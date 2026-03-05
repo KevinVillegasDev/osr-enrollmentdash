@@ -585,11 +585,16 @@ def _replace_nth_mk_value(html: str, n: int, value: str, color: str = None,
         pattern = r'<div class="mk-value"[^>]*>[^<]+</div>'
 
     matches = list(re.finditer(pattern, section))
+    logger.debug("_replace_nth_mk_value: section_start=%s, color=%s, n=%d, "
+                 "section_len=%d, matches=%d, next_section_pos=%s",
+                 section_start, color, n, len(section), len(matches),
+                 next_section if section_start else "N/A")
     if n < len(matches):
         match = matches[n]
         # Build replacement
         old = match.group()
         new = re.sub(r'>([^<]+)<', f'>{value}<', old)
+        logger.debug("Replacing: %s → %s", old[:60], new[:60])
         abs_start = offset + match.start()
         abs_end = offset + match.end()
         html = html[:abs_start] + new + html[abs_end:]
