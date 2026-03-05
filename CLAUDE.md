@@ -15,6 +15,10 @@ feb-2026.html           - February 2026 monthly dashboard
 cohort-tracking.html    - Cohort commission tracker (tabbed: active + baseline)
 q1-enrollment.html      - Q1 2026 enrollment compliance tracker
 field-activity.html     - Weekly field check-in tracker (Maps data)
+automation/             - Salesforce API automation pipeline (Python)
+.github/workflows/      - GitHub Actions cron workflow (2x daily)
+data/snapshots/         - Raw Salesforce JSON archives per month
+requirements.txt        - Python dependencies (requests)
 CLAUDE.md               - This file
 ```
 
@@ -123,18 +127,49 @@ Weekly check-in data from Salesforce Maps.
 
 ## Data Flow
 
-Current (manual):
-1. Kevin exports 4 Salesforce reports as Excel files
-2. Claude processes Excel → generates HTML with embedded data
-3. Kevin uploads HTML files to Netlify (via GitHub push or drag-and-drop)
+**Automated (active):**
+1. GitHub Actions runs 2x daily (7am + 11pm CT, weekdays) via `.github/workflows/update-dashboards.yml`
+2. Python script authenticates to Salesforce via Connected App (OAuth 2.0 Client Credentials)
+3. Pulls 5 reports via Salesforce Analytics REST API (v62.0)
+4. Processors transform report JSON → JS data variables matching each page's schema
+5. HTML generator injects new data into existing HTML files (script data block + hardcoded KPIs)
+6. Git commit → Netlify auto-deploys
+7. Raw report JSON saved to `data/snapshots/{YYYY-MM}/` for historical reference
 
-Future (automated):
-1. GitHub Actions workflow runs nightly at 11pm
-2. Authenticates to Salesforce via Connected App (OAuth)
-3. Pulls 5 reports via Salesforce REST API
-4. Python script processes report data → rebuilds HTML pages
-5. Commits to GitHub → Netlify auto-deploys
-6. End-of-month snapshot saves data as JSON archive before relative date filters roll
+**Manual fallback:**
+1. Kevin exports Salesforce reports as Excel
+2. Claude processes Excel → generates HTML with embedded data
+3. Push to GitHub → Netlify deploys
+
+## Automation Architecture
+
+```
+automation/
+  config.py                  # Report IDs, OSR roster, colors, SF column labels
+  salesforce_auth.py         # OAuth 2.0 Client Credentials → SalesforceClient
+  salesforce_reports.py      # Fetch + parse reports via Analytics REST API
+  processors/
+    monthly_dashboard.py     # Reports 1-4 → repCredits, marketData, topProducers, etc.
+    cohort_tracking.py       # Reports 2+4 (date overrides) → janCohort, febCohort arrays
+    q1_enrollment.py         # Report 2 (per month) → q1Data array
+    field_activity.py        # Report 5 → repActivity, repStops, days, dayLabels
+    index_page.py            # Aggregates all processors → index.html KPIs
+  html_generator.py          # Injects data into HTML (script block split + regex KPIs)
+  main.py                    # Orchestrator: auth → fetch → process → generate
+```
+
+**Run locally:** `python -m automation.main --dry-run` (outputs to `output/` dir)
+**Run in CI:** Triggered by cron schedule or manual `workflow_dispatch`
+
+## GitHub Secrets Required
+
+| Secret | Description |
+|--------|-------------|
+| `SF_LOGIN_URL` | Salesforce login URL (e.g., `https://login.salesforce.com`) |
+| `SF_CLIENT_ID` | Connected App Consumer Key |
+| `SF_CLIENT_SECRET` | Connected App Consumer Secret |
+
+Report IDs are configured in `automation/config.py` (REPORT_IDS dict). Each ID is the 18-character Salesforce Report ID found in the report URL.
 
 ## Salesforce Reports Needed
 

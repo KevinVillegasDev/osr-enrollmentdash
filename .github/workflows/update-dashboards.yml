@@ -1,0 +1,51 @@
+name: Update OSR Dashboards
+
+on:
+  schedule:
+    # 7:00 AM CT (13:00 UTC) weekdays — morning refresh
+    - cron: '0 13 * * 1-5'
+    # 11:00 PM CT (05:00 UTC next day) weekdays — end of day capture
+    - cron: '0 5 * * 2-6'
+  workflow_dispatch:
+    # Manual trigger from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update-dashboards:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run dashboard update
+        env:
+          SF_LOGIN_URL: ${{ secrets.SF_LOGIN_URL }}
+          SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
+          SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
+        run: python -m automation.main
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git diff --quiet || echo "has_changes=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add *.html data/snapshots/
+          git commit -m "Auto-update dashboards $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push

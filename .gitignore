@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Dry-run output
+output/
+
+# OS files
+.DS_Store
+Thumbs.db
