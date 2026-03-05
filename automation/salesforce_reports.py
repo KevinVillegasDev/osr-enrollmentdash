@@ -64,9 +64,16 @@ def fetch_report(client, report_id: str, filters: list = None) -> dict:
                     "Some rows may be missing.", report_id
                 )
 
-            # Log format and row count
+            # Log format, filters, and column info
             report_format = result.get("reportMetadata", {}).get("reportFormat", "UNKNOWN")
-            logger.info("Report %s: format=%s", report_id, report_format)
+            report_filters = result.get("reportMetadata", {}).get("reportFilters", [])
+            detail_cols = result.get("reportMetadata", {}).get("detailColumns", [])
+            group_cols_down = result.get("reportMetadata", {}).get("groupingsDown", [])
+            group_cols_across = result.get("reportMetadata", {}).get("groupingsAcross", [])
+            logger.info("Report %s: format=%s, filters=%s", report_id, report_format, report_filters)
+            logger.info("Report %s: detailColumns=%s", report_id, detail_cols)
+            logger.info("Report %s: groupingsDown=%s, groupingsAcross=%s",
+                        report_id, group_cols_down, group_cols_across)
             return result
 
         except Exception as e:
