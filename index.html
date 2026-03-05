@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EasyPay Finance — OSR Enrollment & Company Enrollment Production</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif; background: #0B0F1A; color: #F1F5F9; min-height: 100vh; }
+    ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #111827; } ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+    .hero { background: linear-gradient(135deg, #111827 0%, #1a1f35 50%, #0f172a 100%); border-bottom: 1px solid #1E293B; padding: 60px 40px 56px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%); pointer-events: none; }
+    .hero-badge { display: inline-block; font-size: 11px; font-weight: 700; background: linear-gradient(135deg, #3B82F6, #6366F1); color: #fff; padding: 4px 14px; border-radius: 20px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+    .hero h1 { font-size: 44px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 10px; }
+    .hero h1 span { background: linear-gradient(135deg, #3B82F6, #06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 16px; color: #94A3B8; max-width: 600px; margin: 0 auto; line-height: 1.5; }
+
+    .main { max-width: 1200px; margin: 0 auto; padding: 48px 40px 80px; }
+    .section-label { font-size: 13px; font-weight: 600; color: #64748B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; }
+
+    .year-group { margin-bottom: 48px; }
+    .year-title { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+    .year-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, #1E293B, transparent); }
+
+    .month-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+
+    .month-card { background: #111827; border: 1px solid #1E293B; border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.25s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+    .month-card:hover { border-color: #3B82F6; transform: translateY(-3px); box-shadow: 0 12px 40px rgba(59,130,246,0.12); }
+    .month-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #3B82F6, #06B6D4); opacity: 0; transition: opacity 0.25s; }
+    .month-card:hover::before { opacity: 1; }
+
+    .month-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+    .month-name { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+    .month-tag { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 6px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .tag-latest { background: rgba(16,185,129,0.15); color: #10B981; }
+    .tag-past { background: rgba(100,116,139,0.15); color: #64748B; }
+
+    .month-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .mk { background: #0B0F1A; border-radius: 10px; padding: 14px 16px; }
+    .mk-label { font-size: 11px; color: #64748B; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; margin-bottom: 4px; }
+    .mk-value { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+
+    .month-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 16px; border-top: 1px solid #1E293B; }
+    .month-detail { font-size: 12px; color: #64748B; }
+    .month-detail span { color: #94A3B8; font-weight: 600; }
+    .month-arrow { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #3B82F6; }
+    .month-arrow svg { width: 16px; height: 16px; transition: transform 0.2s; }
+    .month-card:hover .month-arrow svg { transform: translateX(3px); }
+
+    .empty-card { background: #111827; border: 2px dashed #1E293B; border-radius: 16px; padding: 48px 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 260px; }
+    .empty-icon { font-size: 36px; margin-bottom: 12px; opacity: 0.4; }
+    .empty-title { font-size: 15px; font-weight: 600; color: #475569; margin-bottom: 4px; }
+    .empty-sub { font-size: 13px; color: #334155; }
+
+    .summary-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 48px; }
+    .sb { background: #111827; border: 1px solid #1E293B; border-radius: 12px; padding: 20px 24px; text-align: center; }
+    .sb-label { font-size: 11px; color: #64748B; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; margin-bottom: 6px; }
+    .sb-value { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+    .sb-sub { font-size: 12px; color: #475569; margin-top: 2px; }
+
+    @media (max-width: 768px) {
+      .hero { padding: 40px 20px 36px; }
+      .hero h1 { font-size: 28px; }
+      .main { padding: 32px 20px; }
+      .month-grid { grid-template-columns: 1fr; }
+      .summary-bar { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 420px) {
+      .summary-bar { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-badge">Sales Intelligence</div>
+    <h1>OSR Enrollment &amp; <span>Company Enrollment Production</span></h1>
+    <p class="hero-sub">Enrollment, production, and market performance tracking for the EasyPay Finance outside sales team.</p>
+  </div>
+
+  <div class="main">
+
+    <!-- YTD Summary -->
+    <div class="section-label">Year-to-Date Summary · 2026</div>
+    <div class="summary-bar">
+      <div class="sb">
+        <div class="sb-label">Total Enrollments</div>
+        <div class="sb-value" style="color:#3B82F6">290</div>
+        <div class="sb-sub">All channels</div>
+      </div>
+      <div class="sb">
+        <div class="sb-label">OSR Credited</div>
+        <div class="sb-value" style="color:#10B981">217</div>
+        <div class="sb-sub">74.8% of total</div>
+      </div>
+      <div class="sb">
+        <div class="sb-label">Funded Volume</div>
+        <div class="sb-value" style="color:#F59E0B">$200K</div>
+        <div class="sb-sub">Month 0 across all months</div>
+      </div>
+      <div class="sb">
+        <div class="sb-label">Months Tracked</div>
+        <div class="sb-value" style="color:#8B5CF6">2</div>
+        <div class="sb-sub">January &amp; February 2026</div>
+      </div>
+    </div>
+
+    <!-- Cohort Tracker -->
+    <div class="year-group">
+      <div class="year-title">Commission Tracking</div>
+      <div class="month-grid">
+        <a href="cohort-tracking.html" class="month-card" style="border-color:#F59E0B33">
+          <div class="month-header">
+            <div class="month-name">Cohort Production</div>
+            <span class="month-tag" style="background:#F59E0B;color:#000">Live</span>
+          </div>
+          <div class="month-kpis">
+            <div class="mk">
+              <div class="mk-label">Feb Cohort</div>
+              <div class="mk-value" style="color:#10B981">$129.5K</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">Jan Cohort</div>
+              <div class="mk-value" style="color:#3B82F6">$91.2K</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">At $15K Target</div>
+              <div class="mk-value" style="color:#F59E0B">4 / 21</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">$30K True-Up</div>
+              <div class="mk-value" style="color:#8B5CF6">Active</div>
+            </div>
+          </div>
+          <div class="month-footer">
+            <div class="month-detail">Tabbed: Feb (active) + Jan (baseline) · <span>$15K M0+M1 target</span></div>
+            <div class="month-arrow">View <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg></div>
+          </div>
+        </a>
+
+        <a href="q1-enrollment.html" class="month-card" style="border-color:#8B5CF633">
+          <div class="month-header">
+            <div class="month-name">Q1 Enrollment Compliance</div>
+            <span class="month-tag" style="background:#8B5CF6;color:#fff">New</span>
+          </div>
+          <div class="month-kpis">
+            <div class="mk">
+              <div class="mk-label">Q1 Total</div>
+              <div class="mk-value" style="color:#8B5CF6">217</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">At 30 Target</div>
+              <div class="mk-value" style="color:#10B981">2 / 12</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">10/mo Flags</div>
+              <div class="mk-value" style="color:#F59E0B">11</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">Mar Remaining</div>
+              <div class="mk-value" style="color:#06B6D4">28 days</div>
+            </div>
+          </div>
+          <div class="month-footer">
+            <div class="month-detail">Per-OSR quarterly targets · <span>30/quarter, 10/month floor</span></div>
+            <div class="month-arrow">View <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg></div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Field Activity -->
+    <div class="year-group">
+      <div class="year-title">Field Activity</div>
+      <div class="month-grid">
+        <a href="field-activity.html" class="month-card" style="border-color:#06B6D433">
+          <div class="month-header">
+            <div class="month-name">This Week's Check-Ins</div>
+            <span class="month-tag" style="background:#06B6D4;color:#000">Live</span>
+          </div>
+          <div class="month-kpis">
+            <div class="mk">
+              <div class="mk-label">Total Stops</div>
+              <div class="mk-value" style="color:#06B6D4">321</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">Existing</div>
+              <div class="mk-value" style="color:#3B82F6">170</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">Prospects</div>
+              <div class="mk-value" style="color:#F59E0B">151</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">Reps Active</div>
+              <div class="mk-value" style="color:#10B981">10</div>
+            </div>
+          </div>
+          <div class="month-footer">
+            <div class="month-detail">Maps check-ins · Mar 2–4 · <span>107 avg/day</span></div>
+            <div class="month-arrow">View <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg></div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 2026 Monthly Dashboards -->
+    <div class="year-group">
+      <div class="year-title">2026 Monthly Dashboards</div>
+      <div class="month-grid" id="monthGrid">
+
+        <!-- FEBRUARY 2026 -->
+        <a href="feb-2026.html" class="month-card">
+          <div class="month-header">
+            <div class="month-name">February</div>
+            <span class="month-tag tag-latest">Latest</span>
+          </div>
+          <div class="month-kpis">
+            <div class="mk">
+              <div class="mk-label">Enrollments</div>
+              <div class="mk-value" style="color:#3B82F6">171</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">OSR Credited</div>
+              <div class="mk-value" style="color:#10B981">132</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">Funded Volume</div>
+              <div class="mk-value" style="color:#F59E0B">$167K</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">Conversion</div>
+              <div class="mk-value" style="color:#8B5CF6">20.8%</div>
+            </div>
+          </div>
+          <div class="month-footer">
+            <div class="month-detail">Top rep: <span>Jared Midkiff (20)</span> · Top market: <span>TX (38)</span></div>
+            <div class="month-arrow">View <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg></div>
+          </div>
+        </a>
+
+        <!-- JANUARY 2026 -->
+        <a href="jan-2026.html" class="month-card">
+          <div class="month-header">
+            <div class="month-name">January</div>
+            <span class="month-tag" style="background:#334155;color:#94A3B8">Baseline</span>
+          </div>
+          <div class="month-kpis">
+            <div class="mk">
+              <div class="mk-label">Enrollments</div>
+              <div class="mk-value" style="color:#3B82F6">119</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">OSR Credited</div>
+              <div class="mk-value" style="color:#10B981">85</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">Funded Volume</div>
+              <div class="mk-value" style="color:#F59E0B">$33.1K</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">Conversion</div>
+              <div class="mk-value" style="color:#8B5CF6">21.4%</div>
+            </div>
+          </div>
+          <div class="month-footer">
+            <div class="month-detail">Top rep: <span>Matthew MacDonald (23)</span> · Top market: <span>TX (30)</span></div>
+            <div class="month-arrow">View <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg></div>
+          </div>
+        </a>
+
+      </div>
+      <!-- Show/hide toggle for when 4+ months exist -->
+      <div id="showMore" style="display:none;text-align:center;margin-top:16px">
+        <button onclick="toggleOlderMonths()" id="showMoreBtn" style="background:#1E293B;border:1px solid #334155;color:#94A3B8;padding:8px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;font-family:inherit;transition:all .15s">Show older months</button>
+      </div>
+    </div>
+
+  </div>
+
+<script>
+// Auto-collapse months beyond the 3 most recent
+(function(){
+  var grid = document.getElementById('monthGrid');
+  var cards = grid.querySelectorAll('.month-card');
+  if(cards.length > 3){
+    document.getElementById('showMore').style.display = 'block';
+    for(var i = 3; i < cards.length; i++){
+      cards[i].style.display = 'none';
+      cards[i].classList.add('older-month');
+    }
+  }
+})();
+var olderVisible = false;
+function toggleOlderMonths(){
+  olderVisible = !olderVisible;
+  var cards = document.querySelectorAll('.older-month');
+  cards.forEach(function(c){ c.style.display = olderVisible ? '' : 'none'; });
+  document.getElementById('showMoreBtn').textContent = olderVisible ? 'Hide older months' : 'Show older months';
+}
+</script>
+
+</body>
+</html>

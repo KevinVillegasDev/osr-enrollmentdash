@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Q1 2026 Enrollment Tracker</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0F1A;color:#E2E8F0;font-family:'Segoe UI',system-ui,sans-serif;padding:20px;max-width:1200px;margin:0 auto}
+a{color:#8B5CF6;text-decoration:none}a:hover{text-decoration:underline}
+.back{display:inline-block;margin-bottom:20px;font-size:14px;color:#64748B}.back:hover{color:#8B5CF6}
+.hdr{text-align:center;margin-bottom:32px}
+.hdr h1{font-size:32px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px}
+.badge{display:inline-block;background:#8B5CF6;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.06em;text-transform:uppercase;margin-left:8px;vertical-align:middle}
+.sub{color:#64748B;font-size:14px;margin-top:8px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.kpi{background:#111827;border:1px solid #1E293B;border-radius:12px;padding:16px;text-align:center}
+.kpi-l{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#64748B;margin-bottom:6px;font-weight:600}
+.kpi-v{font-size:28px;font-weight:700}
+.kpi-s{font-size:12px;color:#475569;margin-top:4px}
+.card{background:#111827;border:1px solid #1E293B;border-radius:14px;margin-bottom:12px;overflow:hidden}
+.card-h{padding:16px 20px;display:flex;align-items:center;gap:16px}
+.rank{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.r1{background:#10B981;color:#0B0F1A}.r2{background:#3B82F6;color:#fff}.rn{background:#1E293B;color:#64748B}
+.rw{background:#F59E0B;color:#0B0F1A}.rd{background:#EF4444;color:#fff}
+.info{flex:1;min-width:0}
+.name{font-size:16px;font-weight:600;margin-bottom:4px}
+.meta{font-size:12px;color:#64748B;display:flex;gap:16px;flex-wrap:wrap}
+.total{font-size:22px;font-weight:700;flex-shrink:0;text-align:right;min-width:80px}
+.total span{display:block;font-size:11px;color:#64748B;font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.bar-wrap{margin:8px 20px 12px;display:flex;gap:4px;align-items:flex-end;height:36px}
+.bar-seg{border-radius:4px;position:relative;display:flex;align-items:center;justify-content:center;min-width:24px}
+.bar-seg span{font-size:11px;font-weight:600;color:#fff;white-space:nowrap}
+.bar-target{position:absolute;right:0;top:-16px;font-size:10px;color:#475569}
+.months{display:flex;gap:4px;margin:0 20px 14px;align-items:center}
+.month-box{flex:1;background:#1E293B;border-radius:8px;padding:10px;text-align:center}
+.month-box.ok{border:1px solid #10B981}
+.month-box.warn{border:1px solid #F59E0B}
+.month-box.bad{border:1px solid #EF4444}
+.month-box .mo-label{font-size:10px;color:#64748B;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.month-box .mo-val{font-size:20px;font-weight:700}
+.month-box .mo-status{font-size:10px;margin-top:2px;font-weight:600}
+.month-box.ok .mo-status{color:#10B981}
+.month-box.warn .mo-status{color:#F59E0B}
+.month-box.bad .mo-status{color:#EF4444}
+.prog{margin:0 20px 16px;background:#1E293B;border-radius:6px;height:8px;overflow:hidden;position:relative}
+.prog-fill{height:100%;border-radius:6px;transition:width .3s}
+.prog-mark{position:absolute;top:-4px;bottom:-4px;width:2px;background:#E2E8F0;opacity:.5}
+.legend{display:flex;gap:20px;justify-content:center;margin-bottom:20px;font-size:12px;color:#64748B;flex-wrap:wrap}
+.legend-i{display:flex;align-items:center;gap:6px}
+.legend-d{width:10px;height:10px;border-radius:2px}
+.note{text-align:center;color:#475569;font-size:12px;margin-bottom:24px;font-style:italic}
+.footer{text-align:center;color:#334155;font-size:12px;margin-top:32px;padding:16px 0}
+@media(max-width:768px){.kpis{grid-template-columns:repeat(2,1fr)}.months{flex-wrap:wrap}}
+</style></head><body>
+<a href="index.html" class="back">&larr; Back to Dashboard Hub</a>
+<div class="hdr">
+<h1>Q1 Enrollment Compliance <span class="badge">2026</span></h1>
+<div class="sub">Individual OSR quarterly targets &middot; 30 enrollments / quarter, 10 / month minimum</div>
+</div>
+<div class="kpis">
+<div class="kpi"><div class="kpi-l">Total Q1 Enrollments</div><div class="kpi-v" style="color:#8B5CF6">217</div><div class="kpi-s">All OSR-credited</div></div>
+<div class="kpi"><div class="kpi-l">Reps at 30</div><div class="kpi-v" style="color:#10B981">2 / 12</div><div class="kpi-s">Quarterly target met</div></div>
+<div class="kpi"><div class="kpi-l">Months Under 10</div><div class="kpi-v" style="color:#F59E0B">11</div><div class="kpi-s">Across all reps (Jan+Feb)</div></div>
+<div class="kpi"><div class="kpi-l">March Remaining</div><div class="kpi-v" style="color:#06B6D4">28</div><div class="kpi-s">Days to close Q1</div></div>
+</div>
+<div class="legend">
+<div class="legend-i"><div class="legend-d" style="background:#10B981"></div>At or above target</div>
+<div class="legend-i"><div class="legend-d" style="background:#F59E0B"></div>On pace (within reach)</div>
+<div class="legend-i"><div class="legend-d" style="background:#EF4444"></div>Behind / at risk</div>
+</div>
+<div class="note">Quarterly true-up: if any single month falls below 10 but you hit 30 for the quarter, no penalty applies.</div>
+<div id="cards"></div>
+<div class="footer">EasyPay Finance &middot; Q1 2026 Enrollment Compliance Tracker &middot; Data from Salesforce</div>
+<script>
+var q1Data=[{n:"Matthew MacDonald",jan:23,feb:8,mar:0,q1:31,need:0,janOk:true,febOk:false},{n:"Jared Midkiff",jan:10,feb:20,mar:0,q1:30,need:0,janOk:true,febOk:true},{n:"Stephanie Whitlock",jan:13,feb:14,mar:0,q1:27,need:3,janOk:true,febOk:true},{n:"Joseph Guerra",jan:14,feb:11,mar:0,q1:25,need:5,janOk:true,febOk:true},{n:"Yemaira Hernandez",jan:10,feb:12,mar:0,q1:22,need:8,janOk:true,febOk:true},{n:"Omar Corona",jan:6,feb:11,mar:0,q1:17,need:13,janOk:false,febOk:true},{n:"Sara Porter",jan:0,feb:16,mar:0,q1:16,need:14,janOk:false,febOk:true},{n:"Phillip Mason",jan:1,feb:13,mar:0,q1:14,need:16,janOk:false,febOk:true},{n:"DeLon Phoenix",jan:1,feb:10,mar:0,q1:11,need:19,janOk:false,febOk:true},{n:"Outside Sales Manager",jan:1,feb:9,mar:0,q1:10,need:20,janOk:false,febOk:false},{n:"Eric Henderson",jan:2,feb:7,mar:0,q1:9,need:21,janOk:false,febOk:false},{n:"Claudia Gerhardt",jan:4,feb:1,mar:0,q1:5,need:25,janOk:false,febOk:false},];
+
+function render(){
+var h='';
+for(var i=0;i<q1Data.length;i++){
+var d=q1Data[i];
+var pct=Math.min(d.q1/30*100,100);
+var color=d.q1>=30?'#10B981':d.q1>=20?'#F59E0B':'#EF4444';
+var rankClass=d.q1>=30?'r1':d.q1>=20?'rw':'rd';
+var statusText=d.q1>=30?'Target Met':('Need '+d.need+' in March');
+
+h+='<div class="card"><div class="card-h">';
+h+='<div class="rank '+rankClass+'">'+(i+1)+'</div>';
+h+='<div class="info"><div class="name">'+d.n+'</div>';
+h+='<div class="meta"><span>'+statusText+'</span></div></div>';
+h+='<div class="total" style="color:'+color+'">'+d.q1+'/30<span>Q1 Total</span></div>';
+h+='</div>';
+
+// Monthly boxes
+h+='<div class="months">';
+var janClass=d.jan>=10?'ok':(d.jan>0?'warn':'bad');
+var febClass=d.feb>=10?'ok':(d.feb>0?'warn':'bad');
+h+='<div class="month-box '+janClass+'"><div class="mo-label">January</div><div class="mo-val">'+d.jan+'</div>';
+h+='<div class="mo-status">'+(d.jan>=10?'10+ floor met':d.jan+'/10 min')+'</div></div>';
+h+='<div class="month-box '+febClass+'"><div class="mo-label">February</div><div class="mo-val">'+d.feb+'</div>';
+h+='<div class="mo-status">'+(d.feb>=10?'10+ floor met':d.feb+'/10 min')+'</div></div>';
+h+='<div class="month-box" style="border:1px solid #334155"><div class="mo-label">March</div><div class="mo-val" style="color:#475569">-</div>';
+h+='<div class="mo-status" style="color:#475569">In progress</div></div>';
+h+='</div>';
+
+// Progress bar
+h+='<div class="prog"><div class="prog-fill" style="width:'+pct+'%;background:'+color+'"></div>';
+h+='<div class="prog-mark" style="left:33.3%"></div>';
+h+='<div class="prog-mark" style="left:66.6%"></div>';
+h+='</div></div>';
+}
+document.getElementById('cards').innerHTML=h;
+}
+render();
+</script></body></html>

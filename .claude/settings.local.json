@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init)",
+      "Bash(git remote add origin https://github.com/KevinVillegasDev/osr-enrollmentdash.git)",
+      "Bash(git add CLAUDE.md cohort-tracking.html feb-2026.html field-activity.html index.html jan-2026.html q1-enrollment.html .claude/)"
+    ]
+  }
+}
