@@ -105,6 +105,9 @@ def process(monthly_results: dict[str, dict],
         "q1_at_target": q1_result.get("kpi_at_target", "0 / 0"),
         "q1_months_under_10": q1_result.get("kpi_months_under_10", 0),
         "q1_days_remaining": q1_result.get("kpi_days_remaining", "0 days"),
+        "quarter_num": (q1_result.get("quarter_months", [1])[0] - 1) // 3 + 1,
+        "quarter_filename": f"q{(q1_result.get('quarter_months', [1])[0] - 1) // 3 + 1}-enrollment.html",
+        "quarter_current_month": q1_result.get("kpi_current_month", ""),
 
         # Field activity card
         "field_total_stops": field_result.get("kpi_total_stops", 0),

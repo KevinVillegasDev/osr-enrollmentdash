@@ -70,40 +70,45 @@ a{color:#8B5CF6;text-decoration:none}a:hover{text-decoration:underline}
 <div id="cards"></div>
 <div class="footer">EasyPay Finance &middot; Q1 2026 Enrollment Compliance Tracker &middot; Data from Salesforce</div>
 <script>
-var q1Data=[{"n":"Matthew MacDonald","jan":23,"feb":8,"mar":0,"q1":31,"need":0,"janOk":true,"febOk":false,"marOk":true},{"n":"Jared Midkiff","jan":10,"feb":20,"mar":0,"q1":30,"need":0,"janOk":true,"febOk":true,"marOk":true},{"n":"Stephanie Whitlock","jan":13,"feb":14,"mar":0,"q1":27,"need":3,"janOk":true,"febOk":true,"marOk":true},{"n":"Joseph Guerra","jan":14,"feb":11,"mar":0,"q1":25,"need":5,"janOk":true,"febOk":true,"marOk":true},{"n":"Yemaira Hernandez","jan":10,"feb":12,"mar":0,"q1":22,"need":8,"janOk":true,"febOk":true,"marOk":true},{"n":"Omar Corona","jan":6,"feb":11,"mar":0,"q1":17,"need":13,"janOk":false,"febOk":true,"marOk":true},{"n":"Sara Porter","jan":0,"feb":16,"mar":0,"q1":16,"need":14,"janOk":false,"febOk":true,"marOk":true},{"n":"Phillip Mason","jan":1,"feb":13,"mar":0,"q1":14,"need":16,"janOk":false,"febOk":true,"marOk":true},{"n":"DeLon Phoenix","jan":1,"feb":10,"mar":0,"q1":11,"need":19,"janOk":false,"febOk":true,"marOk":true},{"n":"Eric Henderson","jan":2,"feb":7,"mar":0,"q1":9,"need":21,"janOk":false,"febOk":false,"marOk":true},{"n":"Outside Sales Mgr","jan":0,"feb":9,"mar":0,"q1":9,"need":21,"janOk":false,"febOk":false,"marOk":true},{"n":"Claudia Gerhardt","jan":4,"feb":1,"mar":0,"q1":5,"need":25,"janOk":false,"febOk":false,"marOk":true},{"n":"Outside Sales Manager","jan":1,"feb":0,"mar":0,"q1":1,"need":29,"janOk":false,"febOk":false,"marOk":true}];
+var quarterConfig={"num":1,"year":2026,"months":[{"key":"jan","label":"January","num":1},{"key":"feb","label":"February","num":2},{"key":"mar","label":"March","num":3}]};
+var q1Data=[{"n":"Matthew MacDonald","jan":23,"feb":8,"mar":0,"q1":31,"need":0,"janOk":true,"febOk":false,"marOk":true,"janProg":false,"febProg":false,"marProg":true},{"n":"Jared Midkiff","jan":10,"feb":20,"mar":0,"q1":30,"need":0,"janOk":true,"febOk":true,"marOk":true,"janProg":false,"febProg":false,"marProg":true},{"n":"Stephanie Whitlock","jan":13,"feb":14,"mar":0,"q1":27,"need":3,"janOk":true,"febOk":true,"marOk":true,"janProg":false,"febProg":false,"marProg":true},{"n":"Joseph Guerra","jan":14,"feb":11,"mar":0,"q1":25,"need":5,"janOk":true,"febOk":true,"marOk":true,"janProg":false,"febProg":false,"marProg":true},{"n":"Yemaira Hernandez","jan":10,"feb":12,"mar":0,"q1":22,"need":8,"janOk":true,"febOk":true,"marOk":true,"janProg":false,"febProg":false,"marProg":true},{"n":"Omar Corona","jan":6,"feb":11,"mar":0,"q1":17,"need":13,"janOk":false,"febOk":true,"marOk":true,"janProg":false,"febProg":false,"marProg":true},{"n":"Sara Porter","jan":0,"feb":16,"mar":0,"q1":16,"need":14,"janOk":false,"febOk":true,"marOk":true,"janProg":false,"febProg":false,"marProg":true},{"n":"Phillip Mason","jan":1,"feb":13,"mar":0,"q1":14,"need":16,"janOk":false,"febOk":true,"marOk":true,"janProg":false,"febProg":false,"marProg":true},{"n":"DeLon Phoenix","jan":1,"feb":10,"mar":0,"q1":11,"need":19,"janOk":false,"febOk":true,"marOk":true,"janProg":false,"febProg":false,"marProg":true},{"n":"Eric Henderson","jan":2,"feb":7,"mar":0,"q1":9,"need":21,"janOk":false,"febOk":false,"marOk":true,"janProg":false,"febProg":false,"marProg":true},{"n":"Outside Sales Mgr","jan":0,"feb":9,"mar":0,"q1":9,"need":21,"janOk":false,"febOk":false,"marOk":true,"janProg":false,"febProg":false,"marProg":true},{"n":"Claudia Gerhardt","jan":4,"feb":1,"mar":0,"q1":5,"need":25,"janOk":false,"febOk":false,"marOk":true,"janProg":false,"febProg":false,"marProg":true},{"n":"Outside Sales Manager","jan":1,"feb":0,"mar":0,"q1":1,"need":29,"janOk":false,"febOk":false,"marOk":true,"janProg":false,"febProg":false,"marProg":true}];
 
 function render(){
-var h='';
+var h='',cfg=quarterConfig,target=30;
+var lastMonth=cfg.months[cfg.months.length-1].label;
 for(var i=0;i<q1Data.length;i++){
 var d=q1Data[i];
-var pct=Math.min(d.q1/30*100,100);
-var color=d.q1>=30?'#10B981':d.q1>=20?'#F59E0B':'#EF4444';
-var rankClass=d.q1>=30?'r1':d.q1>=20?'rw':'rd';
-var statusText=d.q1>=30?'Target Met':('Need '+d.need+' in March');
+var pct=Math.min(d.q1/target*100,100);
+var color=d.q1>=target?'#10B981':d.q1>=20?'#F59E0B':'#EF4444';
+var rankClass=d.q1>=target?'r1':d.q1>=20?'rw':'rd';
+var statusText=d.q1>=target?'Target Met':('Need '+d.need+' in '+lastMonth);
 
 h+='<div class="card"><div class="card-h">';
 h+='<div class="rank '+rankClass+'">'+(i+1)+'</div>';
 h+='<div class="info"><div class="name">'+d.n+'</div>';
 h+='<div class="meta"><span>'+statusText+'</span></div></div>';
-h+='<div class="total" style="color:'+color+'">'+d.q1+'/30<span>Q1 Total</span></div>';
+h+='<div class="total" style="color:'+color+'">'+d.q1+'/'+target+'<span>Q'+cfg.num+' Total</span></div>';
 h+='</div>';
 
-// Monthly boxes
 h+='<div class="months">';
-var janClass=d.jan>=10?'ok':(d.jan>0?'warn':'bad');
-var febClass=d.feb>=10?'ok':(d.feb>0?'warn':'bad');
-h+='<div class="month-box '+janClass+'"><div class="mo-label">January</div><div class="mo-val">'+d.jan+'</div>';
-h+='<div class="mo-status">'+(d.jan>=10?'10+ floor met':d.jan+'/10 min')+'</div></div>';
-h+='<div class="month-box '+febClass+'"><div class="mo-label">February</div><div class="mo-val">'+d.feb+'</div>';
-h+='<div class="mo-status">'+(d.feb>=10?'10+ floor met':d.feb+'/10 min')+'</div></div>';
-h+='<div class="month-box" style="border:1px solid #334155"><div class="mo-label">March</div><div class="mo-val" style="color:#475569">-</div>';
+for(var j=0;j<cfg.months.length;j++){
+var mc=cfg.months[j],val=d[mc.key],inProg=d[mc.key+'Prog'];
+if(inProg){
+h+='<div class="month-box" style="border:1px solid #334155"><div class="mo-label">'+mc.label+'</div><div class="mo-val" style="color:#475569">'+val+'</div>';
 h+='<div class="mo-status" style="color:#475569">In progress</div></div>';
+} else {
+var ok=d[mc.key+'Ok'],cls=ok?'ok':(val>0?'warn':'bad');
+h+='<div class="month-box '+cls+'"><div class="mo-label">'+mc.label+'</div><div class="mo-val">'+val+'</div>';
+h+='<div class="mo-status">'+(ok?'10+ floor met':val+'/10 min')+'</div></div>';
+}
+}
 h+='</div>';
 
-// Progress bar
 h+='<div class="prog"><div class="prog-fill" style="width:'+pct+'%;background:'+color+'"></div>';
-h+='<div class="prog-mark" style="left:33.3%"></div>';
-h+='<div class="prog-mark" style="left:66.6%"></div>';
+var markPct=100/cfg.months.length;
+for(var j=1;j<cfg.months.length;j++){
+h+='<div class="prog-mark" style="left:'+(markPct*j).toFixed(1)+'%"></div>';
+}
 h+='</div></div>';
 }
 document.getElementById('cards').innerHTML=h;

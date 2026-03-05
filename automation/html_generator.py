@@ -14,7 +14,7 @@ import os
 import re
 from datetime import date
 
-from .config import PROJECT_ROOT
+from .config import PROJECT_ROOT, MONTH_NAMES, MONTH_ABBREV
 
 logger = logging.getLogger(__name__)
 
@@ -261,7 +261,8 @@ def _replace_monthly_js_hardcoded(html: str, data: dict) -> str:
 # ─── Cohort Tracking Generator ───────────────────────────────────────────────
 
 def update_cohort_tracking(filepath: str, cohorts: dict[str, list],
-                           cohort_kpis: dict) -> bool:
+                           cohort_kpis: dict,
+                           cohort_configs: list = None) -> bool:
     """
     Update cohort-tracking.html with new cohort data.
 
@@ -270,6 +271,7 @@ def update_cohort_tracking(filepath: str, cohorts: dict[str, list],
         cohorts: Dict mapping variable names to cohort arrays,
                 e.g., {"janCohort": [...], "febCohort": [...]}
         cohort_kpis: Dict with per-cohort KPI summaries
+        cohort_configs: List of cohort config dicts for the cohortConfig JS variable
     """
     if not os.path.exists(filepath):
         logger.error("Cohort tracking file not found: %s", filepath)
@@ -277,12 +279,44 @@ def update_cohort_tracking(filepath: str, cohorts: dict[str, list],
 
     html = _read_file(filepath)
 
-    # Replace each cohort variable
+    # Replace each cohort data variable
     for var_name, cohort_data in cohorts.items():
         cohort_json = json.dumps(cohort_data, separators=(",", ":"), ensure_ascii=False)
         pattern = rf'var {var_name}=\[.*?\];'
         replacement = f'var {var_name}={cohort_json};'
-        html = re.sub(pattern, replacement, html, count=1, flags=re.DOTALL)
+        if re.search(pattern, html, flags=re.DOTALL):
+            html = re.sub(pattern, replacement, html, count=1, flags=re.DOTALL)
+        else:
+            # New cohort variable — insert before activeTab declaration
+            insert_pos = html.find('var activeTab=')
+            if insert_pos != -1:
+                html = html[:insert_pos] + replacement + '\n' + html[insert_pos:]
+                logger.info("Inserted new cohort variable: %s", var_name)
+
+    # Inject/update cohortConfig variable
+    if cohort_configs:
+        config_json = json.dumps(cohort_configs, separators=(",", ":"), ensure_ascii=False)
+        if re.search(r'var cohortConfig=\[.*?\];', html, flags=re.DOTALL):
+            html = re.sub(r'var cohortConfig=\[.*?\];',
+                          f'var cohortConfig={config_json};',
+                          html, count=1, flags=re.DOTALL)
+        else:
+            # Insert at the start of the script
+            script_pos = html.find('<script>') + len('<script>')
+            html = html[:script_pos] + f'\nvar cohortConfig={config_json};\n' + html[script_pos:]
+
+        # Update activeTab to match first (active) cohort
+        active_id = cohort_configs[0]["id"]
+        html = re.sub(r"var activeTab='[^']*'",
+                      f"var activeTab='{active_id}'", html)
+
+        # Regenerate tab HTML
+        tabs_html = _generate_cohort_tabs_html(cohort_configs)
+        html = re.sub(
+            r'(<div class="tabs" id="cohortTabs">)\s*.*?\s*(</div>\s*\n\s*<div id="kpis">)',
+            rf'\1\n{tabs_html}\n\2',
+            html, count=1, flags=re.DOTALL
+        )
 
     if _validate_html(html):
         _write_file(filepath, html)
@@ -293,25 +327,73 @@ def update_cohort_tracking(filepath: str, cohorts: dict[str, list],
         return False
 
 
-# ─── Q1 Enrollment Generator ────────────────────────────────────────────────
+def _generate_cohort_tabs_html(configs: list) -> str:
+    """Generate the tab button HTML for cohort tracking."""
+    tabs = []
+    for cfg in configs:
+        tab_class = "tab"
+        if cfg.get("type") == "active":
+            tab_class += " active"
+        elif cfg.get("type") == "baseline":
+            tab_class += " tab-dim"
+
+        tag_text = ""
+        if cfg["type"] == "active":
+            tag_text = "Active"
+        elif cfg["type"] == "baseline":
+            tag_text = "Baseline"
+
+        cid = cfg["id"]
+        label = cfg["label"]
+        tab_html = f'<div class="{tab_class}" data-tab="{cid}" onclick="switchTab(\'{cid}\')">{label}'
+        if tag_text:
+            tab_html += f' <span class="tag">{tag_text}</span>'
+        tab_html += '</div>'
+        tabs.append(tab_html)
+
+    return "\n".join(tabs)
+
+
+# ─── Quarterly Enrollment Generator ──────────────────────────────────────────
 
 def update_q1_enrollment(filepath: str, data: dict) -> bool:
     """
-    Update q1-enrollment.html with new enrollment compliance data.
+    Update a quarterly enrollment HTML file with new compliance data.
 
     Args:
-        filepath: Path to q1-enrollment.html
+        filepath: Path to q{N}-enrollment.html
         data: Output from q1_enrollment.process()
     """
     if not os.path.exists(filepath):
-        logger.error("Q1 enrollment file not found: %s", filepath)
+        logger.error("Quarterly enrollment file not found: %s", filepath)
         return False
 
     html = _read_file(filepath)
 
+    quarter_months = data.get("quarter_months", [1, 2, 3])
+    quarter_num = (quarter_months[0] - 1) // 3 + 1
+    year = data.get("year", 2026)
+
+    # Generate and inject quarterConfig
+    config_js = _build_quarter_config_js(data)
+    html = re.sub(r'var quarterConfig=\{.*?\};',
+                  f'var quarterConfig={config_js};',
+                  html, count=1, flags=re.DOTALL)
+
     # Replace q1Data variable
     q1_json = json.dumps(data["q1Data"], separators=(",", ":"), ensure_ascii=False)
-    html = re.sub(r'var q1Data=\[.*?\];', f'var q1Data={q1_json};', html, count=1, flags=re.DOTALL)
+    html = re.sub(r'var q1Data=\[.*?\];', f'var q1Data={q1_json};',
+                  html, count=1, flags=re.DOTALL)
+
+    # Update dynamic text: title, heading, footer, badge year
+    html = re.sub(r'Q\d \d{4} Enrollment Tracker',
+                  f'Q{quarter_num} {year} Enrollment Tracker', html)
+    html = re.sub(r'Q\d Enrollment Compliance',
+                  f'Q{quarter_num} Enrollment Compliance', html)
+    html = re.sub(r'Q\d \d{4} Enrollment Compliance Tracker',
+                  f'Q{quarter_num} {year} Enrollment Compliance Tracker', html)
+    html = re.sub(r'(<span class="badge">)\d{4}(</span>)',
+                  rf'\g<1>{year}\2', html)
 
     # Replace hardcoded KPI values in HTML
     html = _replace_q1_kpis(html, data)
@@ -325,17 +407,122 @@ def update_q1_enrollment(filepath: str, data: dict) -> bool:
         return False
 
 
+def _build_quarter_config_js(data: dict) -> str:
+    """Build the quarterConfig JS object from processor data."""
+    quarter_months = data.get("quarter_months", [1, 2, 3])
+    year = data.get("year", 2026)
+    quarter_num = (quarter_months[0] - 1) // 3 + 1
+
+    months = []
+    for m in quarter_months:
+        months.append({
+            "key": MONTH_ABBREV[m],
+            "label": MONTH_NAMES[m],
+            "num": m,
+        })
+
+    config = {"num": quarter_num, "year": year, "months": months}
+    return json.dumps(config, separators=(",", ":"))
+
+
 def _replace_q1_kpis(html: str, data: dict) -> str:
-    """Replace KPI values in q1-enrollment.html."""
-    # These KPIs are in stat boxes or similar structures
-    # Total Q1 Enrollments
+    """Replace KPI values in the quarterly enrollment HTML."""
+    quarter_months = data.get("quarter_months", [1, 2, 3])
+    quarter_num = (quarter_months[0] - 1) // 3 + 1
+    current_month = data.get("kpi_current_month", "")
+
+    # Total Q enrollments — update label and value
+    html = re.sub(r'Total Q\d Enrollments',
+                  f'Total Q{quarter_num} Enrollments', html)
     html = re.sub(
-        r'(Q1 Total[^<]*</div>\s*<div class="[^"]*value[^"]*"[^>]*>)\d+',
+        r'(Total Q\d Enrollments</div><div class="kpi-v"[^>]*>)[^<]+',
         rf'\g<1>{data["kpi_total_enrollments"]}',
-        html, flags=re.DOTALL
+        html
     )
 
+    # Reps at 30
+    html = re.sub(
+        r'(Reps at 30</div><div class="kpi-v"[^>]*>)[^<]+',
+        rf'\g<1>{data["kpi_at_target"]}',
+        html
+    )
+
+    # Months Under 10
+    html = re.sub(
+        r'(Months Under 10</div><div class="kpi-v"[^>]*>)[^<]+',
+        rf'\g<1>{data["kpi_months_under_10"]}',
+        html
+    )
+
+    # Month Remaining — update label and value
+    if current_month:
+        html = re.sub(r'\w+ Remaining</div><div class="kpi-v"',
+                      f'{current_month} Remaining</div><div class="kpi-v"', html)
+        days_match = re.search(r'(\d+)', data.get("kpi_days_remaining", "0 days"))
+        if days_match:
+            html = re.sub(
+                r'(\w+ Remaining</div><div class="kpi-v"[^>]*>)[^<]+',
+                rf'\g<1>{days_match.group(1)}',
+                html
+            )
+
+    # Update KPI sub text for completed months
+    completed_months = []
+    for m in quarter_months:
+        from datetime import date as dt_date
+        today = dt_date.today()
+        if data.get("year", 2026) < today.year or \
+           (data.get("year", 2026) == today.year and m < today.month):
+            completed_months.append(MONTH_NAMES[m][:3])
+    if completed_months:
+        months_sub = "+".join(completed_months)
+        html = re.sub(r'Across all reps \([^)]+\)',
+                      f'Across all reps ({months_sub})', html)
+
     return html
+
+
+def create_quarterly_enrollment_page(quarter_num: int, year: int,
+                                      output_dir: str = None) -> str:
+    """
+    Create a new quarterly enrollment page from the template.
+
+    Uses q1-enrollment.html as the base template (it has the config-driven
+    render function), updates Q number and year references.
+
+    Returns the path to the created file, or None on failure.
+    """
+    # Find the best template: q1-enrollment.html or most recent existing quarter
+    template_path = os.path.join(PROJECT_ROOT, "q1-enrollment.html")
+    if not os.path.exists(template_path):
+        # Try the previous quarter
+        for q in range(quarter_num - 1, 0, -1):
+            candidate = os.path.join(PROJECT_ROOT, f"q{q}-enrollment.html")
+            if os.path.exists(candidate):
+                template_path = candidate
+                break
+        else:
+            logger.error("No quarterly enrollment template found")
+            return None
+
+    target_dir = output_dir or PROJECT_ROOT
+    target_path = os.path.join(target_dir, f"q{quarter_num}-enrollment.html")
+
+    html = _read_file(template_path)
+
+    # Replace Q number and year references
+    html = re.sub(r'Q\d \d{4} Enrollment Tracker',
+                  f'Q{quarter_num} {year} Enrollment Tracker', html)
+    html = re.sub(r'Q\d Enrollment Compliance',
+                  f'Q{quarter_num} Enrollment Compliance', html)
+    html = re.sub(r'Q\d \d{4} Enrollment Compliance Tracker',
+                  f'Q{quarter_num} {year} Enrollment Compliance Tracker', html)
+    html = re.sub(r'(<span class="badge">)\d{4}',
+                  rf'\g<1>{year}', html)
+
+    _write_file(target_path, html)
+    logger.info("Created quarterly enrollment page: %s", target_path)
+    return target_path
 
 
 # ─── Field Activity Generator ────────────────────────────────────────────────
@@ -395,6 +582,118 @@ def _replace_field_kpis(html: str, data: dict) -> str:
 
 # ─── Index Page Generator ────────────────────────────────────────────────────
 
+_MONTH_ORDER = {"jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+                "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12}
+
+_ARROW_SVG = ('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" '
+              'stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" '
+              'stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>')
+
+
+def _generate_month_card_html(card: dict, tag_html: str = "") -> str:
+    """Generate HTML for a single month dashboard card."""
+    key = card["key"]  # e.g., "feb-2026"
+    href = f"{key}.html"
+
+    top_rep = card.get("top_rep_name", "N/A")
+    top_rep_count = card.get("top_rep_count", 0)
+    top_market = card.get("top_market_name", "N/A")
+    top_market_count = card.get("top_market_count", 0)
+
+    top_rep_display = f"{top_rep} ({top_rep_count})" if top_rep != "N/A" and top_rep_count > 0 else "N/A"
+    top_market_display = f"{top_market} ({top_market_count})" if top_market != "N/A" and top_market_count > 0 else "N/A"
+
+    tag_line = f'\n            {tag_html}' if tag_html else ""
+
+    return f"""        <a href="{href}" class="month-card">
+          <div class="month-header">
+            <div class="month-name">{card["month_name"]}</div>{tag_line}
+          </div>
+          <div class="month-kpis">
+            <div class="mk">
+              <div class="mk-label">Enrollments</div>
+              <div class="mk-value" style="color:#3B82F6">{card["kpi_total"]}</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">OSR Credited</div>
+              <div class="mk-value" style="color:#10B981">{card["kpi_osr"]}</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">Funded Volume</div>
+              <div class="mk-value" style="color:#F59E0B">{card["kpi_funded_short"]}</div>
+            </div>
+            <div class="mk">
+              <div class="mk-label">Conversion</div>
+              <div class="mk-value" style="color:#8B5CF6">{card["kpi_conversion"]}</div>
+            </div>
+          </div>
+          <div class="month-footer">
+            <div class="month-detail">Top rep: <span>{top_rep_display}</span> \u00b7 Top market: <span>{top_market_display}</span></div>
+            <div class="month-arrow">View {_ARROW_SVG}</div>
+          </div>
+        </a>"""
+
+
+def _generate_month_cards_html(month_cards: list) -> str:
+    """Generate all month card HTML blocks, sorted newest-first."""
+    if not month_cards:
+        return ""
+
+    # Sort newest-first by year desc, then month number desc
+    def sort_key(card):
+        abbrev = card["key"].split("-")[0]
+        month_num = _MONTH_ORDER.get(abbrev, 0)
+        return (card.get("year", 2026), month_num)
+
+    sorted_cards = sorted(month_cards, key=sort_key, reverse=True)
+
+    cards_html = []
+    for i, card in enumerate(sorted_cards):
+        if i == 0:
+            # Newest card gets "Latest" badge
+            tag = '<span class="month-tag tag-latest">Latest</span>'
+        elif card["key"] == "jan-2026":
+            # January 2026 always gets "Baseline" badge
+            tag = '<span class="month-tag" style="background:#334155;color:#94A3B8">Baseline</span>'
+        else:
+            tag = ""
+
+        cards_html.append(_generate_month_card_html(card, tag))
+
+    return "\n\n" + "\n\n".join(cards_html) + "\n"
+
+
+def _replace_month_grid(html: str, month_cards_html: str) -> str:
+    """Replace the inner content of the monthGrid div with generated cards."""
+    grid_open = '<div class="month-grid" id="monthGrid">'
+    grid_marker = '<!-- Show/hide toggle'
+
+    grid_start = html.find(grid_open)
+    if grid_start == -1:
+        logger.warning("monthGrid div not found in index.html")
+        return html
+
+    content_start = grid_start + len(grid_open)
+    marker_pos = html.find(grid_marker, content_start)
+    if marker_pos == -1:
+        logger.warning("Show/hide toggle comment not found in index.html")
+        return html
+
+    # Find the closing </div> right before the marker
+    close_div_pos = html.rfind('</div>', content_start, marker_pos)
+    if close_div_pos == -1:
+        logger.warning("Closing </div> for monthGrid not found")
+        return html
+
+    html = (html[:content_start] +
+            month_cards_html +
+            "\n      " + html[close_div_pos:])
+
+    logger.info("Replaced monthGrid contents with %d generated cards",
+                month_cards_html.count('class="month-card"'))
+    return html
+
+
 def update_index_page(filepath: str, data: dict) -> bool:
     """
     Update index.html with new aggregated values.
@@ -438,19 +737,32 @@ def update_index_page(filepath: str, data: dict) -> bool:
                                      color="#F59E0B", section_start="Commission Tracking")
 
     # ── Q1 Enrollment Compliance Card ────────────────────────────────────
-    # Each color is unique within the Q1 Enrollment section, so n=0 for all
-    # Q1 Total
+    # Find the current quarter label in the HTML (may be Q1, Q2, etc.)
+    quarter_num = data.get("quarter_num", 1)
+    quarter_filename = data.get("quarter_filename", "q1-enrollment.html")
+    quarter_current_month = data.get("quarter_current_month", "")
+
+    q_match = re.search(r'Q(\d) Enrollment', html)
+    q_section = q_match.group() if q_match else f"Q{quarter_num} Enrollment"
+
+    # Update KPI values (using current Q-section text for matching)
     html = _replace_nth_mk_value(html, 0, str(data["q1_total"]),
-                                 color="#8B5CF6", section_start="Q1 Enrollment")
-    # At 30 Target
+                                 color="#8B5CF6", section_start=q_section)
     html = _replace_nth_mk_value(html, 0, data["q1_at_target"],
-                                 color="#10B981", section_start="Q1 Enrollment")
-    # 10/mo Flags
+                                 color="#10B981", section_start=q_section)
     html = _replace_nth_mk_value(html, 0, str(data["q1_months_under_10"]),
-                                 color="#F59E0B", section_start="Q1 Enrollment")
-    # Days Remaining
+                                 color="#F59E0B", section_start=q_section)
     html = _replace_nth_mk_value(html, 0, data["q1_days_remaining"],
-                                 color="#06B6D4", section_start="Q1 Enrollment")
+                                 color="#06B6D4", section_start=q_section)
+
+    # Dynamically update Q-number labels, href, and month name
+    html = re.sub(r'href="q\d-enrollment\.html"',
+                  f'href="{quarter_filename}"', html)
+    html = re.sub(r'Q\d Enrollment Compliance',
+                  f'Q{quarter_num} Enrollment Compliance', html)
+    html = re.sub(r'Q\d Total', f'Q{quarter_num} Total', html)
+    if quarter_current_month:
+        html = re.sub(r'(\w+) Remaining', f'{quarter_current_month[:3]} Remaining', html)
 
     # ── Field Activity Card ──────────────────────────────────────────────
     # Each color is unique within the Field Activity section, so n=0 for all
@@ -463,6 +775,11 @@ def update_index_page(filepath: str, data: dict) -> bool:
                                  color="#F59E0B", section_start=">Field Activity<")
     html = _replace_nth_mk_value(html, 0, str(data["field_reps_active"]),
                                  color="#10B981", section_start=">Field Activity<")
+
+    # ── Month Cards ──────────────────────────────────────────────────────
+    month_cards_html = _generate_month_cards_html(data.get("month_cards", []))
+    if month_cards_html:
+        html = _replace_month_grid(html, month_cards_html)
 
     if _validate_html(html):
         _write_file(filepath, html)

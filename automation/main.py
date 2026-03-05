@@ -166,10 +166,15 @@ def main():
             active_cohort, prev_month
         )
 
+    # Build cohort configs for all tracked cohorts
+    cohort_configs = _build_cohort_configs(current_month, current_year)
+
     # Update cohort-tracking.html
     cohort_path = os.path.join(output_dir, "cohort-tracking.html")
     if os.path.exists(cohort_path) and cohorts:
-        html_generator.update_cohort_tracking(cohort_path, cohorts, cohort_kpis_dict)
+        html_generator.update_cohort_tracking(
+            cohort_path, cohorts, cohort_kpis_dict, cohort_configs
+        )
 
     # ── Step 5: Process Q1 Enrollment Compliance ─────────────────────────
     logger.info("--- Processing Q1 enrollment compliance ---")
@@ -237,6 +242,11 @@ def main():
     quarter_num = (quarter_start_month - 1) // 3 + 1
     q_filename = f"q{quarter_num}-enrollment.html"
     q_path = os.path.join(output_dir, q_filename)
+
+    # Auto-create quarterly page if it doesn't exist
+    if not os.path.exists(q_path):
+        logger.info("Quarterly file %s doesn't exist. Creating from template.", q_filename)
+        html_generator.create_quarterly_enrollment_page(quarter_num, current_year, output_dir)
 
     if os.path.exists(q_path):
         html_generator.update_q1_enrollment(q_path, q1_data)
@@ -522,6 +532,133 @@ def _parse_dollar_amount(s: str) -> float:
             return float(s)
         except ValueError:
             return 0.0
+
+
+def _build_cohort_configs(current_month: int, current_year: int) -> list:
+    """
+    Build the cohortConfig list for all tracked cohorts.
+
+    Each cohort corresponds to a month's enrollees. The active cohort is the
+    previous month's enrollees (currently being tracked in M1). January 2026
+    is always the baseline cohort.
+
+    Returns a list of config dicts ordered: active first, then reverse chronological.
+    """
+    import calendar
+
+    today = date.today()
+    configs = []
+
+    # Cohort tracking starts from Jan 2026
+    start_month = 1
+    start_year = 2026
+
+    # Build configs for each enrollment month from Jan 2026 to prev_month
+    for enrollment_month in range(start_month, current_month):
+        enrollment_year = current_year
+        m0_abbrev = MONTH_ABBREV[enrollment_month]
+
+        # M1 = enrollment_month + 1
+        m1_month = enrollment_month + 1
+        m1_year = enrollment_year
+        if m1_month > 12:
+            m1_month = 1
+            m1_year += 1
+
+        # M2 = enrollment_month + 2
+        m2_month = enrollment_month + 2
+        m2_year = enrollment_year
+        if m2_month > 12:
+            m2_month -= 12
+            m2_year += 1
+
+        # Determine M1 status
+        m1_complete = (m1_year < today.year or
+                       (m1_year == today.year and m1_month < today.month))
+        m1_in_progress = (m1_year == today.year and m1_month == today.month)
+
+        # Determine cohort type
+        if enrollment_month == start_month and enrollment_year == start_year:
+            cohort_type = "baseline"
+        elif enrollment_month == current_month - 1:
+            cohort_type = "active"
+        else:
+            cohort_type = "completed"
+
+        # Month keys and labels for the merchant table
+        month_keys = [m0_abbrev, MONTH_ABBREV[m1_month]]
+        m0_label = MONTH_NAMES[enrollment_month][:3]
+        m1_label = MONTH_NAMES[m1_month][:3]
+        month_labels = [f"{m0_label} $", f"{m1_label} $"]
+
+        # Add M2 column if M1 is complete (true-up tracking available)
+        has_m2 = m1_complete
+        if has_m2:
+            m2_abbrev = MONTH_ABBREV[m2_month]
+            month_keys.append(m2_abbrev)
+            m2_label = MONTH_NAMES[m2_month][:3]
+            month_labels.append(f"{m2_label} $")
+
+        # Build deadline info
+        if m1_in_progress:
+            _, days_in_month = calendar.monthrange(today.year, today.month)
+            days_remaining = days_in_month - today.day
+            deadline = f"{MONTH_NAMES[m1_month]} (M1 in progress)"
+            deadline_sub = f"{days_remaining} days remaining"
+        elif m1_complete:
+            deadline = f"{MONTH_NAMES[m1_month]} (M1 complete)"
+            deadline_sub = "M1 closed, M2 true-up available"
+        else:
+            deadline = f"{MONTH_NAMES[m1_month]} (upcoming)"
+            deadline_sub = ""
+
+        # Note text (HTML)
+        if cohort_type == "active":
+            note = (f'<div class="note"><b>Active cohort</b> &mdash; '
+                    f'{MONTH_NAMES[enrollment_month]} enrollees must produce $15K by end of '
+                    f'{MONTH_NAMES[m1_month]} (M0+M1). Miss? $30K by end of '
+                    f'{MONTH_NAMES[m2_month]} (M2 true-up).</div>')
+        elif cohort_type == "baseline":
+            note = (f'<div class="note"><b>Baseline cohort (pre-commission structure)</b> '
+                    f'&mdash; {MONTH_NAMES[enrollment_month]} cohort tracked retroactively. '
+                    f'Month 2 true-up: $30K by end of {MONTH_NAMES[m2_month]}.</div>')
+        else:
+            note = (f'<div class="note"><b>Completed cohort</b> &mdash; '
+                    f'{MONTH_NAMES[enrollment_month]} enrollees, M1 deadline was end of '
+                    f'{MONTH_NAMES[m1_month]}.</div>')
+
+        label = f"{MONTH_NAMES[enrollment_month][:3]} \u2192 {MONTH_NAMES[m1_month][:3]}"
+
+        configs.append({
+            "id": m0_abbrev,
+            "label": label,
+            "varName": f"{m0_abbrev}Cohort",
+            "type": cohort_type,
+            "note": note,
+            "monthKeys": month_keys,
+            "monthLabels": month_labels,
+            "hasM2": has_m2,
+            "deadline": deadline,
+            "deadlineSub": deadline_sub,
+        })
+
+    # Sort: active first, then reverse chronological
+    type_order = {"active": 0, "completed": 1, "baseline": 2}
+    configs.sort(key=lambda c: (type_order.get(c["type"], 1),
+                                 -_month_num_from_id(c["id"])))
+
+    logger.info("Built %d cohort configs: %s",
+                len(configs),
+                ", ".join(f'{c["label"]} ({c["type"]})' for c in configs))
+
+    return configs
+
+
+def _month_num_from_id(month_id: str) -> int:
+    """Convert month abbreviation to month number for sorting."""
+    month_map = {"jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+                 "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12}
+    return month_map.get(month_id, 0)
 
 
 if __name__ == "__main__":

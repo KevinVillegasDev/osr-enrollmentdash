@@ -73,14 +73,16 @@ def process(monthly_credited: dict[str, list[dict]], quarter_months: list[int],
         entry["q1"] = total
         entry["need"] = max(0, QUARTERLY_TARGET - total)
 
-        # Check monthly floor compliance
+        # Check monthly floor compliance and in-progress status
         for month_num in quarter_months:
             abbrev = MONTH_ABBREV[month_num]
             count = monthly_counts.get(abbrev, 0)
             # Only flag completed months
             is_completed = (year < today.year or
                            (year == today.year and month_num < today.month))
+            is_current_or_future = not is_completed
             entry[f"{abbrev}Ok"] = count >= MONTHLY_FLOOR if is_completed else True
+            entry[f"{abbrev}Prog"] = is_current_or_future
 
         q1_data.append(entry)
 
