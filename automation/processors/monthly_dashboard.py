@@ -37,6 +37,16 @@ def process(all_enrollments: list[dict], credited_enrollments: list[dict],
     month_name = MONTH_NAMES[month]
     month_abbrev = month_name[:3]
 
+    # Log first row's keys for debugging column label mapping
+    if credited_enrollments:
+        logger.info("Sample credited_enrollments row keys: %s", list(credited_enrollments[0].keys())[:15])
+    if all_enrollments:
+        logger.info("Sample all_enrollments row keys: %s", list(all_enrollments[0].keys())[:15])
+    if current_month_activity:
+        logger.info("Sample current_month_activity row keys: %s", list(current_month_activity[0].keys())[:15])
+    if last_month_activity:
+        logger.info("Sample last_month_activity row keys: %s", list(last_month_activity[0].keys())[:15])
+
     # ── repCredits: OSR enrollment counts ────────────────────────────────
     osr_counts = Counter()
     for row in credited_enrollments:
@@ -107,15 +117,42 @@ def process(all_enrollments: list[dict], credited_enrollments: list[dict],
 
     # ── Build merchant activity lookup (from Reports 3 + 4) ─────────────
     # Key by branch ID → {funded_dollars, funded_apps, total_apps}
+    # Matrix reports have month-prefixed columns like "3/1/2026_Sum of Funded Dollars"
+    # so we sum across all monthly columns for each metric.
     merchant_activity = defaultdict(lambda: {"funded": 0.0, "funded_apps": 0, "total_apps": 0})
 
     for row in current_month_activity + last_month_activity:
         branch = _get(row, "branch_id", "")
         if not branch:
-            continue
-        funded = _to_float(_get(row, "funded_dollars", 0))
-        funded_apps = _to_int(_get(row, "funded_apps", 0))
-        total_apps = _to_int(_get(row, "total_apps", 0))
+            # Also try "Account Name" as some matrix rows only have that
+            branch = row.get("Branch ID", "")
+            if not branch:
+                continue
+
+        # Sum across all month-prefixed columns (matrix report format)
+        funded = 0.0
+        funded_apps = 0
+        total_apps = 0
+        has_monthly_cols = False
+
+        for key, val in row.items():
+            kl = key.lower()
+            if "funded dollars" in kl and not kl.startswith("_"):
+                funded += _to_float(val)
+                has_monthly_cols = True
+            elif "funded applications total" in kl and not kl.startswith("_"):
+                funded_apps += _to_int(val)
+                has_monthly_cols = True
+            elif kl.endswith("applications") and "funded" not in kl and not kl.startswith("_"):
+                total_apps += _to_int(val)
+                has_monthly_cols = True
+
+        # Fallback to direct column labels (tabular report format)
+        if not has_monthly_cols:
+            funded = _to_float(_get(row, "funded_dollars", 0))
+            funded_apps = _to_int(_get(row, "funded_apps", 0))
+            total_apps = _to_int(_get(row, "total_apps", 0))
+
         merchant_activity[branch]["funded"] += funded
         merchant_activity[branch]["funded_apps"] += funded_apps
         merchant_activity[branch]["total_apps"] += total_apps

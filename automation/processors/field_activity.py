@@ -11,7 +11,7 @@ import logging
 from collections import defaultdict
 from datetime import datetime, date
 
-from ..config import COLUMN_LABELS
+from ..config import COLUMN_LABELS, OSR_ROSTER
 
 logger = logging.getLogger(__name__)
 
@@ -40,15 +40,16 @@ def process(check_in_rows: list[dict]) -> dict:
         check_date = _get(row, "check_in_date", "")
         comment = _get(row, "stop_comment", "")
         location = _get(row, "stop_location", "")
-        record_type = _get(row, "record_type", "")
 
         # Parse date
         date_str = _format_date(check_date)
         if not date_str:
             continue
 
-        # Existing = Account (has Branch ID), Prospect = Lead
-        is_existing = 1 if "account" in record_type.lower() else 0
+        # Existing = Account (Lead field is null/empty), Prospect = Lead (Lead field has ID)
+        lead_label = COLUMN_LABELS.get("lead_field", "Lead")
+        lead_val = row.get(lead_label)
+        is_existing = 1 if (lead_val is None or lead_val == "" or str(lead_val) == "null") else 0
 
         key = (rep, stop_name, date_str)
         existing_entry = dedup_key.get(key)
@@ -145,7 +146,7 @@ def process(check_in_rows: list[dict]) -> dict:
         "kpi_total_stops": total_stops,
         "kpi_existing": total_existing,
         "kpi_prospect": total_prospect,
-        "kpi_reps_active": reps_active,
+        "kpi_reps_active": f"{reps_active} / {len(OSR_ROSTER)}",
         "kpi_avg_per_day": avg_per_day,
         "kpi_week_range": f"{week_start} - {week_end}" if sorted_dates else "N/A",
     }
@@ -161,7 +162,7 @@ def _empty_result() -> dict:
         "kpi_total_stops": 0,
         "kpi_existing": 0,
         "kpi_prospect": 0,
-        "kpi_reps_active": 0,
+        "kpi_reps_active": f"0 / {len(OSR_ROSTER)}",
         "kpi_avg_per_day": 0,
         "kpi_week_range": "N/A",
     }

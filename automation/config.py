@@ -99,13 +99,14 @@ COLUMN_LABELS = {
     "total_apps": "# Applications",
     "funded_avg": "# Funded Average",
     "mmd_number": "Monthly Merchant Data: MMD Number",
-    # Report 5: Field activity
-    "check_in_date": "Date",
-    "check_in_rep": "Full Name",
-    "stop_name": "Related To",
-    "stop_comment": "Comments",
-    "stop_location": "Address",
-    "record_type": "Object Type",  # Account vs Lead
+    # Report 5: Field activity (Maps check-ins via Salesforce API)
+    # API returns _label_ prefixed keys for display values
+    "check_in_date": "_label_Date",
+    "check_in_rep": "_label_Assigned",
+    "stop_name": "_label_Company / Account",
+    "stop_comment": "_label_Full Comments",
+    "stop_location": "",  # Not available in API response
+    "lead_field": "Lead",  # null = Account (existing), non-null = Lead (prospect)
 }
 
 # ─── File Paths ──────────────────────────────────────────────────────────────

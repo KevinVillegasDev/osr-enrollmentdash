@@ -161,15 +161,31 @@ def _parse_summary_report(report_json: dict) -> list[dict]:
     groupings = report_json.get("groupingsDown", {}).get("groupings", [])
 
     detail_columns = metadata.get("detailColumns", [])
-    group_columns = metadata.get("groupingsDown", [])
+    raw_group_columns = metadata.get("groupingsDown", [])
+
+    # groupingsDown entries may be dicts with 'name' key or plain strings
+    group_column_names = []
+    for g in raw_group_columns:
+        if isinstance(g, dict):
+            group_column_names.append(g.get("name", str(g)))
+        else:
+            group_column_names.append(str(g))
 
     col_info = extended.get("detailColumnInfo", {})
+    grouping_info = extended.get("groupingColumnInfo", {})
     label_map = {}
     for api_name in detail_columns:
         info = col_info.get(api_name, {})
         label_map[api_name] = info.get("label", api_name)
 
-    # Build grouping label lookup
+    # Build grouping column label lookup (API name → display label)
+    group_label_map = {}
+    for api_name in group_column_names:
+        # Check groupingColumnInfo first, then detailColumnInfo
+        info = grouping_info.get(api_name, col_info.get(api_name, {}))
+        group_label_map[api_name] = info.get("label", api_name)
+
+    # Build grouping value lookup (factMap key → list of grouping values)
     group_labels = {}
     _extract_grouping_labels(groupings, group_labels, [])
 
@@ -185,11 +201,9 @@ def _parse_summary_report(report_json: dict) -> list[dict]:
             row_dict = {}
 
             # Add grouping fields
-            key_parts = key.replace("!T", "").split("_")
             if key in group_labels:
-                for group_col, group_val in zip(group_columns, group_labels[key]):
-                    g_info = col_info.get(group_col, {})
-                    g_label = g_info.get("label", group_col)
+                for group_name, group_val in zip(group_column_names, group_labels[key]):
+                    g_label = group_label_map.get(group_name, group_name)
                     row_dict[g_label] = group_val
 
             # Add detail columns

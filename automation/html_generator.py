@@ -554,8 +554,18 @@ def _replace_nth_mk_value(html: str, n: int, value: str, color: str = None,
         section_idx = html.find(section_start)
         if section_idx == -1:
             return html
-        # Find the next section or end of file
-        next_section = html.find('<h2', section_idx + len(section_start))
+        # Find the next section boundary (year-group div or h2)
+        # index.html uses <div class="year-title"> for sections, not <h2>
+        next_section = -1
+        for boundary in ['class="year-title"', 'class="year-group"', '<h2']:
+            pos = html.find(boundary, section_idx + len(section_start))
+            if pos != -1:
+                # Back up to the start of the containing tag
+                tag_start = html.rfind('<', section_idx, pos)
+                if tag_start != -1:
+                    pos = tag_start
+                if next_section == -1 or pos < next_section:
+                    next_section = pos
         if next_section == -1:
             section = html[section_idx:]
             offset = section_idx
