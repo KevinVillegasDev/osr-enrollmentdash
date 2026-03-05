@@ -222,9 +222,9 @@
       <div class="kpi-grid">
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#3B82F6,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">0</span><span class="kpi-sub">All sources, Mar 2026</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#10B981,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">0</span><span class="kpi-sub">0% of total</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#F59E0B,transparent)"></div><span class="kpi-label">Funded Volume</span><span class="kpi-value">$0</span><span class="kpi-sub">0 merchants tracked</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#8B5CF6,transparent)"></div><span class="kpi-label">Funded Apps</span><span class="kpi-value">0</span><span class="kpi-sub">of 0 total apps</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#06B6D4,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">0%</span><span class="kpi-sub">Apps → Funded</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#F59E0B,transparent)"></div><span class="kpi-label">Funded Volume</span><span class="kpi-value">$226,626</span><span class="kpi-sub">82 merchants tracked</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#8B5CF6,transparent)"></div><span class="kpi-label">Funded Apps</span><span class="kpi-value">111</span><span class="kpi-sub">of 485 total apps</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#06B6D4,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">22.9%</span><span class="kpi-sub">Apps → Funded</span></div>
       </div>
       <div class="card">
         <div class="section-title">Daily Enrollment Pace</div>
@@ -320,10 +320,10 @@
     <!-- PRODUCTION -->
     <div class="tab-content" id="production">
       <div class="kpi-grid kpi-grid-4">
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#10B981,transparent)"></div><span class="kpi-label">Total Funded</span><span class="kpi-value">$0</span><span class="kpi-sub">Across 0 producing merchants</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#3B82F6,transparent)"></div><span class="kpi-label">Avg Ticket</span><span class="kpi-value">$0</span><span class="kpi-sub">Per funded application</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#8B5CF6,transparent)"></div><span class="kpi-label">Total Applications</span><span class="kpi-value">0</span><span class="kpi-sub">Across 0 active merchants</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#F59E0B,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">0%</span><span class="kpi-sub">0 of 0 apps funded</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#10B981,transparent)"></div><span class="kpi-label">Total Funded</span><span class="kpi-value">$226,626</span><span class="kpi-sub">Across 46 producing merchants</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#3B82F6,transparent)"></div><span class="kpi-label">Avg Ticket</span><span class="kpi-value">$2,042</span><span class="kpi-sub">Per funded application</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#8B5CF6,transparent)"></div><span class="kpi-label">Total Applications</span><span class="kpi-value">485</span><span class="kpi-sub">Across 82 active merchants</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#F59E0B,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">22.9%</span><span class="kpi-sub">111 of 485 apps funded</span></div>
       </div>
       <div class="card">
         <div class="section-title">Top 15 Producing Merchants</div>
@@ -450,7 +450,7 @@ var pt='';topProducers.forEach(function(m,i){var rv=parseFloat(m.r);var cls=rv>=
 document.getElementById('prodTable').innerHTML=pt;
 
 // Funnel
-var fi=[{"l":"Active Merchants","v":0,"w":100,"c":"#3B82F6"},{"l":"Total Applications","v":0,"w":85,"c":"#8B5CF6"},{"l":"Funded Applications","v":0,"w":10,"c":"#10B981"},{"l":"Producing Merchants","v":0,"w":10,"c":"#F59E0B"}];
+var fi=[{"l":"Active Merchants","v":82,"w":100,"c":"#3B82F6"},{"l":"Total Applications","v":485,"w":85,"c":"#8B5CF6"},{"l":"Funded Applications","v":111,"w":23,"c":"#10B981"},{"l":"Producing Merchants","v":46,"w":56,"c":"#F59E0B"}];
 var fh='';fi.forEach(function(s){fh+='<div class="funnel-item"><div class="funnel-header"><span class="funnel-label">'+s.l+'</span><span class="funnel-value" style="color:'+s.c+'">'+s.v+'</span></div><div class="funnel-track"><div class="funnel-fill" style="width:'+s.w+'%;background:linear-gradient(90deg,'+s.c+','+s.c+'88)"></div></div></div>';});
 document.getElementById('funnelArea').innerHTML=fh;
 
