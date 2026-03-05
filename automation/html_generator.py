@@ -425,40 +425,42 @@ def update_index_page(filepath: str, data: dict) -> bool:
     baseline = cohort.get("baseline_cohort", {})
 
     if active:
-        # First mk-value (green) = active cohort funded
+        # Active cohort funded (unique green in Commission Tracking section)
         html = _replace_nth_mk_value(html, 0, active.get("total_funded_display", "$0"),
                                      color="#10B981", section_start="Commission Tracking")
     if baseline:
-        # Second mk-value (blue) = baseline cohort funded
-        html = _replace_nth_mk_value(html, 1, baseline.get("total_funded_display", "$0"),
+        # Baseline cohort funded (unique blue in Commission Tracking section)
+        html = _replace_nth_mk_value(html, 0, baseline.get("total_funded_display", "$0"),
                                      color="#3B82F6", section_start="Commission Tracking")
     if active:
-        # At $15K Target
-        html = _replace_nth_mk_value(html, 2, active.get("at_target_display", "0 / 0"),
+        # At $15K Target (first amber in Commission Tracking section)
+        html = _replace_nth_mk_value(html, 0, active.get("at_target_display", "0 / 0"),
                                      color="#F59E0B", section_start="Commission Tracking")
 
     # ── Q1 Enrollment Compliance Card ────────────────────────────────────
+    # Each color is unique within the Q1 Enrollment section, so n=0 for all
     # Q1 Total
     html = _replace_nth_mk_value(html, 0, str(data["q1_total"]),
                                  color="#8B5CF6", section_start="Q1 Enrollment")
     # At 30 Target
-    html = _replace_nth_mk_value(html, 1, data["q1_at_target"],
+    html = _replace_nth_mk_value(html, 0, data["q1_at_target"],
                                  color="#10B981", section_start="Q1 Enrollment")
     # 10/mo Flags
-    html = _replace_nth_mk_value(html, 2, str(data["q1_months_under_10"]),
+    html = _replace_nth_mk_value(html, 0, str(data["q1_months_under_10"]),
                                  color="#F59E0B", section_start="Q1 Enrollment")
     # Days Remaining
-    html = _replace_nth_mk_value(html, 3, data["q1_days_remaining"],
+    html = _replace_nth_mk_value(html, 0, data["q1_days_remaining"],
                                  color="#06B6D4", section_start="Q1 Enrollment")
 
     # ── Field Activity Card ──────────────────────────────────────────────
+    # Each color is unique within the Field Activity section, so n=0 for all
     html = _replace_nth_mk_value(html, 0, str(data["field_total_stops"]),
                                  color="#06B6D4", section_start="Field Activity")
-    html = _replace_nth_mk_value(html, 1, str(data["field_existing"]),
+    html = _replace_nth_mk_value(html, 0, str(data["field_existing"]),
                                  color="#3B82F6", section_start="Field Activity")
-    html = _replace_nth_mk_value(html, 2, str(data["field_prospect"]),
+    html = _replace_nth_mk_value(html, 0, str(data["field_prospect"]),
                                  color="#F59E0B", section_start="Field Activity")
-    html = _replace_nth_mk_value(html, 3, str(data["field_reps_active"]),
+    html = _replace_nth_mk_value(html, 0, str(data["field_reps_active"]),
                                  color="#10B981", section_start="Field Activity")
 
     if _validate_html(html):
