@@ -82,7 +82,9 @@ class SalesforceClient:
         """
         url = f"{self.instance_url}{path}"
         resp = self._session.get(url, params=params, timeout=120)
-        resp.raise_for_status()
+        if not resp.ok:
+            logger.error("GET %s failed (%d): %s", path, resp.status_code, resp.text[:500])
+            resp.raise_for_status()
         return resp.json()
 
     def post(self, path: str, body: dict = None) -> dict:
@@ -98,5 +100,7 @@ class SalesforceClient:
         """
         url = f"{self.instance_url}{path}"
         resp = self._session.post(url, json=body or {}, timeout=120)
-        resp.raise_for_status()
+        if not resp.ok:
+            logger.error("POST %s failed (%d): %s", path, resp.status_code, resp.text[:500])
+            resp.raise_for_status()
         return resp.json()
