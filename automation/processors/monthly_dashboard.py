@@ -221,14 +221,25 @@ def process(all_enrollments: list[dict], credited_enrollments: list[dict],
     kpi_other = kpi_total_enrollments - kpi_osr_credited
     kpi_other_pct = round(100 - kpi_credit_pct, 1)
 
-    total_funded = sum(m["funded"] for m in merchant_activity.values())
-    total_funded_apps = sum(m["funded_apps"] for m in merchant_activity.values())
-    total_apps = sum(m["total_apps"] for m in merchant_activity.values())
+    # Only count activity from merchants enrolled THIS month.
+    # merchant_activity merges Report 3 (this month) + Report 4 (last month's
+    # enrollees), so unfiltered totals would include prior-month spillover.
+    enrolled_branches = set()
+    for row in all_enrollments:
+        branch = _get(row, "branch_id", "")
+        if branch:
+            enrolled_branches.add(branch)
+
+    enrolled_act = {b: a for b, a in merchant_activity.items() if b in enrolled_branches}
+
+    total_funded = sum(m["funded"] for m in enrolled_act.values())
+    total_funded_apps = sum(m["funded_apps"] for m in enrolled_act.values())
+    total_apps = sum(m["total_apps"] for m in enrolled_act.values())
     kpi_conversion = round(total_funded_apps / total_apps * 100, 1) if total_apps > 0 else 0
     kpi_avg_ticket = round(total_funded / total_funded_apps) if total_funded_apps > 0 else 0
 
-    active_merchants = sum(1 for m in merchant_activity.values() if m["total_apps"] > 0)
-    producing_merchants = sum(1 for m in merchant_activity.values() if m["funded"] > 0)
+    active_merchants = sum(1 for m in enrolled_act.values() if m["total_apps"] > 0)
+    producing_merchants = sum(1 for m in enrolled_act.values() if m["funded"] > 0)
 
     # ── Product mix (LTO vs RC) ──────────────────────────────────────────
     osr_lto, osr_rc = 0, 0
