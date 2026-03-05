@@ -12,13 +12,14 @@ import argparse
 import json
 import logging
 import os
+import re
 import sys
 from datetime import date, timedelta
 
 from .config import (
     SF_LOGIN_URL, SF_CLIENT_ID, SF_CLIENT_SECRET,
     REPORT_IDS, MONTH_ABBREV, MONTH_NAMES, PROJECT_ROOT,
-    month_filename, month_filepath,
+    COLUMN_LABELS, month_filename, month_filepath,
 )
 from .salesforce_auth import SalesforceClient, SalesforceAuthError
 from .salesforce_reports import fetch_all_reports, fetch_cohort_activity, parse_report_rows, fetch_report
@@ -224,6 +225,12 @@ def main():
                     logger.warning("Failed to fetch month %d credited enrollments: %s", m, e)
                     monthly_credited[abbrev] = []
 
+        # If still no data, try extracting from existing HTML dashboard
+        if not monthly_credited.get(abbrev) and m < current_month:
+            html_rows = _extract_credited_from_html(m, current_year)
+            if html_rows:
+                monthly_credited[abbrev] = html_rows
+
     q1_data = q1_enrollment.process(monthly_credited, quarter_months, current_year)
 
     # Determine Q enrollment file name
@@ -256,6 +263,11 @@ def main():
         snapshot = _load_month_snapshot_all(m, current_year)
         if snapshot:
             monthly_results[mk] = snapshot
+        else:
+            # Fallback: extract pre-computed data from existing HTML dashboard
+            html_data = _extract_monthly_from_html(m, current_year)
+            if html_data:
+                monthly_results[mk] = html_data
 
     index_data = index_page.process(
         monthly_results=monthly_results,
@@ -362,6 +374,154 @@ def _load_month_snapshot_all(month: int, year: int) -> dict:
     except Exception as e:
         logger.warning("Failed to process snapshot for %d-%02d: %s", year, month, e)
         return None
+
+
+def _extract_monthly_from_html(month: int, year: int) -> dict | None:
+    """
+    Extract pre-computed monthly dashboard data from an existing HTML file.
+
+    Used as fallback when snapshots don't exist for historical months,
+    so YTD summary and monthly cards still show correct values.
+    """
+    filepath = month_filepath(month, year)
+    if not os.path.exists(filepath):
+        logger.info("No HTML file found for %s %d", MONTH_NAMES[month], year)
+        return None
+
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            html = f.read()
+
+        # Extract total enrollments from "All Enrollments (N)"
+        m = re.search(r'All Enrollments \((\d+)\)', html)
+        kpi_total = int(m.group(1)) if m else 0
+
+        # Extract OSR credited from "OSR Credited (N)"
+        m = re.search(r'OSR Credited \((\d+)\)', html)
+        kpi_osr = int(m.group(1)) if m else 0
+
+        # Extract conversion rate from KPI HTML
+        m = re.search(r'Conversion Rate</span><span class="kpi-value">(\d+\.?\d*)%', html)
+        kpi_conversion = float(m.group(1)) if m else 0
+
+        # Extract funded volume from KPI HTML
+        m = re.search(r'Funded Volume</span><span class="kpi-value">\$([^<]+)', html)
+        funded_str = m.group(1).strip() if m else "0"
+        funded_amount = _parse_dollar_amount(funded_str)
+
+        # Format funded display
+        if funded_amount >= 1_000_000:
+            funded_short = f"${funded_amount/1_000_000:.1f}M"
+        elif funded_amount >= 1_000:
+            funded_short = f"${funded_amount/1_000:.0f}K"
+        else:
+            funded_short = f"${int(funded_amount)}"
+
+        # Extract repCredits from JS variable
+        rep_credits = _parse_js_array(html, "repCredits")
+
+        # Extract marketData from JS variable
+        market_data = _parse_js_array(html, "marketData")
+
+        # Create synthetic topProducers with just the funded total
+        top_producers = [{"f": funded_amount}] if funded_amount > 0 else []
+
+        logger.info(
+            "Extracted from %s HTML: total=%d, osr=%d, funded=%s",
+            MONTH_NAMES[month], kpi_total, kpi_osr, funded_short,
+        )
+
+        return {
+            "kpi_total": kpi_total,
+            "kpi_osr": kpi_osr,
+            "kpi_conversion": kpi_conversion,
+            "kpi_funded_display": funded_short,
+            "kpi_funded_short": funded_short,
+            "topProducers": top_producers,
+            "repCredits": rep_credits,
+            "marketData": market_data,
+            "month_name": MONTH_NAMES[month],
+            "year": year,
+        }
+    except Exception as e:
+        logger.warning("Failed to extract data from %s HTML: %s", MONTH_NAMES[month], e)
+        return None
+
+
+def _extract_credited_from_html(month: int, year: int) -> list:
+    """
+    Generate synthetic credited enrollment rows from HTML dashboard data.
+
+    Extracts repCredits from the month's HTML and generates one row per
+    credited enrollment (with the OSR Enrollment Credit field set).
+    Used for Q1 enrollment compliance when snapshots aren't available.
+    """
+    filepath = month_filepath(month, year)
+    if not os.path.exists(filepath):
+        return []
+
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            html = f.read()
+
+        rep_credits = _parse_js_array(html, "repCredits")
+        osr_label = COLUMN_LABELS.get("osr_credit", "OSR Enrollment Credit")
+
+        rows = []
+        for rep in rep_credits:
+            name = rep.get("n", "")
+            count = rep.get("v", 0)
+            for _ in range(count):
+                rows.append({osr_label: name})
+
+        logger.info(
+            "Generated %d synthetic credited rows from %s HTML",
+            len(rows), MONTH_NAMES[month],
+        )
+        return rows
+    except Exception as e:
+        logger.warning(
+            "Failed to extract credited data from %s HTML: %s",
+            MONTH_NAMES[month], e,
+        )
+        return []
+
+
+def _parse_js_array(html: str, var_name: str) -> list:
+    """Parse a JS variable containing an array of simple objects from HTML."""
+    pattern = rf'var {var_name}\s*=\s*(\[.*?\]);'
+    m = re.search(pattern, html, re.DOTALL)
+    if not m:
+        return []
+
+    js_str = m.group(1)
+    # Convert JS object literal to valid JSON:
+    # 1. Quote unquoted keys like {n: "foo"} → {"n": "foo"}
+    json_str = re.sub(r'([{,])\s*([a-zA-Z_]\w*)\s*:', r'\1"\2":', js_str)
+    # 2. Remove trailing commas before } or ]
+    json_str = re.sub(r',\s*([}\]])', r'\1', json_str)
+    # 3. Handle JS escaped single quotes: \' → '
+    json_str = json_str.replace("\\'", "'")
+
+    try:
+        return json.loads(json_str)
+    except json.JSONDecodeError as e:
+        logger.warning("Failed to parse JS array '%s': %s", var_name, e)
+        return []
+
+
+def _parse_dollar_amount(s: str) -> float:
+    """Parse a dollar amount string like '33,147' or '167K' into a float."""
+    s = s.strip().replace(",", "")
+    if s.upper().endswith("M"):
+        return float(s[:-1]) * 1_000_000
+    elif s.upper().endswith("K"):
+        return float(s[:-1]) * 1_000
+    else:
+        try:
+            return float(s)
+        except ValueError:
+            return 0.0
 
 
 if __name__ == "__main__":
