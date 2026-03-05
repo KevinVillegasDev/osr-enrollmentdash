@@ -454,14 +454,15 @@ def update_index_page(filepath: str, data: dict) -> bool:
 
     # ── Field Activity Card ──────────────────────────────────────────────
     # Each color is unique within the Field Activity section, so n=0 for all
+    # Use ">Field Activity<" to avoid matching the HTML comment <!-- Field Activity -->
     html = _replace_nth_mk_value(html, 0, str(data["field_total_stops"]),
-                                 color="#06B6D4", section_start="Field Activity")
+                                 color="#06B6D4", section_start=">Field Activity<")
     html = _replace_nth_mk_value(html, 0, str(data["field_existing"]),
-                                 color="#3B82F6", section_start="Field Activity")
+                                 color="#3B82F6", section_start=">Field Activity<")
     html = _replace_nth_mk_value(html, 0, str(data["field_prospect"]),
-                                 color="#F59E0B", section_start="Field Activity")
+                                 color="#F59E0B", section_start=">Field Activity<")
     html = _replace_nth_mk_value(html, 0, str(data["field_reps_active"]),
-                                 color="#10B981", section_start="Field Activity")
+                                 color="#10B981", section_start=">Field Activity<")
 
     if _validate_html(html):
         _write_file(filepath, html)
