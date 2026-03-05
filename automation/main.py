@@ -169,9 +169,9 @@ def main():
     # Build cohort configs for all tracked cohorts
     cohort_configs = _build_cohort_configs(current_month, current_year)
 
-    # Update cohort-tracking.html
+    # Update cohort-tracking.html (always update configs/tabs, even if no new data)
     cohort_path = os.path.join(output_dir, "cohort-tracking.html")
-    if os.path.exists(cohort_path) and cohorts:
+    if os.path.exists(cohort_path) and (cohorts or cohort_configs):
         html_generator.update_cohort_tracking(
             cohort_path, cohorts, cohort_kpis_dict, cohort_configs
         )
