@@ -41,15 +41,20 @@ def fetch_report(client, report_id: str, filters: list = None) -> dict:
         RuntimeError: If all retries are exhausted
     """
     path = _report_url(report_id)
-    body = {}
+    use_post = filters is not None
+    body = None
     if filters:
         body = {"reportMetadata": {"reportFilters": filters}}
 
     last_error = None
     for attempt in range(1, MAX_RETRIES + 1):
         try:
-            logger.info("Fetching report %s (attempt %d/%d)", report_id, attempt, MAX_RETRIES)
-            result = client.post(path, body=body if body else None)
+            logger.info("Fetching report %s (attempt %d/%d, method=%s)",
+                        report_id, attempt, MAX_RETRIES, "POST" if use_post else "GET")
+            if use_post:
+                result = client.post(path, body=body)
+            else:
+                result = client.get(path)
 
             # Check if all data was returned
             all_data = result.get("allData", True)
