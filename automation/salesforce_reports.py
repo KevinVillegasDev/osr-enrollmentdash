@@ -395,14 +395,22 @@ def fetch_cohort_activity(client, enrollment_month: int, enrollment_year: int,
     else:
         enroll_end = date(enrollment_year, enrollment_month + 1, 1) - timedelta(days=1)
 
+    # Must include ALL saved filters (POST replaces them entirely).
+    # Report 4 saved filters: RECORDTYPE=Branch, Account.Enrollment_Date__c=LAST MONTH
+    # We keep RECORDTYPE and override the enrollment date range.
     filters = [
         {
-            "column": "ENROLLMENT_DATE",
+            "column": "RECORDTYPE",
+            "operator": "equals",
+            "value": "Branch",
+        },
+        {
+            "column": "Account.Enrollment_Date__c",
             "operator": "greaterOrEqual",
             "value": enroll_start.isoformat(),
         },
         {
-            "column": "ENROLLMENT_DATE",
+            "column": "Account.Enrollment_Date__c",
             "operator": "lessOrEqual",
             "value": enroll_end.isoformat(),
         },

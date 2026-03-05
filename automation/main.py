@@ -201,11 +201,22 @@ def main():
                             end_date = date(current_year + 1, 1, 1) - timedelta(days=1)
                         else:
                             end_date = date(current_year, m + 1, 1) - timedelta(days=1)
+                        # Must include ALL saved filters (POST replaces them entirely).
+                        # Report 2 saved filters: RECORDTYPE=Branch, enrollment date,
+                        # and 3 conversion filters.
                         filters = [
-                            {"column": "ENROLLMENT_DATE", "operator": "greaterOrEqual",
+                            {"column": "RECORDTYPE", "operator": "equals",
+                             "value": "Branch"},
+                            {"column": "Account.Enrollment_Date__c", "operator": "greaterOrEqual",
                              "value": start_date.isoformat()},
-                            {"column": "ENROLLMENT_DATE", "operator": "lessOrEqual",
+                            {"column": "Account.Enrollment_Date__c", "operator": "lessOrEqual",
                              "value": end_date.isoformat()},
+                            {"column": "Account.Parent_EP_Converted__c", "operator": "equals",
+                             "value": "True"},
+                            {"column": "Account.Parent_EP_Converted_Override__c", "operator": "equals",
+                             "value": "True"},
+                            {"column": "Account.EP_Converted__c", "operator": "equals",
+                             "value": "True"},
                         ]
                         raw = fetch_report(client, report_id, filters=filters)
                         monthly_credited[abbrev] = parse_report_rows(raw)
