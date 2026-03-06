@@ -356,27 +356,26 @@
 </div>
 
 <script>
-var repCredits=[{"n":"Jared Midkiff","v":8},{"n":"Joseph Guerra","v":4},{"n":"Stephanie Whitlock","v":4},{"n":"Phillip Mason","v":4},{"n":"Eric Henderson","v":3},{"n":"Yemaira Hernandez","v":3},{"n":"Omar Corona","v":2},{"n":"Outside Sales Manager","v":1},{"n":"Matthew MacDonald","v":1},{"n":"Claudia Gerhardt","v":1}];
+var repCredits=[{"n":"Jared Midkiff","v":8},{"n":"Joseph Guerra","v":5},{"n":"Phillip Mason","v":4},{"n":"Stephanie Whitlock","v":4},{"n":"Eric Henderson","v":3},{"n":"Yemaira Hernandez","v":3},{"n":"Matthew MacDonald","v":2},{"n":"Claudia Gerhardt","v":1},{"n":"Omar Corona","v":1}];
 var marketData=[{"n":"FL","v":13},{"n":"TX","v":6},{"n":"CA","v":5},{"n":"PA","v":3},{"n":"AZ","v":2},{"n":"GA","v":2}];
-var industryData=[{"n":"Auto - Repair","v":20},{"n":"Auto - Total Car Care","v":5},{"n":"Auto - Stereo","v":4},{"n":"Auto - Tires","v":1},{"n":"Auto - Transmission","v":1}];
+var industryData=[{"n":"Auto - Repair","v":20},{"n":"Auto - Total Car Care","v":5},{"n":"Auto - Stereo","v":4},{"n":"Auto - Transmission","v":1},{"n":"Auto - Tires","v":1}];
 var marketDataFull=[{"n":"FL","v":15},{"n":"TX","v":9},{"n":"CA","v":7},{"n":"PA","v":5},{"n":"AZ","v":3},{"n":"GA","v":2},{"n":"NM","v":1}];
 var industryDataFull=[{"n":"Auto - Repair","v":23},{"n":"Auto - Total Car Care","v":6},{"n":"Auto - Stereo","v":5},{"n":"Auto - Transmission","v":2},{"n":"Auto - Other","v":2},{"n":"Auto - Tires","v":2},{"n":"Furniture","v":1},{"n":"Auto - Collision","v":1}];
 var marketsScope='osr';
-var isrData=[{"n":"Laura Angulo","v":13},{"n":"Javier Gonzalez","v":6},{"n":"Luzmam Vigil","v":6},{"n":"Katie Anguiano","v":3},{"n":"Michael Palmer","v":2}];
+var isrData=[{"n":"Laura Angulo","v":13},{"n":"Luzmam Vigil","v":6},{"n":"Javier Gonzalez","v":6},{"n":"Katie Anguiano","v":3},{"n":"Michael Palmer","v":2}];
 var dailyTrend=[{"d":"Mar 2","v":2},{"d":"Mar 3","v":6},{"d":"Mar 4","v":15},{"d":"Mar 5","v":8}];
 var topProducers=[{"n":"Total Automotive & Offroad","f":2000.0,"fa":1,"ta":1,"r":"100.0%","o":""},{"n":"Ad Modera Living","f":0.0,"fa":0,"ta":2,"r":"0.0%","o":""},{"n":"Direct Tire Co","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":""},{"n":"Performance Custom Cables","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":""},{"n":"Driven Import Auto Care","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":""}];
 var PC=["#3B82F6","#10B981","#F59E0B","#EF4444","#8B5CF6","#06B6D4","#EC4899","#F97316","#14B8A6","#A855F7","#6366F1","#84CC16"];
 
 var repMerchants={
-"Joseph Guerra":[{"n":"Louetta Tires & Brakes","b":25421,"l":"Spring, TX","f":0,"fa":0,"ta":0},{"n":"Performance Custom Cables","b":25446,"l":"Spring, TX","f":0.0,"fa":0,"ta":1},{"n":"Gentry Automotive","b":25450,"l":"Montgomery, TX","f":0,"fa":0,"ta":0},{"n":"Concierge Auto Repair","b":25411,"l":"Spring, TX","f":0,"fa":0,"ta":0}],
-"Outside Sales Manager":[{"n":"Llantera Del Centro","b":25425,"l":"Mesa, AZ","f":0,"fa":0,"ta":0}],
-"Stephanie Whitlock":[{"n":"Direct Tire Co","b":25424,"l":"Jacksonville, FL","f":0.0,"fa":0,"ta":1},{"n":"Americas DIY Auto Repair","b":25439,"l":"Douglasville, GA","f":0,"fa":0,"ta":0},{"n":"Carvi Auto Repair","b":25447,"l":"Jacksonville, FL","f":0,"fa":0,"ta":0},{"n":"Driven Import Auto Care","b":25444,"l":"Newnan, GA","f":0.0,"fa":0,"ta":1}],
-"Omar Corona":[{"n":"Total Automotive & Offroad","b":25427,"l":"Houston, TX","f":2000.0,"fa":1,"ta":1},{"n":"Manriquez Collision Center","b":25448,"l":"Houston, TX","f":0,"fa":0,"ta":0}],
-"Matthew MacDonald":[{"n":"Trusted Auto Pros","b":25441,"l":"Tempe, AZ","f":0,"fa":0,"ta":0}],
 "Claudia Gerhardt":[{"n":"All Auto Pros","b":25426,"l":"Norco, CA","f":0,"fa":0,"ta":0}],
 "Eric Henderson":[{"n":"Auto X Repair And Sales","b":25413,"l":"Reading, PA","f":0,"fa":0,"ta":0},{"n":"J & F Auto Repair & Sales","b":25440,"l":"West Lawn, PA","f":0,"fa":0,"ta":0},{"n":"LG Transmission Experts","b":25445,"l":"Allentown, PA","f":0,"fa":0,"ta":0}],
 "Jared Midkiff":[{"n":"Street King Auto","b":25412,"l":"Winter Haven, FL","f":0,"fa":0,"ta":0},{"n":"Aamco Transmissions & Total Car Care - US 19 N - Clearwater","b":25428,"l":"Clearwater, FL","f":0,"fa":0,"ta":0},{"n":"Auto Repair Pros Hollywood East 7","b":25431,"l":"Hollywood, FL","f":0,"fa":0,"ta":0},{"n":"Auto Repair Pros WPB 1","b":25433,"l":"West Palm Beach, FL","f":0,"fa":0,"ta":0},{"n":"Auto Repair Pros Lantana 3","b":25434,"l":"Lantana, FL","f":0,"fa":0,"ta":0},{"n":"Auto Repair Pros Greenacres 2","b":25435,"l":"Greenacres, FL","f":0,"fa":0,"ta":0},{"n":"Auto Repair Pros Margate 4","b":25436,"l":"Margate, FL","f":0,"fa":0,"ta":0},{"n":"Auto Repair Pros Hollywood North 6","b":25437,"l":"Hollywood, FL","f":0,"fa":0,"ta":0}],
+"Joseph Guerra":[{"n":"Total Automotive & Offroad","b":25427,"l":"Houston, TX","f":2000.0,"fa":1,"ta":1},{"n":"Concierge Auto Repair","b":25411,"l":"Spring, TX","f":0,"fa":0,"ta":0},{"n":"Louetta Tires & Brakes","b":25421,"l":"Spring, TX","f":0,"fa":0,"ta":0},{"n":"Performance Custom Cables","b":25446,"l":"Spring, TX","f":0.0,"fa":0,"ta":1},{"n":"Gentry Automotive","b":25450,"l":"Montgomery, TX","f":0,"fa":0,"ta":0}],
+"Matthew MacDonald":[{"n":"Llantera Del Centro","b":25425,"l":"Mesa, AZ","f":0,"fa":0,"ta":0},{"n":"Trusted Auto Pros","b":25441,"l":"Tempe, AZ","f":0,"fa":0,"ta":0}],
+"Omar Corona":[{"n":"Manriquez Collision Center","b":25448,"l":"Houston, TX","f":0,"fa":0,"ta":0}],
 "Phillip Mason":[{"n":"Westcoast Evolutions - Arden","b":25414,"l":"Sacramento, CA","f":0,"fa":0,"ta":0},{"n":"Westcoast Evolutions - Elk Grove","b":25415,"l":"Elk Grove, CA","f":0,"fa":0,"ta":0},{"n":"Westcoast Evolutions - Gold River","b":25416,"l":"Gold River, CA","f":0,"fa":0,"ta":0},{"n":"Westcoast Evolutions - Jefferson","b":25417,"l":"West Sacramento, CA","f":0,"fa":0,"ta":0}],
+"Stephanie Whitlock":[{"n":"Direct Tire Co","b":25424,"l":"Jacksonville, FL","f":0.0,"fa":0,"ta":1},{"n":"Driven Import Auto Care","b":25444,"l":"Newnan, GA","f":0.0,"fa":0,"ta":1},{"n":"Americas DIY Auto Repair","b":25439,"l":"Douglasville, GA","f":0,"fa":0,"ta":0},{"n":"Carvi Auto Repair","b":25447,"l":"Jacksonville, FL","f":0,"fa":0,"ta":0}],
 "Yemaira Hernandez":[{"n":"Prestige European 5","b":25432,"l":"Fort Lauderdale, FL","f":0,"fa":0,"ta":0},{"n":"Pro Mecanic 360","b":25438,"l":"Miami, FL","f":0,"fa":0,"ta":0},{"n":"Star Auto Techs","b":25451,"l":"Pembroke Pines, FL","f":0,"fa":0,"ta":0}]
 };
 
