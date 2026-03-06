@@ -1105,5 +1105,32 @@
     "_label_Industry": "Auto - Repair",
     "EPF Product": "Rental Payments (Lease-to-Own Option)",
     "_label_EPF Product": "Rental Payments (Lease-to-Own Option)"
+  },
+  {
+    "Enrollment Date": "3/6/2026",
+    "Branch ID": "25452",
+    "_label_Branch ID": "25452",
+    "Account Name": "001TO00000h6UKPYA2",
+    "_label_Account Name": "Texas Automotive and Tire",
+    "Billing State/Province (text only)": "Texas",
+    "_label_Billing State/Province (text only)": "Texas",
+    "Status": "New",
+    "_label_Status": "New",
+    "Parent Account": "001TO00000h2Sp4YAE",
+    "_label_Parent Account": "Texas Automotive and Tire LLC",
+    "CID": "19774",
+    "_label_CID": "19774",
+    "Billing Street": "411 South Texas Boulevard",
+    "_label_Billing Street": "411 South Texas Boulevard",
+    "Billing State/Province": "TX",
+    "_label_Billing State/Province": "Texas",
+    "Billing Zip/Postal Code": "78332",
+    "_label_Billing Zip/Postal Code": "78332",
+    "Created Date": "2026-03-01",
+    "_label_Created Date": "3/1/2026",
+    "Industry": "Auto - Tires",
+    "_label_Industry": "Auto - Tires",
+    "EPF Product": "Rental Payments (Lease-to-Own Option)",
+    "_label_EPF Product": "Rental Payments (Lease-to-Own Option)"
   }
 ]
