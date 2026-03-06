@@ -198,10 +198,12 @@ def _get(row: dict, col_key: str, default: str = "") -> str:
 
     # For OSR name: the "OSR Enrollment Credit" column often contains "-"
     # in SUMMARY format.  The actual rep name is in alternate fields.
+    # IMPORTANT: Check _label_OSR first — "Referral/Promo Code" is a free-text
+    # field that may contain abbreviations instead of full names.
     if col_key == "osr_credit":
         if not val or val == "-":
-            for alt in ("Referral/Promo Code", "_label_OSR",
-                        "_label_OSR Enrollment Credit"):
+            for alt in ("_label_OSR", "_label_OSR Enrollment Credit",
+                        "Referral/Promo Code"):
                 alt_val = row.get(alt)
                 if alt_val and alt_val != "-":
                     return alt_val

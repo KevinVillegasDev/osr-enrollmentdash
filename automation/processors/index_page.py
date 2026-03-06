@@ -8,7 +8,12 @@ and per-month dashboard card values for index.html.
 
 import logging
 
+from ..config import MONTH_ABBREV
+
 logger = logging.getLogger(__name__)
+
+# Reverse lookup: month abbreviation → month number for sorting
+_ABBREV_TO_NUM = {v: k for k, v in MONTH_ABBREV.items()}
 
 
 def process(monthly_results: dict[str, dict],
@@ -37,7 +42,7 @@ def process(monthly_results: dict[str, dict],
 
     month_cards = []
 
-    for key, data in sorted(monthly_results.items()):
+    for key, data in sorted(monthly_results.items(), key=_month_sort_key):
         ytd_total_enrollments += data.get("kpi_total", 0)
         ytd_osr_credited += data.get("kpi_osr", 0)
         # Sum funded from the funnel's producing merchants total
@@ -127,7 +132,7 @@ def _months_tracked_sub(monthly_results: dict) -> str:
 
     month_names = []
     year = None
-    for key, data in sorted(monthly_results.items()):
+    for key, data in sorted(monthly_results.items(), key=_month_sort_key):
         month_names.append(data.get("month_name", ""))
         year = data.get("year", 2026)
 
@@ -137,3 +142,10 @@ def _months_tracked_sub(monthly_results: dict) -> str:
         return f"{month_names[0]} & {month_names[1]} {year}"
     else:
         return ", ".join(month_names[:-1]) + f" & {month_names[-1]} {year}"
+
+
+def _month_sort_key(item: tuple) -> int:
+    """Sort key for monthly_results items — chronological order by month number."""
+    key = item[0]  # e.g., "feb-2026"
+    abbrev = key.split("-")[0]
+    return _ABBREV_TO_NUM.get(abbrev, 0)

@@ -556,11 +556,13 @@ def _normalize_enrollment_rows(rows: list) -> list:
         new_row = dict(row)
 
         # Fix OSR name: "OSR Enrollment Credit" often = "-" in SUMMARY format.
-        # The actual name is in "Referral/Promo Code" or "_label_OSR".
+        # The actual name is in "_label_OSR" (authoritative) or "Referral/Promo Code" (free-text).
+        # IMPORTANT: Check _label_OSR first — "Referral/Promo Code" is a free-text field
+        # that may contain abbreviations like "Stephanie" or "mm" instead of full names.
         osr_val = row.get(osr_label, "")
         if not osr_val or osr_val == "-":
-            for alt in ("Referral/Promo Code", "_label_OSR",
-                        f"_label_{osr_label}"):
+            for alt in ("_label_OSR", f"_label_{osr_label}",
+                        "Referral/Promo Code"):
                 alt_val = row.get(alt)
                 if alt_val and alt_val != "-":
                     new_row[osr_label] = alt_val
@@ -572,6 +574,14 @@ def _normalize_enrollment_rows(rows: list) -> list:
         label_name = row.get(f"_label_{merchant_label}", "")
         if label_name and label_name != "-" and label_name != name_val:
             new_row[merchant_label] = label_name
+
+        # Fix ISR name: raw value is a Salesforce User ID (e.g., "005TO000...").
+        # Display name lives in "_label_ISR".
+        isr_label = COLUMN_LABELS.get("isr_assignment", "ISR")
+        isr_val = row.get(isr_label, "")
+        label_isr = row.get(f"_label_{isr_label}", "")
+        if label_isr and label_isr != "-" and label_isr != isr_val:
+            new_row[isr_label] = label_isr
 
         normalized.append(new_row)
 
