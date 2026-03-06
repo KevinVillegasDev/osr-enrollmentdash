@@ -9,14 +9,16 @@ The primary user is Kevin (Sales Program Manager). The dashboards track merchant
 ## File Structure
 
 ```
-index.html              - Landing page / dashboard hub
-jan-2026.html           - January 2026 monthly dashboard
-feb-2026.html           - February 2026 monthly dashboard
+index.html              - Landing page / dashboard hub (with force-update button)
+jan-2026.html           - January 2026 monthly dashboard (baseline, manual)
+feb-2026.html           - February 2026 monthly dashboard (manual)
+mar-2026.html           - March 2026 monthly dashboard (automated)
 cohort-tracking.html    - Cohort commission tracker (tabbed: active + baseline)
 q1-enrollment.html      - Q1 2026 enrollment compliance tracker
 field-activity.html     - Weekly field check-in tracker (Maps data)
 automation/             - Salesforce API automation pipeline (Python)
 .github/workflows/      - GitHub Actions cron workflow (2x daily)
+netlify/functions/      - Netlify Function for manual force-update trigger
 data/snapshots/         - Raw Salesforce JSON archives per month
 requirements.txt        - Python dependencies (requests)
 CLAUDE.md               - This file
@@ -34,9 +36,9 @@ Styling: Dark theme (#0B0F1A background), DM Sans font, consistent color system 
 - Cyan #06B6D4 (field activity)
 - Red #EF4444 (behind/at risk)
 
-Charts: Chart.js 4.x loaded from CDN. Used on monthly dashboards (jan/feb) for bar charts, doughnut charts, and daily trend lines.
+Charts: Chart.js 4.x loaded from CDN. Used on monthly dashboards for bar charts, doughnut charts, and daily trend lines.
 
-## Monthly Dashboard Pattern (jan-2026.html, feb-2026.html)
+## Monthly Dashboard Pattern (jan-2026.html, feb-2026.html, mar-2026.html)
 
 Each monthly dashboard has 4 tabs: Overview, Rep Performance, Markets, Production.
 
@@ -59,7 +61,7 @@ Each monthly dashboard has 4 tabs: Overview, Rep Performance, Markets, Productio
 - Production funnel visualization
 - Key observations section
 
-**To add a new month:** Duplicate the most recent month's HTML, replace all data variables in the `<script>` block, update hardcoded values in the function section (enrollment counts in toggle buttons, product mix numbers, funnel numbers, observations text, bars init values). Update index.html to add the new month card and update YTD summary.
+**New monthly dashboards are created automatically** by the automation pipeline when a new month starts. The pipeline duplicates the previous month's HTML as a template and injects fresh data. No manual file creation needed.
 
 ## Commission Tracking (cohort-tracking.html)
 
@@ -73,7 +75,7 @@ Tracks OSR compliance with Paul Funchess's commission structure:
 - Only OSR-credited merchants count (non-credited enrollments excluded)
 
 **Structure:**
-- Tabbed interface: one tab per cohort
+- Data-driven tabbed interface: `cohortConfig` array defines all tabs dynamically
 - Active cohort (orange tab): the current month's enrollees being tracked
 - Baseline/completed cohorts (gray dimmed tab): finalized or pre-structure cohorts
 - Each tab shows: KPIs, progress bars per OSR, expandable merchant drilldowns with per-month funding columns
@@ -82,7 +84,7 @@ Tracks OSR compliance with Paul Funchess's commission structure:
 - Feb → Mar (Active): Feb enrollees, $15K deadline end of March, M2 true-up end of April
 - Jan → Feb (Baseline): Pre-commission-structure, retroactive tracking for comparison
 
-**When a new month starts:** Add a new tab for the new cohort (e.g., "Mar → Apr"). Move the previous active cohort's tab to non-dimmed completed state. The JS data arrays are `janCohort` and `febCohort` - add `marCohort` etc following the same pattern.
+**New cohort tabs are created automatically** by the pipeline when a new month starts. The `cohortConfig` array and cohort data variables are injected dynamically.
 
 ## Q1 Enrollment Compliance (q1-enrollment.html)
 
@@ -94,15 +96,18 @@ Tracks per-OSR quarterly enrollment targets:
 - Quarterly true-up: if any month falls below 10 but quarter total hits 30, no penalty
 - Resets at start of each quarter
 
-**Current:** Q1 2026 = Jan + Feb + Mar. March column shows "-" (in progress).
+**Structure:**
+- Data-driven: `quarterConfig` defines quarter number, year, and month keys/labels
+- `q1Data` array contains per-OSR enrollment counts by month
+- New quarterly pages are created automatically when a new quarter starts
 
-**When Q2 starts:** Freeze Q1 page as final record. Create q2-enrollment.html with fresh data. Update index.html to link to both (Q1 as archived, Q2 as active).
+**Current:** Q1 2026 = Jan + Feb + Mar.
 
 ## Field Activity Tracker (field-activity.html)
 
 Weekly check-in data from Salesforce Maps.
 
-**Data source:** Maps_Check_Ins_This_Week report (exported as Excel)
+**Data source:** Maps_Check_Ins_This_Week report (Report 5)
 
 **Features:**
 - Leaderboard sorted by total stops
@@ -119,24 +124,33 @@ Weekly check-in data from Salesforce Maps.
 
 **Sections:**
 1. YTD Summary bar (total enrollments, OSR credited, funded volume, months tracked)
-2. Commission Tracking (cohort production card + Q1 enrollment compliance card)
+2. Commission Tracking (cohort production card + quarterly enrollment compliance card)
 3. Field Activity (weekly check-ins card)
 4. Monthly Dashboards (cards per month, auto-collapses after 3 most recent)
 
-**When updating:** YTD summary is hardcoded and must be manually updated when new months are added. Monthly dashboard cards are also hardcoded with summary KPIs from each month.
+**Force-update button:** The "Refresh All Reports" button calls a Netlify Function (`/.netlify/functions/trigger-update`) that triggers the GitHub Actions workflow via API. Requires `GH_PAT` environment variable in Netlify.
+
+**All values are updated automatically** by the pipeline — YTD summary, month cards, commission card, Q1 card, and field activity card.
 
 ## Data Flow
 
-**Automated (active):**
+**Automated (active, hands-free):**
 1. GitHub Actions runs 2x daily (7am + 11pm CT, weekdays) via `.github/workflows/update-dashboards.yml`
 2. Python script authenticates to Salesforce via Connected App (OAuth 2.0 Client Credentials)
-3. Pulls 5 reports via Salesforce Analytics REST API (v62.0)
-4. Processors transform report JSON → JS data variables matching each page's schema
-5. HTML generator injects new data into existing HTML files (script data block + hardcoded KPIs)
-6. Git commit → Netlify auto-deploys
-7. Raw report JSON saved to `data/snapshots/{YYYY-MM}/` for historical reference
+3. Pulls 5 core reports via Salesforce Analytics REST API (v62.0)
+4. Normalization step converts raw Salesforce data (IDs, null placeholders) to display values
+5. Processors transform normalized data → JS data variables matching each page's schema
+6. HTML generator injects new data into existing HTML files (script data block + hardcoded KPIs)
+7. If a new month/quarter starts, new pages are auto-created from templates
+8. Git commit → Netlify auto-deploys
+9. Raw report JSON saved to `data/snapshots/{YYYY-MM}/` for historical reference
 
-**Manual fallback:**
+**Manual force-update:**
+1. Kevin clicks "Refresh All Reports" button on index.html
+2. Netlify Function triggers GitHub Actions workflow via API
+3. Same pipeline runs as above
+
+**Manual fallback (for historical months without snapshots):**
 1. Kevin exports Salesforce reports as Excel
 2. Claude processes Excel → generates HTML with embedded data
 3. Push to GitHub → Netlify deploys
@@ -150,16 +164,47 @@ automation/
   salesforce_reports.py      # Fetch + parse reports via Analytics REST API
   processors/
     monthly_dashboard.py     # Reports 1-4 → repCredits, marketData, topProducers, etc.
-    cohort_tracking.py       # Reports 2+4 (date overrides) → janCohort, febCohort arrays
+    cohort_tracking.py       # Reports 2+4 (date overrides) → cohort arrays
     q1_enrollment.py         # Report 2 (per month) → q1Data array
     field_activity.py        # Report 5 → repActivity, repStops, days, dayLabels
     index_page.py            # Aggregates all processors → index.html KPIs
   html_generator.py          # Injects data into HTML (script block split + regex KPIs)
-  main.py                    # Orchestrator: auth → fetch → process → generate
+  main.py                    # Orchestrator: auth → fetch → normalize → process → generate
 ```
 
 **Run locally:** `python -m automation.main --dry-run` (outputs to `output/` dir)
-**Run in CI:** Triggered by cron schedule or manual `workflow_dispatch`
+**Run in CI:** Triggered by cron schedule, manual `workflow_dispatch`, or Netlify Function
+
+### Salesforce Report Formats
+
+The Analytics REST API returns reports in different formats depending on report type. The automation handles all three:
+
+- **SUMMARY** format (Reports 1, 2): Stores raw Salesforce IDs in main keys and display labels in `_label_` prefixed keys. E.g., `{"OSR Enrollment Credit": "-", "_label_OSR": "Joseph Guerra", "Account Name": "001TO00...", "_label_Account Name": "Merchant Name", "ISR": "005TO000...", "_label_ISR": "Javier Gonzalez"}`. The normalization step in `main.py` (`_normalize_enrollment_rows()`) converts these to display values.
+
+- **MATRIX** format (Reports 3, 4): Date-prefixed aggregate columns like `"3/1/2026_Sum of Funded Dollars"`. The `_normalize_matrix_to_monthly()` helper splits these into per-month flat rows with standard column names.
+
+- **TABULAR** format (Report 5): Straightforward key-value rows, no special handling needed.
+
+### Data Normalization (main.py)
+
+The `_normalize_enrollment_rows()` function fixes three fields after fetching:
+1. **OSR name**: Resolves from `_label_OSR` (authoritative) → `_label_OSR Enrollment Credit` → `Referral/Promo Code` (free-text fallback). Important: `_label_OSR` must be checked before `Referral/Promo Code` because the free-text field may contain abbreviations.
+2. **Merchant name**: Resolves from `_label_Account Name` (replaces raw Salesforce Account ID).
+3. **ISR name**: Resolves from `_label_ISR` (replaces raw Salesforce User ID).
+
+### Cohort Data Pipeline
+
+For the active cohort (previous month's enrollees):
+1. Activity data loaded from Report 4 (matrix format) and normalized via `_normalize_matrix_to_monthly()`
+2. Enrollment list loaded from: saved snapshot → API fetch with date override + `reportBooleanFilter` → HTML fallback
+3. The `reportBooleanFilter` (e.g., `"1 AND 2 AND 3 AND (4 OR 5 OR 6)"`) is required because Report 2's saved filters use OR logic for conversion fields, but POST filter overrides default to AND logic
+
+### Q1 Data Pipeline
+
+For each month in the quarter:
+1. Current month: uses core `credited_enrollments` report
+2. Previous months: loaded from snapshot → API fetch via `_fetch_credited_for_month()` → HTML fallback
+3. All data normalized before processing
 
 ## GitHub Secrets Required
 
@@ -171,6 +216,12 @@ automation/
 
 Report IDs are configured in `automation/config.py` (REPORT_IDS dict). Each ID is the 18-character Salesforce Report ID found in the report URL.
 
+## Netlify Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `GH_PAT` | GitHub Personal Access Token (for triggering workflow via API) |
+
 ## Salesforce Reports Needed
 
 | # | Report Name | Key Filters | Purpose |
@@ -181,7 +232,7 @@ Report IDs are configured in `automation/config.py` (REPORT_IDS dict). Each ID i
 | 4 | Last_Month_Enrollment_Activity_Report | Enrollment Date = LAST MONTH, Record Type = Branch | Month 1 funding (multi-month columns) |
 | 5 | Maps_Check_Ins_This_Week | Date = THIS WEEK | Field check-in activity |
 
-For historical cohorts or Month 2 true-up data, Report 4's template is called with filter overrides to specify the exact enrollment date range needed.
+For historical cohorts or Month 2 true-up data, Report 2 and 4 templates are called with filter overrides (including `reportBooleanFilter` for OR logic) to specify the exact enrollment date range needed.
 
 ## OSR Roster (as of March 2026)
 
@@ -210,23 +261,26 @@ Claudia Gerhardt, DeLon Phoenix, Eric Henderson, Jared Midkiff, Joseph Guerra, M
 
 ## Common Maintenance Tasks
 
-**Add a new monthly dashboard:**
-1. Process 4 Salesforce reports for the month
-2. Duplicate most recent month's HTML file
-3. Replace all JS data variables
-4. Update all hardcoded values in function section
-5. Add month card to index.html
-6. Update YTD summary on index.html
-7. Update cohort-tracking.html with new cohort tab
-8. Update q1-enrollment.html (or create new quarterly page)
+Most tasks are now handled automatically by the pipeline. Manual intervention is only needed for:
 
-**Update field activity:**
-1. Export Maps_Check_Ins_This_Week report
-2. Process and deduplicate check-in data
-3. Rebuild field-activity.html with new data
-4. Update field activity card on index.html
+**Roster changes:**
+1. Update `OSR_ROSTER` and `OSR_COLORS` in `automation/config.py`
+2. Update the roster section in this file
 
-**End of quarter:**
-1. Freeze current quarterly enrollment page as final
-2. Create new quarterly page
-3. Update index.html commission tracking section
+**Report changes:**
+1. Update `REPORT_IDS` in `automation/config.py` with new 18-character Salesforce Report IDs
+2. If column names change, update `COLUMN_LABELS` in `automation/config.py`
+
+**End of quarter (automated):**
+- New quarterly enrollment page is auto-created when a new quarter starts
+- Previous quarter page is preserved as an archive
+- Index.html is updated automatically
+
+**Debugging the pipeline:**
+1. Check GitHub Actions logs for errors
+2. Run locally with `python -m automation.main --dry-run` to test
+3. Check `data/snapshots/{YYYY-MM}/` for raw API data
+4. Common issues:
+   - SUMMARY format: check that `_normalize_enrollment_rows()` handles the field correctly
+   - Matrix format: check date-prefixed column names in `_normalize_matrix_to_monthly()`
+   - POST filter overrides: ensure `reportBooleanFilter` preserves OR logic from saved report
