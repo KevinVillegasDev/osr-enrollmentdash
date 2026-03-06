@@ -193,24 +193,40 @@ def _parse_summary_report(report_json: dict) -> list[dict]:
     group_labels = {}
     _extract_grouping_labels(groupings, group_labels, [])
 
-    # Debug: log factMap keys to diagnose 0-row issue
-    has_detail_rows = metadata.get("hasDetailRows", "NOT_SET")
+    has_detail_rows = metadata.get("hasDetailRows", False)
     logger.info("Summary report factMap keys: %s (hasDetailRows=%s, groupings=%d)",
                 sorted(fact_map.keys()), has_detail_rows, len(groupings))
 
     rows = []
     for key in sorted(fact_map.keys()):
-        # Skip grand total and subtotal rows (keys ending in "T")
-        if key.endswith("!T") or key == "T!T":
+        # Skip grand total
+        if key == "T!T":
             continue
 
         section = fact_map[key]
-        for row in section.get("rows", []):
+        section_rows = section.get("rows", [])
+
+        # For summary reports, detail rows live inside the group subtotal
+        # sections (keys like "0!T", "1!T").  Only skip subtotal keys if
+        # there are also non-subtotal detail keys in the factMap.
+        is_subtotal = key.endswith("!T")
+        if is_subtotal and not section_rows:
+            continue
+
+        # Determine the grouping index for this key
+        # "0!T" → group index "0", "0_0" → group index "0"
+        group_idx = key.split("!")[0].split("_")[0] if "!" in key or "_" in key else key
+
+        for row in section_rows:
             cells = row.get("dataCells", [])
             row_dict = {}
 
-            # Add grouping fields
-            if key in group_labels:
+            # Add grouping fields — look up by group index
+            if group_idx in group_labels:
+                for group_name, group_val in zip(group_column_names, group_labels[group_idx]):
+                    g_label = group_label_map.get(group_name, group_name)
+                    row_dict[g_label] = group_val
+            elif key in group_labels:
                 for group_name, group_val in zip(group_column_names, group_labels[key]):
                     g_label = group_label_map.get(group_name, group_name)
                     row_dict[g_label] = group_val
