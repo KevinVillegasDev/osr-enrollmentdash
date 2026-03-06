@@ -87,19 +87,20 @@ class SalesforceClient:
             resp.raise_for_status()
         return resp.json()
 
-    def post(self, path: str, body: dict = None) -> dict:
+    def post(self, path: str, body: dict = None, params: dict = None) -> dict:
         """
         POST request to Salesforce REST API.
 
         Args:
             path: API path
             body: Optional JSON body
+            params: Optional query parameters
 
         Returns:
             Parsed JSON response
         """
         url = f"{self.instance_url}{path}"
-        resp = self._session.post(url, json=body or {}, timeout=120)
+        resp = self._session.post(url, json=body or {}, params=params, timeout=120)
         if not resp.ok:
             logger.error("POST %s failed (%d): %s", path, resp.status_code, resp.text[:500])
             resp.raise_for_status()

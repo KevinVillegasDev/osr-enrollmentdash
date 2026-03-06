@@ -40,10 +40,11 @@ def fetch_report(client, report_id: str, filters: list = None) -> dict:
     Raises:
         RuntimeError: If all retries are exhausted
     """
+    path = _report_url(report_id)
     # includeDetails=true ensures SUMMARY reports return detail rows
     # (not just group subtotals).  Without this, the factMap only
     # contains keys like "0!T" and the parser returns 0 rows.
-    path = _report_url(report_id) + "?includeDetails=true"
+    query_params = {"includeDetails": "true"}
     use_post = filters is not None
     body = None
     if filters:
@@ -55,9 +56,9 @@ def fetch_report(client, report_id: str, filters: list = None) -> dict:
             logger.info("Fetching report %s (attempt %d/%d, method=%s)",
                         report_id, attempt, MAX_RETRIES, "POST" if use_post else "GET")
             if use_post:
-                result = client.post(path, body=body)
+                result = client.post(path, body=body, params=query_params)
             else:
-                result = client.get(path)
+                result = client.get(path, params=query_params)
 
             # Check if all data was returned
             all_data = result.get("allData", True)
