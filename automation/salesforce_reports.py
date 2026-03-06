@@ -289,12 +289,15 @@ def _parse_matrix_report(report_json: dict) -> list[dict]:
     for i, grp in enumerate(col_groupings):
         col_labels[str(i)] = grp.get("label", grp.get("value", f"col_{i}"))
 
-    # Build row group hierarchy: row index -> {Account Name, Branch ID}
+    # Build row group hierarchy: compound key -> {Account Name, Branch ID}
+    # key_map maps factMap compound keys (e.g., "0_0", "1_0") to flat indices
+    # in row_merchants, so we correctly handle parents with multiple children.
     row_merchants = []
-    _extract_row_groups(row_groupings, row_merchants, {})
+    row_key_map = {}
+    _extract_row_groups(row_groupings, row_merchants, {}, row_key_map)
 
-    logger.info("Matrix report: %d row groups, %d column groups, %d aggregates",
-                len(row_merchants), len(col_labels), len(agg_columns))
+    logger.info("Matrix report: %d row groups (leaves), %d compound keys, %d column groups, %d aggregates",
+                len(row_merchants), len(row_key_map), len(col_labels), len(agg_columns))
 
     # Build aggregate label map
     agg_labels = []
@@ -303,9 +306,12 @@ def _parse_matrix_report(report_json: dict) -> list[dict]:
         agg_labels.append(info.get("label", agg_api))
 
     # Parse factMap
-    # Keys are like "0_0!0_0" (row0_subrow0!col0_subcol0)
+    # Keys are like "0_0!0_0" (parent0_child0!col0_subcol0)
     # or "0!0" for single-level groupings
     # The "!" separates row key from column key
+    # IMPORTANT: Use the FULL compound row key (e.g., "0_0", "0_1", "1_0")
+    # to distinguish each leaf node. Using only the parent index would collapse
+    # all children under one parent and shift all subsequent merchants.
     rows_out = {}
 
     for key, section in fact_map.items():
@@ -318,11 +324,7 @@ def _parse_matrix_report(report_json: dict) -> list[dict]:
         if row_key == "T" or col_key == "T":
             continue
 
-        # Get the row index (first number before any underscore)
-        row_parts = row_key.split("_")
-        row_idx = row_parts[0]
-
-        # Get column index
+        # Get column index (first number — columns are single-level for our reports)
         col_parts = col_key.split("_")
         col_idx = col_parts[0]
 
@@ -332,44 +334,68 @@ def _parse_matrix_report(report_json: dict) -> list[dict]:
         # Get aggregates for this cell
         aggregates = section.get("aggregates", [])
 
-        # Initialize row if needed
-        if row_idx not in rows_out:
-            # Find merchant info from row groupings
-            idx = int(row_idx) if row_idx.isdigit() else 0
-            if idx < len(row_merchants):
-                rows_out[row_idx] = dict(row_merchants[idx])
+        # Initialize row if needed — use FULL compound row_key
+        if row_key not in rows_out:
+            # Look up merchant info via compound key mapping
+            flat_idx = row_key_map.get(row_key, -1)
+            if 0 <= flat_idx < len(row_merchants):
+                rows_out[row_key] = dict(row_merchants[flat_idx])
             else:
-                rows_out[row_idx] = {}
+                # Fallback: try interpreting as flat index for single-level reports
+                idx = int(row_key) if row_key.isdigit() else -1
+                if 0 <= idx < len(row_merchants):
+                    rows_out[row_key] = dict(row_merchants[idx])
+                else:
+                    logger.warning("Matrix parser: unknown row key '%s'", row_key)
+                    rows_out[row_key] = {}
 
         # Add per-month aggregate values
         for i, agg_val in enumerate(aggregates):
             label = agg_labels[i] if i < len(agg_labels) else f"agg_{i}"
             val = agg_val.get("value", 0)
-            rows_out[row_idx][f"{month_label}_{label}"] = val
+            rows_out[row_key][f"{month_label}_{label}"] = val
 
     result = list(rows_out.values())
     logger.info("Parsed %d merchants from matrix report", len(result))
     return result
 
 
-def _extract_row_groups(groupings: list, result: list, current: dict):
-    """Recursively extract row group labels from nested groupings."""
-    for grp in groupings:
+def _extract_row_groups(groupings: list, result: list, current: dict,
+                        key_map: dict = None, path: list = None):
+    """
+    Recursively extract row group labels from nested groupings.
+
+    Also builds a compound-key → flat-index mapping so the matrix parser
+    can correctly look up merchants by their factMap row key.
+
+    Args:
+        groupings: List of grouping dicts from groupingsDown.groupings
+        result: Flat list of leaf-node dicts (appended to in-place)
+        current: Accumulated parent-level fields for this branch
+        key_map: Optional dict mapping compound key (e.g., "0_0", "1_0") → flat index
+        path: Current nesting path as list of index strings
+    """
+    if path is None:
+        path = []
+    for i, grp in enumerate(groupings):
         entry = dict(current)
         label = grp.get("label", grp.get("value", ""))
-        key = grp.get("key", "")
 
         # Determine the group field name from the level
         # Level 0 = Account Name, Level 1 = Branch ID (for Report 4)
         sub_groupings = grp.get("groupings", [])
+        current_path = path + [str(i)]
 
         if sub_groupings:
             # This is a parent group (Account Name)
             entry["Account Name"] = label
-            _extract_row_groups(sub_groupings, result, entry)
+            _extract_row_groups(sub_groupings, result, entry, key_map, current_path)
         else:
             # This is a leaf group (Branch ID)
             entry["Branch ID"] = label
+            compound_key = "_".join(current_path)
+            if key_map is not None:
+                key_map[compound_key] = len(result)
             result.append(entry)
 
 
