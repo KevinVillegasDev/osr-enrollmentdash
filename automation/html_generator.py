@@ -570,13 +570,33 @@ def _build_field_activity_script(data: dict) -> str:
 
 
 def _replace_field_kpis(html: str, data: dict) -> str:
-    """Replace hardcoded KPI values in field-activity.html body."""
+    """Replace hardcoded KPI values and day filter buttons in field-activity.html."""
     # Total Stops
     html = re.sub(
         r'(Total Stops[^<]*</div>\s*<div[^>]*>)\d+',
         rf'\g<1>{data["kpi_total_stops"]}',
         html, flags=re.DOTALL
     )
+
+    # Rebuild day filter buttons dynamically from the data
+    days = data.get("days", [])
+    day_labels = data.get("dayLabels", {})
+    if days:
+        buttons = ['  <button class="filter-btn active" onclick="setFilter(\'all\')">All Days</button>']
+        for d in days:
+            label = day_labels.get(d, "")
+            # Extract short date like "3/2" from "3/2/2026"
+            short = "/".join(d.split("/")[:2]) if "/" in d else d
+            buttons.append(f'  <button class="filter-btn" onclick="setFilter(\'{d}\')">{label} {short}</button>')
+        new_day_buttons = "\n".join(buttons)
+
+        # Replace everything between <div class="filters"> and <span style="flex:1">
+        html = re.sub(
+            r'(<div class="filters">\s*)\n.*?(\n  <span style="flex:1">)',
+            rf'\g<1>\n{new_day_buttons}\n\g<2>',
+            html, flags=re.DOTALL
+        )
+
     return html
 
 

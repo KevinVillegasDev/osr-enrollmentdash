@@ -161,15 +161,22 @@ var dayLabels={"3/2/2026":"Mon","3/3/2026":"Tue","3/4/2026":"Wed","3/5/2026":"Th
 
 function setFilter(f){
   dayFilter=f;
+  var dayBtnCount=days.length+1;
   document.querySelectorAll('.filters button').forEach(function(b,i){
-    if(i<4) b.classList.toggle('active', (f==='all'&&i===0)||(b.textContent.includes('Mon')&&f==='3/2/2026')||(b.textContent.includes('Tue')&&f==='3/3/2026')||(b.textContent.includes('Wed')&&f==='3/4/2026'));
+    if(i<dayBtnCount){
+      var match=b.getAttribute('onclick')||'';
+      var val=match.match(/setFilter\('([^']+)'\)/);
+      if(val) b.classList.toggle('active',val[1]===f);
+    }
   });
   render();
 }
 function setType(t){
   typeFilter=t;
-  document.querySelectorAll('.filters button').forEach(function(b,i){
-    if(i>=5) b.classList.toggle('active', (t==='all'&&i===5)||(t==='existing'&&i===6)||(t==='prospect'&&i===7));
+  document.querySelectorAll('.filters button').forEach(function(b){
+    var match=b.getAttribute('onclick')||'';
+    var val=match.match(/setType\('([^']+)'\)/);
+    if(val) b.classList.toggle('active',val[1]===t);
   });
   render();
 }
