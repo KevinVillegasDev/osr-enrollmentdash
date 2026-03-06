@@ -334,20 +334,18 @@ def _parse_matrix_report(report_json: dict) -> list[dict]:
         # Get aggregates for this cell
         aggregates = section.get("aggregates", [])
 
-        # Initialize row if needed — use FULL compound row_key
+        # Initialize row if needed — use FULL compound row_key.
+        # Only process row keys that match a leaf node in the compound key map.
+        # The factMap also contains parent-level summary keys (e.g., "7!0" for
+        # all children under parent 7), which we skip to avoid duplicates.
         if row_key not in rows_out:
-            # Look up merchant info via compound key mapping
             flat_idx = row_key_map.get(row_key, -1)
             if 0 <= flat_idx < len(row_merchants):
                 rows_out[row_key] = dict(row_merchants[flat_idx])
             else:
-                # Fallback: try interpreting as flat index for single-level reports
-                idx = int(row_key) if row_key.isdigit() else -1
-                if 0 <= idx < len(row_merchants):
-                    rows_out[row_key] = dict(row_merchants[idx])
-                else:
-                    logger.warning("Matrix parser: unknown row key '%s'", row_key)
-                    rows_out[row_key] = {}
+                # Skip parent-level summary keys — they aggregate child data
+                # which we already capture at the leaf level
+                continue
 
         # Add per-month aggregate values
         for i, agg_val in enumerate(aggregates):
