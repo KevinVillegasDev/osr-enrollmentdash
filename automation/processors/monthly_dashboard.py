@@ -174,6 +174,7 @@ def process(all_enrollments: list[dict], credited_enrollments: list[dict],
 
         merchant = {
             "n": name,
+            "b": _try_int(branch) if branch else "",
             "l": location,
             "f": round(activity["funded"], 2),
             "fa": activity["funded_apps"],
@@ -330,11 +331,24 @@ def process(all_enrollments: list[dict], credited_enrollments: list[dict],
         "year": year,
         "month_name": month_name,
         "month_abbrev": month_abbrev,
-        "last_updated": date.today().strftime("%b %-d, %Y"),
+        "last_updated": _format_date(date.today()),
     }
 
 
 # ── Helper functions ─────────────────────────────────────────────────────────
+
+def _format_date(d) -> str:
+    """Format a date as 'Mar 5, 2026' — portable across Windows and Linux."""
+    import platform
+    try:
+        if platform.system() == "Windows":
+            return d.strftime("%b %#d, %Y")
+        else:
+            return d.strftime("%b %-d, %Y")
+    except ValueError:
+        # Fallback: manual formatting
+        return f"{d.strftime('%b')} {d.day}, {d.year}"
+
 
 def _get(row: dict, col_key: str, default: str = "") -> str:
     """Get a value from a row dict using the column label mapping."""
@@ -360,6 +374,14 @@ def _to_int(val) -> int:
         return int(float(str(val).replace(",", "")))
     except (ValueError, TypeError):
         return 0
+
+
+def _try_int(val):
+    """Try to convert to int for compact JSON, return as-is if not possible."""
+    try:
+        return int(val)
+    except (ValueError, TypeError):
+        return val
 
 
 def _parse_date(val) -> date:

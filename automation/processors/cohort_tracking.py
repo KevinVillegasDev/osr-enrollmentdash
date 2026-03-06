@@ -186,8 +186,34 @@ def compute_cohort_kpis(cohort: list[dict], enrollment_month: int) -> dict:
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
 def _get(row: dict, col_key: str, default: str = "") -> str:
+    """
+    Get a column value from a row, handling both TABULAR and SUMMARY formats.
+
+    SUMMARY format stores raw API values (Salesforce IDs, "-" for nulls) in
+    the main key, and display labels in _label_ prefixed keys.  For certain
+    columns we need the display label instead of the raw value.
+    """
     label = COLUMN_LABELS.get(col_key, col_key)
-    return row.get(label, default)
+    val = row.get(label, None)
+
+    # For OSR name: the "OSR Enrollment Credit" column often contains "-"
+    # in SUMMARY format.  The actual rep name is in alternate fields.
+    if col_key == "osr_credit":
+        if not val or val == "-":
+            for alt in ("Referral/Promo Code", "_label_OSR",
+                        "_label_OSR Enrollment Credit"):
+                alt_val = row.get(alt)
+                if alt_val and alt_val != "-":
+                    return alt_val
+
+    # For merchant name: raw value is a Salesforce Account ID in SUMMARY
+    # format; the display name lives in the _label_ version.
+    if col_key == "merchant_name":
+        label_val = row.get(f"_label_{label}")
+        if label_val and label_val != "-":
+            return label_val
+
+    return val if val is not None else default
 
 
 def _to_float(val) -> float:

@@ -25,7 +25,8 @@ def _report_url(report_id: str) -> str:
     return f"/services/data/{SF_API_VERSION}/analytics/reports/{report_id}"
 
 
-def fetch_report(client, report_id: str, filters: list = None) -> dict:
+def fetch_report(client, report_id: str, filters: list = None,
+                 boolean_filter: str = None) -> dict:
     """
     Execute a Salesforce report synchronously and return the full JSON response.
 
@@ -33,6 +34,9 @@ def fetch_report(client, report_id: str, filters: list = None) -> dict:
         client: Authenticated SalesforceClient instance
         report_id: 18-character Salesforce Report ID
         filters: Optional list of reportFilter dicts to override the saved filters
+        boolean_filter: Optional boolean filter expression for AND/OR logic,
+                       e.g. "1 AND 2 AND 3 AND (4 OR 5 OR 6)".
+                       Only used when filters are also provided.
 
     Returns:
         Full report response JSON with factMap, reportMetadata, reportExtendedMetadata
@@ -48,7 +52,10 @@ def fetch_report(client, report_id: str, filters: list = None) -> dict:
     use_post = filters is not None
     body = None
     if filters:
-        body = {"reportMetadata": {"reportFilters": filters}}
+        metadata = {"reportFilters": filters}
+        if boolean_filter:
+            metadata["reportBooleanFilter"] = boolean_filter
+        body = {"reportMetadata": metadata}
 
     last_error = None
     for attempt in range(1, MAX_RETRIES + 1):

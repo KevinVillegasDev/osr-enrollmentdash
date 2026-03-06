@@ -95,6 +95,15 @@ def main():
         # Load from latest snapshot
         reports = _load_latest_snapshot()
 
+    # Normalize enrollment rows so all processors see display values
+    # instead of raw Salesforce IDs (SUMMARY format stores IDs in main keys,
+    # display labels in _label_ prefixed keys).
+    for report_key in ("credited_enrollments", "new_enrollments"):
+        if reports.get(report_key):
+            reports[report_key] = _normalize_enrollment_rows(
+                reports[report_key]
+            )
+
     # ── Step 3: Process Monthly Dashboard ────────────────────────────────
     logger.info("--- Processing monthly dashboard ---")
     monthly_data = monthly_dashboard.process(
@@ -133,26 +142,46 @@ def main():
         prev_month = 12
         prev_year -= 1
 
-    # Fetch cohort-specific activity data
+    # 1. Get activity data FIRST — we need it to build enrollment list from HTML fallback
+    #    Report 4 (last_month_activity) already contains activity for merchants
+    #    enrolled LAST MONTH (= our active cohort).
     active_cohort_activity = {}
-    if client:
-        # M0 activity (enrollment month)
-        m0_abbrev = MONTH_ABBREV[prev_month]
-        active_cohort_activity[m0_abbrev] = reports.get("credited_enrollments", [])
+    last_month_activity = reports.get("last_month_activity", [])
+    if last_month_activity:
+        active_cohort_activity = _normalize_matrix_to_monthly(last_month_activity)
+        logger.info("Normalized matrix activity into %d months: %s",
+                     len(active_cohort_activity),
+                     {k: len(v) for k, v in active_cohort_activity.items()})
 
-        # M1 activity (current month) — need to fetch with date override
-        m1_abbrev = MONTH_ABBREV[current_month]
+    # If no matrix data, try dedicated cohort fetch
+    if not active_cohort_activity and client:
         try:
-            m1_rows = fetch_cohort_activity(
+            cohort_matrix = fetch_cohort_activity(
                 client, prev_month, prev_year, current_month, current_year
             )
-            active_cohort_activity[m1_abbrev] = m1_rows
+            active_cohort_activity = _normalize_matrix_to_monthly(cohort_matrix)
         except Exception as e:
-            logger.warning("Failed to fetch M1 cohort activity: %s", e)
-            active_cohort_activity[m1_abbrev] = []
+            logger.warning("Failed to fetch cohort activity: %s", e)
 
-    # Build active cohort (previous month's enrollees)
-    active_cohort_enrollments = reports.get("credited_enrollments", [])
+    # 2. Get active cohort ENROLLMENT LIST (prev month's credited enrollments)
+    #    NOT current month's reports["credited_enrollments"] — that's this month's data!
+    active_cohort_enrollments = _load_month_snapshot(prev_month, prev_year, "credited_enrollments")
+    if active_cohort_enrollments:
+        logger.info("Loaded %d active cohort enrollments from %s %d snapshot",
+                     len(active_cohort_enrollments), MONTH_ABBREV[prev_month], prev_year)
+        active_cohort_enrollments = _normalize_enrollment_rows(active_cohort_enrollments)
+    elif client:
+        active_cohort_enrollments = _fetch_credited_for_month(client, prev_month, prev_year)
+        if active_cohort_enrollments:
+            active_cohort_enrollments = _normalize_enrollment_rows(active_cohort_enrollments)
+    if not active_cohort_enrollments:
+        # HTML fallback: build enrollment list from activity data (has Branch IDs)
+        # combined with repMerchants (has OSR → merchant name mapping)
+        active_cohort_enrollments = _build_enrollment_from_activity_and_html(
+            prev_month, prev_year, active_cohort_activity
+        )
+
+    # 3. Build active cohort
     if active_cohort_enrollments:
         active_var_name = f"{MONTH_ABBREV[prev_month]}Cohort"
         active_cohort = cohort_tracking.process_cohort(
@@ -196,39 +225,12 @@ def main():
             # Try to load from snapshot
             snapshot = _load_month_snapshot(m, current_year, "credited_enrollments")
             if snapshot:
-                monthly_credited[abbrev] = snapshot
+                monthly_credited[abbrev] = _normalize_enrollment_rows(snapshot)
             elif client and m < current_month:
-                # Fetch with date override
-                try:
-                    report_id = REPORT_IDS["credited_enrollments"]
-                    if report_id != "REPLACE_WITH_REPORT_ID":
-                        start_date = date(current_year, m, 1)
-                        if m == 12:
-                            end_date = date(current_year + 1, 1, 1) - timedelta(days=1)
-                        else:
-                            end_date = date(current_year, m + 1, 1) - timedelta(days=1)
-                        # Must include ALL saved filters (POST replaces them entirely).
-                        # Report 2 saved filters: RECORDTYPE=Branch, enrollment date,
-                        # and 3 conversion filters.
-                        filters = [
-                            {"column": "RECORDTYPE", "operator": "equals",
-                             "value": "Branch"},
-                            {"column": "Account.Enrollment_Date__c", "operator": "greaterOrEqual",
-                             "value": start_date.isoformat()},
-                            {"column": "Account.Enrollment_Date__c", "operator": "lessOrEqual",
-                             "value": end_date.isoformat()},
-                            {"column": "Account.Parent_EP_Converted__c", "operator": "equals",
-                             "value": "True"},
-                            {"column": "Account.Parent_EP_Converted_Override__c", "operator": "equals",
-                             "value": "True"},
-                            {"column": "Account.EP_Converted__c", "operator": "equals",
-                             "value": "True"},
-                        ]
-                        raw = fetch_report(client, report_id, filters=filters)
-                        monthly_credited[abbrev] = parse_report_rows(raw)
-                except Exception as e:
-                    logger.warning("Failed to fetch month %d credited enrollments: %s", m, e)
-                    monthly_credited[abbrev] = []
+                # Fetch with date override + boolean filter for OR logic
+                rows = _fetch_credited_for_month(client, m, current_year)
+                if rows:
+                    monthly_credited[abbrev] = _normalize_enrollment_rows(rows)
 
         # If still no data, try extracting from existing HTML dashboard
         if not monthly_credited.get(abbrev) and m < current_month:
@@ -532,6 +534,327 @@ def _parse_dollar_amount(s: str) -> float:
             return float(s)
         except ValueError:
             return 0.0
+
+
+def _normalize_enrollment_rows(rows: list) -> list:
+    """
+    Normalize SUMMARY-format enrollment rows to use display values.
+
+    The SUMMARY report parser stores raw Salesforce API values in the main keys
+    and display labels in _label_ prefixed keys:
+        {"Account Name": "001TO000...", "_label_Account Name": "Merchant Name",
+         "OSR Enrollment Credit": "-", "_label_OSR": "Rep Name"}
+
+    This normalizer replaces raw values with display values for fields where
+    the raw value is a Salesforce ID or null placeholder ("-").
+    """
+    normalized = []
+    osr_label = COLUMN_LABELS.get("osr_credit", "OSR Enrollment Credit")
+    merchant_label = COLUMN_LABELS.get("merchant_name", "Account Name")
+
+    for row in rows:
+        new_row = dict(row)
+
+        # Fix OSR name: "OSR Enrollment Credit" often = "-" in SUMMARY format.
+        # The actual name is in "Referral/Promo Code" or "_label_OSR".
+        osr_val = row.get(osr_label, "")
+        if not osr_val or osr_val == "-":
+            for alt in ("Referral/Promo Code", "_label_OSR",
+                        f"_label_{osr_label}"):
+                alt_val = row.get(alt)
+                if alt_val and alt_val != "-":
+                    new_row[osr_label] = alt_val
+                    break
+
+        # Fix merchant name: raw value is a Salesforce Account ID.
+        # Display name lives in "_label_Account Name".
+        name_val = row.get(merchant_label, "")
+        label_name = row.get(f"_label_{merchant_label}", "")
+        if label_name and label_name != "-" and label_name != name_val:
+            new_row[merchant_label] = label_name
+
+        normalized.append(new_row)
+
+    return normalized
+
+
+def _fetch_credited_for_month(client, month: int, year: int) -> list:
+    """
+    Fetch Report 2 (credited enrollments) for a specific past month via API.
+
+    Uses POST with date filter overrides and a boolean filter expression
+    to correctly handle the OR logic for conversion filters (any one of
+    Parent_EP_Converted, Parent_EP_Converted_Override, or EP_Converted
+    being True means the merchant is converted).
+    """
+    report_id = REPORT_IDS["credited_enrollments"]
+    if report_id == "REPLACE_WITH_REPORT_ID":
+        return []
+
+    start_date = date(year, month, 1)
+    if month == 12:
+        end_date = date(year + 1, 1, 1) - timedelta(days=1)
+    else:
+        end_date = date(year, month + 1, 1) - timedelta(days=1)
+
+    # Report 2 saved filters use OR logic for 3 conversion flags:
+    # (Parent_EP_Converted OR Parent_EP_Converted_Override OR EP_Converted)
+    # POST replaces ALL saved filters, so we must replicate the OR via
+    # reportBooleanFilter.
+    filters = [
+        {"column": "RECORDTYPE", "operator": "equals",
+         "value": "Branch"},
+        {"column": "Account.Enrollment_Date__c", "operator": "greaterOrEqual",
+         "value": start_date.isoformat()},
+        {"column": "Account.Enrollment_Date__c", "operator": "lessOrEqual",
+         "value": end_date.isoformat()},
+        {"column": "Account.Parent_EP_Converted__c", "operator": "equals",
+         "value": "True"},
+        {"column": "Account.Parent_EP_Converted_Override__c", "operator": "equals",
+         "value": "True"},
+        {"column": "Account.EP_Converted__c", "operator": "equals",
+         "value": "True"},
+    ]
+
+    try:
+        raw = fetch_report(
+            client, report_id, filters=filters,
+            boolean_filter="1 AND 2 AND 3 AND (4 OR 5 OR 6)"
+        )
+        rows = parse_report_rows(raw)
+        if rows:
+            logger.info("Fetched %d credited enrollments for %s %d via API",
+                         len(rows), MONTH_ABBREV[month], year)
+            return rows
+    except Exception as e:
+        logger.warning("Failed to fetch credited enrollments for %s %d: %s",
+                        MONTH_ABBREV[month], year, e)
+
+    return []
+
+
+def _normalize_matrix_to_monthly(matrix_rows: list) -> dict:
+    """
+    Convert matrix report rows (date-prefixed columns) into per-month flat rows.
+
+    Matrix reports (Report 4) return rows like:
+        {"Account Name": "X", "Branch ID": "123",
+         "2/1/2026_Sum of Funded Dollars": 5000, "3/1/2026_Sum of Funded Dollars": 3000}
+
+    This function splits each row into per-month entries with standard column names:
+        {"feb": [{"Account Name": "X", "Branch ID": "123", "# Funded Dollars": 5000}],
+         "mar": [{"Account Name": "X", "Branch ID": "123", "# Funded Dollars": 3000}]}
+
+    The column renaming (e.g., "Sum of Funded Dollars" → "# Funded Dollars")
+    ensures compatibility with cohort_tracking.process_cohort() which uses
+    COLUMN_LABELS for lookups.
+    """
+    from collections import defaultdict
+
+    # Map matrix aggregate labels to standard COLUMN_LABELS values
+    agg_map = {
+        "Sum of Funded Dollars": COLUMN_LABELS["funded_dollars"],
+        "Sum of Funded Applications Total": COLUMN_LABELS["funded_apps"],
+        "Sum of Applications": COLUMN_LABELS["total_apps"],
+        "Sum of Funded Average": COLUMN_LABELS["funded_avg"],
+    }
+
+    monthly = defaultdict(list)
+
+    for row in matrix_rows:
+        month_data = defaultdict(dict)  # month_abbrev → {standard_col: value}
+        base_data = {}  # non-date columns (Account Name, Branch ID)
+
+        for col, val in row.items():
+            # Match date prefix: "2/1/2026_Sum of Funded Dollars"
+            m = re.match(r'^(\d{1,2})/\d{1,2}/(\d{4})_(.+)$', col)
+            if not m:
+                # Try ISO format: "2026-02-01_..."
+                m = re.match(r'^(\d{4})-(\d{2})-\d{2}_(.+)$', col)
+                if m:
+                    month_num = int(m.group(2))
+                    base_col = m.group(3)
+                else:
+                    base_data[col] = val
+                    continue
+            else:
+                month_num = int(m.group(1))
+                base_col = m.group(3)
+
+            abbrev = MONTH_ABBREV.get(month_num, f"m{month_num}")
+            mapped_col = agg_map.get(base_col, base_col)
+            month_data[abbrev][mapped_col] = val
+
+        # Create a flat row for each month that has data
+        for month_abbrev, cols in month_data.items():
+            flat_row = dict(base_data)
+            flat_row.update(cols)
+            monthly[month_abbrev].append(flat_row)
+
+    return dict(monthly)
+
+
+def _build_enrollment_from_activity_and_html(month: int, year: int,
+                                               activity: dict) -> list:
+    """
+    Build a credited enrollment list by combining two data sources:
+    1. Matrix activity data (Report 4) — has Branch IDs and Account Names
+    2. repMerchants from HTML dashboard — has OSR → merchant name mapping
+
+    This is used when no snapshot or API data is available for the enrollment
+    month.  The activity data provides the definitive list of merchants with
+    their Branch IDs, and the HTML repMerchants provides the OSR attribution.
+    """
+    osr_label = COLUMN_LABELS.get("osr_credit", "OSR Enrollment Credit")
+    merchant_label = COLUMN_LABELS.get("merchant_name", "Account Name")
+    branch_label = COLUMN_LABELS.get("branch_id", "Branch ID")
+
+    # Step 1: Build OSR lookup from repMerchants in the monthly HTML
+    osr_by_merchant_name = _build_osr_lookup_from_html(month, year)
+
+    # Step 2: Build enrollment rows from activity data (has Branch IDs)
+    # Collect unique merchants from all months of activity
+    seen_branches = set()
+    rows = []
+
+    for month_key, month_rows in activity.items():
+        for row in month_rows:
+            branch = str(row.get(branch_label, ""))
+            if not branch or branch in seen_branches:
+                continue
+            seen_branches.add(branch)
+
+            name = row.get(merchant_label, "Unknown")
+            osr = osr_by_merchant_name.get(name, "")
+
+            if osr:
+                rows.append({
+                    osr_label: osr,
+                    merchant_label: name,
+                    branch_label: branch,
+                })
+
+    if rows:
+        logger.info("Built %d enrollment rows from activity data + HTML OSR lookup for %s %d",
+                     len(rows), MONTH_NAMES[month], year)
+    else:
+        logger.warning("Could not build enrollment list for %s %d — "
+                        "falling back to simple HTML extraction",
+                        MONTH_NAMES[month], year)
+        rows = _extract_credited_from_html(month, year)
+
+    return rows
+
+
+def _build_osr_lookup_from_html(month: int, year: int) -> dict:
+    """
+    Build a merchant_name → OSR name lookup from repMerchants in HTML.
+
+    Returns dict mapping merchant display name to OSR name.
+    """
+    filepath = month_filepath(month, year)
+    if not os.path.exists(filepath):
+        return {}
+
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            html = f.read()
+
+        rep_merchants = _parse_js_object(html, "repMerchants")
+        if not rep_merchants:
+            return {}
+
+        lookup = {}
+        for osr_name, merchants in rep_merchants.items():
+            for m in merchants:
+                name = m.get("n", "")
+                if name:
+                    lookup[name] = osr_name
+
+        logger.info("Built OSR lookup with %d merchants from %s HTML",
+                     len(lookup), MONTH_NAMES[month])
+        return lookup
+
+    except Exception as e:
+        logger.warning("Failed to build OSR lookup from %s HTML: %s",
+                        MONTH_NAMES[month], e)
+        return {}
+
+
+def _extract_credited_with_merchants(month: int, year: int) -> list:
+    """
+    Extract credited enrollment rows with branch IDs and OSR mapping from HTML.
+
+    Parses the repMerchants JS object from the monthly dashboard to get
+    per-rep merchant lists with branch IDs — more detailed than
+    _extract_credited_from_html() which only produces rep name + count.
+    """
+    filepath = month_filepath(month, year)
+    if not os.path.exists(filepath):
+        return _extract_credited_from_html(month, year)
+
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            html = f.read()
+
+        rep_merchants = _parse_js_object(html, "repMerchants")
+        if not rep_merchants:
+            logger.info("No repMerchants found in %s HTML, falling back to simple extraction",
+                         MONTH_NAMES[month])
+            return _extract_credited_from_html(month, year)
+
+        osr_label = COLUMN_LABELS.get("osr_credit", "OSR Enrollment Credit")
+        merchant_label = COLUMN_LABELS.get("merchant_name", "Account Name")
+        branch_label = COLUMN_LABELS.get("branch_id", "Branch ID")
+
+        rows = []
+        for rep_name, merchants in rep_merchants.items():
+            for m in merchants:
+                rows.append({
+                    osr_label: rep_name,
+                    merchant_label: m.get("n", "Unknown"),
+                    branch_label: str(m.get("b", "")),
+                })
+
+        if rows:
+            logger.info("Extracted %d credited enrollments with merchants from %s HTML",
+                         len(rows), MONTH_NAMES[month])
+            return rows
+        else:
+            return _extract_credited_from_html(month, year)
+
+    except Exception as e:
+        logger.warning("Failed to extract credited merchants from %s HTML: %s",
+                        MONTH_NAMES[month], e)
+        return _extract_credited_from_html(month, year)
+
+
+def _parse_js_object(html: str, var_name: str) -> dict:
+    """
+    Parse a JS variable containing an object from HTML.
+
+    Handles repMerchants-style objects:
+        var repMerchants={"Rep Name":[{n:"Merchant",b:12345}, ...], ...};
+    """
+    pattern = rf'var {var_name}=(\{{.*?\}});'
+    m = re.search(pattern, html, re.DOTALL)
+    if not m:
+        return {}
+
+    js_str = m.group(1)
+    # Convert JS to JSON:
+    # 1. Quote unquoted keys like {n: "foo"} → {"n": "foo"}
+    json_str = re.sub(r'([{,])\s*([a-zA-Z_]\w*)\s*:', r'\1"\2":', js_str)
+    # 2. Remove trailing commas
+    json_str = re.sub(r',\s*([}\]])', r'\1', json_str)
+    # 3. Handle escaped single quotes
+    json_str = json_str.replace("\\'", "'")
+
+    try:
+        return json.loads(json_str)
+    except json.JSONDecodeError as e:
+        logger.warning("Failed to parse JS object '%s': %s", var_name, e)
+        return {}
 
 
 def _build_cohort_configs(current_month: int, current_year: int) -> list:
