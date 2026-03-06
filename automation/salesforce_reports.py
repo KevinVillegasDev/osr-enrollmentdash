@@ -53,8 +53,8 @@ def fetch_report(client, report_id: str, filters: list = None) -> dict:
     last_error = None
     for attempt in range(1, MAX_RETRIES + 1):
         try:
-            logger.info("Fetching report %s (attempt %d/%d, method=%s)",
-                        report_id, attempt, MAX_RETRIES, "POST" if use_post else "GET")
+            logger.info("Fetching report %s (attempt %d/%d, method=%s, params=%s)",
+                        report_id, attempt, MAX_RETRIES, "POST" if use_post else "GET", query_params)
             if use_post:
                 result = client.post(path, body=body, params=query_params)
             else:
@@ -193,10 +193,10 @@ def _parse_summary_report(report_json: dict) -> list[dict]:
     group_labels = {}
     _extract_grouping_labels(groupings, group_labels, [])
 
-    # Debug: log factMap keys and includeDetails status to diagnose 0-row issue
-    include_details = metadata.get("includeDetails", "NOT_SET")
-    logger.info("Summary report factMap keys: %s (includeDetails=%s, groupings=%d)",
-                sorted(fact_map.keys()), include_details, len(groupings))
+    # Debug: log factMap keys to diagnose 0-row issue
+    has_detail_rows = metadata.get("hasDetailRows", "NOT_SET")
+    logger.info("Summary report factMap keys: %s (hasDetailRows=%s, groupings=%d)",
+                sorted(fact_map.keys()), has_detail_rows, len(groupings))
 
     rows = []
     for key in sorted(fact_map.keys()):

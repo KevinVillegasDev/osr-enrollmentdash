@@ -81,6 +81,7 @@ class SalesforceClient:
             Parsed JSON response
         """
         url = f"{self.instance_url}{path}"
+        logger.debug("GET %s params=%s", url, params)
         resp = self._session.get(url, params=params, timeout=120)
         if not resp.ok:
             logger.error("GET %s failed (%d): %s", path, resp.status_code, resp.text[:500])
