@@ -19,16 +19,16 @@ exports.handler = async function (event) {
     return {
       statusCode: 405,
       headers,
-      body: JSON.stringify({ error: "Method not allowed" }),
+      body: JSON.stringify({ success: false, message: "Method not allowed" }),
     };
   }
 
-  const token = process.env.GITHUB_PAT;
+  const token = process.env.GITHUB_PAT || process.env.GH_PAT;
   if (!token) {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: "GITHUB_PAT not configured" }),
+      body: JSON.stringify({ success: false, message: "GITHUB_PAT or GH_PAT not configured in Netlify env vars" }),
     };
   }
 
