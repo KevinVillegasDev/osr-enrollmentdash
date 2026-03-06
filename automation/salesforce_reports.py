@@ -192,6 +192,11 @@ def _parse_summary_report(report_json: dict) -> list[dict]:
     group_labels = {}
     _extract_grouping_labels(groupings, group_labels, [])
 
+    # Debug: log factMap keys and includeDetails status to diagnose 0-row issue
+    include_details = metadata.get("includeDetails", "NOT_SET")
+    logger.info("Summary report factMap keys: %s (includeDetails=%s, groupings=%d)",
+                sorted(fact_map.keys()), include_details, len(groupings))
+
     rows = []
     for key in sorted(fact_map.keys()):
         # Skip grand total and subtotal rows (keys ending in "T")
