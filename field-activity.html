@@ -89,9 +89,11 @@ a:hover{text-decoration:underline}
 .cal-nav:hover{border-color:#06B6D4;color:#E2E8F0}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
 .cal-day-label{text-align:center;font-size:10px;font-weight:600;color:#475569;padding:4px 0;text-transform:uppercase;letter-spacing:.06em}
-.cal-day{text-align:center;padding:6px 2px;border-radius:8px;font-size:13px;color:#334155;cursor:default;position:relative;transition:all .15s}
-.cal-day.has-data{color:#E2E8F0;cursor:pointer;font-weight:600}
-.cal-day.has-data:hover{background:#1E293B}
+.cal-day{text-align:center;padding:6px 2px;border-radius:8px;font-size:13px;color:#475569;cursor:pointer;position:relative;transition:all .15s}
+.cal-day:empty{cursor:default}
+.cal-day:not(:empty):hover{background:#1E293B;color:#94A3B8}
+.cal-day.has-data{color:#E2E8F0;font-weight:600}
+.cal-day.has-data:hover{background:#1E293B;color:#E2E8F0}
 .cal-day.active{background:#06B6D4;color:#0B0F1A;font-weight:700}
 .cal-day.active:hover{background:#22D3EE}
 .cal-day.today{box-shadow:inset 0 0 0 1.5px #334155}
@@ -103,7 +105,8 @@ a:hover{text-decoration:underline}
 .cal-all-btn:hover{border-color:#06B6D4;color:#E2E8F0}
 .cal-all-btn.active{background:#06B6D4;border-color:#06B6D4;color:#0B0F1A}
 .type-filters{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start}
-.cal-day.in-range{background:rgba(6,182,212,.08);border-radius:4px}
+.cal-day.in-range{background:rgba(6,182,212,.12);border-radius:4px;color:#94A3B8}
+.cal-day.in-range:hover{background:#164E63;color:#E2E8F0}
 .cal-day.in-range.has-data{background:#164E63;color:#E2E8F0}
 .cal-day.in-range.has-data:hover{background:#1E6E8A}
 .cal-status{font-size:11px;text-align:center;margin-top:8px;min-height:16px;color:#64748B}
@@ -258,8 +261,7 @@ function renderCalendar(){
       else if(isInRange(dateStr)) cls+=' in-range';
     }
     if(dateStr===todayStr) cls+=' today';
-    var onclick=cnt>0?' onclick="setFilter(\''+dateStr+'\')"':'';
-    g+='<div class="'+cls+'"'+onclick+'>'+d;
+    g+='<div class="'+cls+'" onclick="setFilter(\''+dateStr+'\')">'+d;
     if(cnt>0) g+='<div class="cal-count">'+cnt+'</div>';
     g+='</div>';
   }
