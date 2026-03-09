@@ -855,6 +855,7 @@ def update_index_page(filepath: str, data: dict) -> bool:
     )
 
     # Update detail line with date range and avg/day
+    # Note: The HTML uses literal Unicode · (U+00B7) and – (U+2013), not HTML entities
     field_range = data.get("field_month_range", "N/A")
     field_avg = data.get("field_avg_per_day", 0)
     if field_range and field_range != "N/A":
@@ -862,14 +863,14 @@ def update_index_page(filepath: str, data: dict) -> bool:
         if len(parts) == 2:
             start_short = "/".join(parts[0].split("/")[:2])
             end_short = "/".join(parts[1].split("/")[:2])
-            range_text = f"{start_short}&ndash;{end_short}"
+            range_text = f"{start_short}\u2013{end_short}"
         else:
             range_text = field_range
     else:
         range_text = "No data"
     html = re.sub(
-        r'Maps check-ins &middot;[^<]*<span>[^<]*</span>',
-        f'Maps check-ins &middot; {range_text} &middot; <span>{field_avg} avg/day</span>',
+        r'Maps check-ins[^<]*<span>[^<]*</span>',
+        f'Maps check-ins \u00b7 {range_text} \u00b7 <span>{field_avg} avg/day</span>',
         html
     )
 
