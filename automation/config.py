@@ -101,7 +101,7 @@ COLUMN_LABELS = {
     "mmd_number": "Monthly Merchant Data: MMD Number",
     # Report 5: Field activity (Maps check-ins via Salesforce API)
     # API returns _label_ prefixed keys for display values
-    "check_in_date": "_label_Date",
+    "check_in_date": "_label_Created Date/Time",
     "check_in_rep": "_label_Assigned",
     "stop_name": "_label_Company / Account",
     "stop_comment": "_label_Full Comments",
