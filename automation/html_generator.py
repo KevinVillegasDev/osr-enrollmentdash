@@ -558,7 +558,12 @@ def update_field_activity(filepath: str, data: dict) -> bool:
 
 
 def _build_field_activity_script(data: dict) -> str:
-    """Build the JS data variable block for field-activity.html."""
+    """Build the JS data variable block for field-activity.html.
+
+    Includes calendar state initialization so it survives data replacement.
+    The _replace_script_data() function replaces everything from <script> to
+    the first `function` keyword, so the calendar init IIFE must live here.
+    """
     lines = []
     lines.append(f"var repActivity={_js_value(data['repActivity'])};")
     lines.append(f"var repStops={_js_value(data['repStops'])};")
@@ -566,16 +571,35 @@ def _build_field_activity_script(data: dict) -> str:
     lines.append(f"var typeFilter='all';")
     lines.append(f"var days={_js_value(data['days'])};")
     lines.append(f"var dayLabels={_js_value(data['dayLabels'])};")
+    lines.append("")
+    # Calendar state — must be in data block because _replace_script_data
+    # replaces everything before the first `function` keyword.
+    lines.append("// ── Calendar state ──────────────────────────────────────────")
+    lines.append("var calYear, calMonth;")
+    lines.append("(function initCal(){")
+    lines.append("  if(days.length){")
+    lines.append("    var p=days[0].split('/');")
+    lines.append("    calMonth=parseInt(p[0])-1;")
+    lines.append("    calYear=parseInt(p[2]);")
+    lines.append("  } else {")
+    lines.append("    var now=new Date();")
+    lines.append("    calMonth=now.getMonth();")
+    lines.append("    calYear=now.getFullYear();")
+    lines.append("  }")
+    lines.append("})();")
     return "\n".join(lines)
 
 
 def _replace_field_kpis(html: str, data: dict) -> str:
-    """Replace hardcoded KPI values, header, and day filter buttons in field-activity.html."""
+    """Replace hardcoded KPI values and header in field-activity.html.
+
+    The calendar component is rendered client-side from the days/dayLabels
+    data variables, so no HTML replacement is needed for filters.
+    """
     from datetime import datetime
 
     # Update header subtitle with date range
     month_range = data.get("kpi_month_range", "N/A")
-    now_str = datetime.now().strftime("%-m/%-d" if os.name != "nt" else "%#m/%#d")
     if month_range and month_range != "N/A":
         parts = month_range.split(" - ")
         if len(parts) == 2:
@@ -594,70 +618,70 @@ def _replace_field_kpis(html: str, data: dict) -> str:
         html
     )
 
-    # Total Stops
+    # ── KPI values ────────────────────────────────────────────────────────
+    total = data["kpi_total_stops"] or 1
+    existing = data["kpi_existing"]
+    prospect = data["kpi_prospect"]
+    existing_pct = round(existing / total * 100) if total else 0
+    prospect_pct = round(prospect / total * 100) if total else 0
+    reps_count = int(data["kpi_reps_active"].split("/")[0].strip()) if "/" in str(data["kpi_reps_active"]) else 1
+    avg_per_rep = round(data["kpi_total_stops"] / max(reps_count, 1), 1)
+
+    # Total Stops value
     html = re.sub(
         r'(Total Stops[^<]*</div>\s*<div[^>]*>)\d+',
         rf'\g<1>{data["kpi_total_stops"]}',
         html, flags=re.DOTALL
     )
 
-    # Avg per day sub-label
+    # Avg per day sub-label (value may be int or float like "83.0")
     html = re.sub(
-        r'(\d+ avg / day)',
+        r'[\d.]+ avg / day',
         f'{data["kpi_avg_per_day"]} avg / day',
         html
     )
 
-    # Existing Merchants count
-    total = data["kpi_total_stops"] or 1
-    existing = data["kpi_existing"]
-    prospect = data["kpi_prospect"]
-    existing_pct = round(existing / total * 100) if total else 0
-    prospect_pct = round(prospect / total * 100) if total else 0
-
+    # Existing Merchants value
     html = re.sub(
         r'(Existing Merchants[^<]*</div>\s*<div[^>]*>)\d+',
         rf'\g<1>{existing}',
         html, flags=re.DOTALL
     )
+
+    # Existing Merchants % sub-label (appears right after Existing value)
     html = re.sub(
         r'(\d+% of stops</div>\s*</div>\s*<div class="kpi-card">\s*<div class="kpi-label">Prospects)',
         f'{existing_pct}% of stops</div>\n  </div>\n  <div class="kpi-card">\n    <div class="kpi-label">Prospects',
         html, flags=re.DOTALL
     )
 
-    # Prospects count
+    # Prospects value
     html = re.sub(
         r'(Prospects[^<]*</div>\s*<div[^>]*>)\d+',
         rf'\g<1>{prospect}',
         html, flags=re.DOTALL
     )
 
-    # Reps Active count
+    # Prospects % sub-label (appears right after Prospects value)
     html = re.sub(
-        r'(Reps Active[^<]*</div>\s*<div[^>]*>)\d+',
-        rf'\g<1>{data["kpi_reps_active"].split(" /")[0].strip()}',
+        r'(\d+% of stops</div>\s*</div>\s*<div class="kpi-card">\s*<div class="kpi-label">Reps Active)',
+        f'{prospect_pct}% of stops</div>\n  </div>\n  <div class="kpi-card">\n    <div class="kpi-label">Reps Active',
         html, flags=re.DOTALL
     )
 
-    # Rebuild day filter buttons dynamically from the data
-    days = data.get("days", [])
-    day_labels_map = data.get("dayLabels", {})
-    if days:
-        buttons = ['  <button class="filter-btn active" onclick="setFilter(\'all\')">All Days</button>']
-        for d in days:
-            label = day_labels_map.get(d, "")
-            # Extract short date like "3/2" from "3/2/2026"
-            short = "/".join(d.split("/")[:2]) if "/" in d else d
-            buttons.append(f'  <button class="filter-btn" onclick="setFilter(\'{d}\')">{label} {short}</button>')
-        new_day_buttons = "\n".join(buttons)
+    # Reps Active value
+    html = re.sub(
+        r'(Reps Active[^<]*</div>\s*<div[^>]*>)\d+',
+        rf'\g<1>{reps_count}',
+        html, flags=re.DOTALL
+    )
 
-        # Replace everything between <div class="filters"> and <span style="flex:1">
-        html = re.sub(
-            r'(<div class="filters">\s*)\n.*?(\n  <span style="flex:1">)',
-            rf'\g<1>\n{new_day_buttons}\n\g<2>',
-            html, flags=re.DOTALL
-        )
+    # Reps Active sub-label (avg stops per rep)
+    html = re.sub(
+        r'[\d.]+ avg stops / rep',
+        f'{avg_per_rep} avg stops / rep',
+        html
+    )
 
     return html
 
