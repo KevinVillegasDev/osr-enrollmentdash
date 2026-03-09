@@ -4,6 +4,7 @@ Field activity (Maps check-in) data processor.
 Transforms Salesforce Maps check-in report data into the JS structures
 used by field-activity.html.
 
+Report 5 now pulls THIS MONTH (all check-ins for the current calendar month).
 Handles deduplication (multiple entries per stop → keep longest comment).
 """
 
@@ -126,10 +127,10 @@ def process(check_in_rows: list[dict]) -> dict:
 
     # Date range
     if sorted_dates:
-        week_start = sorted_dates[0]
-        week_end = sorted_dates[-1]
+        month_start = sorted_dates[0]
+        month_end = sorted_dates[-1]
     else:
-        week_start = week_end = "N/A"
+        month_start = month_end = "N/A"
 
     logger.info(
         "Field activity: %d total stops, %d existing, %d prospect, %d reps active",
@@ -148,7 +149,7 @@ def process(check_in_rows: list[dict]) -> dict:
         "kpi_prospect": total_prospect,
         "kpi_reps_active": f"{reps_active} / {len(OSR_ROSTER)}",
         "kpi_avg_per_day": avg_per_day,
-        "kpi_week_range": f"{week_start} - {week_end}" if sorted_dates else "N/A",
+        "kpi_month_range": f"{month_start} - {month_end}" if sorted_dates else "N/A",
     }
 
 

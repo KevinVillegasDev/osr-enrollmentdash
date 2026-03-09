@@ -20,7 +20,7 @@ REPORT_IDS = {
     "credited_enrollments": os.environ.get("SF_REPORT_CREDITED_ENROLLMENTS", "00OTO000007Mhrt2AC"),
     "current_month_activity": os.environ.get("SF_REPORT_CURRENT_MONTH_ACTIVITY", "00OTO00000671Gr2AI"),
     "last_month_activity": os.environ.get("SF_REPORT_LAST_MONTH_ACTIVITY", "00OTO000009Iw1x2AC"),
-    "maps_check_ins": os.environ.get("SF_REPORT_MAPS_CHECK_INS", "00OTO000009JqfF2AS"),
+    "maps_check_ins": os.environ.get("SF_REPORT_MAPS_CHECK_INS", "00OTO000009NEbN2AW"),
 }
 
 # ─── OSR Roster (as of March 2026) ──────────────────────────────────────────

@@ -570,7 +570,30 @@ def _build_field_activity_script(data: dict) -> str:
 
 
 def _replace_field_kpis(html: str, data: dict) -> str:
-    """Replace hardcoded KPI values and day filter buttons in field-activity.html."""
+    """Replace hardcoded KPI values, header, and day filter buttons in field-activity.html."""
+    from datetime import datetime
+
+    # Update header subtitle with date range
+    month_range = data.get("kpi_month_range", "N/A")
+    now_str = datetime.now().strftime("%-m/%-d" if os.name != "nt" else "%#m/%#d")
+    if month_range and month_range != "N/A":
+        parts = month_range.split(" - ")
+        if len(parts) == 2:
+            start_short = "/".join(parts[0].split("/")[:2])
+            end_short = "/".join(parts[1].split("/")[:2])
+            year = parts[1].split("/")[-1] if "/" in parts[1] else "2026"
+            sub_text = f"Maps check-ins &middot; {start_short} &ndash; {end_short}, {year}"
+        else:
+            sub_text = f"Maps check-ins &middot; {month_range}"
+    else:
+        sub_text = "Maps check-ins &middot; No data"
+
+    html = re.sub(
+        r'(<div class="header-sub">).*?(</div>)',
+        rf'\1{sub_text}\2',
+        html
+    )
+
     # Total Stops
     html = re.sub(
         r'(Total Stops[^<]*</div>\s*<div[^>]*>)\d+',
@@ -578,13 +601,52 @@ def _replace_field_kpis(html: str, data: dict) -> str:
         html, flags=re.DOTALL
     )
 
+    # Avg per day sub-label
+    html = re.sub(
+        r'(\d+ avg / day)',
+        f'{data["kpi_avg_per_day"]} avg / day',
+        html
+    )
+
+    # Existing Merchants count
+    total = data["kpi_total_stops"] or 1
+    existing = data["kpi_existing"]
+    prospect = data["kpi_prospect"]
+    existing_pct = round(existing / total * 100) if total else 0
+    prospect_pct = round(prospect / total * 100) if total else 0
+
+    html = re.sub(
+        r'(Existing Merchants[^<]*</div>\s*<div[^>]*>)\d+',
+        rf'\g<1>{existing}',
+        html, flags=re.DOTALL
+    )
+    html = re.sub(
+        r'(\d+% of stops</div>\s*</div>\s*<div class="kpi-card">\s*<div class="kpi-label">Prospects)',
+        f'{existing_pct}% of stops</div>\n  </div>\n  <div class="kpi-card">\n    <div class="kpi-label">Prospects',
+        html, flags=re.DOTALL
+    )
+
+    # Prospects count
+    html = re.sub(
+        r'(Prospects[^<]*</div>\s*<div[^>]*>)\d+',
+        rf'\g<1>{prospect}',
+        html, flags=re.DOTALL
+    )
+
+    # Reps Active count
+    html = re.sub(
+        r'(Reps Active[^<]*</div>\s*<div[^>]*>)\d+',
+        rf'\g<1>{data["kpi_reps_active"].split(" /")[0].strip()}',
+        html, flags=re.DOTALL
+    )
+
     # Rebuild day filter buttons dynamically from the data
     days = data.get("days", [])
-    day_labels = data.get("dayLabels", {})
+    day_labels_map = data.get("dayLabels", {})
     if days:
         buttons = ['  <button class="filter-btn active" onclick="setFilter(\'all\')">All Days</button>']
         for d in days:
-            label = day_labels.get(d, "")
+            label = day_labels_map.get(d, "")
             # Extract short date like "3/2" from "3/2/2026"
             short = "/".join(d.split("/")[:2]) if "/" in d else d
             buttons.append(f'  <button class="filter-btn" onclick="setFilter(\'{d}\')">{label} {short}</button>')
@@ -785,6 +847,32 @@ def update_index_page(filepath: str, data: dict) -> bool:
         html = re.sub(r'(\w+) Remaining', f'{quarter_current_month[:3]} Remaining', html)
 
     # ── Field Activity Card ──────────────────────────────────────────────
+    # Update card title to "This Month's Check-Ins"
+    html = re.sub(
+        r"This Week's Check-Ins",
+        "This Month's Check-Ins",
+        html
+    )
+
+    # Update detail line with date range and avg/day
+    field_range = data.get("field_month_range", "N/A")
+    field_avg = data.get("field_avg_per_day", 0)
+    if field_range and field_range != "N/A":
+        parts = field_range.split(" - ")
+        if len(parts) == 2:
+            start_short = "/".join(parts[0].split("/")[:2])
+            end_short = "/".join(parts[1].split("/")[:2])
+            range_text = f"{start_short}&ndash;{end_short}"
+        else:
+            range_text = field_range
+    else:
+        range_text = "No data"
+    html = re.sub(
+        r'Maps check-ins &middot;[^<]*<span>[^<]*</span>',
+        f'Maps check-ins &middot; {range_text} &middot; <span>{field_avg} avg/day</span>',
+        html
+    )
+
     # Each color is unique within the Field Activity section, so n=0 for all
     # Use ">Field Activity<" to avoid matching the HTML comment <!-- Field Activity -->
     html = _replace_nth_mk_value(html, 0, str(data["field_total_stops"]),

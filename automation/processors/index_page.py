@@ -119,6 +119,8 @@ def process(monthly_results: dict[str, dict],
         "field_existing": field_result.get("kpi_existing", 0),
         "field_prospect": field_result.get("kpi_prospect", 0),
         "field_reps_active": field_result.get("kpi_reps_active", 0),
+        "field_avg_per_day": field_result.get("kpi_avg_per_day", 0),
+        "field_month_range": field_result.get("kpi_month_range", "N/A"),
 
         # Per-month dashboard cards
         "month_cards": month_cards,
