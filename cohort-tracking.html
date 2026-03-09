@@ -3,66 +3,66 @@
 <title>Cohort Commission Tracker</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0B0F1A;color:#E2E8F0;font-family:'Segoe UI',system-ui,sans-serif;padding:20px;max-width:1200px;margin:0 auto}
-a{color:#F59E0B;text-decoration:none}a:hover{text-decoration:underline}
-.back{display:inline-block;margin-bottom:20px;font-size:14px;color:#64748B}.back:hover{color:#F59E0B}
+body{background:#0D1321;color:#F1F5F9;font-family:'Segoe UI',system-ui,sans-serif;padding:20px;max-width:1200px;margin:0 auto}
+a{color:#FBBF24;text-decoration:none}a:hover{text-decoration:underline}
+.back{display:inline-block;margin-bottom:20px;font-size:14px;color:#8494AB}.back:hover{color:#FBBF24}
 .hdr{text-align:center;margin-bottom:24px}
 .hdr h1{font-size:32px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px}
-.sub{color:#64748B;font-size:14px;margin-top:8px}
+.sub{color:#8494AB;font-size:14px;margin-top:8px}
 
 .tabs{display:flex;gap:8px;margin-bottom:24px;justify-content:center}
-.tab{padding:10px 24px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;border:1px solid #1E293B;background:#111827;color:#94A3B8;transition:all .15s}
-.tab:hover{border-color:#F59E0B;color:#E2E8F0}
-.tab.active{background:#F59E0B;border-color:#F59E0B;color:#0B0F1A}
+.tab{padding:10px 24px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;border:1px solid #293852;background:#151E2F;color:#A8B8CC;transition:all .15s}
+.tab:hover{border-color:#FBBF24;color:#F1F5F9}
+.tab.active{background:#FBBF24;border-color:#FBBF24;color:#0D1321}
 .tab .tag{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;margin-left:6px;text-transform:uppercase}
 .tab.active .tag{background:rgba(0,0,0,.2)}
-.tab:not(.active) .tag{background:#1E293B}
+.tab:not(.active) .tag{background:#293852}
 .tab-dim{opacity:.5;border-style:dashed}
 .tab-dim:hover{opacity:.8}
-.tab-dim.active{opacity:1;border-style:solid;background:#64748B;border-color:#64748B}
+.tab-dim.active{opacity:1;border-style:solid;background:#8494AB;border-color:#8494AB}
 
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
-.kpi{background:#111827;border:1px solid #1E293B;border-radius:12px;padding:16px;text-align:center}
-.kpi-l{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#64748B;margin-bottom:6px;font-weight:600}
+.kpi{background:#151E2F;border:1px solid #293852;border-radius:12px;padding:16px;text-align:center}
+.kpi-l{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#8494AB;margin-bottom:6px;font-weight:600}
 .kpi-v{font-size:28px;font-weight:700}
-.kpi-s{font-size:12px;color:#475569;margin-top:4px}
+.kpi-s{font-size:12px;color:#627289;margin-top:4px}
 
-.note{text-align:center;color:#475569;font-size:12px;margin-bottom:20px;padding:8px;background:#111827;border:1px solid #1E293B;border-radius:8px}
-.note b{color:#F59E0B}
+.note{text-align:center;color:#627289;font-size:12px;margin-bottom:20px;padding:8px;background:#151E2F;border:1px solid #293852;border-radius:8px}
+.note b{color:#FBBF24}
 
-.card{background:#111827;border:1px solid #1E293B;border-radius:14px;margin-bottom:12px;overflow:hidden;transition:border-color .2s}
-.card:hover{border-color:#F59E0B33}
+.card{background:#151E2F;border:1px solid #293852;border-radius:14px;margin-bottom:12px;overflow:hidden;transition:border-color .2s}
+.card:hover{border-color:#FBBF2433}
 .card-h{padding:16px 20px;cursor:pointer;display:flex;align-items:center;gap:16px}
 .rank{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
-.rank-g{background:#10B981;color:#0B0F1A}.rank-o{background:#F59E0B;color:#0B0F1A}.rank-b{background:#3B82F6;color:#fff}.rank-d{background:#1E293B;color:#64748B}
+.rank-g{background:#2DD4A0;color:#0D1321}.rank-o{background:#FBBF24;color:#0D1321}.rank-b{background:#5B9BFF;color:#fff}.rank-d{background:#293852;color:#8494AB}
 .info{flex:1;min-width:0}
 .name{font-size:16px;font-weight:600;margin-bottom:4px}
-.meta{font-size:12px;color:#64748B;display:flex;gap:16px;flex-wrap:wrap}
+.meta{font-size:12px;color:#8494AB;display:flex;gap:16px;flex-wrap:wrap}
 .total-v{font-size:22px;font-weight:700;flex-shrink:0;text-align:right;min-width:100px}
-.total-v span{display:block;font-size:11px;color:#64748B;font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.total-v span{display:block;font-size:11px;color:#8494AB;font-weight:500;text-transform:uppercase;letter-spacing:.04em}
 
 .prog-row{margin:8px 20px 12px;position:relative}
-.prog-bar{background:#1E293B;border-radius:6px;height:24px;overflow:visible;position:relative}
+.prog-bar{background:#293852;border-radius:6px;height:24px;overflow:visible;position:relative}
 .prog-fill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;min-width:40px;position:relative;z-index:1}
-.prog-target{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:11px;color:#475569;z-index:0}
-.trueup{font-size:11px;color:#F59E0B;margin-top:4px;text-align:right;padding:0 20px 8px}
+.prog-target{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:11px;color:#627289;z-index:0}
+.trueup{font-size:11px;color:#FBBF24;margin-top:4px;text-align:right;padding:0 20px 8px}
 
-.stops{display:none;border-top:1px solid #1E293B}
+.stops{display:none;border-top:1px solid #293852}
 .card.open .stops{display:block}
-.hint{text-align:center;padding:0 20px 10px;font-size:12px;color:#475569}
+.hint{text-align:center;padding:0 20px 10px;font-size:12px;color:#627289}
 .card.open .hint{display:none}
 
-.stop{padding:8px 20px;border-bottom:1px solid #0B0F1A;display:flex;gap:12px;align-items:center;font-size:13px}
+.stop{padding:8px 20px;border-bottom:1px solid #0D1321;display:flex;gap:12px;align-items:center;font-size:13px}
 .stop:last-child{border:none}
-.stop:hover{background:#0F172A}
+.stop:hover{background:#111B2E}
 .stop-name{flex:1;font-weight:500}
 .stop-val{min-width:70px;text-align:right;font-weight:600}
 .stop-total{min-width:80px;text-align:right;font-weight:700}
 .stop-badge{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600}
-.badge-prod{background:rgba(16,185,129,.15);color:#10B981}
-.badge-zero{background:rgba(100,116,139,.1);color:#475569}
+.badge-prod{background:rgba(16,185,129,.15);color:#2DD4A0}
+.badge-zero{background:rgba(100,116,139,.1);color:#627289}
 
-.footer{text-align:center;color:#334155;font-size:12px;margin-top:32px;padding:16px 0}
+.footer{text-align:center;color:#3D5170;font-size:12px;margin-top:32px;padding:16px 0}
 @media(max-width:768px){.kpis{grid-template-columns:repeat(2,1fr)}.card-h{flex-wrap:wrap;gap:10px}}
 </style></head><body>
 
@@ -110,10 +110,10 @@ var totalFunded=0,totalProducing=0,totalMerchants=0,atTarget=0;
 cohort.forEach(function(o){totalFunded+=o.f;totalProducing+=o.p;totalMerchants+=o.m;if(o.f>=target)atTarget++});
 
 var kh='<div class="kpis">';
-kh+='<div class="kpi"><div class="kpi-l">Cohort Funded</div><div class="kpi-v" style="color:#10B981">'+fmt(totalFunded)+'</div><div class="kpi-s">M0+M1 combined</div></div>';
-kh+='<div class="kpi"><div class="kpi-l">Producing</div><div class="kpi-v" style="color:#3B82F6">'+totalProducing+'/'+totalMerchants+'</div><div class="kpi-s">'+(totalMerchants>0?Math.round(totalProducing/totalMerchants*100):0)+'% of merchants</div></div>';
-kh+='<div class="kpi"><div class="kpi-l">At $15K Target</div><div class="kpi-v" style="color:#F59E0B">'+atTarget+' / '+cohort.length+'</div><div class="kpi-s">OSRs compliant</div></div>';
-kh+='<div class="kpi"><div class="kpi-l">Deadline</div><div class="kpi-v" style="color:#8B5CF6;font-size:16px">'+cfg.deadline+'</div><div class="kpi-s">'+cfg.deadlineSub+'</div></div>';
+kh+='<div class="kpi"><div class="kpi-l">Cohort Funded</div><div class="kpi-v" style="color:#2DD4A0">'+fmt(totalFunded)+'</div><div class="kpi-s">M0+M1 combined</div></div>';
+kh+='<div class="kpi"><div class="kpi-l">Producing</div><div class="kpi-v" style="color:#5B9BFF">'+totalProducing+'/'+totalMerchants+'</div><div class="kpi-s">'+(totalMerchants>0?Math.round(totalProducing/totalMerchants*100):0)+'% of merchants</div></div>';
+kh+='<div class="kpi"><div class="kpi-l">At $15K Target</div><div class="kpi-v" style="color:#FBBF24">'+atTarget+' / '+cohort.length+'</div><div class="kpi-s">OSRs compliant</div></div>';
+kh+='<div class="kpi"><div class="kpi-l">Deadline</div><div class="kpi-v" style="color:#A78BFA;font-size:16px">'+cfg.deadline+'</div><div class="kpi-s">'+cfg.deadlineSub+'</div></div>';
 kh+='</div>';
 document.getElementById('kpis').innerHTML=kh;
 document.getElementById('note').innerHTML=cfg.note;
@@ -123,15 +123,15 @@ for(var i=0;i<cohort.length;i++){
 var o=cohort[i];
 var pct=Math.min(o.f/target*100,100);
 var pctDisplay=Math.round(o.f/target*100);
-var color=o.f>=target?'#10B981':o.f>=target*.5?'#F59E0B':o.f>0?'#3B82F6':'#475569';
+var color=o.f>=target?'#2DD4A0':o.f>=target*.5?'#FBBF24':o.f>0?'#5B9BFF':'#627289';
 var rankClass=o.f>=target?'rank-g':o.f>=target*.5?'rank-o':o.f>0?'rank-b':'rank-d';
 
 h+='<div class="card" onclick="tog(this)">';
 h+='<div class="card-h">';
 h+='<div class="rank '+rankClass+'">'+(i+1)+'</div>';
 h+='<div class="info"><div class="name">'+o.n+'</div>';
-h+='<div class="meta"><span style="color:#3B82F6">'+o.p+'/'+o.m+' producing</span>';
-if(o.f>=target) h+='<span style="color:#10B981">Target met</span>';
+h+='<div class="meta"><span style="color:#5B9BFF">'+o.p+'/'+o.m+' producing</span>';
+if(o.f>=target) h+='<span style="color:#2DD4A0">Target met</span>';
 else h+='<span>Need '+fmt(target-o.f)+' more</span>';
 h+='</div></div>';
 h+='<div class="total-v" style="color:'+color+'">'+fmt(o.f)+'<span>'+pctDisplay+'% of $15K</span></div>';
@@ -152,7 +152,7 @@ h+='<div class="trueup">Month 2 true-up: '+fmt(o.f2)+' / $30K ('+(Math.round(o.f
 h+='<div class="hint">Click to see '+o.s.length+' merchants</div>';
 h+='<div class="stops">';
 
-h+='<div class="stop" style="font-weight:600;color:#64748B;font-size:11px;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #1E293B">';
+h+='<div class="stop" style="font-weight:600;color:#8494AB;font-size:11px;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #293852">';
 h+='<div class="stop-name">Merchant</div>';
 for(var k=0;k<cfg.monthLabels.length;k++) h+='<div class="stop-val">'+cfg.monthLabels[k]+'</div>';
 h+='<div class="stop-total">Total</div></div>';
@@ -166,7 +166,7 @@ for(var k=0;k<cfg.monthKeys.length;k++){
 var mk=cfg.monthKeys[k];
 h+='<div class="stop-val">'+(s[mk]>0?fmt(s[mk]):'-')+'</div>';
 }
-h+='<div class="stop-total" style="color:'+(s.t>0?'#10B981':'#475569')+'">'+fmt(s.t)+'</div>';
+h+='<div class="stop-total" style="color:'+(s.t>0?'#2DD4A0':'#627289')+'">'+fmt(s.t)+'</div>';
 h+='</div>';
 }
 h+='</div></div>';

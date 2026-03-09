@@ -3,51 +3,51 @@
 <title>Q1 2026 Enrollment Tracker</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0B0F1A;color:#E2E8F0;font-family:'Segoe UI',system-ui,sans-serif;padding:20px;max-width:1200px;margin:0 auto}
-a{color:#8B5CF6;text-decoration:none}a:hover{text-decoration:underline}
-.back{display:inline-block;margin-bottom:20px;font-size:14px;color:#64748B}.back:hover{color:#8B5CF6}
+body{background:#0D1321;color:#F1F5F9;font-family:'Segoe UI',system-ui,sans-serif;padding:20px;max-width:1200px;margin:0 auto}
+a{color:#A78BFA;text-decoration:none}a:hover{text-decoration:underline}
+.back{display:inline-block;margin-bottom:20px;font-size:14px;color:#8494AB}.back:hover{color:#A78BFA}
 .hdr{text-align:center;margin-bottom:32px}
 .hdr h1{font-size:32px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px}
-.badge{display:inline-block;background:#8B5CF6;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.06em;text-transform:uppercase;margin-left:8px;vertical-align:middle}
-.sub{color:#64748B;font-size:14px;margin-top:8px}
+.badge{display:inline-block;background:#A78BFA;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.06em;text-transform:uppercase;margin-left:8px;vertical-align:middle}
+.sub{color:#8494AB;font-size:14px;margin-top:8px}
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
-.kpi{background:#111827;border:1px solid #1E293B;border-radius:12px;padding:16px;text-align:center}
-.kpi-l{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#64748B;margin-bottom:6px;font-weight:600}
+.kpi{background:#151E2F;border:1px solid #293852;border-radius:12px;padding:16px;text-align:center}
+.kpi-l{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#8494AB;margin-bottom:6px;font-weight:600}
 .kpi-v{font-size:28px;font-weight:700}
-.kpi-s{font-size:12px;color:#475569;margin-top:4px}
-.card{background:#111827;border:1px solid #1E293B;border-radius:14px;margin-bottom:12px;overflow:hidden}
+.kpi-s{font-size:12px;color:#627289;margin-top:4px}
+.card{background:#151E2F;border:1px solid #293852;border-radius:14px;margin-bottom:12px;overflow:hidden}
 .card-h{padding:16px 20px;display:flex;align-items:center;gap:16px}
 .rank{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
-.r1{background:#10B981;color:#0B0F1A}.r2{background:#3B82F6;color:#fff}.rn{background:#1E293B;color:#64748B}
-.rw{background:#F59E0B;color:#0B0F1A}.rd{background:#EF4444;color:#fff}
+.r1{background:#2DD4A0;color:#0D1321}.r2{background:#5B9BFF;color:#fff}.rn{background:#293852;color:#8494AB}
+.rw{background:#FBBF24;color:#0D1321}.rd{background:#F87171;color:#fff}
 .info{flex:1;min-width:0}
 .name{font-size:16px;font-weight:600;margin-bottom:4px}
-.meta{font-size:12px;color:#64748B;display:flex;gap:16px;flex-wrap:wrap}
+.meta{font-size:12px;color:#8494AB;display:flex;gap:16px;flex-wrap:wrap}
 .total{font-size:22px;font-weight:700;flex-shrink:0;text-align:right;min-width:80px}
-.total span{display:block;font-size:11px;color:#64748B;font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.total span{display:block;font-size:11px;color:#8494AB;font-weight:500;text-transform:uppercase;letter-spacing:.04em}
 .bar-wrap{margin:8px 20px 12px;display:flex;gap:4px;align-items:flex-end;height:36px}
 .bar-seg{border-radius:4px;position:relative;display:flex;align-items:center;justify-content:center;min-width:24px}
 .bar-seg span{font-size:11px;font-weight:600;color:#fff;white-space:nowrap}
-.bar-target{position:absolute;right:0;top:-16px;font-size:10px;color:#475569}
+.bar-target{position:absolute;right:0;top:-16px;font-size:10px;color:#627289}
 .months{display:flex;gap:4px;margin:0 20px 14px;align-items:center}
-.month-box{flex:1;background:#1E293B;border-radius:8px;padding:10px;text-align:center}
-.month-box.ok{border:1px solid #10B981}
-.month-box.warn{border:1px solid #F59E0B}
-.month-box.bad{border:1px solid #EF4444}
-.month-box .mo-label{font-size:10px;color:#64748B;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.month-box{flex:1;background:#293852;border-radius:8px;padding:10px;text-align:center}
+.month-box.ok{border:1px solid #2DD4A0}
+.month-box.warn{border:1px solid #FBBF24}
+.month-box.bad{border:1px solid #F87171}
+.month-box .mo-label{font-size:10px;color:#8494AB;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
 .month-box .mo-val{font-size:20px;font-weight:700}
 .month-box .mo-status{font-size:10px;margin-top:2px;font-weight:600}
-.month-box.ok .mo-status{color:#10B981}
-.month-box.warn .mo-status{color:#F59E0B}
-.month-box.bad .mo-status{color:#EF4444}
-.prog{margin:0 20px 16px;background:#1E293B;border-radius:6px;height:8px;overflow:hidden;position:relative}
+.month-box.ok .mo-status{color:#2DD4A0}
+.month-box.warn .mo-status{color:#FBBF24}
+.month-box.bad .mo-status{color:#F87171}
+.prog{margin:0 20px 16px;background:#293852;border-radius:6px;height:8px;overflow:hidden;position:relative}
 .prog-fill{height:100%;border-radius:6px;transition:width .3s}
-.prog-mark{position:absolute;top:-4px;bottom:-4px;width:2px;background:#E2E8F0;opacity:.5}
-.legend{display:flex;gap:20px;justify-content:center;margin-bottom:20px;font-size:12px;color:#64748B;flex-wrap:wrap}
+.prog-mark{position:absolute;top:-4px;bottom:-4px;width:2px;background:#F1F5F9;opacity:.5}
+.legend{display:flex;gap:20px;justify-content:center;margin-bottom:20px;font-size:12px;color:#8494AB;flex-wrap:wrap}
 .legend-i{display:flex;align-items:center;gap:6px}
 .legend-d{width:10px;height:10px;border-radius:2px}
-.note{text-align:center;color:#475569;font-size:12px;margin-bottom:24px;font-style:italic}
-.footer{text-align:center;color:#334155;font-size:12px;margin-top:32px;padding:16px 0}
+.note{text-align:center;color:#627289;font-size:12px;margin-bottom:24px;font-style:italic}
+.footer{text-align:center;color:#3D5170;font-size:12px;margin-top:32px;padding:16px 0}
 @media(max-width:768px){.kpis{grid-template-columns:repeat(2,1fr)}.months{flex-wrap:wrap}}
 </style></head><body>
 <a href="index.html" class="back">&larr; Back to Dashboard Hub</a>
@@ -56,15 +56,15 @@ a{color:#8B5CF6;text-decoration:none}a:hover{text-decoration:underline}
 <div class="sub">Individual OSR quarterly targets &middot; 30 enrollments / quarter, 10 / month minimum</div>
 </div>
 <div class="kpis">
-<div class="kpi"><div class="kpi-l">Total Q1 Enrollments</div><div class="kpi-v" style="color:#8B5CF6">249</div><div class="kpi-s">All OSR-credited</div></div>
-<div class="kpi"><div class="kpi-l">Reps at 30</div><div class="kpi-v" style="color:#10B981">4 / 12</div><div class="kpi-s">Quarterly target met</div></div>
-<div class="kpi"><div class="kpi-l">Months Under 10</div><div class="kpi-v" style="color:#F59E0B">10</div><div class="kpi-s">Across all reps (Jan+Feb)</div></div>
-<div class="kpi"><div class="kpi-l">March Remaining</div><div class="kpi-v" style="color:#06B6D4">22</div><div class="kpi-s">Days to close Q1</div></div>
+<div class="kpi"><div class="kpi-l">Total Q1 Enrollments</div><div class="kpi-v" style="color:#A78BFA">249</div><div class="kpi-s">All OSR-credited</div></div>
+<div class="kpi"><div class="kpi-l">Reps at 30</div><div class="kpi-v" style="color:#2DD4A0">4 / 12</div><div class="kpi-s">Quarterly target met</div></div>
+<div class="kpi"><div class="kpi-l">Months Under 10</div><div class="kpi-v" style="color:#FBBF24">10</div><div class="kpi-s">Across all reps (Jan+Feb)</div></div>
+<div class="kpi"><div class="kpi-l">March Remaining</div><div class="kpi-v" style="color:#22D3EE">22</div><div class="kpi-s">Days to close Q1</div></div>
 </div>
 <div class="legend">
-<div class="legend-i"><div class="legend-d" style="background:#10B981"></div>At or above target</div>
-<div class="legend-i"><div class="legend-d" style="background:#F59E0B"></div>On pace (within reach)</div>
-<div class="legend-i"><div class="legend-d" style="background:#EF4444"></div>Behind / at risk</div>
+<div class="legend-i"><div class="legend-d" style="background:#2DD4A0"></div>At or above target</div>
+<div class="legend-i"><div class="legend-d" style="background:#FBBF24"></div>On pace (within reach)</div>
+<div class="legend-i"><div class="legend-d" style="background:#F87171"></div>Behind / at risk</div>
 </div>
 <div class="note">Quarterly true-up: if any single month falls below 10 but you hit 30 for the quarter, no penalty applies.</div>
 <div id="cards"></div>
@@ -79,7 +79,7 @@ var lastMonth=cfg.months[cfg.months.length-1].label;
 for(var i=0;i<q1Data.length;i++){
 var d=q1Data[i];
 var pct=Math.min(d.q1/target*100,100);
-var color=d.q1>=target?'#10B981':d.q1>=20?'#F59E0B':'#EF4444';
+var color=d.q1>=target?'#2DD4A0':d.q1>=20?'#FBBF24':'#F87171';
 var rankClass=d.q1>=target?'r1':d.q1>=20?'rw':'rd';
 var statusText=d.q1>=target?'Target Met':('Need '+d.need+' in '+lastMonth);
 
@@ -94,8 +94,8 @@ h+='<div class="months">';
 for(var j=0;j<cfg.months.length;j++){
 var mc=cfg.months[j],val=d[mc.key],inProg=d[mc.key+'Prog'];
 if(inProg){
-h+='<div class="month-box" style="border:1px solid #334155"><div class="mo-label">'+mc.label+'</div><div class="mo-val" style="color:#475569">'+val+'</div>';
-h+='<div class="mo-status" style="color:#475569">In progress</div></div>';
+h+='<div class="month-box" style="border:1px solid #3D5170"><div class="mo-label">'+mc.label+'</div><div class="mo-val" style="color:#627289">'+val+'</div>';
+h+='<div class="mo-status" style="color:#627289">In progress</div></div>';
 } else {
 var ok=d[mc.key+'Ok'],cls=ok?'ok':(val>0?'warn':'bad');
 h+='<div class="month-box '+cls+'"><div class="mo-label">'+mc.label+'</div><div class="mo-val">'+val+'</div>';

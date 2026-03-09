@@ -8,58 +8,58 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif; background: #0B0F1A; color: #F1F5F9; min-height: 100vh; }
-    ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #111827; } ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    body { font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif; background: #0D1321; color: #F1F5F9; min-height: 100vh; }
+    ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #151E2F; } ::-webkit-scrollbar-thumb { background: #3D5170; border-radius: 4px; }
 
-    .hero { background: linear-gradient(135deg, #111827 0%, #1a1f35 50%, #0f172a 100%); border-bottom: 1px solid #1E293B; padding: 60px 40px 56px; text-align: center; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%); pointer-events: none; }
-    .hero-badge { display: inline-block; font-size: 11px; font-weight: 700; background: linear-gradient(135deg, #3B82F6, #6366F1); color: #fff; padding: 4px 14px; border-radius: 20px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+    .hero { background: linear-gradient(135deg, #151E2F 0%, #1a1f35 50%, #111B2E 100%); border-bottom: 1px solid #293852; padding: 60px 40px 56px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(91,155,255,0.06) 0%, transparent 70%); pointer-events: none; }
+    .hero-badge { display: inline-block; font-size: 11px; font-weight: 700; background: linear-gradient(135deg, #5B9BFF, #818CF8); color: #fff; padding: 4px 14px; border-radius: 20px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
     .hero h1 { font-size: 44px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 10px; }
-    .hero h1 span { background: linear-gradient(135deg, #3B82F6, #06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero-sub { font-size: 16px; color: #94A3B8; max-width: 600px; margin: 0 auto; line-height: 1.5; }
+    .hero h1 span { background: linear-gradient(135deg, #5B9BFF, #22D3EE); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 16px; color: #A8B8CC; max-width: 600px; margin: 0 auto; line-height: 1.5; }
 
     .main { max-width: 1200px; margin: 0 auto; padding: 48px 40px 80px; }
-    .section-label { font-size: 13px; font-weight: 600; color: #64748B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; }
+    .section-label { font-size: 13px; font-weight: 600; color: #8494AB; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; }
 
     .year-group { margin-bottom: 48px; }
     .year-title { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
-    .year-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, #1E293B, transparent); }
+    .year-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, #293852, transparent); }
 
     .month-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
 
-    .month-card { background: #111827; border: 1px solid #1E293B; border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.25s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .month-card:hover { border-color: #3B82F6; transform: translateY(-3px); box-shadow: 0 12px 40px rgba(59,130,246,0.12); }
-    .month-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #3B82F6, #06B6D4); opacity: 0; transition: opacity 0.25s; }
+    .month-card { background: #151E2F; border: 1px solid #293852; border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.25s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+    .month-card:hover { border-color: #5B9BFF; transform: translateY(-3px); box-shadow: 0 12px 40px rgba(91,155,255,0.12); }
+    .month-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #5B9BFF, #22D3EE); opacity: 0; transition: opacity 0.25s; }
     .month-card:hover::before { opacity: 1; }
 
     .month-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
     .month-name { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
     .month-tag { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 6px; letter-spacing: 0.04em; text-transform: uppercase; }
-    .tag-latest { background: rgba(16,185,129,0.15); color: #10B981; }
-    .tag-past { background: rgba(100,116,139,0.15); color: #64748B; }
+    .tag-latest { background: rgba(16,185,129,0.15); color: #2DD4A0; }
+    .tag-past { background: rgba(100,116,139,0.15); color: #8494AB; }
 
     .month-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-    .mk { background: #0B0F1A; border-radius: 10px; padding: 14px 16px; }
-    .mk-label { font-size: 11px; color: #64748B; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; margin-bottom: 4px; }
+    .mk { background: #0D1321; border-radius: 10px; padding: 14px 16px; }
+    .mk-label { font-size: 11px; color: #8494AB; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; margin-bottom: 4px; }
     .mk-value { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
 
-    .month-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 16px; border-top: 1px solid #1E293B; }
-    .month-detail { font-size: 12px; color: #64748B; }
-    .month-detail span { color: #94A3B8; font-weight: 600; }
-    .month-arrow { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #3B82F6; }
+    .month-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 16px; border-top: 1px solid #293852; }
+    .month-detail { font-size: 12px; color: #8494AB; }
+    .month-detail span { color: #A8B8CC; font-weight: 600; }
+    .month-arrow { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #5B9BFF; }
     .month-arrow svg { width: 16px; height: 16px; transition: transform 0.2s; }
     .month-card:hover .month-arrow svg { transform: translateX(3px); }
 
-    .empty-card { background: #111827; border: 2px dashed #1E293B; border-radius: 16px; padding: 48px 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 260px; }
+    .empty-card { background: #151E2F; border: 2px dashed #293852; border-radius: 16px; padding: 48px 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 260px; }
     .empty-icon { font-size: 36px; margin-bottom: 12px; opacity: 0.4; }
-    .empty-title { font-size: 15px; font-weight: 600; color: #475569; margin-bottom: 4px; }
-    .empty-sub { font-size: 13px; color: #334155; }
+    .empty-title { font-size: 15px; font-weight: 600; color: #627289; margin-bottom: 4px; }
+    .empty-sub { font-size: 13px; color: #3D5170; }
 
     .summary-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 48px; }
-    .sb { background: #111827; border: 1px solid #1E293B; border-radius: 12px; padding: 20px 24px; text-align: center; }
-    .sb-label { font-size: 11px; color: #64748B; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; margin-bottom: 6px; }
+    .sb { background: #151E2F; border: 1px solid #293852; border-radius: 12px; padding: 20px 24px; text-align: center; }
+    .sb-label { font-size: 11px; color: #8494AB; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; margin-bottom: 6px; }
     .sb-value { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
-    .sb-sub { font-size: 12px; color: #475569; margin-top: 2px; }
+    .sb-sub { font-size: 12px; color: #627289; margin-top: 2px; }
 
     @media (max-width: 768px) {
       .hero { padding: 40px 20px 36px; }
@@ -73,16 +73,16 @@
     }
 
     .refresh-wrap { margin-top: 18px; display: flex; align-items: center; justify-content: center; gap: 12px; }
-    .refresh-btn { display: inline-flex; align-items: center; gap: 8px; background: rgba(30,41,59,0.8); border: 1px solid #334155; color: #94A3B8; padding: 8px 18px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600; font-family: inherit; transition: all 0.2s; backdrop-filter: blur(4px); }
-    .refresh-btn:hover { border-color: #3B82F6; color: #E2E8F0; background: rgba(30,41,59,0.95); }
+    .refresh-btn { display: inline-flex; align-items: center; gap: 8px; background: rgba(30,41,59,0.8); border: 1px solid #3D5170; color: #A8B8CC; padding: 8px 18px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600; font-family: inherit; transition: all 0.2s; backdrop-filter: blur(4px); }
+    .refresh-btn:hover { border-color: #5B9BFF; color: #F1F5F9; background: rgba(30,41,59,0.95); }
     .refresh-btn:active { transform: scale(0.97); }
     .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .refresh-btn svg { width: 15px; height: 15px; }
     .refresh-btn.spinning svg { animation: spin 1s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .refresh-status { font-size: 12px; color: #475569; transition: all 0.3s; }
-    .refresh-status.ok { color: #10B981; }
-    .refresh-status.err { color: #EF4444; }
+    .refresh-status { font-size: 12px; color: #627289; transition: all 0.3s; }
+    .refresh-status.ok { color: #2DD4A0; }
+    .refresh-status.err { color: #F87171; }
   </style>
 </head>
 <body>
@@ -107,22 +107,22 @@
     <div class="summary-bar">
       <div class="sb">
         <div class="sb-label">Total Enrollments</div>
-        <div class="sb-value" style="color:#3B82F6">336</div>
+        <div class="sb-value" style="color:#5B9BFF">336</div>
         <div class="sb-sub">All channels</div>
       </div>
       <div class="sb">
         <div class="sb-label">OSR Credited</div>
-        <div class="sb-value" style="color:#10B981">248</div>
+        <div class="sb-value" style="color:#2DD4A0">248</div>
         <div class="sb-sub">73.8% of total</div>
       </div>
       <div class="sb">
         <div class="sb-label">Funded Volume</div>
-        <div class="sb-value" style="color:#F59E0B">$205K</div>
+        <div class="sb-value" style="color:#FBBF24">$205K</div>
         <div class="sb-sub">Month 0 across all months</div>
       </div>
       <div class="sb">
         <div class="sb-label">Months Tracked</div>
-        <div class="sb-value" style="color:#8B5CF6">3</div>
+        <div class="sb-value" style="color:#A78BFA">3</div>
         <div class="sb-sub">January, February & March 2026</div>
       </div>
     </div>
@@ -131,27 +131,27 @@
     <div class="year-group">
       <div class="year-title">Commission Tracking</div>
       <div class="month-grid">
-        <a href="cohort-tracking.html" class="month-card" style="border-color:#F59E0B33">
+        <a href="cohort-tracking.html" class="month-card" style="border-color:#FBBF2433">
           <div class="month-header">
             <div class="month-name">Cohort Production</div>
-            <span class="month-tag" style="background:#F59E0B;color:#000">Live</span>
+            <span class="month-tag" style="background:#FBBF24;color:#000">Live</span>
           </div>
           <div class="month-kpis">
             <div class="mk">
               <div class="mk-label">Feb Cohort</div>
-              <div class="mk-value" style="color:#10B981">$164.8K</div>
+              <div class="mk-value" style="color:#2DD4A0">$164.8K</div>
             </div>
             <div class="mk">
               <div class="mk-label">Jan Cohort</div>
-              <div class="mk-value" style="color:#3B82F6">$91.2K</div>
+              <div class="mk-value" style="color:#5B9BFF">$91.2K</div>
             </div>
             <div class="mk">
               <div class="mk-label">At $15K Target</div>
-              <div class="mk-value" style="color:#F59E0B">2 / 12</div>
+              <div class="mk-value" style="color:#FBBF24">2 / 12</div>
             </div>
             <div class="mk">
               <div class="mk-label">$30K True-Up</div>
-              <div class="mk-value" style="color:#8B5CF6">Active</div>
+              <div class="mk-value" style="color:#A78BFA">Active</div>
             </div>
           </div>
           <div class="month-footer">
@@ -160,27 +160,27 @@
           </div>
         </a>
 
-        <a href="q1-enrollment.html" class="month-card" style="border-color:#8B5CF633">
+        <a href="q1-enrollment.html" class="month-card" style="border-color:#A78BFA33">
           <div class="month-header">
             <div class="month-name">Q1 Enrollment Compliance</div>
-            <span class="month-tag" style="background:#8B5CF6;color:#fff">New</span>
+            <span class="month-tag" style="background:#A78BFA;color:#fff">New</span>
           </div>
           <div class="month-kpis">
             <div class="mk">
               <div class="mk-label">Q1 Total</div>
-              <div class="mk-value" style="color:#8B5CF6">249</div>
+              <div class="mk-value" style="color:#A78BFA">249</div>
             </div>
             <div class="mk">
               <div class="mk-label">At 30 Target</div>
-              <div class="mk-value" style="color:#10B981">4 / 12</div>
+              <div class="mk-value" style="color:#2DD4A0">4 / 12</div>
             </div>
             <div class="mk">
               <div class="mk-label">10/mo Flags</div>
-              <div class="mk-value" style="color:#F59E0B">10</div>
+              <div class="mk-value" style="color:#FBBF24">10</div>
             </div>
             <div class="mk">
               <div class="mk-label">Mar Remaining</div>
-              <div class="mk-value" style="color:#06B6D4">22 days</div>
+              <div class="mk-value" style="color:#22D3EE">22 days</div>
             </div>
           </div>
           <div class="month-footer">
@@ -195,27 +195,27 @@
     <div class="year-group">
       <div class="year-title">Field Activity</div>
       <div class="month-grid">
-        <a href="field-activity.html" class="month-card" style="border-color:#06B6D433">
+        <a href="field-activity.html" class="month-card" style="border-color:#22D3EE33">
           <div class="month-header">
             <div class="month-name">This Month's Check-Ins</div>
-            <span class="month-tag" style="background:#06B6D4;color:#000">Live</span>
+            <span class="month-tag" style="background:#22D3EE;color:#000">Live</span>
           </div>
           <div class="month-kpis">
             <div class="mk">
               <div class="mk-label">Total Stops</div>
-              <div class="mk-value" style="color:#06B6D4">749</div>
+              <div class="mk-value" style="color:#22D3EE">749</div>
             </div>
             <div class="mk">
               <div class="mk-label">Existing</div>
-              <div class="mk-value" style="color:#3B82F6">475</div>
+              <div class="mk-value" style="color:#5B9BFF">475</div>
             </div>
             <div class="mk">
               <div class="mk-label">Prospects</div>
-              <div class="mk-value" style="color:#F59E0B">274</div>
+              <div class="mk-value" style="color:#FBBF24">274</div>
             </div>
             <div class="mk">
               <div class="mk-label">Reps Active</div>
-              <div class="mk-value" style="color:#10B981">11 / 12</div>
+              <div class="mk-value" style="color:#2DD4A0">11 / 12</div>
             </div>
           </div>
           <div class="month-footer">
@@ -239,19 +239,19 @@
           <div class="month-kpis">
             <div class="mk">
               <div class="mk-label">Enrollments</div>
-              <div class="mk-value" style="color:#3B82F6">46</div>
+              <div class="mk-value" style="color:#5B9BFF">46</div>
             </div>
             <div class="mk">
               <div class="mk-label">OSR Credited</div>
-              <div class="mk-value" style="color:#10B981">31</div>
+              <div class="mk-value" style="color:#2DD4A0">31</div>
             </div>
             <div class="mk">
               <div class="mk-label">Funded Volume</div>
-              <div class="mk-value" style="color:#F59E0B">$5K</div>
+              <div class="mk-value" style="color:#FBBF24">$5K</div>
             </div>
             <div class="mk">
               <div class="mk-label">Conversion</div>
-              <div class="mk-value" style="color:#8B5CF6">16.7%</div>
+              <div class="mk-value" style="color:#A78BFA">16.7%</div>
             </div>
           </div>
           <div class="month-footer">
@@ -267,19 +267,19 @@
           <div class="month-kpis">
             <div class="mk">
               <div class="mk-label">Enrollments</div>
-              <div class="mk-value" style="color:#3B82F6">171</div>
+              <div class="mk-value" style="color:#5B9BFF">171</div>
             </div>
             <div class="mk">
               <div class="mk-label">OSR Credited</div>
-              <div class="mk-value" style="color:#10B981">132</div>
+              <div class="mk-value" style="color:#2DD4A0">132</div>
             </div>
             <div class="mk">
               <div class="mk-label">Funded Volume</div>
-              <div class="mk-value" style="color:#F59E0B">$167K</div>
+              <div class="mk-value" style="color:#FBBF24">$167K</div>
             </div>
             <div class="mk">
               <div class="mk-label">Conversion</div>
-              <div class="mk-value" style="color:#8B5CF6">20.8%</div>
+              <div class="mk-value" style="color:#A78BFA">20.8%</div>
             </div>
           </div>
           <div class="month-footer">
@@ -291,24 +291,24 @@
         <a href="jan-2026.html" class="month-card">
           <div class="month-header">
             <div class="month-name">January</div>
-            <span class="month-tag" style="background:#334155;color:#94A3B8">Baseline</span>
+            <span class="month-tag" style="background:#3D5170;color:#A8B8CC">Baseline</span>
           </div>
           <div class="month-kpis">
             <div class="mk">
               <div class="mk-label">Enrollments</div>
-              <div class="mk-value" style="color:#3B82F6">119</div>
+              <div class="mk-value" style="color:#5B9BFF">119</div>
             </div>
             <div class="mk">
               <div class="mk-label">OSR Credited</div>
-              <div class="mk-value" style="color:#10B981">85</div>
+              <div class="mk-value" style="color:#2DD4A0">85</div>
             </div>
             <div class="mk">
               <div class="mk-label">Funded Volume</div>
-              <div class="mk-value" style="color:#F59E0B">$33K</div>
+              <div class="mk-value" style="color:#FBBF24">$33K</div>
             </div>
             <div class="mk">
               <div class="mk-label">Conversion</div>
-              <div class="mk-value" style="color:#8B5CF6">21.4%</div>
+              <div class="mk-value" style="color:#A78BFA">21.4%</div>
             </div>
           </div>
           <div class="month-footer">
@@ -320,7 +320,7 @@
       </div>
       <!-- Show/hide toggle for when 4+ months exist -->
       <div id="showMore" style="display:none;text-align:center;margin-top:16px">
-        <button onclick="toggleOlderMonths()" id="showMoreBtn" style="background:#1E293B;border:1px solid #334155;color:#94A3B8;padding:8px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;font-family:inherit;transition:all .15s">Show older months</button>
+        <button onclick="toggleOlderMonths()" id="showMoreBtn" style="background:#293852;border:1px solid #3D5170;color:#A8B8CC;padding:8px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;font-family:inherit;transition:all .15s">Show older months</button>
       </div>
     </div>
 

@@ -9,28 +9,28 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif; background: #0B0F1A; color: #F1F5F9; min-height: 100vh; }
+    body { font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif; background: #0D1321; color: #F1F5F9; min-height: 100vh; }
     ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: #111827; }
-    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-track { background: #151E2F; }
+    ::-webkit-scrollbar-thumb { background: #3D5170; border-radius: 4px; }
 
-    .header { background: linear-gradient(135deg, #111827 0%, #1a1f35 100%); border-bottom: 1px solid #1E293B; padding: 32px 40px 0; }
-    .home-link { display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#64748B;text-decoration:none;font-weight:500;margin-bottom:12px;transition:color .2s; }
-    .home-link:hover { color:#3B82F6; }
+    .header { background: linear-gradient(135deg, #151E2F 0%, #1a1f35 100%); border-bottom: 1px solid #293852; padding: 32px 40px 0; }
+    .home-link { display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#8494AB;text-decoration:none;font-weight:500;margin-bottom:12px;transition:color .2s; }
+    .home-link:hover { color:#5B9BFF; }
     .home-link svg { width:16px;height:16px; }
     .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
-    .badge { font-size: 11px; font-weight: 700; background: #3B82F6; color: #fff; padding: 3px 10px; border-radius: 6px; letter-spacing: 0.06em; text-transform: uppercase; display: inline-block; }
-    .header-meta { font-size: 13px; color: #64748B; }
+    .badge { font-size: 11px; font-weight: 700; background: #5B9BFF; color: #fff; padding: 3px 10px; border-radius: 6px; letter-spacing: 0.06em; text-transform: uppercase; display: inline-block; }
+    .header-meta { font-size: 13px; color: #8494AB; }
     .header h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; margin: 6px 0 0; }
-    .header-sub { font-size: 14px; color: #94A3B8; margin: 6px 0 0; }
+    .header-sub { font-size: 14px; color: #A8B8CC; margin: 6px 0 0; }
     .updated { text-align: right; }
-    .updated-label { font-size: 12px; color: #64748B; }
-    .updated-date { font-size: 14px; font-weight: 600; color: #94A3B8; }
+    .updated-label { font-size: 12px; color: #8494AB; }
+    .updated-date { font-size: 14px; font-weight: 600; color: #A8B8CC; }
 
     .tabs { display: flex; gap: 0; }
-    .tab { padding: 12px 24px; background: transparent; border: none; border-bottom: 2px solid transparent; color: #64748B; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; font-family: inherit; }
-    .tab.active { border-bottom-color: #3B82F6; color: #F1F5F9; font-weight: 600; }
-    .tab:hover { color: #94A3B8; }
+    .tab { padding: 12px 24px; background: transparent; border: none; border-bottom: 2px solid transparent; color: #8494AB; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+    .tab.active { border-bottom-color: #5B9BFF; color: #F1F5F9; font-weight: 600; }
+    .tab:hover { color: #A8B8CC; }
 
     .content { padding: 32px 40px; max-width: 1400px; margin: 0 auto; }
     .tab-content { display: none; }
@@ -38,15 +38,15 @@
 
     .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 36px; }
     .kpi-grid-4 { grid-template-columns: repeat(4, 1fr); }
-    .kpi { background: #111827; border: 1px solid #1E293B; border-radius: 16px; padding: 24px 28px; display: flex; flex-direction: column; gap: 6px; position: relative; overflow: hidden; }
+    .kpi { background: #151E2F; border: 1px solid #293852; border-radius: 16px; padding: 24px 28px; display: flex; flex-direction: column; gap: 6px; position: relative; overflow: hidden; }
     .kpi-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-    .kpi-label { font-size: 13px; color: #94A3B8; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; }
+    .kpi-label { font-size: 13px; color: #A8B8CC; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; }
     .kpi-value { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
-    .kpi-sub { font-size: 13px; color: #64748B; margin-top: 2px; }
+    .kpi-sub { font-size: 13px; color: #8494AB; margin-top: 2px; }
 
-    .card { background: #111827; border: 1px solid #1E293B; border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+    .card { background: #151E2F; border: 1px solid #293852; border-radius: 16px; padding: 28px; margin-bottom: 24px; }
     .section-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.01em; }
-    .section-sub { font-size: 13px; color: #64748B; margin-bottom: 20px; }
+    .section-sub { font-size: 13px; color: #8494AB; margin-bottom: 20px; }
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
     .grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px; }
@@ -54,75 +54,75 @@
     .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 
     .progress-row { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
-    .progress-label { font-size: 13px; font-weight: 600; color: #94A3B8; flex-shrink: 0; }
-    .progress-track { flex: 1; height: 24px; background: #1E293B; border-radius: 6px; overflow: hidden; }
+    .progress-label { font-size: 13px; font-weight: 600; color: #A8B8CC; flex-shrink: 0; }
+    .progress-track { flex: 1; height: 24px; background: #293852; border-radius: 6px; overflow: hidden; }
     .progress-fill { height: 100%; border-radius: 6px; transition: width 0.8s ease; }
     .progress-value { font-size: 14px; font-weight: 700; width: 30px; text-align: right; flex-shrink: 0; }
 
-    .stat-box { background: #0F172A; border-radius: 12px; padding: 20px; text-align: center; }
-    .stat-box-label { font-size: 11px; color: #64748B; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-box { background: #111B2E; border-radius: 12px; padding: 20px; text-align: center; }
+    .stat-box-label { font-size: 11px; color: #8494AB; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
     .stat-box-value { font-size: 40px; font-weight: 800; }
-    .stat-box-sub { font-size: 12px; color: #64748B; margin-top: 4px; }
+    .stat-box-sub { font-size: 12px; color: #8494AB; margin-top: 4px; }
 
-    .callout { display: flex; gap: 28px; margin-top: 12px; padding: 12px 16px; background: #0F172A; border-radius: 10px; flex-wrap: wrap; }
-    .callout span { font-size: 12px; color: #64748B; }
+    .callout { display: flex; gap: 28px; margin-top: 12px; padding: 12px 16px; background: #111B2E; border-radius: 10px; flex-wrap: wrap; }
+    .callout span { font-size: 12px; color: #8494AB; }
 
     table { width: 100%; border-collapse: separate; border-spacing: 0 4px; }
-    th { text-align: right; padding: 10px 16px; font-size: 11px; font-weight: 600; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #1E293B; }
+    th { text-align: right; padding: 10px 16px; font-size: 11px; font-weight: 600; color: #8494AB; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #293852; }
     th.left { text-align: left; }
     td { padding: 12px 16px; font-size: 13px; }
     tr.stripe { background: rgba(15, 23, 42, 0.3); }
-    .td-rank { color: #64748B; text-align: right; font-weight: 600; }
+    .td-rank { color: #8494AB; text-align: right; font-weight: 600; }
     .td-name { font-weight: 600; text-align: left; }
-    .td-funded { font-size: 14px; font-weight: 700; color: #10B981; text-align: right; font-variant-numeric: tabular-nums; }
+    .td-funded { font-size: 14px; font-weight: 700; color: #2DD4A0; text-align: right; font-variant-numeric: tabular-nums; }
     .td-num { text-align: right; }
-    .td-muted { text-align: right; color: #94A3B8; }
+    .td-muted { text-align: right; color: #A8B8CC; }
     .rate-badge { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 6px; display: inline-block; }
-    .rate-green { background: rgba(16,185,129,0.13); color: #10B981; }
-    .rate-amber { background: rgba(245,158,11,0.13); color: #F59E0B; }
-    .rate-red { background: rgba(239,68,68,0.13); color: #EF4444; }
+    .rate-green { background: rgba(16,185,129,0.13); color: #2DD4A0; }
+    .rate-amber { background: rgba(251,191,36,0.13); color: #FBBF24; }
+    .rate-red { background: rgba(239,68,68,0.13); color: #F87171; }
 
-    .rep-card { background: #111827; border: 1px solid #1E293B; border-radius: 14px; padding: 20px 22px; position: relative; overflow: hidden; }
-    .rep-card-top { position: absolute; top: 10px; right: 12px; font-size: 10px; font-weight: 700; background: #10B981; color: #fff; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.04em; }
+    .rep-card { background: #151E2F; border: 1px solid #293852; border-radius: 14px; padding: 20px 22px; position: relative; overflow: hidden; }
+    .rep-card-top { position: absolute; top: 10px; right: 12px; font-size: 10px; font-weight: 700; background: #2DD4A0; color: #fff; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.04em; }
     .rep-name { font-size: 15px; font-weight: 700; margin-bottom: 14px; }
-    .rep-num { font-size: 36px; font-weight: 800; color: #10B981; }
-    .rep-label { font-size: 13px; color: #64748B; margin-left: 8px; }
+    .rep-num { font-size: 36px; font-weight: 800; color: #2DD4A0; }
+    .rep-label { font-size: 13px; color: #8494AB; margin-left: 8px; }
 
-    .obs-item { display: flex; gap: 12px; padding: 12px 14px; background: #0F172A; border-radius: 10px; margin-bottom: 14px; }
+    .obs-item { display: flex; gap: 12px; padding: 12px 14px; background: #111B2E; border-radius: 10px; margin-bottom: 14px; }
     .obs-icon { font-size: 18px; flex-shrink: 0; }
-    .obs-text { font-size: 13px; color: #94A3B8; line-height: 1.5; }
+    .obs-text { font-size: 13px; color: #A8B8CC; line-height: 1.5; }
 
     .funnel-item { margin-bottom: 12px; }
     .funnel-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
-    .funnel-label { font-size: 13px; color: #94A3B8; }
+    .funnel-label { font-size: 13px; color: #A8B8CC; }
     .funnel-value { font-size: 14px; font-weight: 700; }
-    .funnel-track { height: 16px; background: #1E293B; border-radius: 4px; overflow: hidden; }
+    .funnel-track { height: 16px; background: #293852; border-radius: 4px; overflow: hidden; }
     .funnel-fill { height: 100%; border-radius: 4px; }
 
-    .rep-card:hover { border-color: #334155; transition: border-color 0.2s; }
+    .rep-card:hover { border-color: #3D5170; transition: border-color 0.2s; }
     #chartTopReps, #chartAllReps { cursor: pointer; }
 
     .modal-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:1000; backdrop-filter:blur(4px); justify-content:center; align-items:center; padding:20px; }
     .modal-overlay.open { display:flex; }
-    .modal { background:#111827; border:1px solid #1E293B; border-radius:16px; max-width:700px; width:100%; max-height:85vh; overflow-y:auto; padding:28px; position:relative; }
-    .modal-close { position:absolute; top:16px; right:16px; background:#1E293B; border:none; color:#94A3B8; width:32px; height:32px; border-radius:8px; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; font-family:inherit; }
-    .modal-close:hover { background:#334155; color:#F1F5F9; }
+    .modal { background:#151E2F; border:1px solid #293852; border-radius:16px; max-width:700px; width:100%; max-height:85vh; overflow-y:auto; padding:28px; position:relative; }
+    .modal-close { position:absolute; top:16px; right:16px; background:#293852; border:none; color:#A8B8CC; width:32px; height:32px; border-radius:8px; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; font-family:inherit; }
+    .modal-close:hover { background:#3D5170; color:#F1F5F9; }
     .modal h3 { font-size:20px; font-weight:700; margin-bottom:4px; padding-right:40px; }
-    .modal .modal-sub { font-size:13px; color:#64748B; margin-bottom:20px; }
+    .modal .modal-sub { font-size:13px; color:#8494AB; margin-bottom:20px; }
     .modal-stats { display:flex; gap:16px; margin-bottom:20px; flex-wrap:wrap; }
-    .modal-stat { background:#0F172A; border-radius:10px; padding:12px 16px; flex:1; min-width:120px; }
-    .modal-stat-label { font-size:11px; color:#64748B; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px; }
+    .modal-stat { background:#111B2E; border-radius:10px; padding:12px 16px; flex:1; min-width:120px; }
+    .modal-stat-label { font-size:11px; color:#8494AB; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px; }
     .modal-stat-val { font-size:22px; font-weight:700; }
     .merchant-row { display:flex; justify-content:space-between; align-items:center; padding:12px 14px; border-radius:10px; margin-bottom:6px; }
-    .merchant-row:nth-child(odd) { background:#0F172A; }
+    .merchant-row:nth-child(odd) { background:#111B2E; }
     .merchant-info { flex:1; min-width:0; }
     .merchant-name { font-size:14px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .merchant-loc { font-size:12px; color:#64748B; margin-top:2px; }
+    .merchant-loc { font-size:12px; color:#8494AB; margin-top:2px; }
     .merchant-nums { text-align:right; flex-shrink:0; margin-left:16px; }
-    .merchant-funded { font-size:14px; font-weight:700; color:#10B981; }
-    .merchant-apps { font-size:11px; color:#64748B; margin-top:2px; }
-    .merchant-zero .merchant-funded { color:#64748B; }
-    .no-data-tag { font-size:11px; color:#64748B; background:#1E293B; padding:2px 8px; border-radius:4px; }
+    .merchant-funded { font-size:14px; font-weight:700; color:#2DD4A0; }
+    .merchant-apps { font-size:11px; color:#8494AB; margin-top:2px; }
+    .merchant-zero .merchant-funded { color:#8494AB; }
+    .no-data-tag { font-size:11px; color:#8494AB; background:#293852; padding:2px 8px; border-radius:4px; }
 
     @media (max-width: 768px) {
       .modal { padding:18px; border-radius:12px; max-height:90vh; }
@@ -220,32 +220,32 @@
     <!-- OVERVIEW -->
     <div class="tab-content active" id="overview">
       <div class="kpi-grid">
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#3B82F6,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">46</span><span class="kpi-sub">All sources, Mar 2026</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#10B981,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">31</span><span class="kpi-sub">67.4% of total</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#F59E0B,transparent)"></div><span class="kpi-label">Funded Volume</span><span class="kpi-value">$4,990</span><span class="kpi-sub">7 merchants tracked</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#8B5CF6,transparent)"></div><span class="kpi-label">Funded Apps</span><span class="kpi-value">3</span><span class="kpi-sub">of 18 total apps</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#06B6D4,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">16.7%</span><span class="kpi-sub">Apps → Funded</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">46</span><span class="kpi-sub">All sources, Mar 2026</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">31</span><span class="kpi-sub">67.4% of total</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#FBBF24,transparent)"></div><span class="kpi-label">Funded Volume</span><span class="kpi-value">$4,990</span><span class="kpi-sub">7 merchants tracked</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#A78BFA,transparent)"></div><span class="kpi-label">Funded Apps</span><span class="kpi-value">3</span><span class="kpi-sub">of 18 total apps</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#22D3EE,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">16.7%</span><span class="kpi-sub">Apps → Funded</span></div>
       </div>
       <div class="card">
         <div class="section-title">Daily Enrollment Pace</div>
         <div class="section-sub">Credited enrollments by date — Feb 2026</div>
         <div style="height:240px"><canvas id="chartDaily"></canvas></div>
         <div class="callout">
-          <span><strong style="color:#F59E0B">Peak:</strong> Mar 4 (15 enrollments)</span>
-          <span><strong style="color:#3B82F6">Avg daily:</strong> ~7.8 enrollments/day</span>
+          <span><strong style="color:#FBBF24">Peak:</strong> Mar 4 (15 enrollments)</span>
+          <span><strong style="color:#5B9BFF">Avg daily:</strong> ~7.8 enrollments/day</span>
         </div>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px">
-        <div style="font-size:13px;color:#64748B">Breakdown: <span id="ovScopeLabel" style="color:#E2E8F0;font-weight:600">OSR Credited (31)</span></div>
-        <div style="display:inline-flex;background:#1E293B;border-radius:8px;padding:3px;gap:2px">
-          <button id="ovBtnOsr" onclick="setOverviewScope('osr')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:#3B82F6;color:#fff;transition:all .2s">OSR Credited (31)</button>
-          <button id="ovBtnAll" onclick="setOverviewScope('all')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:transparent;color:#64748B;transition:all .2s">All Enrollments (46)</button>
+        <div style="font-size:13px;color:#8494AB">Breakdown: <span id="ovScopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (31)</span></div>
+        <div style="display:inline-flex;background:#293852;border-radius:8px;padding:3px;gap:2px">
+          <button id="ovBtnOsr" onclick="setOverviewScope('osr')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (31)</button>
+          <button id="ovBtnAll" onclick="setOverviewScope('all')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (46)</button>
         </div>
       </div>
       <div class="grid-2-1">
         <div class="card">
           <div class="section-title">Top 6 Reps by Credits</div>
-          <div class="section-sub">Enrollments credited to OSR · <span style="color:#60A5FA">Click for details</span></div>
+          <div class="section-sub">Enrollments credited to OSR · <span style="color:#7AB8FF">Click for details</span></div>
           <div style="height:260px"><canvas id="chartTopReps"></canvas></div>
         </div>
         <div class="card">
@@ -253,8 +253,8 @@
           <div class="section-sub" id="ovProductSub">EPF product type split</div>
           <div style="height:200px"><canvas id="chartProduct"></canvas></div>
           <div id="ovProductLegend" style="margin-top:12px">
-            <div style="display:flex;align-items:center;gap:10px;font-size:13px;margin-bottom:8px"><div style="width:10px;height:10px;border-radius:3px;background:#3B82F6"></div><span style="color:#94A3B8;flex:1">Lease-to-Own</span><span style="font-weight:600">82</span><span style="color:#64748B;font-size:12px">62.1%</span></div>
-            <div style="display:flex;align-items:center;gap:10px;font-size:13px"><div style="width:10px;height:10px;border-radius:3px;background:#8B5CF6"></div><span style="color:#94A3B8;flex:1">Retail Contract</span><span style="font-weight:600">50</span><span style="color:#64748B;font-size:12px">37.9%</span></div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;margin-bottom:8px"><div style="width:10px;height:10px;border-radius:3px;background:#5B9BFF"></div><span style="color:#A8B8CC;flex:1">Lease-to-Own</span><span style="font-weight:600">82</span><span style="color:#8494AB;font-size:12px">62.1%</span></div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px"><div style="width:10px;height:10px;border-radius:3px;background:#A78BFA"></div><span style="color:#A8B8CC;flex:1">Retail Contract</span><span style="font-weight:600">50</span><span style="color:#8494AB;font-size:12px">37.9%</span></div>
           </div>
         </div>
       </div>
@@ -276,21 +276,21 @@
     <div class="tab-content" id="reps">
       <div class="card">
         <div class="section-title">Credited Enrollments by Rep</div>
-        <div class="section-sub">Enrollments officially credited to each OSR — March 2026 · <span style="color:#60A5FA">Click a bar to view merchant details</span></div>
+        <div class="section-sub">Enrollments officially credited to each OSR — March 2026 · <span style="color:#7AB8FF">Click a bar to view merchant details</span></div>
         <div style="height:480px"><canvas id="chartAllReps"></canvas></div>
       </div>
       <div class="section-title" style="margin-bottom:4px">Individual Rep Scorecards</div>
-      <div class="section-sub" style="margin-bottom:20px">Credited enrollment count per rep · <span style="color:#60A5FA">Tap a card to view merchants</span></div>
+      <div class="section-sub" style="margin-bottom:20px">Credited enrollment count per rep · <span style="color:#7AB8FF">Tap a card to view merchants</span></div>
       <div class="grid-4" id="repCards"></div>
     </div>
 
     <!-- MARKETS -->
     <div class="tab-content" id="markets">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-        <div style="font-size:13px;color:#64748B">Showing <span id="scopeLabel" style="color:#E2E8F0;font-weight:600">OSR Credited (31)</span> enrollments</div>
-        <div style="display:inline-flex;background:#1E293B;border-radius:8px;padding:3px;gap:2px">
-          <button id="btnOsr" onclick="setMarketsScope('osr')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:#3B82F6;color:#fff;transition:all .2s">OSR Credited (31)</button>
-          <button id="btnAll" onclick="setMarketsScope('all')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:#64748B;transition:all .2s">All Enrollments (46)</button>
+        <div style="font-size:13px;color:#8494AB">Showing <span id="scopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (31)</span> enrollments</div>
+        <div style="display:inline-flex;background:#293852;border-radius:8px;padding:3px;gap:2px">
+          <button id="btnOsr" onclick="setMarketsScope('osr')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (31)</button>
+          <button id="btnAll" onclick="setMarketsScope('all')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (46)</button>
         </div>
       </div>
       <div class="grid-2">
@@ -310,9 +310,9 @@
         <div class="section-title">Total vs. Credited Enrollments</div>
         <div class="section-sub">46 total new enrollments, 31 credited to outside sales team</div>
         <div class="grid-3">
-          <div class="stat-box"><div class="stat-box-label">Total New</div><div class="stat-box-value" style="color:#3B82F6">46</div><div class="stat-box-sub">67.4% of total</div></div>
-          <div class="stat-box"><div class="stat-box-label">OSR Credited</div><div class="stat-box-value" style="color:#10B981">31</div><div class="stat-box-sub">77.2% of total</div></div>
-          <div class="stat-box"><div class="stat-box-label">Other Sources</div><div class="stat-box-value" style="color:#F59E0B">15</div><div class="stat-box-sub">32.6% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">Total New</div><div class="stat-box-value" style="color:#5B9BFF">46</div><div class="stat-box-sub">67.4% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">OSR Credited</div><div class="stat-box-value" style="color:#2DD4A0">31</div><div class="stat-box-sub">77.2% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">Other Sources</div><div class="stat-box-value" style="color:#FBBF24">15</div><div class="stat-box-sub">32.6% of total</div></div>
         </div>
       </div>
     </div>
@@ -320,10 +320,10 @@
     <!-- PRODUCTION -->
     <div class="tab-content" id="production">
       <div class="kpi-grid kpi-grid-4">
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#10B981,transparent)"></div><span class="kpi-label">Total Funded</span><span class="kpi-value">$4,990</span><span class="kpi-sub">Across 2 producing merchants</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#3B82F6,transparent)"></div><span class="kpi-label">Avg Ticket</span><span class="kpi-value">$1,663</span><span class="kpi-sub">Per funded application</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#8B5CF6,transparent)"></div><span class="kpi-label">Total Applications</span><span class="kpi-value">18</span><span class="kpi-sub">Across 7 active merchants</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#F59E0B,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">16.7%</span><span class="kpi-sub">3 of 18 apps funded</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Total Funded</span><span class="kpi-value">$4,990</span><span class="kpi-sub">Across 2 producing merchants</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Avg Ticket</span><span class="kpi-value">$1,663</span><span class="kpi-sub">Per funded application</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#A78BFA,transparent)"></div><span class="kpi-label">Total Applications</span><span class="kpi-value">18</span><span class="kpi-sub">Across 7 active merchants</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#FBBF24,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">16.7%</span><span class="kpi-sub">3 of 18 apps funded</span></div>
       </div>
       <div class="card">
         <div class="section-title">Top 15 Producing Merchants</div>
@@ -365,7 +365,7 @@ var marketsScope='osr';
 var isrData=[{"n":"Laura Angulo","v":13},{"n":"Luzmam Vigil","v":6},{"n":"Javier Gonzalez","v":6},{"n":"Katie Anguiano","v":3},{"n":"Michael Palmer","v":2}];
 var dailyTrend=[{"d":"Mar 2","v":2},{"d":"Mar 3","v":6},{"d":"Mar 4","v":15},{"d":"Mar 5","v":8}];
 var topProducers=[{"n":"Ad Modera Living","f":2989.88,"fa":2,"ta":11,"r":"18.2%","o":""},{"n":"Total Automotive & Offroad","f":2000.0,"fa":1,"ta":2,"r":"50.0%","o":""},{"n":"Louetta Tires & Brakes","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":""},{"n":"Direct Tire Co","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":""},{"n":"Auto Repair Pros Lantana 3","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":""},{"n":"Performance Custom Cables","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":""},{"n":"Driven Import Auto Care","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":""}];
-var PC=["#3B82F6","#10B981","#F59E0B","#EF4444","#8B5CF6","#06B6D4","#EC4899","#F97316","#14B8A6","#A855F7","#6366F1","#84CC16"];
+var PC=["#5B9BFF","#2DD4A0","#FBBF24","#F87171","#A78BFA","#22D3EE","#F472B6","#FB923C","#2DD4BF","#C084FC","#818CF8","#A3E635"];
 
 var repMerchants={
 "Claudia Gerhardt":[{"n":"All Auto Pros","b":25426,"l":"Norco, CA","f":0,"fa":0,"ta":0}],
@@ -385,7 +385,7 @@ function openRepModal(name){
   m.forEach(function(x){totalF+=x.f;totalFA+=x.fa;totalTA+=x.ta;if(x.f>0)producing++;});
   document.getElementById('modalRepName').textContent=name;
   document.getElementById('modalRepSub').textContent=m.length+' enrolled merchants \u2022 '+producing+' producing';
-  document.getElementById('modalStats').innerHTML='<div class="modal-stat"><div class="modal-stat-label">Funded Volume</div><div class="modal-stat-val" style="color:#10B981">$'+totalF.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0})+'</div></div><div class="modal-stat"><div class="modal-stat-label">Funded Apps</div><div class="modal-stat-val" style="color:#3B82F6">'+totalFA+'</div></div><div class="modal-stat"><div class="modal-stat-label">Total Apps</div><div class="modal-stat-val" style="color:#8B5CF6">'+totalTA+'</div></div><div class="modal-stat"><div class="modal-stat-label">Producing</div><div class="modal-stat-val" style="color:#F59E0B">'+producing+'/'+m.length+'</div></div>';
+  document.getElementById('modalStats').innerHTML='<div class="modal-stat"><div class="modal-stat-label">Funded Volume</div><div class="modal-stat-val" style="color:#2DD4A0">$'+totalF.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0})+'</div></div><div class="modal-stat"><div class="modal-stat-label">Funded Apps</div><div class="modal-stat-val" style="color:#5B9BFF">'+totalFA+'</div></div><div class="modal-stat"><div class="modal-stat-label">Total Apps</div><div class="modal-stat-val" style="color:#A78BFA">'+totalTA+'</div></div><div class="modal-stat"><div class="modal-stat-label">Producing</div><div class="modal-stat-val" style="color:#FBBF24">'+producing+'/'+m.length+'</div></div>';
   var sorted=m.slice().sort(function(a,b){return b.f-a.f;});
   var h='';sorted.forEach(function(x){
     var cls=x.f>0?'':'merchant-zero';
@@ -399,7 +399,7 @@ function closeModal(){document.getElementById('repModal').classList.remove('open
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
 
 var charts={};
-var ttStyle={backgroundColor:'#1E293B',borderColor:'#334155',borderWidth:1,titleColor:'#94A3B8',bodyColor:'#F1F5F9',padding:12,cornerRadius:10};
+var ttStyle={backgroundColor:'#293852',borderColor:'#3D5170',borderWidth:1,titleColor:'#A8B8CC',bodyColor:'#F1F5F9',padding:12,cornerRadius:10};
 
 function switchTab(id){
   document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
@@ -426,23 +426,23 @@ function initCharts(){
   var e;
   e=document.getElementById('chartDaily');
   if(e&&e.offsetParent!==null){destroyChart('daily');
-    charts.daily=new Chart(e,{type:'line',data:{labels:dailyTrend.map(function(d){return d.d}),datasets:[{data:dailyTrend.map(function(d){return d.v}),borderColor:'#3B82F6',backgroundColor:'rgba(59,130,246,0.1)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#3B82F6',pointHoverRadius:5,pointHoverBorderColor:'#fff',pointHoverBorderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:ttStyle},scales:{x:{grid:{display:false},ticks:{color:'#64748B'}},y:{beginAtZero:true,grid:{color:'#1E293B'},ticks:{color:'#64748B'}}}}});
+    charts.daily=new Chart(e,{type:'line',data:{labels:dailyTrend.map(function(d){return d.d}),datasets:[{data:dailyTrend.map(function(d){return d.v}),borderColor:'#5B9BFF',backgroundColor:'rgba(91,155,255,0.1)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#5B9BFF',pointHoverRadius:5,pointHoverBorderColor:'#fff',pointHoverBorderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:ttStyle},scales:{x:{grid:{display:false},ticks:{color:'#8494AB'}},y:{beginAtZero:true,grid:{color:'#293852'},ticks:{color:'#8494AB'}}}}});
   }
   e=document.getElementById('chartTopReps');
   if(e&&e.offsetParent!==null){destroyChart('topReps');var t6=repCredits.slice(0,6);
-    charts.topReps=new Chart(e,{type:'bar',data:{labels:t6.map(function(r){return r.n}),datasets:[{data:t6.map(function(r){return r.v}),backgroundColor:t6.map(function(_,i){return i===0?'#10B981':'#3B82F6'}),borderRadius:6,barThickness:20}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,onClick:function(evt,els){if(els.length){openRepModal(t6[els[0].index].n);}},plugins:{legend:{display:false},tooltip:ttStyle},scales:{x:{grid:{color:'#1E293B'},ticks:{color:'#64748B'}},y:{grid:{display:false},ticks:{color:'#60A5FA',font:{weight:'600'}}}}}});
+    charts.topReps=new Chart(e,{type:'bar',data:{labels:t6.map(function(r){return r.n}),datasets:[{data:t6.map(function(r){return r.v}),backgroundColor:t6.map(function(_,i){return i===0?'#2DD4A0':'#5B9BFF'}),borderRadius:6,barThickness:20}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,onClick:function(evt,els){if(els.length){openRepModal(t6[els[0].index].n);}},plugins:{legend:{display:false},tooltip:ttStyle},scales:{x:{grid:{color:'#293852'},ticks:{color:'#8494AB'}},y:{grid:{display:false},ticks:{color:'#7AB8FF',font:{weight:'600'}}}}}});
   }
   e=document.getElementById('chartProduct');
   if(e&&e.offsetParent!==null){destroyChart('product');
-    charts.product=new Chart(e,{type:'doughnut',data:{labels:['Lease-to-Own','Retail Contract'],datasets:[{data:[82,50],backgroundColor:['#3B82F6','#8B5CF6'],borderWidth:0,spacing:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false},tooltip:ttStyle}}});
+    charts.product=new Chart(e,{type:'doughnut',data:{labels:['Lease-to-Own','Retail Contract'],datasets:[{data:[82,50],backgroundColor:['#5B9BFF','#A78BFA'],borderWidth:0,spacing:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false},tooltip:ttStyle}}});
   }
   e=document.getElementById('chartAllReps');
   if(e&&e.offsetParent!==null){destroyChart('allReps');
-    charts.allReps=new Chart(e,{type:'bar',data:{labels:repCredits.map(function(r){return r.n}),datasets:[{data:repCredits.map(function(r){return r.v}),backgroundColor:repCredits.map(function(_,i){return i===0?'#10B981':i<3?'#3B82F6':'#60A5FA'}),borderRadius:6,barThickness:20}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,onClick:function(evt,els){if(els.length){openRepModal(repCredits[els[0].index].n);}},plugins:{legend:{display:false},tooltip:ttStyle},scales:{x:{grid:{color:'#1E293B'},ticks:{color:'#64748B'}},y:{grid:{display:false},ticks:{color:'#60A5FA',font:{weight:'600'}}}}}});
+    charts.allReps=new Chart(e,{type:'bar',data:{labels:repCredits.map(function(r){return r.n}),datasets:[{data:repCredits.map(function(r){return r.v}),backgroundColor:repCredits.map(function(_,i){return i===0?'#2DD4A0':i<3?'#5B9BFF':'#7AB8FF'}),borderRadius:6,barThickness:20}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,onClick:function(evt,els){if(els.length){openRepModal(repCredits[els[0].index].n);}},plugins:{legend:{display:false},tooltip:ttStyle},scales:{x:{grid:{color:'#293852'},ticks:{color:'#8494AB'}},y:{grid:{display:false},ticks:{color:'#7AB8FF',font:{weight:'600'}}}}}});
   }
   e=document.getElementById('chartStates');
   if(e&&e.offsetParent!==null){destroyChart('states');
-    charts.states=new Chart(e,{type:'bar',data:{labels:marketData.map(function(m){return m.n}),datasets:[{data:marketData.map(function(m){return m.v}),backgroundColor:marketData.map(function(_,i){return PC[i]}),borderRadius:6,barThickness:28}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:ttStyle},scales:{x:{grid:{display:false},ticks:{color:'#64748B',maxRotation:35}},y:{beginAtZero:true,grid:{color:'#1E293B'},ticks:{color:'#64748B'}}}}});
+    charts.states=new Chart(e,{type:'bar',data:{labels:marketData.map(function(m){return m.n}),datasets:[{data:marketData.map(function(m){return m.v}),backgroundColor:marketData.map(function(_,i){return PC[i]}),borderRadius:6,barThickness:28}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:ttStyle},scales:{x:{grid:{display:false},ticks:{color:'#8494AB',maxRotation:35}},y:{beginAtZero:true,grid:{color:'#293852'},ticks:{color:'#8494AB'}}}}});
   }
   e=document.getElementById('chartIndustry');
   if(e&&e.offsetParent!==null){destroyChart('industry');
@@ -451,7 +451,7 @@ function initCharts(){
 }
 
 // Rep cards
-var rc='';repCredits.forEach(function(r,i){if(r.n==='Outside Sales Mgr')return;rc+='<div class="rep-card" style="cursor:pointer" onclick="openRepModal(\''+r.n.replace(/'/g,"\\'")+'\')">'+(i===0?'<div class="rep-card-top">TOP</div>':'')+'<div class="rep-name" style="color:#60A5FA">'+r.n+' <span style="font-size:11px;color:#64748B">▸</span></div><span class="rep-num">'+r.v+'</span><span class="rep-label">enrollments</span></div>';});
+var rc='';repCredits.forEach(function(r,i){if(r.n==='Outside Sales Mgr')return;rc+='<div class="rep-card" style="cursor:pointer" onclick="openRepModal(\''+r.n.replace(/'/g,"\\'")+'\')">'+(i===0?'<div class="rep-card-top">TOP</div>':'')+'<div class="rep-name" style="color:#7AB8FF">'+r.n+' <span style="font-size:11px;color:#8494AB">▸</span></div><span class="rep-num">'+r.v+'</span><span class="rep-label">enrollments</span></div>';});
 document.getElementById('repCards').innerHTML=rc;
 
 // Production table
@@ -459,7 +459,7 @@ var pt='';topProducers.forEach(function(m,i){var rv=parseFloat(m.r);var cls=rv>=
 document.getElementById('prodTable').innerHTML=pt;
 
 // Funnel
-var fi=[{"l":"Active Merchants","v":7,"w":100,"c":"#3B82F6"},{"l":"Total Applications","v":18,"w":85,"c":"#8B5CF6"},{"l":"Funded Applications","v":3,"w":17,"c":"#10B981"},{"l":"Producing Merchants","v":2,"w":29,"c":"#F59E0B"}];
+var fi=[{"l":"Active Merchants","v":7,"w":100,"c":"#5B9BFF"},{"l":"Total Applications","v":18,"w":85,"c":"#A78BFA"},{"l":"Funded Applications","v":3,"w":17,"c":"#2DD4A0"},{"l":"Producing Merchants","v":2,"w":29,"c":"#FBBF24"}];
 var fh='';fi.forEach(function(s){fh+='<div class="funnel-item"><div class="funnel-header"><span class="funnel-label">'+s.l+'</span><span class="funnel-value" style="color:'+s.c+'">'+s.v+'</span></div><div class="funnel-track"><div class="funnel-fill" style="width:'+s.w+'%;background:linear-gradient(90deg,'+s.c+','+s.c+'88)"></div></div></div>';});
 document.getElementById('funnelArea').innerHTML=fh;
 
@@ -469,7 +469,7 @@ var oh='';obs.forEach(function(o){oh+='<div class="obs-item"><span class="obs-ic
 document.getElementById('observations').innerHTML=oh;
 
 // Industry legend
-var il='';industryData.forEach(function(d,i){il+='<div style="display:flex;align-items:center;gap:8px;font-size:12px"><div style="width:8px;height:8px;border-radius:2px;background:'+PC[i]+';flex-shrink:0"></div><span style="color:#94A3B8">'+d.n+'</span><span style="font-weight:600;margin-left:auto">'+d.v+'</span></div>';});
+var il='';industryData.forEach(function(d,i){il+='<div style="display:flex;align-items:center;gap:8px;font-size:12px"><div style="width:8px;height:8px;border-radius:2px;background:'+PC[i]+';flex-shrink:0"></div><span style="color:#A8B8CC">'+d.n+'</span><span style="font-weight:600;margin-left:auto">'+d.v+'</span></div>';});
 document.getElementById('industryLegend').innerHTML=il;
 
 function setMarketsScope(scope){
@@ -477,22 +477,22 @@ function setMarketsScope(scope){
   var sd=scope==='all'?marketDataFull:marketData;
   var id=scope==='all'?industryDataFull:industryData;
   // Update toggle buttons
-  document.getElementById('btnOsr').style.background=scope==='osr'?'#3B82F6':'transparent';
-  document.getElementById('btnOsr').style.color=scope==='osr'?'#fff':'#64748B';
-  document.getElementById('btnAll').style.background=scope==='all'?'#3B82F6':'transparent';
-  document.getElementById('btnAll').style.color=scope==='all'?'#fff':'#64748B';
+  document.getElementById('btnOsr').style.background=scope==='osr'?'#5B9BFF':'transparent';
+  document.getElementById('btnOsr').style.color=scope==='osr'?'#fff':'#8494AB';
+  document.getElementById('btnAll').style.background=scope==='all'?'#5B9BFF':'transparent';
+  document.getElementById('btnAll').style.color=scope==='all'?'#fff':'#8494AB';
   document.getElementById('scopeLabel').textContent=scope==='all'?'All Enrollments (46)':'OSR Credited (31)';
   document.getElementById('stateSub').textContent=scope==='all'?'All new enrollments across all channels':'Credited sales team enrollments';
   // Rebuild state chart
   destroyChart('states');
   var e=document.getElementById('chartStates');
-  charts.states=new Chart(e,{type:'bar',data:{labels:sd.map(function(m){return m.n}),datasets:[{data:sd.map(function(m){return m.v}),backgroundColor:sd.map(function(_,i){return PC[i%PC.length]}),borderRadius:6,barThickness:28}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:ttStyle},scales:{x:{grid:{display:false},ticks:{color:'#64748B',maxRotation:35}},y:{beginAtZero:true,grid:{color:'#1E293B'},ticks:{color:'#64748B'}}}}});
+  charts.states=new Chart(e,{type:'bar',data:{labels:sd.map(function(m){return m.n}),datasets:[{data:sd.map(function(m){return m.v}),backgroundColor:sd.map(function(_,i){return PC[i%PC.length]}),borderRadius:6,barThickness:28}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:ttStyle},scales:{x:{grid:{display:false},ticks:{color:'#8494AB',maxRotation:35}},y:{beginAtZero:true,grid:{color:'#293852'},ticks:{color:'#8494AB'}}}}});
   // Rebuild industry chart
   destroyChart('industry');
   e=document.getElementById('chartIndustry');
   charts.industry=new Chart(e,{type:'doughnut',data:{labels:id.map(function(d){return d.n}),datasets:[{data:id.map(function(d){return d.v}),backgroundColor:id.map(function(_,i){return PC[i%PC.length]}),borderWidth:0,spacing:2}]},options:{responsive:true,maintainAspectRatio:false,cutout:'50%',plugins:{legend:{display:false},tooltip:ttStyle}}});
   // Rebuild industry legend
-  var il2='';id.forEach(function(d,i){il2+='<div style="display:flex;align-items:center;gap:8px;font-size:12px"><div style="width:8px;height:8px;border-radius:2px;background:'+PC[i%PC.length]+';flex-shrink:0"></div><span style="color:#94A3B8">'+d.n+'</span><span style="font-weight:600;margin-left:auto">'+d.v+'</span></div>';});
+  var il2='';id.forEach(function(d,i){il2+='<div style="display:flex;align-items:center;gap:8px;font-size:12px"><div style="width:8px;height:8px;border-radius:2px;background:'+PC[i%PC.length]+';flex-shrink:0"></div><span style="color:#A8B8CC">'+d.n+'</span><span style="font-weight:600;margin-left:auto">'+d.v+'</span></div>';});
   document.getElementById('industryLegend').innerHTML=il2;
   // Rebuild top 5 markets bars
   bars('marketsOverview',sd.slice(0,5),sd[0].v,PC.slice(0,5),100);
@@ -500,10 +500,10 @@ function setMarketsScope(scope){
 
 function setOverviewScope(scope){
   // Toggle buttons
-  document.getElementById('ovBtnOsr').style.background=scope==='osr'?'#3B82F6':'transparent';
-  document.getElementById('ovBtnOsr').style.color=scope==='osr'?'#fff':'#64748B';
-  document.getElementById('ovBtnAll').style.background=scope==='all'?'#3B82F6':'transparent';
-  document.getElementById('ovBtnAll').style.color=scope==='all'?'#fff':'#64748B';
+  document.getElementById('ovBtnOsr').style.background=scope==='osr'?'#5B9BFF':'transparent';
+  document.getElementById('ovBtnOsr').style.color=scope==='osr'?'#fff':'#8494AB';
+  document.getElementById('ovBtnAll').style.background=scope==='all'?'#5B9BFF':'transparent';
+  document.getElementById('ovBtnAll').style.color=scope==='all'?'#fff':'#8494AB';
   document.getElementById('ovScopeLabel').textContent=scope==='all'?'All Enrollments (46)':'OSR Credited (31)';
   // Top 5 Markets
   var sd=scope==='all'?marketDataFull:marketData;
@@ -514,23 +514,23 @@ function setOverviewScope(scope){
     document.getElementById('ovProductSub').textContent='EPF product type split — all channels';
     destroyChart('product');
     var e=document.getElementById('chartProduct');
-    charts.product=new Chart(e,{type:'doughnut',data:{labels:['Lease-to-Own','Retail Contract'],datasets:[{data:[100,71],backgroundColor:['#3B82F6','#8B5CF6'],borderWidth:0,spacing:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{display:false},tooltip:ttStyle}}});
-    document.getElementById('ovProductLegend').innerHTML='<div style="display:flex;align-items:center;gap:10px;font-size:13px;margin-bottom:8px"><div style="width:10px;height:10px;border-radius:3px;background:#3B82F6"></div><span style="color:#94A3B8;flex:1">Lease-to-Own</span><span style="font-weight:600">100</span><span style="color:#64748B;font-size:12px">58.5%</span></div><div style="display:flex;align-items:center;gap:10px;font-size:13px"><div style="width:10px;height:10px;border-radius:3px;background:#8B5CF6"></div><span style="color:#94A3B8;flex:1">Retail Contract</span><span style="font-weight:600">71</span><span style="color:#64748B;font-size:12px">41.5%</span></div>';
+    charts.product=new Chart(e,{type:'doughnut',data:{labels:['Lease-to-Own','Retail Contract'],datasets:[{data:[100,71],backgroundColor:['#5B9BFF','#A78BFA'],borderWidth:0,spacing:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{display:false},tooltip:ttStyle}}});
+    document.getElementById('ovProductLegend').innerHTML='<div style="display:flex;align-items:center;gap:10px;font-size:13px;margin-bottom:8px"><div style="width:10px;height:10px;border-radius:3px;background:#5B9BFF"></div><span style="color:#A8B8CC;flex:1">Lease-to-Own</span><span style="font-weight:600">100</span><span style="color:#8494AB;font-size:12px">58.5%</span></div><div style="display:flex;align-items:center;gap:10px;font-size:13px"><div style="width:10px;height:10px;border-radius:3px;background:#A78BFA"></div><span style="color:#A8B8CC;flex:1">Retail Contract</span><span style="font-weight:600">71</span><span style="color:#8494AB;font-size:12px">41.5%</span></div>';
   } else {
     document.getElementById('ovProductSub').textContent='EPF product type split';
     destroyChart('product');
     var e=document.getElementById('chartProduct');
-    charts.product=new Chart(e,{type:'doughnut',data:{labels:['Lease-to-Own','Retail Contract'],datasets:[{data:[82,50],backgroundColor:['#3B82F6','#8B5CF6'],borderWidth:0,spacing:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{display:false},tooltip:ttStyle}}});
-    document.getElementById('ovProductLegend').innerHTML='<div style="display:flex;align-items:center;gap:10px;font-size:13px;margin-bottom:8px"><div style="width:10px;height:10px;border-radius:3px;background:#3B82F6"></div><span style="color:#94A3B8;flex:1">Lease-to-Own</span><span style="font-weight:600">82</span><span style="color:#64748B;font-size:12px">62.1%</span></div><div style="display:flex;align-items:center;gap:10px;font-size:13px"><div style="width:10px;height:10px;border-radius:3px;background:#8B5CF6"></div><span style="color:#94A3B8;flex:1">Retail Contract</span><span style="font-weight:600">50</span><span style="color:#64748B;font-size:12px">37.9%</span></div>';
+    charts.product=new Chart(e,{type:'doughnut',data:{labels:['Lease-to-Own','Retail Contract'],datasets:[{data:[82,50],backgroundColor:['#5B9BFF','#A78BFA'],borderWidth:0,spacing:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{display:false},tooltip:ttStyle}}});
+    document.getElementById('ovProductLegend').innerHTML='<div style="display:flex;align-items:center;gap:10px;font-size:13px;margin-bottom:8px"><div style="width:10px;height:10px;border-radius:3px;background:#5B9BFF"></div><span style="color:#A8B8CC;flex:1">Lease-to-Own</span><span style="font-weight:600">82</span><span style="color:#8494AB;font-size:12px">62.1%</span></div><div style="display:flex;align-items:center;gap:10px;font-size:13px"><div style="width:10px;height:10px;border-radius:3px;background:#A78BFA"></div><span style="color:#A8B8CC;flex:1">Retail Contract</span><span style="font-weight:600">50</span><span style="color:#8494AB;font-size:12px">37.9%</span></div>';
   }
 }
 
 // Progress bars
 bars('marketsOverview',marketData.slice(0,5),13,PC.slice(0,5),100);
-bars('isrBars',isrData,13,'#06B6D4',130);
+bars('isrBars',isrData,13,'#22D3EE',130);
 
 // Init
-Chart.defaults.color='#64748B';
+Chart.defaults.color='#8494AB';
 Chart.defaults.font.family="'DM Sans','Segoe UI',system-ui,sans-serif";
 initCharts();
 

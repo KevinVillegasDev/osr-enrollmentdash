@@ -180,12 +180,12 @@ def _replace_monthly_html_kpis(html: str, data: dict) -> str:
 
     # Daily pace callout
     html = re.sub(
-        r'(<strong style="color:#F59E0B">Peak:</strong>)[^<]+(</span>)',
+        r'(<strong style="color:#FBBF24">Peak:</strong>)[^<]+(</span>)',
         rf'\1 {kpi["peak_day"]} ({kpi["peak_day_count"]} enrollments)\2',
         html
     )
     html = re.sub(
-        r'(<strong style="color:#3B82F6">Avg daily:</strong>)[^<]+(</span>)',
+        r'(<strong style="color:#5B9BFF">Avg daily:</strong>)[^<]+(</span>)',
         rf'\1 ~{kpi["avg_daily"]} enrollments/day\2',
         html
     )
@@ -719,19 +719,19 @@ def _generate_month_card_html(card: dict, tag_html: str = "") -> str:
           <div class="month-kpis">
             <div class="mk">
               <div class="mk-label">Enrollments</div>
-              <div class="mk-value" style="color:#3B82F6">{card["kpi_total"]}</div>
+              <div class="mk-value" style="color:#5B9BFF">{card["kpi_total"]}</div>
             </div>
             <div class="mk">
               <div class="mk-label">OSR Credited</div>
-              <div class="mk-value" style="color:#10B981">{card["kpi_osr"]}</div>
+              <div class="mk-value" style="color:#2DD4A0">{card["kpi_osr"]}</div>
             </div>
             <div class="mk">
               <div class="mk-label">Funded Volume</div>
-              <div class="mk-value" style="color:#F59E0B">{card["kpi_funded_short"]}</div>
+              <div class="mk-value" style="color:#FBBF24">{card["kpi_funded_short"]}</div>
             </div>
             <div class="mk">
               <div class="mk-label">Conversion</div>
-              <div class="mk-value" style="color:#8B5CF6">{card["kpi_conversion"]}</div>
+              <div class="mk-value" style="color:#A78BFA">{card["kpi_conversion"]}</div>
             </div>
           </div>
           <div class="month-footer">
@@ -761,7 +761,7 @@ def _generate_month_cards_html(month_cards: list) -> str:
             tag = '<span class="month-tag tag-latest">Latest</span>'
         elif card["key"] == "jan-2026":
             # January 2026 always gets "Baseline" badge
-            tag = '<span class="month-tag" style="background:#334155;color:#94A3B8">Baseline</span>'
+            tag = '<span class="month-tag" style="background:#3D5170;color:#A8B8CC">Baseline</span>'
         else:
             tag = ""
 
@@ -817,13 +817,13 @@ def update_index_page(filepath: str, data: dict) -> bool:
 
     # ── YTD Summary ──────────────────────────────────────────────────────
     # Total Enrollments
-    html = _replace_sb_value(html, "#3B82F6", str(data["ytd_total_enrollments"]), "All channels")
+    html = _replace_sb_value(html, "#5B9BFF", str(data["ytd_total_enrollments"]), "All channels")
     # OSR Credited
-    html = _replace_sb_value(html, "#10B981", str(data["ytd_osr_credited"]), data["ytd_credit_pct"])
+    html = _replace_sb_value(html, "#2DD4A0", str(data["ytd_osr_credited"]), data["ytd_credit_pct"])
     # Funded Volume
-    html = _replace_sb_value(html, "#F59E0B", data["ytd_funded_display"], data["ytd_funded_sub"])
+    html = _replace_sb_value(html, "#FBBF24", data["ytd_funded_display"], data["ytd_funded_sub"])
     # Months Tracked
-    html = _replace_sb_value(html, "#8B5CF6", str(data["ytd_months_tracked"]), data["ytd_months_sub"])
+    html = _replace_sb_value(html, "#A78BFA", str(data["ytd_months_tracked"]), data["ytd_months_sub"])
 
     # ── Commission Tracking Card ─────────────────────────────────────────
     cohort = data.get("cohort", {})
@@ -833,15 +833,15 @@ def update_index_page(filepath: str, data: dict) -> bool:
     if active:
         # Active cohort funded (unique green in Commission Tracking section)
         html = _replace_nth_mk_value(html, 0, active.get("total_funded_display", "$0"),
-                                     color="#10B981", section_start="Commission Tracking")
+                                     color="#2DD4A0", section_start="Commission Tracking")
     if baseline:
         # Baseline cohort funded (unique blue in Commission Tracking section)
         html = _replace_nth_mk_value(html, 0, baseline.get("total_funded_display", "$0"),
-                                     color="#3B82F6", section_start="Commission Tracking")
+                                     color="#5B9BFF", section_start="Commission Tracking")
     if active:
         # At $15K Target (first amber in Commission Tracking section)
         html = _replace_nth_mk_value(html, 0, active.get("at_target_display", "0 / 0"),
-                                     color="#F59E0B", section_start="Commission Tracking")
+                                     color="#FBBF24", section_start="Commission Tracking")
 
     # ── Q1 Enrollment Compliance Card ────────────────────────────────────
     # Find the current quarter label in the HTML (may be Q1, Q2, etc.)
@@ -854,13 +854,13 @@ def update_index_page(filepath: str, data: dict) -> bool:
 
     # Update KPI values (using current Q-section text for matching)
     html = _replace_nth_mk_value(html, 0, str(data["q1_total"]),
-                                 color="#8B5CF6", section_start=q_section)
+                                 color="#A78BFA", section_start=q_section)
     html = _replace_nth_mk_value(html, 0, data["q1_at_target"],
-                                 color="#10B981", section_start=q_section)
+                                 color="#2DD4A0", section_start=q_section)
     html = _replace_nth_mk_value(html, 0, str(data["q1_months_under_10"]),
-                                 color="#F59E0B", section_start=q_section)
+                                 color="#FBBF24", section_start=q_section)
     html = _replace_nth_mk_value(html, 0, data["q1_days_remaining"],
-                                 color="#06B6D4", section_start=q_section)
+                                 color="#22D3EE", section_start=q_section)
 
     # Dynamically update Q-number labels, href, and month name
     html = re.sub(r'href="q\d-enrollment\.html"',
@@ -902,13 +902,13 @@ def update_index_page(filepath: str, data: dict) -> bool:
     # Each color is unique within the Field Activity section, so n=0 for all
     # Use ">Field Activity<" to avoid matching the HTML comment <!-- Field Activity -->
     html = _replace_nth_mk_value(html, 0, str(data["field_total_stops"]),
-                                 color="#06B6D4", section_start=">Field Activity<")
+                                 color="#22D3EE", section_start=">Field Activity<")
     html = _replace_nth_mk_value(html, 0, str(data["field_existing"]),
-                                 color="#3B82F6", section_start=">Field Activity<")
+                                 color="#5B9BFF", section_start=">Field Activity<")
     html = _replace_nth_mk_value(html, 0, str(data["field_prospect"]),
-                                 color="#F59E0B", section_start=">Field Activity<")
+                                 color="#FBBF24", section_start=">Field Activity<")
     html = _replace_nth_mk_value(html, 0, str(data["field_reps_active"]),
-                                 color="#10B981", section_start=">Field Activity<")
+                                 color="#2DD4A0", section_start=">Field Activity<")
 
     # ── Month Cards ──────────────────────────────────────────────────────
     month_cards_html = _generate_month_cards_html(data.get("month_cards", []))
