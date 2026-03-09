@@ -567,7 +567,8 @@ def _build_field_activity_script(data: dict) -> str:
     lines = []
     lines.append(f"var repActivity={_js_value(data['repActivity'])};")
     lines.append(f"var repStops={_js_value(data['repStops'])};")
-    lines.append(f"var dayFilter='all';")
+    lines.append(f"var rangeStart=null;")
+    lines.append(f"var rangeEnd=null;")
     lines.append(f"var typeFilter='all';")
     lines.append(f"var days={_js_value(data['days'])};")
     lines.append(f"var dayLabels={_js_value(data['dayLabels'])};")
