@@ -396,14 +396,58 @@ function updateKPIs(){
 }
 
 
+function getActiveDays(){
+  return days.filter(function(d){return isInRange(d)});
+}
+
+function groupByWeek(daily,activeDays){
+  var weeks=[],weekMap={},weekOrder=[];
+  var dayAbbr=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  activeDays.forEach(function(dateStr){
+    var p=dateStr.split('/');
+    var dt=new Date(parseInt(p[2]),parseInt(p[0])-1,parseInt(p[1]));
+    // Find Monday of this week
+    var dow=dt.getDay();
+    var diff=dow===0?6:dow-1;
+    var mon=new Date(dt);
+    mon.setDate(dt.getDate()-diff);
+    var wk=mon.getMonth()+'/'+mon.getDate()+'/'+mon.getFullYear();
+    if(!weekMap[wk]){
+      weekMap[wk]={count:0,monday:mon};
+      weekOrder.push(wk);
+    }
+    weekMap[wk].count+=(daily[dateStr]||0);
+  });
+  // Sort by date and assign labels
+  weekOrder.sort(function(a,b){return weekMap[a].monday-weekMap[b].monday});
+  return weekOrder.map(function(k,i){
+    var m=weekMap[k].monday;
+    var fri=new Date(m);fri.setDate(m.getDate()+4);
+    var label=(m.getMonth()+1)+'/'+m.getDate()+'-'+(fri.getMonth()+1)+'/'+fri.getDate();
+    return {count:weekMap[k].count,label:label,idx:i+1};
+  });
+}
+
 function render(){
-  var maxDaily=0;
+  var activeDays=getActiveDays();
+  var barMode=activeDays.length<=1?'none':activeDays.length<=7?'daily':'weekly';
+
   var filtered=repActivity.map(function(d){return getFilteredRep(d)});
   filtered.sort(function(a,b){return b.t-a.t});
-  filtered.forEach(function(d){
-    days.forEach(function(day){if(d.daily[day]>maxDaily) maxDaily=d.daily[day]});
-  });
-  if(maxDaily===0) maxDaily=1;
+
+  // Compute max for scaling
+  var maxBar=0;
+  if(barMode==='daily'){
+    filtered.forEach(function(d){
+      activeDays.forEach(function(day){var c=d.daily[day]||0;if(c>maxBar)maxBar=c});
+    });
+  } else if(barMode==='weekly'){
+    filtered.forEach(function(d){
+      var wks=groupByWeek(d.daily,activeDays);
+      wks.forEach(function(w){if(w.count>maxBar)maxBar=w.count});
+    });
+  }
+  if(maxBar===0)maxBar=1;
 
   var h='';
   for(var i=0;i<filtered.length;i++){
@@ -432,20 +476,37 @@ function render(){
     }
     h+='</div>';
 
-    h+='<div class="daily-bars">';
-    days.forEach(function(day){
-      var cnt=d.daily[day]||0;
-      var barH=Math.max((cnt/maxDaily)*40,2);
-      var color=cnt>15?'#06B6D4':cnt>10?'#3B82F6':cnt>0?'#1E40AF':'#1E293B';
-      h+='<div class="daily-bar-wrap">';
-      h+='<div class="daily-bar-count">'+(cnt||'-')+'</div>';
-      h+='<div class="daily-bar" style="height:44px">';
-      h+='<div class="daily-bar-fill" style="height:'+barH+'px;background:'+color+'"></div>';
+    if(barMode==='daily'){
+      h+='<div class="daily-bars">';
+      activeDays.forEach(function(day){
+        var cnt=d.daily[day]||0;
+        var barH=Math.max((cnt/maxBar)*40,2);
+        var color=cnt>15?'#06B6D4':cnt>10?'#3B82F6':cnt>0?'#1E40AF':'#1E293B';
+        h+='<div class="daily-bar-wrap">';
+        h+='<div class="daily-bar-count">'+(cnt||'-')+'</div>';
+        h+='<div class="daily-bar" style="height:44px">';
+        h+='<div class="daily-bar-fill" style="height:'+barH+'px;background:'+color+'"></div>';
+        h+='</div>';
+        h+='<div class="daily-bar-label">'+dayLabels[day]+'</div>';
+        h+='</div>';
+      });
       h+='</div>';
-      h+='<div class="daily-bar-label">'+dayLabels[day]+'</div>';
+    } else if(barMode==='weekly'){
+      var wks=groupByWeek(d.daily,activeDays);
+      h+='<div class="daily-bars">';
+      wks.forEach(function(w){
+        var barH=Math.max((w.count/maxBar)*40,2);
+        var color=w.count>60?'#06B6D4':w.count>40?'#3B82F6':w.count>0?'#1E40AF':'#1E293B';
+        h+='<div class="daily-bar-wrap">';
+        h+='<div class="daily-bar-count">'+(w.count||'-')+'</div>';
+        h+='<div class="daily-bar" style="height:44px">';
+        h+='<div class="daily-bar-fill" style="height:'+barH+'px;background:'+color+'"></div>';
+        h+='</div>';
+        h+='<div class="daily-bar-label">'+w.label+'</div>';
+        h+='</div>';
+      });
       h+='</div>';
-    });
-    h+='</div>';
+    }
 
     var stops=getFilteredStops(d.n);
     h+='<div class="expand-hint"><span class="hint-closed">Click to see '+stops.length+' stops</span><span class="hint-open">Click to collapse</span></div>';
