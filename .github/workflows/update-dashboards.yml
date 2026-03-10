@@ -2,10 +2,11 @@ name: Update OSR Dashboards
 
 on:
   schedule:
-    # 7:00 AM CT (13:00 UTC) weekdays — morning refresh
-    - cron: '0 13 * * 1-5'
-    # 11:00 PM CT (05:00 UTC next day) weekdays — end of day capture
-    - cron: '0 5 * * 2-6'
+    # Hourly 5 AM – 6 PM PST (1 PM – 2 AM UTC) weekdays
+    # 1 PM – 11 PM UTC = Mon-Fri
+    - cron: '0 13-23 * * 1-5'
+    # 12 AM – 2 AM UTC = Tue-Sat (still PST weekday evening)
+    - cron: '0 0-2 * * 2-6'
   workflow_dispatch:
     # Manual trigger from GitHub Actions tab
 
