@@ -31,7 +31,8 @@ a:hover{text-decoration:underline}
 
 .rep-card{background:#151E2F;border:1px solid #293852;border-radius:14px;margin-bottom:12px;overflow:hidden;transition:border-color .2s}
 .rep-card:hover{border-color:#3B5FBF}
-.rep-header{padding:16px 20px;cursor:pointer;display:flex;align-items:center;gap:16px}
+.rep-toggle-zone{cursor:pointer}
+.rep-header{padding:16px 20px;display:flex;align-items:center;gap:16px}
 .rep-rank{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
 .rank-1{background:#FBBF24;color:#0D1321}
 .rank-2{background:#A8B8CC;color:#0D1321}
@@ -76,10 +77,11 @@ a:hover{text-decoration:underline}
 .stop-content{flex:1;min-width:0}
 .stop-name{font-size:14px;font-weight:600;margin-bottom:2px}
 .stop-loc{font-size:12px;color:#8494AB;margin-bottom:4px}
-.stop-comment{font-size:13px;color:#A8B8CC;line-height:1.5;max-height:60px;overflow:hidden;transition:max-height .3s;cursor:pointer}
-.stop-comment.open{max-height:2000px}
-.stop-comment-toggle{font-size:11px;color:#22D3EE;cursor:pointer;margin-top:2px;display:none}
-.stop-comment.long~.stop-comment-toggle{display:inline-block}
+.stop-comment{font-size:13px;color:#A8B8CC;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.stop-comment.open{-webkit-line-clamp:unset;overflow:visible}
+.stop-comment-toggle{font-size:12px;color:#22D3EE;cursor:pointer;margin-top:4px;padding:2px 0;display:none;font-weight:500}
+.stop-comment-toggle:hover{color:#67E8F9;text-decoration:underline}
+.stop-comment.clamped~.stop-comment-toggle{display:inline-block}
 
 .legend{display:flex;gap:20px;justify-content:center;margin-bottom:24px;font-size:12px;color:#8494AB}
 .legend-item{display:flex;align-items:center;gap:6px}
@@ -456,7 +458,8 @@ function render(){
     var exPct=d.t>0?(d.ex/d.t*100):0;
     var prPct=100-exPct;
 
-    h+='<div class="rep-card" onclick="toggleRep(this)">';
+    h+='<div class="rep-card">';
+    h+='<div class="rep-toggle-zone" onclick="toggleRep(this.parentElement)">';
     h+='<div class="rep-header">';
     h+='<div class="rep-rank '+rankClass+'">'+(i+1)+'</div>';
     h+='<div class="rep-info">';
@@ -510,6 +513,7 @@ function render(){
 
     var stops=getFilteredStops(d.n);
     h+='<div class="expand-hint"><span class="hint-closed">Click to see '+stops.length+' stops</span><span class="hint-open">Click to collapse</span></div>';
+    h+='</div>'; // close rep-toggle-zone
 
     h+='<div class="rep-stops">';
     for(var j=0;j<stops.length;j++){
@@ -531,8 +535,8 @@ function render(){
       h+='<div class="stop-name">'+s.n+'</div>';
       if(s.l) h+='<div class="stop-loc">'+s.l+'</div>';
       if(comment){
-        h+='<div class="stop-comment'+(isLong?' long':'')+'" onclick="event.stopPropagation();this.classList.toggle(\'open\')">'+comment+'</div>';
-        if(isLong) h+='<span class="stop-comment-toggle" onclick="event.stopPropagation();this.previousElementSibling.classList.toggle(\'open\')">show more</span>';
+        h+='<div class="stop-comment">'+comment+'</div>';
+        h+='<span class="stop-comment-toggle" onclick="toggleComment(this)">show more</span>';
       }
       h+='</div></div>';
     }
@@ -541,7 +545,20 @@ function render(){
   document.getElementById('repCards').innerHTML=h;
 }
 
-function toggleRep(el){el.classList.toggle('expanded');}
+function toggleComment(toggle){
+  var comment=toggle.previousElementSibling;
+  comment.classList.toggle('open');
+  toggle.textContent=comment.classList.contains('open')?'show less':'show more';
+}
+
+function toggleRep(el){
+  el.classList.toggle('expanded');
+  if(el.classList.contains('expanded')){
+    el.querySelectorAll('.stop-comment').forEach(function(c){
+      if(c.scrollHeight>c.clientHeight) c.classList.add('clamped');
+    });
+  }
+}
 
 function calcGapMinutes(t1,t2){
   // Parse "5:40 AM" / "12:30 PM" into minutes since midnight
