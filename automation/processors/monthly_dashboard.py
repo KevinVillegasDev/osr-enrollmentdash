@@ -190,11 +190,19 @@ def process(all_enrollments: list[dict], credited_enrollments: list[dict],
 
     # ── topProducers: Top 15 merchants by funded volume ──────────────────
     # Build from all enrollments (not just credited) with activity data
+    # Report 1 doesn't have OSR credit, so look it up from credited_enrollments
+    branch_to_osr = {}
+    for row in credited_enrollments:
+        b = _get(row, "branch_id", "")
+        o = _get(row, "osr_credit", "")
+        if b and o:
+            branch_to_osr[b] = o
+
     all_merchants_with_funding = []
     for row in all_enrollments:
         name = _get(row, "merchant_name", "Unknown")
         branch = _get(row, "branch_id", "")
-        osr = _get(row, "osr_credit", "")
+        osr = branch_to_osr.get(branch, "")
 
         activity = merchant_activity.get(branch, {"funded": 0, "funded_apps": 0, "total_apps": 0})
         funded = activity["funded"]
