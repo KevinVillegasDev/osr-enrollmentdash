@@ -51,6 +51,7 @@ a:hover{text-decoration:underline}
 .kpi-trend-change.down{background:rgba(248,113,113,0.12);color:#F87171}
 .kpi-trend-change.neutral{background:rgba(132,148,171,0.12);color:#8494AB}
 .kpi-trend-prev{font-size:12px;color:#627289;margin-top:6px}
+.kpi-trend-ctx{font-size:11px;color:#FBBF24;margin-top:6px;line-height:1.4;font-style:italic;opacity:0.85}
 .kpi-info{position:absolute;top:14px;right:14px;width:18px;height:18px;border-radius:50%;background:rgba(132,148,171,0.15);color:#627289;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:help;transition:all 0.2s;line-height:1}
 .kpi-info:hover{background:rgba(132,148,171,0.3);color:#A8B8CC}
 .kpi-tooltip{display:none;position:absolute;top:36px;right:8px;background:#1E293B;border:1px solid #3D5170;border-radius:10px;padding:10px 14px;font-size:12px;color:#A8B8CC;line-height:1.5;width:220px;z-index:10;box-shadow:0 8px 24px rgba(0,0,0,0.4);font-weight:400;text-transform:none;letter-spacing:0}
@@ -264,7 +265,7 @@ a:hover{text-decoration:underline}
   <!-- Top Improvers / Biggest Decliners -->
   <div class="card">
     <div class="section-title">Rep Ranking Movement</div>
-    <div class="section-sub">Month-over-month enrollment change (OSR-credited)</div>
+    <div class="section-sub" id="moversSub">Month-over-month enrollment change (OSR-credited)</div>
     <div class="movers-grid" id="moversGrid"></div>
   </div>
 
@@ -408,11 +409,36 @@ function pctChange(curr,prev){
 function renderKPITrends(){
   var curr=monthlyKPIs[monthlyKPIs.length-1];
   var prev=monthlyKPIs.length>1?monthlyKPIs[monthlyKPIs.length-2]:null;
+  var daysElapsed=dailyPaceCurrent.length;
+  var prevDays=dailyPacePrevious.length;
+  var isMidMonth=bizDaysLeft>3;
+
+  // Build contextual caveats per KPI
+  var enrollCtx='';
+  var fundedCtx='';
+  var convCtx='';
+  var ticketCtx='';
+  if(isMidMonth&&prev){
+    enrollCtx=daysElapsed+' biz days in vs '+previousMonthLabel+'\'s full '+prevDays;
+    fundedCtx=daysElapsed+' biz days in — '+previousMonthLabel+' was a full month';
+  }
+  if(prev&&curr.totalApps>0&&prev.totalApps>0){
+    convCtx=curr.fundedApps+' of '+curr.totalApps+' apps vs '+prev.fundedApps+' of '+prev.totalApps+' last month';
+  }else if(prev&&curr.totalApps>0&&prev.totalApps===0){
+    convCtx='Based on '+curr.totalApps+' total apps ('+previousMonthLabel+' app data unavailable)';
+  }
+  if(prev&&curr.fundedApps>0&&prev.fundedApps>0){
+    var currSample=curr.fundedApps;var prevSample=prev.fundedApps;
+    if(currSample<prevSample*0.5) ticketCtx='Small sample: '+currSample+' funded apps vs '+prevSample+' in '+previousMonthLabel;
+  }else if(curr.fundedApps>0&&prev&&prev.fundedApps===0){
+    ticketCtx='Based on '+curr.fundedApps+' funded apps ('+previousMonthLabel+' data unavailable)';
+  }
+
   var items=[
-    {label:"OSR Enrollments",value:curr.credited,prev:prev?prev.credited:0,format:fmtN,color:"#5B9BFF",tip:"Merchants enrolled and credited to an outside sales rep this month. Does not include non-OSR channel enrollments."},
-    {label:"Funded Volume",value:curr.funded,prev:prev?prev.funded:0,format:fmt,color:"#2DD4A0",tip:"Total dollar amount of financed transactions processed by this month\u2019s enrolled merchants (Month 0 activity only)."},
-    {label:"Conversion Rate",value:curr.convRate,prev:prev?prev.convRate:0,format:function(v){return v+"%"},color:"#A78BFA",suffix:"%",tip:"Funded applications \u00f7 total applications submitted. Higher = better quality enrollments converting to revenue."},
-    {label:"Avg Ticket",value:curr.avgTicket,prev:prev?prev.avgTicket:0,format:function(v){return '$'+fmtN(Math.round(v))},color:"#FBBF24",tip:"Average funded dollar amount per application. Funded volume \u00f7 funded application count."}
+    {label:"OSR Enrollments",value:curr.credited,prev:prev?prev.credited:0,format:fmtN,color:"#5B9BFF",tip:"Merchants enrolled and credited to an outside sales rep this month. Does not include non-OSR channel enrollments.",ctx:enrollCtx},
+    {label:"Funded Volume",value:curr.funded,prev:prev?prev.funded:0,format:fmt,color:"#2DD4A0",tip:"Total dollar amount of financed transactions processed by this month\u2019s enrolled merchants (Month 0 activity only).",ctx:fundedCtx},
+    {label:"Conversion Rate",value:curr.convRate,prev:prev?prev.convRate:0,format:function(v){return v+"%"},color:"#A78BFA",suffix:"%",tip:"Funded applications \u00f7 total applications submitted. Higher = better quality enrollments converting to revenue.",ctx:convCtx},
+    {label:"Avg Ticket",value:curr.avgTicket,prev:prev?prev.avgTicket:0,format:function(v){return '$'+fmtN(Math.round(v))},color:"#FBBF24",tip:"Average funded dollar amount per application. Funded volume \u00f7 funded application count.",ctx:ticketCtx}
   ];
   var h='';
   items.forEach(function(it){
@@ -423,6 +449,7 @@ function renderKPITrends(){
     h+='<div class="kpi-trend-value" style="color:'+it.color+'">'+it.format(it.value)+'</div>';
     h+='<span class="kpi-trend-change '+ch.cls+'">'+ch.val+' vs '+previousMonthLabel+'</span>';
     h+='<div class="kpi-trend-prev">'+previousMonthLabel+': '+it.format(it.prev)+'</div>';
+    if(it.ctx)h+='<div class="kpi-trend-ctx">'+it.ctx+'</div>';
     h+='</div>';
   });
   document.getElementById('kpiTrendCards').innerHTML=h;
@@ -440,13 +467,27 @@ function generateInsights(){
   var fundedChange=((curr.funded-prev.funded)/prev.funded*100);
 
   var trendText='';
+  var isMidMonth=bizDaysLeft>3;
   if(Math.abs(convChange)>50){
     trendText='Conversion rate moved from <b>'+prev.convRate+'%</b> to <b>'+curr.convRate+'%</b> — a <b class="num">'+Math.abs(Math.round(convChange))+'%</b> '+(convChange>0?'improvement':'decline')+' month-over-month. ';
-    if(curr.convRate>prev.convRate)trendText+='Fewer enrollments but higher quality — merchants are converting at nearly double the rate.';
-    else trendText+='This may indicate a quality issue with new enrollments.';
+    // Add critical volume context
+    if(curr.totalApps>0&&prev.totalApps>0){
+      trendText+='<b>Important context:</b> This is based on <b class="num">'+curr.totalApps+' applications</b> vs '+previousMonthLabel+'\'s <b class="num">'+prev.totalApps+'</b>. ';
+      if(curr.totalApps<prev.totalApps*0.5){
+        trendText+='The much smaller sample size means this rate could shift significantly as more merchants submit apps. ';
+      }
+    }
+    if(convChange>0&&isMidMonth)trendText+='Early conversions often skew higher — monitor as volume grows through month-end.';
+    else if(convChange<0)trendText+='This may indicate a quality issue with new enrollments.';
   }else{
     trendText='Enrollment volume '+(enrollChange<0?'declined':'grew')+' by <b class="num">'+Math.abs(Math.round(enrollChange))+'%</b> month-over-month ('+prev.credited+' &#8594; '+curr.credited+'). ';
-    trendText+='Funded volume is at <b>'+fmt(curr.funded)+'</b> vs <b>'+fmt(prev.funded)+'</b> last month.';
+    if(isMidMonth){
+      var daysElapsed=dailyPaceCurrent.length;
+      trendText+='Note: '+currentMonthLabel+' is only <b class="num">'+daysElapsed+' biz days</b> in vs '+previousMonthLabel+'\'s full month. ';
+    }
+    trendText+='Funded volume is at <b>'+fmt(curr.funded)+'</b> vs <b>'+fmt(prev.funded)+'</b> last month';
+    if(isMidMonth)trendText+=' (month still in progress)';
+    trendText+='.';
   }
   document.getElementById('insightTrend').innerHTML='<div class="insight insight-trend"><div class="insight-header">Key Trend</div><div class="insight-body">'+trendText+'</div></div>';
 
@@ -457,8 +498,12 @@ function generateInsights(){
   var atRisk=repTrends.filter(function(r){return r.q1<r.target});
   var zeroThisMonth=repTrends.filter(function(r){return r[curKey]===0});
   var watchText='';
+  var daysElapsed=dailyPaceCurrent.length;
   if(currAvg<prevAvg*0.8){
     watchText=currentMonthLabel+' daily enrollment pace is <b class="num">'+currAvg.toFixed(1)+'/day</b> vs '+previousMonthLabel+'\'s <b class="num">'+prevAvg.toFixed(1)+'/day</b>. ';
+    // Add context: how many enrollments would match last month at this pace?
+    var projectedAtPace=Math.round(currAvg*(daysElapsed+bizDaysLeft));
+    watchText+='At current pace, '+currentMonthLabel+' would finish around <b class="num">'+projectedAtPace+' credited</b> vs '+previousMonthLabel+'\'s <b class="num">'+prev.credited+'</b>. ';
   }
   watchText+='<b class="num">'+atRisk.length+' of '+repTrends.length+'</b> reps are behind on Q1 targets.';
   if(zeroThisMonth.length>0){
@@ -485,9 +530,11 @@ function generateInsights(){
   if(marketTrends.length>0&&prev){
     var prevKey=prev.key;
     var growing=marketTrends.filter(function(m){return m[curKey]>0&&m[prevKey]>0}).sort(function(a,b){return (b[curKey]-b[prevKey])-(a[curKey]-a[prevKey])});
-    var shrinking=marketTrends.filter(function(m){return m[prevKey]>0}).sort(function(a,b){return (a[curKey]-a[prevKey])-(b[curKey]-b[prevKey])});
     if(growing.length>0&&growing[0][curKey]>growing[0][prevKey]){
-      brightText+=' <b>'+growing[0].state+'</b> is the top growing market ('+growing[0][prevKey]+' &#8594; '+growing[0][curKey]+').';
+      var gm=growing[0];
+      brightText+=' <b>'+gm.state+'</b> is the top growing market ('+gm[prevKey]+' &#8594; '+gm[curKey];
+      if(isMidMonth)brightText+=', '+currentMonthLabel+' still in progress';
+      brightText+=').';
     }
   }
   document.getElementById('insightBright').innerHTML='<div class="insight insight-bright"><div class="insight-header">Bright Spot</div><div class="insight-body">'+brightText+'</div></div>';
@@ -635,6 +682,10 @@ function renderMovers(){
   }
   h+='</div>';
   document.getElementById('moversGrid').innerHTML=h;
+  // Add mid-month context to subtitle
+  if(bizDaysLeft>3){
+    document.getElementById('moversSub').textContent=currentMonthLabel+' ('+dailyPaceCurrent.length+' biz days) vs '+previousMonthLabel+' (full month) \u2014 expect declines to narrow as month progresses';
+  }
 }
 
 /* ---- Rep Mini Charts ---- */
@@ -725,7 +776,16 @@ function renderFunnel(){
   // Opportunity insight
   var enrolled=funnelData[0].v;var withApps=funnelData[2].v;var noApps=enrolled-withApps;
   if(noApps>0){
-    var txt='<b class="num">'+noApps+' merchants</b> enrolled but have not submitted a single application yet. These are the lowest-friction conversions — they\'re already in the system. If even half start submitting at average rates, funded volume could increase significantly.';
+    var isMidMonth=bizDaysLeft>3;
+    var txt='<b class="num">'+noApps+' of '+enrolled+' merchants</b> enrolled this month have not submitted a single application yet. ';
+    if(isMidMonth){
+      var daysElapsed=dailyPaceCurrent.length;
+      txt+='With <b class="num">'+bizDaysLeft+' biz days</b> remaining, many recent enrollees may not have had time to onboard and submit their first app. ';
+      txt+='Still, these are the lowest-friction conversions — they\'re already in the system. ';
+    }else{
+      txt+='These are the lowest-friction conversions — they\'re already in the system. ';
+    }
+    txt+='If even half start submitting at average rates, funded volume could increase significantly.';
     document.getElementById('insightOpportunity').innerHTML='<div class="insight insight-bright"><div class="insight-header">Key Opportunity</div><div class="insight-body">'+txt+'</div></div>';
   }
 }
@@ -840,10 +900,24 @@ function renderBottomLine(){
   var prev=monthlyKPIs.length>1?monthlyKPIs[monthlyKPIs.length-2]:null;
   var atTarget=repTrends.filter(function(r){return r.q1>=r.target}).length;
   var febAtTarget=febCohortReps.filter(function(r){return r.f>=15000}).length;
+  var daysElapsed=dailyPaceCurrent.length;
+  var isMidMonth=bizDaysLeft>3;
   var txt='';
-  txt+=currentMonthLabel+' enrollment volume is running <b>significantly below</b> '+previousMonthLabel+' ';
-  txt+='(<b class="num">'+curr.credited+'</b> vs <b class="num">'+(prev?prev.credited:'—')+'</b> credited), ';
-  txt+='but conversion quality is <b>much stronger</b> at <b class="num">'+curr.convRate+'%</b>. ';
+  if(isMidMonth&&prev){
+    txt+=currentMonthLabel+' is <b class="num">'+daysElapsed+' biz days</b> in with <b class="num">'+bizDaysLeft+' remaining</b>. ';
+    txt+='OSR enrollments are at <b class="num">'+curr.credited+'</b> vs '+previousMonthLabel+'\'s full-month <b class="num">'+prev.credited+'</b>. ';
+  }else{
+    txt+=currentMonthLabel+' enrollment volume is running <b>significantly below</b> '+previousMonthLabel+' ';
+    txt+='(<b class="num">'+curr.credited+'</b> vs <b class="num">'+(prev?prev.credited:'\u2014')+'</b> credited). ';
+  }
+  // Conversion with volume context
+  if(curr.convRate>0&&prev&&prev.convRate>0){
+    txt+='Conversion rate is at <b class="num">'+curr.convRate+'%</b> vs '+previousMonthLabel+'\'s <b class="num">'+prev.convRate+'%</b>';
+    if(curr.totalApps>0&&prev.totalApps>0&&curr.totalApps<prev.totalApps*0.5){
+      txt+=' — but on just <b class="num">'+curr.totalApps+' apps</b> vs <b class="num">'+prev.totalApps+'</b>';
+    }
+    txt+='. ';
+  }
   txt+='<b class="num">'+atTarget+' of '+repTrends.length+'</b> reps have already hit Q1 enrollment targets. ';
   txt+='On the commission side, <b class="num">'+febAtTarget+' of '+febCohortReps.length+'</b> reps have Feb cohorts at or above the $15K M1 threshold. ';
   txt+='<b>Priority actions:</b> Drive enrollment volume in the final '+bizDaysLeft+' business days of '+currentMonthLabel+', ';
