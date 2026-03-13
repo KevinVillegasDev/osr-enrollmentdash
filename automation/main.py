@@ -466,6 +466,24 @@ def _extract_monthly_from_html(month: int, year: int) -> dict | None:
         else:
             funded_short = f"${int(funded_amount)}"
 
+        # Extract funded apps from KPI HTML: "Funded Apps ... <value>81</value> ... of 390 total apps"
+        m = re.search(r'Funded Apps</span><span class="kpi-value">(\d+)', html)
+        kpi_funded_apps = int(m.group(1)) if m else 0
+
+        # Extract total apps from "of N total apps" sub-label
+        m = re.search(r'of (\d[\d,]*) total apps', html)
+        kpi_total_apps = int(m.group(1).replace(",", "")) if m else 0
+
+        # Extract avg ticket from Production tab KPI
+        m = re.search(r'Avg Ticket</span><span class="kpi-value">\$([^<]+)', html)
+        kpi_avg_ticket = m.group(1).strip() if m else "0"
+
+        # Extract product mix (LTO, RC) from the doughnut chart legend
+        lto_match = re.search(r'Lease-to-Own</span><span[^>]*>(\d+)', html)
+        rc_match = re.search(r'Retail Contract</span><span[^>]*>(\d+)', html)
+        kpi_lto = int(lto_match.group(1)) if lto_match else 0
+        kpi_rc = int(rc_match.group(1)) if rc_match else 0
+
         # Extract repCredits from JS variable
         rep_credits = _parse_js_array(html, "repCredits")
 
@@ -486,6 +504,10 @@ def _extract_monthly_from_html(month: int, year: int) -> dict | None:
             "kpi_conversion": kpi_conversion,
             "kpi_funded_display": funded_short,
             "kpi_funded_short": funded_short,
+            "kpi_funded_apps": kpi_funded_apps,
+            "kpi_total_apps": kpi_total_apps,
+            "kpi_avg_ticket": kpi_avg_ticket,
+            "osr_product_mix": (kpi_lto, kpi_rc),
             "topProducers": top_producers,
             "repCredits": rep_credits,
             "marketData": market_data,
