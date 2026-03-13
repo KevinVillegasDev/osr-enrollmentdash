@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Analytics & Insights — EasyPay Finance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0D1321;color:#F1F5F9;font-family:'DM Sans','Segoe UI',system-ui,sans-serif;min-height:100vh}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:#151E2F}
+::-webkit-scrollbar-thumb{background:#3D5170;border-radius:4px}
+a{color:#5B9BFF;text-decoration:none}
+a:hover{text-decoration:underline}
+
+.header{background:linear-gradient(135deg,#151E2F 0%,#1a1f35 100%);border-bottom:1px solid #293852;padding:32px 40px 0}
+.home-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#8494AB;margin-bottom:16px;text-decoration:none}
+.home-link:hover{color:#5B9BFF}
+.header-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px}
+.badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;text-transform:uppercase;margin-right:10px}
+.badge-purple{background:#A78BFA;color:#fff}
+.badge-live{background:rgba(45,212,160,0.15);color:#2DD4A0;border:1px solid rgba(45,212,160,0.3)}
+.header-meta{font-size:13px;color:#8494AB}
+.header h1{font-size:28px;font-weight:800;margin-top:8px;letter-spacing:-0.02em}
+.header h1 span{background:linear-gradient(135deg,#A78BFA,#5B9BFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header-sub{font-size:14px;color:#8494AB;margin-top:4px}
+.updated{text-align:right}
+.updated-label{font-size:11px;color:#627289;text-transform:uppercase;letter-spacing:0.05em}
+.updated-date{font-size:15px;font-weight:600;color:#A8B8CC;margin-top:2px}
+
+.tabs{display:flex;gap:0;margin-top:8px}
+.tab{padding:12px 24px;background:transparent;border:none;border-bottom:2px solid transparent;color:#8494AB;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;font-family:inherit}
+.tab:hover{color:#F1F5F9}
+.tab.active{border-bottom-color:#A78BFA;color:#F1F5F9;font-weight:600}
+
+.content{max-width:1280px;margin:0 auto;padding:32px 40px 60px}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* KPI Cards with trend arrows */
+.kpi-trend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+.kpi-trend{background:#151E2F;border:1px solid #293852;border-radius:16px;padding:24px 28px;position:relative;overflow:hidden}
+.kpi-trend-bar{position:absolute;top:0;left:0;right:0;height:3px}
+.kpi-trend-label{font-size:12px;color:#8494AB;font-weight:500;letter-spacing:0.04em;text-transform:uppercase}
+.kpi-trend-value{font-size:32px;font-weight:700;margin:8px 0 4px;letter-spacing:-0.02em}
+.kpi-trend-change{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;padding:2px 8px;border-radius:4px}
+.kpi-trend-change.up{background:rgba(45,212,160,0.12);color:#2DD4A0}
+.kpi-trend-change.down{background:rgba(248,113,113,0.12);color:#F87171}
+.kpi-trend-change.neutral{background:rgba(132,148,171,0.12);color:#8494AB}
+.kpi-trend-prev{font-size:12px;color:#627289;margin-top:6px}
+.kpi-info{position:absolute;top:14px;right:14px;width:18px;height:18px;border-radius:50%;background:rgba(132,148,171,0.15);color:#627289;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:help;transition:all 0.2s;line-height:1}
+.kpi-info:hover{background:rgba(132,148,171,0.3);color:#A8B8CC}
+.kpi-tooltip{display:none;position:absolute;top:36px;right:8px;background:#1E293B;border:1px solid #3D5170;border-radius:10px;padding:10px 14px;font-size:12px;color:#A8B8CC;line-height:1.5;width:220px;z-index:10;box-shadow:0 8px 24px rgba(0,0,0,0.4);font-weight:400;text-transform:none;letter-spacing:0}
+.kpi-info:hover+.kpi-tooltip{display:block}
+
+/* Cards */
+.card{background:#151E2F;border:1px solid #293852;border-radius:16px;padding:28px;margin-bottom:24px}
+.section-title{font-size:20px;font-weight:700;margin-bottom:4px}
+.section-sub{font-size:13px;color:#8494AB;margin-bottom:20px}
+.section-right{float:right;font-size:12px;color:#627289;font-style:italic}
+
+/* Insight callout boxes */
+.insight{border-left:4px solid;border-radius:0 12px 12px 0;padding:18px 22px;margin-bottom:16px;background:rgba(21,30,47,0.8)}
+.insight-header{font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px}
+.insight-body{font-size:14px;color:#A8B8CC;line-height:1.6}
+.insight-body b{color:#F1F5F9}
+.insight-body .num{font-weight:700}
+.insight-trend{border-color:#5B9BFF}.insight-trend .insight-header{color:#5B9BFF}
+.insight-watch{border-color:#FBBF24}.insight-watch .insight-header{color:#FBBF24}
+.insight-bright{border-color:#2DD4A0}.insight-bright .insight-header{color:#2DD4A0}
+.insight-bottom{border-color:#A78BFA;background:rgba(167,139,250,0.06)}.insight-bottom .insight-header{color:#A78BFA}
+
+/* Grids */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid-2-1{display:grid;grid-template-columns:2fr 1fr;gap:24px}
+.grid-1-2{display:grid;grid-template-columns:1fr 2fr;gap:24px}
+
+/* Chart containers */
+.chart-wrap{position:relative;height:300px;margin-top:12px}
+.chart-wrap-sm{height:220px}
+.chart-wrap-lg{height:360px}
+
+/* Weekly trend cards */
+.week-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:16px}
+.week-card{background:#111B2E;border:1px solid #293852;border-radius:12px;padding:16px;text-align:center}
+.week-card.peak{border-color:#2DD4A0;background:rgba(45,212,160,0.05)}
+.week-label{font-size:11px;color:#627289;font-weight:600;text-transform:uppercase;letter-spacing:0.04em}
+.week-value{font-size:24px;font-weight:700;margin:6px 0 2px}
+.week-sub{font-size:11px;color:#8494AB}
+.week-pct{font-size:12px;font-weight:600;margin-top:4px}
+.week-pct.up{color:#2DD4A0}
+.week-pct.down{color:#F87171}
+
+/* Ranking movement */
+.movers-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.mover-col h3{font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.mover-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:10px;margin-bottom:6px}
+.mover-row:nth-child(odd){background:#111B2E}
+.mover-name{font-size:14px;font-weight:600}
+.mover-detail{font-size:12px;color:#8494AB;margin-top:2px}
+.mover-change{font-size:14px;font-weight:700;text-align:right}
+
+/* Rep mini chart cards */
+.rep-mini-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.rep-mini{background:#111B2E;border:1px solid #293852;border-radius:12px;padding:16px}
+.rep-mini-name{font-size:13px;font-weight:700;color:#7AB8FF;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rep-mini-bars{display:flex;align-items:flex-end;gap:4px;height:50px;margin-bottom:8px}
+.rep-mini-bar{flex:1;border-radius:3px 3px 0 0;min-height:2px;transition:height 0.6s ease}
+.rep-mini-stats{display:flex;justify-content:space-between;font-size:11px;color:#8494AB}
+.rep-mini-q1{font-weight:700}
+
+/* Q1 Forecast table */
+.forecast-table{width:100%;border-collapse:separate;border-spacing:0 4px}
+.forecast-table th{text-align:left;padding:10px 14px;font-size:11px;font-weight:600;color:#8494AB;text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid #293852}
+.forecast-table th.right{text-align:right}
+.forecast-table td{padding:12px 14px;font-size:13px}
+.forecast-table tr.stripe{background:rgba(15,23,42,0.3)}
+.status-badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;display:inline-block;white-space:nowrap}
+.status-met{background:rgba(45,212,160,0.13);color:#2DD4A0}
+.status-track{background:rgba(91,155,255,0.13);color:#5B9BFF}
+.status-risk{background:rgba(251,191,36,0.13);color:#FBBF24}
+.status-critical{background:rgba(248,113,113,0.13);color:#F87171}
+
+/* Efficiency bars */
+.eff-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.eff-label{font-size:13px;font-weight:600;color:#A8B8CC;width:160px;flex-shrink:0}
+.eff-track{flex:1;height:22px;background:#293852;border-radius:5px;overflow:hidden;position:relative}
+.eff-fill{height:100%;border-radius:5px;transition:width 0.8s ease}
+.eff-value{font-size:13px;font-weight:700;width:50px;text-align:right;flex-shrink:0}
+
+/* Funnel */
+.funnel-stage{margin-bottom:10px}
+.funnel-head{display:flex;justify-content:space-between;margin-bottom:4px}
+.funnel-label{font-size:13px;color:#A8B8CC}
+.funnel-val{font-size:14px;font-weight:700}
+.funnel-track{height:20px;background:#293852;border-radius:4px;overflow:hidden}
+.funnel-fill{height:100%;border-radius:4px}
+.funnel-drop{font-size:11px;color:#627289;margin-top:3px;padding-left:8px}
+
+/* Cohort health cards */
+.cohort-card{background:#111B2E;border:1px solid #293852;border-radius:14px;padding:22px;margin-bottom:16px}
+.cohort-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.cohort-name{font-size:16px;font-weight:700}
+.cohort-badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px}
+.cohort-badge-active{background:rgba(251,191,36,0.15);color:#FBBF24}
+.cohort-badge-baseline{background:rgba(132,148,171,0.15);color:#8494AB}
+.cohort-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.cohort-kpi{text-align:center}
+.cohort-kpi-val{font-size:22px;font-weight:700}
+.cohort-kpi-label{font-size:11px;color:#8494AB;margin-top:2px}
+.cohort-progress{margin-top:8px}
+.cohort-rep{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.cohort-rep-name{font-size:12px;font-weight:600;color:#A8B8CC;width:140px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cohort-rep-track{flex:1;height:14px;background:#293852;border-radius:3px;overflow:hidden}
+.cohort-rep-fill{height:100%;border-radius:3px}
+.cohort-rep-val{font-size:11px;font-weight:600;width:60px;text-align:right;flex-shrink:0}
+
+/* Projection scenarios */
+.scenario-table{width:100%;border-collapse:collapse;margin-top:12px}
+.scenario-table th{text-align:left;padding:10px 14px;font-size:11px;font-weight:600;color:#8494AB;text-transform:uppercase;border-bottom:1px solid #293852}
+.scenario-table td{padding:10px 14px;font-size:13px;border-bottom:1px solid rgba(41,56,82,0.4)}
+.scenario-label{font-weight:700}
+
+/* Methodology */
+.method-step{display:flex;gap:14px;margin-bottom:16px}
+.method-num{width:28px;height:28px;border-radius:50%;background:#A78BFA;color:#0D1321;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.method-text{font-size:14px;color:#A8B8CC;line-height:1.6}
+.method-text b{color:#F1F5F9}
+.method-calc{display:inline-block;background:rgba(167,139,250,0.12);color:#A78BFA;font-size:12px;font-weight:600;padding:2px 8px;border-radius:4px;margin:2px 4px}
+
+/* Responsive */
+@media(max-width:768px){
+  .header,.content{padding-left:16px;padding-right:16px}
+  .kpi-trend-grid{grid-template-columns:repeat(2,1fr)}
+  .grid-2,.grid-2-1,.grid-1-2,.movers-grid{grid-template-columns:1fr}
+  .tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .rep-mini-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:420px){
+  .kpi-trend-grid{grid-template-columns:1fr}
+  .rep-mini-grid{grid-template-columns:1fr}
+  .header h1{font-size:20px}
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <a href="index.html" class="home-link">&#8592; Dashboard Hub</a>
+  <div class="header-top">
+    <div>
+      <span class="badge badge-purple">New</span>
+      <span class="badge badge-live">Live</span>
+      <span class="header-meta">Q1 2026</span>
+      <h1>Analytics & <span>Insights</span></h1>
+      <p class="header-sub">Month-over-month trends, rep analytics, production forecasts &amp; actionable intelligence</p>
+    </div>
+    <div class="updated">
+      <div class="updated-label">Data through</div>
+      <div class="updated-date" id="lastUpdated">Mar 13, 2026</div>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('trends')">Trends & Insights</button>
+    <button class="tab" onclick="switchTab('reps')">Rep Analytics</button>
+    <button class="tab" onclick="switchTab('production')">Production & Forecasts</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ===== TAB 1: TRENDS & INSIGHTS ===== -->
+<div class="tab-content active" id="trends">
+
+  <!-- KPI Trend Cards -->
+  <div class="kpi-trend-grid" id="kpiTrendCards"></div>
+
+  <!-- Insight: Key Trend -->
+  <div id="insightTrend"></div>
+
+  <!-- Enrollment Trend Chart -->
+  <div class="card">
+    <div class="section-title">Enrollment Trend</div>
+    <div class="section-sub">Monthly enrollment volume — all channels vs OSR-credited</div>
+    <div class="chart-wrap"><canvas id="chartEnrollTrend"></canvas></div>
+  </div>
+
+  <!-- Daily Pace Overlay -->
+  <div class="card">
+    <div class="section-title">Daily Enrollment Pace</div>
+    <div class="section-sub" id="paceSubtitle">Current month vs previous month — by business day</div>
+    <div class="chart-wrap chart-wrap-lg"><canvas id="chartDailyPace"></canvas></div>
+  </div>
+
+  <!-- Weekly Trend Cards -->
+  <div class="card">
+    <div class="section-title">Weekly Breakdown</div>
+    <div class="section-sub">Current month enrollment pace by week (OSR-credited)</div>
+    <div class="week-cards" id="weekCards"></div>
+  </div>
+
+  <!-- Funded Velocity -->
+  <div class="card">
+    <div class="section-title">Funded Volume Velocity</div>
+    <div class="section-sub">Daily funded dollars for current month vs previous month average</div>
+    <div class="chart-wrap"><canvas id="chartFundedVelocity"></canvas></div>
+  </div>
+
+  <!-- Insight: Watch Out + Bright Spot -->
+  <div class="grid-2">
+    <div id="insightWatch"></div>
+    <div id="insightBright"></div>
+  </div>
+
+</div>
+
+<!-- ===== TAB 2: REP ANALYTICS ===== -->
+<div class="tab-content" id="reps">
+
+  <!-- Top Improvers / Biggest Decliners -->
+  <div class="card">
+    <div class="section-title">Rep Ranking Movement</div>
+    <div class="section-sub">Month-over-month enrollment change (OSR-credited)</div>
+    <div class="movers-grid" id="moversGrid"></div>
+  </div>
+
+  <!-- Per-Rep Mini Charts -->
+  <div class="card">
+    <div class="section-title">Q1 Enrollment by Rep</div>
+    <div class="section-sub">3-month enrollment trend per rep — target: 30 per quarter, 10+ floor per month</div>
+    <div class="rep-mini-grid" id="repMiniGrid"></div>
+  </div>
+
+  <!-- Q1 Compliance Forecast -->
+  <div class="card">
+    <div class="section-title">Q1 Compliance Forecast</div>
+    <div class="section-sub" id="forecastSub">Projected quarterly totals based on current March pace</div>
+    <table class="forecast-table" id="forecastTable"></table>
+  </div>
+
+  <!-- Enrollment Efficiency -->
+  <div class="card">
+    <div class="section-title">Enrollment Efficiency</div>
+    <div class="section-sub">Percentage of each rep's enrollees that have produced funded volume (Feb cohort, M0+M1)</div>
+    <div id="effBars"></div>
+  </div>
+
+</div>
+
+<!-- ===== TAB 3: PRODUCTION & FORECASTS ===== -->
+<div class="tab-content" id="production">
+
+  <!-- Enrollment-to-Funding Funnel -->
+  <div class="card">
+    <div class="section-title">Enrollment-to-Funding Funnel</div>
+    <div class="section-sub">Current month — where merchants drop off in the funding journey</div>
+    <div id="funnelArea"></div>
+    <div id="insightOpportunity" style="margin-top:16px"></div>
+  </div>
+
+  <!-- Cohort Health -->
+  <div class="card">
+    <div class="section-title">Commission Cohort Health</div>
+    <div class="section-sub">$15K M0+M1 target per OSR — are cohorts on track?</div>
+    <div id="cohortArea"></div>
+  </div>
+
+  <!-- Market Trends + Product Mix -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="section-title">Market Trends</div>
+      <div class="section-sub">Top states by OSR-credited enrollments — 3-month view</div>
+      <div class="chart-wrap"><canvas id="chartMarkets"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="section-title">Product Mix Trend</div>
+      <div class="section-sub">Lease-to-Own vs Retail Contract by month</div>
+      <div class="chart-wrap"><canvas id="chartProductMix"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Month-End Projection -->
+  <div class="card">
+    <div class="section-title">March Month-End Projection</div>
+    <div class="section-sub">Estimated final enrollment count based on current pace</div>
+    <div class="grid-2">
+      <div>
+        <table class="scenario-table" id="scenarioTable"></table>
+      </div>
+      <div id="projectionMath"></div>
+    </div>
+  </div>
+
+  <!-- Bottom Line -->
+  <div id="insightBottomLine"></div>
+
+</div>
+
+</div><!-- /content -->
+
+<div style="text-align:center;padding:20px;font-size:12px;color:#627289;border-top:1px solid #293852">
+  EasyPay Finance &mdash; OSR Analytics &amp; Insights Dashboard &mdash; <span id="footerDate"></span>
+</div>
+
+<script>
+/* ============================================================
+   DATA BLOCK — Pipeline replaces everything above first function
+   ============================================================ */
+
+var monthlyKPIs=[
+{month:"Jan 2026",key:"jan",total:119,credited:85,funded:33126,fundedApps:18,totalApps:84,convRate:21.4,avgTicket:1840,lto:52,rc:33},
+{month:"Feb 2026",key:"feb",total:171,credited:132,funded:166378,fundedApps:81,totalApps:390,convRate:20.8,avgTicket:2054,lto:82,rc:50},
+{month:"Mar 2026",key:"mar",total:50,credited:31,funded:19598,fundedApps:12,totalApps:29,convRate:41.4,avgTicket:1633,lto:19,rc:12}
+];
+
+var repTrends=[
+{n:"Jared Midkiff",jan:10,feb:20,mar:9,q1:39,target:30},
+{n:"Matthew MacDonald",jan:23,feb:10,mar:2,q1:35,target:30},
+{n:"Stephanie Whitlock",jan:13,feb:14,mar:4,q1:31,target:30},
+{n:"Joseph Guerra",jan:14,feb:11,mar:5,q1:30,target:30},
+{n:"Yemaira Hernandez",jan:10,feb:12,mar:2,q1:24,target:30},
+{n:"Omar Corona",jan:6,feb:11,mar:1,q1:18,target:30},
+{n:"Phillip Mason",jan:1,feb:13,mar:4,q1:18,target:30},
+{n:"Sara Porter",jan:0,feb:16,mar:0,q1:16,target:30},
+{n:"Eric Henderson",jan:2,feb:7,mar:3,q1:12,target:30},
+{n:"DeLon Phoenix",jan:1,feb:10,mar:0,q1:11,target:30},
+{n:"Outside Sales Manager",jan:1,feb:8,mar:0,q1:9,target:30},
+{n:"Claudia Gerhardt",jan:4,feb:1,mar:1,q1:6,target:30}
+];
+
+var dailyPaceCurrent=[
+{d:"Mar 2",v:2},{d:"Mar 3",v:6},{d:"Mar 4",v:15},{d:"Mar 5",v:8}
+];
+
+var dailyPacePrevious=[
+{d:"Feb 3",v:7},{d:"Feb 4",v:8},{d:"Feb 5",v:12},{d:"Feb 6",v:8},{d:"Feb 7",v:1},
+{d:"Feb 9",v:3},{d:"Feb 10",v:9},{d:"Feb 11",v:4},{d:"Feb 12",v:5},{d:"Feb 13",v:4},
+{d:"Feb 16",v:21},{d:"Feb 17",v:4},{d:"Feb 18",v:8},{d:"Feb 19",v:12},{d:"Feb 20",v:7},
+{d:"Feb 21",v:1},{d:"Feb 24",v:3},{d:"Feb 25",v:6},{d:"Feb 26",v:7},{d:"Feb 27",v:2}
+];
+
+var marketTrends=[
+{state:"FL",jan:20,feb:32,mar:13},
+{state:"TX",jan:20,feb:38,mar:6},
+{state:"CA",jan:5,feb:15,mar:5},
+{state:"AZ",jan:15,feb:11,mar:2},
+{state:"GA",jan:12,feb:12,mar:2},
+{state:"NV",jan:10,feb:8,mar:0},
+{state:"PA",jan:2,feb:7,mar:3}
+];
+
+var febCohortReps=[
+{n:"DeLon Phoenix",m:10,p:5,f:55858},
+{n:"Jared Midkiff",m:20,p:10,f:34717},
+{n:"Matthew MacDonald",m:10,p:5,f:15111},
+{n:"Eric Henderson",m:7,p:2,f:13330},
+{n:"Yemaira Hernandez",m:12,p:3,f:11392},
+{n:"Sara Porter",m:16,p:1,f:10670},
+{n:"Joseph Guerra",m:11,p:4,f:10637},
+{n:"Outside Sales Manager",m:8,p:4,f:10601},
+{n:"Stephanie Whitlock",m:14,p:4,f:8031},
+{n:"Omar Corona",m:11,p:1,f:5730},
+{n:"Claudia Gerhardt",m:1,p:0,f:0},
+{n:"Phillip Mason",m:13,p:0,f:0}
+];
+
+var janCohortReps=[
+{n:"Matthew MacDonald",m:22,p:13,f:38428},
+{n:"Stephanie Whitlock",m:6,p:5,f:18452},
+{n:"Yemaira Hernandez",m:6,p:3,f:11650},
+{n:"Joseph Guerra",m:9,p:6,f:8603},
+{n:"Jared Midkiff",m:8,p:3,f:6846},
+{n:"Claudia Gerhardt",m:3,p:3,f:5314},
+{n:"Omar Corona",m:4,p:1,f:1933},
+{n:"DeLon Phoenix",m:1,p:0,f:0},
+{n:"Eric Henderson",m:2,p:0,f:0}
+];
+
+var funnelData=[
+{l:"Total Enrolled (All Channels)",v:50,c:"#5B9BFF"},
+{l:"OSR-Credited",v:31,c:"#A78BFA"},
+{l:"Merchants with Applications",v:13,c:"#FBBF24"},
+{l:"Funded Applications",v:12,c:"#2DD4A0"},
+{l:"Producing Merchants (>$0)",v:7,c:"#10B981"}
+];
+
+var bizDaysLeft=12;
+var currentMonthLabel="March";
+var previousMonthLabel="February";
+
+/* ============================================================
+   FUNCTIONS — Pipeline preserves everything below
+   ============================================================ */
+
+var charts={};
+var PC=["#3B82F6","#10B981","#F59E0B","#EF4444","#8B5CF6","#06B6D4","#EC4899","#F97316","#14B8A6","#A855F7","#6366F1","#84CC16"];
+var ttStyle={backgroundColor:'#293852',borderColor:'#3D5170',borderWidth:1,titleColor:'#A8B8CC',bodyColor:'#F1F5F9',padding:12,cornerRadius:10};
+
+Chart.defaults.color='#8494AB';
+Chart.defaults.font.family="'DM Sans','Segoe UI',system-ui,sans-serif";
+
+function switchTab(id){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+  document.getElementById(id).classList.add('active');
+  var tabs=document.querySelectorAll('.tab');
+  var map={trends:0,reps:1,production:2};
+  if(map[id]!==undefined)tabs[map[id]].classList.add('active');
+  setTimeout(initCharts,50);
+}
+
+function destroyChart(k){if(charts[k]){charts[k].destroy();delete charts[k]}}
+
+function fmt(n){
+  if(n>=1000000)return '$'+(n/1000000).toFixed(1)+'M';
+  if(n>=1000)return '$'+(n/1000).toFixed(1)+'K';
+  return '$'+Math.round(n).toLocaleString();
+}
+
+function fmtN(n){return n.toLocaleString('en-US')}
+
+function pctChange(curr,prev){
+  if(prev===0)return curr>0?{val:"+100%",cls:"up"}:{val:"—",cls:"neutral"};
+  var p=((curr-prev)/prev*100);
+  var sign=p>=0?"+":"";
+  return {val:sign+Math.round(p)+"%",cls:p>=0?"up":"down"};
+}
+
+/* ---- KPI Trend Cards ---- */
+function renderKPITrends(){
+  var curr=monthlyKPIs[monthlyKPIs.length-1];
+  var prev=monthlyKPIs.length>1?monthlyKPIs[monthlyKPIs.length-2]:null;
+  var items=[
+    {label:"OSR Enrollments",value:curr.credited,prev:prev?prev.credited:0,format:fmtN,color:"#5B9BFF",tip:"Merchants enrolled and credited to an outside sales rep this month. Does not include non-OSR channel enrollments."},
+    {label:"Funded Volume",value:curr.funded,prev:prev?prev.funded:0,format:fmt,color:"#2DD4A0",tip:"Total dollar amount of financed transactions processed by this month\u2019s enrolled merchants (Month 0 activity only)."},
+    {label:"Conversion Rate",value:curr.convRate,prev:prev?prev.convRate:0,format:function(v){return v+"%"},color:"#A78BFA",suffix:"%",tip:"Funded applications \u00f7 total applications submitted. Higher = better quality enrollments converting to revenue."},
+    {label:"Avg Ticket",value:curr.avgTicket,prev:prev?prev.avgTicket:0,format:function(v){return '$'+fmtN(Math.round(v))},color:"#FBBF24",tip:"Average funded dollar amount per application. Funded volume \u00f7 funded application count."}
+  ];
+  var h='';
+  items.forEach(function(it){
+    var ch=pctChange(it.value,it.prev);
+    h+='<div class="kpi-trend"><div class="kpi-trend-bar" style="background:linear-gradient(90deg,'+it.color+',transparent)"></div>';
+    h+='<div class="kpi-info">i</div><div class="kpi-tooltip">'+it.tip+'</div>';
+    h+='<div class="kpi-trend-label">'+it.label+'</div>';
+    h+='<div class="kpi-trend-value" style="color:'+it.color+'">'+it.format(it.value)+'</div>';
+    h+='<span class="kpi-trend-change '+ch.cls+'">'+ch.val+' vs '+previousMonthLabel+'</span>';
+    h+='<div class="kpi-trend-prev">'+previousMonthLabel+': '+it.format(it.prev)+'</div>';
+    h+='</div>';
+  });
+  document.getElementById('kpiTrendCards').innerHTML=h;
+}
+
+/* ---- Insight Generators ---- */
+function generateInsights(){
+  var curr=monthlyKPIs[monthlyKPIs.length-1];
+  var prev=monthlyKPIs.length>1?monthlyKPIs[monthlyKPIs.length-2]:null;
+  if(!prev)return;
+
+  // KEY TREND: find biggest notable change
+  var convChange=((curr.convRate-prev.convRate)/prev.convRate*100);
+  var enrollChange=((curr.credited-prev.credited)/prev.credited*100);
+  var fundedChange=((curr.funded-prev.funded)/prev.funded*100);
+
+  var trendText='';
+  if(Math.abs(convChange)>50){
+    trendText='Conversion rate moved from <b>'+prev.convRate+'%</b> to <b>'+curr.convRate+'%</b> — a <b class="num">'+Math.abs(Math.round(convChange))+'%</b> '+(convChange>0?'improvement':'decline')+' month-over-month. ';
+    if(curr.convRate>prev.convRate)trendText+='Fewer enrollments but higher quality — merchants are converting at nearly double the rate.';
+    else trendText+='This may indicate a quality issue with new enrollments.';
+  }else{
+    trendText='Enrollment volume '+(enrollChange<0?'declined':'grew')+' by <b class="num">'+Math.abs(Math.round(enrollChange))+'%</b> month-over-month ('+prev.credited+' &#8594; '+curr.credited+'). ';
+    trendText+='Funded volume is at <b>'+fmt(curr.funded)+'</b> vs <b>'+fmt(prev.funded)+'</b> last month.';
+  }
+  document.getElementById('insightTrend').innerHTML='<div class="insight insight-trend"><div class="insight-header">Key Trend</div><div class="insight-body">'+trendText+'</div></div>';
+
+  // WATCH OUT: enrollment pace, Q1 risk, and zero-activity reps
+  var currAvg=dailyPaceCurrent.length>0?dailyPaceCurrent.reduce(function(s,d){return s+d.v},0)/dailyPaceCurrent.length:0;
+  var prevAvg=dailyPacePrevious.length>0?dailyPacePrevious.reduce(function(s,d){return s+d.v},0)/dailyPacePrevious.length:0;
+  var curKey=curr.key;
+  var atRisk=repTrends.filter(function(r){return r.q1<r.target});
+  var zeroThisMonth=repTrends.filter(function(r){return r[curKey]===0});
+  var watchText='';
+  if(currAvg<prevAvg*0.8){
+    watchText=currentMonthLabel+' daily enrollment pace is <b class="num">'+currAvg.toFixed(1)+'/day</b> vs '+previousMonthLabel+'\'s <b class="num">'+prevAvg.toFixed(1)+'/day</b>. ';
+  }
+  watchText+='<b class="num">'+atRisk.length+' of '+repTrends.length+'</b> reps are behind on Q1 targets.';
+  if(zeroThisMonth.length>0){
+    watchText+=' <b class="num">'+zeroThisMonth.length+' rep'+(zeroThisMonth.length>1?'s have':' has')+'</b> zero enrollments in '+currentMonthLabel;
+    if(zeroThisMonth.length<=3)watchText+=' ('+zeroThisMonth.map(function(r){return r.n.split(' ')[0]}).join(', ')+')';
+    watchText+='.';
+  }
+  var critical=atRisk.filter(function(r){var need=r.target-r.q1;return need>bizDaysLeft*2});
+  if(critical.length>0)watchText+=' <b>'+critical[0].n+'</b> needs <b class="num">'+(critical[0].target-critical[0].q1)+'</b> more in '+bizDaysLeft+' biz days — mathematically challenging.';
+  document.getElementById('insightWatch').innerHTML='<div class="insight insight-watch"><div class="insight-header">Watch Out</div><div class="insight-body">'+watchText+'</div></div>';
+
+  // BRIGHT SPOT: top performer, avg per rep, top growing market, cohort leader
+  var sorted=repTrends.slice().sort(function(a,b){return b.q1-a.q1});
+  var top=sorted[0];
+  var avgPerRep=Math.round(curr.credited/repTrends.length*10)/10;
+  var prevAvgPerRep=prev?Math.round(prev.credited/repTrends.length*10)/10:0;
+  var brightText='<b>'+top.n+'</b> leads Q1 with <b class="num">'+top.q1+' enrollments</b>';
+  if(top.q1>=top.target)brightText+=' — already <b class="num">'+(top.q1-top.target)+' ahead</b> of the '+top.target+' target.';
+  else brightText+=' and needs only <b class="num">'+(top.target-top.q1)+'</b> more to hit '+top.target+'.';
+  // Add cohort bright spot
+  var topCohort=typeof febCohortReps!=='undefined'?febCohortReps.slice().sort(function(a,b){return b.f-a.f})[0]:null;
+  if(topCohort&&topCohort.f>=15000)brightText+=' On the commission side, <b>'+topCohort.n+'</b>\'s Feb cohort has already hit <b>'+fmt(topCohort.f)+'</b> — well above the $15K target.';
+  // Top growing market
+  if(marketTrends.length>0&&prev){
+    var prevKey=prev.key;
+    var growing=marketTrends.filter(function(m){return m[curKey]>0&&m[prevKey]>0}).sort(function(a,b){return (b[curKey]-b[prevKey])-(a[curKey]-a[prevKey])});
+    var shrinking=marketTrends.filter(function(m){return m[prevKey]>0}).sort(function(a,b){return (a[curKey]-a[prevKey])-(b[curKey]-b[prevKey])});
+    if(growing.length>0&&growing[0][curKey]>growing[0][prevKey]){
+      brightText+=' <b>'+growing[0].state+'</b> is the top growing market ('+growing[0][prevKey]+' &#8594; '+growing[0][curKey]+').';
+    }
+  }
+  document.getElementById('insightBright').innerHTML='<div class="insight insight-bright"><div class="insight-header">Bright Spot</div><div class="insight-body">'+brightText+'</div></div>';
+}
+
+/* ---- Enrollment Trend Chart ---- */
+function renderEnrollTrend(){
+  var el=document.getElementById('chartEnrollTrend');
+  if(!el||el.offsetParent===null)return;
+  destroyChart('enrollTrend');
+  var labels=monthlyKPIs.map(function(m){return m.month});
+  charts.enrollTrend=new Chart(el,{
+    type:'line',
+    data:{
+      labels:labels,
+      datasets:[{
+        label:'All Channels',data:monthlyKPIs.map(function(m){return m.total}),
+        borderColor:'#5B9BFF',backgroundColor:'rgba(91,155,255,0.08)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:5,pointBackgroundColor:'#5B9BFF',pointHoverRadius:7
+      },{
+        label:'OSR-Credited',data:monthlyKPIs.map(function(m){return m.credited}),
+        borderColor:'#A78BFA',backgroundColor:'rgba(167,139,250,0.08)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:5,pointBackgroundColor:'#A78BFA',pointHoverRadius:7
+      }]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true,padding:20}},tooltip:ttStyle},
+      scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:'#293852'}}}}
+  });
+}
+
+/* ---- Daily Pace Overlay ---- */
+function renderDailyPace(){
+  var el=document.getElementById('chartDailyPace');
+  if(!el||el.offsetParent===null)return;
+  destroyChart('dailyPace');
+  var maxLen=Math.max(dailyPaceCurrent.length,dailyPacePrevious.length);
+  var labels=[];for(var i=1;i<=maxLen;i++)labels.push('Day '+i);
+  var prevAvg=dailyPacePrevious.length>0?dailyPacePrevious.reduce(function(s,d){return s+d.v},0)/dailyPacePrevious.length:0;
+
+  charts.dailyPace=new Chart(el,{
+    type:'bar',
+    data:{
+      labels:labels,
+      datasets:[{
+        label:previousMonthLabel,data:dailyPacePrevious.map(function(d){return d.v}),
+        backgroundColor:'rgba(91,155,255,0.2)',borderColor:'rgba(91,155,255,0.3)',borderWidth:1,borderRadius:4,barPercentage:0.7
+      },{
+        label:currentMonthLabel,data:dailyPaceCurrent.map(function(d){return d.v}),
+        backgroundColor:'#5B9BFF',borderRadius:4,barPercentage:0.7
+      }]
+    },
+    plugins:[{id:'avgLine',afterDraw:function(chart){
+      var yScale=chart.scales.y;var ctx=chart.ctx;
+      var y=yScale.getPixelForValue(prevAvg);
+      ctx.save();ctx.setLineDash([6,4]);ctx.strokeStyle='#F87171';ctx.lineWidth=2;
+      ctx.beginPath();ctx.moveTo(chart.chartArea.left,y);ctx.lineTo(chart.chartArea.right,y);ctx.stroke();
+      ctx.fillStyle='#F87171';ctx.font="bold 11px 'DM Sans'";ctx.textAlign='right';
+      ctx.fillText(previousMonthLabel+' avg: '+prevAvg.toFixed(1)+'/day',chart.chartArea.right,y-6);
+      ctx.restore();
+    }}],
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true,padding:20}},tooltip:ttStyle},
+      scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:'#293852'}}}}
+  });
+}
+
+/* ---- Weekly Cards ---- */
+function renderWeekCards(){
+  // Group current month daily data into weeks
+  var weeks=[];var weekData=[];var dayCount=0;
+  dailyPaceCurrent.forEach(function(d){
+    weekData.push(d.v);dayCount++;
+    if(dayCount%5===0||dayCount===dailyPaceCurrent.length){
+      var sum=weekData.reduce(function(a,b){return a+b},0);
+      weeks.push({sum:sum,avg:(sum/weekData.length).toFixed(1),days:weekData.length});
+      weekData=[];
+    }
+  });
+  var prevAvg=dailyPacePrevious.length>0?(dailyPacePrevious.reduce(function(s,d){return s+d.v},0)/dailyPacePrevious.length).toFixed(1):0;
+  var maxAvg=Math.max.apply(null,weeks.map(function(w){return parseFloat(w.avg)}));
+  var h='';
+  weeks.forEach(function(w,i){
+    var isPeak=parseFloat(w.avg)===maxAvg;
+    var pct=prevAvg>0?((parseFloat(w.avg)/parseFloat(prevAvg)-1)*100):0;
+    var pctCls=pct>=0?'up':'down';
+    h+='<div class="week-card'+(isPeak?' peak':'')+'"><div class="week-label">WK '+(i+1)+'</div>';
+    h+='<div class="week-value">'+(w.avg)+'</div><div class="week-sub">avg/day</div>';
+    h+='<div class="week-pct '+pctCls+'">'+(pct>=0?'+':'')+Math.round(pct)+'% vs '+previousMonthLabel+'</div></div>';
+  });
+  if(bizDaysLeft>0){
+    h+='<div class="week-card" style="border-style:dashed;opacity:0.6"><div class="week-label">REMAINING</div>';
+    h+='<div class="week-value">'+bizDaysLeft+'</div><div class="week-sub">biz days left</div></div>';
+  }
+  document.getElementById('weekCards').innerHTML=h;
+}
+
+/* ---- Funded Velocity (simple bar for current month top producers) ---- */
+function renderFundedVelocity(){
+  var el=document.getElementById('chartFundedVelocity');
+  if(!el||el.offsetParent===null)return;
+  destroyChart('fundedVelocity');
+  // Show monthly funded totals as bars
+  charts.fundedVelocity=new Chart(el,{
+    type:'bar',
+    data:{
+      labels:monthlyKPIs.map(function(m){return m.month}),
+      datasets:[{
+        label:'Funded Volume',data:monthlyKPIs.map(function(m){return m.funded}),
+        backgroundColor:['rgba(91,155,255,0.5)','rgba(91,155,255,0.5)','#2DD4A0'],
+        borderRadius:8,barThickness:60
+      }]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...ttStyle,callbacks:{label:function(ctx){return ' $'+ctx.raw.toLocaleString()}}}},
+      scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:'#293852'},ticks:{callback:function(v){return fmt(v)}}}}}
+  });
+}
+
+/* ---- Rep Movers ---- */
+function renderMovers(){
+  var curr=monthlyKPIs[monthlyKPIs.length-1].key;
+  var prev=monthlyKPIs.length>1?monthlyKPIs[monthlyKPIs.length-2].key:null;
+  if(!prev)return;
+  var changes=repTrends.map(function(r){
+    var cv=r[curr]||0;var pv=r[prev]||0;
+    return {n:r.n,curr:cv,prev:pv,delta:cv-pv,pct:pv>0?((cv-pv)/pv*100):cv>0?100:0};
+  });
+  var improvers=changes.filter(function(c){return c.delta>0}).sort(function(a,b){return b.delta-a.delta});
+  var decliners=changes.filter(function(c){return c.delta<0}).sort(function(a,b){return a.delta-b.delta});
+  var stayers=changes.filter(function(c){return c.delta===0});
+
+  var h='<div class="mover-col"><h3><span style="color:#2DD4A0">&#9650;</span> Top Improvers</h3>';
+  if(improvers.length===0)h+='<div style="color:#627289;font-size:13px;padding:10px">No improvers this month</div>';
+  improvers.forEach(function(c,i){
+    h+='<div class="mover-row"><div><div class="mover-name">'+c.n+'</div><div class="mover-detail">'+c.prev+' &#8594; '+c.curr+'</div></div>';
+    h+='<div class="mover-change" style="color:#2DD4A0">+'+c.delta+'</div></div>';
+  });
+  h+='</div><div class="mover-col"><h3><span style="color:#F87171">&#9660;</span> Biggest Declines</h3>';
+  if(decliners.length===0)h+='<div style="color:#627289;font-size:13px;padding:10px">No decliners this month</div>';
+  decliners.forEach(function(c,i){
+    h+='<div class="mover-row"><div><div class="mover-name">'+c.n+'</div><div class="mover-detail">'+c.prev+' &#8594; '+c.curr+'</div></div>';
+    h+='<div class="mover-change" style="color:#F87171">'+c.delta+'</div></div>';
+  });
+  if(stayers.length>0){
+    stayers.forEach(function(c){
+      h+='<div class="mover-row"><div><div class="mover-name">'+c.n+'</div><div class="mover-detail">'+c.prev+' &#8594; '+c.curr+'</div></div>';
+      h+='<div class="mover-change" style="color:#8494AB">0</div></div>';
+    });
+  }
+  h+='</div>';
+  document.getElementById('moversGrid').innerHTML=h;
+}
+
+/* ---- Rep Mini Charts ---- */
+function renderRepMiniCharts(){
+  var months=monthlyKPIs.map(function(m){return m.key});
+  var monthLabels=monthlyKPIs.map(function(m){return m.month.split(' ')[0].substring(0,3)});
+  var maxEnroll=0;
+  repTrends.forEach(function(r){months.forEach(function(m){if(r[m]>maxEnroll)maxEnroll=r[m]})});
+
+  var h='';
+  repTrends.forEach(function(r){
+    var need=Math.max(0,r.target-r.q1);
+    var trend=months.length>=2?(r[months[months.length-1]]>=r[months[months.length-2]]?'#2DD4A0':'#F87171'):'#5B9BFF';
+    h+='<div class="rep-mini"><div class="rep-mini-name">'+r.n+'</div>';
+    h+='<div class="rep-mini-bars">';
+    months.forEach(function(m,i){
+      var v=r[m]||0;var pct=maxEnroll>0?(v/maxEnroll*100):0;
+      var color=i===months.length-1?trend:'rgba(91,155,255,0.5)';
+      h+='<div class="rep-mini-bar" style="height:'+Math.max(pct,4)+'%;background:'+color+'" title="'+monthLabels[i]+': '+v+'"></div>';
+    });
+    h+='</div><div class="rep-mini-stats">';
+    h+='<span class="rep-mini-q1" style="color:'+(r.q1>=r.target?'#2DD4A0':'#F1F5F9')+'">Q1: '+r.q1+'</span>';
+    h+='<span>'+(need>0?'Need '+need:'Target met')+'</span></div></div>';
+  });
+  document.getElementById('repMiniGrid').innerHTML=h;
+}
+
+/* ---- Q1 Forecast Table ---- */
+function renderForecastTable(){
+  var curr=monthlyKPIs[monthlyKPIs.length-1].key;
+  var daysElapsed=dailyPaceCurrent.length;
+  var totalDaysInMonth=daysElapsed+bizDaysLeft;
+
+  var h='<thead><tr><th>Rep</th><th class="right">Q1 Actual</th><th class="right">Mar Pace</th><th class="right">Projected Q1</th><th class="right">Need</th><th>Status</th></tr></thead><tbody>';
+  repTrends.forEach(function(r,i){
+    var marSoFar=r[curr]||0;
+    var dailyRate=daysElapsed>0?(marSoFar/daysElapsed):0;
+    var projected=Math.round(marSoFar+dailyRate*bizDaysLeft);
+    var projQ1=r.q1-marSoFar+projected;
+    var need=Math.max(0,r.target-r.q1);
+    var status,statusCls;
+    if(r.q1>=r.target){status='Target Met';statusCls='status-met'}
+    else if(projQ1>=r.target){status='On Track';statusCls='status-track'}
+    else if(need<=bizDaysLeft*1.5){status='At Risk';statusCls='status-risk'}
+    else{status='Critical';statusCls='status-critical'}
+    h+='<tr class="'+(i%2?'stripe':'')+'"><td style="font-weight:600">'+r.n+'</td>';
+    h+='<td style="text-align:right;font-weight:700">'+r.q1+'</td>';
+    h+='<td style="text-align:right;color:#8494AB">'+dailyRate.toFixed(1)+'/day</td>';
+    h+='<td style="text-align:right;font-weight:600">'+projQ1+'</td>';
+    h+='<td style="text-align:right;'+(need>0?'color:#FBBF24':'color:#2DD4A0')+'">'+(need>0?need:'&#10003;')+'</td>';
+    h+='<td><span class="status-badge '+statusCls+'">'+status+'</span></td></tr>';
+  });
+  h+='</tbody>';
+  document.getElementById('forecastTable').innerHTML=h;
+  document.getElementById('forecastSub').textContent='Projected quarterly totals based on current '+currentMonthLabel+' pace ('+dailyPaceCurrent.length+' biz days elapsed, '+bizDaysLeft+' remaining)';
+}
+
+/* ---- Enrollment Efficiency ---- */
+function renderEfficiency(){
+  var h='';
+  febCohortReps.forEach(function(r){
+    var pct=r.m>0?(r.p/r.m*100):0;
+    var color=pct>=50?'#2DD4A0':pct>=25?'#FBBF24':'#F87171';
+    h+='<div class="eff-row"><span class="eff-label">'+r.n+'</span>';
+    h+='<div class="eff-track"><div class="eff-fill" style="width:'+pct+'%;background:linear-gradient(90deg,'+color+','+color+'88)"></div></div>';
+    h+='<span class="eff-value" style="color:'+color+'">'+Math.round(pct)+'%</span></div>';
+  });
+  document.getElementById('effBars').innerHTML=h;
+}
+
+/* ---- Funnel ---- */
+function renderFunnel(){
+  var maxV=funnelData[0].v;
+  var h='';
+  funnelData.forEach(function(s,i){
+    var pct=maxV>0?(s.v/maxV*100):0;
+    h+='<div class="funnel-stage"><div class="funnel-head"><span class="funnel-label">'+s.l+'</span>';
+    h+='<span class="funnel-val" style="color:'+s.c+'">'+s.v+'</span></div>';
+    h+='<div class="funnel-track"><div class="funnel-fill" style="width:'+pct+'%;background:linear-gradient(90deg,'+s.c+','+s.c+'88)"></div></div>';
+    if(i>0){
+      var dropPct=funnelData[i-1].v>0?Math.round((1-s.v/funnelData[i-1].v)*100):0;
+      if(dropPct>0)h+='<div class="funnel-drop">&#8627; '+dropPct+'% drop-off from previous stage</div>';
+    }
+    h+='</div>';
+  });
+  document.getElementById('funnelArea').innerHTML=h;
+
+  // Opportunity insight
+  var enrolled=funnelData[0].v;var withApps=funnelData[2].v;var noApps=enrolled-withApps;
+  if(noApps>0){
+    var txt='<b class="num">'+noApps+' merchants</b> enrolled but have not submitted a single application yet. These are the lowest-friction conversions — they\'re already in the system. If even half start submitting at average rates, funded volume could increase significantly.';
+    document.getElementById('insightOpportunity').innerHTML='<div class="insight insight-bright"><div class="insight-header">Key Opportunity</div><div class="insight-body">'+txt+'</div></div>';
+  }
+}
+
+/* ---- Cohort Health ---- */
+function renderCohortHealth(){
+  var cohorts=[
+    {name:"Feb Cohort (Active)",badge:"Active",badgeCls:"cohort-badge-active",reps:febCohortReps,target:15000,deadline:"End of March",note:"M0+M1 deadline"},
+    {name:"Jan Cohort (Baseline)",badge:"Baseline",badgeCls:"cohort-badge-baseline",reps:janCohortReps,target:15000,deadline:"Complete",note:"Pre-commission structure"}
+  ];
+  var h='';
+  cohorts.forEach(function(c){
+    var totalFunded=c.reps.reduce(function(s,r){return s+r.f},0);
+    var atTarget=c.reps.filter(function(r){return r.f>=c.target}).length;
+    var totalMerchants=c.reps.reduce(function(s,r){return s+r.m},0);
+    var producing=c.reps.reduce(function(s,r){return s+r.p},0);
+
+    h+='<div class="cohort-card"><div class="cohort-header"><span class="cohort-name">'+c.name+'</span>';
+    h+='<span class="cohort-badge '+c.badgeCls+'">'+c.badge+'</span></div>';
+    h+='<div class="cohort-kpis">';
+    h+='<div class="cohort-kpi"><div class="cohort-kpi-val" style="color:#2DD4A0">'+fmt(totalFunded)+'</div><div class="cohort-kpi-label">Total Funded</div></div>';
+    h+='<div class="cohort-kpi"><div class="cohort-kpi-val" style="color:#5B9BFF">'+atTarget+' / '+c.reps.length+'</div><div class="cohort-kpi-label">Reps at $15K</div></div>';
+    h+='<div class="cohort-kpi"><div class="cohort-kpi-val" style="color:#FBBF24">'+producing+' / '+totalMerchants+'</div><div class="cohort-kpi-label">Producing</div></div>';
+    h+='</div><div class="cohort-progress">';
+    c.reps.forEach(function(r){
+      var pct=Math.min(100,r.f/c.target*100);
+      var color=r.f>=c.target?'#2DD4A0':pct>=60?'#FBBF24':'#F87171';
+      h+='<div class="cohort-rep"><span class="cohort-rep-name">'+r.n+'</span>';
+      h+='<div class="cohort-rep-track"><div class="cohort-rep-fill" style="width:'+pct+'%;background:'+color+'"></div></div>';
+      h+='<span class="cohort-rep-val" style="color:'+color+'">'+fmt(r.f)+'</span></div>';
+    });
+    h+='</div></div>';
+  });
+  document.getElementById('cohortArea').innerHTML=h;
+}
+
+/* ---- Market Trends Chart ---- */
+function renderMarkets(){
+  var el=document.getElementById('chartMarkets');
+  if(!el||el.offsetParent===null)return;
+  destroyChart('markets');
+  var months=monthlyKPIs.map(function(m){return m.key});
+  var colors=['rgba(91,155,255,0.4)','rgba(167,139,250,0.5)','#5B9BFF'];
+  charts.markets=new Chart(el,{
+    type:'bar',
+    data:{
+      labels:marketTrends.map(function(m){return m.state}),
+      datasets:monthlyKPIs.map(function(m,i){
+        return {label:m.month.split(' ')[0].substring(0,3),data:marketTrends.map(function(s){return s[m.key]||0}),backgroundColor:colors[i]||PC[i],borderRadius:4,barPercentage:0.7};
+      })
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true,padding:16}},tooltip:ttStyle},
+      scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:'#293852'}}}}
+  });
+}
+
+/* ---- Product Mix Chart ---- */
+function renderProductMix(){
+  var el=document.getElementById('chartProductMix');
+  if(!el||el.offsetParent===null)return;
+  destroyChart('productMix');
+  charts.productMix=new Chart(el,{
+    type:'bar',
+    data:{
+      labels:monthlyKPIs.map(function(m){return m.month.split(' ')[0].substring(0,3)}),
+      datasets:[{
+        label:'Lease-to-Own',data:monthlyKPIs.map(function(m){return m.lto}),backgroundColor:'#5B9BFF',borderRadius:4
+      },{
+        label:'Retail Contract',data:monthlyKPIs.map(function(m){return m.rc}),backgroundColor:'#A78BFA',borderRadius:4
+      }]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true,padding:16}},tooltip:ttStyle},
+      scales:{x:{grid:{display:false},stacked:true},y:{beginAtZero:true,grid:{color:'#293852'},stacked:true}}}
+  });
+}
+
+/* ---- Month-End Projection ---- */
+function renderProjection(){
+  var curr=monthlyKPIs[monthlyKPIs.length-1];
+  var daysElapsed=dailyPaceCurrent.length;
+  var totalBizDays=daysElapsed+bizDaysLeft;
+  var currTotal=dailyPaceCurrent.reduce(function(s,d){return s+d.v},0);
+  var dailyRate=daysElapsed>0?(currTotal/daysElapsed):0;
+
+  var moderate=Math.round(currTotal+dailyRate*bizDaysLeft);
+  var optimistic=Math.round(currTotal+dailyRate*1.3*bizDaysLeft);
+  var conservative=Math.round(currTotal+dailyRate*0.7*bizDaysLeft);
+
+  var h='<thead><tr><th>Scenario</th><th>Projected OSR Enrollments</th><th>Assumption</th></tr></thead><tbody>';
+  h+='<tr><td class="scenario-label" style="color:#2DD4A0">Optimistic</td><td style="font-weight:700">'+optimistic+'</td>';
+  h+='<td style="color:#8494AB;font-size:12px">30% above current daily rate — team pushes hard final stretch</td></tr>';
+  h+='<tr><td class="scenario-label" style="color:#FBBF24">Moderate</td><td style="font-weight:700">'+moderate+'</td>';
+  h+='<td style="color:#8494AB;font-size:12px">Current pace continues unchanged</td></tr>';
+  h+='<tr><td class="scenario-label" style="color:#F87171">Conservative</td><td style="font-weight:700">'+conservative+'</td>';
+  h+='<td style="color:#8494AB;font-size:12px">30% below current rate — fatigue or seasonal dip</td></tr>';
+  h+='</tbody>';
+  document.getElementById('scenarioTable').innerHTML=h;
+
+  // Methodology
+  var mh='<div style="padding:8px 0"><div style="font-size:16px;font-weight:700;margin-bottom:16px">How We Calculate</div>';
+  mh+='<div class="method-step"><div class="method-num">1</div><div class="method-text"><b>Current pace:</b> '+currTotal+' enrollments in '+daysElapsed+' business days = <span class="method-calc">'+dailyRate.toFixed(1)+'/day</span></div></div>';
+  mh+='<div class="method-step"><div class="method-num">2</div><div class="method-text"><b>Days remaining:</b> <span class="method-calc">'+bizDaysLeft+' biz days</span> left in '+currentMonthLabel+'</div></div>';
+  mh+='<div class="method-step"><div class="method-num">3</div><div class="method-text"><b>Moderate projection:</b> <span class="method-calc">'+currTotal+' + ('+dailyRate.toFixed(1)+' &times; '+bizDaysLeft+') = '+moderate+'</span></div></div>';
+  mh+='<div class="method-step"><div class="method-num">4</div><div class="method-text"><b>Range:</b> &plusmn;30% applied to daily rate for optimistic/conservative bounds</div></div>';
+  mh+='</div>';
+  document.getElementById('projectionMath').innerHTML=mh;
+}
+
+/* ---- Bottom Line ---- */
+function renderBottomLine(){
+  var curr=monthlyKPIs[monthlyKPIs.length-1];
+  var prev=monthlyKPIs.length>1?monthlyKPIs[monthlyKPIs.length-2]:null;
+  var atTarget=repTrends.filter(function(r){return r.q1>=r.target}).length;
+  var febAtTarget=febCohortReps.filter(function(r){return r.f>=15000}).length;
+  var txt='';
+  txt+=currentMonthLabel+' enrollment volume is running <b>significantly below</b> '+previousMonthLabel+' ';
+  txt+='(<b class="num">'+curr.credited+'</b> vs <b class="num">'+(prev?prev.credited:'—')+'</b> credited), ';
+  txt+='but conversion quality is <b>much stronger</b> at <b class="num">'+curr.convRate+'%</b>. ';
+  txt+='<b class="num">'+atTarget+' of '+repTrends.length+'</b> reps have already hit Q1 enrollment targets. ';
+  txt+='On the commission side, <b class="num">'+febAtTarget+' of '+febCohortReps.length+'</b> reps have Feb cohorts at or above the $15K M1 threshold. ';
+  txt+='<b>Priority actions:</b> Drive enrollment volume in the final '+bizDaysLeft+' business days of '+currentMonthLabel+', ';
+  txt+='and focus outreach on the '+(funnelData[0].v-funnelData[2].v)+' enrolled merchants with zero applications.';
+  document.getElementById('insightBottomLine').innerHTML='<div class="insight insight-bottom"><div class="insight-header">Bottom Line</div><div class="insight-body">'+txt+'</div></div>';
+}
+
+/* ---- Init All ---- */
+function initCharts(){
+  renderEnrollTrend();
+  renderDailyPace();
+  renderFundedVelocity();
+  renderMarkets();
+  renderProductMix();
+}
+
+function init(){
+  renderKPITrends();
+  generateInsights();
+  renderWeekCards();
+  renderMovers();
+  renderRepMiniCharts();
+  renderForecastTable();
+  renderEfficiency();
+  renderFunnel();
+  renderCohortHealth();
+  renderProjection();
+  renderBottomLine();
+  initCharts();
+  document.getElementById('footerDate').textContent='Data as of '+document.getElementById('lastUpdated').textContent;
+}
+
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>

@@ -23,7 +23,7 @@ from .config import (
 )
 from .salesforce_auth import SalesforceClient, SalesforceAuthError
 from .salesforce_reports import fetch_all_reports, fetch_cohort_activity, parse_report_rows, fetch_report
-from .processors import monthly_dashboard, cohort_tracking, q1_enrollment, field_activity, index_page
+from .processors import monthly_dashboard, cohort_tracking, q1_enrollment, field_activity, index_page, analytics
 from . import html_generator
 
 # ─── Logging ─────────────────────────────────────────────────────────────────
@@ -261,7 +261,44 @@ def main():
     if os.path.exists(field_path):
         html_generator.update_field_activity(field_path, field_data)
 
-    # ── Step 7: Update Index Page ────────────────────────────────────────
+    # ── Step 7: Process Analytics & Insights ─────────────────────────────
+    logger.info("--- Processing analytics & insights ---")
+
+    # Collect monthly results needed for analytics (reuse index-page collection below)
+    analytics_monthly = {}
+    analytics_month_key = f"{MONTH_ABBREV[current_month]}-{current_year}"
+    analytics_monthly[analytics_month_key] = monthly_data
+
+    for m in range(1, current_month):
+        mk = f"{MONTH_ABBREV[m]}-{current_year}"
+        snapshot = _load_month_snapshot_all(m, current_year)
+        if snapshot:
+            analytics_monthly[mk] = snapshot
+        else:
+            html_data = _extract_monthly_from_html(m, current_year)
+            if html_data:
+                analytics_monthly[mk] = html_data
+
+    analytics_data = analytics.process(
+        monthly_results=analytics_monthly,
+        q1_data=q1_data,
+        cohorts=cohorts,
+        current_month=current_month,
+        current_year=current_year,
+    )
+
+    analytics_path = os.path.join(output_dir, "analytics.html")
+    if not os.path.exists(analytics_path):
+        # Copy from project root for dry-run mode
+        src = os.path.join(PROJECT_ROOT, "analytics.html")
+        if os.path.exists(src):
+            import shutil
+            shutil.copy2(src, analytics_path)
+            logger.info("Copied analytics.html to %s", output_dir)
+    if os.path.exists(analytics_path):
+        html_generator.update_analytics_page(analytics_path, analytics_data)
+
+    # ── Step 8: Update Index Page ────────────────────────────────────────
     logger.info("--- Updating index page ---")
 
     # Collect monthly results for all tracked months

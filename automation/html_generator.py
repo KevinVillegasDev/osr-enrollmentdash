@@ -924,6 +924,117 @@ def update_index_page(filepath: str, data: dict) -> bool:
         return False
 
 
+# ─── Analytics Page Generator ────────────────────────────────────────────────
+
+def generate_analytics_script_data(data: dict) -> str:
+    """
+    Generate the JS data variable block for analytics.html.
+
+    Replaces everything from <script> to the first `function` keyword,
+    so this must also include the chart config constants (charts, PC, ttStyle,
+    Chart.defaults) that live between the data block and the first function.
+    """
+    lines = []
+
+    # monthlyKPIs
+    lines.append(f"var monthlyKPIs={_js_value(data['monthlyKPIs'])};")
+    lines.append("")
+
+    # repTrends
+    lines.append(f"var repTrends={_js_value(data['repTrends'])};")
+    lines.append("")
+
+    # Daily pace
+    lines.append(f"var dailyPaceCurrent={_js_value(data['dailyPaceCurrent'])};")
+    lines.append("")
+    lines.append(f"var dailyPacePrevious={_js_value(data['dailyPacePrevious'])};")
+    lines.append("")
+
+    # Market trends
+    lines.append(f"var marketTrends={_js_value(data['marketTrends'])};")
+    lines.append("")
+
+    # Cohort reps — one variable per cohort
+    for var_name, reps_array in sorted(data.get("cohortReps", {}).items()):
+        lines.append(f"var {var_name}={_js_value(reps_array)};")
+    lines.append("")
+
+    # Funnel data
+    lines.append(f"var funnelData={_js_value(data['funnelData'])};")
+    lines.append("")
+
+    # Metadata
+    lines.append(f"var bizDaysLeft={data['bizDaysLeft']};")
+    lines.append(f"var currentMonthLabel={json.dumps(data['currentMonthLabel'])};")
+    lines.append(f"var previousMonthLabel={json.dumps(data['previousMonthLabel'])};")
+    lines.append("")
+
+    # Chart config constants (must be included because _replace_script_data
+    # replaces everything up to the first `function` keyword)
+    lines.append("/* ============================================================")
+    lines.append("   FUNCTIONS — Pipeline preserves everything below")
+    lines.append("   ============================================================ */")
+    lines.append("")
+    lines.append("var charts={};")
+    lines.append('var PC=["#3B82F6","#10B981","#F59E0B","#EF4444","#8B5CF6",'
+                 '"#06B6D4","#EC4899","#F97316","#14B8A6","#A855F7","#6366F1","#84CC16"];')
+    lines.append("var ttStyle={backgroundColor:'#293852',borderColor:'#3D5170',"
+                 "borderWidth:1,titleColor:'#A8B8CC',bodyColor:'#F1F5F9',"
+                 "padding:12,cornerRadius:10};")
+    lines.append("")
+    lines.append("Chart.defaults.color='#8494AB';")
+    lines.append("Chart.defaults.font.family=\"'DM Sans','Segoe UI',system-ui,sans-serif\";")
+
+    return "\n".join(lines)
+
+
+def update_analytics_page(filepath: str, data: dict) -> bool:
+    """
+    Update analytics.html with new analytics data.
+
+    Args:
+        filepath: Path to analytics.html
+        data: Output from analytics.process()
+
+    Returns:
+        True if file was updated successfully
+    """
+    if not os.path.exists(filepath):
+        logger.error("Analytics page not found: %s", filepath)
+        return False
+
+    html = _read_file(filepath)
+
+    # Replace the script data block
+    script_data = generate_analytics_script_data(data)
+    html = _replace_script_data(html, script_data)
+
+    # Update last-updated date
+    today = date.today()
+    try:
+        import platform
+        if platform.system() == "Windows":
+            date_str = today.strftime("%b %#d, %Y")
+        else:
+            date_str = today.strftime("%b %-d, %Y")
+    except ValueError:
+        date_str = f"{today.strftime('%b')} {today.day}, {today.year}"
+
+    html = re.sub(
+        r'(<div class="updated-date">)[^<]+(</div>)',
+        rf'\g<1>{date_str}\2',
+        html
+    )
+
+    if _validate_html(html):
+        _write_file(filepath, html)
+        logger.info("Updated %s", filepath)
+        return True
+    else:
+        logger.error("HTML validation failed for %s", filepath)
+        return False
+
+
 # ─── Core Utilities ──────────────────────────────────────────────────────────
 
 def _replace_script_data(html: str, new_data: str) -> str:
