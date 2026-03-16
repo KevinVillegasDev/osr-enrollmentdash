@@ -20424,5 +20424,33 @@
     "_label_Full Comments": "Checked in via Maps Application \nSynopsis:\nVisited the location; all bays and doors were locked with a gated storefront. No one was present, and the office appeared closed.\n\nNotes:\n\t\u2022\tPrevious phone calls were unanswered\n\t\u2022\tPhone number appears disconnected\n\t\u2022\tLikely that the store is permanently closed\n\nDisposition:\nDisqualified \u2013 account should be marked closed/removed from the system.\n\nFollow-Up Steps (\u2264250 chars):\nPurge from Salesforce to prevent future visits or outreach. No follow-up required.",
     "Lead": null,
     "_label_Lead": "-"
+  },
+  {
+    "Created Date/Time": "2026-03-16T22:02:23Z",
+    "_label_Created Date/Time": "3/16/2026, 3:02 PM",
+    "Subject": "00UTO00000XoGHu2AN",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "00QTO000016JDVS2A4",
+    "_label_Company / Account": "Lemonaide Auto & Diesel Repair",
+    "Assigned": "005TO000008qrzhYAA",
+    "_label_Assigned": "Claudia Gerhardt",
+    "Full Comments": "Salesforce Note \u2013 LEMON AIDE Auto Repair and Diesel (Lake Elsinore, CA)\n\nStopped by the shop while visiting other merchants in the mall and spoke with John. He mentioned that they currently use American First Finance, though they only use it occasionally\u2014about twice a year. The majority of their customers pay with cash or credit card, so there isn\u2019t a significant need for financing options.\n\nJohn was not interested in enrolling with EasyPay at this time. I provided him with my contact informatio",
+    "_label_Full Comments": "Salesforce Note \u2013 LEMON AIDE Auto Repair and Diesel (Lake Elsinore, CA)\n\nStopped by the shop while visiting other merchants in the mall and spoke with John. He mentioned that they currently use American First Finance, though they only use it occasionally\u2014about twice a year. The majority of their customers pay with cash or credit card, so there isn\u2019t a significant need for financing options.\n\nJohn was not interested in enrolling with EasyPay at this time. I provided him with my contact informatio",
+    "Lead": "00QTO000016JDVS2A4",
+    "_label_Lead": "John Unknown"
+  },
+  {
+    "Created Date/Time": "2026-03-16T22:31:33Z",
+    "_label_Created Date/Time": "3/16/2026, 3:31 PM",
+    "Subject": "00UTO00000XoCXp2AN",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "00QTO000016JIDN2A4",
+    "_label_Company / Account": "Diamond Star Auto Glass and Tint - Lake Elsinore",
+    "Assigned": "005TO000008qrzhYAA",
+    "_label_Assigned": "Claudia Gerhardt",
+    "Full Comments": "Salesforce Note: Diamond Auto Glass and Tint ( Lake Elsinore, CA) stopped by this shop this was a click to create stop as I was visiting shops in the area. Met with Eddie discussed EasyPay options went over our program. He mentioned there is not really a need for it as majority of tickets are lower typical under $500 went over our program min and max dollar amounts. Discussed 90 days same as cash options. Gave him my contact info, he will keep us in mind if anything is needed.",
+    "_label_Full Comments": "Salesforce Note: Diamond Auto Glass and Tint ( Lake Elsinore, CA) stopped by this shop this was a click to create stop as I was visiting shops in the area. Met with Eddie discussed EasyPay options went over our program. He mentioned there is not really a need for it as majority of tickets are lower typical under $500 went over our program min and max dollar amounts. Discussed 90 days same as cash options. Gave him my contact info, he will keep us in mind if anything is needed.",
+    "Lead": "00QTO000016JIDN2A4",
+    "_label_Lead": "Eddie Unknown"
   }
 ]
