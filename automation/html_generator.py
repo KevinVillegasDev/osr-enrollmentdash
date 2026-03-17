@@ -910,6 +910,16 @@ def update_index_page(filepath: str, data: dict) -> bool:
     html = _replace_nth_mk_value(html, 0, str(data["field_reps_active"]),
                                  color="#2DD4A0", section_start=">Field Activity<")
 
+    # ── Rep Scorecard ─────────────────────────────────────────────────────
+    scorecard = data.get("rep_scorecard", [])
+    if scorecard:
+        scorecard_html = _generate_scorecard_table(
+            scorecard,
+            data.get("scorecard_month", ""),
+            data.get("scorecard_year", 2026),
+        )
+        html = _replace_between_markers(html, "Scorecard Data", scorecard_html)
+
     # ── Month Cards ──────────────────────────────────────────────────────
     month_cards_html = _generate_month_cards_html(data.get("month_cards", []))
     if month_cards_html:
@@ -1033,6 +1043,120 @@ def update_analytics_page(filepath: str, data: dict) -> bool:
     else:
         logger.error("HTML validation failed for %s", filepath)
         return False
+
+
+# ─── Rep Scorecard Generator ─────────────────────────────────────────────────
+
+def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int) -> str:
+    """
+    Generate the HTML table rows for the rep scorecard.
+
+    Returns the full inner content between the <!-- Rep Scorecard --> markers,
+    including the subtitle, table, and data.
+    """
+    def _fmt_funded(v):
+        if v >= 1_000_000:
+            return f"${v/1_000_000:.1f}M"
+        elif v >= 1_000:
+            return f"${v/1_000:.1f}K"
+        elif v > 0:
+            return f"${int(v)}"
+        return "$0"
+
+    rows = []
+    for i, rep in enumerate(scorecard):
+        stops = rep["stops_per_day"]
+        enrollments = rep["enrollments"]
+        funded = rep["funded"]
+
+        # Color-code enrollments
+        if enrollments >= 10:
+            enroll_color = "#2DD4A0"
+        elif enrollments >= 5:
+            enroll_color = "#FBBF24"
+        elif enrollments > 0:
+            enroll_color = "#F1F5F9"
+        else:
+            enroll_color = "#627289"
+
+        # Color-code funded
+        if funded >= 5000:
+            funded_color = "#2DD4A0"
+        elif funded > 0:
+            funded_color = "#FBBF24"
+        else:
+            funded_color = "#627289"
+
+        # Color-code stops
+        if stops >= 10:
+            stops_color = "#2DD4A0"
+        elif stops >= 5:
+            stops_color = "#FBBF24"
+        elif stops > 0:
+            stops_color = "#F1F5F9"
+        else:
+            stops_color = "#627289"
+
+        stripe = ' class="sc-stripe"' if i % 2 == 1 else ""
+        rows.append(
+            f'<tr{stripe}>'
+            f'<td class="sc-name">{rep["name"]}</td>'
+            f'<td class="sc-num" style="color:{stops_color}">{stops}</td>'
+            f'<td class="sc-num" style="color:{enroll_color}">{enrollments}</td>'
+            f'<td class="sc-num" style="color:{funded_color}">{_fmt_funded(funded)}</td>'
+            f'</tr>'
+        )
+
+    # Summary stats
+    total_enrollments = sum(r["enrollments"] for r in scorecard)
+    total_funded = sum(r["funded"] for r in scorecard)
+    active_reps = sum(1 for r in scorecard if r["enrollments"] > 0)
+
+    subtitle = (
+        f'Field activity &middot; enrollment &middot; revenue pipeline &middot; '
+        f'{month_name} {year}'
+    )
+
+    table = (
+        f'<div class="sc-subtitle">{subtitle}</div>\n'
+        f'<div class="sc-summary">'
+        f'<span><b style="color:#22D3EE">{active_reps}</b> active reps</span>'
+        f'<span><b style="color:#5B9BFF">{total_enrollments}</b> enrollments</span>'
+        f'<span><b style="color:#2DD4A0">{_fmt_funded(total_funded)}</b> funded</span>'
+        f'</div>\n'
+        f'<div style="overflow-x:auto">\n'
+        f'<table class="sc-table">\n'
+        f'<thead><tr>'
+        f'<th class="sc-th-name">Rep</th>'
+        f'<th class="sc-th-num">Stops/Day</th>'
+        f'<th class="sc-th-num">Enrollments</th>'
+        f'<th class="sc-th-num">Funded (M0)</th>'
+        f'</tr></thead>\n'
+        f'<tbody>\n'
+        + "\n".join(rows) +
+        f'\n</tbody>\n'
+        f'</table>\n'
+        f'</div>'
+    )
+
+    return table
+
+
+def _replace_between_markers(html: str, marker_name: str, content: str) -> str:
+    """
+    Replace content between <!-- marker_name --> and <!-- /marker_name --> markers.
+    """
+    pattern = re.compile(
+        rf'(<!--\s*{re.escape(marker_name)}\s*-->)'
+        rf'.*?'
+        rf'(<!--\s*/{re.escape(marker_name)}\s*-->)',
+        re.DOTALL
+    )
+    replacement = rf'\1\n{content}\n\2'
+    new_html, count = pattern.subn(replacement, html)
+    if count == 0:
+        logger.warning("Markers <!-- %s --> not found in HTML", marker_name)
+    return new_html
 
 
 # ─── Core Utilities ──────────────────────────────────────────────────────────

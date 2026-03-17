@@ -323,6 +323,7 @@ def main():
         cohort_kpis=cohort_kpis_dict,
         q1_result=q1_data,
         field_result=field_data,
+        current_month_key=month_key,
     )
 
     index_path = os.path.join(output_dir, "index.html")

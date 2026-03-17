@@ -61,6 +61,21 @@
     .sb-value { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
     .sb-sub { font-size: 12px; color: #627289; margin-top: 2px; }
 
+    /* Rep Scorecard */
+    .sc-card { background: #151E2F; border: 1px solid #293852; border-radius: 16px; padding: 28px; margin-bottom: 48px; }
+    .sc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+    .sc-title { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+    .sc-subtitle { font-size: 13px; color: #8494AB; margin-bottom: 16px; }
+    .sc-summary { display: flex; gap: 24px; margin-bottom: 16px; font-size: 13px; color: #8494AB; }
+    .sc-summary b { font-weight: 700; }
+    .sc-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .sc-table thead { border-bottom: 1px solid #293852; }
+    .sc-th-name { text-align: left; padding: 10px 12px; font-size: 11px; color: #627289; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+    .sc-th-num { text-align: right; padding: 10px 12px; font-size: 11px; color: #627289; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+    .sc-name { padding: 10px 12px; font-weight: 600; color: #F1F5F9; white-space: nowrap; }
+    .sc-num { text-align: right; padding: 10px 12px; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .sc-stripe { background: rgba(13,19,33,0.5); }
+
     @media (max-width: 768px) {
       .hero { padding: 40px 20px 36px; }
       .hero h1 { font-size: 28px; }
@@ -125,6 +140,29 @@
         <div class="sb-value" style="color:#A78BFA">3</div>
         <div class="sb-sub">January, February & March 2026</div>
       </div>
+    </div>
+
+    <div class="sc-card">
+      <div class="sc-header">
+        <div class="sc-title">Rep Scorecard</div>
+        <span class="month-tag" style="background:rgba(34,211,238,0.15);color:#22D3EE;border:1px solid rgba(34,211,238,0.3)">Live</span>
+      </div>
+      <!-- Scorecard Data -->
+      <div class="sc-subtitle">Field activity &middot; enrollment &middot; revenue pipeline &middot; March 2026</div>
+      <div class="sc-summary">
+        <span><b style="color:#22D3EE">0</b> active reps</span>
+        <span><b style="color:#5B9BFF">0</b> enrollments</span>
+        <span><b style="color:#2DD4A0">$0</b> funded</span>
+      </div>
+      <div style="overflow-x:auto">
+      <table class="sc-table">
+      <thead><tr><th class="sc-th-name">Rep</th><th class="sc-th-num">Stops/Day</th><th class="sc-th-num">Enrollments</th><th class="sc-th-num">Funded (M0)</th></tr></thead>
+      <tbody>
+      <tr><td class="sc-name" colspan="4" style="text-align:center;color:#627289;padding:24px">Pipeline will populate on next refresh</td></tr>
+      </tbody>
+      </table>
+      </div>
+      <!-- /Scorecard Data -->
     </div>
 
     <!-- Cohort Tracker -->

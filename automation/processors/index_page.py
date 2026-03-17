@@ -8,7 +8,7 @@ and per-month dashboard card values for index.html.
 
 import logging
 
-from ..config import MONTH_ABBREV
+from ..config import MONTH_ABBREV, OSR_ROSTER
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +19,8 @@ _ABBREV_TO_NUM = {v: k for k, v in MONTH_ABBREV.items()}
 def process(monthly_results: dict[str, dict],
             cohort_kpis: dict,
             q1_result: dict,
-            field_result: dict) -> dict:
+            field_result: dict,
+            current_month_key: str = "") -> dict:
     """
     Aggregate all processor outputs into index.html display values.
 
@@ -92,6 +93,15 @@ def process(monthly_results: dict[str, dict],
         ytd_total_enrollments, ytd_osr_credited, ytd_funded_display, months_tracked
     )
 
+    # ── Rep Scorecard ─────────────────────────────────────────────────────
+    # Merge field activity (stops/day), enrollments, and M0 funded per rep
+    current_data = monthly_results.get(current_month_key, {}) if current_month_key else {}
+    scorecard = _build_rep_scorecard(field_result, current_data)
+
+    # Determine current month label for scorecard subtitle
+    scorecard_month = current_data.get("month_name", "")
+    scorecard_year = current_data.get("year", 2026)
+
     return {
         # YTD Summary
         "ytd_total_enrollments": ytd_total_enrollments,
@@ -124,7 +134,60 @@ def process(monthly_results: dict[str, dict],
 
         # Per-month dashboard cards
         "month_cards": month_cards,
+
+        # Rep Scorecard
+        "rep_scorecard": scorecard,
+        "scorecard_month": scorecard_month,
+        "scorecard_year": scorecard_year,
     }
+
+
+def _build_rep_scorecard(field_result: dict, current_month_data: dict) -> list[dict]:
+    """
+    Build per-rep scorecard combining field activity, enrollments, and M0 funded.
+
+    Returns list of dicts sorted by enrollments descending:
+        [{name, stops_per_day, enrollments, funded}, ...]
+    """
+    # 1. Per-rep avg stops/day from field activity
+    rep_stops = {}
+    for rep_act in field_result.get("repActivity", []):
+        name = rep_act.get("n", "")
+        total = rep_act.get("t", 0)
+        daily = rep_act.get("daily", {})
+        active_days = len(daily)
+        avg = round(total / active_days, 1) if active_days > 0 else 0
+        rep_stops[name] = avg
+
+    # 2. Per-rep enrollment counts from current month repCredits
+    rep_enrollments = {}
+    for rc in current_month_data.get("repCredits", []):
+        rep_enrollments[rc["n"]] = rc["v"]
+
+    # 3. Per-rep M0 funded volume from current month repMerchants
+    rep_funded = {}
+    for osr, merchants in current_month_data.get("repMerchants", {}).items():
+        rep_funded[osr] = sum(m.get("f", 0) for m in merchants)
+
+    # Merge across all OSR roster reps
+    scorecard = []
+    for name in OSR_ROSTER:
+        scorecard.append({
+            "name": name,
+            "stops_per_day": rep_stops.get(name, 0),
+            "enrollments": rep_enrollments.get(name, 0),
+            "funded": round(rep_funded.get(name, 0), 2),
+        })
+
+    # Sort by enrollments descending, then by funded descending
+    scorecard.sort(key=lambda r: (r["enrollments"], r["funded"]), reverse=True)
+
+    logger.info("Scorecard: %d reps, %d with stops, %d with enrollments",
+                len(scorecard),
+                sum(1 for r in scorecard if r["stops_per_day"] > 0),
+                sum(1 for r in scorecard if r["enrollments"] > 0))
+
+    return scorecard
 
 
 def _months_tracked_sub(monthly_results: dict) -> str:
