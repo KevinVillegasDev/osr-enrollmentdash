@@ -45,7 +45,8 @@
     overlay.style.cssText = [
       'position:fixed', 'inset:0', 'z-index:999999',
       'background:#0D1321', 'display:flex', 'align-items:center',
-      'justify-content:center', 'font-family:"DM Sans","Segoe UI",system-ui,sans-serif'
+      'justify-content:center', 'font-family:"DM Sans","Segoe UI",system-ui,sans-serif',
+      'visibility:visible'
     ].join(';');
 
     var card = document.createElement('div');
