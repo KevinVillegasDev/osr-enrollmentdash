@@ -33,7 +33,6 @@ OSR_ROSTER = [
     "Matthew MacDonald",
     "Omar Corona",
     "Phillip Mason",
-    "Sara Porter",
     "Stephanie Whitlock",
     "Yemaira Hernandez",
     "Outside Sales Manager",
