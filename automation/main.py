@@ -195,7 +195,32 @@ def main():
             active_cohort, prev_month
         )
 
-    # Build cohort configs for all tracked cohorts
+    # 4. Build current month cohort (M0 in progress)
+    #    Uses this month's credited enrollments + Report 3 (current_month_activity)
+    current_cohort_enrollments = reports.get("credited_enrollments", [])
+    current_cohort_activity = {}
+    if reports.get("current_month_activity"):
+        current_cohort_activity = _normalize_matrix_to_monthly(
+            reports["current_month_activity"]
+        )
+        logger.info("Normalized current month activity into %d months: %s",
+                     len(current_cohort_activity),
+                     {k: len(v) for k, v in current_cohort_activity.items()})
+
+    if current_cohort_enrollments:
+        current_var_name = f"{MONTH_ABBREV[current_month]}Cohort"
+        current_cohort = cohort_tracking.process_cohort(
+            credited_enrollments=current_cohort_enrollments,
+            monthly_activity=current_cohort_activity,
+            enrollment_month=current_month,
+            enrollment_year=current_year,
+        )
+        cohorts[current_var_name] = current_cohort
+        cohort_kpis_dict["current_cohort"] = cohort_tracking.compute_cohort_kpis(
+            current_cohort, current_month
+        )
+
+    # Build cohort configs for all tracked cohorts (including current month)
     cohort_configs = _build_cohort_configs(current_month, current_year)
 
     # Update cohort-tracking.html (always update configs/tabs, even if no new data)
@@ -946,8 +971,8 @@ def _build_cohort_configs(current_month: int, current_year: int) -> list:
     start_month = 1
     start_year = 2026
 
-    # Build configs for each enrollment month from Jan 2026 to prev_month
-    for enrollment_month in range(start_month, current_month):
+    # Build configs for each enrollment month from Jan 2026 to current_month (inclusive)
+    for enrollment_month in range(start_month, current_month + 1):
         enrollment_year = current_year
         m0_abbrev = MONTH_ABBREV[enrollment_month]
 
@@ -971,10 +996,12 @@ def _build_cohort_configs(current_month: int, current_year: int) -> list:
         m1_in_progress = (m1_year == today.year and m1_month == today.month)
 
         # Determine cohort type
-        if enrollment_month == start_month and enrollment_year == start_year:
+        if enrollment_month == current_month:
+            cohort_type = "new"  # Current month, M0 in progress
+        elif enrollment_month == start_month and enrollment_year == start_year:
             cohort_type = "baseline"
         elif enrollment_month == current_month - 1:
-            cohort_type = "active"
+            cohort_type = "active"  # Previous month, M1 deadline this month
         else:
             cohort_type = "completed"
 
@@ -993,7 +1020,12 @@ def _build_cohort_configs(current_month: int, current_year: int) -> list:
             month_labels.append(f"{m2_label} $")
 
         # Build deadline info
-        if m1_in_progress:
+        if cohort_type == "new":
+            _, days_in_month = calendar.monthrange(today.year, today.month)
+            days_remaining = days_in_month - today.day
+            deadline = f"{MONTH_NAMES[m1_month]} (M1 upcoming)"
+            deadline_sub = f"{days_remaining} days left in M0"
+        elif m1_in_progress:
             _, days_in_month = calendar.monthrange(today.year, today.month)
             days_remaining = days_in_month - today.day
             deadline = f"{MONTH_NAMES[m1_month]} (M1 in progress)"
@@ -1006,7 +1038,12 @@ def _build_cohort_configs(current_month: int, current_year: int) -> list:
             deadline_sub = ""
 
         # Note text (HTML)
-        if cohort_type == "active":
+        if cohort_type == "new":
+            note = (f'<div class="note"><b>New cohort (M0 in progress)</b> &mdash; '
+                    f'{MONTH_NAMES[enrollment_month]} enrollees, Month 0 tracking. '
+                    f'$15K deadline: end of {MONTH_NAMES[m1_month]} (M1). '
+                    f'Miss? $30K by end of {MONTH_NAMES[m2_month]} (M2 true-up).</div>')
+        elif cohort_type == "active":
             note = (f'<div class="note"><b>Active cohort</b> &mdash; '
                     f'{MONTH_NAMES[enrollment_month]} enrollees must produce $15K by end of '
                     f'{MONTH_NAMES[m1_month]} (M0+M1). Miss? $30K by end of '
@@ -1035,8 +1072,8 @@ def _build_cohort_configs(current_month: int, current_year: int) -> list:
             "deadlineSub": deadline_sub,
         })
 
-    # Sort: active first, then reverse chronological
-    type_order = {"active": 0, "completed": 1, "baseline": 2}
+    # Sort: new (current month) first, then active, then reverse chronological
+    type_order = {"new": 0, "active": 1, "completed": 2, "baseline": 3}
     configs.sort(key=lambda c: (type_order.get(c["type"], 1),
                                  -_month_num_from_id(c["id"])))
 

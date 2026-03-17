@@ -17,7 +17,7 @@ cohort-tracking.html    - Cohort commission tracker (tabbed: active + baseline)
 q1-enrollment.html      - Q1 2026 enrollment compliance tracker
 field-activity.html     - Weekly field check-in tracker (Maps data)
 automation/             - Salesforce API automation pipeline (Python)
-.github/workflows/      - GitHub Actions cron workflow (2x daily)
+.github/workflows/      - GitHub Actions cron workflow (hourly, weekdays)
 netlify/functions/      - Netlify Function for manual force-update trigger
 data/snapshots/         - Raw Salesforce JSON archives per month
 requirements.txt        - Python dependencies (requests)
@@ -135,7 +135,7 @@ Weekly check-in data from Salesforce Maps.
 ## Data Flow
 
 **Automated (active, hands-free):**
-1. GitHub Actions runs 2x daily (7am + 11pm CT, weekdays) via `.github/workflows/update-dashboards.yml`
+1. GitHub Actions runs hourly (5 AM – 6 PM PST, weekdays) via `.github/workflows/update-dashboards.yml`
 2. Python script authenticates to Salesforce via Connected App (OAuth 2.0 Client Credentials)
 3. Pulls 5 core reports via Salesforce Analytics REST API (v62.0)
 4. Normalization step converts raw Salesforce data (IDs, null placeholders) to display values

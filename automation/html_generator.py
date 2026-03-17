@@ -329,16 +329,23 @@ def update_cohort_tracking(filepath: str, cohorts: dict[str, list],
 
 def _generate_cohort_tabs_html(configs: list) -> str:
     """Generate the tab button HTML for cohort tracking."""
+    # First config entry is the default active tab
+    default_id = configs[0]["id"] if configs else ""
+
     tabs = []
     for cfg in configs:
         tab_class = "tab"
-        if cfg.get("type") == "active":
-            tab_class += " active"
+        if cfg["id"] == default_id:
+            tab_class += " active"  # Currently selected tab
         elif cfg.get("type") == "baseline":
             tab_class += " tab-dim"
 
         tag_text = ""
-        if cfg["type"] == "active":
+        tag_style = ""
+        if cfg["type"] == "new":
+            tag_text = "New"
+            tag_style = ' style="background:rgba(167,139,250,.18);color:#A78BFA"'
+        elif cfg["type"] == "active":
             tag_text = "Active"
         elif cfg["type"] == "baseline":
             tag_text = "Baseline"
@@ -347,7 +354,7 @@ def _generate_cohort_tabs_html(configs: list) -> str:
         label = cfg["label"]
         tab_html = f'<div class="{tab_class}" data-tab="{cid}" onclick="switchTab(\'{cid}\')">{label}'
         if tag_text:
-            tab_html += f' <span class="tag">{tag_text}</span>'
+            tab_html += f' <span class="tag"{tag_style}>{tag_text}</span>'
         tab_html += '</div>'
         tabs.append(tab_html)
 
