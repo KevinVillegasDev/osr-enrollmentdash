@@ -149,8 +149,9 @@ def _build_rep_scorecard(field_result: dict, current_month_data: dict) -> list[d
     Returns list of dicts sorted by enrollments descending:
         [{name, stops_per_day, enrollments, funded}, ...]
     """
-    # 1. Per-rep avg stops/day from field activity
+    # 1. Per-rep avg stops/day and prospect stops from field activity
     rep_stops = {}
+    rep_prospect_stops = {}
     for rep_act in field_result.get("repActivity", []):
         name = rep_act.get("n", "")
         total = rep_act.get("t", 0)
@@ -158,6 +159,7 @@ def _build_rep_scorecard(field_result: dict, current_month_data: dict) -> list[d
         active_days = len(daily)
         avg = round(total / active_days, 1) if active_days > 0 else 0
         rep_stops[name] = avg
+        rep_prospect_stops[name] = rep_act.get("pr", 0)
 
     # 2. Per-rep enrollment counts from current month repCredits
     rep_enrollments = {}
@@ -172,10 +174,16 @@ def _build_rep_scorecard(field_result: dict, current_month_data: dict) -> list[d
     # Merge across all OSR roster reps
     scorecard = []
     for name in OSR_ROSTER:
+        prospects = rep_prospect_stops.get(name, 0)
+        enrollments = rep_enrollments.get(name, 0)
+        # Prospect stops per enrollment — lower = more efficient
+        ratio = round(prospects / enrollments, 1) if enrollments > 0 else None
         scorecard.append({
             "name": name,
             "stops_per_day": rep_stops.get(name, 0),
-            "enrollments": rep_enrollments.get(name, 0),
+            "prospect_stops": prospects,
+            "enrollments": enrollments,
+            "stops_per_enroll": ratio,
             "funded": round(rep_funded.get(name, 0), 2),
         })
 

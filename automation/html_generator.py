@@ -832,23 +832,23 @@ def update_index_page(filepath: str, data: dict) -> bool:
     # Months Tracked
     html = _replace_sb_value(html, "#A78BFA", str(data["ytd_months_tracked"]), data["ytd_months_sub"])
 
-    # ── Commission Tracking Card ─────────────────────────────────────────
+    # ── Enrollment Production Tracking Card ─────────────────────────────────────────
     cohort = data.get("cohort", {})
     active = cohort.get("active_cohort", {})
     baseline = cohort.get("baseline_cohort", {})
 
     if active:
-        # Active cohort funded (unique green in Commission Tracking section)
+        # Active cohort funded (unique green in Enrollment Production Tracking section)
         html = _replace_nth_mk_value(html, 0, active.get("total_funded_display", "$0"),
-                                     color="#2DD4A0", section_start="Commission Tracking")
+                                     color="#2DD4A0", section_start="Enrollment Production Tracking")
     if baseline:
-        # Baseline cohort funded (unique blue in Commission Tracking section)
+        # Baseline cohort funded (unique blue in Enrollment Production Tracking section)
         html = _replace_nth_mk_value(html, 0, baseline.get("total_funded_display", "$0"),
-                                     color="#5B9BFF", section_start="Commission Tracking")
+                                     color="#5B9BFF", section_start="Enrollment Production Tracking")
     if active:
-        # At $15K Target (first amber in Commission Tracking section)
+        # At $15K Target (first amber in Enrollment Production Tracking section)
         html = _replace_nth_mk_value(html, 0, active.get("at_target_display", "0 / 0"),
-                                     color="#FBBF24", section_start="Commission Tracking")
+                                     color="#FBBF24", section_start="Enrollment Production Tracking")
 
     # ── Q1 Enrollment Compliance Card ────────────────────────────────────
     # Find the current quarter label in the HTML (may be Q1, Q2, etc.)
@@ -917,7 +917,7 @@ def update_index_page(filepath: str, data: dict) -> bool:
     html = _replace_nth_mk_value(html, 0, str(data["field_reps_active"]),
                                  color="#2DD4A0", section_start=">Field Activity<")
 
-    # ── Rep Scorecard ─────────────────────────────────────────────────────
+    # ── Rep Leaderboard ─────────────────────────────────────────────────────
     scorecard = data.get("rep_scorecard", [])
     if scorecard:
         scorecard_html = _generate_scorecard_table(
@@ -1052,13 +1052,13 @@ def update_analytics_page(filepath: str, data: dict) -> bool:
         return False
 
 
-# ─── Rep Scorecard Generator ─────────────────────────────────────────────────
+# ─── Rep Leaderboard Generator ─────────────────────────────────────────────────
 
 def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int) -> str:
     """
-    Generate the HTML table rows for the rep scorecard.
+    Generate the HTML table rows for the rep leaderboard.
 
-    Returns the full inner content between the <!-- Rep Scorecard --> markers,
+    Returns the full inner content between the <!-- Scorecard Data --> markers,
     including the subtitle, table, and data.
     """
     def _fmt_funded(v):
@@ -1075,6 +1075,7 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
         stops = rep["stops_per_day"]
         enrollments = rep["enrollments"]
         funded = rep["funded"]
+        spe = rep.get("stops_per_enroll")  # None if 0 enrollments
 
         # Color-code enrollments
         if enrollments >= 10:
@@ -1104,12 +1105,27 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
         else:
             stops_color = "#627289"
 
+        # Color-code stops/enrollment ratio (lower = better)
+        if spe is None:
+            spe_display = "—"
+            spe_color = "#627289"
+        elif spe <= 3:
+            spe_display = str(spe)
+            spe_color = "#2DD4A0"
+        elif spe <= 8:
+            spe_display = str(spe)
+            spe_color = "#FBBF24"
+        else:
+            spe_display = str(spe)
+            spe_color = "#F87171"
+
         stripe = ' class="sc-stripe"' if i % 2 == 1 else ""
         rows.append(
             f'<tr{stripe}>'
             f'<td class="sc-name">{rep["name"]}</td>'
             f'<td class="sc-num" style="color:{stops_color}">{stops}</td>'
             f'<td class="sc-num" style="color:{enroll_color}">{enrollments}</td>'
+            f'<td class="sc-num" style="color:{spe_color}">{spe_display}</td>'
             f'<td class="sc-num" style="color:{funded_color}">{_fmt_funded(funded)}</td>'
             f'</tr>'
         )
@@ -1118,6 +1134,15 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
     total_enrollments = sum(r["enrollments"] for r in scorecard)
     total_funded = sum(r["funded"] for r in scorecard)
     active_reps = sum(1 for r in scorecard if r["enrollments"] > 0)
+
+    # Avg stops/enrollment across reps who have enrollments
+    reps_with_enrollments = [r for r in scorecard if r["enrollments"] > 0]
+    if reps_with_enrollments:
+        total_prospects = sum(r.get("prospect_stops", 0) for r in reps_with_enrollments)
+        total_enroll = sum(r["enrollments"] for r in reps_with_enrollments)
+        avg_spe = round(total_prospects / total_enroll, 1) if total_enroll > 0 else 0
+    else:
+        avg_spe = 0
 
     subtitle = (
         f'Field activity &middot; enrollment &middot; revenue pipeline &middot; '
@@ -1130,6 +1155,7 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
         f'<span><b style="color:#22D3EE">{active_reps}</b> active reps</span>'
         f'<span><b style="color:#5B9BFF">{total_enrollments}</b> enrollments</span>'
         f'<span><b style="color:#2DD4A0">{_fmt_funded(total_funded)}</b> funded</span>'
+        f'<span><b style="color:#FBBF24">{avg_spe}</b> avg stops/enroll</span>'
         f'</div>\n'
         f'<div style="overflow-x:auto">\n'
         f'<table class="sc-table">\n'
@@ -1137,6 +1163,7 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
         f'<th class="sc-th-name">Rep</th>'
         f'<th class="sc-th-num">Stops/Day</th>'
         f'<th class="sc-th-num">Enrollments</th>'
+        f'<th class="sc-th-num">Stops/Enroll</th>'
         f'<th class="sc-th-num">Funded (M0)</th>'
         f'</tr></thead>\n'
         f'<tbody>\n'
