@@ -149,9 +149,11 @@ def _build_rep_scorecard(field_result: dict, current_month_data: dict) -> list[d
     Returns list of dicts sorted by enrollments descending:
         [{name, stops_per_day, enrollments, funded}, ...]
     """
-    # 1. Per-rep avg stops/day and prospect stops from field activity
+    # 1. Per-rep avg stops/day, prospect/existing stops from field activity
     rep_stops = {}
     rep_prospect_stops = {}
+    rep_existing_stops = {}
+    rep_total_stops = {}
     for rep_act in field_result.get("repActivity", []):
         name = rep_act.get("n", "")
         total = rep_act.get("t", 0)
@@ -160,6 +162,8 @@ def _build_rep_scorecard(field_result: dict, current_month_data: dict) -> list[d
         avg = round(total / active_days, 1) if active_days > 0 else 0
         rep_stops[name] = avg
         rep_prospect_stops[name] = rep_act.get("pr", 0)
+        rep_existing_stops[name] = rep_act.get("ex", 0)
+        rep_total_stops[name] = total
 
     # 2. Per-rep enrollment counts from current month repCredits
     rep_enrollments = {}
@@ -175,13 +179,20 @@ def _build_rep_scorecard(field_result: dict, current_month_data: dict) -> list[d
     scorecard = []
     for name in OSR_ROSTER:
         prospects = rep_prospect_stops.get(name, 0)
+        existing = rep_existing_stops.get(name, 0)
+        total = rep_total_stops.get(name, 0)
         enrollments = rep_enrollments.get(name, 0)
         # Prospect stops per enrollment — lower = more efficient
         ratio = round(prospects / enrollments, 1) if enrollments > 0 else None
+        # Prospect % of total stops — hunting vs farming indicator
+        prospect_pct = round(prospects / total * 100) if total > 0 else None
         scorecard.append({
             "name": name,
             "stops_per_day": rep_stops.get(name, 0),
             "prospect_stops": prospects,
+            "existing_stops": existing,
+            "total_stops": total,
+            "prospect_pct": prospect_pct,
             "enrollments": enrollments,
             "stops_per_enroll": ratio,
             "funded": round(rep_funded.get(name, 0), 2),

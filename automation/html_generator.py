@@ -1076,6 +1076,8 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
         enrollments = rep["enrollments"]
         funded = rep["funded"]
         spe = rep.get("stops_per_enroll")  # None if 0 enrollments
+        prospect_stops = rep.get("prospect_stops", 0)
+        prospect_pct = rep.get("prospect_pct")  # None if 0 total stops
 
         # Color-code enrollments
         if enrollments >= 10:
@@ -1108,24 +1110,43 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
         # Color-code stops/enrollment ratio (lower = better)
         if spe is None:
             spe_display = "—"
+            spe_sub = ""
             spe_color = "#627289"
         elif spe <= 3:
             spe_display = str(spe)
+            spe_sub = f'<div style="font-size:0.7em;color:#627289;margin-top:1px">{prospect_stops} visits</div>'
             spe_color = "#2DD4A0"
         elif spe <= 8:
             spe_display = str(spe)
+            spe_sub = f'<div style="font-size:0.7em;color:#627289;margin-top:1px">{prospect_stops} visits</div>'
             spe_color = "#FBBF24"
         else:
             spe_display = str(spe)
+            spe_sub = f'<div style="font-size:0.7em;color:#627289;margin-top:1px">{prospect_stops} visits</div>'
             spe_color = "#F87171"
+
+        # Color-code prospect % (higher = more hunting)
+        if prospect_pct is None:
+            pct_display = "—"
+            pct_color = "#627289"
+        elif prospect_pct >= 70:
+            pct_display = f"{prospect_pct}%"
+            pct_color = "#5B9BFF"  # blue = heavy hunter
+        elif prospect_pct >= 40:
+            pct_display = f"{prospect_pct}%"
+            pct_color = "#A78BFA"  # purple = balanced
+        else:
+            pct_display = f"{prospect_pct}%"
+            pct_color = "#22D3EE"  # cyan = farmer
 
         stripe = ' class="sc-stripe"' if i % 2 == 1 else ""
         rows.append(
             f'<tr{stripe}>'
             f'<td class="sc-name">{rep["name"]}</td>'
             f'<td class="sc-num" style="color:{stops_color}">{stops}</td>'
+            f'<td class="sc-num" style="color:{pct_color}">{pct_display}</td>'
             f'<td class="sc-num" style="color:{enroll_color}">{enrollments}</td>'
-            f'<td class="sc-num" style="color:{spe_color}">{spe_display}</td>'
+            f'<td class="sc-num" style="color:{spe_color}">{spe_display}{spe_sub}</td>'
             f'<td class="sc-num" style="color:{funded_color}">{_fmt_funded(funded)}</td>'
             f'</tr>'
         )
@@ -1144,6 +1165,15 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
     else:
         avg_spe = 0
 
+    # Team-wide prospect % (all reps with any stops)
+    reps_with_stops = [r for r in scorecard if r.get("total_stops", 0) > 0]
+    if reps_with_stops:
+        team_prospect = sum(r.get("prospect_stops", 0) for r in reps_with_stops)
+        team_total = sum(r.get("total_stops", 0) for r in reps_with_stops)
+        team_prospect_pct = round(team_prospect / team_total * 100) if team_total > 0 else 0
+    else:
+        team_prospect_pct = 0
+
     subtitle = (
         f'Field activity &middot; enrollment &middot; revenue pipeline &middot; '
         f'{month_name} {year}'
@@ -1156,12 +1186,14 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
         f'<span><b style="color:#5B9BFF">{total_enrollments}</b> enrollments</span>'
         f'<span><b style="color:#2DD4A0">{_fmt_funded(total_funded)}</b> funded</span>'
         f'<span><b style="color:#FBBF24">{avg_spe}</b> avg stops/enroll</span>'
+        f'<span><b style="color:#A78BFA">{team_prospect_pct}%</b> team prospect</span>'
         f'</div>\n'
         f'<div style="overflow-x:auto">\n'
         f'<table class="sc-table">\n'
         f'<thead><tr>'
         f'<th class="sc-th-name">Rep</th>'
         f'<th class="sc-th-num">Stops/Day</th>'
+        f'<th class="sc-th-num">Prospect %</th>'
         f'<th class="sc-th-num">Enrollments</th>'
         f'<th class="sc-th-num">Stops/Enroll</th>'
         f'<th class="sc-th-num">Funded (M0)</th>'
