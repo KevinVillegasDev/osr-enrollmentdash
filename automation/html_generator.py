@@ -1307,7 +1307,7 @@ def _generate_isr_scorecard_table(isr_scorecard: list[dict]) -> str:
         f'<th class="sc-th-name">Rep</th>'
         f'<th class="sc-th-num">Talk Time</th>'
         f'<th class="sc-th-num">Calls</th>'
-        f'<th class="sc-th-num" style="width:140px">Distribution</th>'
+        f'<th class="sc-th-num" style="width:140px;cursor:help" title="Talk time relative to top performer — full bar = highest talk time this month">Distribution</th>'
         f'</tr></thead>\n'
         f'<tbody>\n'
         + "\n".join(rows) +
