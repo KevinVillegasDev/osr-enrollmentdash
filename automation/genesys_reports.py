@@ -38,7 +38,7 @@ def fetch_agent_talk_time(client, interval: str = None) -> list[dict]:
         "interval": interval,
         "granularity": "PT24H",
         "groupBy": ["userId"],
-        "metrics": ["tTalk", "nConnected"],
+        "metrics": ["tTalk"],
         "filter": {
             "type": "and",
             "predicates": [
@@ -83,9 +83,8 @@ def fetch_agent_talk_time(client, interval: str = None) -> list[dict]:
                 metric_name = metric.get("metric", "")
                 stats = metric.get("stats", {})
                 if metric_name == "tTalk":
-                    # tTalk is in milliseconds
+                    # tTalk stats.sum = total milliseconds, stats.count = number of talk segments
                     total_talk += stats.get("sum", 0)
-                elif metric_name == "nConnected":
                     total_calls += int(stats.get("count", 0))
 
         user_talk[user_id] = user_talk.get(user_id, 0) + total_talk
