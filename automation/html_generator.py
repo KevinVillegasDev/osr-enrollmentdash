@@ -927,6 +927,12 @@ def update_index_page(filepath: str, data: dict) -> bool:
         )
         html = _replace_between_markers(html, "Scorecard Data", scorecard_html)
 
+    # ── ISR Leaderboard ──────────────────────────────────────────────────
+    isr_scorecard = data.get("isr_scorecard", [])
+    if isr_scorecard:
+        isr_html = _generate_isr_scorecard_table(isr_scorecard)
+        html = _replace_between_markers(html, "ISR Scorecard Data", isr_html)
+
     # ── Month Cards ──────────────────────────────────────────────────────
     month_cards_html = _generate_month_cards_html(data.get("month_cards", []))
     if month_cards_html:
@@ -1197,6 +1203,111 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
         f'<th class="sc-th-num">Enrollments</th>'
         f'<th class="sc-th-num">Stops/Enroll</th>'
         f'<th class="sc-th-num">Funded (M0)</th>'
+        f'</tr></thead>\n'
+        f'<tbody>\n'
+        + "\n".join(rows) +
+        f'\n</tbody>\n'
+        f'</table>\n'
+        f'</div>'
+    )
+
+    return table
+
+
+def _generate_isr_scorecard_table(isr_scorecard: list[dict]) -> str:
+    """
+    Generate the HTML table for the ISR leaderboard (Genesys talk time).
+
+    Returns the full inner content between the <!-- ISR Scorecard Data --> markers.
+    """
+    rows = []
+    max_talk = max((r["talk_seconds"] for r in isr_scorecard), default=1) or 1
+
+    for i, rep in enumerate(isr_scorecard):
+        talk_display = rep.get("talk_display", "0m")
+        talk_seconds = rep.get("talk_seconds", 0)
+        calls = rep.get("calls", 0)
+        bar_pct = round((talk_seconds / max_talk) * 100) if max_talk > 0 else 0
+
+        # Color-code talk time
+        if talk_seconds >= 8 * 3600:  # 8+ hours
+            talk_color = "#2DD4A0"
+        elif talk_seconds >= 4 * 3600:  # 4+ hours
+            talk_color = "#FBBF24"
+        elif talk_seconds > 0:
+            talk_color = "#F1F5F9"
+        else:
+            talk_color = "#627289"
+
+        # Color-code calls
+        if calls >= 200:
+            calls_color = "#2DD4A0"
+        elif calls >= 100:
+            calls_color = "#FBBF24"
+        elif calls > 0:
+            calls_color = "#F1F5F9"
+        else:
+            calls_color = "#627289"
+
+        # Rank badge
+        rank = i + 1
+        if rank == 1:
+            rank_style = "background:rgba(251,191,36,0.15);color:#FBBF24"
+        elif rank == 2:
+            rank_style = "background:rgba(148,163,184,0.15);color:#94A3B8"
+        elif rank == 3:
+            rank_style = "background:rgba(180,120,80,0.15);color:#CD7F32"
+        else:
+            rank_style = "background:rgba(98,114,137,0.1);color:#627289"
+
+        stripe = ' class="sc-stripe"' if i % 2 == 1 else ""
+        rows.append(
+            f'<tr{stripe}>'
+            f'<td class="sc-num" style="width:36px"><span style="display:inline-flex;align-items:center;'
+            f'justify-content:center;width:24px;height:24px;border-radius:6px;font-size:0.75rem;'
+            f'font-weight:700;{rank_style}">{rank}</span></td>'
+            f'<td class="sc-name">{rep["name"]}</td>'
+            f'<td class="sc-num" style="color:{talk_color}">{talk_display}</td>'
+            f'<td class="sc-num" style="color:{calls_color}">{calls}</td>'
+            f'<td class="sc-num" style="width:140px;padding-right:16px">'
+            f'<div style="height:6px;border-radius:3px;background:rgba(34,211,238,0.15)">'
+            f'<div style="height:100%;border-radius:3px;width:{bar_pct}%;'
+            f'background:linear-gradient(90deg,#22D3EE,#5B9BFF)"></div></div></td>'
+            f'</tr>'
+        )
+
+    # Summary stats
+    total_talk = sum(r["talk_seconds"] for r in isr_scorecard)
+    total_calls = sum(r.get("calls", 0) for r in isr_scorecard)
+    active_reps = sum(1 for r in isr_scorecard if r["talk_seconds"] > 0)
+    avg_talk = total_talk // active_reps if active_reps > 0 else 0
+
+    total_h = total_talk // 3600
+    total_m = (total_talk % 3600) // 60
+    avg_h = avg_talk // 3600
+    avg_m = (avg_talk % 3600) // 60
+
+    total_display = f"{total_h}h {total_m}m" if total_h > 0 else f"{total_m}m"
+    avg_display = f"{avg_h}h {avg_m}m" if avg_h > 0 else f"{avg_m}m"
+
+    subtitle = 'Genesys Cloud &middot; voice calls &middot; current week'
+
+    table = (
+        f'<div class="sc-subtitle">{subtitle}</div>\n'
+        f'<div class="sc-summary">'
+        f'<span><b style="color:#22D3EE">{active_reps}</b> active reps</span>'
+        f'<span><b style="color:#5B9BFF">{total_display}</b> total talk</span>'
+        f'<span><b style="color:#2DD4A0">{avg_display}</b> avg per rep</span>'
+        f'<span><b style="color:#FBBF24">{total_calls:,}</b> calls</span>'
+        f'</div>\n'
+        f'<div style="overflow-x:auto">\n'
+        f'<table class="sc-table">\n'
+        f'<thead><tr>'
+        f'<th class="sc-th-num" style="width:36px">#</th>'
+        f'<th class="sc-th-name">Rep</th>'
+        f'<th class="sc-th-num">Talk Time</th>'
+        f'<th class="sc-th-num">Calls</th>'
+        f'<th class="sc-th-num" style="width:140px">Distribution</th>'
         f'</tr></thead>\n'
         f'<tbody>\n'
         + "\n".join(rows) +

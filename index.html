@@ -65,7 +65,11 @@
     /* Rep Scorecard */
     .sc-card { background: #151E2F; border: 1px solid #293852; border-radius: 16px; padding: 28px; margin-bottom: 48px; }
     .sc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
-    .sc-title { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+    .sc-title { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; display: flex; align-items: center; gap: 12px; }
+    .sc-toggle { display: inline-flex; background: #0D1321; border-radius: 8px; border: 1px solid #293852; overflow: hidden; }
+    .sc-toggle-btn { padding: 6px 14px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; background: transparent; color: #627289; transition: all 0.2s; font-family: inherit; letter-spacing: 0.3px; }
+    .sc-toggle-btn.active { background: rgba(34,211,238,0.15); color: #22D3EE; }
+    .sc-toggle-btn:hover:not(.active) { color: #8494AB; }
     .sc-subtitle { font-size: 13px; color: #8494AB; margin-bottom: 16px; }
     .sc-summary { display: flex; gap: 24px; margin-bottom: 16px; font-size: 13px; color: #8494AB; }
     .sc-summary b { font-weight: 700; }
@@ -145,9 +149,15 @@
 
     <div class="sc-card">
       <div class="sc-header">
-        <div class="sc-title">Rep Leaderboard</div>
+        <div class="sc-title">Rep Leaderboard
+          <div class="sc-toggle">
+            <button class="sc-toggle-btn active" onclick="toggleScorecard('osr')" id="btn-osr">OSR</button>
+            <button class="sc-toggle-btn" onclick="toggleScorecard('isr')" id="btn-isr">ISR</button>
+          </div>
+        </div>
         <span class="month-tag" style="background:rgba(34,211,238,0.15);color:#22D3EE;border:1px solid rgba(34,211,238,0.3)">Live</span>
       </div>
+      <div id="osr-scorecard">
       <!-- Scorecard Data -->
 <div class="sc-subtitle">Field activity &middot; enrollment &middot; revenue pipeline &middot; March 2026</div>
 <div class="sc-summary"><span><b style="color:#22D3EE">9</b> active reps</span><span><b style="color:#5B9BFF">73</b> enrollments</span><span><b style="color:#2DD4A0">$14.1K</b> funded</span><span><b style="color:#FBBF24">7.2</b> avg stops/enroll</span><span><b style="color:#A78BFA">36%</b> team prospect</span></div>
@@ -171,7 +181,25 @@
 </table>
 </div>
 <!-- /Scorecard Data -->
+      </div>
+      <div id="isr-scorecard" style="display:none">
+      <!-- ISR Scorecard Data -->
+      <div class="sc-subtitle">Genesys Cloud &middot; voice calls &middot; current week</div>
+      <div style="text-align:center;padding:40px 20px;color:#627289">
+        <div style="font-size:2rem;margin-bottom:8px">📡</div>
+        <div>ISR data loading on next pipeline run...</div>
+      </div>
+      <!-- /ISR Scorecard Data -->
+      </div>
     </div>
+    <script>
+    function toggleScorecard(view) {
+      document.getElementById('osr-scorecard').style.display = view === 'osr' ? '' : 'none';
+      document.getElementById('isr-scorecard').style.display = view === 'isr' ? '' : 'none';
+      document.getElementById('btn-osr').className = 'sc-toggle-btn' + (view === 'osr' ? ' active' : '');
+      document.getElementById('btn-isr').className = 'sc-toggle-btn' + (view === 'isr' ? ' active' : '');
+    }
+    </script>
 
     <!-- Enrollment Production Tracking -->
     <div class="year-group">

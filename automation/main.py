@@ -385,6 +385,7 @@ def main():
         q1_result=q1_data,
         field_result=field_data,
         current_month_key=month_key,
+        genesys_data=genesys_data,
     )
 
     index_path = os.path.join(output_dir, "index.html")

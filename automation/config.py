@@ -21,7 +21,12 @@ GENESYS_CLIENT_SECRET = os.environ.get("GENESYS_CLIENT_SECRET", "")
 # Names must match exactly how they appear in Genesys Cloud.
 # Update this list when ISRs join or leave the team.
 ISR_ROSTER = [
-    # Add ISR names here once we confirm how they appear in Genesys
+    "Connor Admirand",
+    "Javier Gonzalez",
+    "Katie Anguiano",
+    "Laura Angulo",
+    "Michael Palmer",
+    "Noemy Carrion",
 ]
 
 # ─── Salesforce Report IDs ───────────────────────────────────────────────────

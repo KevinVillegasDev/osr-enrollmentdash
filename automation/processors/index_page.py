@@ -8,7 +8,7 @@ and per-month dashboard card values for index.html.
 
 import logging
 
-from ..config import MONTH_ABBREV, OSR_ROSTER
+from ..config import MONTH_ABBREV, OSR_ROSTER, ISR_ROSTER
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +20,8 @@ def process(monthly_results: dict[str, dict],
             cohort_kpis: dict,
             q1_result: dict,
             field_result: dict,
-            current_month_key: str = "") -> dict:
+            current_month_key: str = "",
+            genesys_data: list = None) -> dict:
     """
     Aggregate all processor outputs into index.html display values.
 
@@ -31,6 +32,7 @@ def process(monthly_results: dict[str, dict],
                     Keys: active_cohort, baseline_cohort (each with total_funded_display, etc.)
         q1_result: Output from q1_enrollment.process()
         field_result: Output from field_activity.process()
+        genesys_data: List of dicts from Genesys Cloud (agent talk time data)
 
     Returns:
         Dict with all values needed to update index.html
@@ -139,6 +141,9 @@ def process(monthly_results: dict[str, dict],
         "rep_scorecard": scorecard,
         "scorecard_month": scorecard_month,
         "scorecard_year": scorecard_year,
+
+        # ISR Scorecard (Genesys talk time)
+        "isr_scorecard": _build_isr_scorecard(genesys_data or []),
     }
 
 
@@ -233,3 +238,29 @@ def _month_sort_key(item: tuple) -> int:
     key = item[0]  # e.g., "feb-2026"
     abbrev = key.split("-")[0]
     return _ABBREV_TO_NUM.get(abbrev, 0)
+
+
+def _build_isr_scorecard(genesys_data: list) -> list[dict]:
+    """
+    Filter Genesys talk time data to ISR_ROSTER reps only.
+
+    Returns list of dicts sorted by talk_seconds descending:
+        [{name, talk_seconds, talk_display, calls}, ...]
+    """
+    if not genesys_data:
+        return []
+
+    # Filter to ISR roster only (case-insensitive matching)
+    isr_names_lower = {name.lower() for name in ISR_ROSTER}
+    isr_data = [
+        agent for agent in genesys_data
+        if agent.get("name", "").lower() in isr_names_lower
+    ]
+
+    # Sort by talk time descending
+    isr_data.sort(key=lambda a: a.get("talk_seconds", 0), reverse=True)
+
+    logger.info("ISR scorecard: %d/%d roster reps found in Genesys data",
+                len(isr_data), len(ISR_ROSTER))
+
+    return isr_data
