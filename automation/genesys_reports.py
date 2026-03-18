@@ -6,7 +6,7 @@ Groups by userId and resolves display names via the Users API.
 """
 
 import logging
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 logger = logging.getLogger(__name__)
 
@@ -56,11 +56,18 @@ def fetch_agent_talk_time(client, interval: str = None) -> list[dict]:
         logger.error("Failed to fetch conversation aggregates: %s", e)
         return []
 
-    # Parse response — extract userId → total tTalk
+    # Parse response — extract userId → total tTalk and nConnected
     user_talk = {}
     user_calls = {}
 
     results = resp.get("results", [])
+
+    # Log first result for debugging response structure
+    if results:
+        import json as _json
+        logger.info("Genesys response sample (first result): %s",
+                     _json.dumps(results[0], indent=2, default=str)[:2000])
+
     for result in results:
         group = result.get("group", {})
         user_id = group.get("userId")
@@ -73,15 +80,13 @@ def fetch_agent_talk_time(client, interval: str = None) -> list[dict]:
         for data_item in result.get("data", []):
             metrics = data_item.get("metrics", [])
             for metric in metrics:
-                if metric.get("metric") == "tTalk":
+                metric_name = metric.get("metric", "")
+                stats = metric.get("stats", {})
+                if metric_name == "tTalk":
                     # tTalk is in milliseconds
-                    total_talk += metric.get("stats", {}).get("sum", 0)
-                elif metric.get("nConnected"):
-                    total_calls += metric.get("stats", {}).get("count", 0)
-            # Also check flat stats structure
-            stats = data_item.get("stats", {})
-            if "tTalk" in stats:
-                total_talk += stats["tTalk"].get("sum", 0)
+                    total_talk += stats.get("sum", 0)
+                elif metric_name == "nConnected":
+                    total_calls += int(stats.get("count", 0))
 
         user_talk[user_id] = user_talk.get(user_id, 0) + total_talk
         user_calls[user_id] = user_calls.get(user_id, 0) + total_calls
@@ -123,7 +128,7 @@ def _current_week_interval() -> str:
     """
     now = datetime.now(timezone.utc)
     # Monday of current week
-    monday = now - __import__("datetime").timedelta(days=now.weekday())
+    monday = now - timedelta(days=now.weekday())
     monday = monday.replace(hour=0, minute=0, second=0, microsecond=0)
 
     start = monday.strftime("%Y-%m-%dT%H:%M:%S.000Z")
