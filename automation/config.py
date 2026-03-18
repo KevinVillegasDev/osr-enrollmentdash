@@ -23,12 +23,13 @@ REPORT_IDS = {
     "maps_check_ins": os.environ.get("SF_REPORT_MAPS_CHECK_INS", "00OTO000009NEbN2AW"),
 }
 
-# ─── OSR Roster (as of March 2026) ──────────────────────────────────────────
+# ─── OSR Roster (as of March 2026) ───────────────────────────────────────────
 OSR_ROSTER = [
     "Claudia Gerhardt",
     "DeLon Phoenix",
     "Eric Henderson",
     "Jared Midkiff",
+    "Jeremy Moore",
     "Joseph Guerra",
     "Matthew MacDonald",
     "Omar Corona",

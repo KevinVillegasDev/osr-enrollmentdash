@@ -236,7 +236,7 @@ For historical cohorts or Month 2 true-up data, Report 2 and 4 templates are cal
 
 ## OSR Roster (as of March 2026)
 
-Claudia Gerhardt, DeLon Phoenix, Eric Henderson, Jared Midkiff, Joseph Guerra, Matthew MacDonald, Omar Corona, Phillip Mason, Sara Porter, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
+Claudia Gerhardt, DeLon Phoenix, Eric Henderson, Jared Midkiff, Jeremy Moore, Joseph Guerra, Matthew MacDonald, Omar Corona, Phillip Mason, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
 
 ## Key Terminology
 
