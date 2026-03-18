@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesys API Test | EasyPay Finance</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="auth.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #0D1321;
+            color: #F1F5F9;
+            padding: 32px;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .header .badge {
+            background: rgba(34, 211, 238, 0.15);
+            color: #22D3EE;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .header .back-link {
+            margin-left: auto;
+            color: #8494AB;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .header .back-link:hover { color: #F1F5F9; }
+
+        .status-bar {
+            background: #151E2F;
+            border: 1px solid #293852;
+            border-radius: 12px;
+            padding: 16px 24px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #2DD4A0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .status-dot.error { background: #F87171; animation: none; }
+        .status-dot.pending { background: #FBBF24; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .status-text { font-size: 0.9rem; color: #8494AB; }
+        .status-text strong { color: #F1F5F9; }
+
+        .info-card {
+            background: #151E2F;
+            border: 1px solid #293852;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .info-card h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #22D3EE;
+        }
+
+        .kpi-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .kpi-box {
+            background: #151E2F;
+            border: 1px solid #293852;
+            border-radius: 12px;
+            padding: 20px 24px;
+            flex: 1;
+            text-align: center;
+        }
+        .kpi-box .kpi-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #22D3EE;
+        }
+        .kpi-box .kpi-label {
+            font-size: 0.8rem;
+            color: #8494AB;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #627289;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #293852;
+        }
+        th.num { text-align: right; }
+        td {
+            padding: 14px 16px;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(41, 56, 82, 0.5);
+        }
+        td.num {
+            text-align: right;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+        tr:hover td { background: rgba(34, 211, 238, 0.03); }
+
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        .rank-1 { background: rgba(251, 191, 36, 0.15); color: #FBBF24; }
+        .rank-2 { background: rgba(148, 163, 184, 0.15); color: #94A3B8; }
+        .rank-3 { background: rgba(180, 120, 80, 0.15); color: #CD7F32; }
+        .rank-other { background: rgba(98, 114, 137, 0.1); color: #627289; }
+
+        .talk-bar {
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(34, 211, 238, 0.15);
+            margin-top: 6px;
+        }
+        .talk-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #22D3EE, #5B9BFF);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #627289;
+        }
+        .empty-state .icon { font-size: 3rem; margin-bottom: 16px; }
+        .empty-state h3 { color: #8494AB; margin-bottom: 8px; }
+
+        .raw-json {
+            background: #0B0F1A;
+            border: 1px solid #293852;
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: #8494AB;
+            max-height: 300px;
+            overflow: auto;
+            white-space: pre-wrap;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🔌 Genesys API Test</h1>
+    <span class="badge">TEST PAGE</span>
+    <a href="index.html" class="back-link">← Back to Dashboard</a>
+</div>
+
+<!-- Status Bar -->
+<div class="status-bar" id="statusBar">
+    <div class="status-dot pending" id="statusDot"></div>
+    <span class="status-text" id="statusText">Waiting for data... Run the test script to populate this page.</span>
+</div>
+
+<!-- KPI Row -->
+<div class="kpi-row" id="kpiRow" style="display: none;">
+    <div class="kpi-box">
+        <div class="kpi-value" id="kpiAgents">—</div>
+        <div class="kpi-label">Agents</div>
+    </div>
+    <div class="kpi-box">
+        <div class="kpi-value" id="kpiTotalTalk">—</div>
+        <div class="kpi-label">Total Talk Time</div>
+    </div>
+    <div class="kpi-box">
+        <div class="kpi-value" id="kpiAvgTalk">—</div>
+        <div class="kpi-label">Avg per Agent</div>
+    </div>
+    <div class="kpi-box">
+        <div class="kpi-value" id="kpiTotalCalls">—</div>
+        <div class="kpi-label">Connected Calls</div>
+    </div>
+</div>
+
+<!-- Data Table -->
+<div class="info-card">
+    <h2>ISR Talk Time — This Week</h2>
+    <div id="tableContainer">
+        <div class="empty-state">
+            <div class="icon">📡</div>
+            <h3>No data yet</h3>
+            <p>The Genesys API test script hasn't run yet. Data will appear here once the pipeline fetches it.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Raw API Response -->
+<div class="info-card">
+    <h2>Raw API Response</h2>
+    <p style="font-size: 0.85rem; color: #627289; margin-bottom: 8px;">Debug view of the data returned by Genesys Cloud API</p>
+    <div class="raw-json" id="rawJson">No data loaded yet.</div>
+</div>
+
+<!-- Genesys Data (injected by test script) -->
+<!-- Genesys Data Start -->
+<script>
+var genesysData = null;
+var genesysTimestamp = null;
+var genesysInterval = null;
+var genesysError = null;
+</script>
+<!-- Genesys Data End -->
+
+<script>
+(function() {
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    const kpiRow = document.getElementById('kpiRow');
+    const tableContainer = document.getElementById('tableContainer');
+    const rawJson = document.getElementById('rawJson');
+
+    if (genesysError) {
+        statusDot.className = 'status-dot error';
+        statusText.innerHTML = '<strong>Error:</strong> ' + genesysError;
+        rawJson.textContent = genesysError;
+        return;
+    }
+
+    if (!genesysData || genesysData.length === 0) {
+        if (genesysTimestamp) {
+            statusDot.className = 'status-dot';
+            statusText.innerHTML = 'API returned <strong>no agent data</strong> for this period. Last fetched: ' + genesysTimestamp;
+        }
+        return;
+    }
+
+    // Success state
+    statusDot.className = 'status-dot';
+    statusText.innerHTML = 'Data loaded successfully — <strong>' + genesysData.length + ' agents</strong> found. Last updated: <strong>' + genesysTimestamp + '</strong>';
+    if (genesysInterval) {
+        statusText.innerHTML += ' | Interval: ' + genesysInterval;
+    }
+
+    // KPIs
+    kpiRow.style.display = 'flex';
+    document.getElementById('kpiAgents').textContent = genesysData.length;
+
+    const totalSeconds = genesysData.reduce((sum, a) => sum + a.talk_seconds, 0);
+    const totalCalls = genesysData.reduce((sum, a) => sum + (a.calls || 0), 0);
+    const avgSeconds = Math.round(totalSeconds / genesysData.length);
+
+    document.getElementById('kpiTotalTalk').textContent = formatDuration(totalSeconds);
+    document.getElementById('kpiAvgTalk').textContent = formatDuration(avgSeconds);
+    document.getElementById('kpiTotalCalls').textContent = totalCalls.toLocaleString();
+
+    // Table
+    const maxTalk = genesysData[0].talk_seconds || 1;
+
+    let html = '<table><thead><tr>';
+    html += '<th style="width:40px">#</th>';
+    html += '<th>Agent</th>';
+    html += '<th class="num">Talk Time</th>';
+    html += '<th class="num">Calls</th>';
+    html += '<th style="width:200px">Distribution</th>';
+    html += '</tr></thead><tbody>';
+
+    genesysData.forEach((agent, i) => {
+        const rank = i + 1;
+        const rankClass = rank <= 3 ? 'rank-' + rank : 'rank-other';
+        const barPct = Math.round((agent.talk_seconds / maxTalk) * 100);
+
+        html += '<tr>';
+        html += '<td><span class="rank-badge ' + rankClass + '">' + rank + '</span></td>';
+        html += '<td>' + agent.name + '</td>';
+        html += '<td class="num">' + agent.talk_display + '</td>';
+        html += '<td class="num">' + (agent.calls || 0) + '</td>';
+        html += '<td><div class="talk-bar"><div class="talk-bar-fill" style="width:' + barPct + '%"></div></div></td>';
+        html += '</tr>';
+    });
+
+    html += '</tbody></table>';
+    tableContainer.innerHTML = html;
+
+    // Raw JSON
+    rawJson.textContent = JSON.stringify(genesysData, null, 2);
+
+    function formatDuration(s) {
+        if (s <= 0) return '0m';
+        const h = Math.floor(s / 3600);
+        const m = Math.floor((s % 3600) / 60);
+        return h > 0 ? h + 'h ' + m + 'm' : m + 'm';
+    }
+})();
+</script>
+
+</body>
+</html>

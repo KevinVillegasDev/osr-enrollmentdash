@@ -35,6 +35,9 @@ jobs:
           SF_LOGIN_URL: ${{ secrets.SF_LOGIN_URL }}
           SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
           SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
+          GENESYS_CLIENT_ID: ${{ secrets.GENESYS_CLIENT_ID }}
+          GENESYS_CLIENT_SECRET: ${{ secrets.GENESYS_CLIENT_SECRET }}
+          GENESYS_REGION: ${{ secrets.GENESYS_REGION }}
         run: python -m automation.main
 
       - name: Check for changes

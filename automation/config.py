@@ -11,6 +11,19 @@ SF_CLIENT_ID = os.environ.get("SF_CLIENT_ID", "")
 SF_CLIENT_SECRET = os.environ.get("SF_CLIENT_SECRET", "")
 SF_API_VERSION = "v62.0"
 
+# ─── Genesys Cloud Connection ────────────────────────────────────────────────
+GENESYS_REGION = os.environ.get("GENESYS_REGION", "usw2.pure.cloud")
+GENESYS_CLIENT_ID = os.environ.get("GENESYS_CLIENT_ID", "")
+GENESYS_CLIENT_SECRET = os.environ.get("GENESYS_CLIENT_SECRET", "")
+
+# ─── ISR Roster ──────────────────────────────────────────────────────────────
+# Inside sales reps tracked via Genesys Cloud talk time.
+# Names must match exactly how they appear in Genesys Cloud.
+# Update this list when ISRs join or leave the team.
+ISR_ROSTER = [
+    # Add ISR names here once we confirm how they appear in Genesys
+]
+
 # ─── Salesforce Report IDs ───────────────────────────────────────────────────
 # Kevin: Replace these placeholder values with your 18-character Salesforce Report IDs.
 # Find them by opening each report in Salesforce and copying the ID from the URL:

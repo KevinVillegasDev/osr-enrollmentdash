@@ -18,6 +18,7 @@ from datetime import date, timedelta
 
 from .config import (
     SF_LOGIN_URL, SF_CLIENT_ID, SF_CLIENT_SECRET,
+    GENESYS_REGION, GENESYS_CLIENT_ID, GENESYS_CLIENT_SECRET,
     REPORT_IDS, MONTH_ABBREV, MONTH_NAMES, PROJECT_ROOT,
     COLUMN_LABELS, month_filename, month_filepath,
 )
@@ -285,6 +286,41 @@ def main():
     field_path = os.path.join(output_dir, "field-activity.html")
     if os.path.exists(field_path):
         html_generator.update_field_activity(field_path, field_data)
+
+    # ── Step 6b: Fetch Genesys Cloud Data ───────────────────────────────
+    genesys_data = []
+    if GENESYS_CLIENT_ID and GENESYS_CLIENT_SECRET:
+        logger.info("--- Fetching Genesys Cloud data ---")
+        from .genesys_auth import GenesysClient, GenesysAuthError
+        from .genesys_reports import fetch_agent_talk_time
+
+        genesys_client = GenesysClient(GENESYS_REGION, GENESYS_CLIENT_ID, GENESYS_CLIENT_SECRET)
+        try:
+            genesys_client.authenticate()
+            genesys_data = fetch_agent_talk_time(genesys_client)
+            logger.info("Genesys: found %d agents with talk time", len(genesys_data))
+
+            # Save snapshot
+            genesys_snapshot_path = os.path.join(
+                PROJECT_ROOT, "data", "snapshots",
+                f"{current_year}-{current_month:02d}", "genesys_talk_time.json"
+            )
+            with open(genesys_snapshot_path, "w", encoding="utf-8") as f:
+                json.dump(genesys_data, f, indent=2, default=str)
+
+            # Update test page if it exists
+            from .test_genesys import _update_test_page
+            from datetime import datetime as _dt, timezone as _tz
+            _update_test_page(
+                agents=genesys_data,
+                timestamp=_dt.now(_tz.utc).strftime("%Y-%m-%d %H:%M UTC")
+            )
+        except GenesysAuthError as e:
+            logger.warning("Genesys auth failed (non-fatal): %s", e)
+        except Exception as e:
+            logger.warning("Genesys data fetch failed (non-fatal): %s", e)
+    else:
+        logger.info("--- Skipping Genesys (no credentials configured) ---")
 
     # ── Step 7: Process Analytics & Insights ─────────────────────────────
     logger.info("--- Processing analytics & insights ---")
