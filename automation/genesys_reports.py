@@ -22,14 +22,14 @@ def fetch_agent_talk_time(client, interval: str = None) -> list[dict]:
     Args:
         client: Authenticated GenesysClient instance.
         interval: ISO-8601 interval string (e.g., '2026-03-17T00:00:00Z/2026-03-18T23:59:59Z').
-                  Defaults to current week (Monday 00:00 UTC through now).
+                  Defaults to current month (1st of month 00:00 UTC through now).
 
     Returns:
         List of dicts: [{"name": "Agent Name", "talk_seconds": 12345, "talk_display": "3h 25m"}, ...]
         Sorted by talk_seconds descending.
     """
     if not interval:
-        interval = _current_week_interval()
+        interval = _current_month_interval()
 
     logger.info("Fetching Genesys talk time for interval: %s", interval)
 
@@ -121,16 +121,14 @@ def _resolve_user_name(client, user_id: str) -> str:
         return user_id
 
 
-def _current_week_interval() -> str:
+def _current_month_interval() -> str:
     """
-    Build an ISO-8601 interval for current week (Monday 00:00 UTC → now).
+    Build an ISO-8601 interval for current month (1st of month 00:00 UTC → now).
     """
     now = datetime.now(timezone.utc)
-    # Monday of current week
-    monday = now - timedelta(days=now.weekday())
-    monday = monday.replace(hour=0, minute=0, second=0, microsecond=0)
+    first_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
 
-    start = monday.strftime("%Y-%m-%dT%H:%M:%S.000Z")
+    start = first_of_month.strftime("%Y-%m-%dT%H:%M:%S.000Z")
     end = now.strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
     return f"{start}/{end}"

@@ -1229,20 +1229,20 @@ def _generate_isr_scorecard_table(isr_scorecard: list[dict]) -> str:
         calls = rep.get("calls", 0)
         bar_pct = round((talk_seconds / max_talk) * 100) if max_talk > 0 else 0
 
-        # Color-code talk time
-        if talk_seconds >= 8 * 3600:  # 8+ hours
+        # Color-code talk time (monthly thresholds)
+        if talk_seconds >= 40 * 3600:  # 40+ hours
             talk_color = "#2DD4A0"
-        elif talk_seconds >= 4 * 3600:  # 4+ hours
+        elif talk_seconds >= 20 * 3600:  # 20+ hours
             talk_color = "#FBBF24"
         elif talk_seconds > 0:
             talk_color = "#F1F5F9"
         else:
             talk_color = "#627289"
 
-        # Color-code calls
-        if calls >= 200:
+        # Color-code calls (monthly thresholds)
+        if calls >= 1000:
             calls_color = "#2DD4A0"
-        elif calls >= 100:
+        elif calls >= 500:
             calls_color = "#FBBF24"
         elif calls > 0:
             calls_color = "#F1F5F9"
@@ -1290,7 +1290,7 @@ def _generate_isr_scorecard_table(isr_scorecard: list[dict]) -> str:
     total_display = f"{total_h}h {total_m}m" if total_h > 0 else f"{total_m}m"
     avg_display = f"{avg_h}h {avg_m}m" if avg_h > 0 else f"{avg_m}m"
 
-    subtitle = 'Genesys Cloud &middot; voice calls &middot; current week'
+    subtitle = 'Genesys Cloud &middot; voice calls &middot; current month'
 
     table = (
         f'<div class="sc-subtitle">{subtitle}</div>\n'
