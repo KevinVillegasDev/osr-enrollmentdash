@@ -170,9 +170,9 @@
   {
     "user_id": "a907a9b0-1d7d-4bca-bbef-e55967e19d27",
     "name": "Michelle Johnson",
-    "talk_seconds": 134268,
-    "talk_display": "37h 17m",
-    "calls": 3030
+    "talk_seconds": 134288,
+    "talk_display": "37h 18m",
+    "calls": 3031
   },
   {
     "user_id": "dbad3bfb-f8b3-4632-8920-25fbb6e58730",
@@ -212,9 +212,9 @@
   {
     "user_id": "3379f0b9-cd06-400b-bddb-8164e11d41e8",
     "name": "Fatmata Barry",
-    "talk_seconds": 124489,
-    "talk_display": "34h 34m",
-    "calls": 2239
+    "talk_seconds": 124519,
+    "talk_display": "34h 35m",
+    "calls": 2240
   },
   {
     "user_id": "14f259f6-102a-4700-a51a-b47ae04d24e7",
@@ -226,9 +226,9 @@
   {
     "user_id": "03ef1d8c-7daa-4a57-9229-d028d76c465a",
     "name": "Fatima Rodriguez",
-    "talk_seconds": 121263,
+    "talk_seconds": 121289,
     "talk_display": "33h 41m",
-    "calls": 1996
+    "calls": 1997
   },
   {
     "user_id": "e3e7fe27-1781-4f59-a5b7-3a7d89753df3",
@@ -434,18 +434,18 @@
     "calls": 207
   },
   {
+    "user_id": "3afeaaa8-987f-46bd-8079-a9f5069b5ca9",
+    "name": "Connor Admirand",
+    "talk_seconds": 18563,
+    "talk_display": "5h 9m",
+    "calls": 116
+  },
+  {
     "user_id": "527ab052-2fd2-4be9-b637-465315f2ae40",
     "name": "Hector Garcia",
     "talk_seconds": 18437,
     "talk_display": "5h 7m",
     "calls": 275
-  },
-  {
-    "user_id": "3afeaaa8-987f-46bd-8079-a9f5069b5ca9",
-    "name": "Connor Admirand",
-    "talk_seconds": 18392,
-    "talk_display": "5h 6m",
-    "calls": 115
   },
   {
     "user_id": "5d7ad755-966b-4442-a22a-8cca9ac54a15",
