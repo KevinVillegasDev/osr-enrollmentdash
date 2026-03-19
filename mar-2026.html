@@ -221,8 +221,8 @@
     <!-- OVERVIEW -->
     <div class="tab-content active" id="overview">
       <div class="kpi-grid">
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">104</span><span class="kpi-sub">All sources, Mar 2026</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">75</span><span class="kpi-sub">72.1% of total</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">108</span><span class="kpi-sub">All sources, Mar 2026</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">76</span><span class="kpi-sub">70.4% of total</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#FBBF24,transparent)"></div><span class="kpi-label">Funded Volume</span><span class="kpi-value">$36,425</span><span class="kpi-sub">27 merchants tracked</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#A78BFA,transparent)"></div><span class="kpi-label">Funded Apps</span><span class="kpi-value">24</span><span class="kpi-sub">of 77 total apps</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#22D3EE,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">31.2%</span><span class="kpi-sub">Apps → Funded</span></div>
@@ -233,14 +233,14 @@
         <div style="height:240px"><canvas id="chartDaily"></canvas></div>
         <div class="callout">
           <span><strong style="color:#FBBF24">Peak:</strong> Mar 14 (20 enrollments)</span>
-          <span><strong style="color:#5B9BFF">Avg daily:</strong> ~5.8 enrollments/day</span>
+          <span><strong style="color:#5B9BFF">Avg daily:</strong> ~5.4 enrollments/day</span>
         </div>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px">
-        <div style="font-size:13px;color:#8494AB">Breakdown: <span id="ovScopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (75)</span></div>
+        <div style="font-size:13px;color:#8494AB">Breakdown: <span id="ovScopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (76)</span></div>
         <div style="display:inline-flex;background:#293852;border-radius:8px;padding:3px;gap:2px">
-          <button id="ovBtnOsr" onclick="setOverviewScope('osr')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (75)</button>
-          <button id="ovBtnAll" onclick="setOverviewScope('all')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (104)</button>
+          <button id="ovBtnOsr" onclick="setOverviewScope('osr')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (76)</button>
+          <button id="ovBtnAll" onclick="setOverviewScope('all')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (108)</button>
         </div>
       </div>
       <div class="grid-2-1">
@@ -288,10 +288,10 @@
     <!-- MARKETS -->
     <div class="tab-content" id="markets">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-        <div style="font-size:13px;color:#8494AB">Showing <span id="scopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (75)</span> enrollments</div>
+        <div style="font-size:13px;color:#8494AB">Showing <span id="scopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (76)</span> enrollments</div>
         <div style="display:inline-flex;background:#293852;border-radius:8px;padding:3px;gap:2px">
-          <button id="btnOsr" onclick="setMarketsScope('osr')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (75)</button>
-          <button id="btnAll" onclick="setMarketsScope('all')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (104)</button>
+          <button id="btnOsr" onclick="setMarketsScope('osr')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (76)</button>
+          <button id="btnAll" onclick="setMarketsScope('all')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (108)</button>
         </div>
       </div>
       <div class="grid-2">
@@ -309,11 +309,11 @@
       </div>
       <div class="card">
         <div class="section-title">Total vs. Credited Enrollments</div>
-        <div class="section-sub">104 total new enrollments, 75 credited to outside sales team</div>
+        <div class="section-sub">108 total new enrollments, 76 credited to outside sales team</div>
         <div class="grid-3">
-          <div class="stat-box"><div class="stat-box-label">Total New</div><div class="stat-box-value" style="color:#5B9BFF">104</div><div class="stat-box-sub">72.1% of total</div></div>
-          <div class="stat-box"><div class="stat-box-label">OSR Credited</div><div class="stat-box-value" style="color:#2DD4A0">75</div><div class="stat-box-sub">77.2% of total</div></div>
-          <div class="stat-box"><div class="stat-box-label">Other Sources</div><div class="stat-box-value" style="color:#FBBF24">29</div><div class="stat-box-sub">27.9% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">Total New</div><div class="stat-box-value" style="color:#5B9BFF">108</div><div class="stat-box-sub">70.4% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">OSR Credited</div><div class="stat-box-value" style="color:#2DD4A0">76</div><div class="stat-box-sub">77.2% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">Other Sources</div><div class="stat-box-value" style="color:#FBBF24">32</div><div class="stat-box-sub">29.6% of total</div></div>
         </div>
       </div>
     </div>
@@ -357,20 +357,21 @@
 </div>
 
 <script>
-var repCredits=[{"n":"Stephanie Whitlock","v":29},{"n":"Joseph Guerra","v":10},{"n":"Jared Midkiff","v":10},{"n":"Eric Henderson","v":6},{"n":"Omar Corona","v":5},{"n":"Matthew MacDonald","v":5},{"n":"Phillip Mason","v":4},{"n":"Yemaira Hernandez","v":4},{"n":"Claudia Gerhardt","v":2}];
-var marketData=[{"n":"FL","v":38},{"n":"TX","v":15},{"n":"CA","v":6},{"n":"PA","v":6},{"n":"AZ","v":5},{"n":"GA","v":4},{"n":"VA","v":1}];
-var industryData=[{"n":"Auto - Repair","v":50},{"n":"Auto - Total Car Care","v":11},{"n":"Auto - Tires","v":5},{"n":"Auto - Stereo","v":5},{"n":"Auto - Transmission","v":2},{"n":"Furniture","v":1},{"n":"Auto - Wheels & Tires","v":1}];
-var marketDataFull=[{"n":"FL","v":44},{"n":"TX","v":21},{"n":"CA","v":10},{"n":"AZ","v":9},{"n":"PA","v":8},{"n":"GA","v":7},{"n":"NM","v":1},{"n":"MO","v":1},{"n":"VA","v":1},{"n":"SD","v":1},{"n":"NV","v":1}];
-var industryDataFull=[{"n":"Auto - Repair","v":61},{"n":"Auto - Total Car Care","v":14},{"n":"Auto - Tires","v":7},{"n":"Auto - Stereo","v":6},{"n":"Auto - Transmission","v":5},{"n":"Auto - Other","v":3},{"n":"Furniture","v":2},{"n":"Auto - Collision","v":2},{"n":"Auto - Wheels & Tires","v":2},{"n":"Auto - Dealership","v":1},{"n":"Pets","v":1}];
+var repCredits=[{"n":"Stephanie Whitlock","v":29},{"n":"Joseph Guerra","v":10},{"n":"Jared Midkiff","v":10},{"n":"Eric Henderson","v":6},{"n":"Omar Corona","v":5},{"n":"Matthew MacDonald","v":5},{"n":"Phillip Mason","v":4},{"n":"Yemaira Hernandez","v":4},{"n":"Claudia Gerhardt","v":2},{"n":"Outside Sales Manager","v":1}];
+var marketData=[{"n":"FL","v":38},{"n":"TX","v":16},{"n":"CA","v":6},{"n":"PA","v":6},{"n":"AZ","v":5},{"n":"GA","v":4},{"n":"VA","v":1}];
+var industryData=[{"n":"Auto - Repair","v":51},{"n":"Auto - Total Car Care","v":11},{"n":"Auto - Tires","v":5},{"n":"Auto - Stereo","v":5},{"n":"Auto - Transmission","v":2},{"n":"Furniture","v":1},{"n":"Auto - Wheels & Tires","v":1}];
+var marketDataFull=[{"n":"FL","v":46},{"n":"TX","v":22},{"n":"CA","v":11},{"n":"AZ","v":9},{"n":"PA","v":8},{"n":"GA","v":7},{"n":"NM","v":1},{"n":"MO","v":1},{"n":"VA","v":1},{"n":"SD","v":1},{"n":"NV","v":1}];
+var industryDataFull=[{"n":"Auto - Repair","v":65},{"n":"Auto - Total Car Care","v":14},{"n":"Auto - Tires","v":7},{"n":"Auto - Stereo","v":6},{"n":"Auto - Transmission","v":5},{"n":"Auto - Other","v":3},{"n":"Furniture","v":2},{"n":"Auto - Collision","v":2},{"n":"Auto - Wheels & Tires","v":2},{"n":"Auto - Dealership","v":1},{"n":"Pets","v":1}];
 var marketsScope='osr';
-var isrData=[{"n":"Javier Gonzalez","v":29},{"n":"Connor Admirand","v":17},{"n":"Noemy Carrion","v":15},{"n":"Laura Angulo","v":5},{"n":"Luzmam Vigil","v":3},{"n":"Michael Palmer","v":3},{"n":"Katie Anguiano","v":2}];
-var dailyTrend=[{"d":"Mar 2","v":2},{"d":"Mar 3","v":6},{"d":"Mar 4","v":15},{"d":"Mar 5","v":8},{"d":"Mar 6","v":2},{"d":"Mar 10","v":2},{"d":"Mar 11","v":3},{"d":"Mar 12","v":7},{"d":"Mar 13","v":2},{"d":"Mar 14","v":20},{"d":"Mar 16","v":2},{"d":"Mar 17","v":4},{"d":"Mar 18","v":2}];
+var isrData=[{"n":"Javier Gonzalez","v":29},{"n":"Connor Admirand","v":17},{"n":"Noemy Carrion","v":16},{"n":"Laura Angulo","v":5},{"n":"Luzmam Vigil","v":3},{"n":"Michael Palmer","v":3},{"n":"Katie Anguiano","v":2}];
+var dailyTrend=[{"d":"Mar 2","v":2},{"d":"Mar 3","v":6},{"d":"Mar 4","v":15},{"d":"Mar 5","v":8},{"d":"Mar 6","v":2},{"d":"Mar 10","v":2},{"d":"Mar 11","v":3},{"d":"Mar 12","v":7},{"d":"Mar 13","v":2},{"d":"Mar 14","v":20},{"d":"Mar 16","v":2},{"d":"Mar 17","v":4},{"d":"Mar 18","v":2},{"d":"Mar 19","v":1}];
 var topProducers=[{"n":"Ad Modera Living","f":9175.27,"fa":5,"ta":11,"r":"45.5%","o":""},{"n":"Trusted Auto Pros","f":4500.0,"fa":1,"ta":0,"r":"0.0%","o":"Matthew MacDonald"},{"n":"Total Automotive & Offroad","f":3947.94,"fa":3,"ta":4,"r":"75.0%","o":"Joseph Guerra"},{"n":"Westcoast Evolutions - Jefferson","f":3357.73,"fa":4,"ta":6,"r":"66.7%","o":"Phillip Mason"},{"n":"Westcoast Evolutions - Arden","f":3125.27,"fa":2,"ta":3,"r":"66.7%","o":"Phillip Mason"},{"n":"Capital Tires","f":2875.0,"fa":1,"ta":1,"r":"100.0%","o":""},{"n":"Godiesel","f":2400.0,"fa":1,"ta":1,"r":"100.0%","o":""},{"n":"Performance Custom Cables","f":2400.0,"fa":1,"ta":1,"r":"100.0%","o":"Joseph Guerra"},{"n":"Auto Repair Pros Hollywood East 7","f":1023.2,"fa":1,"ta":3,"r":"33.3%","o":"Jared Midkiff"},{"n":"Driven Import Auto Care","f":1000.0,"fa":1,"ta":1,"r":"100.0%","o":"Stephanie Whitlock"},{"n":"LG Transmission Experts","f":758.13,"fa":1,"ta":3,"r":"33.3%","o":"Eric Henderson"},{"n":"Bruno\u2019s Aquarium","f":662.65,"fa":1,"ta":4,"r":"25.0%","o":""},{"n":"Auto Repair Pros Lantana 3","f":600.0,"fa":1,"ta":3,"r":"33.3%","o":"Jared Midkiff"},{"n":"Texas Automotive and Tire","f":600.0,"fa":1,"ta":3,"r":"33.3%","o":""},{"n":"Street King Auto","f":0.0,"fa":0,"ta":3,"r":"0.0%","o":"Jared Midkiff"}];
 var PC=["#3B82F6","#10B981","#F59E0B","#EF4444","#8B5CF6","#06B6D4","#EC4899","#F97316","#14B8A6","#A855F7","#6366F1","#84CC16"];
 
 var repMerchants={
 "Joseph Guerra":[{"n":"Total Automotive & Offroad","b":25427,"l":"Houston, TX","f":3947.94,"fa":3,"ta":4},{"n":"Performance Custom Cables","b":25446,"l":"Spring, TX","f":2400.0,"fa":1,"ta":1},{"n":"BTS Brothers Tire Service 3 - FM 1960 E","b":25504,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"BTS Brothers Tire Service 2 - FM 1960 W","b":25505,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Mayan Center Tires","b":25507,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Concierge Auto Repair","b":25411,"l":"Spring, TX","f":0,"fa":0,"ta":0},{"n":"Louetta Tires & Brakes","b":25421,"l":"Spring, TX","f":0.0,"fa":0,"ta":1},{"n":"Gentry Automotive","b":25450,"l":"Montgomery, TX","f":0,"fa":0,"ta":0},{"n":"Whittyz Diesel and Auto Repair","b":25465,"l":"Humble, TX","f":0,"fa":0,"ta":0},{"n":"Lana Auto Service","b":25503,"l":"Houston, TX","f":0,"fa":0,"ta":0}],
 "Omar Corona":[{"n":"BTS Brothers Tire Service 1 - Airline Dr","b":25506,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Manriquez Collision Center","b":25448,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Revline Auto Repair","b":25462,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Jayce Auto Repair","b":25466,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Mits Tire Service","b":25464,"l":"Houston, TX","f":0,"fa":0,"ta":0}],
+"Outside Sales Manager":[{"n":"Cornerstone Car Care","b":25516,"l":"Arlington, TX","f":0,"fa":0,"ta":0}],
 "Stephanie Whitlock":[{"n":"Driven Import Auto Care","b":25444,"l":"Newnan, GA","f":1000.0,"fa":1,"ta":1},{"n":"Atlantic Tire - 682 Peachtree","b":25514,"l":"Peachtree Corners, GA","f":0,"fa":0,"ta":0},{"n":"Atlantic Tire - 681 Avenues","b":25515,"l":"Marietta, GA","f":0,"fa":0,"ta":0},{"n":"Retanas Auto Repair","b":25471,"l":"Fredricksburg, VA","f":0,"fa":0,"ta":0},{"n":"Direct Tire Co","b":25424,"l":"Jacksonville, FL","f":0.0,"fa":0,"ta":1},{"n":"Americas DIY Auto Repair","b":25439,"l":"Douglasville, GA","f":0,"fa":0,"ta":0},{"n":"Carvi Auto Repair","b":25447,"l":"Jacksonville, FL","f":0,"fa":0,"ta":0},{"n":"Apex Automotive - Boyton","b":25476,"l":"Boyton Beach, FL","f":0,"fa":0,"ta":0},{"n":"Apex Automotive - Delray","b":25477,"l":"Delray Beach, FL","f":0,"fa":0,"ta":0},{"n":"Apex Tire and Auto - Adelphia","b":25479,"l":"Lighthouse Point, FL","f":0,"fa":0,"ta":0},{"n":"Collier Car Care Center","b":25481,"l":"Naples, FL","f":0,"fa":0,"ta":0},{"n":"Apex Automotive - Lake Worth","b":25478,"l":"Greenacres, FL","f":0,"fa":0,"ta":0},{"n":"Johnny Myers Discount Tire","b":25485,"l":"Fort Myers, FL","f":0,"fa":0,"ta":0},{"n":"Apex Automotive - Wellington","b":25480,"l":"Wellington, FL","f":0,"fa":0,"ta":0},{"n":"Golden Gate Tire and Service","b":25482,"l":"Stuart, FL","f":0,"fa":0,"ta":0},{"n":"Great Bear","b":25483,"l":"Weston, FL","f":0,"fa":0,"ta":0},{"n":"Scott's Tire & Service","b":25486,"l":"Port St. Lucie, FL","f":0,"fa":0,"ta":0},{"n":"Scotty's Automotive","b":25487,"l":"Fort Myers, FL","f":0,"fa":0,"ta":0},{"n":"Apex Tire & Auto - San Jose","b":25489,"l":"Jacksonville, FL","f":0,"fa":0,"ta":0},{"n":"Apex Tire & Auto - Blanding","b":25493,"l":"Jacksonville, FL","f":0,"fa":0,"ta":0},{"n":"Apex Tire & Auto - University","b":25488,"l":"Jacksonville, FL","f":0.0,"fa":0,"ta":1},{"n":"Apex Tire & Auto - St Augustine","b":25494,"l":"St Augustine, FL","f":0,"fa":0,"ta":0},{"n":"Apex Tire & Auto - Cassat","b":25491,"l":"Jacksonville, FL","f":0,"fa":0,"ta":0},{"n":"Apex Tire & Auto - Jullington","b":25490,"l":"Jacksonville, FL","f":0,"fa":0,"ta":0},{"n":"Apex Tire & Auto - Fleming","b":25492,"l":"Fleming Island, FL","f":0,"fa":0,"ta":0},{"n":"EF Tire & Auto Repair","b":25498,"l":"Pompano Beach, FL","f":0,"fa":0,"ta":0},{"n":"Supreme Auto Care","b":25495,"l":"Safety Harbor, FL","f":0,"fa":0,"ta":0},{"n":"Apex Tire & Auto -Daniels","b":25497,"l":"Ft Myers, FL","f":0,"fa":0,"ta":0},{"n":"Bob's Tire & Brake","b":25499,"l":"Ocala, FL","f":0,"fa":0,"ta":0}],
 "Claudia Gerhardt":[{"n":"All Auto Pros","b":25426,"l":"Norco, CA","f":0,"fa":0,"ta":0},{"n":"Lux Euro Garage","b":25455,"l":"Moreno Valley, CA","f":0.0,"fa":0,"ta":1}],
 "Eric Henderson":[{"n":"LG Transmission Experts","b":25445,"l":"Allentown, PA","f":758.13,"fa":1,"ta":3},{"n":"Auto X Repair And Sales","b":25413,"l":"Reading, PA","f":0.0,"fa":0,"ta":3},{"n":"J & F Auto Repair & Sales","b":25440,"l":"West Lawn, PA","f":0,"fa":0,"ta":0},{"n":"JF Motors","b":25453,"l":"Chester, PA","f":0,"fa":0,"ta":0},{"n":"Xpert Transmission Auto Repair","b":25461,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0},{"n":"T & M Auto Repair","b":25502,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0}],
@@ -482,7 +483,7 @@ function setMarketsScope(scope){
   document.getElementById('btnOsr').style.color=scope==='osr'?'#fff':'#8494AB';
   document.getElementById('btnAll').style.background=scope==='all'?'#5B9BFF':'transparent';
   document.getElementById('btnAll').style.color=scope==='all'?'#fff':'#8494AB';
-  document.getElementById('scopeLabel').textContent=scope==='all'?'All Enrollments (104)':'OSR Credited (75)';
+  document.getElementById('scopeLabel').textContent=scope==='all'?'All Enrollments (108)':'OSR Credited (76)';
   document.getElementById('stateSub').textContent=scope==='all'?'All new enrollments across all channels':'Credited sales team enrollments';
   // Rebuild state chart
   destroyChart('states');
@@ -505,7 +506,7 @@ function setOverviewScope(scope){
   document.getElementById('ovBtnOsr').style.color=scope==='osr'?'#fff':'#8494AB';
   document.getElementById('ovBtnAll').style.background=scope==='all'?'#5B9BFF':'transparent';
   document.getElementById('ovBtnAll').style.color=scope==='all'?'#fff':'#8494AB';
-  document.getElementById('ovScopeLabel').textContent=scope==='all'?'All Enrollments (104)':'OSR Credited (75)';
+  document.getElementById('ovScopeLabel').textContent=scope==='all'?'All Enrollments (108)':'OSR Credited (76)';
   // Top 5 Markets
   var sd=scope==='all'?marketDataFull:marketData;
   document.getElementById('ovMarketSub').textContent=scope==='all'?'States by total enrollment volume':'States by credited enrollment volume';
