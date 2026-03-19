@@ -121,16 +121,16 @@
   {
     "user_id": "402712c6-4dee-4abc-a77f-a62f0bc1aeb0",
     "name": "Julio Zuniga",
-    "talk_seconds": 154787,
-    "talk_display": "42h 59m",
-    "calls": 1977
+    "talk_seconds": 154871,
+    "talk_display": "43h 1m",
+    "calls": 1980
   },
   {
     "user_id": "bd4818d1-a4eb-4711-bdbb-736a2227bbd2",
     "name": "Alex Perez",
-    "talk_seconds": 151722,
-    "talk_display": "42h 8m",
-    "calls": 1610
+    "talk_seconds": 151996,
+    "talk_display": "42h 13m",
+    "calls": 1613
   },
   {
     "user_id": "24b58ccf-3042-4c4b-b52c-0bff88f282da",
@@ -156,9 +156,9 @@
   {
     "user_id": "d421063f-892f-44c6-a753-68c3b0dc2525",
     "name": "Elton Ramirez",
-    "talk_seconds": 140787,
-    "talk_display": "39h 6m",
-    "calls": 2015
+    "talk_seconds": 140841,
+    "talk_display": "39h 7m",
+    "calls": 2017
   },
   {
     "user_id": "d2343d3e-9373-4bc2-9b38-907016f6998b",
@@ -205,9 +205,9 @@
   {
     "user_id": "d92f85ef-d236-44e8-af25-34c7caa50a3f",
     "name": "Dan Flores",
-    "talk_seconds": 123499,
-    "talk_display": "34h 18m",
-    "calls": 2328
+    "talk_seconds": 123568,
+    "talk_display": "34h 19m",
+    "calls": 2330
   },
   {
     "user_id": "14f259f6-102a-4700-a51a-b47ae04d24e7",
@@ -247,9 +247,9 @@
   {
     "user_id": "eb53ed35-8863-4021-bd44-909f19636923",
     "name": "Benjamin Munoz",
-    "talk_seconds": 108560,
-    "talk_display": "30h 9m",
-    "calls": 1501
+    "talk_seconds": 108784,
+    "talk_display": "30h 13m",
+    "calls": 1508
   },
   {
     "user_id": "f6480c39-3494-44ac-a818-6a6982fb29ce",
@@ -268,9 +268,9 @@
   {
     "user_id": "21ab0300-3df4-4b95-a620-da649b60ba1e",
     "name": "Eduardo Yanez",
-    "talk_seconds": 105038,
-    "talk_display": "29h 10m",
-    "calls": 2214
+    "talk_seconds": 105196,
+    "talk_display": "29h 13m",
+    "calls": 2216
   },
   {
     "user_id": "44b5a74e-dfd1-46dc-81a3-5582c9e57065",
@@ -322,18 +322,18 @@
     "calls": 467
   },
   {
+    "user_id": "e650f045-ae73-4b3d-be81-b95449f33f2f",
+    "name": "Maria Rosales",
+    "talk_seconds": 75002,
+    "talk_display": "20h 50m",
+    "calls": 1971
+  },
+  {
     "user_id": "51debfab-e7a1-47c4-9da2-757d9bb615d1",
     "name": "Francisco Lozano",
     "talk_seconds": 74736,
     "talk_display": "20h 45m",
     "calls": 1978
-  },
-  {
-    "user_id": "e650f045-ae73-4b3d-be81-b95449f33f2f",
-    "name": "Maria Rosales",
-    "talk_seconds": 74629,
-    "talk_display": "20h 43m",
-    "calls": 1970
   },
   {
     "user_id": "4c30a9fe-24ea-4d0d-8835-b545238c8b15",
