@@ -1378,6 +1378,17 @@ def _generate_forecast_table(forecast_data: dict) -> str:
         f'{month_name} {year} &middot; Day {biz_elapsed} of {biz_total}</div>'
     )
 
+    # WIP banner
+    wip_banner = (
+        '<div style="margin:8px 0 12px;padding:8px 14px;border-radius:8px;'
+        'background:rgba(251,191,36,0.08);border:1px dashed rgba(251,191,36,0.3);'
+        'font-size:0.8em;color:#FBBF24;display:flex;align-items:center;gap:6px">'
+        '<span style="font-size:1.1em">&#9888;</span> '
+        'Work in progress &mdash; territory budget data is manually updated. '
+        'Actuals will auto-refresh from Salesforce once the report is available.'
+        '</div>'
+    )
+
     # Summary bar
     team_var_color = _variance_color(team_var_pct)
     team_var_sign = "+" if team_var_pct >= 0 else ""
@@ -1444,6 +1455,7 @@ def _generate_forecast_table(forecast_data: dict) -> str:
     # Assemble table
     table = (
         subtitle +
+        wip_banner +
         summary +
         f'<div style="overflow-x:auto">\n'
         f'<table class="fc-table">\n'
