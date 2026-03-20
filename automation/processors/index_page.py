@@ -9,6 +9,7 @@ and per-month dashboard card values for index.html.
 import logging
 
 from ..config import MONTH_ABBREV, OSR_ROSTER, ISR_ROSTER
+from .forecast import process_forecast
 
 logger = logging.getLogger(__name__)
 
@@ -104,6 +105,16 @@ def process(monthly_results: dict[str, dict],
     scorecard_month = current_data.get("month_name", "")
     scorecard_year = current_data.get("year", 2026)
 
+    # ── Production Forecast ────────────────────────────────────────────
+    try:
+        forecast_data = process_forecast()
+        logger.info("Forecast: %d reps, team variance %.1f%%",
+                     len(forecast_data.get("reps", [])),
+                     forecast_data.get("team_variance_pct", 0))
+    except Exception as e:
+        logger.warning("Forecast processing failed: %s", e)
+        forecast_data = {}
+
     return {
         # YTD Summary
         "ytd_total_enrollments": ytd_total_enrollments,
@@ -144,6 +155,9 @@ def process(monthly_results: dict[str, dict],
 
         # ISR Scorecard (Genesys talk time)
         "isr_scorecard": _build_isr_scorecard(genesys_data or []),
+
+        # Production Forecast
+        "forecast": forecast_data,
     }
 
 

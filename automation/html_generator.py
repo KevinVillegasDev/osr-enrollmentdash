@@ -933,6 +933,12 @@ def update_index_page(filepath: str, data: dict) -> bool:
         isr_html = _generate_isr_scorecard_table(isr_scorecard)
         html = _replace_between_markers(html, "ISR Scorecard Data", isr_html)
 
+    # ── Production Forecast ──────────────────────────────────────────────
+    forecast = data.get("forecast", {})
+    if forecast and forecast.get("reps"):
+        forecast_html = _generate_forecast_table(forecast)
+        html = _replace_between_markers(html, "Forecast Data", forecast_html)
+
     # ── Month Cards ──────────────────────────────────────────────────────
     month_cards_html = _generate_month_cards_html(data.get("month_cards", []))
     if month_cards_html:
@@ -1308,6 +1314,146 @@ def _generate_isr_scorecard_table(isr_scorecard: list[dict]) -> str:
         f'<th class="sc-th-num">Talk Time</th>'
         f'<th class="sc-th-num">Calls</th>'
         f'<th class="sc-th-num" style="width:140px;cursor:help" title="Talk time relative to top performer — full bar = highest talk time this month">Distribution</th>'
+        f'</tr></thead>\n'
+        f'<tbody>\n'
+        + "\n".join(rows) +
+        f'\n</tbody>\n'
+        f'</table>\n'
+        f'</div>'
+    )
+
+    return table
+
+
+# ─── Production Forecast Generator ─────────────────────────────────────────────
+
+def _generate_forecast_table(forecast_data: dict) -> str:
+    """
+    Generate the HTML content for the Production Forecast section.
+
+    Returns the full inner content between the <!-- Forecast Data --> markers,
+    including subtitle, summary stats, table, and progress bars.
+
+    forecast_data dict expected keys:
+        month_name (str), year (int),
+        biz_days_elapsed (int), biz_days_total (int),
+        team_mtd (float), team_budget (float), team_projected (float),
+        team_variance_pct (float),
+        reps (list[dict]) - each with: name, territory, mtd, budget,
+            projected, variance_pct
+    """
+
+    def _fmt_currency(v):
+        """Format currency for large numbers: $1.3M, $281K, $xxx."""
+        if abs(v) >= 1_000_000:
+            return f"${v / 1_000_000:.1f}M"
+        elif abs(v) >= 1_000:
+            return f"${v / 1_000:.0f}K"
+        elif v > 0:
+            return f"${int(v)}"
+        return "$0"
+
+    def _variance_color(pct):
+        """Return color hex for a variance percentage."""
+        if pct >= 0:
+            return "#2DD4A0"
+        elif pct >= -10:
+            return "#FBBF24"
+        else:
+            return "#F87171"
+
+    month_name = forecast_data.get("month_name", "")
+    year = forecast_data.get("year", 2026)
+    biz_elapsed = forecast_data.get("biz_days_elapsed", 0)
+    biz_total = forecast_data.get("biz_days_total", 0)
+    team_mtd = forecast_data.get("team_mtd", 0)
+    team_budget = forecast_data.get("team_budget", 0)
+    team_projected = forecast_data.get("team_projected", 0)
+    team_var_pct = forecast_data.get("team_variance_pct", 0)
+    reps = forecast_data.get("reps", [])
+
+    # Subtitle
+    subtitle = (
+        f'<div class="fc-subtitle">Territory production vs budget &middot; '
+        f'{month_name} {year} &middot; Day {biz_elapsed} of {biz_total}</div>'
+    )
+
+    # Summary bar
+    team_var_color = _variance_color(team_var_pct)
+    team_var_sign = "+" if team_var_pct >= 0 else ""
+    summary = (
+        f'<div class="fc-summary">'
+        f'<span>Team MTD: <b style="color:#FBBF24">{_fmt_currency(team_mtd)}</b></span>'
+        f'<span>Team Budget: <b style="color:#8494AB">{_fmt_currency(team_budget)}</b></span>'
+        f'<span>Team Projected: <b style="color:#A78BFA">{_fmt_currency(team_projected)}</b></span>'
+        f'<span>Team Variance: <b style="color:{team_var_color}">{team_var_sign}{team_var_pct:.1f}%</b></span>'
+        f'</div>'
+    )
+
+    # Table rows
+    rows = []
+    for i, rep in enumerate(reps):
+        stripe = ' class="fc-stripe"' if i % 2 == 1 else ""
+        name = rep.get("name", "")
+        territory = rep.get("territory", "")
+        mtd = rep.get("mtd", 0)
+        budget = rep.get("budget", 0)
+        projected = rep.get("projected", 0)
+        var_pct = rep.get("variance_pct", 0)
+
+        # Projected color
+        if budget > 0:
+            proj_ratio = projected / budget
+        else:
+            proj_ratio = 1.0
+        if proj_ratio >= 1.0:
+            proj_color = "#2DD4A0"
+        elif proj_ratio >= 0.8:
+            proj_color = "#FBBF24"
+        else:
+            proj_color = "#F87171"
+
+        # Variance color
+        var_color = _variance_color(var_pct)
+        var_sign = "+" if var_pct >= 0 else ""
+
+        # Progress bar width (capped at 100%)
+        bar_width = min(100, (projected / budget * 100)) if budget > 0 else 0
+
+        # Territory sub-text
+        territory_html = ""
+        if territory:
+            territory_html = f'<div class="fc-name-sub">{territory}</div>'
+
+        row = (
+            f'<tr{stripe}>'
+            f'<td class="fc-name">{name}{territory_html}</td>'
+            f'<td class="fc-num" style="color:#FBBF24">{_fmt_currency(mtd)}</td>'
+            f'<td class="fc-num" style="color:#8494AB">{_fmt_currency(budget)}</td>'
+            f'<td class="fc-num" style="color:{proj_color}">{_fmt_currency(projected)}</td>'
+            f'<td class="fc-num" style="color:{var_color}">{var_sign}{var_pct:.1f}%</td>'
+            f'<td class="fc-bar-cell" style="width:140px">'
+            f'<div style="height:6px;border-radius:3px;background:rgba(167,139,250,0.15)">'
+            f'<div style="height:100%;border-radius:3px;width:{bar_width:.0f}%;'
+            f'background:linear-gradient(90deg,#A78BFA,#5B9BFF)"></div>'
+            f'</div></td>'
+            f'</tr>'
+        )
+        rows.append(row)
+
+    # Assemble table
+    table = (
+        subtitle +
+        summary +
+        f'<div style="overflow-x:auto">\n'
+        f'<table class="fc-table">\n'
+        f'<thead><tr>'
+        f'<th class="fc-th-name">Rep</th>'
+        f'<th class="fc-th">MTD Actual</th>'
+        f'<th class="fc-th">Budget</th>'
+        f'<th class="fc-th">Projected</th>'
+        f'<th class="fc-th">Variance</th>'
+        f'<th class="fc-th" style="width:140px">Pace</th>'
         f'</tr></thead>\n'
         f'<tbody>\n'
         + "\n".join(rows) +
