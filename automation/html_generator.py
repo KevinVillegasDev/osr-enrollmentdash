@@ -1396,7 +1396,7 @@ def _generate_forecast_table(forecast_data: dict) -> str:
         stripe = ' class="fc-stripe"' if i % 2 == 1 else ""
         name = rep.get("name", "")
         territory = rep.get("territory", "")
-        mtd = rep.get("mtd", 0)
+        mtd = rep.get("mtd_actual", 0)
         budget = rep.get("budget", 0)
         projected = rep.get("projected", 0)
         var_pct = rep.get("variance_pct", 0)
