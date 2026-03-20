@@ -128,9 +128,9 @@
   {
     "user_id": "bd4818d1-a4eb-4711-bdbb-736a2227bbd2",
     "name": "Alex Perez",
-    "talk_seconds": 160706,
-    "talk_display": "44h 38m",
-    "calls": 1695
+    "talk_seconds": 161666,
+    "talk_display": "44h 54m",
+    "calls": 1700
   },
   {
     "user_id": "402712c6-4dee-4abc-a77f-a62f0bc1aeb0",
@@ -205,9 +205,9 @@
   {
     "user_id": "d92f85ef-d236-44e8-af25-34c7caa50a3f",
     "name": "Dan Flores",
-    "talk_seconds": 132332,
+    "talk_seconds": 132352,
     "talk_display": "36h 45m",
-    "calls": 2517
+    "calls": 2518
   },
   {
     "user_id": "14f259f6-102a-4700-a51a-b47ae04d24e7",
@@ -240,9 +240,9 @@
   {
     "user_id": "eb53ed35-8863-4021-bd44-909f19636923",
     "name": "Benjamin Munoz",
-    "talk_seconds": 118887,
-    "talk_display": "33h 1m",
-    "calls": 1640
+    "talk_seconds": 119076,
+    "talk_display": "33h 4m",
+    "calls": 1641
   },
   {
     "user_id": "1332d5ba-280b-4f82-9b9f-ea0c03c92c89",
@@ -259,18 +259,18 @@
     "calls": 1901
   },
   {
+    "user_id": "21ab0300-3df4-4b95-a620-da649b60ba1e",
+    "name": "Eduardo Yanez",
+    "talk_seconds": 114416,
+    "talk_display": "31h 46m",
+    "calls": 2391
+  },
+  {
     "user_id": "a63aa338-8da1-4a10-a178-e30a09083412",
     "name": "Elena Garcia",
     "talk_seconds": 114184,
     "talk_display": "31h 43m",
     "calls": 945
-  },
-  {
-    "user_id": "21ab0300-3df4-4b95-a620-da649b60ba1e",
-    "name": "Eduardo Yanez",
-    "talk_seconds": 114072,
-    "talk_display": "31h 41m",
-    "calls": 2388
   },
   {
     "user_id": "44b5a74e-dfd1-46dc-81a3-5582c9e57065",
@@ -317,9 +317,9 @@
   {
     "user_id": "e650f045-ae73-4b3d-be81-b95449f33f2f",
     "name": "Maria Rosales",
-    "talk_seconds": 81927,
-    "talk_display": "22h 45m",
-    "calls": 2151
+    "talk_seconds": 81979,
+    "talk_display": "22h 46m",
+    "calls": 2154
   },
   {
     "user_id": "51debfab-e7a1-47c4-9da2-757d9bb615d1",
@@ -532,6 +532,13 @@
     "calls": 4
   },
   {
+    "user_id": "c452ea49-5d1b-4c1f-ae71-bdce0153d27d",
+    "name": "Carlos Jimenez",
+    "talk_seconds": 3829,
+    "talk_display": "1h 3m",
+    "calls": 6
+  },
+  {
     "user_id": "a8127baa-561c-4296-9426-5e5dff460683",
     "name": "Janis Haro",
     "talk_seconds": 3684,
@@ -544,13 +551,6 @@
     "talk_seconds": 3375,
     "talk_display": "56m",
     "calls": 22
-  },
-  {
-    "user_id": "c452ea49-5d1b-4c1f-ae71-bdce0153d27d",
-    "name": "Carlos Jimenez",
-    "talk_seconds": 1590,
-    "talk_display": "26m",
-    "calls": 5
   },
   {
     "user_id": "3ab22848-616e-4f4a-9a5c-f4571a1a1af6",
