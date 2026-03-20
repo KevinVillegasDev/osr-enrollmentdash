@@ -12,7 +12,7 @@ import json
 import logging
 import os
 import re
-from datetime import date
+from datetime import date, datetime, timezone, timedelta
 
 from .config import PROJECT_ROOT, MONTH_NAMES, MONTH_ABBREV
 
@@ -938,6 +938,12 @@ def update_index_page(filepath: str, data: dict) -> bool:
     if forecast and forecast.get("reps"):
         forecast_html = _generate_forecast_table(forecast)
         html = _replace_between_markers(html, "Forecast Data", forecast_html)
+
+    # ── Last Updated Timestamp ─────────────────────────────────────────
+    pst = timezone(timedelta(hours=-7))
+    now_pst = datetime.now(pst)
+    timestamp_str = now_pst.strftime("%b %d, %Y at %I:%M %p PST")
+    html = _replace_between_markers(html, "Last Updated", timestamp_str)
 
     # ── Month Cards ──────────────────────────────────────────────────────
     month_cards_html = _generate_month_cards_html(data.get("month_cards", []))
