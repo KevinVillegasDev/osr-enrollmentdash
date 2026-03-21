@@ -1397,10 +1397,11 @@ def _generate_forecast_table(forecast_data: dict) -> str:
     # Summary bar
     team_var_color = _variance_color(team_var_pct)
     team_var_sign = "+" if team_var_pct >= 0 else ""
+    team_attain = round(team_mtd / team_budget * 100, 1) if team_budget > 0 else 0
     summary = (
         f'<div class="fc-summary">'
         f'<span>Team MTD: <b style="color:#FBBF24">{_fmt_currency(team_mtd)}</b></span>'
-        f'<span>Team Budget: <b style="color:#8494AB">{_fmt_currency(team_budget)}</b></span>'
+        f'<span>Team Attainment: <b style="color:#A78BFA">{team_attain}%</b></span>'
         f'<span>Team Projected: <b style="color:#A78BFA">{_fmt_currency(team_projected)}</b></span>'
         f'<span>Team Variance: <b style="color:{team_var_color}">{team_var_sign}{team_var_pct:.1f}%</b></span>'
         f'</div>'
@@ -1441,11 +1442,20 @@ def _generate_forecast_table(forecast_data: dict) -> str:
         if territory:
             territory_html = f'<div class="fc-name-sub">{territory}</div>'
 
+        # Attainment % (MTD / Budget)
+        attain_pct = round(mtd / budget * 100, 1) if budget > 0 else 0
+        if attain_pct >= (biz_elapsed / biz_total * 100):
+            attain_color = "#2DD4A0"  # on pace
+        elif attain_pct >= (biz_elapsed / biz_total * 100) * 0.8:
+            attain_color = "#FBBF24"  # within 80% of expected pace
+        else:
+            attain_color = "#F87171"  # behind
+
         row = (
             f'<tr{stripe}>'
             f'<td class="fc-name">{name}{territory_html}</td>'
             f'<td class="fc-num" style="color:#FBBF24">{_fmt_currency(mtd)}</td>'
-            f'<td class="fc-num" style="color:#8494AB">{_fmt_currency(budget)}</td>'
+            f'<td class="fc-num" style="color:{attain_color}">{attain_pct}%</td>'
             f'<td class="fc-num" style="color:{proj_color}">{_fmt_currency(projected)}</td>'
             f'<td class="fc-num" style="color:{var_color}">{var_sign}{var_pct:.1f}%</td>'
             f'<td class="fc-bar-cell" style="width:140px">'
@@ -1467,7 +1477,7 @@ def _generate_forecast_table(forecast_data: dict) -> str:
         f'<thead><tr>'
         f'<th class="fc-th-name">Rep</th>'
         f'<th class="fc-th" style="cursor:help" title="Total funded origination dollars in this territory so far this month — includes all merchants (new enrollees + existing book of business)">MTD Actual <span style="font-size:0.85em;opacity:0.5">&#9432;</span></th>'
-        f'<th class="fc-th" style="cursor:help" title="Monthly budget target for this territory from the 2026 sales budget — based on total territory production, not just new enrollments">Budget <span style="font-size:0.85em;opacity:0.5">&#9432;</span></th>'
+        f'<th class="fc-th" style="cursor:help" title="Percentage of monthly budget target achieved so far — color is green if on pace for the month, amber if within 80%% of expected pace, red if behind">% Attainment <span style="font-size:0.85em;opacity:0.5">&#9432;</span></th>'
         f'<th class="fc-th" style="cursor:help" title="Projected end-of-month total based on current daily pace — calculated as: MTD Actual × (total business days ÷ elapsed business days)">Projected <span style="font-size:0.85em;opacity:0.5">&#9432;</span></th>'
         f'<th class="fc-th" style="cursor:help" title="Percentage difference between projected end-of-month and budget target — green = on/above target, amber = within 10%, red = more than 10% behind">Variance <span style="font-size:0.85em;opacity:0.5">&#9432;</span></th>'
         f'<th class="fc-th" style="width:140px;cursor:help" title="Visual progress bar showing projected production as a percentage of the budget target — full bar means on track to meet or exceed budget">Pace <span style="font-size:0.85em;opacity:0.5">&#9432;</span></th>'
