@@ -924,6 +924,7 @@ def update_index_page(filepath: str, data: dict) -> bool:
             scorecard,
             data.get("scorecard_month", ""),
             data.get("scorecard_year", 2026),
+            forecast_data=data.get("forecast", {}),
         )
         html = _replace_between_markers(html, "Scorecard Data", scorecard_html)
 
@@ -1072,12 +1073,14 @@ def update_analytics_page(filepath: str, data: dict) -> bool:
 
 # ─── Rep Leaderboard Generator ─────────────────────────────────────────────────
 
-def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int) -> str:
+def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int,
+                               forecast_data: dict = None) -> str:
     """
-    Generate the HTML table rows for the rep leaderboard.
+    Generate the HTML for the rep leaderboard grid view AND chart view,
+    including a toggle to switch between them.
 
     Returns the full inner content between the <!-- Scorecard Data --> markers,
-    including the subtitle, table, and data.
+    including the subtitle, toggle, grid table, and chart cards.
     """
     def _fmt_funded(v):
         if v >= 1_000_000:
@@ -1091,11 +1094,17 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
     rows = []
     for i, rep in enumerate(scorecard):
         stops = rep["stops_per_day"]
+        avg_hours = rep.get("avg_hours", 0)
         enrollments = rep["enrollments"]
         funded = rep["funded"]
-        spe = rep.get("stops_per_enroll")  # None if 0 enrollments
         prospect_stops = rep.get("prospect_stops", 0)
         prospect_pct = rep.get("prospect_pct")  # None if 0 total stops
+
+        # Conversion = enrollments / prospect_stops (higher = better)
+        if prospect_stops > 0 and enrollments > 0:
+            conversion = round(enrollments / prospect_stops * 100, 1)
+        else:
+            conversion = None
 
         # Color-code enrollments
         if enrollments >= 10:
@@ -1125,27 +1134,34 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
         else:
             stops_color = "#627289"
 
-        # Color-code stops/enrollment ratio (lower = better)
-        if spe is None:
-            spe_display = "—"
-            spe_sub = ""
-            spe_color = "#627289"
-        elif spe <= 3:
-            spe_display = str(spe)
-            spe_sub = f'<div style="font-size:0.7em;color:#627289;margin-top:1px">{prospect_stops} visits</div>'
-            spe_color = "#2DD4A0"
-        elif spe <= 8:
-            spe_display = str(spe)
-            spe_sub = f'<div style="font-size:0.7em;color:#627289;margin-top:1px">{prospect_stops} visits</div>'
-            spe_color = "#FBBF24"
+        # Color-code avg hours
+        if avg_hours >= 6:
+            hours_color = "#2DD4A0"
+        elif avg_hours >= 4:
+            hours_color = "#FBBF24"
+        elif avg_hours > 0:
+            hours_color = "#F87171"
         else:
-            spe_display = str(spe)
-            spe_sub = f'<div style="font-size:0.7em;color:#627289;margin-top:1px">{prospect_stops} visits</div>'
-            spe_color = "#F87171"
+            hours_color = "#627289"
+        hours_display = f"{avg_hours}h" if avg_hours > 0 else "\u2014"
+
+        # Color-code conversion (higher = better)
+        if conversion is None:
+            conv_display = "\u2014"
+            conv_color = "#627289"
+        elif conversion >= 15:
+            conv_display = f"{conversion}%"
+            conv_color = "#2DD4A0"
+        elif conversion >= 8:
+            conv_display = f"{conversion}%"
+            conv_color = "#FBBF24"
+        else:
+            conv_display = f"{conversion}%"
+            conv_color = "#F87171"
 
         # Color-code prospect % (higher = more hunting)
         if prospect_pct is None:
-            pct_display = "—"
+            pct_display = "\u2014"
             pct_color = "#627289"
         elif prospect_pct >= 70:
             pct_display = f"{prospect_pct}%"
@@ -1162,9 +1178,10 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
             f'<tr{stripe}>'
             f'<td class="sc-name">{rep["name"]}</td>'
             f'<td class="sc-num" style="color:{stops_color}">{stops}</td>'
+            f'<td class="sc-num" style="color:{hours_color}">{hours_display}</td>'
             f'<td class="sc-num" style="color:{pct_color}">{pct_display}</td>'
             f'<td class="sc-num" style="color:{enroll_color}">{enrollments}</td>'
-            f'<td class="sc-num" style="color:{spe_color}">{spe_display}{spe_sub}</td>'
+            f'<td class="sc-num" style="color:{conv_color}">{conv_display}</td>'
             f'<td class="sc-num" style="color:{funded_color}">{_fmt_funded(funded)}</td>'
             f'</tr>'
         )
@@ -1174,14 +1191,13 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
     total_funded = sum(r["funded"] for r in scorecard)
     active_reps = sum(1 for r in scorecard if r["enrollments"] > 0)
 
-    # Avg stops/enrollment across reps who have enrollments
+    # Team conversion = total enrollments / total prospect stops
     reps_with_enrollments = [r for r in scorecard if r["enrollments"] > 0]
-    if reps_with_enrollments:
-        total_prospects = sum(r.get("prospect_stops", 0) for r in reps_with_enrollments)
-        total_enroll = sum(r["enrollments"] for r in reps_with_enrollments)
-        avg_spe = round(total_prospects / total_enroll, 1) if total_enroll > 0 else 0
+    total_prospect_stops = sum(r.get("prospect_stops", 0) for r in scorecard)
+    if total_prospect_stops > 0 and total_enrollments > 0:
+        team_conversion = round(total_enrollments / total_prospect_stops * 100, 1)
     else:
-        avg_spe = 0
+        team_conversion = 0
 
     # Team-wide prospect % (all reps with any stops)
     reps_with_stops = [r for r in scorecard if r.get("total_stops", 0) > 0]
@@ -1197,13 +1213,34 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
         f'{month_name} {year}'
     )
 
-    table = (
-        f'<div class="sc-subtitle">{subtitle}</div>\n'
+    # Toggle buttons
+    toggle = (
+        '<div style="display:flex;gap:4px;margin:8px 0 12px">'
+        '<button onclick="document.getElementById(\'scGrid\').style.display=\'block\';'
+        'document.getElementById(\'scCharts\').style.display=\'none\';'
+        'this.style.background=\'rgba(91,155,255,0.15)\';this.style.color=\'#5B9BFF\';'
+        'this.nextElementSibling.style.background=\'rgba(98,114,137,0.1)\';'
+        'this.nextElementSibling.style.color=\'#627289\'" '
+        'style="padding:6px 16px;border-radius:8px;border:none;cursor:pointer;'
+        'font-size:0.82em;font-weight:600;font-family:inherit;'
+        'background:rgba(91,155,255,0.15);color:#5B9BFF">Grid</button>'
+        '<button onclick="document.getElementById(\'scCharts\').style.display=\'block\';'
+        'document.getElementById(\'scGrid\').style.display=\'none\';'
+        'this.style.background=\'rgba(91,155,255,0.15)\';this.style.color=\'#5B9BFF\';'
+        'this.previousElementSibling.style.background=\'rgba(98,114,137,0.1)\';'
+        'this.previousElementSibling.style.color=\'#627289\'" '
+        'style="padding:6px 16px;border-radius:8px;border:none;cursor:pointer;'
+        'font-size:0.82em;font-weight:600;font-family:inherit;'
+        'background:rgba(98,114,137,0.1);color:#627289">Charts</button>'
+        '</div>'
+    )
+
+    grid_table = (
         f'<div class="sc-summary">'
         f'<span><b style="color:#22D3EE">{active_reps}</b> active reps</span>'
         f'<span><b style="color:#5B9BFF">{total_enrollments}</b> enrollments</span>'
         f'<span><b style="color:#2DD4A0">{_fmt_funded(total_funded)}</b> funded</span>'
-        f'<span><b style="color:#FBBF24">{avg_spe}</b> avg stops/enroll</span>'
+        f'<span><b style="color:#FBBF24">{team_conversion}%</b> team conversion</span>'
         f'<span><b style="color:#A78BFA">{team_prospect_pct}%</b> team prospect</span>'
         f'</div>\n'
         f'<div style="overflow-x:auto">\n'
@@ -1211,9 +1248,10 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
         f'<thead><tr>'
         f'<th class="sc-th-name">Rep</th>'
         f'<th class="sc-th-num">Stops/Day</th>'
+        f'<th class="sc-th-num">Avg Hrs</th>'
         f'<th class="sc-th-num">Prospect %</th>'
         f'<th class="sc-th-num">Enrollments</th>'
-        f'<th class="sc-th-num">Stops/Enroll</th>'
+        f'<th class="sc-th-num">Conversion</th>'
         f'<th class="sc-th-num">Funded (M0)</th>'
         f'</tr></thead>\n'
         f'<tbody>\n'
@@ -1223,7 +1261,191 @@ def _generate_scorecard_table(scorecard: list[dict], month_name: str, year: int)
         f'</div>'
     )
 
-    return table
+    # Generate chart view
+    charts_html = _generate_scorecard_charts(scorecard, forecast_data)
+
+    result = (
+        f'<div class="sc-subtitle">{subtitle}</div>\n'
+        f'{toggle}\n'
+        f'<div id="scGrid">\n{grid_table}\n</div>\n'
+        f'<div id="scCharts" style="display:none">\n{charts_html}\n</div>'
+    )
+
+    return result
+
+
+def _generate_scorecard_charts(scorecard: list[dict], forecast_data: dict = None) -> str:
+    """
+    Generate 5 horizontal bar chart cards for the chart view of the rep scorecard.
+
+    Charts:
+    1. Stops per Day
+    2. Avg Hours in Field
+    3. Enrollments
+    4. Conversion Rate (enrollments / prospect_stops as %)
+    5. % Budget Attainment (MTD / budget as %)
+
+    Uses inline HTML/CSS (no Chart.js).
+    """
+    def _bar_chart_card(title: str, items: list[tuple], unit: str = "",
+                        thresholds: list[tuple] = None) -> str:
+        """
+        Build a single horizontal bar chart card.
+
+        Args:
+            title: Chart title
+            items: List of (name, value) tuples, pre-sorted descending
+            unit: Suffix for display (e.g., "%", "h")
+            thresholds: List of (min_val, color) tuples, checked in order.
+                        First match wins. Default color is #5B9BFF.
+        """
+        if not items:
+            return ""
+
+        max_val = max(v for _, v in items) if items else 1
+        if max_val <= 0:
+            max_val = 1
+
+        bar_rows = []
+        for name, val in items:
+            bar_width = round((val / max_val) * 100) if max_val > 0 else 0
+            bar_width = min(bar_width, 100)
+
+            # Determine bar color from thresholds
+            bar_color = "#5B9BFF"
+            if thresholds:
+                for min_val, color in thresholds:
+                    if val >= min_val:
+                        bar_color = color
+                        break
+
+            # Format display value
+            if unit == "%" and val > 0:
+                display = f"{val:.1f}%" if isinstance(val, float) else f"{val}%"
+            elif unit == "h" and val > 0:
+                display = f"{val}h"
+            elif unit == "$" and val > 0:
+                if val >= 1_000_000:
+                    display = f"${val/1_000_000:.1f}M"
+                elif val >= 1_000:
+                    display = f"${val/1_000:.1f}K"
+                else:
+                    display = f"${int(val)}"
+            elif val > 0:
+                display = str(val)
+            else:
+                display = "\u2014"
+                bar_color = "#627289"
+
+            # Dim bar for zero values
+            bar_bg_opacity = "0.15" if val > 0 else "0.05"
+
+            bar_rows.append(
+                f'<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">'
+                f'<div style="width:130px;min-width:130px;font-size:0.82em;color:#8494AB;'
+                f'text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{name}</div>'
+                f'<div style="flex:1;height:20px;border-radius:6px;background:rgba(91,155,255,{bar_bg_opacity});'
+                f'position:relative;overflow:hidden">'
+                f'<div style="height:100%;border-radius:6px;width:{bar_width}%;'
+                f'background:{bar_color};transition:width 0.3s ease"></div>'
+                f'</div>'
+                f'<div style="width:55px;min-width:55px;font-size:0.82em;font-weight:600;'
+                f'color:{bar_color};text-align:right">{display}</div>'
+                f'</div>'
+            )
+
+        return (
+            f'<div style="background:#151E2F;border:1px solid #293852;border-radius:12px;'
+            f'padding:16px 18px;margin-bottom:12px">'
+            f'<div style="font-size:0.88em;font-weight:700;color:#F1F5F9;'
+            f'margin-bottom:12px">{title}</div>'
+            + "\n".join(bar_rows) +
+            f'</div>'
+        )
+
+    # ── 1. Stops per Day ────────────────────────────────────────────────
+    stops_items = sorted(
+        [(r["name"], r["stops_per_day"]) for r in scorecard],
+        key=lambda x: x[1], reverse=True
+    )
+    stops_chart = _bar_chart_card(
+        "Stops per Day", stops_items,
+        thresholds=[(10, "#2DD4A0"), (5, "#FBBF24"), (0.1, "#F1F5F9")]
+    )
+
+    # ── 2. Avg Hours in Field ───────────────────────────────────────────
+    hours_items = sorted(
+        [(r["name"], r.get("avg_hours", 0)) for r in scorecard],
+        key=lambda x: x[1], reverse=True
+    )
+    hours_chart = _bar_chart_card(
+        "Avg Hours in Field", hours_items, unit="h",
+        thresholds=[(6, "#2DD4A0"), (4, "#FBBF24"), (0.1, "#F87171")]
+    )
+
+    # ── 3. Enrollments ──────────────────────────────────────────────────
+    enroll_items = sorted(
+        [(r["name"], r["enrollments"]) for r in scorecard],
+        key=lambda x: x[1], reverse=True
+    )
+    enroll_chart = _bar_chart_card(
+        "Enrollments", enroll_items,
+        thresholds=[(10, "#2DD4A0"), (5, "#FBBF24"), (1, "#F1F5F9")]
+    )
+
+    # ── 4. Conversion Rate ──────────────────────────────────────────────
+    conv_items = []
+    for r in scorecard:
+        prospect_stops = r.get("prospect_stops", 0)
+        enrollments = r["enrollments"]
+        if prospect_stops > 0 and enrollments > 0:
+            conv_rate = round(enrollments / prospect_stops * 100, 1)
+        else:
+            conv_rate = 0
+        conv_items.append((r["name"], conv_rate))
+    conv_items.sort(key=lambda x: x[1], reverse=True)
+    conv_chart = _bar_chart_card(
+        "Conversion Rate", conv_items, unit="%",
+        thresholds=[(15, "#2DD4A0"), (8, "#FBBF24"), (0.1, "#F87171")]
+    )
+
+    # ── 5. % Budget Attainment ──────────────────────────────────────────
+    attain_items = []
+    if forecast_data and forecast_data.get("reps"):
+        # Build a lookup by rep name
+        forecast_lookup = {r["name"]: r for r in forecast_data["reps"]}
+        for r in scorecard:
+            fc = forecast_lookup.get(r["name"])
+            if fc and fc.get("budget", 0) > 0:
+                attain_pct = round(fc["mtd_actual"] / fc["budget"] * 100, 1)
+            else:
+                attain_pct = 0
+            attain_items.append((r["name"], attain_pct))
+        attain_items.sort(key=lambda x: x[1], reverse=True)
+
+        biz_elapsed = forecast_data.get("biz_days_elapsed", 0)
+        biz_total = forecast_data.get("biz_days_total", 1)
+        expected_pct = round(biz_elapsed / biz_total * 100)
+
+        attain_chart = _bar_chart_card(
+            f"% Budget Attainment (expected pace: {expected_pct}%)",
+            attain_items, unit="%",
+            thresholds=[(expected_pct, "#2DD4A0"),
+                        (expected_pct * 0.8, "#FBBF24"),
+                        (0.1, "#F87171")]
+        )
+    else:
+        attain_chart = (
+            '<div style="background:#151E2F;border:1px solid #293852;border-radius:12px;'
+            'padding:16px 18px;margin-bottom:12px">'
+            '<div style="font-size:0.88em;font-weight:700;color:#F1F5F9;'
+            'margin-bottom:12px">% Budget Attainment</div>'
+            '<div style="font-size:0.82em;color:#627289;padding:12px 0">'
+            'No forecast data available</div>'
+            '</div>'
+        )
+
+    return stops_chart + hours_chart + enroll_chart + conv_chart + attain_chart
 
 
 def _generate_isr_scorecard_table(isr_scorecard: list[dict]) -> str:

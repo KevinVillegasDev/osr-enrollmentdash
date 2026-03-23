@@ -74,11 +74,18 @@ def process(check_in_rows: list[dict]) -> dict:
 
     all_dates = set()
 
+    # Collect timestamps per (rep, date) for avg hours calculation
+    rep_day_timestamps = defaultdict(lambda: defaultdict(list))  # rep → date → [sort_key, ...]
+
     for stop in dedup_key.values():
         rep = stop["_rep"]
         date_str = stop["d"]
 
         all_dates.add(date_str)
+
+        # Collect sort key timestamps for hours-in-field calculation
+        if stop.get("sk"):
+            rep_day_timestamps[rep][date_str].append(stop["sk"])
 
         # Add to stop list (without internal keys)
         stop_entry = {k: v for k, v in stop.items() if k not in ("_rep", "sk")}
@@ -100,6 +107,29 @@ def process(check_in_rows: list[dict]) -> dict:
     for rep in rep_stops_dict:
         rep_stops_dict[rep].sort(key=lambda x: _stop_sort_key(x))
 
+    # ── Compute avg hours in field per rep ────────────────────────────────
+    rep_avg_hours = {}
+    for rep, day_map in rep_day_timestamps.items():
+        daily_spans = []
+        for date_str, timestamps in day_map.items():
+            if len(timestamps) < 2:
+                continue  # Need at least 2 stops to compute a span
+            sorted_ts = sorted(timestamps)
+            first = sorted_ts[0]   # e.g. "2026-03-02 08:40"
+            last = sorted_ts[-1]
+            try:
+                first_dt = datetime.strptime(first, "%Y-%m-%d %H:%M")
+                last_dt = datetime.strptime(last, "%Y-%m-%d %H:%M")
+                span_hours = (last_dt - first_dt).total_seconds() / 3600
+                if span_hours > 0:
+                    daily_spans.append(span_hours)
+            except ValueError:
+                continue
+        if daily_spans:
+            rep_avg_hours[rep] = round(sum(daily_spans) / len(daily_spans), 1)
+        else:
+            rep_avg_hours[rep] = 0
+
     # ── Build repActivity array ──────────────────────────────────────────
     rep_activity = []
     for rep, agg in rep_agg.items():
@@ -109,6 +139,7 @@ def process(check_in_rows: list[dict]) -> dict:
             "ex": agg["existing"],
             "pr": agg["prospect"],
             "daily": dict(agg["daily"]),
+            "avg_hours": rep_avg_hours.get(rep, 0),
         })
 
     # Sort by total stops descending

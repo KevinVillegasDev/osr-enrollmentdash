@@ -168,11 +168,12 @@ def _build_rep_scorecard(field_result: dict, current_month_data: dict) -> list[d
     Returns list of dicts sorted by enrollments descending:
         [{name, stops_per_day, enrollments, funded}, ...]
     """
-    # 1. Per-rep avg stops/day, prospect/existing stops from field activity
+    # 1. Per-rep avg stops/day, prospect/existing stops, avg hours from field activity
     rep_stops = {}
     rep_prospect_stops = {}
     rep_existing_stops = {}
     rep_total_stops = {}
+    rep_avg_hours = {}
     for rep_act in field_result.get("repActivity", []):
         name = rep_act.get("n", "")
         total = rep_act.get("t", 0)
@@ -183,6 +184,7 @@ def _build_rep_scorecard(field_result: dict, current_month_data: dict) -> list[d
         rep_prospect_stops[name] = rep_act.get("pr", 0)
         rep_existing_stops[name] = rep_act.get("ex", 0)
         rep_total_stops[name] = total
+        rep_avg_hours[name] = rep_act.get("avg_hours", 0)
 
     # 2. Per-rep enrollment counts from current month repCredits
     rep_enrollments = {}
@@ -208,6 +210,7 @@ def _build_rep_scorecard(field_result: dict, current_month_data: dict) -> list[d
         scorecard.append({
             "name": name,
             "stops_per_day": rep_stops.get(name, 0),
+            "avg_hours": rep_avg_hours.get(name, 0),
             "prospect_stops": prospects,
             "existing_stops": existing,
             "total_stops": total,
