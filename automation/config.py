@@ -43,6 +43,7 @@ REPORT_IDS = {
 
 # ─── OSR Roster (as of March 2026) ───────────────────────────────────────────
 OSR_ROSTER = [
+    "Cesar Flores",
     "Claudia Gerhardt",
     "DeLon Phoenix",
     "Eric Henderson",
@@ -59,14 +60,16 @@ OSR_ROSTER = [
 
 # ─── Territory → OSR Mapping ────────────────────────────────────────────────
 # Maps territory codes from the sales budget to OSR names.
-# Unassigned territories (LTO-4, LTO-8, RIC-1, RIC-3, RIC-5) are excluded.
+# Unassigned territories (LTO-4, LTO-8, RIC-3, RIC-5) are excluded.
 # LTO-4 was Sara Porter (no longer on team); Jeremy Moore took RIC-4.
+# Cesar Flores assigned RIC-1.
 TERRITORY_MAP = {
     "LTO-1": "Yemaira Hernandez",
     "LTO-2": "Omar Corona",
     "LTO-3": "Joseph Guerra",
     "LTO-5": "Jared Midkiff",
     "LTO-7": "Stephanie Whitlock",
+    "RIC-1": "Cesar Flores",
     "RIC-2": "Claudia Gerhardt",
     "RIC-4": "Jeremy Moore",
     "RIC-6": "Phillip Mason",
