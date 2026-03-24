@@ -1,0 +1,890 @@
+[
+  {
+    "User": "0058Y00000BjAtfQAF",
+    "_label_User": "Joseph Guerra",
+    "Monthly Quota: MQ Number": "a39TO000006SEHXYA4",
+    "_label_Monthly Quota: MQ Number": "MQ-1360",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 645,
+    "_label_Applications": "645",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 532838,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$532,838.00",
+    "Funded Dollars": {
+      "amount": 424701.83,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$424,701.83",
+    "Funded Dollars Difference": {
+      "amount": -108136.17,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$108,136.17",
+    "Funded Applications Total": 230,
+    "_label_Funded Applications Total": "230",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 869,
+    "_label_Applications Projected": "869",
+    "Funding Progress": 106.3,
+    "_label_Funding Progress": "106.3%",
+    "Funding Projected": {
+      "amount": 566269.11,
+      "currency": null
+    },
+    "_label_Funding Projected": "$566,269.11"
+  },
+  {
+    "User": "005TO000006CQMfYAO",
+    "_label_User": "Omar Corona",
+    "Monthly Quota: MQ Number": "a39TO000006SEHjYAO",
+    "_label_Monthly Quota: MQ Number": "MQ-1372",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 856,
+    "_label_Applications": "856",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 626167,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$626,167.00",
+    "Funded Dollars": {
+      "amount": 463133.34,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$463,133.34",
+    "Funded Dollars Difference": {
+      "amount": -163033.66,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$163,033.66",
+    "Funded Applications Total": 310,
+    "_label_Funded Applications Total": "310",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 1154,
+    "_label_Applications Projected": "1,154",
+    "Funding Progress": 98.6,
+    "_label_Funding Progress": "98.6%",
+    "Funding Projected": {
+      "amount": 617511.12,
+      "currency": null
+    },
+    "_label_Funding Projected": "$617,511.12"
+  },
+  {
+    "User": "005TO000007Eqp7YAC",
+    "_label_User": "Yemaira Hernandez",
+    "Monthly Quota: MQ Number": "a39TO000006SEHvYAO",
+    "_label_Monthly Quota: MQ Number": "MQ-1384",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 906,
+    "_label_Applications": "906",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 594160,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$594,160.00",
+    "Funded Dollars": {
+      "amount": 537625.08,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$537,625.08",
+    "Funded Dollars Difference": {
+      "amount": -56534.92,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$56,534.92",
+    "Funded Applications Total": 309,
+    "_label_Funded Applications Total": "309",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 1221,
+    "_label_Applications Projected": "1,221",
+    "Funding Progress": 120.6,
+    "_label_Funding Progress": "120.6%",
+    "Funding Projected": {
+      "amount": 716833.44,
+      "currency": null
+    },
+    "_label_Funding Projected": "$716,833.44"
+  },
+  {
+    "User": "005TO000007KAf7YAG",
+    "_label_User": "David Castillo",
+    "Monthly Quota: MQ Number": "a39TO000006SEI7YAO",
+    "_label_Monthly Quota: MQ Number": "MQ-1396",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": null,
+    "_label_Applications": "-",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": null,
+    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars": null,
+    "_label_Funded Dollars": "-",
+    "Funded Dollars Difference": null,
+    "_label_Funded Dollars Difference": "-",
+    "Funded Applications Total": null,
+    "_label_Funded Applications Total": "-",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 0,
+    "_label_Applications Projected": "0",
+    "Funding Progress": 0,
+    "_label_Funding Progress": "0.0%",
+    "Funding Projected": {
+      "amount": 0,
+      "currency": null
+    },
+    "_label_Funding Projected": "$0.00"
+  },
+  {
+    "User": "005TO000008qrzhYAA",
+    "_label_User": "Claudia Gerhardt",
+    "Monthly Quota: MQ Number": "a39TO000006SEIJYA4",
+    "_label_Monthly Quota: MQ Number": "MQ-1408",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 669,
+    "_label_Applications": "669",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 774120,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$774,120.00",
+    "Funded Dollars": {
+      "amount": 417412.14,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$417,412.14",
+    "Funded Dollars Difference": {
+      "amount": -356707.86,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$356,707.86",
+    "Funded Applications Total": 280,
+    "_label_Funded Applications Total": "280",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 902,
+    "_label_Applications Projected": "902",
+    "Funding Progress": 71.9,
+    "_label_Funding Progress": "71.9%",
+    "Funding Projected": {
+      "amount": 556549.52,
+      "currency": null
+    },
+    "_label_Funding Projected": "$556,549.52"
+  },
+  {
+    "User": "005TO0000099jojYAA",
+    "_label_User": "Eric Henderson",
+    "Monthly Quota: MQ Number": "a39TO000006SEIVYA4",
+    "_label_Monthly Quota: MQ Number": "MQ-1420",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 1765,
+    "_label_Applications": "1,765",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 1322762,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$1,322,762.00",
+    "Funded Dollars": {
+      "amount": 889378.03,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$889,378.03",
+    "Funded Dollars Difference": {
+      "amount": -433383.97,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$433,383.97",
+    "Funded Applications Total": 574,
+    "_label_Funded Applications Total": "574",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 2379,
+    "_label_Applications Projected": "2,379",
+    "Funding Progress": 89.6,
+    "_label_Funding Progress": "89.6%",
+    "Funding Projected": {
+      "amount": 1185837.37,
+      "currency": null
+    },
+    "_label_Funding Projected": "$1,185,837.37"
+  },
+  {
+    "User": "005TO000009FYnOYAW",
+    "_label_User": "DeLon Phoenix",
+    "Monthly Quota: MQ Number": "a39TO000006SEIhYAO",
+    "_label_Monthly Quota: MQ Number": "MQ-1432",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 949,
+    "_label_Applications": "949",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 751960,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$751,960.00",
+    "Funded Dollars": {
+      "amount": 570591.92,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$570,591.92",
+    "Funded Dollars Difference": {
+      "amount": -181368.08,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$181,368.08",
+    "Funded Applications Total": 353,
+    "_label_Funded Applications Total": "353",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 1279,
+    "_label_Applications Projected": "1,279",
+    "Funding Progress": 101.2,
+    "_label_Funding Progress": "101.2%",
+    "Funding Projected": {
+      "amount": 760789.23,
+      "currency": null
+    },
+    "_label_Funding Projected": "$760,789.23"
+  },
+  {
+    "User": "005TO000009FYyfYAG",
+    "_label_User": "Sara Porter",
+    "Monthly Quota: MQ Number": "a39TO000006SEItYAO",
+    "_label_Monthly Quota: MQ Number": "MQ-1444",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 210,
+    "_label_Applications": "210",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": null,
+    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars": {
+      "amount": 121559.64,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$121,559.64",
+    "Funded Dollars Difference": null,
+    "_label_Funded Dollars Difference": "-",
+    "Funded Applications Total": 70,
+    "_label_Funded Applications Total": "70",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 723,
+    "_label_Applications Projected": "723",
+    "Funding Progress": 0,
+    "_label_Funding Progress": "0.0%",
+    "Funding Projected": {
+      "amount": 388990.85,
+      "currency": null
+    },
+    "_label_Funding Projected": "$388,990.85"
+  },
+  {
+    "User": "0058Y00000B79SJQAZ",
+    "_label_User": "Elise Stec",
+    "Monthly Quota: MQ Number": "a39TO000006SEJ5YAO",
+    "_label_Monthly Quota: MQ Number": "MQ-1456",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": null,
+    "_label_Applications": "-",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": null,
+    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars": null,
+    "_label_Funded Dollars": "-",
+    "Funded Dollars Difference": null,
+    "_label_Funded Dollars Difference": "-",
+    "Funded Applications Total": null,
+    "_label_Funded Applications Total": "-",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 0,
+    "_label_Applications Projected": "0",
+    "Funding Progress": 0,
+    "_label_Funding Progress": "0.0%",
+    "Funding Projected": {
+      "amount": 0,
+      "currency": null
+    },
+    "_label_Funding Projected": "$0.00"
+  },
+  {
+    "User": "0058Y00000B3iSUQAZ",
+    "_label_User": "Katie Anguiano",
+    "Monthly Quota: MQ Number": "a39TO000006SEJHYA4",
+    "_label_Monthly Quota: MQ Number": "MQ-1468",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 1446,
+    "_label_Applications": "1,446",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 1557492,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$1,557,492.00",
+    "Funded Dollars": {
+      "amount": 950851.16,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$950,851.16",
+    "Funded Dollars Difference": {
+      "amount": -606640.84,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$606,640.84",
+    "Funded Applications Total": 614,
+    "_label_Funded Applications Total": "614",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 1949,
+    "_label_Applications Projected": "1,949",
+    "Funding Progress": 81.4,
+    "_label_Funding Progress": "81.4%",
+    "Funding Projected": {
+      "amount": 1267801.55,
+      "currency": null
+    },
+    "_label_Funding Projected": "$1,267,801.55"
+  },
+  {
+    "User": "005TO000005jIxBYAU",
+    "_label_User": "Michael Palmer",
+    "Monthly Quota: MQ Number": "a39TO000006SEJTYA4",
+    "_label_Monthly Quota: MQ Number": "MQ-1480",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 2737,
+    "_label_Applications": "2,737",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 2314711,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$2,314,711.00",
+    "Funded Dollars": {
+      "amount": 1645986.65,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$1,645,986.65",
+    "Funded Dollars Difference": {
+      "amount": -668724.35,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$668,724.35",
+    "Funded Applications Total": 1032,
+    "_label_Funded Applications Total": "1,032",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 3689,
+    "_label_Applications Projected": "3,689",
+    "Funding Progress": 94.8,
+    "_label_Funding Progress": "94.8%",
+    "Funding Projected": {
+      "amount": 2194648.87,
+      "currency": null
+    },
+    "_label_Funding Projected": "$2,194,648.87"
+  },
+  {
+    "User": "005TO000006F6MbYAK",
+    "_label_User": "Laura Angulo",
+    "Monthly Quota: MQ Number": "a39TO000006SEJfYAO",
+    "_label_Monthly Quota: MQ Number": "MQ-1492",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 2603,
+    "_label_Applications": "2,603",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 2126828,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$2,126,828.00",
+    "Funded Dollars": {
+      "amount": 1420551.49,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$1,420,551.49",
+    "Funded Dollars Difference": {
+      "amount": -706276.51,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$706,276.51",
+    "Funded Applications Total": 929,
+    "_label_Funded Applications Total": "929",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 3508,
+    "_label_Applications Projected": "3,508",
+    "Funding Progress": 89.1,
+    "_label_Funding Progress": "89.1%",
+    "Funding Projected": {
+      "amount": 1894068.65,
+      "currency": null
+    },
+    "_label_Funding Projected": "$1,894,068.65"
+  },
+  {
+    "User": "005TO0000083IdJYAU",
+    "_label_User": "Javier Gonzalez",
+    "Monthly Quota: MQ Number": "a39TO000006SEJrYAO",
+    "_label_Monthly Quota: MQ Number": "MQ-1504",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 2628,
+    "_label_Applications": "2,628",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 1756364,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$1,756,364.00",
+    "Funded Dollars": {
+      "amount": 1386604.84,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$1,386,604.84",
+    "Funded Dollars Difference": {
+      "amount": -369759.16,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$369,759.16",
+    "Funded Applications Total": 901,
+    "_label_Funded Applications Total": "901",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 3542,
+    "_label_Applications Projected": "3,542",
+    "Funding Progress": 105.3,
+    "_label_Funding Progress": "105.3%",
+    "Funding Projected": {
+      "amount": 1848806.45,
+      "currency": null
+    },
+    "_label_Funding Projected": "$1,848,806.45"
+  },
+  {
+    "User": "005TO000009IGvZYAW",
+    "_label_User": "Noemy Carrion",
+    "Monthly Quota: MQ Number": "a39TO000006SEK3YAO",
+    "_label_Monthly Quota: MQ Number": "MQ-1516",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 1906,
+    "_label_Applications": "1,906",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 1456727,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$1,456,727.00",
+    "Funded Dollars": {
+      "amount": 1116475.73,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$1,116,475.73",
+    "Funded Dollars Difference": {
+      "amount": -340251.27,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$340,251.27",
+    "Funded Applications Total": 677,
+    "_label_Funded Applications Total": "677",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 2569,
+    "_label_Applications Projected": "2,569",
+    "Funding Progress": 102.2,
+    "_label_Funding Progress": "102.2%",
+    "Funding Projected": {
+      "amount": 1488634.31,
+      "currency": null
+    },
+    "_label_Funding Projected": "$1,488,634.31"
+  },
+  {
+    "User": "0058Y00000BjB02QAF",
+    "_label_User": "Luzmam Vigil",
+    "Monthly Quota: MQ Number": "a39TO000006SEKFYA4",
+    "_label_Monthly Quota: MQ Number": "MQ-1528",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 11339,
+    "_label_Applications": "11,339",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 10914140,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$10,914,140.00",
+    "Funded Dollars": {
+      "amount": 6531356.03,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$6,531,356.03",
+    "Funded Dollars Difference": {
+      "amount": -4382783.97,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$4,382,783.97",
+    "Funded Applications Total": 4161,
+    "_label_Funded Applications Total": "4,161",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 15283,
+    "_label_Applications Projected": "15,283",
+    "Funding Progress": 79.8,
+    "_label_Funding Progress": "79.8%",
+    "Funding Projected": {
+      "amount": 8708474.71,
+      "currency": null
+    },
+    "_label_Funding Projected": "$8,708,474.71"
+  },
+  {
+    "User": "0058Y00000B79SKQAZ",
+    "_label_User": "Outside Sales Manager",
+    "Monthly Quota: MQ Number": "a39TO000006SEKRYA4",
+    "_label_Monthly Quota: MQ Number": "MQ-1540",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 12092,
+    "_label_Applications": "12,092",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": null,
+    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars": {
+      "amount": 6747475.73,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$6,747,475.73",
+    "Funded Dollars Difference": null,
+    "_label_Funded Dollars Difference": "-",
+    "Funded Applications Total": 4333,
+    "_label_Funded Applications Total": "4,333",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 16298,
+    "_label_Applications Projected": "16,298",
+    "Funding Progress": 0,
+    "_label_Funding Progress": "0.0%",
+    "Funding Projected": {
+      "amount": 8996634.31,
+      "currency": null
+    },
+    "_label_Funding Projected": "$8,996,634.31"
+  },
+  {
+    "User": "0058Y00000B79SFQAZ",
+    "_label_User": "Jared Midkiff",
+    "Monthly Quota: MQ Number": "a39TO000006SEKdYAO",
+    "_label_Monthly Quota: MQ Number": "MQ-1552",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 1448,
+    "_label_Applications": "1,448",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 951648,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$951,648.00",
+    "Funded Dollars": {
+      "amount": 677538.2,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$677,538.20",
+    "Funded Dollars Difference": {
+      "amount": -274109.8,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$274,109.80",
+    "Funded Applications Total": 489,
+    "_label_Funded Applications Total": "489",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 1952,
+    "_label_Applications Projected": "1,952",
+    "Funding Progress": 94.9,
+    "_label_Funding Progress": "94.9%",
+    "Funding Projected": {
+      "amount": 903384.27,
+      "currency": null
+    },
+    "_label_Funding Projected": "$903,384.27"
+  },
+  {
+    "User": "0058Y00000BjAreQAF",
+    "_label_User": "Stephanie Whitlock",
+    "Monthly Quota: MQ Number": "a39TO000006SEKpYAO",
+    "_label_Monthly Quota: MQ Number": "MQ-1564",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 521,
+    "_label_Applications": "521",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 379257,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$379,257.00",
+    "Funded Dollars": {
+      "amount": 232853.55,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$232,853.55",
+    "Funded Dollars Difference": {
+      "amount": -146403.45,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$146,403.45",
+    "Funded Applications Total": 172,
+    "_label_Funded Applications Total": "172",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 702,
+    "_label_Applications Projected": "702",
+    "Funding Progress": 81.9,
+    "_label_Funding Progress": "81.9%",
+    "Funding Projected": {
+      "amount": 310471.4,
+      "currency": null
+    },
+    "_label_Funding Projected": "$310,471.40"
+  },
+  {
+    "User": "0058Y00000BjAryQAF",
+    "_label_User": "Matthew MacDonald",
+    "Monthly Quota: MQ Number": "a39TO000006SEL1YAO",
+    "_label_Monthly Quota: MQ Number": "MQ-1576",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 1800,
+    "_label_Applications": "1,800",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 1562751,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$1,562,751.00",
+    "Funded Dollars": {
+      "amount": 1077276.02,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$1,077,276.02",
+    "Funded Dollars Difference": {
+      "amount": -485474.98,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$485,474.98",
+    "Funded Applications Total": 681,
+    "_label_Funded Applications Total": "681",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 2426,
+    "_label_Applications Projected": "2,426",
+    "Funding Progress": 91.9,
+    "_label_Funding Progress": "91.9%",
+    "Funding Projected": {
+      "amount": 1436368.03,
+      "currency": null
+    },
+    "_label_Funding Projected": "$1,436,368.03"
+  },
+  {
+    "User": "005TO000009aiVBYAY",
+    "_label_User": "Phillip Mason",
+    "Monthly Quota: MQ Number": "a39TO000006YQMRYA4",
+    "_label_Monthly Quota: MQ Number": "MQ-1588",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 589,
+    "_label_Applications": "589",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 581173,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$581,173.00",
+    "Funded Dollars": {
+      "amount": 337850.2,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$337,850.20",
+    "Funded Dollars Difference": {
+      "amount": -243322.8,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$243,322.80",
+    "Funded Applications Total": 224,
+    "_label_Funded Applications Total": "224",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 794,
+    "_label_Applications Projected": "794",
+    "Funding Progress": 77.5,
+    "_label_Funding Progress": "77.5%",
+    "Funding Projected": {
+      "amount": 450466.93,
+      "currency": null
+    },
+    "_label_Funding Projected": "$450,466.93"
+  },
+  {
+    "User": "0058Y00000BjB0lQAF",
+    "_label_User": "Connor Admirand",
+    "Monthly Quota: MQ Number": "a39TO0000071wItYAI",
+    "_label_Monthly Quota: MQ Number": "MQ-1600",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": 2274,
+    "_label_Applications": "2,274",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 1702019,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$1,702,019.00",
+    "Funded Dollars": {
+      "amount": 1116004.74,
+      "currency": null
+    },
+    "_label_Funded Dollars": "$1,116,004.74",
+    "Funded Dollars Difference": {
+      "amount": -586014.26,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$586,014.26",
+    "Funded Applications Total": 742,
+    "_label_Funded Applications Total": "742",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 3065,
+    "_label_Applications Projected": "3,065",
+    "Funding Progress": 87.4,
+    "_label_Funding Progress": "87.4%",
+    "Funding Projected": {
+      "amount": 1488006.32,
+      "currency": null
+    },
+    "_label_Funding Projected": "$1,488,006.32"
+  },
+  {
+    "User": "005TO00000AbxucYAB",
+    "_label_User": "Jeremy Moore",
+    "Monthly Quota: MQ Number": "a39TO00000790spYAA",
+    "_label_Monthly Quota: MQ Number": "MQ-1612",
+    "First Date of Month": "2026-03-01",
+    "_label_First Date of Month": "3/1/2026",
+    "Applications Quota": null,
+    "_label_Applications Quota": "-",
+    "Applications": null,
+    "_label_Applications": "-",
+    "Applications Difference": null,
+    "_label_Applications Difference": "-",
+    "Funded Dollars Quota": {
+      "amount": 622432,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$622,432.00",
+    "Funded Dollars": null,
+    "_label_Funded Dollars": "-",
+    "Funded Dollars Difference": null,
+    "_label_Funded Dollars Difference": "-",
+    "Funded Applications Total": null,
+    "_label_Funded Applications Total": "-",
+    "Applications Progress": 0,
+    "_label_Applications Progress": "0.0%",
+    "Applications Projected": 0,
+    "_label_Applications Projected": "0",
+    "Funding Progress": 0,
+    "_label_Funding Progress": "0.0%",
+    "Funding Projected": {
+      "amount": 0,
+      "currency": null
+    },
+    "_label_Funding Projected": "$0.00"
+  }
+]
