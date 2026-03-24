@@ -1,20 +1,21 @@
 """
 Forecast / pacing data processor.
 
-Takes territory-level budget targets and actuals from forecast_data,
-maps territories to OSRs via config.TERRITORY_MAP, and produces
+Takes territory-level budget targets and actuals from either:
+  1. Live Salesforce Monthly Quota report (Report 6) — preferred
+  2. Static forecast_data.py — fallback
+
+Maps territories to OSRs via config.TERRITORY_MAP, and produces
 per-rep forecast projections including MTD pacing, end-of-month projection,
 and year-to-date variance.
 
-Inputs: TERRITORY_BUDGETS, TERRITORY_ACTUALS (from automation.forecast_data)
 Outputs: Dict with per-rep forecast data and team-level aggregates.
 """
 
 import logging
 from datetime import datetime, date, timedelta
 
-from ..config import TERRITORY_MAP, MONTH_NAMES
-from ..forecast_data import TERRITORY_BUDGETS, TERRITORY_ACTUALS, LAST_UPDATED, MTD_MONTH
+from ..config import TERRITORY_MAP, MONTH_NAMES, OSR_ROSTER
 
 logger = logging.getLogger(__name__)
 
@@ -50,12 +51,14 @@ def _business_days_elapsed(year: int, month: int, through_date: date) -> int:
     return count
 
 
-def process_forecast(current_date=None) -> dict:
+def process_forecast(current_date=None, quota_rows=None) -> dict:
     """
     Process budget targets and actuals into per-rep forecast data.
 
     Args:
         current_date: Override for today's date (datetime or date). Defaults to now.
+        quota_rows: Optional list of parsed rows from Report 6 (Monthly Quota).
+                   If provided, uses live Salesforce data instead of static forecast_data.
 
     Returns:
         Dict with month info, per-rep forecasts (sorted by variance descending),
@@ -67,7 +70,7 @@ def process_forecast(current_date=None) -> dict:
         current_date = current_date.date()
 
     year = current_date.year
-    month_num = MTD_MONTH
+    month_num = current_date.month
     month_name = MONTH_NAMES[month_num]
 
     # ── Business day calculations for the current MTD month ───────────────
@@ -85,73 +88,18 @@ def process_forecast(current_date=None) -> dict:
     # ── Build per-rep forecast data ───────────────────────────────────────
     reps = []
 
-    for territory, osr_name in TERRITORY_MAP.items():
-        budgets = TERRITORY_BUDGETS.get(territory)
-        actuals = TERRITORY_ACTUALS.get(territory)
+    if quota_rows:
+        # ── LIVE MODE: Use Salesforce Monthly Quota report ────────────────
+        reps = _process_from_quota_report(quota_rows, year, month_num,
+                                           biz_days_total, biz_days_elapsed)
+        source = "salesforce"
+    else:
+        # ── FALLBACK: Use static forecast_data.py ─────────────────────────
+        reps = _process_from_static_data(year, month_num,
+                                          biz_days_total, biz_days_elapsed)
+        source = "static"
 
-        if not budgets:
-            logger.warning("No budget data for territory %s (%s), skipping.", territory, osr_name)
-            continue
-        if not actuals:
-            logger.warning("No actuals data for territory %s (%s), skipping.", territory, osr_name)
-            continue
-
-        # ── Current month (MTD) ───────────────────────────────────────────
-        current_month_idx = month_num - 1  # 0-based index into budgets list
-        budget = budgets[current_month_idx]
-        mtd_actual = actuals[current_month_idx] if len(actuals) >= month_num else 0
-
-        # Project end-of-month based on current pace
-        projected = round(mtd_actual * (biz_days_total / biz_days_elapsed))
-
-        # Variance vs budget (percentage)
-        if budget > 0:
-            variance_pct = round((projected / budget - 1) * 100, 1)
-        else:
-            variance_pct = 0.0
-
-        # ── Monthly history (completed months) ────────────────────────────
-        monthly_history = []
-        for m in range(1, month_num):  # Months before MTD_MONTH are finalized
-            m_idx = m - 1
-            m_actual = actuals[m_idx] if len(actuals) > m_idx else 0
-            m_budget = budgets[m_idx]
-            m_var = round((m_actual / m_budget - 1) * 100, 1) if m_budget > 0 else 0.0
-            m_abbrev = MONTH_NAMES[m][:3]
-            monthly_history.append({
-                "month": m_abbrev,
-                "actual": m_actual,
-                "budget": m_budget,
-                "var_pct": m_var,
-            })
-
-        # ── Year-to-date ──────────────────────────────────────────────────
-        # YTD actual = sum of completed months + current MTD
-        completed_actuals = sum(actuals[i] for i in range(month_num - 1) if i < len(actuals))
-        ytd_actual = completed_actuals + mtd_actual
-
-        # YTD projected = sum of completed months + current month projected
-        ytd_projected = completed_actuals + projected
-
-        # YTD budget = sum of budgets through current month
-        ytd_budget = sum(budgets[i] for i in range(month_num))
-
-        ytd_variance_pct = round((ytd_projected / ytd_budget - 1) * 100, 1) if ytd_budget > 0 else 0.0
-
-        reps.append({
-            "name": osr_name,
-            "territory": territory,
-            "budget": budget,
-            "mtd_actual": mtd_actual,
-            "projected": projected,
-            "variance_pct": variance_pct,
-            "ytd_budget": ytd_budget,
-            "ytd_actual": ytd_actual,
-            "ytd_projected": ytd_projected,
-            "ytd_variance_pct": ytd_variance_pct,
-            "monthly_history": monthly_history,
-            "on_track": projected >= budget,
-        })
+    logger.info("Forecast source: %s, %d reps", source, len(reps))
 
     # ── Sort by variance_pct descending (best performers first) ───────────
     reps.sort(key=lambda r: r["variance_pct"], reverse=True)
@@ -168,10 +116,115 @@ def process_forecast(current_date=None) -> dict:
         "year": year,
         "biz_days_elapsed": biz_days_elapsed,
         "biz_days_total": biz_days_total,
-        "last_updated": LAST_UPDATED,
+        "last_updated": current_date.isoformat(),
         "reps": reps,
         "team_budget": team_budget,
         "team_mtd": team_mtd,
         "team_projected": team_projected,
         "team_variance_pct": team_variance_pct,
     }
+
+
+def _process_from_quota_report(quota_rows, year, month_num,
+                                biz_days_total, biz_days_elapsed) -> list:
+    """
+    Build per-rep forecast data from live Salesforce Monthly Quota report.
+
+    Report columns used:
+        User, Funded Dollars Quota, Funded Dollars,
+        Funded Dollars Difference, Funding Progress, Funding Projected
+    """
+    # Build lookup: rep name → row data
+    # The report uses _label_ prefix for display values in SUMMARY format,
+    # but as a TABULAR report the labels are direct column names.
+    osr_names_lower = {name.lower(): name for name in OSR_ROSTER}
+    territory_by_osr = {v: k for k, v in TERRITORY_MAP.items()}
+
+    reps = []
+    for row in quota_rows:
+        # Try both raw and _label_ versions
+        rep_name = (row.get("_label_User") or row.get("User") or "").strip()
+
+        # Match against OSR roster (case-insensitive)
+        roster_name = osr_names_lower.get(rep_name.lower())
+        if not roster_name:
+            continue
+
+        # Parse numeric values (handle None/NaN)
+        budget = _safe_float(row.get("Funded Dollars Quota") or row.get("_label_Funded Dollars Quota"))
+        mtd_actual = _safe_float(row.get("Funded Dollars") or row.get("_label_Funded Dollars"))
+
+        if budget is None or budget == 0:
+            continue  # Skip reps with no quota assigned
+
+        if mtd_actual is None:
+            mtd_actual = 0
+
+        territory = territory_by_osr.get(roster_name, "")
+
+        # Project end-of-month based on current pace
+        projected = round(mtd_actual * (biz_days_total / biz_days_elapsed))
+
+        # Variance vs budget
+        variance_pct = round((projected / budget - 1) * 100, 1) if budget > 0 else 0.0
+
+        reps.append({
+            "name": roster_name,
+            "territory": territory,
+            "budget": round(budget, 2),
+            "mtd_actual": round(mtd_actual, 2),
+            "projected": projected,
+            "variance_pct": variance_pct,
+            "on_track": projected >= budget,
+        })
+
+    return reps
+
+
+def _process_from_static_data(year, month_num, biz_days_total, biz_days_elapsed) -> list:
+    """Fallback: build forecast from static forecast_data.py."""
+    try:
+        from ..forecast_data import TERRITORY_BUDGETS, TERRITORY_ACTUALS
+    except ImportError:
+        logger.warning("No forecast_data.py found and no quota report data. Returning empty forecast.")
+        return []
+
+    reps = []
+    for territory, osr_name in TERRITORY_MAP.items():
+        budgets = TERRITORY_BUDGETS.get(territory)
+        actuals = TERRITORY_ACTUALS.get(territory)
+
+        if not budgets or not actuals:
+            continue
+
+        current_month_idx = month_num - 1
+        budget = budgets[current_month_idx]
+        mtd_actual = actuals[current_month_idx] if len(actuals) >= month_num else 0
+
+        projected = round(mtd_actual * (biz_days_total / biz_days_elapsed))
+        variance_pct = round((projected / budget - 1) * 100, 1) if budget > 0 else 0.0
+
+        reps.append({
+            "name": osr_name,
+            "territory": territory,
+            "budget": budget,
+            "mtd_actual": mtd_actual,
+            "projected": projected,
+            "variance_pct": variance_pct,
+            "on_track": projected >= budget,
+        })
+
+    return reps
+
+
+def _safe_float(val) -> float | None:
+    """Safely parse a value to float, returning None for unparseable values."""
+    if val is None:
+        return None
+    try:
+        f = float(val)
+        if f != f:  # NaN check
+            return None
+        return f
+    except (ValueError, TypeError):
+        return None

@@ -379,6 +379,21 @@ def main():
             if html_data:
                 monthly_results[mk] = html_data
 
+    # Monthly Quota report (Report 6) for live forecast data
+    quota_rows = reports.get("monthly_quota", [])
+    if quota_rows:
+        logger.info("Monthly Quota report: %d rows (live forecast data)", len(quota_rows))
+
+        # Save quota snapshot
+        quota_snapshot_path = os.path.join(
+            PROJECT_ROOT, "data", "snapshots",
+            f"{current_year}-{current_month:02d}", "monthly_quota.json"
+        )
+        with open(quota_snapshot_path, "w", encoding="utf-8") as f:
+            json.dump(quota_rows, f, indent=2, default=str)
+    else:
+        logger.info("No monthly quota data — forecast will use static fallback")
+
     index_data = index_page.process(
         monthly_results=monthly_results,
         cohort_kpis=cohort_kpis_dict,
@@ -386,6 +401,7 @@ def main():
         field_result=field_data,
         current_month_key=month_key,
         genesys_data=genesys_data,
+        quota_rows=quota_rows,
     )
 
     index_path = os.path.join(output_dir, "index.html")

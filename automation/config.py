@@ -39,6 +39,7 @@ REPORT_IDS = {
     "current_month_activity": os.environ.get("SF_REPORT_CURRENT_MONTH_ACTIVITY", "00OTO00000671Gr2AI"),
     "last_month_activity": os.environ.get("SF_REPORT_LAST_MONTH_ACTIVITY", "00OTO000009Iw1x2AC"),
     "maps_check_ins": os.environ.get("SF_REPORT_MAPS_CHECK_INS", "00OTO000009NEbN2AW"),
+    "monthly_quota": os.environ.get("SF_REPORT_MONTHLY_QUOTA", "00OTO000009YYWj2AO"),
 }
 
 # ─── OSR Roster (as of March 2026) ───────────────────────────────────────────

@@ -22,7 +22,8 @@ def process(monthly_results: dict[str, dict],
             q1_result: dict,
             field_result: dict,
             current_month_key: str = "",
-            genesys_data: list = None) -> dict:
+            genesys_data: list = None,
+            quota_rows: list = None) -> dict:
     """
     Aggregate all processor outputs into index.html display values.
 
@@ -34,6 +35,7 @@ def process(monthly_results: dict[str, dict],
         q1_result: Output from q1_enrollment.process()
         field_result: Output from field_activity.process()
         genesys_data: List of dicts from Genesys Cloud (agent talk time data)
+        quota_rows: Optional list of parsed rows from Report 6 (Monthly Quota)
 
     Returns:
         Dict with all values needed to update index.html
@@ -107,7 +109,7 @@ def process(monthly_results: dict[str, dict],
 
     # ── Production Forecast ────────────────────────────────────────────
     try:
-        forecast_data = process_forecast()
+        forecast_data = process_forecast(quota_rows=quota_rows)
         logger.info("Forecast: %d reps, team variance %.1f%%",
                      len(forecast_data.get("reps", [])),
                      forecast_data.get("team_variance_pct", 0))
