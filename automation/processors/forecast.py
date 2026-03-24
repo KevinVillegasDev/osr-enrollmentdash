@@ -135,24 +135,24 @@ def _process_from_quota_report(quota_rows, year, month_num,
         Funded Dollars Difference, Funding Progress, Funding Projected
     """
     # Build lookup: rep name → row data
-    # The report uses _label_ prefix for display values in SUMMARY format,
-    # but as a TABULAR report the labels are direct column names.
+    # Salesforce TABULAR format: raw IDs in main keys, display names in _label_ keys.
+    # Currency fields come as {amount, currency} dicts.
     osr_names_lower = {name.lower(): name for name in OSR_ROSTER}
     territory_by_osr = {v: k for k, v in TERRITORY_MAP.items()}
 
     reps = []
     for row in quota_rows:
-        # Try both raw and _label_ versions
-        rep_name = (row.get("_label_User") or row.get("User") or "").strip()
+        # Rep name is in _label_User (raw User field is a Salesforce ID)
+        rep_name = (row.get("_label_User") or "").strip()
 
         # Match against OSR roster (case-insensitive)
         roster_name = osr_names_lower.get(rep_name.lower())
         if not roster_name:
             continue
 
-        # Parse numeric values (handle None/NaN)
-        budget = _safe_float(row.get("Funded Dollars Quota") or row.get("_label_Funded Dollars Quota"))
-        mtd_actual = _safe_float(row.get("Funded Dollars") or row.get("_label_Funded Dollars"))
+        # Parse currency fields — can be {amount, currency} dicts or raw numbers
+        budget = _extract_currency(row.get("Funded Dollars Quota"))
+        mtd_actual = _extract_currency(row.get("Funded Dollars"))
 
         if budget is None or budget == 0:
             continue  # Skip reps with no quota assigned
@@ -228,3 +228,28 @@ def _safe_float(val) -> float | None:
         return f
     except (ValueError, TypeError):
         return None
+
+
+def _extract_currency(val) -> float | None:
+    """
+    Extract a numeric value from a Salesforce currency field.
+
+    Salesforce currency fields come in various formats:
+    - dict: {"amount": 532838.0, "currency": None}
+    - float/int: 532838.0
+    - str: "$532,838.00" or "532838"
+    - None
+    """
+    if val is None:
+        return None
+    if isinstance(val, dict):
+        return _safe_float(val.get("amount"))
+    if isinstance(val, (int, float)):
+        return _safe_float(val)
+    if isinstance(val, str):
+        # Strip currency formatting
+        cleaned = val.replace("$", "").replace(",", "").strip()
+        if cleaned == "-" or cleaned == "":
+            return None
+        return _safe_float(cleaned)
+    return None
