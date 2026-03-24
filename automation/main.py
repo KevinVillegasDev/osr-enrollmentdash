@@ -23,7 +23,7 @@ from .config import (
     COLUMN_LABELS, month_filename, month_filepath,
 )
 from .salesforce_auth import SalesforceClient, SalesforceAuthError
-from .salesforce_reports import fetch_all_reports, fetch_cohort_activity, parse_report_rows, fetch_report
+from .salesforce_reports import fetch_all_reports, fetch_cohort_activity, parse_report_rows, fetch_report, fetch_maps_check_ins_split
 from .processors import monthly_dashboard, cohort_tracking, q1_enrollment, field_activity, index_page, analytics
 from . import html_generator
 
@@ -95,6 +95,20 @@ def main():
     else:
         # Load from latest snapshot
         reports = _load_latest_snapshot()
+
+    # ── Step 2b: Re-fetch Maps check-ins with split to avoid 2000 row cap ──
+    if client:
+        try:
+            maps_split = fetch_maps_check_ins_split(client, current_month, current_year)
+            if len(maps_split) > len(reports.get("maps_check_ins", [])):
+                logger.info("Maps split fetch returned %d rows (vs %d from single fetch). Using split data.",
+                            len(maps_split), len(reports.get("maps_check_ins", [])))
+                reports["maps_check_ins"] = maps_split
+            else:
+                logger.info("Maps single fetch (%d rows) was sufficient. Skipping split.",
+                            len(reports.get("maps_check_ins", [])))
+        except Exception as e:
+            logger.warning("Maps split fetch failed (non-fatal, keeping single fetch): %s", e)
 
     # Normalize enrollment rows so all processors see display values
     # instead of raw Salesforce IDs (SUMMARY format stores IDs in main keys,

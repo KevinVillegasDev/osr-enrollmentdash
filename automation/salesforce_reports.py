@@ -494,3 +494,70 @@ def fetch_cohort_activity(client, enrollment_month: int, enrollment_year: int,
 
     raw = fetch_report(client, report_id, filters=filters)
     return parse_report_rows(raw)
+
+
+def fetch_maps_check_ins_split(client, month: int, year: int) -> list[dict]:
+    """
+    Fetch Maps check-in data in two halves to avoid the 2,000 row API limit.
+
+    Splits the month at the midpoint and makes two API calls with date
+    filter overrides, then merges and deduplicates the results.
+
+    Args:
+        client: Authenticated SalesforceClient
+        month: Current month (1-12)
+        year: Current year
+
+    Returns:
+        Merged list of parsed row dicts (deduplicated)
+    """
+    report_id = REPORT_IDS["maps_check_ins"]
+    if report_id == "REPLACE_WITH_REPORT_ID":
+        logger.warning("maps_check_ins report has placeholder ID. Skipping split fetch.")
+        return []
+
+    # Calculate date ranges
+    month_start = date(year, month, 1)
+    if month == 12:
+        month_end = date(year + 1, 1, 1) - timedelta(days=1)
+    else:
+        month_end = date(year, month + 1, 1) - timedelta(days=1)
+
+    # Split at midpoint
+    mid_day = (month_end.day // 2)
+    first_half_end = date(year, month, mid_day)
+    second_half_start = date(year, month, mid_day + 1)
+
+    # The saved report has two filters: SUBJECT='Maps Check In' and CREATED_DATE='THIS MONTH'
+    # POST replaces all filters, so we must include SUBJECT in both calls.
+    base_filters = [
+        {"column": "SUBJECT", "operator": "equals", "value": "Maps Check In"},
+    ]
+
+    # First half: month start → mid
+    filters_1 = base_filters + [
+        {"column": "CREATED_DATE", "operator": "greaterOrEqual", "value": month_start.isoformat()},
+        {"column": "CREATED_DATE", "operator": "lessOrEqual", "value": first_half_end.isoformat()},
+    ]
+
+    logger.info("Maps split fetch 1/2: %s to %s", month_start.isoformat(), first_half_end.isoformat())
+    raw_1 = fetch_report(client, report_id, filters=filters_1)
+    rows_1 = parse_report_rows(raw_1)
+    logger.info("Maps split 1/2: %d rows", len(rows_1))
+
+    # Second half: mid+1 → month end
+    filters_2 = base_filters + [
+        {"column": "CREATED_DATE", "operator": "greaterOrEqual", "value": second_half_start.isoformat()},
+        {"column": "CREATED_DATE", "operator": "lessOrEqual", "value": month_end.isoformat()},
+    ]
+
+    logger.info("Maps split fetch 2/2: %s to %s", second_half_start.isoformat(), month_end.isoformat())
+    raw_2 = fetch_report(client, report_id, filters=filters_2)
+    rows_2 = parse_report_rows(raw_2)
+    logger.info("Maps split 2/2: %d rows", len(rows_2))
+
+    # Merge
+    all_rows = rows_1 + rows_2
+    logger.info("Maps split total: %d rows (before dedup)", len(all_rows))
+
+    return all_rows
