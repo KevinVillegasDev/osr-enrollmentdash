@@ -1001,6 +1001,7 @@ def generate_analytics_script_data(data: dict) -> str:
 
     # Metadata
     lines.append(f"var bizDaysLeft={data['bizDaysLeft']};")
+    lines.append(f"var bizDaysElapsed={data.get('bizDaysElapsed', 0)};")
     lines.append(f"var currentMonthLabel={json.dumps(data['currentMonthLabel'])};")
     lines.append(f"var previousMonthLabel={json.dumps(data['previousMonthLabel'])};")
     lines.append("")

@@ -419,7 +419,7 @@ function pctChange(curr,prev){
 function renderKPITrends(){
   var curr=monthlyKPIs[monthlyKPIs.length-1];
   var prev=monthlyKPIs.length>1?monthlyKPIs[monthlyKPIs.length-2]:null;
-  var daysElapsed=dailyPaceCurrent.length;
+  var daysElapsed=typeof bizDaysElapsed!=='undefined'?bizDaysElapsed:dailyPaceCurrent.length;
   var prevDays=dailyPacePrevious.length;
   var isMidMonth=bizDaysLeft>3;
 
@@ -492,7 +492,7 @@ function generateInsights(){
   }else{
     trendText='Enrollment volume '+(enrollChange<0?'declined':'grew')+' by <b class="num">'+Math.abs(Math.round(enrollChange))+'%</b> month-over-month ('+prev.credited+' &#8594; '+curr.credited+'). ';
     if(isMidMonth){
-      var daysElapsed=dailyPaceCurrent.length;
+      var daysElapsed=typeof bizDaysElapsed!=='undefined'?bizDaysElapsed:dailyPaceCurrent.length;
       trendText+='Note: '+currentMonthLabel+' is only <b class="num">'+daysElapsed+' biz days</b> in vs '+previousMonthLabel+'\'s full month. ';
     }
     trendText+='Funded volume is at <b>'+fmt(curr.funded)+'</b> vs <b>'+fmt(prev.funded)+'</b> last month';
@@ -508,7 +508,7 @@ function generateInsights(){
   var atRisk=repTrends.filter(function(r){return r.q1<r.target});
   var zeroThisMonth=repTrends.filter(function(r){return r[curKey]===0});
   var watchText='';
-  var daysElapsed=dailyPaceCurrent.length;
+  var daysElapsed=typeof bizDaysElapsed!=='undefined'?bizDaysElapsed:dailyPaceCurrent.length;
   if(currAvg<prevAvg*0.8){
     watchText=currentMonthLabel+' daily enrollment pace is <b class="num">'+currAvg.toFixed(1)+'/day</b> vs '+previousMonthLabel+'\'s <b class="num">'+prevAvg.toFixed(1)+'/day</b>. ';
     // Add context: how many enrollments would match last month at this pace?
@@ -726,7 +726,7 @@ function renderRepMiniCharts(){
 /* ---- Q1 Forecast Table ---- */
 function renderForecastTable(){
   var curr=monthlyKPIs[monthlyKPIs.length-1].key;
-  var daysElapsed=dailyPaceCurrent.length;
+  var daysElapsed=typeof bizDaysElapsed!=='undefined'?bizDaysElapsed:dailyPaceCurrent.length;
   var totalDaysInMonth=daysElapsed+bizDaysLeft;
 
   var h='<thead><tr><th>Rep</th><th class="right">Q1 Actual</th><th class="right">Mar Pace</th><th class="right">Projected Q1</th><th class="right">Need</th><th>Status</th></tr></thead><tbody>';
@@ -789,7 +789,7 @@ function renderFunnel(){
     var isMidMonth=bizDaysLeft>3;
     var txt='<b class="num">'+noApps+' of '+enrolled+' merchants</b> enrolled this month have not submitted a single application yet. ';
     if(isMidMonth){
-      var daysElapsed=dailyPaceCurrent.length;
+      var daysElapsed=typeof bizDaysElapsed!=='undefined'?bizDaysElapsed:dailyPaceCurrent.length;
       txt+='With <b class="num">'+bizDaysLeft+' biz days</b> remaining, many recent enrollees may not have had time to onboard and submit their first app. ';
       txt+='Still, these are the lowest-friction conversions — they\'re already in the system. ';
     }else{
@@ -875,7 +875,7 @@ function renderProductMix(){
 /* ---- Month-End Projection ---- */
 function renderProjection(){
   var curr=monthlyKPIs[monthlyKPIs.length-1];
-  var daysElapsed=dailyPaceCurrent.length;
+  var daysElapsed=typeof bizDaysElapsed!=='undefined'?bizDaysElapsed:dailyPaceCurrent.length;
   var totalBizDays=daysElapsed+bizDaysLeft;
   var currTotal=dailyPaceCurrent.reduce(function(s,d){return s+d.v},0);
   var dailyRate=daysElapsed>0?(currTotal/daysElapsed):0;
@@ -910,7 +910,7 @@ function renderBottomLine(){
   var prev=monthlyKPIs.length>1?monthlyKPIs[monthlyKPIs.length-2]:null;
   var atTarget=repTrends.filter(function(r){return r.q1>=r.target}).length;
   var febAtTarget=febCohortReps.filter(function(r){return r.f>=15000}).length;
-  var daysElapsed=dailyPaceCurrent.length;
+  var daysElapsed=typeof bizDaysElapsed!=='undefined'?bizDaysElapsed:dailyPaceCurrent.length;
   var isMidMonth=bizDaysLeft>3;
   var txt='';
   if(isMidMonth&&prev){

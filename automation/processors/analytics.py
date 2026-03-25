@@ -65,6 +65,7 @@ def process(monthly_results: dict, q1_data: dict, cohorts: dict,
         daily_pace_previous = _extract_daily_trend_from_html(prev_month, prev_year)
 
     biz_days_left = _calc_biz_days_left(today, current_month, current_year)
+    biz_days_elapsed = _calc_biz_days_elapsed(today, current_month, current_year)
 
     # ── Market trends: per-state per-month ────────────────────────────
     market_trends = _build_market_trends(monthly_results, current_month, current_year)
@@ -93,6 +94,7 @@ def process(monthly_results: dict, q1_data: dict, cohorts: dict,
         "cohortReps": cohort_reps_data,  # dict of var_name → simplified array
         "funnelData": funnel_data,
         "bizDaysLeft": biz_days_left,
+        "bizDaysElapsed": biz_days_elapsed,
         "currentMonthLabel": MONTH_NAMES[current_month],
         "previousMonthLabel": MONTH_NAMES[prev_month],
     }
@@ -383,6 +385,16 @@ def _calc_biz_days_left(today: date, month: int, year: int) -> int:
     _, days_in_month = calendar.monthrange(year, month)
     count = 0
     for d in range(today.day + 1, days_in_month + 1):
+        dt = date(year, month, d)
+        if dt.weekday() < 5:  # Mon-Fri
+            count += 1
+    return count
+
+
+def _calc_biz_days_elapsed(today: date, month: int, year: int) -> int:
+    """Calculate business days elapsed in the month (including today)."""
+    count = 0
+    for d in range(1, today.day + 1):
         dt = date(year, month, d)
         if dt.weekday() < 5:  # Mon-Fri
             count += 1
