@@ -1024,13 +1024,14 @@ def generate_analytics_script_data(data: dict) -> str:
     return "\n".join(lines)
 
 
-def update_analytics_page(filepath: str, data: dict) -> bool:
+def update_analytics_page(filepath: str, data: dict, forecast_data: dict = None) -> bool:
     """
     Update analytics.html with new analytics data.
 
     Args:
         filepath: Path to analytics.html
         data: Output from analytics.process()
+        forecast_data: Optional forecast data for the full budget table
 
     Returns:
         True if file was updated successfully
@@ -1044,6 +1045,11 @@ def update_analytics_page(filepath: str, data: dict) -> bool:
     # Replace the script data block
     script_data = generate_analytics_script_data(data)
     html = _replace_script_data(html, script_data)
+
+    # Inject full forecast table (with MTD actuals — admin-only view)
+    if forecast_data and forecast_data.get("reps"):
+        forecast_html = _generate_analytics_forecast_table(forecast_data)
+        html = _replace_between_markers(html, "Analytics Forecast Data", forecast_html)
 
     # Update last-updated date
     today = date.today()
@@ -1615,7 +1621,6 @@ def _generate_forecast_table(forecast_data: dict) -> str:
     team_attain = round(team_mtd / team_budget * 100, 1) if team_budget > 0 else 0
     summary = (
         f'<div class="fc-summary">'
-        f'<span>Team MTD: <b style="color:#FBBF24">{_fmt_currency(team_mtd)}</b></span>'
         f'<span>Team Attainment: <b style="color:#A78BFA">{team_attain}%</b></span>'
         f'<span>Team Projected: <b style="color:#A78BFA">{round(team_projected / team_budget * 100, 1) if team_budget > 0 else 0}%</b></span>'
         f'<span>Team Variance: <b style="color:{team_var_color}">{team_var_sign}{team_var_pct:.1f}%</b></span>'
@@ -1669,7 +1674,6 @@ def _generate_forecast_table(forecast_data: dict) -> str:
         row = (
             f'<tr{stripe}>'
             f'<td class="fc-name">{name}{territory_html}</td>'
-            f'<td class="fc-num" style="color:#FBBF24">{_fmt_currency(mtd)}</td>'
             f'<td class="fc-num" style="color:{attain_color}">{attain_pct}%</td>'
             f'<td class="fc-num" style="color:{proj_color}">{round(proj_ratio * 100, 1)}%</td>'
             f'<td class="fc-num" style="color:{var_color}">{var_sign}{var_pct:.1f}%</td>'
@@ -1691,7 +1695,6 @@ def _generate_forecast_table(forecast_data: dict) -> str:
         f'<table class="fc-table">\n'
         f'<thead><tr>'
         f'<th class="fc-th-name">Rep</th>'
-        f'<th class="fc-th" style="cursor:help" title="Total funded origination dollars in this territory so far this month — includes all merchants (new enrollees + existing book of business)">MTD Actual <span style="font-size:0.85em;opacity:0.5">&#9432;</span></th>'
         f'<th class="fc-th" style="cursor:help" title="Percentage of monthly budget target achieved so far — color is green if on pace for the month, amber if within 80%% of expected pace, red if behind">% Attainment <span style="font-size:0.85em;opacity:0.5">&#9432;</span></th>'
         f'<th class="fc-th" style="cursor:help" title="Projected percentage of budget target at end of month based on current daily pace — 100%% means on track to hit budget exactly">Projected <span style="font-size:0.85em;opacity:0.5">&#9432;</span></th>'
         f'<th class="fc-th" style="cursor:help" title="Percentage difference between projected end-of-month and budget target — green = on/above target, amber = within 10%, red = more than 10% behind">Variance <span style="font-size:0.85em;opacity:0.5">&#9432;</span></th>'
@@ -1702,6 +1705,131 @@ def _generate_forecast_table(forecast_data: dict) -> str:
         f'\n</tbody>\n'
         f'</table>\n'
         f'</div>'
+    )
+
+    return table
+
+
+def _generate_analytics_forecast_table(forecast_data: dict) -> str:
+    """
+    Generate the FULL forecast table for the analytics page (admin view).
+    Includes MTD Actual dollar amounts — not shown on the public index.html.
+    """
+    if not forecast_data or not forecast_data.get("reps"):
+        return '<div class="section-sub">No forecast data available</div>'
+
+    def _fmt_currency(v):
+        if abs(v) >= 1_000_000:
+            return f"${v / 1_000_000:.1f}M"
+        elif abs(v) >= 1_000:
+            return f"${v / 1_000:.0f}K"
+        elif v > 0:
+            return f"${int(v)}"
+        return "$0"
+
+    def _variance_color(pct):
+        if pct >= 0:
+            return "#2DD4A0"
+        elif pct >= -10:
+            return "#FBBF24"
+        return "#F87171"
+
+    month_name = forecast_data.get("month_name", "")
+    year = forecast_data.get("year", 2026)
+    biz_elapsed = forecast_data.get("biz_days_elapsed", 0)
+    biz_total = forecast_data.get("biz_days_total", 0)
+    team_mtd = forecast_data.get("team_mtd", 0)
+    team_budget = forecast_data.get("team_budget", 0)
+    team_projected = forecast_data.get("team_projected", 0)
+    team_var_pct = forecast_data.get("team_variance_pct", 0)
+    reps = forecast_data.get("reps", [])
+
+    team_var_color = _variance_color(team_var_pct)
+    team_var_sign = "+" if team_var_pct >= 0 else ""
+    team_attain = round(team_mtd / team_budget * 100, 1) if team_budget > 0 else 0
+
+    subtitle = (
+        f'<div class="fc-subtitle" style="font-size:0.85em;color:#8494AB;margin-bottom:8px">'
+        f'Territory production vs budget &middot; {month_name} {year} &middot; '
+        f'Day {biz_elapsed} of {biz_total}</div>'
+    )
+
+    summary = (
+        f'<div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:12px;font-size:0.85em">'
+        f'<span>Team MTD: <b style="color:#FBBF24">{_fmt_currency(team_mtd)}</b></span>'
+        f'<span>Team Budget: <b style="color:#8494AB">{_fmt_currency(team_budget)}</b></span>'
+        f'<span>Team Attainment: <b style="color:#A78BFA">{team_attain}%</b></span>'
+        f'<span>Team Projected: <b style="color:#A78BFA">'
+        f'{round(team_projected / team_budget * 100, 1) if team_budget > 0 else 0}%</b></span>'
+        f'<span>Team Variance: <b style="color:{team_var_color}">'
+        f'{team_var_sign}{team_var_pct:.1f}%</b></span>'
+        f'</div>'
+    )
+
+    rows = []
+    for i, rep in enumerate(reps):
+        stripe = ' style="background:rgba(15,23,42,0.3)"' if i % 2 == 1 else ""
+        name = rep.get("name", "")
+        territory = rep.get("territory", "")
+        mtd = rep.get("mtd_actual", 0)
+        budget = rep.get("budget", 0)
+        projected = rep.get("projected", 0)
+        var_pct = rep.get("variance_pct", 0)
+
+        proj_ratio = projected / budget if budget > 0 else 1.0
+        if proj_ratio >= 1.0:
+            proj_color = "#2DD4A0"
+        elif proj_ratio >= 0.8:
+            proj_color = "#FBBF24"
+        else:
+            proj_color = "#F87171"
+
+        var_color = _variance_color(var_pct)
+        var_sign = "+" if var_pct >= 0 else ""
+        attain_pct = round(mtd / budget * 100, 1) if budget > 0 else 0
+        bar_width = min(100, (projected / budget * 100)) if budget > 0 else 0
+
+        expected_pct = (biz_elapsed / biz_total * 100) if biz_total > 0 else 0
+        if attain_pct >= expected_pct:
+            attain_color = "#2DD4A0"
+        elif attain_pct >= expected_pct * 0.8:
+            attain_color = "#FBBF24"
+        else:
+            attain_color = "#F87171"
+
+        terr_html = f' <span style="color:#627289;font-size:0.8em">({territory})</span>' if territory else ""
+
+        rows.append(
+            f'<tr{stripe}>'
+            f'<td style="padding:10px 14px;font-size:13px">{name}{terr_html}</td>'
+            f'<td style="padding:10px 14px;font-size:13px;text-align:right;color:#FBBF24">{_fmt_currency(mtd)}</td>'
+            f'<td style="padding:10px 14px;font-size:13px;text-align:right;color:#8494AB">{_fmt_currency(budget)}</td>'
+            f'<td style="padding:10px 14px;font-size:13px;text-align:right;color:{attain_color}">{attain_pct}%</td>'
+            f'<td style="padding:10px 14px;font-size:13px;text-align:right;color:{proj_color}">{round(proj_ratio * 100, 1)}%</td>'
+            f'<td style="padding:10px 14px;font-size:13px;text-align:right;color:{var_color}">{var_sign}{var_pct:.1f}%</td>'
+            f'<td style="padding:10px 14px;width:120px">'
+            f'<div style="height:6px;border-radius:3px;background:rgba(167,139,250,0.15)">'
+            f'<div style="height:100%;border-radius:3px;width:{bar_width:.0f}%;'
+            f'background:linear-gradient(90deg,#A78BFA,#5B9BFF)"></div></div></td>'
+            f'</tr>'
+        )
+
+    th_style = 'style="text-align:right;padding:10px 14px;font-size:11px;font-weight:600;color:#8494AB;text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid #293852"'
+    table = (
+        subtitle + summary +
+        f'<div style="overflow-x:auto">'
+        f'<table style="width:100%;border-collapse:separate;border-spacing:0 4px">'
+        f'<thead><tr>'
+        f'<th style="text-align:left;padding:10px 14px;font-size:11px;font-weight:600;color:#8494AB;text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid #293852">Rep</th>'
+        f'<th {th_style}>MTD Actual</th>'
+        f'<th {th_style}>Budget</th>'
+        f'<th {th_style}>% Attainment</th>'
+        f'<th {th_style}>Projected</th>'
+        f'<th {th_style}>Variance</th>'
+        f'<th style="padding:10px 14px;font-size:11px;font-weight:600;color:#8494AB;text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid #293852;width:120px">Pace</th>'
+        f'</tr></thead>'
+        f'<tbody>{"".join(rows)}</tbody>'
+        f'</table></div>'
     )
 
     return table

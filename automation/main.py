@@ -373,7 +373,7 @@ def main():
     if os.path.exists(analytics_path):
         html_generator.update_analytics_page(analytics_path, analytics_data)
 
-    # ── Step 8: Update Index Page ────────────────────────────────────────
+    # ── Step 8: Update Index Page ─────────────────────────────────────────
     logger.info("--- Updating index page ---")
 
     # Collect monthly results for all tracked months
@@ -421,6 +421,11 @@ def main():
     index_path = os.path.join(output_dir, "index.html")
     if os.path.exists(index_path):
         html_generator.update_index_page(index_path, index_data)
+
+    # Inject full forecast table into analytics page (admin-only view with MTD actuals)
+    forecast_data = index_data.get("forecast", {})
+    if os.path.exists(analytics_path) and forecast_data.get("reps"):
+        html_generator.update_analytics_page(analytics_path, analytics_data, forecast_data=forecast_data)
 
     logger.info("=== Dashboard update complete ===")
 
