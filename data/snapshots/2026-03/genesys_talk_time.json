@@ -2,9 +2,9 @@
   {
     "user_id": "4b6a0976-42ea-413b-8cea-5d3cbb55fc13",
     "name": "Julio Cervantes",
-    "talk_seconds": 404572,
-    "talk_display": "112h 22m",
-    "calls": 3859
+    "talk_seconds": 405544,
+    "talk_display": "112h 39m",
+    "calls": 3861
   },
   {
     "user_id": "f89a3274-2d6b-416a-b237-c69d941efdf9",
@@ -128,16 +128,16 @@
   {
     "user_id": "bd4818d1-a4eb-4711-bdbb-736a2227bbd2",
     "name": "Alex Perez",
-    "talk_seconds": 208832,
-    "talk_display": "58h 0m",
-    "calls": 2255
+    "talk_seconds": 209656,
+    "talk_display": "58h 14m",
+    "calls": 2260
   },
   {
     "user_id": "402712c6-4dee-4abc-a77f-a62f0bc1aeb0",
     "name": "Julio Zuniga",
-    "talk_seconds": 207254,
-    "talk_display": "57h 34m",
-    "calls": 2708
+    "talk_seconds": 207341,
+    "talk_display": "57h 35m",
+    "calls": 2711
   },
   {
     "user_id": "d2343d3e-9373-4bc2-9b38-907016f6998b",
@@ -184,9 +184,9 @@
   {
     "user_id": "d92f85ef-d236-44e8-af25-34c7caa50a3f",
     "name": "Dan Flores",
-    "talk_seconds": 191691,
-    "talk_display": "53h 14m",
-    "calls": 3622
+    "talk_seconds": 191812,
+    "talk_display": "53h 16m",
+    "calls": 3626
   },
   {
     "user_id": "dbad3bfb-f8b3-4632-8920-25fbb6e58730",
@@ -310,9 +310,9 @@
   {
     "user_id": "e650f045-ae73-4b3d-be81-b95449f33f2f",
     "name": "Maria Rosales",
-    "talk_seconds": 131049,
-    "talk_display": "36h 24m",
-    "calls": 3571
+    "talk_seconds": 131171,
+    "talk_display": "36h 26m",
+    "calls": 3576
   },
   {
     "user_id": "b4bab66e-98f6-425c-b97e-bb6a7f0ddf39",
@@ -525,18 +525,18 @@
     "calls": 21
   },
   {
+    "user_id": "c452ea49-5d1b-4c1f-ae71-bdce0153d27d",
+    "name": "Carlos Jimenez",
+    "talk_seconds": 4302,
+    "talk_display": "1h 11m",
+    "calls": 7
+  },
+  {
     "user_id": "cd56cfad-8be0-48fd-a9b4-ec8389ce732f",
     "name": "Janae Garrett",
     "talk_seconds": 3868,
     "talk_display": "1h 4m",
     "calls": 4
-  },
-  {
-    "user_id": "c452ea49-5d1b-4c1f-ae71-bdce0153d27d",
-    "name": "Carlos Jimenez",
-    "talk_seconds": 3829,
-    "talk_display": "1h 3m",
-    "calls": 6
   },
   {
     "user_id": "a8127baa-561c-4296-9426-5e5dff460683",
