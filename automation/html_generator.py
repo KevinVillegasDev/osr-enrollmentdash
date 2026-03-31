@@ -835,15 +835,43 @@ def update_index_page(filepath: str, data: dict) -> bool:
     # ── Enrollment Production Tracking Card ─────────────────────────────────────────
     cohort = data.get("cohort", {})
     active = cohort.get("active_cohort", {})
-    baseline = cohort.get("baseline_cohort", {})
+    current_cohort = cohort.get("current_cohort", {})
+
+    # Determine cohort month labels from scorecard month
+    month_abbrevs = {1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun",
+                     7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"}
+    current_month_num = {v: k for k, v in {1: "January", 2: "February", 3: "March",
+        4: "April", 5: "May", 6: "June", 7: "July", 8: "August", 9: "September",
+        10: "October", 11: "November", 12: "December"}.items()}.get(scorecard_month, 3)
+    prev_month_num = current_month_num - 1 if current_month_num > 1 else 12
+    active_label = f"{month_abbrevs[prev_month_num]} Cohort"
+    current_label = f"{month_abbrevs[current_month_num]} Cohort"
+
+    # Update cohort card labels dynamically
+    # Replace first cohort label (green value = active = previous month)
+    html = re.sub(
+        r'(<div class="mk-label">)\w+ Cohort(</div>\s*<div class="mk-value" style="color:#2DD4A0">)',
+        rf'\g<1>{active_label}\2', html, count=1
+    )
+    # Replace second cohort label (blue value = current month M0)
+    html = re.sub(
+        r'(<div class="mk-label">)\w+ Cohort(</div>\s*<div class="mk-value" style="color:#5B9BFF">)',
+        rf'\g<1>{current_label}\2', html, count=1
+    )
+    # Update footer text
+    html = re.sub(
+        r'Tabbed: \w+ \(active\) \+ \w+ \(baseline\)',
+        f'Tabbed: {month_abbrevs[prev_month_num]} (active) + {month_abbrevs[current_month_num]} (M0)',
+        html
+    )
 
     if active:
         # Active cohort funded (unique green in Enrollment Production Tracking section)
         html = _replace_nth_mk_value(html, 0, active.get("total_funded_display", "$0"),
                                      color="#2DD4A0", section_start="Enrollment Production Tracking")
-    if baseline:
-        # Baseline cohort funded (unique blue in Enrollment Production Tracking section)
-        html = _replace_nth_mk_value(html, 0, baseline.get("total_funded_display", "$0"),
+    if current_cohort:
+        # Current month cohort funded (unique blue in Enrollment Production Tracking section)
+        html = _replace_nth_mk_value(html, 0, current_cohort.get("total_funded_display", "$0"),
                                      color="#5B9BFF", section_start="Enrollment Production Tracking")
     if active:
         # At $15K Target (first amber in Enrollment Production Tracking section)
