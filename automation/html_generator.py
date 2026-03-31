@@ -1995,12 +1995,18 @@ def _replace_nth_mk_value(html: str, n: int, value: str, color: str = None,
             return html
         # Find the next section boundary (year-group div or h2)
         # index.html uses <div class="year-title"> for sections, not <h2>
+        # Skip well past the current section's year-title to avoid matching it
+        search_from = html.find("</div>", section_idx + len(section_start))
+        if search_from == -1:
+            search_from = section_idx + len(section_start) + 200
+        else:
+            search_from += 6  # past </div>
         next_section = -1
         for boundary in ['class="year-title"', 'class="year-group"', '<h2']:
-            pos = html.find(boundary, section_idx + len(section_start))
+            pos = html.find(boundary, search_from)
             if pos != -1:
                 # Back up to the start of the containing tag
-                tag_start = html.rfind('<', section_idx, pos)
+                tag_start = html.rfind('<', search_from, pos)
                 if tag_start != -1:
                     pos = tag_start
                 if next_section == -1 or pos < next_section:
