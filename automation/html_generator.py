@@ -838,6 +838,8 @@ def update_index_page(filepath: str, data: dict) -> bool:
     current_cohort = cohort.get("current_cohort", {})
 
     # Determine cohort month labels from scorecard month
+    scorecard_month = data.get("scorecard_month", "")
+    scorecard_year = data.get("scorecard_year", 2026)
     month_abbrevs = {1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun",
                      7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"}
     current_month_num = {v: k for k, v in {1: "January", 2: "February", 3: "March",
