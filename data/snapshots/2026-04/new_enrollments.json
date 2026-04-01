@@ -79,5 +79,32 @@
     "_label_Industry": "Auto - Total Car Care",
     "EPF Product": "Rental Payments (Lease-to-Own Option)",
     "_label_EPF Product": "Rental Payments (Lease-to-Own Option)"
+  },
+  {
+    "Enrollment Date": "4/1/2026",
+    "Branch ID": "25560",
+    "_label_Branch ID": "25560",
+    "Account Name": "001TO00000igbMoYAI",
+    "_label_Account Name": "Nicks Automotive",
+    "Billing State/Province (text only)": "Pennsylvania",
+    "_label_Billing State/Province (text only)": "Pennsylvania",
+    "Status": "New",
+    "_label_Status": "New",
+    "Parent Account": "001TO00000igJktYAE",
+    "_label_Parent Account": "Nicks Automotive Inc",
+    "CID": "19846",
+    "_label_CID": "19846",
+    "Billing Street": "1050 Stotler Road",
+    "_label_Billing Street": "1050 Stotler Road",
+    "Billing State/Province": "PA",
+    "_label_Billing State/Province": "Pennsylvania",
+    "Billing Zip/Postal Code": "15235",
+    "_label_Billing Zip/Postal Code": "15235",
+    "Created Date": "2026-04-01",
+    "_label_Created Date": "4/1/2026",
+    "Industry": "Auto - Repair",
+    "_label_Industry": "Auto - Repair",
+    "EPF Product": "Purchase Installments (Retail Contract)",
+    "_label_EPF Product": "Purchase Installments (Retail Contract)"
   }
 ]
