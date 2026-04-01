@@ -357,21 +357,22 @@ a:hover{text-decoration:underline}
 </div>
 
 <script>
-var monthlyKPIs=[{"month":"Jan 2026","key":"jan","total":119,"credited":85,"funded":33000,"fundedApps":18,"totalApps":84,"convRate":21.4,"avgTicket":1841,"lto":52,"rc":33},{"month":"Feb 2026","key":"feb","total":171,"credited":132,"funded":167000,"fundedApps":81,"totalApps":390,"convRate":20.8,"avgTicket":2056,"lto":82,"rc":50},{"month":"Mar 2026","key":"mar","total":145,"credited":108,"funded":109436,"fundedApps":65,"totalApps":189,"convRate":34.4,"avgTicket":1684,"lto":76,"rc":32},{"month":"Apr 2026","key":"apr","total":0,"credited":0,"funded":0,"fundedApps":0,"totalApps":0,"convRate":0,"avgTicket":0,"lto":0,"rc":0}];
+var monthlyKPIs=[{"month":"Jan 2026","key":"jan","total":119,"credited":85,"funded":33000,"fundedApps":18,"totalApps":84,"convRate":21.4,"avgTicket":1841,"lto":52,"rc":33},{"month":"Feb 2026","key":"feb","total":171,"credited":132,"funded":167000,"fundedApps":81,"totalApps":390,"convRate":20.8,"avgTicket":2056,"lto":82,"rc":50},{"month":"Mar 2026","key":"mar","total":145,"credited":108,"funded":109436,"fundedApps":65,"totalApps":189,"convRate":34.4,"avgTicket":1684,"lto":76,"rc":32},{"month":"Apr 2026","key":"apr","total":2,"credited":1,"funded":0,"fundedApps":0,"totalApps":0,"convRate":0,"avgTicket":0,"lto":1,"rc":0}];
 
-var repTrends=[];
+var repTrends=[{"n":"Stephanie Whitlock","apr":1,"may":0,"jun":0,"q1":1,"target":30}];
 
-var dailyPaceCurrent=[];
+var dailyPaceCurrent=[{"d":"Apr 1","v":1}];
 
 var dailyPacePrevious=[{"d":"Mar 2","v":2},{"d":"Mar 3","v":6},{"d":"Mar 4","v":15},{"d":"Mar 5","v":8},{"d":"Mar 6","v":2},{"d":"Mar 10","v":2},{"d":"Mar 11","v":3},{"d":"Mar 12","v":7},{"d":"Mar 13","v":3},{"d":"Mar 14","v":20},{"d":"Mar 16","v":4},{"d":"Mar 17","v":8},{"d":"Mar 18","v":4},{"d":"Mar 19","v":8},{"d":"Mar 20","v":4},{"d":"Mar 24","v":3},{"d":"Mar 26","v":7},{"d":"Mar 31","v":2}];
 
-var marketTrends=[{"state":"FL","jan":20,"feb":32,"mar":47,"apr":0},{"state":"TX","jan":20,"feb":38,"mar":22,"apr":0},{"state":"AZ","jan":15,"feb":11,"mar":8,"apr":0},{"state":"GA","jan":12,"feb":12,"mar":7,"apr":0},{"state":"CA","jan":5,"feb":15,"mar":11,"apr":0},{"state":"PA","jan":2,"feb":7,"mar":11,"apr":0},{"state":"NV","jan":10,"feb":8,"mar":0,"apr":0},{"state":"OR","jan":0,"feb":5,"mar":0,"apr":0},{"state":"VA","jan":1,"feb":0,"mar":2,"apr":0},{"state":"MO","jan":0,"feb":2,"mar":0,"apr":0}];
+var marketTrends=[{"state":"FL","jan":20,"feb":32,"mar":47,"apr":0},{"state":"TX","jan":20,"feb":38,"mar":22,"apr":0},{"state":"AZ","jan":15,"feb":11,"mar":8,"apr":0},{"state":"GA","jan":12,"feb":12,"mar":7,"apr":1},{"state":"CA","jan":5,"feb":15,"mar":11,"apr":0},{"state":"PA","jan":2,"feb":7,"mar":11,"apr":0},{"state":"NV","jan":10,"feb":8,"mar":0,"apr":0},{"state":"OR","jan":0,"feb":5,"mar":0,"apr":0},{"state":"VA","jan":1,"feb":0,"mar":2,"apr":0},{"state":"MO","jan":0,"feb":2,"mar":0,"apr":0}];
 
+var aprCohortReps=[{"n":"Stephanie Whitlock","m":1,"p":0,"f":0}];
 var febCohortReps=[{"n":"DeLon Phoenix","m":10,"p":5,"f":97707},{"n":"Jared Midkiff","m":20,"p":11,"f":47115},{"n":"Yemaira Hernandez","m":12,"p":6,"f":31178},{"n":"Outside Sales Manager","m":8,"p":5,"f":25752},{"n":"Matthew MacDonald","m":10,"p":6,"f":23614},{"n":"Eric Henderson","m":7,"p":2,"f":20679},{"n":"Sara Porter","m":16,"p":2,"f":19630},{"n":"Omar Corona","m":11,"p":3,"f":14923},{"n":"Joseph Guerra","m":11,"p":4,"f":13354},{"n":"Stephanie Whitlock","m":14,"p":5,"f":8631},{"n":"Phillip Mason","m":13,"p":1,"f":700},{"n":"Claudia Gerhardt","m":1,"p":0,"f":0}];
 var janCohortReps=[{"n":"Matthew MacDonald","m":22,"p":13,"f":38428},{"n":"Stephanie Whitlock","m":6,"p":5,"f":18452},{"n":"Yemaira Hernandez","m":6,"p":3,"f":11650},{"n":"Joseph Guerra","m":9,"p":6,"f":8603},{"n":"Jared Midkiff","m":8,"p":3,"f":6846},{"n":"Claudia Gerhardt","m":3,"p":3,"f":5314},{"n":"Omar Corona","m":4,"p":1,"f":1933},{"n":"DeLon Phoenix","m":1,"p":0,"f":0},{"n":"Eric Henderson","m":2,"p":0,"f":0}];
 var marCohortReps=[{"n":"Yemaira Hernandez","m":12,"p":4,"f":12373},{"n":"Phillip Mason","m":6,"p":3,"f":11705},{"n":"Jared Midkiff","m":11,"p":5,"f":10448},{"n":"Eric Henderson","m":11,"p":2,"f":9979},{"n":"Joseph Guerra","m":13,"p":2,"f":6348},{"n":"Matthew MacDonald","m":8,"p":2,"f":5700},{"n":"Stephanie Whitlock","m":32,"p":3,"f":2834},{"n":"Omar Corona","m":9,"p":1,"f":800},{"n":"-","m":1,"p":0,"f":0},{"n":"Cesar Flores","m":1,"p":0,"f":0},{"n":"Claudia Gerhardt","m":3,"p":0,"f":0},{"n":"friend","m":1,"p":0,"f":0}];
 
-var funnelData=[{"l":"Total Enrolled (All Channels)","v":0,"c":"#5B9BFF"},{"l":"OSR-Credited","v":0,"c":"#A78BFA"},{"l":"Merchants with Applications","v":0,"c":"#FBBF24"},{"l":"Funded Applications","v":0,"c":"#2DD4A0"},{"l":"Producing Merchants (>$0)","v":0,"c":"#10B981"}];
+var funnelData=[{"l":"Total Enrolled (All Channels)","v":2,"c":"#5B9BFF"},{"l":"OSR-Credited","v":1,"c":"#A78BFA"},{"l":"Merchants with Applications","v":0,"c":"#FBBF24"},{"l":"Funded Applications","v":0,"c":"#2DD4A0"},{"l":"Producing Merchants (>$0)","v":0,"c":"#10B981"}];
 
 var bizDaysLeft=21;
 var bizDaysElapsed=1;
