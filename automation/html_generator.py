@@ -1677,8 +1677,18 @@ def _generate_forecast_table(forecast_data: dict) -> str:
         f'{month_name} {year} &middot; Day {biz_elapsed} of {biz_total}</div>'
     )
 
-    # WIP banner (removed — forecast now uses live Salesforce data)
-    wip_banner = ""
+    # Early-month notice when projections are unreliable (days 1-3)
+    if biz_elapsed <= 3:
+        wip_banner = (
+            '<div style="margin:8px 0 12px;padding:8px 14px;border-radius:8px;'
+            'background:rgba(91,155,255,0.08);border:1px dashed rgba(91,155,255,0.3);'
+            'font-size:0.8em;color:#5B9BFF;display:flex;align-items:center;gap:6px">'
+            '<span style="font-size:1.1em">&#9432;</span> '
+            f'Early month \u2014 projections stabilizing (day {biz_elapsed} of {biz_total})'
+            '</div>'
+        )
+    else:
+        wip_banner = ""
 
     # Summary bar
     team_var_color = _variance_color(team_var_pct)
