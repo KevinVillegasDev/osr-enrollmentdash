@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>April Enrollment & Production Dashboard — EasyPay Finance</title>
+  <script src="auth.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif; background: #0D1321; color: #F1F5F9; min-height: 100vh; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #151E2F; }
+    ::-webkit-scrollbar-thumb { background: #3D5170; border-radius: 4px; }
+
+    .header { background: linear-gradient(135deg, #151E2F 0%, #1a1f35 100%); border-bottom: 1px solid #293852; padding: 32px 40px 0; }
+    .home-link { display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#8494AB;text-decoration:none;font-weight:500;margin-bottom:12px;transition:color .2s; }
+    .home-link:hover { color:#5B9BFF; }
+    .home-link svg { width:16px;height:16px; }
+    .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+    .badge { font-size: 11px; font-weight: 700; background: #5B9BFF; color: #fff; padding: 3px 10px; border-radius: 6px; letter-spacing: 0.06em; text-transform: uppercase; display: inline-block; }
+    .header-meta { font-size: 13px; color: #8494AB; }
+    .header h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; margin: 6px 0 0; }
+    .header-sub { font-size: 14px; color: #A8B8CC; margin: 6px 0 0; }
+    .updated { text-align: right; }
+    .updated-label { font-size: 12px; color: #8494AB; }
+    .updated-date { font-size: 14px; font-weight: 600; color: #A8B8CC; }
+
+    .tabs { display: flex; gap: 0; }
+    .tab { padding: 12px 24px; background: transparent; border: none; border-bottom: 2px solid transparent; color: #8494AB; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+    .tab.active { border-bottom-color: #5B9BFF; color: #F1F5F9; font-weight: 600; }
+    .tab:hover { color: #A8B8CC; }
+
+    .content { padding: 32px 40px; max-width: 1400px; margin: 0 auto; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 36px; }
+    .kpi-grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .kpi { background: #151E2F; border: 1px solid #293852; border-radius: 16px; padding: 24px 28px; display: flex; flex-direction: column; gap: 6px; position: relative; overflow: hidden; }
+    .kpi-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .kpi-label { font-size: 13px; color: #A8B8CC; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; }
+    .kpi-value { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+    .kpi-sub { font-size: 13px; color: #8494AB; margin-top: 2px; }
+
+    .card { background: #151E2F; border: 1px solid #293852; border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+    .section-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.01em; }
+    .section-sub { font-size: 13px; color: #8494AB; margin-bottom: 20px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+    .grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+    .progress-row { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .progress-label { font-size: 13px; font-weight: 600; color: #A8B8CC; flex-shrink: 0; }
+    .progress-track { flex: 1; height: 24px; background: #293852; border-radius: 6px; overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 6px; transition: width 0.8s ease; }
+    .progress-value { font-size: 14px; font-weight: 700; width: 30px; text-align: right; flex-shrink: 0; }
+
+    .stat-box { background: #111B2E; border-radius: 12px; padding: 20px; text-align: center; }
+    .stat-box-label { font-size: 11px; color: #8494AB; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-box-value { font-size: 40px; font-weight: 800; }
+    .stat-box-sub { font-size: 12px; color: #8494AB; margin-top: 4px; }
+
+    .callout { display: flex; gap: 28px; margin-top: 12px; padding: 12px 16px; background: #111B2E; border-radius: 10px; flex-wrap: wrap; }
+    .callout span { font-size: 12px; color: #8494AB; }
+
+    table { width: 100%; border-collapse: separate; border-spacing: 0 4px; }
+    th { text-align: right; padding: 10px 16px; font-size: 11px; font-weight: 600; color: #8494AB; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #293852; }
+    th.left { text-align: left; }
+    td { padding: 12px 16px; font-size: 13px; }
+    tr.stripe { background: rgba(15, 23, 42, 0.3); }
+    .td-rank { color: #8494AB; text-align: right; font-weight: 600; }
+    .td-name { font-weight: 600; text-align: left; }
+    .td-funded { font-size: 14px; font-weight: 700; color: #2DD4A0; text-align: right; font-variant-numeric: tabular-nums; }
+    .td-num { text-align: right; }
+    .td-muted { text-align: right; color: #A8B8CC; }
+    .rate-badge { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 6px; display: inline-block; }
+    .rate-green { background: rgba(16,185,129,0.13); color: #2DD4A0; }
+    .rate-amber { background: rgba(251,191,36,0.13); color: #FBBF24; }
+    .rate-red { background: rgba(239,68,68,0.13); color: #F87171; }
+
+    .rep-card { background: #151E2F; border: 1px solid #293852; border-radius: 14px; padding: 20px 22px; position: relative; overflow: hidden; }
+    .rep-card-top { position: absolute; top: 10px; right: 12px; font-size: 10px; font-weight: 700; background: #2DD4A0; color: #fff; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.04em; }
+    .rep-name { font-size: 15px; font-weight: 700; margin-bottom: 14px; }
+    .rep-num { font-size: 36px; font-weight: 800; color: #2DD4A0; }
+    .rep-label { font-size: 13px; color: #8494AB; margin-left: 8px; }
+
+    .obs-item { display: flex; gap: 12px; padding: 12px 14px; background: #111B2E; border-radius: 10px; margin-bottom: 14px; }
+    .obs-icon { font-size: 18px; flex-shrink: 0; }
+    .obs-text { font-size: 13px; color: #A8B8CC; line-height: 1.5; }
+
+    .funnel-item { margin-bottom: 12px; }
+    .funnel-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
+    .funnel-label { font-size: 13px; color: #A8B8CC; }
+    .funnel-value { font-size: 14px; font-weight: 700; }
+    .funnel-track { height: 16px; background: #293852; border-radius: 4px; overflow: hidden; }
+    .funnel-fill { height: 100%; border-radius: 4px; }
+
+    .rep-card:hover { border-color: #3D5170; transition: border-color 0.2s; }
+    #chartTopReps, #chartAllReps { cursor: pointer; }
+
+    .modal-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:1000; backdrop-filter:blur(4px); justify-content:center; align-items:center; padding:20px; }
+    .modal-overlay.open { display:flex; }
+    .modal { background:#151E2F; border:1px solid #293852; border-radius:16px; max-width:700px; width:100%; max-height:85vh; overflow-y:auto; padding:28px; position:relative; }
+    .modal-close { position:absolute; top:16px; right:16px; background:#293852; border:none; color:#A8B8CC; width:32px; height:32px; border-radius:8px; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; font-family:inherit; }
+    .modal-close:hover { background:#3D5170; color:#F1F5F9; }
+    .modal h3 { font-size:20px; font-weight:700; margin-bottom:4px; padding-right:40px; }
+    .modal .modal-sub { font-size:13px; color:#8494AB; margin-bottom:20px; }
+    .modal-stats { display:flex; gap:16px; margin-bottom:20px; flex-wrap:wrap; }
+    .modal-stat { background:#111B2E; border-radius:10px; padding:12px 16px; flex:1; min-width:120px; }
+    .modal-stat-label { font-size:11px; color:#8494AB; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px; }
+    .modal-stat-val { font-size:22px; font-weight:700; }
+    .merchant-row { display:flex; justify-content:space-between; align-items:center; padding:12px 14px; border-radius:10px; margin-bottom:6px; }
+    .merchant-row:nth-child(odd) { background:#111B2E; }
+    .merchant-info { flex:1; min-width:0; }
+    .merchant-name { font-size:14px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .merchant-loc { font-size:12px; color:#8494AB; margin-top:2px; }
+    .merchant-nums { text-align:right; flex-shrink:0; margin-left:16px; }
+    .merchant-funded { font-size:14px; font-weight:700; color:#2DD4A0; }
+    .merchant-apps { font-size:11px; color:#8494AB; margin-top:2px; }
+    .merchant-zero .merchant-funded { color:#8494AB; }
+    .no-data-tag { font-size:11px; color:#8494AB; background:#293852; padding:2px 8px; border-radius:4px; }
+
+    @media (max-width: 768px) {
+      .modal { padding:18px; border-radius:12px; max-height:90vh; }
+      .modal h3 { font-size:17px; }
+      .modal-stats { gap:10px; }
+      .modal-stat { padding:10px 12px; min-width:90px; }
+      .modal-stat-val { font-size:18px; }
+      .merchant-name { font-size:13px; }
+      .merchant-funded { font-size:13px; }
+    }
+      .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+      .kpi-grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .grid-2, .grid-2-1, .grid-3 { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .header, .content { padding-left: 16px; padding-right: 16px; }
+      .header { padding-top: 20px; }
+      .header h1 { font-size: 20px; line-height: 1.2; }
+      .header-sub { font-size: 12px; }
+      .header-top { flex-direction: column; gap: 12px; }
+      .updated { text-align: left; }
+      .tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .tabs::-webkit-scrollbar { display: none; }
+      .tab { padding: 10px 16px; font-size: 13px; white-space: nowrap; flex-shrink: 0; }
+      .content { padding-top: 20px; padding-bottom: 20px; }
+      .kpi-grid { grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+      .kpi-grid-4 { grid-template-columns: 1fr 1fr; }
+      .kpi { padding: 16px 18px; border-radius: 12px; }
+      .kpi-value { font-size: 26px; }
+      .kpi-label { font-size: 11px; }
+      .kpi-sub { font-size: 11px; }
+      .card { padding: 18px; margin-bottom: 16px; border-radius: 12px; }
+      .section-title { font-size: 17px; }
+      .section-sub { font-size: 12px; margin-bottom: 14px; }
+      .grid-2, .grid-2-1, .grid-3 { grid-template-columns: 1fr; gap: 16px; margin-bottom: 16px; }
+      .grid-4 { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .progress-label { font-size: 12px !important; width: 80px !important; }
+      .progress-value { font-size: 13px; }
+      .callout { flex-direction: column; gap: 8px; padding: 10px 12px; }
+      .stat-box { padding: 14px; }
+      .stat-box-value { font-size: 28px; }
+      .rep-card { padding: 14px 16px; }
+      .rep-name { font-size: 13px; margin-bottom: 8px; }
+      .rep-num { font-size: 28px; }
+      .rep-label { font-size: 11px; }
+      table { font-size: 12px; }
+      th { padding: 8px 10px; font-size: 10px; }
+      td { padding: 8px 10px; font-size: 12px; }
+      .td-funded { font-size: 12px; }
+      .obs-item { padding: 10px 12px; }
+      .obs-text { font-size: 12px; }
+      .funnel-label { font-size: 12px; }
+      .funnel-value { font-size: 13px; }
+    }
+    @media (max-width: 420px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+      .kpi-grid-4 { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: 1fr; }
+      .header h1 { font-size: 18px; }
+      .kpi-value { font-size: 28px; }
+      .stat-box-value { font-size: 24px; }
+      .grid-3 { gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <a href="index.html" class="home-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>All Months</a>
+    <div class="header-top">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+          <span class="badge">LIVE</span>
+          <span class="header-meta">April 2026</span>
+        </div>
+        <h1>April Enrollment &amp; Production Dashboard</h1>
+        <p class="header-sub">EasyPay Finance — Enrollment &amp; Production Tracking</p>
+      </div>
+      <div class="updated">
+        <div class="updated-label">Last updated</div>
+        <div class="updated-date">Apr 1, 2026</div>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('overview')">Overview</button>
+      <button class="tab" onclick="switchTab('reps')">Rep Performance</button>
+      <button class="tab" onclick="switchTab('markets')">Markets</button>
+      <button class="tab" onclick="switchTab('production')">Production</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- OVERVIEW -->
+    <div class="tab-content active" id="overview">
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">145</span><span class="kpi-sub">All sources, Apr 2026</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">108</span><span class="kpi-sub">74.5% of total</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#FBBF24,transparent)"></div><span class="kpi-label">Funded Volume</span><span class="kpi-value">$109,436</span><span class="kpi-sub">55 merchants tracked</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#A78BFA,transparent)"></div><span class="kpi-label">Funded Apps</span><span class="kpi-value">65</span><span class="kpi-sub">of 189 total apps</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#22D3EE,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">34.4%</span><span class="kpi-sub">Apps → Funded</span></div>
+      </div>
+      <div class="card">
+        <div class="section-title">Daily Enrollment Pace</div>
+        <div class="section-sub">Credited enrollments by date — Feb 2026</div>
+        <div style="height:240px"><canvas id="chartDaily"></canvas></div>
+        <div class="callout">
+          <span><strong style="color:#FBBF24">Peak:</strong> Apr 14 (20 enrollments)</span>
+          <span><strong style="color:#5B9BFF">Avg daily:</strong> ~6.0 enrollments/day</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px">
+        <div style="font-size:13px;color:#8494AB">Breakdown: <span id="ovScopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (108)</span></div>
+        <div style="display:inline-flex;background:#293852;border-radius:8px;padding:3px;gap:2px">
+          <button id="ovBtnOsr" onclick="setOverviewScope('osr')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (108)</button>
+          <button id="ovBtnAll" onclick="setOverviewScope('all')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (145)</button>
+        </div>
+      </div>
+      <div class="grid-2-1">
+        <div class="card">
+          <div class="section-title">Top 6 Reps by Credits</div>
+          <div class="section-sub">Enrollments credited to OSR · <span style="color:#7AB8FF">Click for details</span></div>
+          <div style="height:260px"><canvas id="chartTopReps"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="section-title">Product Mix</div>
+          <div class="section-sub" id="ovProductSub">EPF product type split</div>
+          <div style="height:200px"><canvas id="chartProduct"></canvas></div>
+          <div id="ovProductLegend" style="margin-top:12px">
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;margin-bottom:8px"><div style="width:10px;height:10px;border-radius:3px;background:#5B9BFF"></div><span style="color:#A8B8CC;flex:1">Lease-to-Own</span><span style="font-weight:600">82</span><span style="color:#8494AB;font-size:12px">62.1%</span></div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px"><div style="width:10px;height:10px;border-radius:3px;background:#A78BFA"></div><span style="color:#A8B8CC;flex:1">Retail Contract</span><span style="font-weight:600">50</span><span style="color:#8494AB;font-size:12px">37.9%</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="section-title">Top 5 Markets</div>
+          <div class="section-sub" id="ovMarketSub">States by credited enrollment volume</div>
+          <div id="marketsOverview"></div>
+        </div>
+        <div class="card">
+          <div class="section-title">ISR Assignment</div>
+          <div class="section-sub">Inside sales rep support distribution</div>
+          <div id="isrBars"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REP PERFORMANCE -->
+    <div class="tab-content" id="reps">
+      <div class="card">
+        <div class="section-title">Credited Enrollments by Rep</div>
+        <div class="section-sub">Enrollments officially credited to each OSR — April 2026 · <span style="color:#7AB8FF">Click a bar to view merchant details</span></div>
+        <div style="height:480px"><canvas id="chartAllReps"></canvas></div>
+      </div>
+      <div class="section-title" style="margin-bottom:4px">Individual Rep Scorecards</div>
+      <div class="section-sub" style="margin-bottom:20px">Credited enrollment count per rep · <span style="color:#7AB8FF">Tap a card to view merchants</span></div>
+      <div class="grid-4" id="repCards"></div>
+    </div>
+
+    <!-- MARKETS -->
+    <div class="tab-content" id="markets">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+        <div style="font-size:13px;color:#8494AB">Showing <span id="scopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (108)</span> enrollments</div>
+        <div style="display:inline-flex;background:#293852;border-radius:8px;padding:3px;gap:2px">
+          <button id="btnOsr" onclick="setMarketsScope('osr')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (108)</button>
+          <button id="btnAll" onclick="setMarketsScope('all')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (145)</button>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="section-title">Enrollments by State</div>
+          <div class="section-sub" id="stateSub">Credited sales team enrollments</div>
+          <div style="height:380px"><canvas id="chartStates"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="section-title">Industry Breakdown</div>
+          <div class="section-sub">Vertical distribution across enrollments</div>
+          <div style="height:280px"><canvas id="chartIndustry"></canvas></div>
+          <div id="industryLegend" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="section-title">Total vs. Credited Enrollments</div>
+        <div class="section-sub">145 total new enrollments, 108 credited to outside sales team</div>
+        <div class="grid-3">
+          <div class="stat-box"><div class="stat-box-label">Total New</div><div class="stat-box-value" style="color:#5B9BFF">145</div><div class="stat-box-sub">74.5% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">OSR Credited</div><div class="stat-box-value" style="color:#2DD4A0">108</div><div class="stat-box-sub">77.2% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">Other Sources</div><div class="stat-box-value" style="color:#FBBF24">37</div><div class="stat-box-sub">25.5% of total</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTION -->
+    <div class="tab-content" id="production">
+      <div class="kpi-grid kpi-grid-4">
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Total Funded</span><span class="kpi-value">$109,436</span><span class="kpi-sub">Across 30 producing merchants</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Avg Ticket</span><span class="kpi-value">$1,684</span><span class="kpi-sub">Per funded application</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#A78BFA,transparent)"></div><span class="kpi-label">Total Applications</span><span class="kpi-value">189</span><span class="kpi-sub">Across 55 active merchants</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#FBBF24,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">34.4%</span><span class="kpi-sub">65 of 189 apps funded</span></div>
+      </div>
+      <div class="card">
+        <div class="section-title">Top 15 Producing Merchants</div>
+        <div class="section-sub">Ranked by total funded dollars — Feb 2026 new enrollments</div>
+        <div style="overflow-x:auto"><table><thead><tr><th class="left">#</th><th class="left">Merchant</th><th class="left">OSR</th><th>Funded $</th><th>Funded Apps</th><th>Total Apps</th><th>Conv. Rate</th></tr></thead><tbody id="prodTable"></tbody></table></div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="section-title">Production Funnel</div>
+          <div class="section-sub">Application to funding pipeline</div>
+          <div id="funnelArea"></div>
+        </div>
+        <div class="card">
+          <div class="section-title">Key Observations</div>
+          <div class="section-sub">Production insights for April</div>
+          <div id="observations"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="modal-overlay" id="repModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h3 id="modalRepName"></h3>
+    <div class="modal-sub" id="modalRepSub"></div>
+    <div class="modal-stats" id="modalStats"></div>
+    <div id="modalMerchants"></div>
+  </div>
+</div>
+
+<script>
+var repCredits=[{"n":"Stephanie Whitlock","v":32},{"n":"Joseph Guerra","v":13},{"n":"Yemaira Hernandez","v":12},{"n":"Eric Henderson","v":11},{"n":"Jared Midkiff","v":11},{"n":"Omar Corona","v":9},{"n":"Matthew MacDonald","v":8},{"n":"Phillip Mason","v":6},{"n":"Claudia Gerhardt","v":3},{"n":"friend","v":1},{"n":"-","v":1},{"n":"Cesar Flores","v":1}];
+var marketData=[{"n":"FL","v":47},{"n":"TX","v":22},{"n":"CA","v":11},{"n":"PA","v":11},{"n":"AZ","v":8},{"n":"GA","v":7},{"n":"VA","v":2}];
+var industryData=[{"n":"Auto - Repair","v":66},{"n":"Auto - Total Car Care","v":13},{"n":"Auto - Tires","v":7},{"n":"Auto - Transmission","v":6},{"n":"Auto - Wheels & Tires","v":5},{"n":"Auto - Stereo","v":5},{"n":"Auto - Brakes","v":1},{"n":"Electronics","v":1},{"n":"Auto - Collision","v":1},{"n":"Auto - Other","v":1},{"n":"Furniture","v":1},{"n":"Auto - Dealership","v":1}];
+var marketDataFull=[{"n":"FL","v":53},{"n":"TX","v":31},{"n":"CA","v":20},{"n":"PA","v":14},{"n":"AZ","v":14},{"n":"GA","v":7},{"n":"VA","v":2},{"n":"NM","v":1},{"n":"MO","v":1},{"n":"SD","v":1},{"n":"NV","v":1}];
+var industryDataFull=[{"n":"Auto - Repair","v":80},{"n":"Auto - Total Car Care","v":19},{"n":"Auto - Transmission","v":10},{"n":"Auto - Tires","v":10},{"n":"Auto - Stereo","v":6},{"n":"Auto - Wheels & Tires","v":6},{"n":"Auto - Other","v":4},{"n":"Auto - Collision","v":3},{"n":"Furniture","v":2},{"n":"Auto - Dealership","v":1},{"n":"Electronics","v":1},{"n":"Bicycle","v":1},{"n":"Auto - Brakes","v":1},{"n":"Pets","v":1}];
+var marketsScope='osr';
+var isrData=[{"n":"Javier Gonzalez","v":38},{"n":"Connor Admirand","v":25},{"n":"Noemy Carrion","v":22},{"n":"Laura Angulo","v":8},{"n":"Michael Palmer","v":5},{"n":"Katie Anguiano","v":4},{"n":"Luzmam Vigil","v":3}];
+var dailyTrend=[{"d":"Apr 2","v":2},{"d":"Apr 3","v":6},{"d":"Apr 4","v":15},{"d":"Apr 5","v":8},{"d":"Apr 6","v":2},{"d":"Apr 10","v":2},{"d":"Apr 11","v":3},{"d":"Apr 12","v":7},{"d":"Apr 13","v":3},{"d":"Apr 14","v":20},{"d":"Apr 16","v":4},{"d":"Apr 17","v":8},{"d":"Apr 18","v":4},{"d":"Apr 19","v":8},{"d":"Apr 20","v":4},{"d":"Apr 24","v":3},{"d":"Apr 26","v":7},{"d":"Apr 31","v":2}];
+var topProducers=[{"n":"J and D Auto Service","f":23874.8,"fa":7,"ta":13,"r":"53.8%","o":""},{"n":"Ad Modera Living","f":9175.27,"fa":5,"ta":11,"r":"45.5%","o":""},{"n":"Capital Tires","f":8103.51,"fa":4,"ta":5,"r":"80.0%","o":""},{"n":"Westcoast Evolutions - Jefferson","f":6832.14,"fa":6,"ta":9,"r":"66.7%","o":"Phillip Mason"},{"n":"La Ceiba Tire Shop Miami","f":6223.0,"fa":5,"ta":11,"r":"45.5%","o":"Yemaira Hernandez"},{"n":"Auto X Repair And Sales","f":4700.0,"fa":2,"ta":4,"r":"50.0%","o":"Eric Henderson"},{"n":"Trusted Auto Pros","f":4500.0,"fa":1,"ta":5,"r":"20.0%","o":"Matthew MacDonald"},{"n":"LG Transmission Experts","f":4287.9,"fa":4,"ta":5,"r":"80.0%","o":"Eric Henderson"},{"n":"Texas Automotive and Tire","f":4223.23,"fa":3,"ta":6,"r":"50.0%","o":""},{"n":"Total Automotive & Offroad","f":3947.94,"fa":3,"ta":5,"r":"60.0%","o":"Joseph Guerra"},{"n":"Auto Repair Pros WPB 1","f":3763.51,"fa":3,"ta":14,"r":"21.4%","o":"Jared Midkiff"},{"n":"Westcoast Evolutions - Arden","f":3125.27,"fa":2,"ta":3,"r":"66.7%","o":"Phillip Mason"},{"n":"JR Electronics Auto & Off Road","f":2750.0,"fa":1,"ta":11,"r":"9.1%","o":"Yemaira Hernandez"},{"n":"Miami Transmission Repair","f":2600.0,"fa":1,"ta":2,"r":"50.0%","o":"Yemaira Hernandez"},{"n":"Godiesel","f":2400.0,"fa":1,"ta":1,"r":"100.0%","o":""}];
+var PC=["#3B82F6","#10B981","#F59E0B","#EF4444","#8B5CF6","#06B6D4","#EC4899","#F97316","#14B8A6","#A855F7","#6366F1","#84CC16"];
+
+var repMerchants={
+"friend":[{"n":"Solution Car Multiservices","b":25538,"l":"Richmond, VA","f":0.0,"fa":0,"ta":0}],
+"-":[{"n":"Kaotic Kustomz Wheel & Tire","b":25523,"l":"Tulare, CA","f":0.0,"fa":0,"ta":3}],
+"Stephanie Whitlock":[{"n":"Atlantic Tire - 682 Peachtree","b":25514,"l":"Peachtree Corners, GA","f":1073.58,"fa":1,"ta":1},{"n":"Driven Import Auto Care","b":25444,"l":"Newnan, GA","f":1000.0,"fa":1,"ta":1},{"n":"Atlantic Tire - 681 Avenues","b":25515,"l":"Marietta, GA","f":760.69,"fa":1,"ta":1},{"n":"Meineke 2928 - McDonough","b":25510,"l":"McDonough, GA","f":0,"fa":0,"ta":0},{"n":"Retanas Auto Repair","b":25471,"l":"Fredricksburg, VA","f":0,"fa":0,"ta":0},{"n":"Direct Tire Co","b":25424,"l":"Jacksonville, FL","f":0.0,"fa":0,"ta":1},{"n":"Americas DIY Auto Repair","b":25439,"l":"Douglasville, GA","f":0,"fa":0,"ta":0},{"n":"Carvi Auto Repair","b":25447,"l":"Jacksonville, FL","f":0.0,"fa":0,"ta":1},{"n":"Meineke 509 - Forest Park","b":25509,"l":"Forest Park, GA","f":0,"fa":0,"ta":0},{"n":"Meineke 2920 - Fairburn","b":25508,"l":"Fairburn, GA","f":0,"fa":0,"ta":0},{"n":"Apex Automotive - Boyton","b":25476,"l":"Boyton Beach, FL","f":0,"fa":0,"ta":0},{"n":"Apex Automotive - Delray","b":25477,"l":"Delray Beach, FL","f":0,"fa":0,"ta":0},{"n":"Apex Tire and Auto - Adelphia","b":25479,"l":"Lighthouse Point, FL","f":0,"fa":0,"ta":0},{"n":"Collier Car Care Center","b":25481,"l":"Naples, FL","f":0,"fa":0,"ta":0},{"n":"Apex Automotive - Lake Worth","b":25478,"l":"Greenacres, FL","f":0,"fa":0,"ta":0},{"n":"Johnny Myers Discount Tire","b":25485,"l":"Fort Myers, FL","f":0,"fa":0,"ta":0},{"n":"Apex Automotive - Wellington","b":25480,"l":"Wellington, FL","f":0,"fa":0,"ta":0},{"n":"Golden Gate Tire and Service","b":25482,"l":"Stuart, FL","f":0,"fa":0,"ta":0},{"n":"Great Bear","b":25483,"l":"Weston, FL","f":0.0,"fa":0,"ta":2},{"n":"Scott's Tire & Service","b":25486,"l":"Port St. Lucie, FL","f":0,"fa":0,"ta":0},{"n":"Scotty's Automotive","b":25487,"l":"Fort Myers, FL","f":0,"fa":0,"ta":0},{"n":"Apex Tire & Auto - San Jose","b":25489,"l":"Jacksonville, FL","f":0,"fa":0,"ta":0},{"n":"Apex Tire & Auto - Blanding","b":25493,"l":"Jacksonville, FL","f":0,"fa":0,"ta":0},{"n":"Apex Tire & Auto - University","b":25488,"l":"Jacksonville, FL","f":0.0,"fa":0,"ta":1},{"n":"Apex Tire & Auto - St Augustine","b":25494,"l":"St Augustine, FL","f":0.0,"fa":0,"ta":1},{"n":"Apex Tire & Auto - Cassat","b":25491,"l":"Jacksonville, FL","f":0.0,"fa":0,"ta":3},{"n":"Apex Tire & Auto - Jullington","b":25490,"l":"Jacksonville, FL","f":0,"fa":0,"ta":0},{"n":"Apex Tire & Auto - Fleming","b":25492,"l":"Fleming Island, FL","f":0,"fa":0,"ta":0},{"n":"EF Tire & Auto Repair","b":25498,"l":"Pompano Beach, FL","f":0,"fa":0,"ta":0},{"n":"Supreme Auto Care","b":25495,"l":"Safety Harbor, FL","f":0,"fa":0,"ta":0},{"n":"Apex Tire & Auto -Daniels","b":25497,"l":"Ft Myers, FL","f":0,"fa":0,"ta":0},{"n":"Bob's Tire & Brake","b":25499,"l":"Ocala, FL","f":0,"fa":0,"ta":0}],
+"Cesar Flores":[{"n":"LGZ Automotive","b":25550,"l":"Santa Fe Springs, CA","f":0,"fa":0,"ta":0}],
+"Yemaira Hernandez":[{"n":"La Ceiba Tire Shop Miami","b":25517,"l":"Miami, FL","f":6223.0,"fa":5,"ta":11},{"n":"JR Electronics Auto & Off Road","b":25458,"l":"Miami, FL","f":2750.0,"fa":1,"ta":11},{"n":"Miami Transmission Repair","b":25459,"l":"Miami, FL","f":2600.0,"fa":1,"ta":2},{"n":"Auto Shop Repair","b":25500,"l":"Hialeah, FL","f":800.0,"fa":1,"ta":1},{"n":"Jess Export Variety","b":25525,"l":"Hialeah, FL","f":0,"fa":0,"ta":0},{"n":"Pro Mecanic 360","b":25438,"l":"Miami, FL","f":0,"fa":0,"ta":0},{"n":"Star Auto Techs","b":25451,"l":"Pembroke Pines, FL","f":0,"fa":0,"ta":0},{"n":"Transmissions Unlimited","b":25501,"l":"North Miami Beach, FL","f":0,"fa":0,"ta":0},{"n":"La Ceiba Tire Shop Florida","b":25518,"l":"Miami, FL","f":0.0,"fa":0,"ta":0},{"n":"Scooter Repair Florida","b":25531,"l":"Miami, FL","f":0.0,"fa":0,"ta":1},{"n":"Auto Express Paint","b":25534,"l":"North Miami Beach, FL","f":0,"fa":0,"ta":0},{"n":"Kalibre Diesel Truck","b":25545,"l":"Miami, FL","f":0,"fa":0,"ta":0}],
+"Claudia Gerhardt":[{"n":"All Auto Pros","b":25426,"l":"Norco, CA","f":0,"fa":0,"ta":0},{"n":"Lux Euro Garage","b":25455,"l":"Moreno Valley, CA","f":0.0,"fa":0,"ta":2},{"n":"Apex Auto Studio","b":25520,"l":"Perris, CA","f":0,"fa":0,"ta":0}],
+"Eric Henderson":[{"n":"Auto X Repair And Sales","b":25413,"l":"Reading, PA","f":4700.0,"fa":2,"ta":4},{"n":"LG Transmission Experts","b":25445,"l":"Allentown, PA","f":4287.9,"fa":4,"ta":5},{"n":"J & F Auto Repair & Sales","b":25440,"l":"West Lawn, PA","f":0,"fa":0,"ta":0},{"n":"JF Motors","b":25453,"l":"Chester, PA","f":0,"fa":0,"ta":0},{"n":"Xpert Transmission Auto Repair","b":25461,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0},{"n":"T & M Auto Repair","b":25502,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0},{"n":"Apache's Auto Clinic","b":25521,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0},{"n":"C&C Tire and Auto Repair","b":25528,"l":"Pottstown, PA","f":0,"fa":0,"ta":0},{"n":"Panda Auto Center","b":25543,"l":"Allentown, PA","f":0,"fa":0,"ta":0},{"n":"Flexible Auto Mechanic","b":25542,"l":"Allentown, PA","f":0.0,"fa":0,"ta":1},{"n":"Lew's Service Center","b":25549,"l":"Coatesville, PA","f":0,"fa":0,"ta":0}],
+"Jared Midkiff":[{"n":"Auto Repair Pros WPB 1","b":25433,"l":"West Palm Beach, FL","f":3763.51,"fa":3,"ta":14},{"n":"Auto Repair Pros Margate 4","b":25436,"l":"Margate, FL","f":2100.41,"fa":2,"ta":6},{"n":"Auto Repair Pros Hollywood East 7","b":25431,"l":"Hollywood, FL","f":1023.2,"fa":1,"ta":5},{"n":"Auto Repair Pros Lantana 3","b":25434,"l":"Lantana, FL","f":600.0,"fa":1,"ta":3},{"n":"Street King Auto","b":25412,"l":"Winter Haven, FL","f":0.0,"fa":0,"ta":3},{"n":"Aamco Transmissions & Total Car Care - US 19 N - Clearwater","b":25428,"l":"Clearwater, FL","f":0,"fa":0,"ta":0},{"n":"Prestige European 5","b":25432,"l":"Fort Lauderdale, FL","f":0.0,"fa":0,"ta":1},{"n":"Auto Repair Pros Greenacres 2","b":25435,"l":"Greenacres, FL","f":0,"fa":0,"ta":0},{"n":"Auto Repair Pros Hollywood North 6","b":25437,"l":"Hollywood, FL","f":0,"fa":0,"ta":0},{"n":"PSA Furniture","b":25463,"l":"Tampa, FL","f":0.0,"fa":0,"ta":6},{"n":"Buddy Rolle Tins Tires and More","b":25526,"l":"Lantana, FL","f":0,"fa":0,"ta":0}],
+"Joseph Guerra":[{"n":"Total Automotive & Offroad","b":25427,"l":"Houston, TX","f":3947.94,"fa":3,"ta":5},{"n":"Performance Custom Cables","b":25446,"l":"Spring, TX","f":2400.0,"fa":1,"ta":1},{"n":"Concierge Auto Repair","b":25411,"l":"Spring, TX","f":0,"fa":0,"ta":0},{"n":"Louetta Tires & Brakes","b":25421,"l":"Spring, TX","f":0.0,"fa":0,"ta":1},{"n":"Gentry Automotive","b":25450,"l":"Montgomery, TX","f":0,"fa":0,"ta":0},{"n":"Whittyz Diesel and Auto Repair","b":25465,"l":"Humble, TX","f":0,"fa":0,"ta":0},{"n":"Lana Auto Service","b":25503,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"OSO Customs TX2","b":25554,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Cornerstone Car Care","b":25516,"l":"Arlington, TX","f":0,"fa":0,"ta":0},{"n":"AAMCO Conroe","b":25522,"l":"Conroe, TX","f":0,"fa":0,"ta":0},{"n":"Multistate Transmission - Hemphill 27","b":25513,"l":"Fort Worth, TX","f":0.0,"fa":0,"ta":4},{"n":"Multistate Transmission - Haltom City 25","b":25512,"l":"Haltom City, TX","f":0.0,"fa":0,"ta":2},{"n":"OSO Customs TX1","b":25555,"l":"Katy, TX","f":0,"fa":0,"ta":0}],
+"Matthew MacDonald":[{"n":"Trusted Auto Pros","b":25441,"l":"Tempe, AZ","f":4500.0,"fa":1,"ta":5},{"n":"Meineke 3046","b":25474,"l":"Kingman, AZ","f":1200.0,"fa":2,"ta":3},{"n":"Llantera Del Centro","b":25425,"l":"Mesa, AZ","f":0,"fa":0,"ta":0},{"n":"Little O Tires Queen Creek","b":25468,"l":"Queen Creek, AZ","f":0,"fa":0,"ta":0},{"n":"Little O Tires Casa Grande","b":25469,"l":"Casa Grande, AZ","f":0,"fa":0,"ta":0},{"n":"Little O Tires Stanfield","b":25470,"l":"Stanfield, AZ","f":0,"fa":0,"ta":0},{"n":"Jesus Auto Repair","b":25540,"l":"Casa Grande, AZ","f":0,"fa":0,"ta":0},{"n":"Northland Auto Center","b":25511,"l":"Mesa, AZ","f":0.0,"fa":0,"ta":3}],
+"Omar Corona":[{"n":"Manriquez Collision Center","b":25448,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Revline Auto Repair","b":25462,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Jayce Auto Repair","b":25466,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Mits Tire Service","b":25464,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"BTS Brothers Tire Service 3 - FM 1960 E","b":25504,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"BTS Brothers Tire Service 2 - FM 1960 W","b":25505,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"BTS Brothers Tire Service 1 - Airline Dr","b":25506,"l":"Houston, TX","f":0.0,"fa":0,"ta":1},{"n":"Mayan Center Tires","b":25507,"l":"Houston, TX","f":0.0,"fa":0,"ta":1},{"n":"Sanchez Tire Shop 5","b":25527,"l":"Harlingen, TX","f":0.0,"fa":0,"ta":0}],
+"Phillip Mason":[{"n":"Westcoast Evolutions - Jefferson","b":25417,"l":"West Sacramento, CA","f":6832.14,"fa":6,"ta":9},{"n":"Westcoast Evolutions - Arden","b":25414,"l":"Sacramento, CA","f":3125.27,"fa":2,"ta":3},{"n":"Westcoast Evolutions - Elk Grove","b":25415,"l":"Elk Grove, CA","f":1747.19,"fa":1,"ta":2},{"n":"Westcoast Evolutions - Gold River","b":25416,"l":"Gold River, CA","f":0,"fa":0,"ta":0},{"n":"US Tires and Wheels","b":25524,"l":"Folsom, CA","f":0.0,"fa":0,"ta":2},{"n":"Aamco Antioch 56201","b":25548,"l":"Antioch, CA","f":0.0,"fa":0,"ta":1}]
+};
+
+function openRepModal(name){
+  var m=repMerchants[name];if(!m)return;
+  var totalF=0,totalFA=0,totalTA=0,producing=0;
+  m.forEach(function(x){totalF+=x.f;totalFA+=x.fa;totalTA+=x.ta;if(x.f>0)producing++;});
+  document.getElementById('modalRepName').textContent=name;
+  document.getElementById('modalRepSub').textContent=m.length+' enrolled merchants \u2022 '+producing+' producing';
+  document.getElementById('modalStats').innerHTML='<div class="modal-stat"><div class="modal-stat-label">Funded Volume</div><div class="modal-stat-val" style="color:#2DD4A0">$'+totalF.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0})+'</div></div><div class="modal-stat"><div class="modal-stat-label">Funded Apps</div><div class="modal-stat-val" style="color:#5B9BFF">'+totalFA+'</div></div><div class="modal-stat"><div class="modal-stat-label">Total Apps</div><div class="modal-stat-val" style="color:#A78BFA">'+totalTA+'</div></div><div class="modal-stat"><div class="modal-stat-label">Producing</div><div class="modal-stat-val" style="color:#FBBF24">'+producing+'/'+m.length+'</div></div>';
+  var sorted=m.slice().sort(function(a,b){return b.f-a.f;});
+  var h='';sorted.forEach(function(x){
+    var cls=x.f>0?'':'merchant-zero';
+    h+='<div class="merchant-row '+cls+'"><div class="merchant-info"><div class="merchant-name">'+x.n+'</div><div class="merchant-loc">'+x.l+'</div></div><div class="merchant-nums">'+(x.f>0?'<div class="merchant-funded">$'+x.f.toLocaleString('en-US',{minimumFractionDigits:2})+'</div><div class="merchant-apps">'+x.fa+' funded / '+x.ta+' apps</div>':x.ta>0?'<div class="merchant-funded">$0</div><div class="merchant-apps">0 funded / '+x.ta+' apps</div>':'<span class="no-data-tag">No activity yet</span>')+'</div></div>';
+  });
+  document.getElementById('modalMerchants').innerHTML=h;
+  document.getElementById('repModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('repModal').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+
+var charts={};
+var ttStyle={backgroundColor:'#293852',borderColor:'#3D5170',borderWidth:1,titleColor:'#A8B8CC',bodyColor:'#F1F5F9',padding:12,cornerRadius:10};
+
+function switchTab(id){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+  document.getElementById(id).classList.add('active');
+  var tabs=document.querySelectorAll('.tab');
+  var map={overview:0,reps:1,markets:2,production:3};
+  tabs[map[id]].classList.add('active');
+  setTimeout(initCharts,50);
+}
+
+function destroyChart(k){if(charts[k]){charts[k].destroy();delete charts[k];}}
+
+function bars(el,data,max,colors,lw){
+  var h='';
+  for(var i=0;i<data.length;i++){
+    var c=Array.isArray(colors)?colors[i]:colors;
+    h+='<div class="progress-row"><span class="progress-label" style="width:'+(lw||130)+'px">'+data[i].n+'</span><div class="progress-track"><div class="progress-fill" style="width:'+(data[i].v/max*100)+'%;background:linear-gradient(90deg,'+c+','+c+'88)"></div></div><span class="progress-value">'+data[i].v+'</span></div>';
+  }
+  document.getElementById(el).innerHTML=h;
+}
+
+function initCharts(){
+  var e;
+  e=document.getElementById('chartDaily');
+  if(e&&e.offsetParent!==null){destroyChart('daily');
+    charts.daily=new Chart(e,{type:'line',data:{labels:dailyTrend.map(function(d){return d.d}),datasets:[{data:dailyTrend.map(function(d){return d.v}),borderColor:'#5B9BFF',backgroundColor:'rgba(91,155,255,0.1)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#5B9BFF',pointHoverRadius:5,pointHoverBorderColor:'#fff',pointHoverBorderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:ttStyle},scales:{x:{grid:{display:false},ticks:{color:'#8494AB'}},y:{beginAtZero:true,grid:{color:'#293852'},ticks:{color:'#8494AB'}}}}});
+  }
+  e=document.getElementById('chartTopReps');
+  if(e&&e.offsetParent!==null){destroyChart('topReps');var t6=repCredits.slice(0,6);
+    charts.topReps=new Chart(e,{type:'bar',data:{labels:t6.map(function(r){return r.n}),datasets:[{data:t6.map(function(r){return r.v}),backgroundColor:t6.map(function(_,i){return i===0?'#2DD4A0':'#5B9BFF'}),borderRadius:6,barThickness:20}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,onClick:function(evt,els){if(els.length){openRepModal(t6[els[0].index].n);}},plugins:{legend:{display:false},tooltip:ttStyle},scales:{x:{grid:{color:'#293852'},ticks:{color:'#8494AB'}},y:{grid:{display:false},ticks:{color:'#7AB8FF',font:{weight:'600'}}}}}});
+  }
+  e=document.getElementById('chartProduct');
+  if(e&&e.offsetParent!==null){destroyChart('product');
+    charts.product=new Chart(e,{type:'doughnut',data:{labels:['Lease-to-Own','Retail Contract'],datasets:[{data:[82,50],backgroundColor:['#5B9BFF','#A78BFA'],borderWidth:0,spacing:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false},tooltip:ttStyle}}});
+  }
+  e=document.getElementById('chartAllReps');
+  if(e&&e.offsetParent!==null){destroyChart('allReps');
+    charts.allReps=new Chart(e,{type:'bar',data:{labels:repCredits.map(function(r){return r.n}),datasets:[{data:repCredits.map(function(r){return r.v}),backgroundColor:repCredits.map(function(_,i){return i===0?'#2DD4A0':i<3?'#5B9BFF':'#7AB8FF'}),borderRadius:6,barThickness:20}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,onClick:function(evt,els){if(els.length){openRepModal(repCredits[els[0].index].n);}},plugins:{legend:{display:false},tooltip:ttStyle},scales:{x:{grid:{color:'#293852'},ticks:{color:'#8494AB'}},y:{grid:{display:false},ticks:{color:'#7AB8FF',font:{weight:'600'}}}}}});
+  }
+  e=document.getElementById('chartStates');
+  if(e&&e.offsetParent!==null){destroyChart('states');
+    charts.states=new Chart(e,{type:'bar',data:{labels:marketData.map(function(m){return m.n}),datasets:[{data:marketData.map(function(m){return m.v}),backgroundColor:marketData.map(function(_,i){return PC[i]}),borderRadius:6,barThickness:28}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:ttStyle},scales:{x:{grid:{display:false},ticks:{color:'#8494AB',maxRotation:35}},y:{beginAtZero:true,grid:{color:'#293852'},ticks:{color:'#8494AB'}}}}});
+  }
+  e=document.getElementById('chartIndustry');
+  if(e&&e.offsetParent!==null){destroyChart('industry');
+    charts.industry=new Chart(e,{type:'doughnut',data:{labels:industryData.map(function(d){return d.n}),datasets:[{data:industryData.map(function(d){return d.v}),backgroundColor:industryData.map(function(_,i){return PC[i]}),borderWidth:0,spacing:2}]},options:{responsive:true,maintainAspectRatio:false,cutout:'50%',plugins:{legend:{display:false},tooltip:ttStyle}}});
+  }
+}
+
+// Rep cards
+var rc='';repCredits.forEach(function(r,i){if(r.n==='Outside Sales Mgr')return;rc+='<div class="rep-card" style="cursor:pointer" onclick="openRepModal(\''+r.n.replace(/'/g,"\\'")+'\')">'+(i===0?'<div class="rep-card-top">TOP</div>':'')+'<div class="rep-name" style="color:#7AB8FF">'+r.n+' <span style="font-size:11px;color:#8494AB">▸</span></div><span class="rep-num">'+r.v+'</span><span class="rep-label">enrollments</span></div>';});
+document.getElementById('repCards').innerHTML=rc;
+
+// Production table
+var pt='';topProducers.forEach(function(m,i){var rv=parseFloat(m.r);var cls=rv>=40?'rate-green':rv>=20?'rate-amber':'rate-red';pt+='<tr class="'+(i%2?'stripe':'')+'"><td class="td-rank">'+(i+1)+'</td><td class="td-name">'+m.n+'</td><td class="td-name" style="color:'+(m.o?'#93C5FD':'#6B7280')+'">'+(m.o||'—')+'</td><td class="td-funded">$'+m.f.toLocaleString('en-US',{minimumFractionDigits:2})+'</td><td class="td-num">'+m.fa+'</td><td class="td-muted">'+m.ta+'</td><td class="td-num"><span class="rate-badge '+cls+'">'+m.r+'</span></td></tr>';});
+document.getElementById('prodTable').innerHTML=pt;
+
+// Funnel
+var fi=[{"l":"Active Merchants","v":55,"w":100,"c":"#3B82F6"},{"l":"Total Applications","v":189,"w":85,"c":"#8B5CF6"},{"l":"Funded Applications","v":65,"w":34,"c":"#10B981"},{"l":"Producing Merchants","v":30,"w":55,"c":"#F59E0B"}];
+var fh='';fi.forEach(function(s){fh+='<div class="funnel-item"><div class="funnel-header"><span class="funnel-label">'+s.l+'</span><span class="funnel-value" style="color:'+s.c+'">'+s.v+'</span></div><div class="funnel-track"><div class="funnel-fill" style="width:'+s.w+'%;background:linear-gradient(90deg,'+s.c+','+s.c+'88)"></div></div></div>';});
+document.getElementById('funnelArea').innerHTML=fh;
+
+// Observations
+var obs=[{"i":"🏆","t":"J and D Auto Service leads all merchants at $23,875 funded (21.8% of total volume)"},{"i":"⚡","t":"Top 5 merchants account for $54,209 (49.5%) of all funded volume"},{"i":"🎯","t":"Capital Tires has the highest conversion rate among top producers at 80.0% (4/5 apps funded)"},{"i":"📈","t":"Non-auto verticals driving $15,587 -- 14.2% of total production"}];
+var oh='';obs.forEach(function(o){oh+='<div class="obs-item"><span class="obs-icon">'+o.i+'</span><span class="obs-text">'+o.t+'</span></div>';});
+document.getElementById('observations').innerHTML=oh;
+
+// Industry legend
+var il='';industryData.forEach(function(d,i){il+='<div style="display:flex;align-items:center;gap:8px;font-size:12px"><div style="width:8px;height:8px;border-radius:2px;background:'+PC[i]+';flex-shrink:0"></div><span style="color:#A8B8CC">'+d.n+'</span><span style="font-weight:600;margin-left:auto">'+d.v+'</span></div>';});
+document.getElementById('industryLegend').innerHTML=il;
+
+function setMarketsScope(scope){
+  marketsScope=scope;
+  var sd=scope==='all'?marketDataFull:marketData;
+  var id=scope==='all'?industryDataFull:industryData;
+  // Update toggle buttons
+  document.getElementById('btnOsr').style.background=scope==='osr'?'#5B9BFF':'transparent';
+  document.getElementById('btnOsr').style.color=scope==='osr'?'#fff':'#8494AB';
+  document.getElementById('btnAll').style.background=scope==='all'?'#5B9BFF':'transparent';
+  document.getElementById('btnAll').style.color=scope==='all'?'#fff':'#8494AB';
+  document.getElementById('scopeLabel').textContent=scope==='all'?'All Enrollments (145)':'OSR Credited (108)';
+  document.getElementById('stateSub').textContent=scope==='all'?'All new enrollments across all channels':'Credited sales team enrollments';
+  // Rebuild state chart
+  destroyChart('states');
+  var e=document.getElementById('chartStates');
+  charts.states=new Chart(e,{type:'bar',data:{labels:sd.map(function(m){return m.n}),datasets:[{data:sd.map(function(m){return m.v}),backgroundColor:sd.map(function(_,i){return PC[i%PC.length]}),borderRadius:6,barThickness:28}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:ttStyle},scales:{x:{grid:{display:false},ticks:{color:'#8494AB',maxRotation:35}},y:{beginAtZero:true,grid:{color:'#293852'},ticks:{color:'#8494AB'}}}}});
+  // Rebuild industry chart
+  destroyChart('industry');
+  e=document.getElementById('chartIndustry');
+  charts.industry=new Chart(e,{type:'doughnut',data:{labels:id.map(function(d){return d.n}),datasets:[{data:id.map(function(d){return d.v}),backgroundColor:id.map(function(_,i){return PC[i%PC.length]}),borderWidth:0,spacing:2}]},options:{responsive:true,maintainAspectRatio:false,cutout:'50%',plugins:{legend:{display:false},tooltip:ttStyle}}});
+  // Rebuild industry legend
+  var il2='';id.forEach(function(d,i){il2+='<div style="display:flex;align-items:center;gap:8px;font-size:12px"><div style="width:8px;height:8px;border-radius:2px;background:'+PC[i%PC.length]+';flex-shrink:0"></div><span style="color:#A8B8CC">'+d.n+'</span><span style="font-weight:600;margin-left:auto">'+d.v+'</span></div>';});
+  document.getElementById('industryLegend').innerHTML=il2;
+  // Rebuild top 5 markets bars
+  bars('marketsOverview',sd.slice(0,5),sd[0].v,PC.slice(0,5),100);
+}
+
+function setOverviewScope(scope){
+  // Toggle buttons
+  document.getElementById('ovBtnOsr').style.background=scope==='osr'?'#5B9BFF':'transparent';
+  document.getElementById('ovBtnOsr').style.color=scope==='osr'?'#fff':'#8494AB';
+  document.getElementById('ovBtnAll').style.background=scope==='all'?'#5B9BFF':'transparent';
+  document.getElementById('ovBtnAll').style.color=scope==='all'?'#fff':'#8494AB';
+  document.getElementById('ovScopeLabel').textContent=scope==='all'?'All Enrollments (145)':'OSR Credited (108)';
+  // Top 5 Markets
+  var sd=scope==='all'?marketDataFull:marketData;
+  document.getElementById('ovMarketSub').textContent=scope==='all'?'States by total enrollment volume':'States by credited enrollment volume';
+  bars('marketsOverview',sd.slice(0,5),sd[0].v,PC.slice(0,5),100);
+  // Product Mix
+  if(scope==='all'){
+    document.getElementById('ovProductSub').textContent='EPF product type split — all channels';
+    destroyChart('product');
+    var e=document.getElementById('chartProduct');
+    charts.product=new Chart(e,{type:'doughnut',data:{labels:['Lease-to-Own','Retail Contract'],datasets:[{data:[100,71],backgroundColor:['#5B9BFF','#A78BFA'],borderWidth:0,spacing:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{display:false},tooltip:ttStyle}}});
+    document.getElementById('ovProductLegend').innerHTML='<div style="display:flex;align-items:center;gap:10px;font-size:13px;margin-bottom:8px"><div style="width:10px;height:10px;border-radius:3px;background:#5B9BFF"></div><span style="color:#A8B8CC;flex:1">Lease-to-Own</span><span style="font-weight:600">100</span><span style="color:#8494AB;font-size:12px">58.5%</span></div><div style="display:flex;align-items:center;gap:10px;font-size:13px"><div style="width:10px;height:10px;border-radius:3px;background:#A78BFA"></div><span style="color:#A8B8CC;flex:1">Retail Contract</span><span style="font-weight:600">71</span><span style="color:#8494AB;font-size:12px">41.5%</span></div>';
+  } else {
+    document.getElementById('ovProductSub').textContent='EPF product type split';
+    destroyChart('product');
+    var e=document.getElementById('chartProduct');
+    charts.product=new Chart(e,{type:'doughnut',data:{labels:['Lease-to-Own','Retail Contract'],datasets:[{data:[82,50],backgroundColor:['#5B9BFF','#A78BFA'],borderWidth:0,spacing:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{display:false},tooltip:ttStyle}}});
+    document.getElementById('ovProductLegend').innerHTML='<div style="display:flex;align-items:center;gap:10px;font-size:13px;margin-bottom:8px"><div style="width:10px;height:10px;border-radius:3px;background:#5B9BFF"></div><span style="color:#A8B8CC;flex:1">Lease-to-Own</span><span style="font-weight:600">82</span><span style="color:#8494AB;font-size:12px">62.1%</span></div><div style="display:flex;align-items:center;gap:10px;font-size:13px"><div style="width:10px;height:10px;border-radius:3px;background:#A78BFA"></div><span style="color:#A8B8CC;flex:1">Retail Contract</span><span style="font-weight:600">50</span><span style="color:#8494AB;font-size:12px">37.9%</span></div>';
+  }
+}
+
+// Progress bars
+bars('marketsOverview',marketData.slice(0,5),47,PC.slice(0,5),100);
+bars('isrBars',isrData,38,'#22D3EE',130);
+
+// Init
+Chart.defaults.color='#8494AB';
+Chart.defaults.font.family="'DM Sans','Segoe UI',system-ui,sans-serif";
+initCharts();
+
+
+</script>
+</body>
+</html>
