@@ -11,7 +11,7 @@ import logging
 from collections import defaultdict
 from datetime import date
 
-from ..config import COLUMN_LABELS, MONTH_ABBREV, MONTH_NAMES, COHORT_TARGET_M1, COHORT_TARGET_M2
+from ..config import COLUMN_LABELS, MONTH_ABBREV, MONTH_NAMES, COHORT_TARGET_M1, COHORT_TARGET_M2, OSR_ROSTER
 
 logger = logging.getLogger(__name__)
 
@@ -40,12 +40,18 @@ def process_cohort(credited_enrollments: list[dict],
     merchants_by_osr = defaultdict(list)
     merchant_info = {}  # branch_id -> {name, osr}
 
+    roster_set = set(OSR_ROSTER)
+
     for row in credited_enrollments:
         osr = _get(row, "osr_credit", "Unknown")
         name = _get(row, "merchant_name", "Unknown")
         branch = _get(row, "branch_id", "")
 
         if not branch or not osr:
+            continue
+
+        # Only include reps on the roster — filters out junk like "-", "friend", etc.
+        if osr not in roster_set:
             continue
 
         merchant_info[str(branch)] = {"name": name, "osr": osr}
