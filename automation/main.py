@@ -245,6 +245,23 @@ def main():
             cohort_path, cohorts, cohort_kpis_dict, cohort_configs
         )
 
+    # Compute YTD cumulative funded from ALL cohorts (for YTD summary card)
+    # Sum total_funded from each cohort in the cohorts dict
+    ytd_cohort_funded = 0.0
+    for cohort_name, cohort_data in cohorts.items():
+        cohort_funded = sum(entry.get("f", 0) for entry in cohort_data)
+        logger.info("YTD cohort %s: $%.0f", cohort_name, cohort_funded)
+        ytd_cohort_funded += cohort_funded
+
+    # Also extract funded totals from older cohorts already in cohort-tracking.html
+    if os.path.exists(cohort_path):
+        ytd_cohort_funded += _extract_older_cohort_funded(
+            cohort_path, cohorts.keys(), current_year
+        )
+
+    cohort_kpis_dict["ytd_cumulative_funded"] = round(ytd_cohort_funded, 2)
+    logger.info("YTD cumulative funded (all cohorts): $%.0f", ytd_cohort_funded)
+
     # ── Step 5: Process Q1 Enrollment Compliance ─────────────────────────
     logger.info("--- Processing Q1 enrollment compliance ---")
 
@@ -521,6 +538,52 @@ def _load_month_snapshot_all(month: int, year: int) -> dict:
     except Exception as e:
         logger.warning("Failed to process snapshot for %d-%02d: %s", year, month, e)
         return None
+
+
+def _extract_older_cohort_funded(cohort_html_path: str,
+                                 already_counted: set,
+                                 year: int) -> float:
+    """
+    Extract funded totals from older cohorts in cohort-tracking.html
+    that aren't in the currently processed cohorts dict.
+
+    Parses JS variables like janCohort = [...] and sums the top-level 'f:' values.
+    """
+    try:
+        with open(cohort_html_path, "r", encoding="utf-8") as f:
+            html = f.read()
+    except Exception:
+        return 0.0
+
+    already_lower = {k.lower() for k in already_counted}
+    total = 0.0
+
+    # Find all cohort variables in the HTML
+    for abbrev in MONTH_ABBREV.values():
+        var_name = f"{abbrev}Cohort"
+        if var_name.lower() in already_lower:
+            continue  # Already counted in the live cohorts dict
+
+        pattern = rf'{var_name}\s*=\s*(\[.*?\]);'
+        m = re.search(pattern, html, re.DOTALL)
+        if not m:
+            continue
+
+        raw = m.group(1)
+        # Extract top-level f: values (funded per OSR)
+        # Split by {n: to isolate top-level entries, then find f:VALUE
+        entries = raw.split('{n:')
+        cohort_total = 0.0
+        for entry in entries[1:]:
+            fm = re.search(r',f:(\d+\.?\d*),', entry)
+            if fm:
+                cohort_total += float(fm.group(1))
+
+        if cohort_total > 0:
+            logger.info("YTD older cohort %s: $%.0f (from HTML)", var_name, cohort_total)
+            total += cohort_total
+
+    return total
 
 
 def _extract_monthly_from_html(month: int, year: int) -> dict | None:

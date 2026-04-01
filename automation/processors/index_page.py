@@ -51,16 +51,11 @@ def process(monthly_results: dict[str, dict],
     for key, data in sorted(monthly_results.items(), key=_month_sort_key):
         ytd_total_enrollments += data.get("kpi_total", 0)
         ytd_osr_credited += data.get("kpi_osr", 0)
-        # Sum funded from the funnel's producing merchants total
-        # or use the formatted value
+        # Per-month funded (M0 only) for month cards
         funded_display = data.get("kpi_funded_display", "$0")
         funded_short = data.get("kpi_funded_short", "$0")
 
-        # Try to extract numeric funded value
-        funded_num = 0
-        for fi_item in data.get("fi", []):
-            pass  # funnel items don't have total funded
-        # Use the total from topProducers instead
+        # M0 funded for month cards (not used for YTD total anymore)
         top_prods = data.get("topProducers", [])
         funded_num = sum(p["f"] for p in top_prods)
         ytd_funded_volume += funded_num
@@ -86,6 +81,14 @@ def process(monthly_results: dict[str, dict],
     ytd_credit_pct = round(ytd_osr_credited / ytd_total_enrollments * 100, 1) if ytd_total_enrollments > 0 else 0
 
     # ── Format YTD funded volume ─────────────────────────────────────────
+    # Use cumulative cohort funded (M0+M1+M2 across all months) if available
+    ytd_cohort_cumulative = cohort_kpis.get("ytd_cumulative_funded", 0)
+    if ytd_cohort_cumulative > 0:
+        ytd_funded_volume = ytd_cohort_cumulative
+        ytd_funded_sub = "Cumulative from all cohorts"
+    else:
+        ytd_funded_sub = "Month 0 across all months"
+
     if ytd_funded_volume >= 1_000_000:
         ytd_funded_display = f"${ytd_funded_volume/1_000_000:.1f}M"
     elif ytd_funded_volume >= 1_000:
@@ -123,7 +126,7 @@ def process(monthly_results: dict[str, dict],
         "ytd_osr_credited": ytd_osr_credited,
         "ytd_credit_pct": f"{ytd_credit_pct}% of total",
         "ytd_funded_display": ytd_funded_display,
-        "ytd_funded_sub": "Month 0 across all months",
+        "ytd_funded_sub": ytd_funded_sub,
         "ytd_months_tracked": months_tracked,
         "ytd_months_sub": _months_tracked_sub(monthly_results),
 
