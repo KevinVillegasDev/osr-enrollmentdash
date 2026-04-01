@@ -909,8 +909,16 @@ def update_index_page(filepath: str, data: dict) -> bool:
         html = re.sub(r'(\w+) Remaining', f'{quarter_current_month[:3]} Remaining', html)
 
     # Add "Previous quarters" archive links below the Q card
-    quarter_month_names = {1: "Jan – Mar", 2: "Apr – Jun", 3: "Jul – Sep", 4: "Oct – Dec"}
+    quarter_month_names = {1: "Jan \u2013 Mar", 2: "Apr \u2013 Jun", 3: "Jul \u2013 Sep", 4: "Oct \u2013 Dec"}
     year = data.get("scorecard_year", 2026)
+
+    # First, remove any existing Previous quarter links (avoid accumulation)
+    html = re.sub(
+        r'(<div[^>]*>Previous:.*?</div>)+',
+        '',
+        html
+    )
+
     if quarter_num > 1:
         prev_links = []
         for q in range(1, quarter_num):
@@ -922,7 +930,7 @@ def update_index_page(filepath: str, data: dict) -> bool:
         archive_html = (
             f'<div style="margin-top:-8px;margin-bottom:16px;padding:0 4px;'
             f'font-size:0.8em;color:#627289">'
-            f'Previous: {" &middot; ".join(prev_links)}'
+            f'Previous: {" \u00b7 ".join(prev_links)}'
             f'</div>'
         )
         # Insert after the Q enrollment card's closing </a> tag
