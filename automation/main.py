@@ -571,11 +571,11 @@ def _extract_older_cohort_funded(cohort_html_path: str,
 
         raw = m.group(1)
         # Extract top-level f: values (funded per OSR)
-        # Split by {n: to isolate top-level entries, then find f:VALUE
-        entries = raw.split('{n:')
+        # Handles both JS notation (f:12345.67) and JSON notation ("f":12345.67)
+        entries = re.split(r'\{(?:"n"|n):', raw)
         cohort_total = 0.0
         for entry in entries[1:]:
-            fm = re.search(r',f:(\d+\.?\d*),', entry)
+            fm = re.search(r',\s*"?f"?\s*:\s*(\d+\.?\d*)\s*,', entry)
             if fm:
                 cohort_total += float(fm.group(1))
 
