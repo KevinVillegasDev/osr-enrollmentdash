@@ -119,6 +119,11 @@ def main():
                 reports[report_key]
             )
 
+    # ── One-time: Refresh March 2026 snapshot (SF credits updated after month closed)
+    # TODO: Remove this block after it runs successfully once
+    if client and current_month != 3:  # Only when we're past March
+        _refresh_past_month_snapshot(client, 3, 2026, output_dir)
+
     # ── Step 3: Process Monthly Dashboard ────────────────────────────────
     logger.info("--- Processing monthly dashboard ---")
     monthly_data = monthly_dashboard.process(
@@ -806,6 +811,56 @@ def _normalize_enrollment_rows(rows: list) -> list:
         normalized.append(new_row)
 
     return normalized
+
+
+def _refresh_past_month_snapshot(client, month: int, year: int, output_dir: str):
+    """
+    Re-fetch credited enrollments for a past month and update its snapshot,
+    monthly dashboard, and Q1 data. Used when SF credits are updated after
+    a month closes.
+    """
+    logger.info("--- Refreshing %s %d snapshot (one-time) ---", MONTH_ABBREV[month], year)
+    try:
+        rows = _fetch_credited_for_month(client, month, year)
+        if not rows:
+            logger.warning("No rows returned for %s %d refresh", MONTH_ABBREV[month], year)
+            return
+
+        rows = _normalize_enrollment_rows(rows)
+        logger.info("Refreshed %d credited enrollments for %s %d",
+                     len(rows), MONTH_ABBREV[month], year)
+
+        # Save updated snapshot
+        snapshot_dir = os.path.join(PROJECT_ROOT, "data", "snapshots",
+                                    f"{year}-{month:02d}")
+        os.makedirs(snapshot_dir, exist_ok=True)
+        snapshot_path = os.path.join(snapshot_dir, "credited_enrollments.json")
+        with open(snapshot_path, "w", encoding="utf-8") as f:
+            json.dump(rows, f, indent=2, default=str)
+        logger.info("Saved refreshed snapshot: %s", snapshot_path)
+
+        # Reprocess the monthly dashboard with updated data
+        month_file = month_filename(month, year)
+        month_path = os.path.join(output_dir, month_file)
+        if os.path.exists(month_path):
+            # Load existing activity data from snapshot
+            activity = _load_month_snapshot(month, year, "current_month_activity") or []
+            last_activity = _load_month_snapshot(month, year, "last_month_activity") or []
+            all_enrollments = _load_month_snapshot(month, year, "new_enrollments") or []
+
+            refreshed_data = monthly_dashboard.process(
+                all_enrollments=all_enrollments,
+                credited_enrollments=rows,
+                current_month_activity=activity,
+                last_month_activity=last_activity,
+                month=month,
+                year=year,
+            )
+            html_generator.update_monthly_dashboard(month_path, refreshed_data)
+            logger.info("Reprocessed %s with updated credits", month_file)
+
+    except Exception as e:
+        logger.warning("Past month refresh failed (non-fatal): %s", e)
 
 
 def _fetch_credited_for_month(client, month: int, year: int) -> list:
