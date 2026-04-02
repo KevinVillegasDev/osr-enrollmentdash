@@ -119,11 +119,6 @@ def main():
                 reports[report_key]
             )
 
-    # ── One-time: Refresh March 2026 snapshot (SF credits updated after month closed)
-    # TODO: Remove this block after it runs successfully once
-    if client and current_month != 3:  # Only when we're past March
-        _refresh_past_month_snapshot(client, 3, 2026, output_dir)
-
     # ── Step 3: Process Monthly Dashboard ────────────────────────────────
     logger.info("--- Processing monthly dashboard ---")
     monthly_data = monthly_dashboard.process(
