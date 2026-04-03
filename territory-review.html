@@ -465,8 +465,7 @@ function renderActivityOutput(ao) {
     {label: 'BIDs Produced', value: ao.producing_ratio || '0 / 0'},
     {label: 'Total Funded', value: fmtDollar(ao.total_funding || 0)},
     {label: 'Standard', value: fmtDollar(ao.funding_standard || 0)},
-    {label: '% Achieved', value: fmtPct(output.pct_achieved || 0)},
-    {label: '% of Standard', value: ao.funding_pct.toFixed(1) + '%'},
+    {label: '% of Standard', value: (ao.funding_pct || 0).toFixed(1) + '%'},
     {label: 'Avg Days to 1st Touch', value: (ao.avg_days_first_touch || 0).toFixed(1) + ' days'},
     {label: 'Top Producer', value: esc(ao.concentration_bid || 'N/A') + (ao.concentration_pct > 0 ? ' (' + ao.concentration_pct.toFixed(0) + '%)' : '')}
   ];
