@@ -374,8 +374,8 @@ function renderSummary(s) {
   var colors = ['#5B9BFF','#2DD4A0','#A78BFA','#22D3EE'];
   var items = [
     {value: fmtNum(s.total_enrolled || 0), label:'Total Enrolled', sub:'merchants', color:colors[0]},
-    {value: fmtNum(s.producing || 0), label:'Producing', sub:'of ' + fmtNum(s.total_enrolled || 0) + ' enrolled', color:colors[1]},
-    {value: fmtDollar(s.q_total_funding || 0), label:'Q Total Funding', sub:'vs ' + fmtDollar(s.standard || 45000) + ' standard', color:colors[2]},
+    {value: fmtNum(s.total_producing || 0), label:'Producing', sub:'of ' + fmtNum(s.total_enrolled || 0) + ' enrolled', color:colors[1]},
+    {value: fmtDollar(s.total_funding || 0), label:'Q Total Funding', sub:'vs ' + fmtDollar(s.funding_standard || 45000) + ' standard', color:colors[2]},
     {value: fmtNum(s.isr_touches || 0), label:'ISR Touches', sub:'on enrolled BIDs', color:colors[3]}
   ];
 
@@ -407,8 +407,8 @@ function renderCohortScorecard(cohorts) {
 
   grid.innerHTML = cohorts.map(function(c, i) {
     var color = monthColors[i % monthColors.length];
-    var badge15k = badgeHTML(c.standard_15k);
-    var badge30k = badgeHTML(c.standard_30k);
+    var badge15k = badgeHTML(c.pass_15k === true ? 'PASS' : c.pass_15k === false ? (c.maturity === 'early' ? 'Active' : 'FAIL') : c.pass_15k);
+    var badge30k = badgeHTML(c.pass_30k === true ? 'PASS' : c.pass_30k === false ? (c.maturity === 'early' ? 'Active' : 'FAIL') : c.pass_30k);
     var maturity = c.maturity ? '<div class="tr-cohort-maturity">' + esc(c.maturity) + '</div>' : '';
 
     return '<div class="tr-cohort-card">' +
@@ -429,7 +429,7 @@ function renderCohortScorecard(cohorts) {
     totalFunded += (c.m1_funding || 0);
     totalEnrolled += (c.enrolled || 0);
     totalProducing += (c.producing || 0);
-    totalZero += (c.zero_funded || 0);
+    totalZero += Math.max(0, (c.enrolled || 0) - (c.producing || 0));
   });
   document.getElementById('cohortSummary').innerHTML =
     'Q TOTAL: <b>' + fmtDollar(totalFunded) + '</b> funded &middot; <b>' + totalProducing +
@@ -499,15 +499,15 @@ function renderISRConditioning(rows) {
 
   rows.forEach(function(r, i) {
     var cls = i % 2 === 1 ? ' class="tr-stripe"' : '';
-    var trend = r.trend_days;
+    var trend = r.trend;
     var trendIcon = '';
-    if (trend === 'up') trendIcon = ' <span class="tr-trend-down" title="Increasing (worse)">&uarr;</span>';
-    else if (trend === 'down') trendIcon = ' <span class="tr-trend-up" title="Decreasing (better)">&darr;</span>';
+    if (trend === 'declining') trendIcon = ' <span class="tr-trend-down" title="Declining">&darr;</span>';
+    else if (trend === 'improving') trendIcon = ' <span class="tr-trend-up" title="Improving">&uarr;</span>';
 
     html += '<tr' + cls + '>' +
-      '<td class="tr-bold">' + esc(r.cohort || '') + '</td>' +
-      '<td class="right">' + fmtNum(r.bids || 0) + '</td>' +
-      '<td class="right">' + (r.avg_days || 0).toFixed(1) + trendIcon + '</td>' +
+      '<td class="tr-bold">' + esc(r.month || '') + '</td>' +
+      '<td class="right">' + fmtNum(r.bid_count || 0) + '</td>' +
+      '<td class="right">' + (r.avg_days_first_touch || 0).toFixed(1) + trendIcon + '</td>' +
       '<td class="right">' + fmtNum(r.ob2_completed || 0) + '</td>' +
       '<td class="right">' + fmtNum(r.producing || 0) + '</td>' +
       '<td class="right">' + fmtDollar(r.m1_funding || 0) + '</td>' +
@@ -539,27 +539,21 @@ function renderProducerPatterns(rows) {
     '<th class="right">OB2</th><th class="right">Spiff</th><th>Pattern</th>' +
     '</tr></thead><tbody>';
 
-  var patternNotes = [];
   rows.forEach(function(r, i) {
     var cls = i % 2 === 1 ? ' class="tr-stripe"' : '';
     html += '<tr' + cls + '>' +
       '<td class="tr-bold">' + esc(r.merchant || '') + '</td>' +
-      '<td>' + esc(r.cohort || '') + '</td>' +
+      '<td>' + esc(r.cohort_month || '') + '</td>' +
       '<td class="right">' + fmtDollar(r.q_funding || 0) + '</td>' +
-      '<td class="right">' + esc(r.ob2 || 'N/A') + '</td>' +
-      '<td class="right">' + esc(r.spiff || 'N/A') + '</td>' +
+      '<td class="right">' + (r.ob2_done ? 'Yes' : 'No') + '</td>' +
+      '<td class="right">' + (r.spiff_active ? 'Yes' : 'No') + '</td>' +
       '<td>' + esc(r.pattern || '') + '</td>' +
       '</tr>';
-    if (r.pattern_note) patternNotes.push(r.pattern_note);
   });
   html += '</tbody></table>';
   container.innerHTML = html;
 
-  if (patternNotes.length) {
-    callout.innerHTML = '<b>Pattern Insights:</b> ' + patternNotes.map(esc).join(' | ');
-  } else {
-    callout.innerHTML = '<b>Pattern Insights:</b> Review merchant production timing and onboarding completion for actionable trends.';
-  }
+  callout.innerHTML = '<b>Pattern Insights:</b> Review merchant production timing and onboarding completion for actionable trends.';
 }
 
 /* ===== Section 6: Gaps & Flags ===== */
@@ -571,14 +565,20 @@ function renderGaps(gaps) {
   }
 
   grid.innerHTML = gaps.map(function(g, i) {
-    var sev = (g.severity || 'medium').toLowerCase();
+    var sev = g.type === '72_hour_violation' ? 'high' : g.type === 'stale_zero_funded' ? 'high' : 'medium';
     var sevClass = sev === 'high' ? 'tr-sev-high' : sev === 'low' ? 'tr-sev-low' : 'tr-sev-medium';
-    var bullets = (g.items || []).map(function(item) {
-      return '<li>' + esc(item) + '</li>';
+    var bullets = (g.details || []).map(function(d) {
+      var text = esc(d.merchant || ('BID ' + d.bid));
+      if (d.days_late !== undefined) text += ' — ' + d.days_late + 'd late';
+      if (d.days_since_enrollment !== undefined) text += ' — ' + d.days_since_enrollment + 'd since enrollment';
+      if (d.funding !== undefined && d.funding > 0) text += ' ($' + Number(d.funding).toLocaleString() + ')';
+      else if (d.funding !== undefined) text += ' ($0)';
+      if (d.ob_progress) text += ' [' + esc(d.ob_progress) + ']';
+      return '<li>' + text + '</li>';
     }).join('');
 
     return '<div class="tr-gap-card">' +
-      '<div class="tr-gap-num">' + (i + 1) + '</div>' +
+      '<div class="tr-gap-num">' + (g.count || (g.details || []).length) + '</div>' +
       '<div class="tr-gap-title">' + esc(g.title || 'Issue #' + (i+1)) + '</div>' +
       '<ul class="tr-gap-list">' + bullets + '</ul>' +
       '<span class="tr-gap-severity ' + sevClass + '">' + esc(sev) + '</span>' +
@@ -594,9 +594,9 @@ function renderPipeline(items) {
     return;
   }
 
-  var categories = {HIGH:[], RETAIN:[], GROW:[], 'ACT NOW':[]};
+  var categories = {HIGH:[], RETAIN:[], GROW:[], ACT_NOW:[]};
   items.forEach(function(item) {
-    var cat = (item.category || 'RETAIN').toUpperCase();
+    var cat = (item.category || 'RETAIN').toUpperCase().replace(/\s+/g, '_');
     if (!categories[cat]) categories[cat] = [];
     categories[cat].push(item);
   });
@@ -605,7 +605,7 @@ function renderPipeline(items) {
     'HIGH': {cls:'tr-pl-high', label:'High Priority'},
     'RETAIN': {cls:'tr-pl-retain', label:'Retain'},
     'GROW': {cls:'tr-pl-grow', label:'Grow'},
-    'ACT NOW': {cls:'tr-pl-act', label:'Act Now'}
+    'ACT_NOW': {cls:'tr-pl-act', label:'Act Now'}
   };
 
   var html = '';
@@ -654,8 +654,8 @@ function generatePDF() {
   // Summary
   html += '<div class="pr-section"><h2>Summary</h2><div class="pr-stats">' +
     prStat(fmtNum(s.total_enrolled || 0), 'Enrolled') +
-    prStat(fmtNum(s.producing || 0), 'Producing') +
-    prStat(fmtDollar(s.q_total_funding || 0), 'Q Funding') +
+    prStat(fmtNum(s.total_producing || 0), 'Producing') +
+    prStat(fmtDollar(s.total_funding || 0), 'Q Funding') +
     prStat(fmtNum(s.isr_touches || 0), 'ISR Touches') +
     '</div></div>';
 
@@ -670,30 +670,28 @@ function generatePDF() {
         '<td class="right">' + fmtNum(c.enrolled || 0) + '</td>' +
         '<td class="right">' + fmtNum(c.producing || 0) + '</td>' +
         '<td class="right">' + fmtDollar(c.m1_funding || 0) + '</td>' +
-        '<td class="right">' + prBadge(c.standard_15k) + '</td>' +
-        '<td class="right">' + prBadge(c.standard_30k) + '</td></tr>';
+        '<td class="right">' + prBadge(c.pass_15k === true ? 'PASS' : c.pass_15k === false ? (c.maturity === 'early' ? 'Active' : 'FAIL') : c.pass_15k) + '</td>' +
+        '<td class="right">' + prBadge(c.pass_30k === true ? 'PASS' : c.pass_30k === false ? (c.maturity === 'early' ? 'Active' : 'FAIL') : c.pass_30k) + '</td></tr>';
     });
     html += '</tbody></table></div>';
   }
 
   // Activity vs Output
   var ao = data.activity_vs_output || {};
-  if (ao.activity || ao.output) {
-    var act = ao.activity || {};
-    var out = ao.output || {};
+  if (ao.tsr_checkins !== undefined || ao.total_funding !== undefined) {
     html += '<div class="pr-section"><h2>Activity vs. Output</h2><table class="pr-table"><thead><tr>' +
       '<th>Activity Metric</th><th class="right">Value</th><th></th>' +
       '<th>Output Metric</th><th class="right">Value</th></tr></thead><tbody>';
     var aKeys = [['TSR Check-ins','tsr_checkins'],['ISR Touches','isr_touches'],['Call Entries','call_entries'],['Zero-Touch BIDs','zero_touch_bids']];
-    var oKeys = [['BIDs Produced','bids_produced'],['Total Funded','total_funded'],['Standard','standard'],['% Achieved','pct_achieved']];
+    var oKeys = [['BIDs Produced','producing_ratio'],['Total Funded','total_funding'],['Standard','funding_standard'],['% of Standard','funding_pct']];
     for (var j = 0; j < Math.max(aKeys.length, oKeys.length); j++) {
       var aK = aKeys[j], oK = oKeys[j];
       html += '<tr>';
-      if (aK) { html += '<td>' + aK[0] + '</td><td class="right">' + (aK[1] === 'tsr_checkins' || aK[1] === 'isr_touches' || aK[1] === 'call_entries' || aK[1] === 'zero_touch_bids' ? fmtNum(act[aK[1]] || 0) : act[aK[1]] || 0) + '</td>'; }
+      if (aK) { html += '<td>' + aK[0] + '</td><td class="right">' + fmtNum(ao[aK[1]] || 0) + '</td>'; }
       else { html += '<td></td><td></td>'; }
       html += '<td style="width:20px"></td>';
       if (oK) {
-        var ov = oK[1] === 'total_funded' || oK[1] === 'standard' ? fmtDollar(out[oK[1]] || 0) : oK[1] === 'pct_achieved' ? fmtPct(out[oK[1]] || 0) : fmtNum(out[oK[1]] || 0);
+        var ov = oK[1] === 'total_funding' || oK[1] === 'funding_standard' ? fmtDollar(ao[oK[1]] || 0) : oK[1] === 'funding_pct' ? fmtPct(ao[oK[1]] || 0) : oK[1] === 'producing_ratio' ? esc(ao[oK[1]] || '0 / 0') : fmtNum(ao[oK[1]] || 0);
         html += '<td>' + oK[0] + '</td><td class="right">' + ov + '</td>';
       } else { html += '<td></td><td></td>'; }
       html += '</tr>';
@@ -708,9 +706,9 @@ function generatePDF() {
       '<th>Cohort</th><th class="right">BIDs</th><th class="right">Avg Days</th>' +
       '<th class="right">OB2</th><th class="right">Producing</th><th class="right">M1 Funding</th></tr></thead><tbody>';
     isr.forEach(function(r) {
-      html += '<tr><td>' + esc(r.cohort || '') + '</td>' +
-        '<td class="right">' + fmtNum(r.bids || 0) + '</td>' +
-        '<td class="right">' + (r.avg_days || 0).toFixed(1) + '</td>' +
+      html += '<tr><td>' + esc(r.month || '') + '</td>' +
+        '<td class="right">' + fmtNum(r.bid_count || 0) + '</td>' +
+        '<td class="right">' + (r.avg_days_first_touch || 0).toFixed(1) + '</td>' +
         '<td class="right">' + fmtNum(r.ob2_completed || 0) + '</td>' +
         '<td class="right">' + fmtNum(r.producing || 0) + '</td>' +
         '<td class="right">' + fmtDollar(r.m1_funding || 0) + '</td></tr>';
@@ -725,10 +723,10 @@ function generatePDF() {
       '<th>Merchant</th><th>Cohort</th><th class="right">Q Funding</th><th class="right">OB2</th>' +
       '<th class="right">Spiff</th><th>Pattern</th></tr></thead><tbody>';
     prods.forEach(function(r) {
-      html += '<tr><td>' + esc(r.merchant || '') + '</td><td>' + esc(r.cohort || '') + '</td>' +
+      html += '<tr><td>' + esc(r.merchant || '') + '</td><td>' + esc(r.cohort_month || '') + '</td>' +
         '<td class="right">' + fmtDollar(r.q_funding || 0) + '</td>' +
-        '<td class="right">' + esc(r.ob2 || 'N/A') + '</td>' +
-        '<td class="right">' + esc(r.spiff || 'N/A') + '</td>' +
+        '<td class="right">' + (r.ob2_done ? 'Yes' : 'No') + '</td>' +
+        '<td class="right">' + (r.spiff_active ? 'Yes' : 'No') + '</td>' +
         '<td>' + esc(r.pattern || '') + '</td></tr>';
     });
     html += '</tbody></table></div>';
@@ -739,8 +737,15 @@ function generatePDF() {
   if (gaps.length) {
     html += '<div class="pr-section"><h2>Gaps &amp; Flags</h2>';
     gaps.forEach(function(g, i) {
-      html += '<div class="pr-gap"><h3>' + (i+1) + '. ' + esc(g.title || '') + ' [' + (g.severity || 'medium').toUpperCase() + ']</h3><ul>';
-      (g.items || []).forEach(function(item) { html += '<li>' + esc(item) + '</li>'; });
+      var sev = g.type === '72_hour_violation' || g.type === 'stale_zero_funded' ? 'HIGH' : 'MEDIUM';
+      html += '<div class="pr-gap"><h3>' + (i+1) + '. ' + esc(g.title || '') + ' [' + sev + ']</h3><ul>';
+      (g.details || []).forEach(function(d) {
+        var text = d.merchant || ('BID ' + d.bid);
+        if (d.days_late !== undefined) text += ' — ' + d.days_late + 'd late';
+        if (d.days_since_enrollment !== undefined) text += ' — ' + d.days_since_enrollment + 'd since enrollment';
+        if (d.funding !== undefined) text += ' ($' + Number(d.funding).toLocaleString() + ')';
+        html += '<li>' + esc(text) + '</li>';
+      });
       html += '</ul></div>';
     });
     html += '</div>';
