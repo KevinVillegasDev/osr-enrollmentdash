@@ -453,23 +453,22 @@ function badgeHTML(status) {
 /* ===== Section 3: Activity vs Output ===== */
 function renderActivityOutput(ao) {
   var grid = document.getElementById('activityGrid');
-  var activity = ao.activity || {};
-  var output = ao.output || {};
 
   var leftRows = [
-    {label: 'TSR Check-ins', value: fmtNum(activity.tsr_checkins || 0)},
-    {label: 'ISR Touches', value: fmtNum(activity.isr_touches || 0)},
-    {label: 'Call Entries', value: fmtNum(activity.call_entries || 0)},
-    {label: 'Zero-Touch BIDs', value: fmtNum(activity.zero_touch_bids || 0)}
+    {label: 'TSR Check-ins', value: fmtNum(ao.tsr_checkins || 0)},
+    {label: 'ISR Touches', value: fmtNum(ao.isr_touches || 0)},
+    {label: 'Call Entries', value: fmtNum(ao.call_entries || 0)},
+    {label: 'Zero-Touch BIDs', value: fmtNum(ao.zero_touch_bids || 0)}
   ];
 
   var rightRows = [
-    {label: 'BIDs Produced', value: fmtNum(output.bids_produced || 0)},
-    {label: 'Total Funded', value: fmtDollar(output.total_funded || 0)},
-    {label: 'Standard', value: fmtDollar(output.standard || 0)},
+    {label: 'BIDs Produced', value: ao.producing_ratio || '0 / 0'},
+    {label: 'Total Funded', value: fmtDollar(ao.total_funding || 0)},
+    {label: 'Standard', value: fmtDollar(ao.funding_standard || 0)},
     {label: '% Achieved', value: fmtPct(output.pct_achieved || 0)},
-    {label: 'Avg Days to First Touch', value: (output.avg_days_first_touch || 0).toFixed(1)},
-    {label: 'Concentration Risk', value: esc(output.concentration_risk || 'N/A')}
+    {label: '% of Standard', value: ao.funding_pct.toFixed(1) + '%'},
+    {label: 'Avg Days to 1st Touch', value: (ao.avg_days_first_touch || 0).toFixed(1) + ' days'},
+    {label: 'Top Producer', value: esc(ao.concentration_bid || 'N/A') + (ao.concentration_pct > 0 ? ' (' + ao.concentration_pct.toFixed(0) + '%)' : '')}
   ];
 
   grid.innerHTML =
