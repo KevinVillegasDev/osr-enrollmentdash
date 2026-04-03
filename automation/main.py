@@ -21,10 +21,11 @@ from .config import (
     GENESYS_REGION, GENESYS_CLIENT_ID, GENESYS_CLIENT_SECRET,
     REPORT_IDS, MONTH_ABBREV, MONTH_NAMES, PROJECT_ROOT,
     COLUMN_LABELS, month_filename, month_filepath,
+    TERRITORY_MAP,
 )
 from .salesforce_auth import SalesforceClient, SalesforceAuthError
 from .salesforce_reports import fetch_all_reports, fetch_cohort_activity, parse_report_rows, fetch_report, fetch_maps_check_ins_split
-from .processors import monthly_dashboard, cohort_tracking, q1_enrollment, field_activity, index_page, analytics
+from .processors import monthly_dashboard, cohort_tracking, q1_enrollment, field_activity, index_page, analytics, territory_review
 from . import html_generator
 
 # ─── Logging ─────────────────────────────────────────────────────────────────
@@ -390,6 +391,65 @@ def main():
     if os.path.exists(analytics_path):
         html_generator.update_analytics_page(analytics_path, analytics_data)
 
+    # ── Step 7b: Fetch ISR Notes & Process Territory Reviews ────────────
+    logger.info("--- Processing territory reviews ---")
+
+    # Fetch ISR Notes (Report 7) — non-fatal if it fails
+    isr_notes_rows = []
+    if client:
+        try:
+            isr_notes_rows = fetch_isr_notes_split(client, quarter_months, current_year)
+            logger.info("ISR Notes: %d rows fetched for quarter", len(isr_notes_rows))
+
+            # Save ISR Notes snapshot
+            isr_snapshot_path = os.path.join(snapshot_dir, "isr_notes.json")
+            with open(isr_snapshot_path, "w", encoding="utf-8") as f:
+                json.dump(isr_notes_rows, f, indent=2, default=str)
+            logger.info("Saved ISR Notes snapshot: %s", isr_snapshot_path)
+        except Exception as e:
+            logger.warning("ISR Notes fetch failed (non-fatal): %s", e)
+    else:
+        # Try loading from snapshot
+        isr_snapshot = _load_month_snapshot(current_month, current_year, "isr_notes")
+        if isr_snapshot:
+            isr_notes_rows = isr_snapshot
+            logger.info("Loaded ISR Notes from snapshot: %d rows", len(isr_notes_rows))
+
+    # Process territory review for each assigned territory
+    territory_data = {}
+    for territory_code, osr_name in TERRITORY_MAP.items():
+        try:
+            result = territory_review.process(
+                territory_code=territory_code,
+                osr_name=osr_name,
+                quarter_months=quarter_months,
+                year=current_year,
+                cohorts=cohorts,
+                field_activity=field_data,
+                isr_notes=isr_notes_rows,
+                enrollment_data=monthly_credited,
+                genesys_data=genesys_data,
+            )
+            territory_data[territory_code] = result
+        except Exception as e:
+            logger.warning("Territory review failed for %s: %s", territory_code, e)
+
+    if territory_data:
+        logger.info("Processed territory reviews for %d territories", len(territory_data))
+    else:
+        logger.info("No territory review data produced")
+
+    # Update territory-review.html
+    territory_path = os.path.join(output_dir, "territory-review.html")
+    if not os.path.exists(territory_path):
+        src = os.path.join(PROJECT_ROOT, "territory-review.html")
+        if os.path.exists(src):
+            import shutil
+            shutil.copy2(src, territory_path)
+            logger.info("Copied territory-review.html to %s", output_dir)
+    if os.path.exists(territory_path) and territory_data:
+        html_generator.update_territory_review(territory_path, territory_data)
+
     # ── Step 8: Update Index Page ─────────────────────────────────────────
     logger.info("--- Updating index page ---")
 
@@ -445,6 +505,91 @@ def main():
         html_generator.update_analytics_page(analytics_path, analytics_data, forecast_data=forecast_data)
 
     logger.info("=== Dashboard update complete ===")
+
+
+def fetch_isr_notes_split(client, quarter_months: list[int], year: int) -> list[dict]:
+    """
+    Fetch ISR Notes (Report 7) for an entire quarter, splitting each month
+    in half to stay under the 2,000 row API limit.
+
+    Args:
+        client: Authenticated SalesforceClient
+        quarter_months: List of month numbers, e.g. [1, 2, 3]
+        year: Calendar year
+
+    Returns:
+        Merged, deduplicated list of parsed row dicts
+    """
+    report_id = REPORT_IDS.get("isr_notes", "")
+    if not report_id or report_id == "REPLACE_WITH_REPORT_ID":
+        logger.warning("isr_notes report has placeholder ID. Skipping ISR Notes fetch.")
+        return []
+
+    all_rows = []
+
+    for month in quarter_months:
+        # Don't fetch future months
+        today = date.today()
+        if year > today.year or (year == today.year and month > today.month):
+            continue
+
+        month_start = date(year, month, 1)
+        if month == 12:
+            month_end = date(year + 1, 1, 1) - timedelta(days=1)
+        else:
+            month_end = date(year, month + 1, 1) - timedelta(days=1)
+
+        # For the current month, cap at today
+        if year == today.year and month == today.month:
+            month_end = today
+
+        # Split at midpoint
+        mid_day = month_end.day // 2
+        first_half_end = date(year, month, mid_day)
+        second_half_start = date(year, month, mid_day + 1)
+
+        # First half
+        filters_1 = [
+            {"column": "CREATED_DATE", "operator": "greaterOrEqual", "value": month_start.isoformat()},
+            {"column": "CREATED_DATE", "operator": "lessOrEqual", "value": first_half_end.isoformat()},
+        ]
+
+        logger.info("ISR Notes fetch %s 1/2: %s to %s",
+                     MONTH_ABBREV[month], month_start.isoformat(), first_half_end.isoformat())
+        raw_1 = fetch_report(client, report_id, filters=filters_1)
+        rows_1 = parse_report_rows(raw_1)
+        logger.info("ISR Notes %s 1/2: %d rows", MONTH_ABBREV[month], len(rows_1))
+
+        # Second half
+        filters_2 = [
+            {"column": "CREATED_DATE", "operator": "greaterOrEqual", "value": second_half_start.isoformat()},
+            {"column": "CREATED_DATE", "operator": "lessOrEqual", "value": month_end.isoformat()},
+        ]
+
+        logger.info("ISR Notes fetch %s 2/2: %s to %s",
+                     MONTH_ABBREV[month], second_half_start.isoformat(), month_end.isoformat())
+        raw_2 = fetch_report(client, report_id, filters=filters_2)
+        rows_2 = parse_report_rows(raw_2)
+        logger.info("ISR Notes %s 2/2: %d rows", MONTH_ABBREV[month], len(rows_2))
+
+        all_rows.extend(rows_1)
+        all_rows.extend(rows_2)
+
+    # Deduplicate by (Branch ID, ISR, Subject, Created Date)
+    seen = set()
+    deduped = []
+    for row in all_rows:
+        bid = row.get("Branch ID", row.get(COLUMN_LABELS.get("isr_note_branch_id", "Branch ID"), ""))
+        rep = row.get(COLUMN_LABELS.get("isr_note_rep", "_label_Assigned"), "")
+        subject = row.get(COLUMN_LABELS.get("isr_note_subject", "_label_Subject"), "")
+        created = row.get(COLUMN_LABELS.get("isr_note_date", "_label_Created Date"), "")
+        key = (str(bid), str(rep), str(subject), str(created))
+        if key not in seen:
+            seen.add(key)
+            deduped.append(row)
+
+    logger.info("ISR Notes total: %d rows (%d after dedup)", len(all_rows), len(deduped))
+    return deduped
 
 
 def _create_month_from_template(target_path: str, month: int, year: int):

@@ -2073,6 +2073,74 @@ def _replace_product_legend(html: str, legend_id: str,
     return html  # Product legend is rebuilt by JS, so static HTML just needs initial values
 
 
+# ─── Territory Review Generator ──────────────────────────────────────────────
+
+def update_territory_review(filepath: str, territory_data: dict) -> bool:
+    """
+    Update territory-review.html with new territory review data.
+
+    Args:
+        filepath: Path to territory-review.html
+        territory_data: Dict keyed by territory code (e.g. "LTO-7"),
+                        each value is the output from territory_review.process()
+
+    Returns:
+        True if file was updated successfully
+    """
+    if not os.path.exists(filepath):
+        logger.error("Territory review file not found: %s", filepath)
+        return False
+
+    html = _read_file(filepath)
+
+    # Stamp each territory's summary with an "updated" date
+    today = date.today()
+    try:
+        import platform
+        if platform.system() == "Windows":
+            date_str = today.strftime("%b %#d, %Y")
+        else:
+            date_str = today.strftime("%b %-d, %Y")
+    except ValueError:
+        date_str = f"{today.strftime('%b')} {today.day}, {today.year}"
+
+    for code, data in territory_data.items():
+        if isinstance(data, dict) and "summary" in data:
+            data["summary"]["updated"] = date_str
+
+    # Build the JS data variable block
+    data_json = json.dumps(territory_data, separators=(",", ":"),
+                           ensure_ascii=False, default=str)
+    script_data = f"// Territory Review Data — injected by pipeline\n"
+    script_data += f"var territoryReviewData = {data_json};\n"
+    script_data += f"// End territory review data\n\n"
+    # Preserve the TERRITORY_MAP variable that lives between data and first function
+    script_data += ('var TERRITORY_MAP = {\n'
+        '  "LTO-1": {osr:"Yemaira Hernandez", area:"FL (Miami-Dade/Broward)"},\n'
+        '  "LTO-2": {osr:"Omar Corona", area:"TX (S. Houston/Valley/El Paso)"},\n'
+        '  "LTO-3": {osr:"Joseph Guerra", area:"TX (State Manager)"},\n'
+        '  "LTO-5": {osr:"Jared Midkiff", area:"FL (State Manager)"},\n'
+        '  "LTO-7": {osr:"Stephanie Whitlock", area:"GA/NE FL/Panhandle"},\n'
+        '  "RIC-1": {osr:"Cesar Flores", area:"CA (LA Metro Core)"},\n'
+        '  "RIC-2": {osr:"Claudia Gerhardt", area:"CA (IE South/San Diego)"},\n'
+        '  "RIC-4": {osr:"Jeremy Moore", area:"CA (Orange County/SE LA)"},\n'
+        '  "RIC-6": {osr:"Phillip Mason", area:"CA (Sacramento/NorCal)"},\n'
+        '  "RIC-7": {osr:"DeLon Phoenix", area:"NV (Las Vegas/Reno)"},\n'
+        '  "RIC-8": {osr:"Eric Henderson", area:"PA (4 Metros)"},\n'
+        '  "RIC-9": {osr:"Matthew MacDonald", area:"AZ (State Manager + NM/UT/ID)"}\n'
+        '};')
+
+    html = _replace_script_data(html, script_data)
+
+    if _validate_html(html):
+        _write_file(filepath, html)
+        logger.info("Updated %s with %d territories", filepath, len(territory_data))
+        return True
+    else:
+        logger.error("HTML validation failed for %s", filepath)
+        return False
+
+
 def _validate_html(html: str) -> bool:
     """Basic validation that the HTML is not broken."""
     checks = [

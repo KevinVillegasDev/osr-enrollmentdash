@@ -40,6 +40,7 @@ REPORT_IDS = {
     "last_month_activity": os.environ.get("SF_REPORT_LAST_MONTH_ACTIVITY", "00OTO000009Iw1x2AC"),
     "maps_check_ins": os.environ.get("SF_REPORT_MAPS_CHECK_INS", "00OTO000009NEbN2AW"),
     "monthly_quota": os.environ.get("SF_REPORT_MONTHLY_QUOTA", "00OTO000009YYWj2AO"),
+    "isr_notes": os.environ.get("SF_REPORT_ISR_NOTES", "00O8Y0000098j62UAA"),
 }
 
 # ─── OSR Roster (as of March 2026) ───────────────────────────────────────────
@@ -147,6 +148,13 @@ COLUMN_LABELS = {
     "stop_comment": "_label_Full Comments",
     "stop_location": "",  # Not available in API response
     "lead_field": "Lead",  # null = Account (existing), non-null = Lead (prospect)
+    # Report 7: ISR Notes / Touch Points
+    "isr_note_account": "_label_Company / Account",
+    "isr_note_branch_id": "Branch ID",
+    "isr_note_rep": "_label_Assigned",
+    "isr_note_subject": "_label_Subject",
+    "isr_note_comments": "_label_Full Comments",
+    "isr_note_date": "_label_Created Date",
 }
 
 # ─── File Paths ──────────────────────────────────────────────────────────────

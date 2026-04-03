@@ -17,7 +17,8 @@
   var LS_SITE_KEY = 'epf_site_auth';
   var LS_ANALYTICS_KEY = 'epf_analytics_auth';
 
-  var isAnalyticsPage = /analytics(\.html)?$/i.test(window.location.pathname);
+  var isAnalyticsPage = /analytics(\.html)?$/i.test(window.location.pathname) ||
+                        /territory-review(\.html)?$/i.test(window.location.pathname);
 
   // ── Helpers ──────────────────────────────────────────────────────────
   async function sha256(str) {

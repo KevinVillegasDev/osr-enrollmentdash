@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Territory Cohort Review — EasyPay Finance</title>
+<script src="auth.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0D1321;color:#F1F5F9;font-family:'DM Sans','Segoe UI',system-ui,sans-serif;min-height:100vh}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:#151E2F}
+::-webkit-scrollbar-thumb{background:#3D5170;border-radius:4px}
+a{color:#5B9BFF;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.tr-header{background:linear-gradient(135deg,#151E2F 0%,#1a1f35 100%);border-bottom:1px solid #293852;padding:32px 40px 32px}
+.tr-home-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#8494AB;margin-bottom:16px;text-decoration:none}
+.tr-home-link:hover{color:#5B9BFF}
+.tr-header-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.tr-header-left{flex:1}
+.tr-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;text-transform:uppercase;margin-right:10px}
+.tr-badge-admin{background:rgba(167,139,250,0.2);color:#A78BFA;border:1px solid rgba(167,139,250,0.3)}
+.tr-header h1{font-size:28px;font-weight:800;margin-top:8px;letter-spacing:-0.02em}
+.tr-header h1 span{background:linear-gradient(135deg,#A78BFA,#5B9BFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.tr-subtitle{font-size:14px;color:#8494AB;margin-top:4px}
+.tr-header-right{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+
+.tr-selector-wrap{display:flex;align-items:center;gap:12px}
+.tr-select{background:#0D1321;border:1px solid #293852;color:#F1F5F9;font-size:14px;font-weight:600;font-family:inherit;padding:10px 36px 10px 14px;border-radius:10px;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238494AB' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;min-width:200px;transition:border-color 0.2s}
+.tr-select:hover,.tr-select:focus{border-color:#5B9BFF;outline:none}
+
+.tr-generate-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#A78BFA,#818CF8);border:none;color:#fff;padding:10px 22px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;font-family:inherit;transition:all 0.2s;white-space:nowrap}
+.tr-generate-btn:hover{opacity:0.9;transform:translateY(-1px)}
+.tr-generate-btn:active{transform:scale(0.97)}
+.tr-generate-btn svg{width:16px;height:16px}
+
+/* Content */
+.tr-content{max-width:1280px;margin:0 auto;padding:32px 40px 60px}
+.tr-section{margin-bottom:32px}
+.tr-section-title{font-size:20px;font-weight:700;margin-bottom:4px;letter-spacing:-0.01em}
+.tr-section-sub{font-size:13px;color:#8494AB;margin-bottom:20px}
+
+/* Cards */
+.tr-card{background:#151E2F;border:1px solid #293852;border-radius:16px;padding:28px;margin-bottom:24px}
+
+/* Summary Banner */
+.tr-summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:16px}
+.tr-stat{background:#151E2F;border:1px solid #293852;border-radius:16px;padding:24px 28px;text-align:center;position:relative;overflow:hidden}
+.tr-stat-bar{position:absolute;top:0;left:0;right:0;height:3px}
+.tr-stat-value{font-size:36px;font-weight:800;letter-spacing:-0.03em;line-height:1.1}
+.tr-stat-label{font-size:12px;color:#8494AB;font-weight:500;text-transform:uppercase;letter-spacing:0.04em;margin-top:6px}
+.tr-stat-sub{font-size:12px;color:#627289;margin-top:4px}
+
+.tr-meta-row{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:#8494AB;margin-top:4px}
+.tr-meta-row b{font-weight:700;color:#A8B8CC}
+
+/* Cohort Scorecard */
+.tr-cohort-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
+.tr-cohort-card{background:#151E2F;border:1px solid #293852;border-radius:16px;padding:24px;position:relative;overflow:hidden}
+.tr-cohort-card-bar{position:absolute;top:0;left:0;right:0;height:3px}
+.tr-cohort-month{font-size:16px;font-weight:700;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #293852}
+.tr-cohort-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:13px}
+.tr-cohort-row-label{color:#8494AB}
+.tr-cohort-row-value{font-weight:700;font-variant-numeric:tabular-nums}
+.tr-cohort-badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;display:inline-block}
+.tr-badge-pass{background:rgba(45,212,160,0.13);color:#2DD4A0}
+.tr-badge-fail{background:rgba(248,113,113,0.13);color:#F87171}
+.tr-badge-active{background:rgba(251,191,36,0.13);color:#FBBF24}
+.tr-badge-na{background:rgba(132,148,171,0.12);color:#627289}
+.tr-cohort-maturity{font-size:11px;color:#627289;font-style:italic;margin-top:8px;padding-top:8px;border-top:1px solid rgba(41,56,82,0.5)}
+
+.tr-summary-bar{background:#111B2E;border:1px solid #293852;border-radius:12px;padding:16px 24px;font-size:14px;color:#A8B8CC;text-align:center}
+.tr-summary-bar b{font-weight:700;color:#F1F5F9}
+
+/* Two-column layout */
+.tr-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.tr-av-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(41,56,82,0.4)}
+.tr-av-row:last-child{border-bottom:none}
+.tr-av-label{font-size:13px;color:#8494AB}
+.tr-av-value{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+
+/* Tables */
+.tr-table{width:100%;border-collapse:separate;border-spacing:0 4px}
+.tr-table th{text-align:left;padding:10px 14px;font-size:11px;font-weight:600;color:#8494AB;text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid #293852}
+.tr-table th.right{text-align:right}
+.tr-table td{padding:12px 14px;font-size:13px}
+.tr-table td.right{text-align:right}
+.tr-table tr.tr-stripe{background:rgba(15,23,42,0.3)}
+.tr-table td.tr-bold{font-weight:700}
+.tr-trend-up{color:#2DD4A0}
+.tr-trend-down{color:#F87171}
+.tr-trend-neutral{color:#8494AB}
+
+/* ISR section */
+.tr-ob-box{background:#111B2E;border:1px solid #293852;border-radius:12px;padding:16px 20px;margin-top:16px;font-size:13px;color:#8494AB;line-height:1.7}
+.tr-ob-box b{color:#A8B8CC}
+
+/* Gaps & Flags */
+.tr-gaps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.tr-gap-card{background:#151E2F;border:1px solid #293852;border-radius:16px;padding:24px;position:relative;overflow:hidden}
+.tr-gap-num{position:absolute;top:16px;right:16px;width:28px;height:28px;border-radius:50%;background:rgba(248,113,113,0.15);color:#F87171;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.tr-gap-title{font-size:15px;font-weight:700;margin-bottom:10px;padding-right:36px}
+.tr-gap-list{list-style:none;padding:0}
+.tr-gap-list li{font-size:13px;color:#A8B8CC;line-height:1.6;padding:3px 0;padding-left:16px;position:relative}
+.tr-gap-list li::before{content:'';position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:#F87171}
+.tr-gap-severity{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:0.04em;margin-top:10px}
+.tr-sev-high{background:rgba(248,113,113,0.13);color:#F87171}
+.tr-sev-medium{background:rgba(251,191,36,0.13);color:#FBBF24}
+.tr-sev-low{background:rgba(132,148,171,0.12);color:#8494AB}
+
+/* Pipeline */
+.tr-pipeline-section{margin-bottom:20px}
+.tr-pipeline-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;padding:4px 12px;border-radius:6px;display:inline-block}
+.tr-pl-high{background:rgba(248,113,113,0.13);color:#F87171}
+.tr-pl-retain{background:rgba(45,212,160,0.13);color:#2DD4A0}
+.tr-pl-grow{background:rgba(91,155,255,0.13);color:#5B9BFF}
+.tr-pl-act{background:rgba(251,191,36,0.13);color:#FBBF24}
+.tr-pipeline-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.tr-pl-card{background:#111B2E;border:1px solid #293852;border-radius:12px;padding:16px 20px}
+.tr-pl-merchant{font-size:14px;font-weight:700;margin-bottom:2px}
+.tr-pl-bid{font-size:11px;color:#627289;margin-bottom:8px}
+.tr-pl-funding{font-size:13px;color:#8494AB;margin-bottom:4px}
+.tr-pl-funding b{color:#F1F5F9}
+.tr-pl-reason{font-size:12px;color:#FBBF24;margin-bottom:4px}
+.tr-pl-next{font-size:12px;color:#5B9BFF;font-weight:500}
+
+/* Footer */
+.tr-footer{text-align:center;padding:40px;border-top:1px solid #293852;margin-top:40px}
+.tr-footer-text{font-size:12px;color:#627289;margin-top:12px}
+
+/* No data state */
+.tr-empty{text-align:center;padding:80px 40px}
+.tr-empty-icon{font-size:48px;opacity:0.3;margin-bottom:16px}
+.tr-empty-title{font-size:18px;font-weight:700;color:#627289;margin-bottom:8px}
+.tr-empty-sub{font-size:14px;color:#3D5170}
+
+/* Pattern callout */
+.tr-callout{background:#111B2E;border-left:4px solid #FBBF24;border-radius:0 12px 12px 0;padding:16px 20px;margin-top:16px;font-size:13px;color:#A8B8CC;line-height:1.6}
+.tr-callout b{color:#FBBF24}
+
+/* Responsive */
+@media(max-width:1024px){
+  .tr-summary-grid{grid-template-columns:repeat(2,1fr)}
+  .tr-cohort-grid{grid-template-columns:1fr}
+  .tr-grid-2{grid-template-columns:1fr}
+  .tr-gaps-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .tr-header,.tr-content{padding-left:16px;padding-right:16px}
+  .tr-header-top{flex-direction:column;gap:16px}
+  .tr-header-right{align-items:flex-start}
+  .tr-summary-grid{grid-template-columns:1fr}
+  .tr-stat-value{font-size:28px}
+  .tr-header h1{font-size:22px}
+}
+
+/* ========== Print Report (hidden div) ========== */
+#print-report{display:none}
+.pr-page{background:#fff;color:#111;font-family:'DM Sans','Segoe UI',system-ui,sans-serif;padding:40px;max-width:816px;margin:0 auto}
+.pr-header{text-align:center;border-bottom:3px solid #1a1f35;padding-bottom:20px;margin-bottom:24px}
+.pr-header h1{font-size:22px;font-weight:800;color:#0D1321}
+.pr-header p{font-size:13px;color:#555;margin-top:4px}
+.pr-section{margin-bottom:24px;page-break-inside:avoid}
+.pr-section h2{font-size:16px;font-weight:700;color:#0D1321;border-bottom:2px solid #e5e7eb;padding-bottom:6px;margin-bottom:12px}
+.pr-stats{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.pr-stat-box{flex:1;min-width:120px;background:#f3f4f6;border-radius:8px;padding:12px;text-align:center}
+.pr-stat-box .val{font-size:22px;font-weight:800;color:#0D1321}
+.pr-stat-box .lbl{font-size:11px;color:#555;text-transform:uppercase;margin-top:2px}
+.pr-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:12px}
+.pr-table th{text-align:left;padding:8px 10px;background:#f3f4f6;font-weight:600;color:#333;border-bottom:2px solid #d1d5db;font-size:11px;text-transform:uppercase}
+.pr-table th.right{text-align:right}
+.pr-table td{padding:8px 10px;border-bottom:1px solid #e5e7eb}
+.pr-table td.right{text-align:right}
+.pr-pass{color:#059669;font-weight:700}
+.pr-fail{color:#dc2626;font-weight:700}
+.pr-active{color:#d97706;font-weight:700}
+.pr-gap{background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px 16px;margin-bottom:10px;page-break-inside:avoid}
+.pr-gap h3{font-size:13px;font-weight:700;color:#dc2626;margin-bottom:6px}
+.pr-gap ul{margin:0;padding-left:18px;font-size:12px;color:#333;line-height:1.6}
+.pr-pipeline-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;margin-bottom:8px}
+.pr-footer{text-align:center;font-size:11px;color:#999;margin-top:32px;padding-top:16px;border-top:2px solid #e5e7eb}
+</style>
+</head>
+<body>
+
+<div class="tr-header">
+  <a href="index.html" class="tr-home-link">&#8592; Dashboard Hub</a>
+  <div class="tr-header-top">
+    <div class="tr-header-left">
+      <span class="tr-badge tr-badge-admin">Admin</span>
+      <h1>Territory <span>Cohort Review</span></h1>
+      <p class="tr-subtitle" id="trSubtitle">Select a territory to view the cohort review</p>
+    </div>
+    <div class="tr-header-right">
+      <div class="tr-selector-wrap">
+        <select class="tr-select" id="territorySelect" onchange="onTerritoryChange()">
+          <option value="">-- Select Territory --</option>
+        </select>
+        <button class="tr-generate-btn" id="generateBtn" onclick="generatePDF()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+          Generate Report
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tr-content" id="trContent">
+
+  <!-- Empty state -->
+  <div class="tr-empty" id="trEmpty">
+    <div class="tr-empty-icon">&#128202;</div>
+    <div class="tr-empty-title">No data available</div>
+    <div class="tr-empty-sub">Territory review data has not been loaded yet. The pipeline will inject data when available.</div>
+  </div>
+
+  <!-- All sections rendered by JS -->
+  <div id="trSections" style="display:none">
+
+    <!-- Section 1: Summary Banner -->
+    <div class="tr-section" id="sectionSummary">
+      <div class="tr-summary-grid" id="summaryCards"></div>
+      <div class="tr-meta-row" id="summaryMeta"></div>
+    </div>
+
+    <!-- Section 2: Cohort Scorecard -->
+    <div class="tr-section" id="sectionCohort">
+      <div class="tr-section-title">Cohort Scorecard</div>
+      <div class="tr-section-sub">Monthly enrollment cohort performance against $15K/$30K commission standards</div>
+      <div class="tr-cohort-grid" id="cohortCards"></div>
+      <div class="tr-summary-bar" id="cohortSummary"></div>
+    </div>
+
+    <!-- Section 3: Activity vs Output -->
+    <div class="tr-section" id="sectionActivity">
+      <div class="tr-section-title">Activity vs. Output</div>
+      <div class="tr-section-sub">Field engagement metrics compared against production results</div>
+      <div class="tr-grid-2" id="activityGrid"></div>
+    </div>
+
+    <!-- Section 4: ISR Conditioning by Cohort -->
+    <div class="tr-section" id="sectionISR">
+      <div class="tr-section-title">ISR Conditioning by Cohort</div>
+      <div class="tr-section-sub">Inside sales onboarding sequence tracking per enrollment cohort</div>
+      <div id="isrTable"></div>
+      <div class="tr-ob-box" id="obReference"></div>
+    </div>
+
+    <!-- Section 5: Producer Patterns -->
+    <div class="tr-section" id="sectionProducers">
+      <div class="tr-section-title">Producer Patterns</div>
+      <div class="tr-section-sub">Merchant-level production breakdown with onboarding and spiff indicators</div>
+      <div id="producerTable"></div>
+      <div class="tr-callout" id="patternCallout"></div>
+    </div>
+
+    <!-- Section 6: Gaps & Flags -->
+    <div class="tr-section" id="sectionGaps">
+      <div class="tr-section-title">Gaps &amp; Flags</div>
+      <div class="tr-section-sub">Identified issues requiring attention or follow-up action</div>
+      <div class="tr-gaps-grid" id="gapsGrid"></div>
+    </div>
+
+    <!-- Section 7: Pipeline -->
+    <div class="tr-section" id="sectionPipeline">
+      <div class="tr-section-title">Pipeline</div>
+      <div class="tr-section-sub">Merchant action items categorized by priority and objective</div>
+      <div id="pipelineArea"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="tr-footer">
+  <button class="tr-generate-btn" onclick="generatePDF()">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+    Generate Report
+  </button>
+  <div class="tr-footer-text" id="footerDate"></div>
+  <div class="tr-footer-text" style="margin-top:4px">EasyPay Finance &mdash; Territory Cohort Review</div>
+</div>
+
+<!-- Print Report (hidden, for PDF export) -->
+<div id="print-report">
+  <div class="pr-page" id="prPage"></div>
+</div>
+
+<script>
+// Territory Review Data — injected by pipeline
+var territoryReviewData = {};
+// End territory review data
+
+// Territory map for display names
+var TERRITORY_MAP = {
+  "LTO-1": {osr:"Yemaira Hernandez", area:"FL (Miami-Dade/Broward)"},
+  "LTO-2": {osr:"Omar Corona", area:"TX (S. Houston/Valley/El Paso)"},
+  "LTO-3": {osr:"Joseph Guerra", area:"TX (State Manager)"},
+  "LTO-5": {osr:"Jared Midkiff", area:"FL (State Manager)"},
+  "LTO-7": {osr:"Stephanie Whitlock", area:"GA/NE FL/Panhandle"},
+  "RIC-1": {osr:"Cesar Flores", area:"CA (LA Metro Core)"},
+  "RIC-2": {osr:"Claudia Gerhardt", area:"CA (IE South/San Diego)"},
+  "RIC-4": {osr:"Jeremy Moore", area:"CA (Orange County/SE LA)"},
+  "RIC-6": {osr:"Phillip Mason", area:"CA (Sacramento/NorCal)"},
+  "RIC-7": {osr:"DeLon Phoenix", area:"NV (Las Vegas/Reno)"},
+  "RIC-8": {osr:"Eric Henderson", area:"PA (4 Metros)"},
+  "RIC-9": {osr:"Matthew MacDonald", area:"AZ (State Manager + NM/UT/ID)"}
+};
+
+function initTerritoryReview() {
+  var select = document.getElementById('territorySelect');
+  var keys = Object.keys(territoryReviewData).sort();
+
+  if (keys.length === 0) {
+    document.getElementById('trEmpty').style.display = '';
+    document.getElementById('trSections').style.display = 'none';
+    document.getElementById('footerDate').textContent = 'No data loaded';
+    return;
+  }
+
+  // Populate dropdown
+  select.innerHTML = '<option value="">-- Select Territory --</option>';
+  keys.forEach(function(code) {
+    var opt = document.createElement('option');
+    opt.value = code;
+    var info = TERRITORY_MAP[code];
+    opt.textContent = code + (info ? ' — ' + info.osr : '');
+    select.appendChild(opt);
+  });
+
+  // Default to first territory
+  select.value = keys[0];
+  onTerritoryChange();
+}
+
+function onTerritoryChange() {
+  var code = document.getElementById('territorySelect').value;
+  if (!code || !territoryReviewData[code]) {
+    document.getElementById('trEmpty').style.display = '';
+    document.getElementById('trSections').style.display = 'none';
+    document.getElementById('trSubtitle').textContent = 'Select a territory to view the cohort review';
+    return;
+  }
+
+  document.getElementById('trEmpty').style.display = 'none';
+  document.getElementById('trSections').style.display = '';
+
+  var data = territoryReviewData[code];
+  var info = TERRITORY_MAP[code] || {osr: code, area: ''};
+
+  // Update subtitle
+  var subtitle = data.summary && data.summary.quarter ? data.summary.quarter : 'Q1 2026';
+  document.getElementById('trSubtitle').textContent = subtitle + ' \u00B7 ' + code + ' \u00B7 ' + info.osr;
+
+  renderSummary(data.summary || {});
+  renderCohortScorecard(data.cohort_scorecard || []);
+  renderActivityOutput(data.activity_vs_output || {});
+  renderISRConditioning(data.isr_conditioning || []);
+  renderProducerPatterns(data.producer_patterns || []);
+  renderGaps(data.gaps || []);
+  renderPipeline(data.pipeline || []);
+
+  var updated = data.summary && data.summary.updated ? data.summary.updated : new Date().toLocaleDateString();
+  document.getElementById('footerDate').textContent = 'Updated: ' + updated;
+}
+
+/* ===== Section 1: Summary Banner ===== */
+function renderSummary(s) {
+  var cards = document.getElementById('summaryCards');
+  var colors = ['#5B9BFF','#2DD4A0','#A78BFA','#22D3EE'];
+  var items = [
+    {value: fmtNum(s.total_enrolled || 0), label:'Total Enrolled', sub:'merchants', color:colors[0]},
+    {value: fmtNum(s.producing || 0), label:'Producing', sub:'of ' + fmtNum(s.total_enrolled || 0) + ' enrolled', color:colors[1]},
+    {value: fmtDollar(s.q_total_funding || 0), label:'Q Total Funding', sub:'vs ' + fmtDollar(s.standard || 45000) + ' standard', color:colors[2]},
+    {value: fmtNum(s.isr_touches || 0), label:'ISR Touches', sub:'on enrolled BIDs', color:colors[3]}
+  ];
+
+  cards.innerHTML = items.map(function(it) {
+    return '<div class="tr-stat"><div class="tr-stat-bar" style="background:' + it.color + '"></div>' +
+      '<div class="tr-stat-value" style="color:' + it.color + '">' + it.value + '</div>' +
+      '<div class="tr-stat-label">' + it.label + '</div>' +
+      '<div class="tr-stat-sub">' + it.sub + '</div></div>';
+  }).join('');
+
+  var meta = document.getElementById('summaryMeta');
+  var metaItems = [];
+  if (s.tsr_checkins !== undefined) metaItems.push('TSR Check-ins: <b>' + fmtNum(s.tsr_checkins) + '</b>');
+  if (s.zero_touch_bids !== undefined) metaItems.push('Zero-Touch BIDs: <b>' + fmtNum(s.zero_touch_bids) + '</b>');
+  if (s.isr_name) metaItems.push('ISR: <b>' + esc(s.isr_name) + '</b>');
+  meta.innerHTML = metaItems.map(function(m) { return '<span>' + m + '</span>'; }).join('');
+}
+
+/* ===== Section 2: Cohort Scorecard ===== */
+function renderCohortScorecard(cohorts) {
+  var grid = document.getElementById('cohortCards');
+  var monthColors = ['#5B9BFF','#A78BFA','#22D3EE'];
+
+  if (!cohorts.length) {
+    grid.innerHTML = '<div style="color:#627289;font-style:italic;padding:20px">No cohort data available</div>';
+    document.getElementById('cohortSummary').innerHTML = '';
+    return;
+  }
+
+  grid.innerHTML = cohorts.map(function(c, i) {
+    var color = monthColors[i % monthColors.length];
+    var badge15k = badgeHTML(c.standard_15k);
+    var badge30k = badgeHTML(c.standard_30k);
+    var maturity = c.maturity ? '<div class="tr-cohort-maturity">' + esc(c.maturity) + '</div>' : '';
+
+    return '<div class="tr-cohort-card">' +
+      '<div class="tr-cohort-card-bar" style="background:' + color + '"></div>' +
+      '<div class="tr-cohort-month">' + esc(c.month || 'Month ' + (i+1)) + '</div>' +
+      cohortRow('Merchants Enrolled', fmtNum(c.enrolled || 0)) +
+      cohortRow('Producing BIDs', fmtNum(c.producing || 0) + ' of ' + fmtNum(c.enrolled || 0)) +
+      cohortRow('Month 1 Funding', fmtDollar(c.m1_funding || 0)) +
+      cohortRow('$15K Standard', badge15k) +
+      cohortRow('$30K True-Up', badge30k) +
+      maturity +
+      '</div>';
+  }).join('');
+
+  // Summary bar
+  var totalFunded = 0, totalEnrolled = 0, totalProducing = 0, totalZero = 0;
+  cohorts.forEach(function(c) {
+    totalFunded += (c.m1_funding || 0);
+    totalEnrolled += (c.enrolled || 0);
+    totalProducing += (c.producing || 0);
+    totalZero += (c.zero_funded || 0);
+  });
+  document.getElementById('cohortSummary').innerHTML =
+    'Q TOTAL: <b>' + fmtDollar(totalFunded) + '</b> funded &middot; <b>' + totalProducing +
+    '</b> of <b>' + totalEnrolled + '</b> enrolled BIDs produced &middot; <b>' + totalZero + '</b> at $0';
+}
+
+function cohortRow(label, value) {
+  return '<div class="tr-cohort-row"><span class="tr-cohort-row-label">' + label +
+    '</span><span class="tr-cohort-row-value">' + value + '</span></div>';
+}
+
+function badgeHTML(status) {
+  if (!status) return '<span class="tr-cohort-badge tr-badge-na">N/A</span>';
+  var s = String(status).toUpperCase();
+  if (s === 'PASS') return '<span class="tr-cohort-badge tr-badge-pass">PASS</span>';
+  if (s === 'FAIL') return '<span class="tr-cohort-badge tr-badge-fail">FAIL</span>';
+  if (s === 'ACTIVE') return '<span class="tr-cohort-badge tr-badge-active">Active</span>';
+  return '<span class="tr-cohort-badge tr-badge-na">' + esc(status) + '</span>';
+}
+
+/* ===== Section 3: Activity vs Output ===== */
+function renderActivityOutput(ao) {
+  var grid = document.getElementById('activityGrid');
+  var activity = ao.activity || {};
+  var output = ao.output || {};
+
+  var leftRows = [
+    {label: 'TSR Check-ins', value: fmtNum(activity.tsr_checkins || 0)},
+    {label: 'ISR Touches', value: fmtNum(activity.isr_touches || 0)},
+    {label: 'Call Entries', value: fmtNum(activity.call_entries || 0)},
+    {label: 'Zero-Touch BIDs', value: fmtNum(activity.zero_touch_bids || 0)}
+  ];
+
+  var rightRows = [
+    {label: 'BIDs Produced', value: fmtNum(output.bids_produced || 0)},
+    {label: 'Total Funded', value: fmtDollar(output.total_funded || 0)},
+    {label: 'Standard', value: fmtDollar(output.standard || 0)},
+    {label: '% Achieved', value: fmtPct(output.pct_achieved || 0)},
+    {label: 'Avg Days to First Touch', value: (output.avg_days_first_touch || 0).toFixed(1)},
+    {label: 'Concentration Risk', value: esc(output.concentration_risk || 'N/A')}
+  ];
+
+  grid.innerHTML =
+    '<div class="tr-card"><div style="font-size:16px;font-weight:700;margin-bottom:16px">Activity in the Field</div>' +
+    leftRows.map(avRow).join('') + '</div>' +
+    '<div class="tr-card"><div style="font-size:16px;font-weight:700;margin-bottom:16px">Production Output</div>' +
+    rightRows.map(avRow).join('') + '</div>';
+}
+
+function avRow(r) {
+  return '<div class="tr-av-row"><span class="tr-av-label">' + r.label +
+    '</span><span class="tr-av-value">' + r.value + '</span></div>';
+}
+
+/* ===== Section 4: ISR Conditioning ===== */
+function renderISRConditioning(rows) {
+  var container = document.getElementById('isrTable');
+  if (!rows.length) {
+    container.innerHTML = '<div style="color:#627289;font-style:italic;padding:20px">No ISR conditioning data available</div>';
+    document.getElementById('obReference').style.display = 'none';
+    return;
+  }
+  document.getElementById('obReference').style.display = '';
+
+  var html = '<table class="tr-table"><thead><tr>' +
+    '<th>Cohort</th><th class="right">BIDs</th><th class="right">Avg Days to 1st Touch</th>' +
+    '<th class="right">OB2 Completed</th><th class="right">Producing</th><th class="right">M1 Funding</th>' +
+    '</tr></thead><tbody>';
+
+  rows.forEach(function(r, i) {
+    var cls = i % 2 === 1 ? ' class="tr-stripe"' : '';
+    var trend = r.trend_days;
+    var trendIcon = '';
+    if (trend === 'up') trendIcon = ' <span class="tr-trend-down" title="Increasing (worse)">&uarr;</span>';
+    else if (trend === 'down') trendIcon = ' <span class="tr-trend-up" title="Decreasing (better)">&darr;</span>';
+
+    html += '<tr' + cls + '>' +
+      '<td class="tr-bold">' + esc(r.cohort || '') + '</td>' +
+      '<td class="right">' + fmtNum(r.bids || 0) + '</td>' +
+      '<td class="right">' + (r.avg_days || 0).toFixed(1) + trendIcon + '</td>' +
+      '<td class="right">' + fmtNum(r.ob2_completed || 0) + '</td>' +
+      '<td class="right">' + fmtNum(r.producing || 0) + '</td>' +
+      '<td class="right">' + fmtDollar(r.m1_funding || 0) + '</td>' +
+      '</tr>';
+  });
+  html += '</tbody></table>';
+  container.innerHTML = html;
+
+  document.getElementById('obReference').innerHTML =
+    '<b>OB Sequence Reference</b><br>' +
+    'OB1: Welcome call (Day 0-1) &rarr; OB2: Training / platform walkthrough (Day 2-5) &rarr; ' +
+    'OB3: First transaction follow-up (Day 7-14) &rarr; OB4: 30-day check-in';
+}
+
+/* ===== Section 5: Producer Patterns ===== */
+function renderProducerPatterns(rows) {
+  var container = document.getElementById('producerTable');
+  var callout = document.getElementById('patternCallout');
+
+  if (!rows.length) {
+    container.innerHTML = '<div style="color:#627289;font-style:italic;padding:20px">No producer pattern data available</div>';
+    callout.style.display = 'none';
+    return;
+  }
+  callout.style.display = '';
+
+  var html = '<table class="tr-table"><thead><tr>' +
+    '<th>Merchant</th><th>Cohort</th><th class="right">Q Funding</th>' +
+    '<th class="right">OB2</th><th class="right">Spiff</th><th>Pattern</th>' +
+    '</tr></thead><tbody>';
+
+  var patternNotes = [];
+  rows.forEach(function(r, i) {
+    var cls = i % 2 === 1 ? ' class="tr-stripe"' : '';
+    html += '<tr' + cls + '>' +
+      '<td class="tr-bold">' + esc(r.merchant || '') + '</td>' +
+      '<td>' + esc(r.cohort || '') + '</td>' +
+      '<td class="right">' + fmtDollar(r.q_funding || 0) + '</td>' +
+      '<td class="right">' + esc(r.ob2 || 'N/A') + '</td>' +
+      '<td class="right">' + esc(r.spiff || 'N/A') + '</td>' +
+      '<td>' + esc(r.pattern || '') + '</td>' +
+      '</tr>';
+    if (r.pattern_note) patternNotes.push(r.pattern_note);
+  });
+  html += '</tbody></table>';
+  container.innerHTML = html;
+
+  if (patternNotes.length) {
+    callout.innerHTML = '<b>Pattern Insights:</b> ' + patternNotes.map(esc).join(' | ');
+  } else {
+    callout.innerHTML = '<b>Pattern Insights:</b> Review merchant production timing and onboarding completion for actionable trends.';
+  }
+}
+
+/* ===== Section 6: Gaps & Flags ===== */
+function renderGaps(gaps) {
+  var grid = document.getElementById('gapsGrid');
+  if (!gaps.length) {
+    grid.innerHTML = '<div style="color:#627289;font-style:italic;padding:20px">No gaps or flags identified</div>';
+    return;
+  }
+
+  grid.innerHTML = gaps.map(function(g, i) {
+    var sev = (g.severity || 'medium').toLowerCase();
+    var sevClass = sev === 'high' ? 'tr-sev-high' : sev === 'low' ? 'tr-sev-low' : 'tr-sev-medium';
+    var bullets = (g.items || []).map(function(item) {
+      return '<li>' + esc(item) + '</li>';
+    }).join('');
+
+    return '<div class="tr-gap-card">' +
+      '<div class="tr-gap-num">' + (i + 1) + '</div>' +
+      '<div class="tr-gap-title">' + esc(g.title || 'Issue #' + (i+1)) + '</div>' +
+      '<ul class="tr-gap-list">' + bullets + '</ul>' +
+      '<span class="tr-gap-severity ' + sevClass + '">' + esc(sev) + '</span>' +
+      '</div>';
+  }).join('');
+}
+
+/* ===== Section 7: Pipeline ===== */
+function renderPipeline(items) {
+  var container = document.getElementById('pipelineArea');
+  if (!items.length) {
+    container.innerHTML = '<div style="color:#627289;font-style:italic;padding:20px">No pipeline items</div>';
+    return;
+  }
+
+  var categories = {HIGH:[], RETAIN:[], GROW:[], 'ACT NOW':[]};
+  items.forEach(function(item) {
+    var cat = (item.category || 'RETAIN').toUpperCase();
+    if (!categories[cat]) categories[cat] = [];
+    categories[cat].push(item);
+  });
+
+  var catStyles = {
+    'HIGH': {cls:'tr-pl-high', label:'High Priority'},
+    'RETAIN': {cls:'tr-pl-retain', label:'Retain'},
+    'GROW': {cls:'tr-pl-grow', label:'Grow'},
+    'ACT NOW': {cls:'tr-pl-act', label:'Act Now'}
+  };
+
+  var html = '';
+  Object.keys(categories).forEach(function(cat) {
+    var arr = categories[cat];
+    if (!arr.length) return;
+    var style = catStyles[cat] || {cls:'tr-pl-retain', label:cat};
+
+    html += '<div class="tr-pipeline-section">' +
+      '<div class="tr-pipeline-label ' + style.cls + '">' + style.label + '</div>' +
+      '<div class="tr-pipeline-cards">';
+
+    arr.forEach(function(p) {
+      html += '<div class="tr-pl-card">' +
+        '<div class="tr-pl-merchant">' + esc(p.merchant || '') + '</div>' +
+        '<div class="tr-pl-bid">BID: ' + esc(p.bid || 'N/A') + '</div>' +
+        '<div class="tr-pl-funding">Funding: <b>' + fmtDollar(p.funding || 0) + '</b></div>' +
+        (p.reason ? '<div class="tr-pl-reason">' + esc(p.reason) + '</div>' : '') +
+        (p.next_step ? '<div class="tr-pl-next">&rarr; ' + esc(p.next_step) + '</div>' : '') +
+        '</div>';
+    });
+    html += '</div></div>';
+  });
+
+  container.innerHTML = html;
+}
+
+/* ===== PDF Generation ===== */
+function generatePDF() {
+  var code = document.getElementById('territorySelect').value;
+  if (!code || !territoryReviewData[code]) {
+    alert('Please select a territory first.');
+    return;
+  }
+
+  var data = territoryReviewData[code];
+  var info = TERRITORY_MAP[code] || {osr: code, area: ''};
+  var s = data.summary || {};
+  var quarter = s.quarter || 'Q1 2026';
+
+  var page = document.getElementById('prPage');
+
+  var html = '<div class="pr-header"><h1>Territory Cohort Review</h1>' +
+    '<p>' + quarter + ' &middot; ' + code + ' &middot; ' + esc(info.osr) + '</p></div>';
+
+  // Summary
+  html += '<div class="pr-section"><h2>Summary</h2><div class="pr-stats">' +
+    prStat(fmtNum(s.total_enrolled || 0), 'Enrolled') +
+    prStat(fmtNum(s.producing || 0), 'Producing') +
+    prStat(fmtDollar(s.q_total_funding || 0), 'Q Funding') +
+    prStat(fmtNum(s.isr_touches || 0), 'ISR Touches') +
+    '</div></div>';
+
+  // Cohort Scorecard
+  var cohorts = data.cohort_scorecard || [];
+  if (cohorts.length) {
+    html += '<div class="pr-section"><h2>Cohort Scorecard</h2><table class="pr-table"><thead><tr>' +
+      '<th>Month</th><th class="right">Enrolled</th><th class="right">Producing</th>' +
+      '<th class="right">M1 Funding</th><th class="right">$15K</th><th class="right">$30K</th></tr></thead><tbody>';
+    cohorts.forEach(function(c) {
+      html += '<tr><td>' + esc(c.month || '') + '</td>' +
+        '<td class="right">' + fmtNum(c.enrolled || 0) + '</td>' +
+        '<td class="right">' + fmtNum(c.producing || 0) + '</td>' +
+        '<td class="right">' + fmtDollar(c.m1_funding || 0) + '</td>' +
+        '<td class="right">' + prBadge(c.standard_15k) + '</td>' +
+        '<td class="right">' + prBadge(c.standard_30k) + '</td></tr>';
+    });
+    html += '</tbody></table></div>';
+  }
+
+  // Activity vs Output
+  var ao = data.activity_vs_output || {};
+  if (ao.activity || ao.output) {
+    var act = ao.activity || {};
+    var out = ao.output || {};
+    html += '<div class="pr-section"><h2>Activity vs. Output</h2><table class="pr-table"><thead><tr>' +
+      '<th>Activity Metric</th><th class="right">Value</th><th></th>' +
+      '<th>Output Metric</th><th class="right">Value</th></tr></thead><tbody>';
+    var aKeys = [['TSR Check-ins','tsr_checkins'],['ISR Touches','isr_touches'],['Call Entries','call_entries'],['Zero-Touch BIDs','zero_touch_bids']];
+    var oKeys = [['BIDs Produced','bids_produced'],['Total Funded','total_funded'],['Standard','standard'],['% Achieved','pct_achieved']];
+    for (var j = 0; j < Math.max(aKeys.length, oKeys.length); j++) {
+      var aK = aKeys[j], oK = oKeys[j];
+      html += '<tr>';
+      if (aK) { html += '<td>' + aK[0] + '</td><td class="right">' + (aK[1] === 'tsr_checkins' || aK[1] === 'isr_touches' || aK[1] === 'call_entries' || aK[1] === 'zero_touch_bids' ? fmtNum(act[aK[1]] || 0) : act[aK[1]] || 0) + '</td>'; }
+      else { html += '<td></td><td></td>'; }
+      html += '<td style="width:20px"></td>';
+      if (oK) {
+        var ov = oK[1] === 'total_funded' || oK[1] === 'standard' ? fmtDollar(out[oK[1]] || 0) : oK[1] === 'pct_achieved' ? fmtPct(out[oK[1]] || 0) : fmtNum(out[oK[1]] || 0);
+        html += '<td>' + oK[0] + '</td><td class="right">' + ov + '</td>';
+      } else { html += '<td></td><td></td>'; }
+      html += '</tr>';
+    }
+    html += '</tbody></table></div>';
+  }
+
+  // ISR Conditioning
+  var isr = data.isr_conditioning || [];
+  if (isr.length) {
+    html += '<div class="pr-section"><h2>ISR Conditioning by Cohort</h2><table class="pr-table"><thead><tr>' +
+      '<th>Cohort</th><th class="right">BIDs</th><th class="right">Avg Days</th>' +
+      '<th class="right">OB2</th><th class="right">Producing</th><th class="right">M1 Funding</th></tr></thead><tbody>';
+    isr.forEach(function(r) {
+      html += '<tr><td>' + esc(r.cohort || '') + '</td>' +
+        '<td class="right">' + fmtNum(r.bids || 0) + '</td>' +
+        '<td class="right">' + (r.avg_days || 0).toFixed(1) + '</td>' +
+        '<td class="right">' + fmtNum(r.ob2_completed || 0) + '</td>' +
+        '<td class="right">' + fmtNum(r.producing || 0) + '</td>' +
+        '<td class="right">' + fmtDollar(r.m1_funding || 0) + '</td></tr>';
+    });
+    html += '</tbody></table></div>';
+  }
+
+  // Producer Patterns
+  var prods = data.producer_patterns || [];
+  if (prods.length) {
+    html += '<div class="pr-section"><h2>Producer Patterns</h2><table class="pr-table"><thead><tr>' +
+      '<th>Merchant</th><th>Cohort</th><th class="right">Q Funding</th><th class="right">OB2</th>' +
+      '<th class="right">Spiff</th><th>Pattern</th></tr></thead><tbody>';
+    prods.forEach(function(r) {
+      html += '<tr><td>' + esc(r.merchant || '') + '</td><td>' + esc(r.cohort || '') + '</td>' +
+        '<td class="right">' + fmtDollar(r.q_funding || 0) + '</td>' +
+        '<td class="right">' + esc(r.ob2 || 'N/A') + '</td>' +
+        '<td class="right">' + esc(r.spiff || 'N/A') + '</td>' +
+        '<td>' + esc(r.pattern || '') + '</td></tr>';
+    });
+    html += '</tbody></table></div>';
+  }
+
+  // Gaps
+  var gaps = data.gaps || [];
+  if (gaps.length) {
+    html += '<div class="pr-section"><h2>Gaps &amp; Flags</h2>';
+    gaps.forEach(function(g, i) {
+      html += '<div class="pr-gap"><h3>' + (i+1) + '. ' + esc(g.title || '') + ' [' + (g.severity || 'medium').toUpperCase() + ']</h3><ul>';
+      (g.items || []).forEach(function(item) { html += '<li>' + esc(item) + '</li>'; });
+      html += '</ul></div>';
+    });
+    html += '</div>';
+  }
+
+  // Pipeline
+  var pipe = data.pipeline || [];
+  if (pipe.length) {
+    html += '<div class="pr-section"><h2>Pipeline</h2><table class="pr-table"><thead><tr>' +
+      '<th>Category</th><th>Merchant</th><th>BID</th><th class="right">Funding</th>' +
+      '<th>Reason</th><th>Next Step</th></tr></thead><tbody>';
+    pipe.forEach(function(p) {
+      html += '<tr><td><span class="pr-pipeline-tag" style="background:#eee;color:#333">' + esc(p.category || '') + '</span></td>' +
+        '<td>' + esc(p.merchant || '') + '</td><td>' + esc(p.bid || '') + '</td>' +
+        '<td class="right">' + fmtDollar(p.funding || 0) + '</td>' +
+        '<td>' + esc(p.reason || '') + '</td><td>' + esc(p.next_step || '') + '</td></tr>';
+    });
+    html += '</tbody></table></div>';
+  }
+
+  html += '<div class="pr-footer">EasyPay Finance &mdash; Territory Cohort Review &mdash; Generated ' + new Date().toLocaleDateString() + '</div>';
+
+  page.innerHTML = html;
+
+  // Generate PDF
+  var printDiv = document.getElementById('print-report');
+  printDiv.style.display = 'block';
+
+  var opt = {
+    margin: [0.4, 0.4, 0.4, 0.4],
+    filename: 'Territory_Review_' + code + '_' + quarter.replace(/\s/g,'_') + '.pdf',
+    image: {type:'jpeg', quality:0.98},
+    html2canvas: {scale:2, useCORS:true},
+    jsPDF: {unit:'in', format:'letter', orientation:'portrait'},
+    pagebreak: {mode:['avoid-all','css','legacy']}
+  };
+
+  html2pdf().set(opt).from(page).save().then(function() {
+    printDiv.style.display = 'none';
+  }).catch(function() {
+    printDiv.style.display = 'none';
+  });
+}
+
+/* ===== Print helpers ===== */
+function prStat(val, label) {
+  return '<div class="pr-stat-box"><div class="val">' + val + '</div><div class="lbl">' + label + '</div></div>';
+}
+
+function prBadge(status) {
+  if (!status) return '<span style="color:#999">N/A</span>';
+  var s = String(status).toUpperCase();
+  if (s === 'PASS') return '<span class="pr-pass">PASS</span>';
+  if (s === 'FAIL') return '<span class="pr-fail">FAIL</span>';
+  return '<span class="pr-active">' + esc(status) + '</span>';
+}
+
+/* ===== Formatting helpers ===== */
+function fmtNum(n) {
+  if (n === null || n === undefined) return '0';
+  return Number(n).toLocaleString();
+}
+
+function fmtDollar(n) {
+  if (n === null || n === undefined) return '$0';
+  n = Number(n);
+  if (Math.abs(n) >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
+  if (Math.abs(n) >= 1000) return '$' + (n / 1000).toFixed(0) + 'K';
+  return '$' + n.toLocaleString(undefined, {minimumFractionDigits:0, maximumFractionDigits:0});
+}
+
+function fmtPct(n) {
+  if (n === null || n === undefined) return '0%';
+  return Number(n).toFixed(1) + '%';
+}
+
+function esc(s) {
+  if (!s) return '';
+  var d = document.createElement('div');
+  d.textContent = String(s);
+  return d.innerHTML;
+}
+
+/* ===== Init on load ===== */
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTerritoryReview);
+} else {
+  initTerritoryReview();
+}
+</script>
+</body>
+</html>
