@@ -466,7 +466,7 @@ function renderActivityOutput(ao) {
     {label: 'Total Funded', value: fmtDollar(ao.total_funding || 0)},
     {label: 'Standard', value: fmtDollar(ao.funding_standard || 0)},
     {label: '% of Standard', value: (ao.funding_pct || 0).toFixed(1) + '%'},
-    {label: 'Avg Days to 1st Touch', value: (ao.avg_days_first_touch || 0).toFixed(1) + ' days'},
+    {label: 'Avg Days to 1st Touch', value: fmtDays(ao.avg_days_first_touch)},
     {label: 'Top Producer', value: esc(ao.concentration_bid || 'N/A') + (ao.concentration_pct > 0 ? ' (' + ao.concentration_pct.toFixed(0) + '%)' : '')}
   ];
 
@@ -507,7 +507,7 @@ function renderISRConditioning(rows) {
     html += '<tr' + cls + '>' +
       '<td class="tr-bold">' + esc(r.month || '') + '</td>' +
       '<td class="right">' + fmtNum(r.bid_count || 0) + '</td>' +
-      '<td class="right">' + (r.avg_days_first_touch || 0).toFixed(1) + trendIcon + '</td>' +
+      '<td class="right">' + fmtDays(r.avg_days_first_touch) + ' ' + trendIcon + '</td>' +
       '<td class="right">' + fmtNum(r.ob2_completed || 0) + '</td>' +
       '<td class="right">' + fmtNum(r.producing || 0) + '</td>' +
       '<td class="right">' + fmtDollar(r.m1_funding || 0) + '</td>' +
@@ -708,7 +708,7 @@ function generatePDF() {
     isr.forEach(function(r) {
       html += '<tr><td>' + esc(r.month || '') + '</td>' +
         '<td class="right">' + fmtNum(r.bid_count || 0) + '</td>' +
-        '<td class="right">' + (r.avg_days_first_touch || 0).toFixed(1) + '</td>' +
+        '<td class="right">' + fmtDays(r.avg_days_first_touch) + '</td>' +
         '<td class="right">' + fmtNum(r.ob2_completed || 0) + '</td>' +
         '<td class="right">' + fmtNum(r.producing || 0) + '</td>' +
         '<td class="right">' + fmtDollar(r.m1_funding || 0) + '</td></tr>';
@@ -807,6 +807,12 @@ function prBadge(status) {
 function fmtNum(n) {
   if (n === null || n === undefined) return '0';
   return Number(n).toLocaleString();
+}
+
+function fmtDays(n) {
+  if (n === null || n === undefined || n === 0) return '<1 day';
+  if (n < 1) return '<1 day';
+  return n.toFixed(1) + ' days';
 }
 
 function fmtDollar(n) {
