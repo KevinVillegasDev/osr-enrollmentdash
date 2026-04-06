@@ -120,6 +120,11 @@ def main():
                 reports[report_key]
             )
 
+    # ── One-time: Refresh March 2026 snapshot (fix conversion filter + OS Territory)
+    # TODO: Remove this block after it runs successfully once
+    if client and current_month != 3:
+        _refresh_past_month_snapshot(client, 3, 2026, output_dir)
+
     # ── Step 3: Process Monthly Dashboard ────────────────────────────────
     logger.info("--- Processing monthly dashboard ---")
     monthly_data = monthly_dashboard.process(
@@ -1022,10 +1027,9 @@ def _fetch_credited_for_month(client, month: int, year: int) -> list:
     else:
         end_date = date(year, month + 1, 1) - timedelta(days=1)
 
-    # Report 2 saved filters use OR logic for 3 conversion flags:
-    # (Parent_EP_Converted OR Parent_EP_Converted_Override OR EP_Converted)
-    # POST replaces ALL saved filters, so we must replicate the OR via
-    # reportBooleanFilter.
+    # Filter by Record Type = Branch and Enrollment Date range only.
+    # Do NOT add conversion flag filters — we want ALL credited enrollments
+    # including unconverted ones (they still count for cohort tracking).
     filters = [
         {"column": "RECORDTYPE", "operator": "equals",
          "value": "Branch"},
@@ -1033,18 +1037,11 @@ def _fetch_credited_for_month(client, month: int, year: int) -> list:
          "value": start_date.isoformat()},
         {"column": "Account.Enrollment_Date__c", "operator": "lessOrEqual",
          "value": end_date.isoformat()},
-        {"column": "Account.Parent_EP_Converted__c", "operator": "equals",
-         "value": "True"},
-        {"column": "Account.Parent_EP_Converted_Override__c", "operator": "equals",
-         "value": "True"},
-        {"column": "Account.EP_Converted__c", "operator": "equals",
-         "value": "True"},
     ]
 
     try:
         raw = fetch_report(
             client, report_id, filters=filters,
-            boolean_filter="1 AND 2 AND 3 AND (4 OR 5 OR 6)"
         )
         rows = parse_report_rows(raw)
         if rows:
