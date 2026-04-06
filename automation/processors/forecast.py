@@ -153,17 +153,21 @@ def _process_from_quota_report(quota_rows, year, month_num,
         # Parse currency fields — can be {amount, currency} dicts or raw numbers
         budget = _extract_currency(row.get("Funded Dollars Quota"))
         mtd_actual = _extract_currency(row.get("Funded Dollars"))
+        sf_projected = _extract_currency(row.get("Funding Projected"))
 
         if budget is None or budget == 0:
             continue  # Skip reps with no quota assigned
 
         if mtd_actual is None:
             mtd_actual = 0
+        if sf_projected is None:
+            sf_projected = 0
 
         territory = territory_by_osr.get(roster_name, "")
 
-        # Project end-of-month based on current pace
-        projected = round(mtd_actual * (biz_days_total / biz_days_elapsed))
+        # Use Salesforce's projection instead of our own calculation
+        # for consistency with finance team's numbers
+        projected = round(sf_projected)
 
         # Variance vs budget
         variance_pct = round((projected / budget - 1) * 100, 1) if budget > 0 else 0.0
