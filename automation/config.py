@@ -132,6 +132,7 @@ COLUMN_LABELS = {
     "osr_credit": "OSR Enrollment Credit",
     "isr_assignment": "ISR",
     "product_type": "EPF Product",
+    "os_territory": "OS Territory",
     # Report 3 & 4: Activity reports (matrix/summary format)
     # Report 4 is grouped by Account Name + Branch ID, with column group "First Date of Month"
     # Metric columns within each month group:

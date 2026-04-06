@@ -11,7 +11,7 @@ import logging
 from collections import defaultdict
 from datetime import date
 
-from ..config import COLUMN_LABELS, MONTH_ABBREV, MONTH_NAMES, COHORT_TARGET_M1, COHORT_TARGET_M2, OSR_ROSTER
+from ..config import COLUMN_LABELS, MONTH_ABBREV, MONTH_NAMES, COHORT_TARGET_M1, COHORT_TARGET_M2, OSR_ROSTER, TERRITORY_MAP
 
 logger = logging.getLogger(__name__)
 
@@ -41,6 +41,8 @@ def process_cohort(credited_enrollments: list[dict],
     merchant_info = {}  # branch_id -> {name, osr}
 
     roster_set = set(OSR_ROSTER)
+    # Reverse lookup: OSR name → territory code
+    osr_to_territory = {v: k for k, v in TERRITORY_MAP.items()}
 
     for row in credited_enrollments:
         osr = _get(row, "osr_credit", "Unknown")
@@ -52,6 +54,16 @@ def process_cohort(credited_enrollments: list[dict],
 
         # Only include reps on the roster — filters out junk like "-", "friend", etc.
         if osr not in roster_set:
+            continue
+
+        # Only count merchants in the OSR's assigned territory toward cohort funding.
+        # Enrollment credit still shows on scorecard, but out-of-territory merchants
+        # are excluded from the $15K/$30K cohort targets.
+        merchant_territory = _get(row, "os_territory", "")
+        osr_territory = osr_to_territory.get(osr, "")
+        if merchant_territory and osr_territory and merchant_territory != osr_territory:
+            logger.debug("Excluding %s (BID %s) from %s cohort: merchant territory %s != OSR territory %s",
+                         name, branch, osr, merchant_territory, osr_territory)
             continue
 
         merchant_info[str(branch)] = {"name": name, "osr": osr}
