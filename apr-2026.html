@@ -221,8 +221,8 @@
     <!-- OVERVIEW -->
     <div class="tab-content active" id="overview">
       <div class="kpi-grid">
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">21</span><span class="kpi-sub">All sources, Apr 2026</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">10</span><span class="kpi-sub">47.6% of total</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">22</span><span class="kpi-sub">All sources, Apr 2026</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">11</span><span class="kpi-sub">50.0% of total</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#FBBF24,transparent)"></div><span class="kpi-label">Funded Volume</span><span class="kpi-value">$0</span><span class="kpi-sub">2 merchants tracked</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#A78BFA,transparent)"></div><span class="kpi-label">Funded Apps</span><span class="kpi-value">0</span><span class="kpi-sub">of 2 total apps</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#22D3EE,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">0.0%</span><span class="kpi-sub">Apps → Funded</span></div>
@@ -233,14 +233,14 @@
         <div style="height:240px"><canvas id="chartDaily"></canvas></div>
         <div class="callout">
           <span><strong style="color:#FBBF24">Peak:</strong> Apr 2 (6 enrollments)</span>
-          <span><strong style="color:#5B9BFF">Avg daily:</strong> ~3.3 enrollments/day</span>
+          <span><strong style="color:#5B9BFF">Avg daily:</strong> ~3.7 enrollments/day</span>
         </div>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px">
-        <div style="font-size:13px;color:#8494AB">Breakdown: <span id="ovScopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (10)</span></div>
+        <div style="font-size:13px;color:#8494AB">Breakdown: <span id="ovScopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (11)</span></div>
         <div style="display:inline-flex;background:#293852;border-radius:8px;padding:3px;gap:2px">
-          <button id="ovBtnOsr" onclick="setOverviewScope('osr')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (10)</button>
-          <button id="ovBtnAll" onclick="setOverviewScope('all')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (21)</button>
+          <button id="ovBtnOsr" onclick="setOverviewScope('osr')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (11)</button>
+          <button id="ovBtnAll" onclick="setOverviewScope('all')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (22)</button>
         </div>
       </div>
       <div class="grid-2-1">
@@ -288,10 +288,10 @@
     <!-- MARKETS -->
     <div class="tab-content" id="markets">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-        <div style="font-size:13px;color:#8494AB">Showing <span id="scopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (10)</span> enrollments</div>
+        <div style="font-size:13px;color:#8494AB">Showing <span id="scopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (11)</span> enrollments</div>
         <div style="display:inline-flex;background:#293852;border-radius:8px;padding:3px;gap:2px">
-          <button id="btnOsr" onclick="setMarketsScope('osr')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (10)</button>
-          <button id="btnAll" onclick="setMarketsScope('all')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (21)</button>
+          <button id="btnOsr" onclick="setMarketsScope('osr')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (11)</button>
+          <button id="btnAll" onclick="setMarketsScope('all')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (22)</button>
         </div>
       </div>
       <div class="grid-2">
@@ -309,11 +309,11 @@
       </div>
       <div class="card">
         <div class="section-title">Total vs. Credited Enrollments</div>
-        <div class="section-sub">21 total new enrollments, 10 credited to outside sales team</div>
+        <div class="section-sub">22 total new enrollments, 11 credited to outside sales team</div>
         <div class="grid-3">
-          <div class="stat-box"><div class="stat-box-label">Total New</div><div class="stat-box-value" style="color:#5B9BFF">21</div><div class="stat-box-sub">47.6% of total</div></div>
-          <div class="stat-box"><div class="stat-box-label">OSR Credited</div><div class="stat-box-value" style="color:#2DD4A0">10</div><div class="stat-box-sub">77.2% of total</div></div>
-          <div class="stat-box"><div class="stat-box-label">Other Sources</div><div class="stat-box-value" style="color:#FBBF24">11</div><div class="stat-box-sub">52.4% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">Total New</div><div class="stat-box-value" style="color:#5B9BFF">22</div><div class="stat-box-sub">50.0% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">OSR Credited</div><div class="stat-box-value" style="color:#2DD4A0">11</div><div class="stat-box-sub">77.2% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">Other Sources</div><div class="stat-box-value" style="color:#FBBF24">11</div><div class="stat-box-sub">50.0% of total</div></div>
         </div>
       </div>
     </div>
@@ -357,19 +357,19 @@
 </div>
 
 <script>
-var repCredits=[{"n":"Jared Midkiff","v":4},{"n":"Joseph Guerra","v":2},{"n":"Eric Henderson","v":2},{"n":"Matthew MacDonald","v":1},{"n":"Stephanie Whitlock","v":1}];
-var marketData=[{"n":"FL","v":4},{"n":"TX","v":2},{"n":"PA","v":2},{"n":"AZ","v":1},{"n":"GA","v":1}];
-var industryData=[{"n":"Auto - Repair","v":3},{"n":"Auto - Total Car Care","v":3},{"n":"Auto - Wheels & Tires","v":1},{"n":"Furniture","v":1},{"n":"Auto - Tires","v":1},{"n":"Auto - Transmission","v":1}];
-var marketDataFull=[{"n":"FL","v":8},{"n":"TX","v":5},{"n":"PA","v":3},{"n":"GA","v":2},{"n":"VA","v":1},{"n":"AZ","v":1},{"n":"CA","v":1}];
-var industryDataFull=[{"n":"Auto - Total Car Care","v":8},{"n":"Auto - Repair","v":5},{"n":"Auto - Wheels & Tires","v":3},{"n":"Furniture","v":2},{"n":"Auto - Transmission","v":1},{"n":"Auto - Tires","v":1},{"n":"Auto - Other","v":1}];
+var repCredits=[{"n":"Jared Midkiff","v":4},{"n":"Joseph Guerra","v":3},{"n":"Eric Henderson","v":2},{"n":"Matthew MacDonald","v":1},{"n":"Stephanie Whitlock","v":1}];
+var marketData=[{"n":"FL","v":4},{"n":"TX","v":3},{"n":"PA","v":2},{"n":"AZ","v":1},{"n":"GA","v":1}];
+var industryData=[{"n":"Auto - Repair","v":4},{"n":"Auto - Total Car Care","v":3},{"n":"Auto - Wheels & Tires","v":1},{"n":"Furniture","v":1},{"n":"Auto - Tires","v":1},{"n":"Auto - Transmission","v":1}];
+var marketDataFull=[{"n":"FL","v":8},{"n":"TX","v":6},{"n":"PA","v":3},{"n":"GA","v":2},{"n":"VA","v":1},{"n":"AZ","v":1},{"n":"CA","v":1}];
+var industryDataFull=[{"n":"Auto - Total Car Care","v":8},{"n":"Auto - Repair","v":6},{"n":"Auto - Wheels & Tires","v":3},{"n":"Furniture","v":2},{"n":"Auto - Transmission","v":1},{"n":"Auto - Tires","v":1},{"n":"Auto - Other","v":1}];
 var marketsScope='osr';
-var isrData=[{"n":"Javier Gonzalez","v":4},{"n":"Connor Admirand","v":3},{"n":"Noemy Carrion","v":2},{"n":"Michael Palmer","v":1}];
-var dailyTrend=[{"d":"Apr 1","v":3},{"d":"Apr 2","v":6},{"d":"Apr 6","v":1}];
+var isrData=[{"n":"Javier Gonzalez","v":4},{"n":"Noemy Carrion","v":3},{"n":"Connor Admirand","v":3},{"n":"Michael Palmer","v":1}];
+var dailyTrend=[{"d":"Apr 1","v":3},{"d":"Apr 2","v":6},{"d":"Apr 6","v":2}];
 var topProducers=[{"n":"CM Wheels & Tires","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":""},{"n":"Ron\u2019s Service & Tire Center","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":"Matthew MacDonald"}];
 var PC=["#3B82F6","#10B981","#F59E0B","#EF4444","#8B5CF6","#06B6D4","#EC4899","#F97316","#14B8A6","#A855F7","#6366F1","#84CC16"];
 
 var repMerchants={
-"Joseph Guerra":[{"n":"Porter Automotive & Tire Center","b":25576,"l":"Porter, TX","f":0,"fa":0,"ta":0},{"n":"Legacy TX Off-Road & Performance","b":25567,"l":"Tomball, TX","f":0,"fa":0,"ta":0}],
+"Joseph Guerra":[{"n":"Allen\u2019s Auto Care","b":25578,"l":"Porter, TX","f":0,"fa":0,"ta":0},{"n":"Porter Automotive & Tire Center","b":25576,"l":"Porter, TX","f":0,"fa":0,"ta":0},{"n":"Legacy TX Off-Road & Performance","b":25567,"l":"Tomball, TX","f":0,"fa":0,"ta":0}],
 "Eric Henderson":[{"n":"Nicks Automotive","b":25560,"l":"Pittsburgh, PA","f":0,"fa":0,"ta":0},{"n":"801 Motorsports","b":25563,"l":"19050, PA","f":0,"fa":0,"ta":0}],
 "Jared Midkiff":[{"n":"441 Truck Repair","b":25559,"l":"Orlando, FL","f":0,"fa":0,"ta":0},{"n":"A & A Used Tires & Wheels","b":25564,"l":"Orlando, FL","f":0,"fa":0,"ta":0},{"n":"Orlando Furniture Mart","b":25562,"l":"Orlando, FL","f":0,"fa":0,"ta":0},{"n":"City Auto Express and A/C Repair","b":25566,"l":"Kissimmee, FL","f":0,"fa":0,"ta":0}],
 "Matthew MacDonald":[{"n":"Ron\u2019s Service & Tire Center","b":25561,"l":"Tempe, AZ","f":0.0,"fa":0,"ta":1}],
@@ -478,7 +478,7 @@ function setMarketsScope(scope){
   document.getElementById('btnOsr').style.color=scope==='osr'?'#fff':'#8494AB';
   document.getElementById('btnAll').style.background=scope==='all'?'#5B9BFF':'transparent';
   document.getElementById('btnAll').style.color=scope==='all'?'#fff':'#8494AB';
-  document.getElementById('scopeLabel').textContent=scope==='all'?'All Enrollments (21)':'OSR Credited (10)';
+  document.getElementById('scopeLabel').textContent=scope==='all'?'All Enrollments (22)':'OSR Credited (11)';
   document.getElementById('stateSub').textContent=scope==='all'?'All new enrollments across all channels':'Credited sales team enrollments';
   // Rebuild state chart
   destroyChart('states');
@@ -501,7 +501,7 @@ function setOverviewScope(scope){
   document.getElementById('ovBtnOsr').style.color=scope==='osr'?'#fff':'#8494AB';
   document.getElementById('ovBtnAll').style.background=scope==='all'?'#5B9BFF':'transparent';
   document.getElementById('ovBtnAll').style.color=scope==='all'?'#fff':'#8494AB';
-  document.getElementById('ovScopeLabel').textContent=scope==='all'?'All Enrollments (21)':'OSR Credited (10)';
+  document.getElementById('ovScopeLabel').textContent=scope==='all'?'All Enrollments (22)':'OSR Credited (11)';
   // Top 5 Markets
   var sd=scope==='all'?marketDataFull:marketData;
   document.getElementById('ovMarketSub').textContent=scope==='all'?'States by total enrollment volume':'States by credited enrollment volume';
