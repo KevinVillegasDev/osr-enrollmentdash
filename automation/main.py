@@ -979,25 +979,9 @@ def _refresh_past_month_snapshot(client, month: int, year: int, output_dir: str)
             json.dump(rows, f, indent=2, default=str)
         logger.info("Saved refreshed snapshot: %s", snapshot_path)
 
-        # Reprocess the monthly dashboard with updated data
-        month_file = month_filename(month, year)
-        month_path = os.path.join(output_dir, month_file)
-        if os.path.exists(month_path):
-            # Load existing activity data from snapshot
-            activity = _load_month_snapshot(month, year, "current_month_activity") or []
-            last_activity = _load_month_snapshot(month, year, "last_month_activity") or []
-            all_enrollments = _load_month_snapshot(month, year, "new_enrollments") or []
-
-            refreshed_data = monthly_dashboard.process(
-                all_enrollments=all_enrollments,
-                credited_enrollments=rows,
-                current_month_activity=activity,
-                last_month_activity=last_activity,
-                month=month,
-                year=year,
-            )
-            html_generator.update_monthly_dashboard(month_path, refreshed_data)
-            logger.info("Reprocessed %s with updated credits", month_file)
+        # Note: Do NOT reprocess the monthly dashboard here — it would
+        # overwrite KPI totals using snapshot data that may be incomplete.
+        # The snapshot update is sufficient for cohort tracking.
 
     except Exception as e:
         logger.warning("Past month refresh failed (non-fatal): %s", e)
