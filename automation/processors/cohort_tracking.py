@@ -60,6 +60,8 @@ def process_cohort(credited_enrollments: list[dict],
         # Enrollment credit still shows on scorecard, but out-of-territory merchants
         # are excluded from the $15K/$30K cohort targets.
         merchant_territory = _get(row, "os_territory", "")
+        if merchant_territory == "-":
+            merchant_territory = ""
         osr_territory = osr_to_territory.get(osr, "")
         if merchant_territory and osr_territory and merchant_territory != osr_territory:
             logger.debug("Excluding %s (BID %s) from %s cohort: merchant territory %s != OSR territory %s",
