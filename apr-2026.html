@@ -223,8 +223,8 @@
       <div class="kpi-grid">
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">22</span><span class="kpi-sub">All sources, Apr 2026</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">11</span><span class="kpi-sub">50.0% of total</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#FBBF24,transparent)"></div><span class="kpi-label">Funded Volume</span><span class="kpi-value">$0</span><span class="kpi-sub">2 merchants tracked</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#A78BFA,transparent)"></div><span class="kpi-label">Funded Apps</span><span class="kpi-value">0</span><span class="kpi-sub">of 2 total apps</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#FBBF24,transparent)"></div><span class="kpi-label">Funded Volume</span><span class="kpi-value">$0</span><span class="kpi-sub">3 merchants tracked</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#A78BFA,transparent)"></div><span class="kpi-label">Funded Apps</span><span class="kpi-value">0</span><span class="kpi-sub">of 3 total apps</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#22D3EE,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">0.0%</span><span class="kpi-sub">Apps → Funded</span></div>
       </div>
       <div class="card">
@@ -323,8 +323,8 @@
       <div class="kpi-grid kpi-grid-4">
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Total Funded</span><span class="kpi-value">$0</span><span class="kpi-sub">Across 0 producing merchants</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Avg Ticket</span><span class="kpi-value">$0</span><span class="kpi-sub">Per funded application</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#A78BFA,transparent)"></div><span class="kpi-label">Total Applications</span><span class="kpi-value">2</span><span class="kpi-sub">Across 2 active merchants</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#FBBF24,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">0.0%</span><span class="kpi-sub">0 of 2 apps funded</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#A78BFA,transparent)"></div><span class="kpi-label">Total Applications</span><span class="kpi-value">3</span><span class="kpi-sub">Across 3 active merchants</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#FBBF24,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">0.0%</span><span class="kpi-sub">0 of 3 apps funded</span></div>
       </div>
       <div class="card">
         <div class="section-title">Top 15 Producing Merchants</div>
@@ -365,7 +365,7 @@ var industryDataFull=[{"n":"Auto - Total Car Care","v":8},{"n":"Auto - Repair","
 var marketsScope='osr';
 var isrData=[{"n":"Javier Gonzalez","v":4},{"n":"Noemy Carrion","v":3},{"n":"Connor Admirand","v":3},{"n":"Michael Palmer","v":1}];
 var dailyTrend=[{"d":"Apr 1","v":3},{"d":"Apr 2","v":6},{"d":"Apr 6","v":2}];
-var topProducers=[{"n":"CM Wheels & Tires","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":""},{"n":"Ron\u2019s Service & Tire Center","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":"Matthew MacDonald"}];
+var topProducers=[{"n":"CM Wheels & Tires","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":""},{"n":"Ron\u2019s Service & Tire Center","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":"Matthew MacDonald"},{"n":"EuroPlus","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":""}];
 var PC=["#3B82F6","#10B981","#F59E0B","#EF4444","#8B5CF6","#06B6D4","#EC4899","#F97316","#14B8A6","#A855F7","#6366F1","#84CC16"];
 
 var repMerchants={
@@ -456,7 +456,7 @@ var pt='';topProducers.forEach(function(m,i){var rv=parseFloat(m.r);var cls=rv>=
 document.getElementById('prodTable').innerHTML=pt;
 
 // Funnel
-var fi=[{"l":"Active Merchants","v":2,"w":100,"c":"#3B82F6"},{"l":"Total Applications","v":2,"w":85,"c":"#8B5CF6"},{"l":"Funded Applications","v":0,"w":10,"c":"#10B981"},{"l":"Producing Merchants","v":0,"w":10,"c":"#F59E0B"}];
+var fi=[{"l":"Active Merchants","v":3,"w":100,"c":"#3B82F6"},{"l":"Total Applications","v":3,"w":85,"c":"#8B5CF6"},{"l":"Funded Applications","v":0,"w":10,"c":"#10B981"},{"l":"Producing Merchants","v":0,"w":10,"c":"#F59E0B"}];
 var fh='';fi.forEach(function(s){fh+='<div class="funnel-item"><div class="funnel-header"><span class="funnel-label">'+s.l+'</span><span class="funnel-value" style="color:'+s.c+'">'+s.v+'</span></div><div class="funnel-track"><div class="funnel-fill" style="width:'+s.w+'%;background:linear-gradient(90deg,'+s.c+','+s.c+'88)"></div></div></div>';});
 document.getElementById('funnelArea').innerHTML=fh;
 
