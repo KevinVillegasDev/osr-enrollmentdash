@@ -810,8 +810,7 @@ function fmtNum(n) {
 }
 
 function fmtDays(n) {
-  if (n === null || n === undefined || n === 0) return '<1 day';
-  if (n < 1) return '<1 day';
+  if (n === null || n === undefined) return '0.0 days';
   return n.toFixed(1) + ' days';
 }
 
