@@ -311,13 +311,60 @@ def main():
     if os.path.exists(q_path):
         html_generator.update_q1_enrollment(q_path, q1_data)
 
-    # ── Step 6: Process Field Activity ───────────────────────────────────
+    # ── Step 6: Process Field Activity (multi-month) ──────────────────────
     logger.info("--- Processing field activity ---")
+
+    # ── One-time: re-fetch March maps data (truncated at 2000 rows) ─────
+    if client:
+        try:
+            mar_snap_dir = os.path.join(PROJECT_ROOT, "data", "snapshots", "2026-03")
+            mar_snap_path = os.path.join(mar_snap_dir, "maps_check_ins.json")
+            # Check if March snapshot is truncated (exactly 2000 rows)
+            mar_needs_refetch = False
+            if os.path.exists(mar_snap_path):
+                with open(mar_snap_path, "r", encoding="utf-8") as f:
+                    mar_existing = json.load(f)
+                if len(mar_existing) == 2000:
+                    mar_needs_refetch = True
+                    logger.info("March maps snapshot has exactly 2000 rows — re-fetching with split")
+            if mar_needs_refetch:
+                mar_rows = fetch_maps_check_ins_split(client, 3, 2026)
+                if len(mar_rows) > 2000:
+                    os.makedirs(mar_snap_dir, exist_ok=True)
+                    with open(mar_snap_path, "w", encoding="utf-8") as f:
+                        json.dump(mar_rows, f, indent=2, default=str)
+                    logger.info("Re-fetched March maps: %d rows (was 2000)", len(mar_rows))
+                else:
+                    logger.info("March re-fetch returned %d rows (keeping existing)", len(mar_rows))
+        except Exception as e:
+            logger.warning("March maps re-fetch failed (non-fatal): %s", e)
+
+    # Process current month field activity
     field_data = field_activity.process(reports.get("maps_check_ins", []))
+
+    # Process previous month from snapshot for month toggle
+    prev_month_num = current_month - 1
+    prev_year = current_year
+    if prev_month_num < 1:
+        prev_month_num = 12
+        prev_year -= 1
+    prev_maps = _load_month_snapshot(prev_month_num, prev_year, "maps_check_ins")
+    prev_field_data = None
+    if prev_maps:
+        prev_field_data = field_activity.process(prev_maps)
+        logger.info("Processed prev month field activity: %s %d (%d rows)",
+                     MONTH_ABBREV[prev_month_num], prev_year, len(prev_maps))
+
+    # Build multi-month dict for html_generator
+    current_key = f"{MONTH_ABBREV[current_month]}-{current_year}"
+    field_months = {current_key: field_data}
+    if prev_field_data:
+        prev_key = f"{MONTH_ABBREV[prev_month_num]}-{prev_year}"
+        field_months[prev_key] = prev_field_data
 
     field_path = os.path.join(output_dir, "field-activity.html")
     if os.path.exists(field_path):
-        html_generator.update_field_activity(field_path, field_data)
+        html_generator.update_field_activity(field_path, field_months, current_key)
 
     # ── Step 6b: Fetch Genesys Cloud Data ───────────────────────────────
     genesys_data = []

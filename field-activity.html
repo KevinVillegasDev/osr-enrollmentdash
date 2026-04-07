@@ -119,6 +119,11 @@ a:hover{text-decoration:underline}
 .cal-day.in-range.has-data:hover{background:#287DA0}
 .cal-status{font-size:11px;text-align:center;margin-top:8px;min-height:16px;color:#8494AB}
 
+.month-toggle{display:flex;justify-content:center;gap:6px;margin-bottom:20px}
+.month-btn{background:#293852;border:1px solid #3D5170;color:#A8B8CC;padding:7px 18px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;transition:all .15s}
+.month-btn:hover{border-color:#22D3EE;color:#F1F5F9}
+.month-btn.active{background:#22D3EE;border-color:#22D3EE;color:#0D1321}
+
 .footer{text-align:center;color:#3D5170;font-size:12px;margin-top:32px;padding:16px 0}
 
 @media(max-width:768px){
@@ -136,9 +141,11 @@ a:hover{text-decoration:underline}
 <a href="index.html" class="back-link">&larr; Back to Dashboard Hub</a>
 
 <div class="header">
-  <h1>Field Activity <span class="header-badge">This Month</span></h1>
+  <h1>Field Activity</h1>
   <div class="header-sub">Maps check-ins &middot; 4/1 &ndash; 4/7, 2026</div>
 </div>
+
+<div class="month-toggle" id="monthToggle"></div>
 
 <div class="kpi-row">
   <div class="kpi-card">
@@ -214,6 +221,76 @@ var calYear, calMonth;
     calYear=now.getFullYear();
   }
 })();
+
+function buildMonthToggle(){
+  var el=document.getElementById('monthToggle');
+  if(!el||typeof monthlyFieldData==='undefined') return;
+  var keys=Object.keys(monthlyFieldData).sort();
+  if(keys.length<2){el.style.display='none';return;}
+  var monthNames={jan:'Jan',feb:'Feb',mar:'Mar',apr:'Apr',may:'May',jun:'Jun',jul:'Jul',aug:'Aug',sep:'Sep',oct:'Oct',nov:'Nov',dec:'Dec'};
+  el.innerHTML='';
+  for(var i=0;i<keys.length;i++){
+    var k=keys[i];
+    var parts=k.split('-');
+    var label=(monthNames[parts[0]]||parts[0])+' '+parts[1];
+    var btn=document.createElement('button');
+    btn.className='month-btn'+(k===activeFieldMonth?' active':'');
+    btn.textContent=label;
+    btn.setAttribute('data-month',k);
+    btn.onclick=(function(mk){return function(){swapMonth(mk);};})(k);
+    el.appendChild(btn);
+  }
+}
+
+function swapMonth(key){
+  if(typeof monthlyFieldData==='undefined'||!monthlyFieldData[key]) return;
+  activeFieldMonth=key;
+  var d=monthlyFieldData[key];
+  repActivity=d.repActivity||[];
+  repStops=d.repStops||{};
+  days=d.days||[];
+  dayLabels=d.dayLabels||{};
+  rangeStart=null;rangeEnd=null;typeFilter='all';
+  // Reset calendar to this month
+  if(days.length){var p=days[0].split('/');calMonth=parseInt(p[0])-1;calYear=parseInt(p[2]);}
+  stopCounts=getStopCountsByDate();
+  // Update KPI cards
+  var total=0,ex=0,pr=0,repsSet={};
+  for(var i=0;i<repActivity.length;i++){var r=repActivity[i];total+=r.t;ex+=r.ex;pr+=r.pr;if(r.t>0)repsSet[r.n]=1;}
+  var repsActive=Object.keys(repsSet).length;
+  var numDays=days.length||1;
+  var avgDay=(total/numDays).toFixed(1);
+  var avgRep=repsActive?(total/repsActive).toFixed(1):'0';
+  var exPct=total?Math.round(ex/total*100):0;
+  var prPct=total?Math.round(pr/total*100):0;
+  var kpis=document.querySelectorAll('.kpi-card');
+  if(kpis[0])kpis[0].querySelector('.kpi-value').textContent=total;
+  if(kpis[0])kpis[0].querySelector('.kpi-sub').textContent=avgDay+' avg / day';
+  if(kpis[1])kpis[1].querySelector('.kpi-value').textContent=ex;
+  if(kpis[1])kpis[1].querySelector('.kpi-sub').textContent=exPct+'% of stops';
+  if(kpis[2])kpis[2].querySelector('.kpi-value').textContent=pr;
+  if(kpis[2])kpis[2].querySelector('.kpi-sub').textContent=prPct+'% of stops';
+  if(kpis[3])kpis[3].querySelector('.kpi-value').textContent=repsActive;
+  if(kpis[3])kpis[3].querySelector('.kpi-sub').textContent=avgRep+' avg stops / rep';
+  // Update header sub
+  var sub=document.querySelector('.header-sub');
+  if(sub&&days.length){
+    var s=days[0].split('/'),e=days[days.length-1].split('/');
+    sub.innerHTML='Maps check-ins &middot; '+s[0]+'/'+s[1]+' &ndash; '+e[0]+'/'+e[1]+', '+s[2];
+  }
+  // Update toggle buttons
+  var btns=document.querySelectorAll('.month-btn');
+  for(var b=0;b<btns.length;b++){
+    btns[b].className='month-btn'+(btns[b].getAttribute('data-month')===key?' active':'');
+  }
+  // Update type filter buttons
+  var tBtns=document.querySelectorAll('.type-filters .filter-btn');
+  for(var t=0;t<tBtns.length;t++){
+    tBtns[t].className='filter-btn'+(tBtns[t].textContent.trim()==='All'?' active':'');
+  }
+  renderCalendar();
+  render();
+}
 
 function parseDate(s){
   var p=s.split('/');
@@ -582,6 +659,7 @@ function formatGap(min){
   return rm>0?h+'h '+rm+'m gap':h+'h gap';
 }
 
+buildMonthToggle();
 renderCalendar();
 render();
 </script>

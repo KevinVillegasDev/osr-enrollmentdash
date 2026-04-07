@@ -534,13 +534,16 @@ def create_quarterly_enrollment_page(quarter_num: int, year: int,
 
 # ─── Field Activity Generator ────────────────────────────────────────────────
 
-def update_field_activity(filepath: str, data: dict) -> bool:
+def update_field_activity(filepath: str, field_months: dict,
+                          active_key: str = "") -> bool:
     """
-    Update field-activity.html with new check-in data.
+    Update field-activity.html with multi-month check-in data.
 
     Args:
         filepath: Path to field-activity.html
-        data: Output from field_activity.process()
+        field_months: Dict mapping month keys (e.g. "apr-2026") to
+                      field_activity.process() output dicts.
+        active_key: The month key to display by default (current month).
     """
     if not os.path.exists(filepath):
         logger.error("Field activity file not found: %s", filepath)
@@ -548,37 +551,53 @@ def update_field_activity(filepath: str, data: dict) -> bool:
 
     html = _read_file(filepath)
 
+    # Determine active month data for KPI replacement
+    if active_key and active_key in field_months:
+        active_data = field_months[active_key]
+    else:
+        active_key = sorted(field_months.keys())[-1] if field_months else ""
+        active_data = field_months.get(active_key, {})
+
     # Build the data variable block
-    script_data = _build_field_activity_script(data)
+    script_data = _build_field_activity_script(field_months, active_key)
     html = _replace_script_data(html, script_data)
 
-    # Replace hardcoded KPIs in HTML body
-    html = _replace_field_kpis(html, data)
+    # Replace hardcoded KPIs in HTML body (uses active month)
+    if active_data:
+        html = _replace_field_kpis(html, active_data)
 
     if _validate_html(html):
         _write_file(filepath, html)
-        logger.info("Updated %s", filepath)
+        logger.info("Updated %s (%d months)", filepath, len(field_months))
         return True
     else:
         logger.error("HTML validation failed for %s", filepath)
         return False
 
 
-def _build_field_activity_script(data: dict) -> str:
+def _build_field_activity_script(field_months: dict, active_key: str) -> str:
     """Build the JS data variable block for field-activity.html.
 
-    Includes calendar state initialization so it survives data replacement.
-    The _replace_script_data() function replaces everything from <script> to
-    the first `function` keyword, so the calendar init IIFE must live here.
+    Includes all months' data in a monthlyFieldData object plus the active
+    month's data set as the initial repActivity/repStops/days/dayLabels.
+    Calendar state initialization is included so it survives data replacement.
     """
     lines = []
-    lines.append(f"var repActivity={_js_value(data['repActivity'])};")
-    lines.append(f"var repStops={_js_value(data['repStops'])};")
+
+    # Inject all months as a lookup object
+    lines.append(f"var monthlyFieldData={_js_value(field_months)};")
+    lines.append(f"var activeFieldMonth={_js_value(active_key)};")
+    lines.append("")
+
+    # Set initial active month data
+    active_data = field_months.get(active_key, {})
+    lines.append(f"var repActivity={_js_value(active_data.get('repActivity', []))};")
+    lines.append(f"var repStops={_js_value(active_data.get('repStops', {}))};")
     lines.append(f"var rangeStart=null;")
     lines.append(f"var rangeEnd=null;")
     lines.append(f"var typeFilter='all';")
-    lines.append(f"var days={_js_value(data['days'])};")
-    lines.append(f"var dayLabels={_js_value(data['dayLabels'])};")
+    lines.append(f"var days={_js_value(active_data.get('days', []))};")
+    lines.append(f"var dayLabels={_js_value(active_data.get('dayLabels', {}))};")
     lines.append("")
     # Calendar state — must be in data block because _replace_script_data
     # replaces everything before the first `function` keyword.
