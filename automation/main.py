@@ -659,7 +659,12 @@ def _load_month_snapshot(month: int, year: int, report_key: str) -> list:
 
 
 def _load_month_snapshot_all(month: int, year: int) -> dict:
-    """Load all snapshots for a month and run the monthly processor."""
+    """Load all snapshots for a month and run the monthly processor.
+
+    Requires at minimum new_enrollments AND credited_enrollments snapshots
+    to produce meaningful results. If either is missing, returns None so
+    the caller falls back to HTML extraction.
+    """
     snapshot_dir = os.path.join(PROJECT_ROOT, "data", "snapshots", f"{year}-{month:02d}")
     if not os.path.exists(snapshot_dir):
         return None
@@ -671,6 +676,12 @@ def _load_month_snapshot_all(month: int, year: int) -> dict:
                 key = filename.replace(".json", "")
                 with open(os.path.join(snapshot_dir, filename), "r", encoding="utf-8") as f:
                     reports[key] = json.load(f)
+
+        # Require both enrollment reports for accurate KPIs
+        if not reports.get("new_enrollments") or not reports.get("credited_enrollments"):
+            logger.info("Incomplete snapshot for %d-%02d (missing enrollment data), skipping",
+                        year, month)
+            return None
 
         return monthly_dashboard.process(
             all_enrollments=reports.get("new_enrollments", []),
