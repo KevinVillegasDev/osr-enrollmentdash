@@ -120,21 +120,6 @@ def main():
                 reports[report_key]
             )
 
-    # ── One-time: Fetch Jan + Feb 2026 credited enrollment snapshots
-    # TODO: Remove after successful run
-    if client and current_month >= 3:
-        for m in [1, 2]:
-            snap_dir = os.path.join(PROJECT_ROOT, "data", "snapshots", f"2026-{m:02d}")
-            snap_path = os.path.join(snap_dir, "credited_enrollments.json")
-            if not os.path.exists(snap_path) or os.path.getsize(snap_path) < 1000:
-                rows = _fetch_credited_for_month(client, m, 2026)
-                if rows:
-                    rows = _normalize_enrollment_rows(rows)
-                    os.makedirs(snap_dir, exist_ok=True)
-                    with open(snap_path, "w", encoding="utf-8") as f:
-                        json.dump(rows, f, indent=2, default=str)
-                    logger.info("Saved %d credited enrollments for %s 2026", len(rows), MONTH_ABBREV[m])
-
     # ── Step 3: Process Monthly Dashboard ────────────────────────────────
     logger.info("--- Processing monthly dashboard ---")
     monthly_data = monthly_dashboard.process(
