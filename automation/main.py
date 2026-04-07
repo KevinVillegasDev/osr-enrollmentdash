@@ -314,31 +314,6 @@ def main():
     # ── Step 6: Process Field Activity (multi-month) ──────────────────────
     logger.info("--- Processing field activity ---")
 
-    # ── One-time: re-fetch March maps data (truncated at 2000 rows) ─────
-    if client:
-        try:
-            mar_snap_dir = os.path.join(PROJECT_ROOT, "data", "snapshots", "2026-03")
-            mar_snap_path = os.path.join(mar_snap_dir, "maps_check_ins.json")
-            # Check if March snapshot is truncated (exactly 2000 rows)
-            mar_needs_refetch = False
-            if os.path.exists(mar_snap_path):
-                with open(mar_snap_path, "r", encoding="utf-8") as f:
-                    mar_existing = json.load(f)
-                if len(mar_existing) == 2000:
-                    mar_needs_refetch = True
-                    logger.info("March maps snapshot has exactly 2000 rows — re-fetching with split")
-            if mar_needs_refetch:
-                mar_rows = fetch_maps_check_ins_split(client, 3, 2026)
-                if len(mar_rows) > 2000:
-                    os.makedirs(mar_snap_dir, exist_ok=True)
-                    with open(mar_snap_path, "w", encoding="utf-8") as f:
-                        json.dump(mar_rows, f, indent=2, default=str)
-                    logger.info("Re-fetched March maps: %d rows (was 2000)", len(mar_rows))
-                else:
-                    logger.info("March re-fetch returned %d rows (keeping existing)", len(mar_rows))
-        except Exception as e:
-            logger.warning("March maps re-fetch failed (non-fatal): %s", e)
-
     # Process current month field activity
     field_data = field_activity.process(reports.get("maps_check_ins", []))
 
