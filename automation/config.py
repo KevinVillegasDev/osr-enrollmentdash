@@ -80,6 +80,23 @@ TERRITORY_MAP = {
     "RIC-9": "Matthew MacDonald",
 }
 
+# ─── Territory → ISR Mapping ────────────────────────────────────────
+# Maps territory codes to assigned ISR names.
+ISR_TERRITORY_MAP = {
+    "LTO-1": "Javier Gonzalez",
+    "LTO-2": "Noemy Carrion",
+    "LTO-3": "Noemy Carrion",
+    "LTO-5": "Javier Gonzalez",
+    "LTO-7": "Connor Admirand",
+    "RIC-1": "Katie Anguiano",
+    "RIC-2": "Katie Anguiano",
+    "RIC-4": "Katie Anguiano",
+    "RIC-6": "Laura Angulo",
+    "RIC-7": "Michael Palmer",
+    "RIC-8": "Connor Admirand",
+    "RIC-9": "Michael Palmer",
+}
+
 # ─── Month Mappings ──────────────────────────────────────────────────────────
 MONTH_NAMES = {
     1: "January", 2: "February", 3: "March", 4: "April",

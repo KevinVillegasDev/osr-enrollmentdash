@@ -20,6 +20,7 @@ from ..config import (
     MONTH_NAMES,
     OSR_ROSTER,
     ISR_ROSTER,
+    ISR_TERRITORY_MAP,
     TERRITORY_MAP,
     COHORT_TARGET_M1,
     COHORT_TARGET_M2,
@@ -103,8 +104,11 @@ def process(territory_code: str,
     isr_touch_data = _compute_isr_touches(territory_notes, bid_set)
     total_isr_touches = sum(isr_touch_data.values())
 
-    # ── Derive primary ISR from note frequency ───────────────────────────
-    primary_isr = _derive_primary_isr(territory_notes)
+    # ── Derive primary ISR (static map first, note frequency as override) ─
+    primary_isr = ISR_TERRITORY_MAP.get(territory_code, "")
+    isr_from_notes = _derive_primary_isr(territory_notes)
+    if isr_from_notes:
+        primary_isr = isr_from_notes
 
     # ── Field activity for this rep ──────────────────────────────────────
     tsr_checkins = _get_rep_checkins(field_activity, osr_name)
