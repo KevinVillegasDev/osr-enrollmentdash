@@ -943,5 +943,32 @@
     "_label_Industry": "Scooters",
     "EPF Product": "Rental Payments (Lease-to-Own Option)",
     "_label_EPF Product": "Rental Payments (Lease-to-Own Option)"
+  },
+  {
+    "Enrollment Date": "4/8/2026",
+    "Branch ID": "25592",
+    "_label_Branch ID": "25592",
+    "Account Name": "001TO00000ioRrmYAE",
+    "_label_Account Name": "Sound Image",
+    "Billing State/Province (text only)": "California",
+    "_label_Billing State/Province (text only)": "California",
+    "Status": "New",
+    "_label_Status": "New",
+    "Parent Account": "001TO00000iojWrYAI",
+    "_label_Parent Account": "Issa & Sons Inc",
+    "CID": "19872",
+    "_label_CID": "19872",
+    "Billing Street": "14747 Bear Valley Road",
+    "_label_Billing Street": "14747 Bear Valley Road",
+    "Billing State/Province": "CA",
+    "_label_Billing State/Province": "California",
+    "Billing Zip/Postal Code": "92345",
+    "_label_Billing Zip/Postal Code": "92345",
+    "Created Date": "2026-04-03",
+    "_label_Created Date": "4/3/2026",
+    "Industry": "Auto - Stereo",
+    "_label_Industry": "Auto - Stereo",
+    "EPF Product": "Purchase Installments (Retail Contract)",
+    "_label_EPF Product": "Purchase Installments (Retail Contract)"
   }
 ]
