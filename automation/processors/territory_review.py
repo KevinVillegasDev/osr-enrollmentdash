@@ -341,6 +341,7 @@ def _build_isr_conditioning(osr_cohorts, quarter_months, year,
     """Build per-cohort ISR conditioning table."""
     conditioning = []
     prev_producing = None
+    bid_label = COLUMN_LABELS.get("isr_note_branch_id", "Branch ID")
 
     for month_num in quarter_months:
         abbrev = MONTH_ABBREV[month_num]
@@ -358,12 +359,25 @@ def _build_isr_conditioning(osr_cohorts, quarter_months, year,
                 if bid_val is not None:
                     cohort_bids.append(str(bid_val))
 
+        cohort_bid_set = set(cohort_bids)
+
         ftd_values = [
             days_to_first_touch[bid]
             for bid in cohort_bids
             if bid in days_to_first_touch
         ]
         avg_ftd = round(sum(ftd_values) / len(ftd_values), 1) if ftd_values else 0.0
+
+        # ISR touches for this cohort's BIDs
+        isr_touches = 0
+        for note in territory_notes:
+            bid_raw = note.get(bid_label, "")
+            try:
+                bid = str(int(float(str(bid_raw))))
+            except (ValueError, TypeError):
+                continue
+            if bid in cohort_bid_set:
+                isr_touches += 1
 
         # OB2 completion count: how many BIDs have OB2 Demo logged
         ob2_completed = 0
@@ -387,6 +401,7 @@ def _build_isr_conditioning(osr_cohorts, quarter_months, year,
         conditioning.append({
             "month": MONTH_NAMES[month_num],
             "bid_count": bid_count,
+            "isr_touches": isr_touches,
             "avg_days_first_touch": avg_ftd,
             "ob2_completed": ob2_completed,
             "ob2_total": bid_count,
