@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.15.0/dist/pptxgenjs.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0D1321;color:#F1F5F9;font-family:'DM Sans','Segoe UI',system-ui,sans-serif;min-height:100vh}
@@ -73,6 +74,8 @@ a:hover{text-decoration:underline}
 .tr-badge-active{background:rgba(251,191,36,0.13);color:#FBBF24}
 .tr-badge-na{background:rgba(132,148,171,0.12);color:#627289}
 .tr-cohort-maturity{font-size:11px;color:#627289;font-style:italic;margin-top:8px;padding-top:8px;border-top:1px solid rgba(41,56,82,0.5)}
+.tr-cohort-deck-btn{display:flex;align-items:center;justify-content:center;gap:4px;width:100%;margin-top:12px;padding:6px 0;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.3);color:#A78BFA;border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;transition:all .15s}
+.tr-cohort-deck-btn:hover{background:rgba(167,139,250,0.2);border-color:#A78BFA;color:#C4B5FD}
 
 .tr-summary-bar{background:#111B2E;border:1px solid #293852;border-radius:12px;padding:16px 24px;font-size:14px;color:#A8B8CC;text-align:center}
 .tr-summary-bar b{font-weight:700;color:#F1F5F9}
@@ -278,10 +281,16 @@ a:hover{text-decoration:underline}
 
 <!-- Footer -->
 <div class="tr-footer">
-  <button class="tr-generate-btn" onclick="generatePDF()">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
-    Generate Report
-  </button>
+  <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+    <button class="tr-generate-btn" onclick="generatePDF()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+      PDF Report
+    </button>
+    <button class="tr-generate-btn" style="background:#A78BFA" onclick="generateDeck('quarterly')">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5"/></svg>
+      Quarterly Deck
+    </button>
+  </div>
   <div class="tr-footer-text" id="footerDate"></div>
   <div class="tr-footer-text" style="margin-top:4px">EasyPay Finance &mdash; Territory Cohort Review</div>
 </div>
@@ -420,6 +429,9 @@ function renderCohortScorecard(cohorts) {
       cohortRow('$15K Standard', badge15k) +
       cohortRow('$30K True-Up', badge30k) +
       maturity +
+      '<button class="tr-cohort-deck-btn" onclick="generateDeck(\'monthly\',' + i + ')" title="Generate ' + esc(c.month) + ' deck">' +
+      '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:12px;height:12px"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5"/></svg>' +
+      ' Generate ' + esc(c.month) + ' Deck</button>' +
       '</div>';
   }).join('');
 
@@ -631,6 +643,274 @@ function renderPipeline(items) {
   });
 
   container.innerHTML = html;
+}
+
+/* ===== PPTX Deck Generation ===== */
+function generateDeck(type, monthIdx) {
+  var code = document.getElementById('territorySelect').value;
+  if (!code || !territoryReviewData[code]) { alert('Please select a territory first.'); return; }
+  var td = territoryReviewData[code];
+  var tm = TERRITORY_MAP[code] || {};
+  var sm = td.summary;
+  var co = td.cohort_scorecard;
+  var ic = td.isr_conditioning;
+  var ao = td.activity_vs_output;
+  var pp = td.producer_patterns || [];
+  var gaps = td.gaps || [];
+  var pipe = td.pipeline || [];
+
+  // Determine quarter label from cohort months
+  var monthNames = co.map(function(c){return c.month;});
+  var qLabel = monthNames[0] && monthNames[2] ? monthNames[0].substring(0,3)+'-'+monthNames[2].substring(0,3) : 'Q';
+  var qNum = co[0] ? Math.ceil((['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'].indexOf(co[0].month_abbrev)+1)/3) : 1;
+  var quarterTitle = 'Q' + qNum;
+  var year = new Date().getFullYear();
+
+  // Format helpers (same as build_all_decks.js)
+  function fmt$(n){if(!n||n===0)return '$0';if(n>=1e6)return '$'+(n/1e6).toFixed(1)+'M';if(n>=1000)return '$'+Math.round(n/1000).toLocaleString()+'K';return '$'+Math.round(n).toLocaleString();}
+  function fN(n){return Number(n||0).toLocaleString();}
+  function fD(n){if(n===null||n===undefined)return '0.0 days';return n.toFixed(1)+' days';}
+
+  var pres = new PptxGenJS();
+  pres.layout = 'LAYOUT_16x9';
+
+  var hdr={bold:true,color:'FFFFFF',fill:{color:'1F5577'}};
+  var rAlt={fill:{color:'F0F4FF'}};
+  var tblBorder={type:'solid',pt:0.5,color:'E0E0E0'};
+  function darkSlide(){var sl=pres.addSlide();sl.background={color:'1A1A2E'};return sl;}
+  function lightSlide(){var sl=pres.addSlide();sl.background={color:'F8F9FA'};return sl;}
+
+  if (type === 'monthly') {
+    // ── MONTHLY DECK (7 slides for a single cohort month) ──
+    var mi = monthIdx || 0;
+    var cm = co[mi] || co[0];
+    var ci = ic[mi] || ic[0];
+    var mName = cm.month;
+    var mProducers = pp.filter(function(p){return p.cohort_month === cm.month_abbrev;});
+    // If no cohort_month field, use all producers (data may not have this field)
+    if (mProducers.length === 0 && pp.length > 0) mProducers = pp;
+
+    // S1 — Title
+    var s = darkSlide();
+    s.addShape(pres.ShapeType.rect,{x:0.4,y:1.4,w:1.2,h:0.02,fill:{color:'1AC668'}});
+    s.addText(code+' | '+mName+' '+year+' Enrollment Review',{x:0.4,y:1.5,w:9,fontSize:26,bold:true,color:'FFFFFF',fontFace:'Calibri'});
+    s.addText(sm.osr_name+' (OSR) | '+(sm.isr_name||'N/A')+' (ISR)',{x:0.4,y:2.1,w:9,fontSize:14,color:'FFFFFF',fontFace:'Calibri'});
+    s.addText(tm.area||'',{x:0.4,y:2.5,w:9,fontSize:10,color:'1BCEAC',fontFace:'Calibri'});
+    s.addText(year+' | Internal Strategy Session',{x:0.4,y:2.9,w:9,fontSize:10,color:'8494AB',fontFace:'Calibri'});
+    s.addText('INTERNAL \u2014 NOT FOR DISTRIBUTION',{x:0.4,y:5.3,w:9,fontSize:7,color:'627289',fontFace:'Calibri'});
+
+    // S2 — One-Line Problem (single month)
+    s = darkSlide();
+    s.addText(mName+' Cohort Overview',{x:0.4,y:0.15,w:9,fontSize:20,bold:true,color:'FFFFFF',fontFace:'Calibri'});
+    var stBoxes=[[0.7,String(cm.enrolled||0),'1AC668','Enrolled',cm.producing_ratio||'0 of 0'],[3.7,String(cm.producing||0),'D94F3D','Producing','of '+(cm.enrolled||0)+' enrolled'],[6.7,fmt$(cm.m1_funding||0),'FFC107','M0+M1 Funding','vs $15K expectation']];
+    stBoxes.forEach(function(b){var ns=b[1].length>6?26:36;s.addText([{text:b[1],options:{fontSize:ns,color:b[2],bold:true,breakType:'none'}},{text:'\n'+b[3],options:{fontSize:9,color:'FFFFFF'}}],{x:b[0],y:0.55,w:2.6,h:1.0,fill:{color:'293852'},rectRadius:0.08,align:'center',valign:'middle',fontFace:'Calibri'});s.addText(b[4],{x:b[0],y:1.58,w:2.6,h:0.2,fontSize:8,color:'8494AB',fontFace:'Calibri',align:'center'});});
+    s.addText((ci.bid_count||0)+' BIDs enrolled. '+(cm.producing||0)+' producing '+fmt$(cm.m1_funding||0)+' against $15K expectation.',{x:0.4,y:2.25,w:9.2,fontSize:10,italic:true,color:'FFFFFF',fontFace:'Calibri'});
+
+    // S3 — Cohort Scorecard (single month table)
+    s = lightSlide();
+    s.addText(mName+' Cohort Scorecard',{x:0.4,y:0.15,w:9,fontSize:20,bold:true,color:'1F5577',fontFace:'Calibri'});
+    function statusT(c){if(c.pass_15k)return{text:'PASS',options:{align:'center',bold:true,color:'1AC668'}};if(c.maturity==='early')return{text:'ACTIVE',options:{align:'center',bold:true,color:'FFC107'}};return{text:'FAIL',options:{align:'center',bold:true,color:'D94F3D'}};}
+    s.addTable([
+      [{text:'Metric',options:hdr},{text:mName,options:Object.assign({},hdr,{align:'center'})}],
+      ['Enrolled',{text:String(cm.enrolled||0),options:{align:'center'}}],
+      [{text:'Producing',options:rAlt},{text:(cm.producing||0)+' of '+(cm.enrolled||0),options:Object.assign({},rAlt,{align:'center'})}],
+      ['M0+M1 Funding',{text:fmt$(cm.m1_funding||0),options:{align:'center',bold:true}}],
+      [{text:'$15K Status',options:rAlt},Object.assign(statusT(cm),{options:Object.assign({},rAlt,statusT(cm).options)})]
+    ],{x:0.4,y:0.6,w:9.2,fontSize:10,fontFace:'Calibri',rowH:0.3,colW:[4.6,4.6],border:tblBorder,color:'333333'});
+
+    // S4 — ISR Conditioning (single month)
+    s = lightSlide();
+    s.addText('ISR Conditioning \u2014 '+mName,{x:0.4,y:0.15,w:9,fontSize:20,bold:true,color:'1F5577',fontFace:'Calibri'});
+    s.addText('ISR: '+(sm.isr_name||'N/A'),{x:0.4,y:0.45,w:9,fontSize:9,color:'666666',fontFace:'Calibri'});
+    s.addTable([
+      [{text:'BIDs',options:Object.assign({},hdr,{align:'center'})},{text:'Avg Days 1st Touch',options:Object.assign({},hdr,{align:'center'})},{text:'OB2 Completed',options:Object.assign({},hdr,{align:'center'})},{text:'Producing',options:Object.assign({},hdr,{align:'center'})},{text:'M0+M1 Funding',options:Object.assign({},hdr,{align:'right'})}],
+      [{text:String(ci.bid_count||0),options:{align:'center'}},{text:fD(ci.avg_days_first_touch),options:{align:'center'}},{text:(ci.ob2_completed||0)+' / '+(ci.ob2_total||0),options:{align:'center'}},{text:String(ci.producing||0),options:{align:'center'}},{text:fmt$(ci.m1_funding||0),options:{align:'right'}}]
+    ],{x:0.4,y:0.7,w:9.2,fontSize:10,fontFace:'Calibri',rowH:0.3,colW:[1.5,2.2,1.5,1.5,2.5],border:tblBorder,color:'333333'});
+    s.addShape(pres.ShapeType.roundRect,{x:0.4,y:1.5,w:9.2,h:0.5,fill:{color:'E8F6F5'},line:{color:'1BCEAC',width:1},rectRadius:0.05});
+    s.addText('OB Sequence Reference',{x:0.55,y:1.53,w:8.9,fontSize:10,bold:true,color:'333333',fontFace:'Calibri'});
+    s.addText('OB1: Welcome (Day 0-1) \u2192 OB2: Demo (Day 2-5) \u2192 OB3: Follow-up (Day 7-14) \u2192 OB4: 30-day Check-in',{x:0.55,y:1.73,w:8.9,fontSize:9,color:'333333',fontFace:'Calibri'});
+
+    // S5 — Where Production Lives
+    s = lightSlide();
+    s.addText('Where Production Lives',{x:0.4,y:0.15,w:9,fontSize:20,bold:true,color:'1F5577',fontFace:'Calibri'});
+    s.addText(mProducers.length+' producing merchants in '+mName,{x:0.4,y:0.45,w:9,fontSize:9,color:'666666',fontFace:'Calibri'});
+    var pFS=mProducers.length>15?7:mProducers.length>10?8:9;
+    var pRH=mProducers.length>15?0.18:mProducers.length>10?0.2:0.22;
+    var pRows=[[{text:'#',options:Object.assign({},hdr,{align:'center'})},{text:'Merchant',options:hdr},{text:'Funding',options:Object.assign({},hdr,{align:'right'})},{text:'BID',options:Object.assign({},hdr,{align:'center'})}]];
+    mProducers.forEach(function(p,i){var bg=i%2===1?{fill:{color:'F0F4FF'}}:{};var fs={fontSize:pFS,fontFace:'Calibri',color:'333333'};pRows.push([{text:String(i+1),options:Object.assign({},fs,bg,{align:'center'})},{text:p.merchant||p.name||'',options:Object.assign({},fs,bg)},{text:fmt$(p.funding||p.funded||0),options:Object.assign({},fs,bg,{align:'right',bold:true,color:'1AC668'})},{text:String(p.bid||''),options:Object.assign({},fs,bg,{align:'center'})}]);});
+    if(pRows.length>1)s.addTable(pRows,{x:0.4,y:0.65,w:9.2,fontSize:pFS,fontFace:'Calibri',rowH:pRH,colW:[0.4,5.0,1.8,1.2],border:tblBorder,color:'333333'});
+    else s.addText('No producing merchants this month',{x:0.4,y:1.5,w:9.2,fontSize:12,color:'666666',fontFace:'Calibri',italic:true,align:'center'});
+
+    // S6 — Gaps & Flags
+    s = lightSlide();
+    s.addText('Gaps & Flags',{x:0.4,y:0.15,w:9,fontSize:20,bold:true,color:'1F5577',fontFace:'Calibri'});
+    var mFlags=[];
+    if(!cm.pass_15k&&(cm.enrolled||0)>0){mFlags.push({color:cm.maturity==='early'?'FFC107':'D94F3D',title:mName+' Cohort $15K '+(cm.maturity==='early'?'Tracking':'Miss'),detail:(cm.enrolled||0)+' enrolled, '+(cm.producing||0)+' producing. '+fmt$(cm.m1_funding||0)+' vs $15,000.'});}
+    gaps.forEach(function(g){mFlags.push({color:g.type==='missing_ob2'?'FFC107':'D94F3D',title:g.title,detail:g.count+' of '+(g.total||g.count)+' BIDs affected'});});
+    if(mFlags.length===0)mFlags.push({color:'1AC668',title:'No Flags',detail:'All metrics within expected range for this cohort.'});
+    mFlags.slice(0,3).forEach(function(f,i){var y=0.55+i*0.95;s.addShape(pres.ShapeType.roundRect,{x:0.4,y:y,w:9.2,h:0.75,fill:{color:'FFFFFF'},line:{color:'E0E0E0',width:0.5},rectRadius:0.05});s.addShape(pres.ShapeType.rect,{x:0.4,y:y,w:0.06,h:0.75,fill:{color:f.color}});s.addText((i+1)+'  '+f.title,{x:0.6,y:y+0.05,w:8.8,fontSize:11,bold:true,color:'333333',fontFace:'Calibri'});s.addText(f.detail,{x:0.6,y:y+0.32,w:8.8,fontSize:9,color:'666666',fontFace:'Calibri'});});
+
+    // S7 — Close
+    s = darkSlide();
+    s.addText('The Standard We\u2019re Building Toward',{x:0.4,y:0.8,w:9,fontSize:22,bold:true,color:'FFFFFF',fontFace:'Calibri'});
+    [[0.7,'$15,000','M1 per cohort'],[3.7,'$30,000','Cumulative by M2'],[6.7,'100%','72-hr contact']].forEach(function(b){s.addText([{text:b[1],options:{fontSize:28,color:'1BCEAC',bold:true,breakType:'none'}},{text:'\n'+b[2],options:{fontSize:9,color:'FFFFFF'}}],{x:b[0],y:1.5,w:2.6,h:1.0,fill:{color:'293852'},rectRadius:0.08,align:'center',valign:'middle',fontFace:'Calibri'});});
+    s.addText('INTERNAL \u2014 NOT FOR DISTRIBUTION | EasyPay Finance | '+year,{x:0.4,y:5.3,w:9.2,fontSize:7,color:'627289',fontFace:'Calibri'});
+
+    pres.writeFile({fileName:code+'_'+mName+'_'+year+'_Review.pptx'});
+    return;
+  }
+
+  // ── QUARTERLY DECK (11 slides, same as build_all_decks.js) ──
+  var expectation = co.length * 15000;
+  var totalEnrolled = 0, totalProducing = 0, totalFunding = 0;
+  co.forEach(function(c){totalEnrolled+=(c.enrolled||0);totalProducing+=(c.producing||0);totalFunding+=(c.m1_funding||0);});
+  var totalCheckins = sm.tsr_checkins || 0;
+  var totalISR = sm.isr_touches || 0;
+  var zeroTouch = sm.zero_touch_bids || 0;
+  var allProducers = pp.slice().sort(function(a,b){return (b.funding||b.funded||0)-(a.funding||a.funded||0);});
+  var topProd = allProducers[0];
+  var concPct = (topProd && totalFunding > 0) ? Math.round((topProd.funding||topProd.funded||0)/totalFunding*100) : 0;
+
+  // Weighted avg days
+  var tDW=0,tBW=0;
+  ic.forEach(function(c){if((c.bid_count||0)>0){tDW+=(c.avg_days_first_touch||0)*c.bid_count;tBW+=c.bid_count;}});
+  var avgDaysAll=tBW>0?(tDW/tBW):0;
+
+  // S1 — Title
+  var s = darkSlide();
+  s.addShape(pres.ShapeType.rect,{x:0.4,y:1.4,w:1.2,h:0.02,fill:{color:'1AC668'}});
+  s.addText(code+' | '+quarterTitle+' '+year+' Enrollment Review',{x:0.4,y:1.5,w:9,fontSize:26,bold:true,color:'FFFFFF',fontFace:'Calibri'});
+  s.addText(sm.osr_name+' (OSR) | '+(sm.isr_name||'N/A')+' (ISR)',{x:0.4,y:2.1,w:9,fontSize:14,color:'FFFFFF',fontFace:'Calibri'});
+  s.addText(tm.area||'',{x:0.4,y:2.5,w:9,fontSize:10,color:'1BCEAC',fontFace:'Calibri'});
+  s.addText(year+' | Internal Strategy Session',{x:0.4,y:2.9,w:9,fontSize:10,color:'8494AB',fontFace:'Calibri'});
+  s.addText('INTERNAL \u2014 NOT FOR DISTRIBUTION',{x:0.4,y:5.3,w:9,fontSize:7,color:'627289',fontFace:'Calibri'});
+
+  // S2 — One-Line Problem
+  s = darkSlide();
+  s.addText('The One-Line Problem',{x:0.4,y:0.15,w:9,fontSize:20,bold:true,color:'FFFFFF',fontFace:'Calibri'});
+  var stBoxes=[[0.7,String(totalEnrolled),'1AC668','Total Enrolled',totalEnrolled+' enrolled'],[3.7,String(totalProducing),'D94F3D','Produced','of '+totalEnrolled+' enrolled'],[6.7,fmt$(totalFunding),'FFC107',quarterTitle+' Funding','vs '+fmt$(expectation)+' expectation']];
+  stBoxes.forEach(function(b){var ns=b[1].length>6?26:36;s.addText([{text:b[1],options:{fontSize:ns,color:b[2],bold:true,breakType:'none'}},{text:'\n'+b[3],options:{fontSize:9,color:'FFFFFF'}}],{x:b[0],y:0.55,w:2.6,h:1.0,fill:{color:'293852'},rectRadius:0.08,align:'center',valign:'middle',fontFace:'Calibri'});s.addText(b[4],{x:b[0],y:1.58,w:2.6,h:0.2,fontSize:8,color:'8494AB',fontFace:'Calibri',align:'center'});});
+  s.addText(fN(totalCheckins)+' TSR Check-Ins',{x:0.7,y:1.9,w:2.6,fontSize:9,color:'1BCEAC',fontFace:'Calibri',align:'center'});
+  s.addText(fN(totalISR)+' ISR Touches',{x:3.7,y:1.9,w:2.6,fontSize:9,color:'1BCEAC',fontFace:'Calibri',align:'center'});
+  s.addText(zeroTouch+' Zero-Touch BIDs',{x:6.7,y:1.9,w:2.6,fontSize:9,color:'1BCEAC',fontFace:'Calibri',align:'center'});
+  s.addText(totalEnrolled+' total enrolled '+quarterTitle+'. Of '+totalEnrolled+' enrolled merchants, '+totalProducing+' produced '+fmt$(totalFunding)+' against '+fmt$(expectation)+' expectation.',{x:0.4,y:2.25,w:9.2,fontSize:10,italic:true,color:'FFFFFF',fontFace:'Calibri'});
+
+  // S3 — Cohort Scorecard
+  s = lightSlide();
+  s.addText('Cohort Scorecard \u2014 '+quarterTitle+' '+year,{x:0.4,y:0.15,w:9,fontSize:20,bold:true,color:'1F5577',fontFace:'Calibri'});
+  s.addText('Enrolled merchants count toward $15K expectation',{x:0.4,y:0.45,w:9,fontSize:9,color:'666666',fontFace:'Calibri'});
+  function statusText(c){if(c.pass_15k)return{text:'PASS',options:{align:'center',bold:true,color:'1AC668'}};if(c.maturity==='early')return{text:'ACTIVE',options:{align:'center',bold:true,color:'FFC107'}};return{text:'FAIL',options:{align:'center',bold:true,color:'D94F3D'}};}
+  var scHdr=[{text:'Metric',options:hdr}];co.forEach(function(c){scHdr.push({text:c.month,options:Object.assign({},hdr,{align:'center'})});});
+  var scRows=[scHdr];
+  scRows.push(['Enrolled'].concat(co.map(function(c){return{text:String(c.enrolled||0),options:{align:'center'}};})));
+  scRows.push([{text:'Producing',options:rAlt}].concat(co.map(function(c){return{text:(c.producing||0)+' of '+(c.enrolled||0),options:Object.assign({},rAlt,{align:'center'})};})));
+  scRows.push(['M0+M1 Funding'].concat(co.map(function(c){return{text:fmt$(c.m1_funding||0),options:{align:'center',bold:true}};})));
+  scRows.push([{text:'$15K Status',options:rAlt}].concat(co.map(function(c){var st=statusText(c);return Object.assign(st,{options:Object.assign({},rAlt,st.options)});})));
+  var cw=9.2/(co.length+1);
+  s.addTable(scRows,{x:0.4,y:0.7,w:9.2,fontSize:10,fontFace:'Calibri',rowH:0.28,colW:[cw].concat(co.map(function(){return cw;})),border:tblBorder,color:'333333'});
+  s.addText(quarterTitle+': '+fmt$(totalFunding)+' funded | '+totalProducing+' of '+totalEnrolled+' enrolled BIDs produced | '+(totalEnrolled-totalProducing)+' at $0',{x:0.4,y:3.0,w:9.2,fontSize:9,color:'666666',fontFace:'Calibri'});
+
+  // S4 — Activity vs Output
+  s = lightSlide();
+  s.addText('Activity vs. Output',{x:0.4,y:0.15,w:9,fontSize:20,bold:true,color:'1F5577',fontFace:'Calibri'});
+  s.addText('Activity in the Field',{x:0.4,y:0.55,w:4.2,fontSize:12,bold:true,color:'1F5577',fontFace:'Calibri'});
+  s.addTable([
+    [sm.osr_name+' Check-Ins',fN(totalCheckins)],
+    ['ISR Touches',fN(totalISR)],
+    ['Zero-Touch BIDs',String(zeroTouch)],
+    ['Call Entries',String(ao.call_entries||0)]
+  ],{x:0.4,y:0.85,w:4.2,fontSize:9,fontFace:'Calibri',rowH:0.25,colW:[3.0,1.2],border:tblBorder,color:'333333'});
+  s.addText('Production Output',{x:5.2,y:0.55,w:4.2,fontSize:12,bold:true,color:'1F5577',fontFace:'Calibri'});
+  var pctAch=expectation>0?(totalFunding/expectation*100).toFixed(1):'0';
+  s.addTable([
+    ['BIDs Produced',totalProducing+' / '+totalEnrolled],
+    [quarterTitle+' Total Funded',fmt$(totalFunding)],
+    ['Expectation',fmt$(expectation)],
+    ['% Achieved',pctAch+'%'],
+    ['Top Producer',topProd?(topProd.merchant||topProd.name||'N/A'):'N/A'],
+    ['Concentration',concPct+'% of funding']
+  ],{x:5.2,y:0.85,w:4.2,fontSize:9,fontFace:'Calibri',rowH:0.25,colW:[3.0,1.2],border:tblBorder,color:'333333'});
+  var passCount=co.filter(function(c){return c.pass_15k;}).length;
+  s.addShape(pres.ShapeType.roundRect,{x:0.4,y:3.0,w:9.2,h:0.45,fill:{color:'E8F6F5'},rectRadius:0.05});
+  s.addText(passCount+' of '+co.length+' cohorts passed $15K.'+(topProd?' '+(topProd.merchant||topProd.name)+' drives '+concPct+'% of '+quarterTitle+' production.':''),{x:0.55,y:3.0,w:8.9,h:0.45,fontSize:9,italic:true,color:'333333',fontFace:'Calibri',valign:'middle'});
+
+  // S5 — ISR Conditioning
+  s = lightSlide();
+  s.addText('ISR Conditioning by Cohort',{x:0.4,y:0.15,w:9,fontSize:20,bold:true,color:'1F5577',fontFace:'Calibri'});
+  s.addText('ISR touch activity on enrolled BIDs',{x:0.4,y:0.45,w:9,fontSize:9,color:'666666',fontFace:'Calibri'});
+  var isrRows=[[{text:'Cohort',options:hdr},{text:'BIDs',options:Object.assign({},hdr,{align:'center'})},{text:'Avg Days 1st Touch',options:Object.assign({},hdr,{align:'center'})},{text:'OB2 Done',options:Object.assign({},hdr,{align:'center'})},{text:'Producing',options:Object.assign({},hdr,{align:'center'})},{text:'M0+M1 Funding',options:Object.assign({},hdr,{align:'right'})}]];
+  ic.forEach(function(c,i){var bg=i%2===1?rAlt:{};isrRows.push([{text:co[i].month,options:bg},{text:String(c.bid_count||0),options:Object.assign({},bg,{align:'center'})},{text:fD(c.avg_days_first_touch),options:Object.assign({},bg,{align:'center'})},{text:(c.ob2_completed||0)+' / '+(c.ob2_total||0),options:Object.assign({},bg,{align:'center'})},{text:String(c.producing||0),options:Object.assign({},bg,{align:'center'})},{text:fmt$(c.m1_funding||0),options:Object.assign({},bg,{align:'right'})}]);});
+  s.addTable(isrRows,{x:0.4,y:0.7,w:9.2,fontSize:10,fontFace:'Calibri',rowH:0.28,colW:[1.5,1.0,1.8,1.0,1.0,1.8],border:tblBorder,color:'333333'});
+  s.addText('ISR: '+(sm.isr_name||'N/A')+'. Metrics from CRM touch point data.',{x:0.4,y:1.95,w:9.2,fontSize:8,italic:true,color:'8494AB',fontFace:'Calibri'});
+  s.addShape(pres.ShapeType.roundRect,{x:0.4,y:2.3,w:9.2,h:0.5,fill:{color:'E8F6F5'},line:{color:'1BCEAC',width:1},rectRadius:0.05});
+  s.addText('OB Sequence Reference',{x:0.55,y:2.33,w:8.9,fontSize:10,bold:true,color:'333333',fontFace:'Calibri'});
+  s.addText('OB1: Welcome (Day 0-1) \u2192 OB2: Demo (Day 2-5) \u2192 OB3: Follow-up (Day 7-14) \u2192 OB4: 30-day Check-in',{x:0.55,y:2.53,w:8.9,fontSize:9,color:'333333',fontFace:'Calibri'});
+
+  // S6 — Where Production Lives
+  s = lightSlide();
+  s.addText('Where Production Lives',{x:0.4,y:0.15,w:9,fontSize:20,bold:true,color:'1F5577',fontFace:'Calibri'});
+  s.addText(allProducers.length+' producing merchants across '+quarterTitle,{x:0.4,y:0.45,w:9,fontSize:9,color:'666666',fontFace:'Calibri'});
+  var pFS=allProducers.length>15?7:allProducers.length>10?8:9;
+  var pRH=allProducers.length>15?0.18:allProducers.length>10?0.2:0.22;
+  var prodRows=[[{text:'#',options:Object.assign({},hdr,{align:'center'})},{text:'Merchant',options:hdr},{text:'Cohort',options:Object.assign({},hdr,{align:'center'})},{text:quarterTitle+' Funding',options:Object.assign({},hdr,{align:'right'})},{text:'BID',options:Object.assign({},hdr,{align:'center'})}]];
+  allProducers.forEach(function(p,i){var bg=i%2===1?{fill:{color:'F0F4FF'}}:{};var fs={fontSize:pFS,fontFace:'Calibri',color:'333333'};prodRows.push([{text:String(i+1),options:Object.assign({},fs,bg,{align:'center'})},{text:p.merchant||p.name||'',options:Object.assign({},fs,bg)},{text:p.cohort_month||'',options:Object.assign({},fs,bg,{align:'center'})},{text:fmt$(p.funding||p.funded||0),options:Object.assign({},fs,bg,{align:'right',bold:true,color:'1AC668'})},{text:String(p.bid||''),options:Object.assign({},fs,bg,{align:'center'})}]);});
+  if(prodRows.length>1)s.addTable(prodRows,{x:0.4,y:0.65,w:9.2,fontSize:pFS,fontFace:'Calibri',rowH:pRH,colW:[0.3,3.8,0.8,1.3,0.9],border:tblBorder,color:'333333'});
+  else s.addText('No producing merchants this quarter',{x:0.4,y:1.5,w:9.2,fontSize:12,color:'666666',fontFace:'Calibri',italic:true,align:'center'});
+
+  // S7 — ISR Touch Point Summary (dark)
+  s = darkSlide();
+  s.addText('ISR Touch Point Summary',{x:0.4,y:0.15,w:9,fontSize:20,bold:true,color:'FFFFFF',fontFace:'Calibri'});
+  s.addText('ISR: '+(sm.isr_name||'N/A')+' \u2014 Metrics from CRM touch point data',{x:0.4,y:0.45,w:9,fontSize:9,color:'8494AB',fontFace:'Calibri'});
+  [[0.7,fN(totalISR),'FFFFFF','Total ISR Touches'],[3.7,fD(avgDaysAll),'1BCEAC','Avg Days to 1st Touch'],[6.7,String(zeroTouch),'1AC668','Zero-Touch BIDs']].forEach(function(b){s.addText([{text:b[1],options:{fontSize:b[1].length>8?24:32,color:b[2],bold:true,breakType:'none'}},{text:'\n'+b[3],options:{fontSize:9,color:'8494AB'}}],{x:b[0],y:0.75,w:2.6,h:1.0,fill:{color:'293852'},rectRadius:0.08,align:'center',valign:'middle',fontFace:'Calibri'});});
+  var touchRows=[[{text:'Cohort',options:hdr},{text:'BIDs',options:Object.assign({},hdr,{align:'center'})},{text:'Touches',options:Object.assign({},hdr,{align:'center'})},{text:'Avg Days 1st Touch',options:Object.assign({},hdr,{align:'center'})}]];
+  ic.forEach(function(c,i){var bg=i%2===1?{fill:{color:'293852'}}:{};touchRows.push([{text:co[i].month,options:bg},{text:String(c.bid_count||0),options:Object.assign({},bg,{align:'center'})},{text:String(c.ob2_completed||0),options:Object.assign({},bg,{align:'center'})},{text:fD(c.avg_days_first_touch),options:Object.assign({},bg,{align:'center'})}]);});
+  s.addTable(touchRows,{x:0.4,y:2.0,w:9.2,fontSize:10,fontFace:'Calibri',rowH:0.28,colW:[2.3,2.3,2.3,2.3],border:{type:'solid',pt:0.5,color:'3A4F6B'},color:'FFFFFF'});
+
+  // S8 — Gaps & Flags
+  s = lightSlide();
+  s.addText('Gaps & Flags',{x:0.4,y:0.15,w:9,fontSize:20,bold:true,color:'1F5577',fontFace:'Calibri'});
+  var flags=[];
+  co.forEach(function(c){if(!c.pass_15k&&(c.enrolled||0)>0){flags.push({color:c.maturity==='early'?'FFC107':'D94F3D',title:c.month+' Cohort $15K '+(c.maturity==='early'?'Tracking':'Miss'),detail:(c.enrolled||0)+' enrolled, '+(c.producing||0)+' producing. '+fmt$(c.m1_funding||0)+' vs $15,000.'});}});
+  gaps.forEach(function(g){flags.push({color:g.type==='missing_ob2'?'FFC107':'D94F3D',title:g.title,detail:g.count+' of '+(g.total||g.count)+' BIDs affected'});});
+  if(flags.length===0)flags.push({color:'1AC668',title:'No Flags',detail:'All metrics within expected range.'});
+  flags.slice(0,3).forEach(function(f,i){var y=0.55+i*0.95;s.addShape(pres.ShapeType.roundRect,{x:0.4,y:y,w:9.2,h:0.75,fill:{color:'FFFFFF'},line:{color:'E0E0E0',width:0.5},rectRadius:0.05});s.addShape(pres.ShapeType.rect,{x:0.4,y:y,w:0.06,h:0.75,fill:{color:f.color}});s.addText((i+1)+'  '+f.title,{x:0.6,y:y+0.05,w:8.8,fontSize:11,bold:true,color:'333333',fontFace:'Calibri'});s.addText(f.detail,{x:0.6,y:y+0.32,w:8.8,fontSize:9,color:'666666',fontFace:'Calibri'});});
+
+  // S9 — Pipeline
+  s = lightSlide();
+  s.addText('Opportunity Pipeline',{x:0.4,y:0.15,w:9,fontSize:20,bold:true,color:'1F5577',fontFace:'Calibri'});
+  var cats={HIGH:[],RETAIN:[],GROW:[],ACT_NOW:[]};
+  pipe.forEach(function(p){if(cats[p.category])cats[p.category].push(p);});
+  if(cats.HIGH.length===0&&allProducers.length>0){var recent=allProducers.filter(function(p){return(p.funding||p.funded||0)>0;}).slice(0,2);recent.forEach(function(p){cats.HIGH.push(p);});}
+  if(cats.RETAIN.length===0&&allProducers.length>0)allProducers.slice(0,2).forEach(function(p){cats.RETAIN.push(p);});
+  var zeroCount=totalEnrolled-totalProducing;
+  var sections=[
+    {y:0.5,label:'HIGH PRIORITY',lc:'1AC668',bg:'E8F9F0',bc:'1AC668',lines:cats.HIGH.length>0?cats.HIGH.map(function(p){return(p.merchant||p.name||'')+(p.bid?' ('+p.bid+')':'')+' \u2014 '+fmt$(p.funding||p.funded||0);}):['Focus on activating newest enrollments']},
+    {y:1.5,label:'RETAIN',lc:'1F5577',bg:'F0F4FF',bc:'1F5577',lines:cats.RETAIN.length>0?cats.RETAIN.map(function(p){return(p.merchant||p.name||'')+(p.bid?' ('+p.bid+')':'')+' \u2014 '+fmt$(p.funding||p.funded||0);}):['Identify retention targets']},
+    {y:2.5,label:'GROW',lc:'D48806',bg:'FFF8E6',bc:'FFC107',lines:cats.GROW.length>0?cats.GROW.map(function(p){return(p.merchant||p.name||'');}):['Identify growth candidates']},
+    {y:3.5,label:'ACT NOW',lc:'D94F3D',bg:'FEF2F2',bc:'D94F3D',lines:cats.ACT_NOW.length>0?cats.ACT_NOW.map(function(p){return(p.merchant||p.name||'')+(p.bid?' ('+p.bid+')':'')+' \u2014 '+(p.reason||'Needs attention');}):[(zeroCount>0?zeroCount+' enrolled BIDs with $0 production':'All BIDs producing')]}
+  ];
+  sections.forEach(function(sec){s.addShape(pres.ShapeType.roundRect,{x:0.4,y:sec.y,w:9.2,h:0.85,fill:{color:sec.bg},rectRadius:0.05});s.addShape(pres.ShapeType.rect,{x:0.4,y:sec.y,w:0.06,h:0.85,fill:{color:sec.bc}});s.addText(sec.label,{x:0.6,y:sec.y+0.05,w:8.8,fontSize:9,bold:true,color:sec.lc,fontFace:'Calibri'});sec.lines.slice(0,3).forEach(function(l,i){s.addText(l,{x:0.6,y:sec.y+0.27+i*0.22,w:8.8,fontSize:9,color:'333333',fontFace:'Calibri'});});});
+
+  // S10 — Flags to Resolve
+  s = lightSlide();
+  s.addText('Flags to Resolve',{x:0.4,y:0.15,w:9,fontSize:20,bold:true,color:'1F5577',fontFace:'Calibri'});
+  var flagItems=[];
+  if(zeroCount>0)flagItems.push(['1','Non-producing BIDs activation plan ('+zeroCount+' BIDs)',sm.isr_name||'ISR','This month']);
+  co.forEach(function(c){if(!c.pass_15k&&(c.enrolled||0)>0){flagItems.push([String(flagItems.length+1),c.month+' cohort: '+(c.producing||0)+'/'+(c.enrolled||0)+' producing, '+fmt$(c.m1_funding||0)+' vs $15K',sm.osr_name+' + '+(sm.isr_name||'ISR'),'This month']);}});
+  if(flagItems.length===0)flagItems.push(['1','No outstanding flags','N/A','N/A']);
+  var flagRows=[[{text:'#',options:Object.assign({},hdr,{align:'center'})},{text:'Issue',options:hdr},{text:'Owner',options:hdr},{text:'Deadline',options:hdr}]];
+  flagItems.slice(0,4).forEach(function(r,i){var bg=i%2===1?rAlt:{};flagRows.push(r.map(function(t){return{text:t,options:bg};}));});
+  s.addTable(flagRows,{x:0.4,y:0.6,w:9.2,fontSize:10,fontFace:'Calibri',rowH:0.3,colW:[0.3,5.0,2.0,1.5],border:tblBorder,color:'333333'});
+
+  // S11 — Close
+  s = darkSlide();
+  s.addText('The Standard We\u2019re Building Toward',{x:0.4,y:0.8,w:9,fontSize:22,bold:true,color:'FFFFFF',fontFace:'Calibri'});
+  [[0.7,'$15,000','M1 per cohort'],[3.7,'$30,000','Cumulative by M2'],[6.7,'100%','72-hr contact']].forEach(function(b){s.addText([{text:b[1],options:{fontSize:28,color:'1BCEAC',bold:true,breakType:'none'}},{text:'\n'+b[2],options:{fontSize:9,color:'FFFFFF'}}],{x:b[0],y:1.5,w:2.6,h:1.0,fill:{color:'293852'},rectRadius:0.08,align:'center',valign:'middle',fontFace:'Calibri'});});
+  var bestCohort=co.reduce(function(a,b){return(a.m1_funding||0)>(b.m1_funding||0)?a:b;});
+  s.addText(bestCohort.month+' cohort led with '+(bestCohort.producing||0)+' of '+(bestCohort.enrolled||0)+' producing, '+fmt$(bestCohort.m1_funding||0)+'. Replicate that pattern next quarter.',{x:0.4,y:3.0,w:9.2,fontSize:10,italic:true,color:'FFFFFF',fontFace:'Calibri'});
+  s.addText('INTERNAL \u2014 NOT FOR DISTRIBUTION | EasyPay Finance | '+year,{x:0.4,y:5.3,w:9.2,fontSize:7,color:'627289',fontFace:'Calibri'});
+
+  pres.writeFile({fileName:code+'_'+quarterTitle+'_'+year+'_Territory_Review.pptx'});
 }
 
 /* ===== PDF Generation ===== */
