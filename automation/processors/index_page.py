@@ -281,16 +281,24 @@ def _build_isr_scorecard(genesys_data: list, isr_notes: list = None) -> list[dic
         if agent.get("name", "").lower() in isr_names_lower
     ]
 
-    # Count OB2 completions per ISR from Report 7 notes
+    # Count OB2 completions per ISR from Report 7 notes (unique BIDs only)
     ob2_counts = {}
     if isr_notes:
-        ob2_subjects = {"ob 2 demo", "ob2 demo", "lto training call", "lto training",
-                        "ob 2 merchant refused training"}
+        ob2_prefixes = ("ob 2 demo", "ob2 demo", "lto training call", "lto training",
+                        "ob 2 merchant refused training", "ob 2 osr demo")
+        # Track unique BIDs per ISR to avoid double-counting
+        isr_ob2_bids = {}  # isr_name -> set of BIDs
         for note in isr_notes:
             subject = (note.get("_label_Subject", "") or "").strip().lower()
-            isr_name = note.get("_label_Assigned", "") or ""
-            if subject in ob2_subjects and isr_name:
-                ob2_counts[isr_name] = ob2_counts.get(isr_name, 0) + 1
+            isr_name = (note.get("_label_ISR", "") or "").strip()
+            bid = note.get("Branch ID")
+            if not isr_name or isr_name == "-" or not bid:
+                continue
+            if any(subject.startswith(p) for p in ob2_prefixes):
+                if isr_name not in isr_ob2_bids:
+                    isr_ob2_bids[isr_name] = set()
+                isr_ob2_bids[isr_name].add(str(bid))
+        ob2_counts = {name: len(bids) for name, bids in isr_ob2_bids.items()}
 
     # Attach OB2 counts to each ISR
     for agent in isr_data:

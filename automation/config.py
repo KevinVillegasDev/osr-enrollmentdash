@@ -169,7 +169,7 @@ COLUMN_LABELS = {
     # Report 7: ISR Notes / Touch Points
     "isr_note_account": "_label_Company / Account",
     "isr_note_branch_id": "Branch ID",
-    "isr_note_rep": "_label_Assigned",
+    "isr_note_rep": "_label_ISR",
     "isr_note_subject": "_label_Subject",
     "isr_note_comments": "_label_Full Comments",
     "isr_note_date": "_label_Created Date",
