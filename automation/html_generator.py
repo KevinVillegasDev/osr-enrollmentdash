@@ -1551,6 +1551,7 @@ def _generate_isr_scorecard_table(isr_scorecard: list[dict]) -> str:
         talk_display = rep.get("talk_display", "0m")
         talk_seconds = rep.get("talk_seconds", 0)
         calls = rep.get("calls", 0)
+        ob2_count = rep.get("ob2_count", 0)
         bar_pct = round((talk_seconds / max_talk) * 100) if max_talk > 0 else 0
 
         # Color-code talk time (monthly thresholds)
@@ -1573,6 +1574,16 @@ def _generate_isr_scorecard_table(isr_scorecard: list[dict]) -> str:
         else:
             calls_color = "#627289"
 
+        # Color-code OB2 completions
+        if ob2_count >= 10:
+            ob2_color = "#2DD4A0"
+        elif ob2_count >= 5:
+            ob2_color = "#FBBF24"
+        elif ob2_count > 0:
+            ob2_color = "#F1F5F9"
+        else:
+            ob2_color = "#627289"
+
         # Rank badge
         rank = i + 1
         if rank == 1:
@@ -1593,6 +1604,7 @@ def _generate_isr_scorecard_table(isr_scorecard: list[dict]) -> str:
             f'<td class="sc-name">{rep["name"]}</td>'
             f'<td class="sc-num" style="color:{talk_color}">{talk_display}</td>'
             f'<td class="sc-num" style="color:{calls_color}">{calls}</td>'
+            f'<td class="sc-num" style="color:{ob2_color}">{ob2_count}</td>'
             f'<td class="sc-num" style="width:140px;padding-right:16px">'
             f'<div style="height:6px;border-radius:3px;background:rgba(34,211,238,0.15)">'
             f'<div style="height:100%;border-radius:3px;width:{bar_pct}%;'
@@ -1603,6 +1615,7 @@ def _generate_isr_scorecard_table(isr_scorecard: list[dict]) -> str:
     # Summary stats
     total_talk = sum(r["talk_seconds"] for r in isr_scorecard)
     total_calls = sum(r.get("calls", 0) for r in isr_scorecard)
+    total_ob2 = sum(r.get("ob2_count", 0) for r in isr_scorecard)
     active_reps = sum(1 for r in isr_scorecard if r["talk_seconds"] > 0)
     avg_talk = total_talk // active_reps if active_reps > 0 else 0
 
@@ -1623,6 +1636,7 @@ def _generate_isr_scorecard_table(isr_scorecard: list[dict]) -> str:
         f'<span><b style="color:#5B9BFF">{total_display}</b> total talk</span>'
         f'<span><b style="color:#2DD4A0">{avg_display}</b> avg per rep</span>'
         f'<span><b style="color:#FBBF24">{total_calls:,}</b> calls</span>'
+        f'<span><b style="color:#A78BFA">{total_ob2}</b> OB2s</span>'
         f'</div>\n'
         f'<div style="overflow-x:auto">\n'
         f'<table class="sc-table">\n'
@@ -1631,6 +1645,7 @@ def _generate_isr_scorecard_table(isr_scorecard: list[dict]) -> str:
         f'<th class="sc-th-name">Rep</th>'
         f'<th class="sc-th-num">Talk Time</th>'
         f'<th class="sc-th-num">Calls</th>'
+        f'<th class="sc-th-num" style="cursor:help" title="OB2 Demo/Training completions logged in Salesforce this quarter">OB2</th>'
         f'<th class="sc-th-num" style="width:140px;cursor:help" title="Talk time relative to top performer — full bar = highest talk time this month">Distribution</th>'
         f'</tr></thead>\n'
         f'<tbody>\n'

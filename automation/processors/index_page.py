@@ -23,7 +23,8 @@ def process(monthly_results: dict[str, dict],
             field_result: dict,
             current_month_key: str = "",
             genesys_data: list = None,
-            quota_rows: list = None) -> dict:
+            quota_rows: list = None,
+            isr_notes: list = None) -> dict:
     """
     Aggregate all processor outputs into index.html display values.
 
@@ -158,8 +159,8 @@ def process(monthly_results: dict[str, dict],
         "scorecard_month": scorecard_month,
         "scorecard_year": scorecard_year,
 
-        # ISR Scorecard (Genesys talk time)
-        "isr_scorecard": _build_isr_scorecard(genesys_data or []),
+        # ISR Scorecard (Genesys talk time + OB2 completions)
+        "isr_scorecard": _build_isr_scorecard(genesys_data or [], isr_notes or []),
 
         # Production Forecast
         "forecast": forecast_data,
@@ -262,12 +263,13 @@ def _month_sort_key(item: tuple) -> int:
     return _ABBREV_TO_NUM.get(abbrev, 0)
 
 
-def _build_isr_scorecard(genesys_data: list) -> list[dict]:
+def _build_isr_scorecard(genesys_data: list, isr_notes: list = None) -> list[dict]:
     """
-    Filter Genesys talk time data to ISR_ROSTER reps only.
+    Filter Genesys talk time data to ISR_ROSTER reps only and enrich
+    with OB2 completion counts from ISR Notes (Report 7).
 
     Returns list of dicts sorted by talk_seconds descending:
-        [{name, talk_seconds, talk_display, calls}, ...]
+        [{name, talk_seconds, talk_display, calls, ob2_count}, ...]
     """
     if not genesys_data:
         return []
@@ -275,9 +277,24 @@ def _build_isr_scorecard(genesys_data: list) -> list[dict]:
     # Filter to ISR roster only (case-insensitive matching)
     isr_names_lower = {name.lower() for name in ISR_ROSTER}
     isr_data = [
-        agent for agent in genesys_data
+        dict(agent) for agent in genesys_data
         if agent.get("name", "").lower() in isr_names_lower
     ]
+
+    # Count OB2 completions per ISR from Report 7 notes
+    ob2_counts = {}
+    if isr_notes:
+        ob2_subjects = {"ob 2 demo", "ob2 demo", "lto training call", "lto training",
+                        "ob 2 merchant refused training"}
+        for note in isr_notes:
+            subject = (note.get("_label_Subject", "") or "").strip().lower()
+            isr_name = note.get("_label_Assigned", "") or ""
+            if subject in ob2_subjects and isr_name:
+                ob2_counts[isr_name] = ob2_counts.get(isr_name, 0) + 1
+
+    # Attach OB2 counts to each ISR
+    for agent in isr_data:
+        agent["ob2_count"] = ob2_counts.get(agent.get("name", ""), 0)
 
     # Sort by talk time descending
     isr_data.sort(key=lambda a: a.get("talk_seconds", 0), reverse=True)

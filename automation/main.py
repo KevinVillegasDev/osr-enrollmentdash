@@ -515,6 +515,7 @@ def main():
         current_month_key=month_key,
         genesys_data=genesys_data,
         quota_rows=quota_rows,
+        isr_notes=isr_notes_rows,
     )
 
     index_path = os.path.join(output_dir, "index.html")
