@@ -453,7 +453,7 @@
     "Subject": "00UTO00000YPtNW2A1",
     "_label_Subject": "Maps Check In",
     "Company / Account": "0018Y00002s0kkbQAA",
-    "_label_Company / Account": "Teralgiu Enterprises Inc. DBA Express Tires & Auto Service",
+    "_label_Company / Account": "Master Tech Complete Auto Repair",
     "Assigned": "005TO00000AlZcTYAV",
     "_label_Assigned": "Cesar Flores",
     "Full Comments": "Checked in via Maps Application \nChecked in via Maps Application\n\nAccount/Contact: Express Tires (Closed Location)\nInteraction Type: Store Visit\n\nSummary:\nStopped by Express Tires and confirmed that the business is no longer in operation. The location has been replaced by a new business.\n\nBased on this update, the existing account should be closed/removed from the system. The new business at this location has already been identified and submitted for new enrollment.\n\nKey Insights:\n\u2022 Original business no longer exists\n\u2022 New business operating at location\n\u2022 New enrollment already initiated\n\nNext Steps:\n\u2022 Close or deactivate existing Express Tires account\n\u2022 Proceed with onboarding for new business\n\u2022 Follow up with new account as needed",
@@ -17722,5 +17722,47 @@
     "_label_Full Comments": "Checked in via Maps Application \nFrank\u2019s Mufflers\nContact: Anthony (Mechanic)\n\nSummary:\nStopped by Frank\u2019s Mufflers and spoke to Anthony, a mechanic. He will give my card to the boss. This is a simple follow-up stop within the Morales Transmission cluster.",
     "Lead": "00QTO000016n8252AA",
     "_label_Lead": "Frank\u2019s Mufflers Unknown"
+  },
+  {
+    "Created Date/Time": "2026-04-10T22:55:34Z",
+    "_label_Created Date/Time": "4/10/2026, 3:55 PM",
+    "Subject": "00UTO00000YmnxM2AR",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "001TO00000izGswYAE",
+    "_label_Company / Account": "Noriega's Auto Repair",
+    "Assigned": "005TO000009FYnOYAW",
+    "_label_Assigned": "DeLon Phoenix",
+    "Full Comments": "Checked in via Maps Application \nNoriega\u2019s Auto Repair\n\nBranch ID: TBD\nContact: Roxanna\nAddress: (add if needed)\n\n\u2e3b\n\nSummary:\n\nChecked in with Noriega\u2019s Auto Repair and spoke with Roxanna. This is a new account and everything is in good standing. Positive interaction with continued engagement",
+    "_label_Full Comments": "Checked in via Maps Application \nNoriega\u2019s Auto Repair\n\nBranch ID: TBD\nContact: Roxanna\nAddress: (add if needed)\n\n\u2e3b\n\nSummary:\n\nChecked in with Noriega\u2019s Auto Repair and spoke with Roxanna. This is a new account and everything is in good standing. Positive interaction with continued engagement",
+    "Lead": null,
+    "_label_Lead": "-"
+  },
+  {
+    "Created Date/Time": "2026-04-10T23:18:38Z",
+    "_label_Created Date/Time": "4/10/2026, 4:18 PM",
+    "Subject": "00UTO00000YnBEr2AN",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "00QTO00000Cs7TC2AZ",
+    "_label_Company / Account": "Honest-1 Auto Care",
+    "Assigned": "0058Y00000CRchwQAD",
+    "_label_Assigned": "Chris Koehne",
+    "Full Comments": "Checked in via Maps Application \nCK TEST",
+    "_label_Full Comments": "Checked in via Maps Application \nCK TEST",
+    "Lead": "00QTO00000Cs7TC2AZ",
+    "_label_Lead": "Honest-1 Unknown"
+  },
+  {
+    "Created Date/Time": "2026-04-10T23:25:47Z",
+    "_label_Created Date/Time": "4/10/2026, 4:25 PM",
+    "Subject": "00UTO00000Yn9502AB",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "00QTO00000Cs7TC2AZ",
+    "_label_Company / Account": "Honest-1 Auto Care",
+    "Assigned": "0058Y00000BjAryQAF",
+    "_label_Assigned": "Matthew MacDonald",
+    "Full Comments": "Checked in via Maps Application \nCK Test",
+    "_label_Full Comments": "Checked in via Maps Application \nCK Test",
+    "Lead": "00QTO00000Cs7TC2AZ",
+    "_label_Lead": "Honest-1 Unknown"
   }
 ]
