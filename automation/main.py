@@ -954,18 +954,13 @@ def _normalize_enrollment_rows(rows: list) -> list:
     for row in rows:
         new_row = dict(row)
 
-        # Fix OSR name: "OSR Enrollment Credit" often = "-" in SUMMARY format.
-        # The actual name is in "_label_OSR" (authoritative) or "Referral/Promo Code" (free-text).
-        # IMPORTANT: Check _label_OSR first — "Referral/Promo Code" is a free-text field
-        # that may contain abbreviations like "Stephanie" or "mm" instead of full names.
+        # Fix OSR name: "OSR Enrollment Credit" is the SUMMARY grouping field.
+        # When credit IS assigned, it already contains the display name (e.g., "Cesar Flores").
+        # When credit is NOT assigned, it contains "-".
+        # DO NOT fall back to "_label_OSR" — that's the territory owner, not credit.
+        # Leave "-" as-is so downstream processors can filter uncredited rows.
         osr_val = row.get(osr_label, "")
-        if not osr_val or osr_val == "-":
-            for alt in ("_label_OSR", f"_label_{osr_label}",
-                        "Referral/Promo Code"):
-                alt_val = row.get(alt)
-                if alt_val and alt_val != "-":
-                    new_row[osr_label] = alt_val
-                    break
+        # No fallback needed — the grouping field already has the display name
 
         # Fix merchant name: raw value is a Salesforce Account ID.
         # Display name lives in "_label_Account Name".

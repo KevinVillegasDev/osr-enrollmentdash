@@ -44,7 +44,7 @@ def process(monthly_credited: dict[str, list[dict]], quarter_months: list[int],
         osr_counts = Counter()
         for row in rows:
             osr = _get(row, "osr_credit", "")
-            if osr:
+            if osr and osr != "-":
                 osr_counts[osr] += 1
 
         for osr, count in osr_counts.items():

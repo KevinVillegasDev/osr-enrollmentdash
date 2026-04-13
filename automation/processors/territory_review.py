@@ -651,16 +651,12 @@ def _get_territory_bids(enrollment_data: dict, osr_name: str) -> dict:
 
 
 def _resolve_osr(row: dict) -> str:
-    """Resolve the OSR name from a row, matching normalization logic."""
+    """Resolve the OSR name from a row using OSR Enrollment Credit only.
+    Do NOT fall back to _label_OSR — that's the territory owner, not credit."""
     label = COLUMN_LABELS.get("osr_credit", "OSR Enrollment Credit")
     val = row.get(label, "")
     if val and val != "-":
         return val
-    for alt_key in ("_label_OSR", "_label_OSR Enrollment Credit",
-                    "Referral/Promo Code"):
-        alt_val = row.get(alt_key)
-        if alt_val and alt_val != "-":
-            return alt_val
     return ""
 
 

@@ -216,17 +216,12 @@ def _get(row: dict, col_key: str, default: str = "") -> str:
     label = COLUMN_LABELS.get(col_key, col_key)
     val = row.get(label, None)
 
-    # For OSR name: the "OSR Enrollment Credit" column often contains "-"
-    # in SUMMARY format.  The actual rep name is in alternate fields.
-    # IMPORTANT: Check _label_OSR first — "Referral/Promo Code" is a free-text
-    # field that may contain abbreviations instead of full names.
+    # For OSR name: "OSR Enrollment Credit" is the SUMMARY grouping field.
+    # When credit IS assigned, it already contains the display name.
+    # When "-", the enrollment has no credited OSR — do NOT fall back to
+    # "_label_OSR" which is the territory owner, not credit.
     if col_key == "osr_credit":
-        if not val or val == "-":
-            for alt in ("_label_OSR", "_label_OSR Enrollment Credit",
-                        "Referral/Promo Code"):
-                alt_val = row.get(alt)
-                if alt_val and alt_val != "-":
-                    return alt_val
+        pass  # Use the value as-is from the grouping field
 
     # For merchant name: raw value is a Salesforce Account ID in SUMMARY
     # format; the display name lives in the _label_ version.

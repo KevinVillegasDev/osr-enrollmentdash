@@ -51,7 +51,7 @@ def process(all_enrollments: list[dict], credited_enrollments: list[dict],
     osr_counts = Counter()
     for row in credited_enrollments:
         osr = _get(row, "osr_credit", "Unknown")
-        if osr:
+        if osr and osr != "-":
             osr_counts[osr] += 1
 
     rep_credits = sorted(
@@ -225,7 +225,8 @@ def process(all_enrollments: list[dict], credited_enrollments: list[dict],
 
     # ── KPI calculations ─────────────────────────────────────────────────
     kpi_total_enrollments = len(all_enrollments)
-    kpi_osr_credited = len(credited_enrollments)
+    kpi_osr_credited = sum(1 for r in credited_enrollments
+                           if _get(r, "osr_credit", "") not in ("", "-", "Unknown"))
     kpi_credit_pct = round(kpi_osr_credited / kpi_total_enrollments * 100, 1) if kpi_total_enrollments > 0 else 0
     kpi_other = kpi_total_enrollments - kpi_osr_credited
     kpi_other_pct = round(100 - kpi_credit_pct, 1)
