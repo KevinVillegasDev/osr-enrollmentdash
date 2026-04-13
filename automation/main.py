@@ -97,7 +97,19 @@ def main():
         # Load from latest snapshot
         reports = _load_latest_snapshot()
 
-    # ── Step 2b: Re-fetch Maps check-ins with split to avoid 2000 row cap ──
+    # ── Step 2b: Refresh previous month snapshot (catches SF credit changes) ──
+    if client:
+        prev_m = current_month - 1
+        prev_y = current_year
+        if prev_m < 1:
+            prev_m = 12
+            prev_y -= 1
+        try:
+            _refresh_past_month_snapshot(client, prev_m, prev_y, output_dir)
+        except Exception as e:
+            logger.warning("Previous month snapshot refresh failed (non-fatal): %s", e)
+
+    # ── Step 2c: Re-fetch Maps check-ins with split to avoid 2000 row cap ──
     if client:
         try:
             maps_split = fetch_maps_check_ins_split(client, current_month, current_year)
