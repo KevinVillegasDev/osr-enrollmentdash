@@ -97,6 +97,15 @@ def main():
         # Load from latest snapshot
         reports = _load_latest_snapshot()
 
+    # ── One-time: refresh Jan + Feb snapshots to catch any credit changes ──
+    if client:
+        for ref_month, ref_year in [(1, 2026), (2, 2026)]:
+            try:
+                _refresh_past_month_snapshot(client, ref_month, ref_year, output_dir)
+            except Exception as e:
+                logger.warning("Snapshot refresh for %s %d failed (non-fatal): %s",
+                               MONTH_ABBREV[ref_month], ref_year, e)
+
     # ── Step 2b: Refresh previous month snapshot (catches SF credit changes) ──
     if client:
         prev_m = current_month - 1
