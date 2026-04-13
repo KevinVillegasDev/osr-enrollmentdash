@@ -97,10 +97,6 @@ def main():
         # Load from latest snapshot
         reports = _load_latest_snapshot()
 
-    # ── One-time: refresh March credited snapshot (credit removed on 2 BIDs) ──
-    if client:
-        _refresh_past_month_snapshot(client, 3, 2026, output_dir)
-
     # ── Step 2b: Re-fetch Maps check-ins with split to avoid 2000 row cap ──
     if client:
         try:
