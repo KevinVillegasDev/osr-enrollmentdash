@@ -1,6 +1,6 @@
 [
   {
-    "OSR Enrollment Credit": "Outside Sales Manager",
+    "OSR Enrollment Credit": "-",
     "OSR": "0058Y00000B79SKQAZ",
     "_label_OSR": "Outside Sales Manager",
     "Branch ID": "25307",
@@ -126,7 +126,7 @@
     "_label_OS Territory": "-"
   },
   {
-    "OSR Enrollment Credit": "Claudia Gerhardt",
+    "OSR Enrollment Credit": "-",
     "OSR": "005TO000008qrzhYAA",
     "_label_OSR": "Claudia Gerhardt",
     "Branch ID": "25408",
@@ -189,7 +189,7 @@
     "_label_OS Territory": "RIC-2"
   },
   {
-    "OSR Enrollment Credit": "Jeremy Moore",
+    "OSR Enrollment Credit": "-",
     "OSR": "005TO00000AbxucYAB",
     "_label_OSR": "Jeremy Moore",
     "Branch ID": "25300",
@@ -202,8 +202,8 @@
     "_label_EPF Product": "Purchase Installments (Retail Contract)",
     "Account Name": "The Computer Connect",
     "_label_Account Name": "The Computer Connect",
-    "Status": "New",
-    "_label_Status": "New",
+    "Status": "Suspended",
+    "_label_Status": "Suspended",
     "Status Reason": [],
     "_label_Status Reason": "-",
     "Referral/Promo Code": null,
@@ -228,8 +228,8 @@
     "_label_Billing Zip/Postal Code": "90630",
     "DBA": null,
     "_label_DBA": "-",
-    "Entity Status": "New",
-    "_label_Entity Status": "New",
+    "Entity Status": "Suspended",
+    "_label_Entity Status": "Suspended",
     "ISR": "Katie Anguiano",
     "_label_ISR": "Katie Anguiano",
     "Conversion Specialist": null,
@@ -252,7 +252,7 @@
     "_label_OS Territory": "RIC-4"
   },
   {
-    "OSR Enrollment Credit": "Jacob Harmon",
+    "OSR Enrollment Credit": "-",
     "OSR": null,
     "_label_OSR": "-",
     "Branch ID": "25264",
@@ -315,7 +315,7 @@
     "_label_OS Territory": "-"
   },
   {
-    "OSR Enrollment Credit": "Claudia Gerhardt",
+    "OSR Enrollment Credit": "-",
     "OSR": "005TO000008qrzhYAA",
     "_label_OSR": "Claudia Gerhardt",
     "Branch ID": "25255",
@@ -378,7 +378,7 @@
     "_label_OS Territory": "RIC-2"
   },
   {
-    "OSR Enrollment Credit": "DeLon Phoenix",
+    "OSR Enrollment Credit": "-",
     "OSR": "005TO000009FYnOYAW",
     "_label_OSR": "DeLon Phoenix",
     "Branch ID": "25252",
@@ -441,7 +441,7 @@
     "_label_OS Territory": "RIC-7"
   },
   {
-    "OSR Enrollment Credit": "DeLon Phoenix",
+    "OSR Enrollment Credit": "-",
     "OSR": "005TO000009FYnOYAW",
     "_label_OSR": "DeLon Phoenix",
     "Branch ID": "25251",
@@ -504,7 +504,7 @@
     "_label_OS Territory": "RIC-7"
   },
   {
-    "OSR Enrollment Credit": "Stephanie Whitlock",
+    "OSR Enrollment Credit": "-",
     "OSR": "0058Y00000BjAreQAF",
     "_label_OSR": "Stephanie Whitlock",
     "Branch ID": "25259",
@@ -567,7 +567,7 @@
     "_label_OS Territory": "LTO-7"
   },
   {
-    "OSR Enrollment Credit": "Jared Midkiff",
+    "OSR Enrollment Credit": "-",
     "OSR": "0058Y00000B79SFQAZ",
     "_label_OSR": "Jared Midkiff",
     "Branch ID": "25240",
@@ -630,7 +630,7 @@
     "_label_OS Territory": "LTO-5"
   },
   {
-    "OSR Enrollment Credit": "Outside Sales Manager",
+    "OSR Enrollment Credit": "-",
     "OSR": "0058Y00000B79SKQAZ",
     "_label_OSR": "Outside Sales Manager",
     "Branch ID": "25247",
@@ -693,7 +693,7 @@
     "_label_OS Territory": "LTO-4"
   },
   {
-    "OSR Enrollment Credit": "Outside Sales Manager",
+    "OSR Enrollment Credit": "-",
     "OSR": "0058Y00000B79SKQAZ",
     "_label_OSR": "Outside Sales Manager",
     "Branch ID": "25257",
@@ -756,7 +756,7 @@
     "_label_OS Territory": "LTO-4"
   },
   {
-    "OSR Enrollment Credit": "Phillip Mason",
+    "OSR Enrollment Credit": "-",
     "OSR": "005TO000009aiVBYAY",
     "_label_OSR": "Phillip Mason",
     "Branch ID": "25394",
@@ -819,7 +819,7 @@
     "_label_OS Territory": "RIC-6"
   },
   {
-    "OSR Enrollment Credit": "Kaotic metal works",
+    "OSR Enrollment Credit": "-",
     "OSR": null,
     "_label_OSR": "-",
     "Branch ID": "25281",
@@ -848,8 +848,8 @@
     "_label_Parent Account": "Lito Customs LLC",
     "Industry": "Auto - Stereo",
     "_label_Industry": "Auto - Stereo",
-    "Billing Address Line 1": "1453 East Tulare Avenue",
-    "_label_Billing Address Line 1": "1453 East Tulare Avenue",
+    "Billing Address Line 1": "1453 E Tulare Ave",
+    "_label_Billing Address Line 1": "1453 E Tulare Ave",
     "Billing City": "Tulare",
     "_label_Billing City": "Tulare",
     "Billing State/Province": "CA",
@@ -882,7 +882,7 @@
     "_label_OS Territory": "-"
   },
   {
-    "OSR Enrollment Credit": "Outside Sales Manager",
+    "OSR Enrollment Credit": "-",
     "OSR": "0058Y00000B79SKQAZ",
     "_label_OSR": "Outside Sales Manager",
     "Branch ID": "25248",
@@ -945,7 +945,7 @@
     "_label_OS Territory": "RIC-3"
   },
   {
-    "OSR Enrollment Credit": "Yemaira Hernandez",
+    "OSR Enrollment Credit": "-",
     "OSR": "005TO000007Eqp7YAC",
     "_label_OSR": "Yemaira Hernandez",
     "Branch ID": "25293",
@@ -1008,7 +1008,7 @@
     "_label_OS Territory": "LTO-1"
   },
   {
-    "OSR Enrollment Credit": "Joseph Guerra",
+    "OSR Enrollment Credit": "-",
     "OSR": "0058Y00000BjAtfQAF",
     "_label_OSR": "Joseph Guerra",
     "Branch ID": "25245",
@@ -1071,7 +1071,7 @@
     "_label_OS Territory": "LTO-3"
   },
   {
-    "OSR Enrollment Credit": "Omar Corona",
+    "OSR Enrollment Credit": "-",
     "OSR": "005TO000006CQMfYAO",
     "_label_OSR": "Omar Corona",
     "Branch ID": "25277",
@@ -1134,7 +1134,7 @@
     "_label_OS Territory": "LTO-2"
   },
   {
-    "OSR Enrollment Credit": "Jared Midkiff",
+    "OSR Enrollment Credit": "-",
     "OSR": "0058Y00000B79SFQAZ",
     "_label_OSR": "Jared Midkiff",
     "Branch ID": "25379",
@@ -1260,7 +1260,7 @@
     "_label_OS Territory": "-"
   },
   {
-    "OSR Enrollment Credit": "Omar Corona",
+    "OSR Enrollment Credit": "-",
     "OSR": "005TO000006CQMfYAO",
     "_label_OSR": "Omar Corona",
     "Branch ID": "25405",
@@ -1323,7 +1323,7 @@
     "_label_OS Territory": "LTO-2"
   },
   {
-    "OSR Enrollment Credit": "Omar Corona",
+    "OSR Enrollment Credit": "-",
     "OSR": "005TO000006CQMfYAO",
     "_label_OSR": "Omar Corona",
     "Branch ID": "25406",
@@ -1386,7 +1386,7 @@
     "_label_OS Territory": "LTO-2"
   },
   {
-    "OSR Enrollment Credit": "FormPiper",
+    "OSR Enrollment Credit": "-",
     "OSR": null,
     "_label_OSR": "-",
     "Branch ID": "25318",
@@ -1449,7 +1449,7 @@
     "_label_OS Territory": "-"
   },
   {
-    "OSR Enrollment Credit": "Cesar Flores",
+    "OSR Enrollment Credit": "-",
     "OSR": "005TO00000AlZcTYAV",
     "_label_OSR": "Cesar Flores",
     "Branch ID": "25373",
@@ -1512,7 +1512,7 @@
     "_label_OS Territory": "RIC-1"
   },
   {
-    "OSR Enrollment Credit": "Omar Corona",
+    "OSR Enrollment Credit": "-",
     "OSR": "005TO000006CQMfYAO",
     "_label_OSR": "Omar Corona",
     "Branch ID": "25378",
@@ -1638,7 +1638,7 @@
     "_label_OS Territory": "-"
   },
   {
-    "OSR Enrollment Credit": "Joseph Guerra",
+    "OSR Enrollment Credit": "-",
     "OSR": "0058Y00000BjAtfQAF",
     "_label_OSR": "Joseph Guerra",
     "Branch ID": "25319",
@@ -1764,7 +1764,7 @@
     "_label_OS Territory": "-"
   },
   {
-    "OSR Enrollment Credit": "Outside Sales Manager",
+    "OSR Enrollment Credit": "-",
     "OSR": "0058Y00000B79SKQAZ",
     "_label_OSR": "Outside Sales Manager",
     "Branch ID": "25380",
@@ -1829,7 +1829,7 @@
     "_label_OS Territory": "LTO-8"
   },
   {
-    "OSR Enrollment Credit": "Outside Sales Manager",
+    "OSR Enrollment Credit": "-",
     "OSR": "0058Y00000B79SKQAZ",
     "_label_OSR": "Outside Sales Manager",
     "Branch ID": "25374",
@@ -1892,7 +1892,7 @@
     "_label_OS Territory": "LTO-4"
   },
   {
-    "OSR Enrollment Credit": "customers",
+    "OSR Enrollment Credit": "-",
     "OSR": null,
     "_label_OSR": "-",
     "Branch ID": "25372",
@@ -1955,7 +1955,7 @@
     "_label_OS Territory": "-"
   },
   {
-    "OSR Enrollment Credit": "Claudia Gerhardt",
+    "OSR Enrollment Credit": "-",
     "OSR": "005TO000008qrzhYAA",
     "_label_OSR": "Claudia Gerhardt",
     "Branch ID": "25353",
@@ -2018,7 +2018,7 @@
     "_label_OS Territory": "RIC-2"
   },
   {
-    "OSR Enrollment Credit": "Matthew MacDonald",
+    "OSR Enrollment Credit": "-",
     "OSR": "0058Y00000BjAryQAF",
     "_label_OSR": "Matthew MacDonald",
     "Branch ID": "25382",
@@ -2081,7 +2081,7 @@
     "_label_OS Territory": "RIC-9"
   },
   {
-    "OSR Enrollment Credit": "Outside Sales Manager",
+    "OSR Enrollment Credit": "-",
     "OSR": "0058Y00000B79SKQAZ",
     "_label_OSR": "Outside Sales Manager",
     "Branch ID": "25387",
@@ -2207,7 +2207,7 @@
     "_label_OS Territory": "-"
   },
   {
-    "OSR Enrollment Credit": "Omar Corona",
+    "OSR Enrollment Credit": "-",
     "OSR": "005TO000006CQMfYAO",
     "_label_OSR": "Omar Corona",
     "Branch ID": "25407",
@@ -2270,7 +2270,7 @@
     "_label_OS Territory": "LTO-2"
   },
   {
-    "OSR Enrollment Credit": "L7 Auto Group Auto Repair",
+    "OSR Enrollment Credit": "-",
     "OSR": null,
     "_label_OSR": "-",
     "Branch ID": "25403",
@@ -2333,7 +2333,7 @@
     "_label_OS Territory": "-"
   },
   {
-    "OSR Enrollment Credit": "Yemaira Hernandez",
+    "OSR Enrollment Credit": "-",
     "OSR": "005TO000007Eqp7YAC",
     "_label_OSR": "Yemaira Hernandez",
     "Branch ID": "25409",
@@ -3811,8 +3811,8 @@
     "_label_Parent Account": "Legacy GTA 50 LLC",
     "Industry": "Auto - Repair",
     "_label_Industry": "Auto - Repair",
-    "Billing Address Line 1": "2413 W Clay Street",
-    "_label_Billing Address Line 1": "2413 W Clay Street",
+    "Billing Address Line 1": "2413 W Clay St",
+    "_label_Billing Address Line 1": "2413 W Clay St",
     "Billing City": "St Charles",
     "_label_Billing City": "St Charles",
     "Billing State/Province": "MO",
@@ -5557,8 +5557,8 @@
     "_label_Store Number": "-",
     "EPF Product": "Purchase Installments (Retail Contract)",
     "_label_EPF Product": "Purchase Installments (Retail Contract)",
-    "Account Name": "CJs Auto Repair",
-    "_label_Account Name": "CJs Auto Repair",
+    "Account Name": "CJ's Auto Repair",
+    "_label_Account Name": "CJ's Auto Repair",
     "Status": "New",
     "_label_Status": "New",
     "Status Reason": [],
@@ -5575,8 +5575,8 @@
     "_label_Parent Account": "CJs Auto Repair LLC",
     "Industry": "Auto - Total Car Care",
     "_label_Industry": "Auto - Total Car Care",
-    "Billing Address Line 1": "2401 West Bonanza Road",
-    "_label_Billing Address Line 1": "2401 West Bonanza Road",
+    "Billing Address Line 1": "2401 W Bonanza Rd",
+    "_label_Billing Address Line 1": "2401 W Bonanza Rd",
     "Billing City": "Las Vegas",
     "_label_Billing City": "Las Vegas",
     "Billing State/Province": "NV",
@@ -5764,8 +5764,8 @@
     "_label_Parent Account": "Doctor Auto Care LLC",
     "Industry": "Auto - Repair",
     "_label_Industry": "Auto - Repair",
-    "Billing Address Line 1": "2217 Edgmont Avenue",
-    "_label_Billing Address Line 1": "2217 Edgmont Avenue",
+    "Billing Address Line 1": "2217 Edgmont Ave",
+    "_label_Billing Address Line 1": "2217 Edgmont Ave",
     "Billing City": "Chester",
     "_label_Billing City": "Chester",
     "Billing State/Province": "PA",
@@ -5827,8 +5827,8 @@
     "_label_Parent Account": "Pikes Peak Automotive LLC",
     "Industry": "Auto - Repair",
     "_label_Industry": "Auto - Repair",
-    "Billing Address Line 1": "119 Township Line Road",
-    "_label_Billing Address Line 1": "119 Township Line Road",
+    "Billing Address Line 1": "119 Township Line Rd",
+    "_label_Billing Address Line 1": "119 Township Line Rd",
     "Billing City": "Jenkintown",
     "_label_Billing City": "Jenkintown",
     "Billing State/Province": "PA",
@@ -8873,8 +8873,8 @@
     "_label_Parent: EP Converted Override": "false",
     "EP Converted": false,
     "_label_EP Converted": "false",
-    "Store Email": "javiermorelos@live.com",
-    "_label_Store Email": "javiermorelos@live.com",
+    "Store Email": "morelosjavier092@gmail.com",
+    "_label_Store Email": "morelosjavier092@gmail.com",
     "Category": null,
     "_label_Category": "-",
     "Merchant Risk Level": null,
@@ -10741,8 +10741,8 @@
     "_label_Parent Account": "Carfix Autos LLC",
     "Industry": "Auto - Repair",
     "_label_Industry": "Auto - Repair",
-    "Billing Address Line 1": "6853 65th Street Expressway",
-    "_label_Billing Address Line 1": "6853 65th Street Expressway",
+    "Billing Address Line 1": "6853 65th St Expy",
+    "_label_Billing Address Line 1": "6853 65th St Expy",
     "Billing City": "Sacramento",
     "_label_Billing City": "Sacramento",
     "Billing State/Province": "CA",
