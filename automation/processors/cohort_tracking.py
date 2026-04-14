@@ -149,8 +149,11 @@ def process_cohort(credited_enrollments: list[dict],
             osr_monthly_totals[mk] for mk in month_keys
         )
 
+        territory_code = osr_to_territory.get(osr, "")
+        display_name = f"{osr} ({territory_code})" if territory_code else osr
+
         osr_entry = {
-            "n": osr,
+            "n": display_name,
             "m": merchant_count,
             "p": producing_count,
             "f": round(m0_m1_total, 2),
