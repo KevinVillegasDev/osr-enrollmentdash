@@ -97,6 +97,29 @@ def main():
         # Load from latest snapshot
         reports = _load_latest_snapshot()
 
+    # ── One-time: re-fetch Feb cohort activity to check updated funded amounts ──
+    if client:
+        try:
+            from .salesforce_reports import fetch_cohort_activity, parse_report_rows
+            # Fetch activity for Feb enrollments (their M0=Feb, M1=Mar)
+            # This is Report 4 with enrollment date overridden to February
+            feb_activity_raw = fetch_cohort_activity(client, 2, 2026, 3, 2026)
+            if feb_activity_raw:
+                snap_path = os.path.join(PROJECT_ROOT, "data", "snapshots", "2026-02", "cohort_activity_refresh.json")
+                os.makedirs(os.path.dirname(snap_path), exist_ok=True)
+                with open(snap_path, "w", encoding="utf-8") as f:
+                    json.dump(feb_activity_raw, f, indent=2, default=str)
+                logger.info("Saved Feb cohort activity refresh: %d rows", len(feb_activity_raw))
+
+                # Check Ranger Seat Covers BID 25253
+                for row in feb_activity_raw:
+                    bid = str(row.get("Branch ID", ""))
+                    if bid == "25253":
+                        logger.info("BID 25253 (Ranger Seat Covers) activity: %s",
+                                   {k: v for k, v in row.items() if "Fund" in k or "fund" in k or "Dollars" in k})
+        except Exception as e:
+            logger.warning("Feb cohort activity refresh failed (non-fatal): %s", e)
+
     # ── Step 2b: Refresh previous month snapshot (catches SF credit changes) ──
     if client:
         prev_m = current_month - 1
