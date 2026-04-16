@@ -85,8 +85,9 @@ Two-tier client-side JS password gate using SHA-256 hashing via Web Crypto API:
 
 **OSR Chart View:** 5 horizontal bar charts ranked by rep — Stops/Day, Avg Hours in Field, Enrollments, Conversion Rate, % Budget Attainment.
 
-**ISR Grid View columns:** # | Rep | Talk Time | Calls | Distribution
+**ISR Grid View columns:** # | Rep | Talk Time | Calls | OB2 | Distribution
 - Data sourced from Genesys Cloud API (monthly cumulative, refreshes hourly)
+- **OB2 column** counts unique BIDs per ISR with subjects starting with "OB 2 Demo", "OB2 Demo", "OB 2 Merchant Refused Training", "OB 2 OSR Demo", "LTO Training Call", or "LTO Training". Deduped by BID (not by note count) — so 3 notes on the same merchant = 1 OB2 completion. Counted from Report 7 (ISR Notes) via `_label_ISR` field.
 
 **Summary bars** show team-level aggregates for each view.
 
@@ -137,11 +138,18 @@ Admin-only page gated behind the analytics password. Interactive territory-level
 **Features:**
 - Territory selector dropdown (all 12 assigned territories)
 - 7 sections: Summary banner, Cohort scorecard, Activity vs Output, ISR Conditioning, Producer Patterns, Gap Detection, Pipeline Categorization
-- PDF export via html2pdf.js (client-side, "Generate Report" button)
+- **PDF export** via html2pdf.js (client-side, "PDF Report" button)
+- **PPTX deck generation** via pptxgenjs CDN (client-side, no backend):
+  - **Quarterly Deck** button: full 11-slide deck matching `quarterly-reviews/build_all_decks.js` design
+  - **Generate [Month] Deck** button on each cohort card: 7-slide monthly subset
+  - Same styling (dark/light slides, Calibri, stat boxes, alternating table rows)
 - Data injected by pipeline as `territoryReviewData` JS variable keyed by territory code
+- `fmtDays()` always shows decimal format (e.g., "0.8 days", "1.6 days") — no "<1 day" threshold
+
+**ISR name assignment:** Uses `ISR_TERRITORY_MAP` in config.py as primary source, with ISR Notes frequency as override (so if notes show a different ISR, that name wins).
 
 **Data sources:** Reports 1-6 + Report 7 (ISR Notes) + Genesys + field activity
-**ISR Notes processing:** Groups by Branch ID, computes touches per BID, days to first touch, OB sequence tracking (OB1→OB2→OB3→OB Final), flags 72-hour violations
+**ISR Notes processing:** Groups by Branch ID, computes touches per BID, days to first touch, OB sequence tracking (OB1→OB2→OB3→OB Final), flags 72-hour violations. Per-cohort `isr_touches` field included in `isr_conditioning` output for deck generation.
 
 ## Monthly Dashboard Pattern (jan-2026.html through apr-2026.html)
 
@@ -164,14 +172,25 @@ Tracks OSR compliance with Paul Funchess's commission structure:
 - Month 0 = enrollment month, Month 1 = first full calendar month after enrollment
 - Funding from BOTH Month 0 and Month 1 counts toward the $15K target
 - If an OSR misses $15K by end of Month 1, they get a Month 2 true-up: hit $30K cumulative by end of Month 2
+- **M2 true-up is OR logic**: only available if the cohort FAILED $15K in M1. If M1 passed, true-up is n/a.
 - Only OSR-credited, **in-territory** merchants count (filtered by OS Territory column matching TERRITORY_MAP)
 - Non-roster names (like "-", "friend") are filtered out via OSR_ROSTER check
+
+**Credit attribution — SINGLE SOURCE OF TRUTH:**
+- The `OSR Enrollment Credit` field in Salesforce is the ONLY source used for commission credit.
+- `_label_OSR` (territory owner) is NOT used as a fallback — it's the territory assignment, not the credit.
+- If `OSR Enrollment Credit` is blank ("-"), the enrollment is counted as uncredited and excluded from all cohort calculations.
+- Once the SF admin assigns credit, the next pipeline run picks it up automatically.
+
+**Rep names show territory code**: e.g., "Stephanie Whitlock (LTO-7)" in cohort tables.
 
 **New cohort tabs are created automatically** by the pipeline when a new month starts.
 
 ## Field Activity Tracker (field-activity.html)
 
 Monthly check-in data from Salesforce Maps (Report 5).
+
+**Multi-month toggle:** Page shows pills at the top (e.g., "Mar 2026" / "Apr 2026") to switch between current and previous month's check-in data. Implemented via `monthlyFieldData` JS object injected by the pipeline. Click a month pill to swap `repActivity`, `repStops`, `days`, `dayLabels`, KPIs, and calendar without reloading.
 
 **2,000 row API limit handling:** The pipeline fetches Report 5 in two halves (first half of month + second half) to avoid Salesforce's 2,000 row cap per API call. Results are merged and deduplicated.
 
@@ -242,8 +261,8 @@ Report 5 (Maps Check-Ins) is fetched in two API calls to avoid Salesforce's 2,00
 
 ### Data Normalization (main.py)
 
-The `_normalize_enrollment_rows()` function fixes three fields after fetching:
-1. **OSR name**: Resolves from `_label_OSR` (authoritative) → `_label_OSR Enrollment Credit` → `Referral/Promo Code` (free-text fallback).
+The `_normalize_enrollment_rows()` function fixes fields after fetching:
+1. **OSR credit**: The SUMMARY grouping field `OSR Enrollment Credit` already contains the display name (or "-" when unassigned). No fallback to `_label_OSR` — that's territory owner, not credit.
 2. **Merchant name**: Resolves from `_label_Account Name` (replaces raw Salesforce Account ID).
 3. **ISR name**: Resolves from `_label_ISR` (replaces raw Salesforce User ID).
 
@@ -258,7 +277,14 @@ The pipeline only processes the current month's data live. For past months on th
 2. If incomplete → falls back to `_extract_monthly_from_html()` which reads KPIs from the existing dashboard HTML
 3. Past month dashboard HTML files are NEVER reprocessed by the pipeline — they stay frozen
 
-The `_refresh_past_month_snapshot()` helper exists for one-time re-fetches of credited enrollment data (e.g., when SF credits are corrected after month closes). It updates ONLY the snapshot JSON, NOT the dashboard HTML.
+**Automatic previous-month snapshot refresh (Step 2b in main.py):**
+On every hourly pipeline run, the previous month's snapshots are auto-refreshed from Salesforce:
+1. `_refresh_past_month_snapshot()` — re-fetches credited enrollments (catches SF credit reassignments)
+2. `fetch_cohort_activity()` — re-fetches last month activity/funding data (catches late-posting transactions)
+
+This ensures cohort commission numbers stay current for the most recently-closed month without manual intervention. Only affects snapshot JSON — dashboard HTML is never regenerated for past months.
+
+For older months (2+ months back), snapshots are frozen unless manually refreshed with a one-time `_refresh_past_month_snapshot()` call in main.py.
 
 ### HTML Injection Patterns
 
@@ -406,7 +432,7 @@ PPTX decks generated per territory for leadership reviews. Built with pptxgenjs 
 
 **Roster changes:**
 1. Update `OSR_ROSTER` (or `ISR_ROSTER`) in `automation/config.py`
-2. If the rep has a territory, update `TERRITORY_MAP` in `automation/config.py`
+2. If the rep has a territory, update `TERRITORY_MAP` (OSR) and/or `ISR_TERRITORY_MAP` (ISR) in `automation/config.py`
 3. Update the roster/territory sections in this file
 
 **Report changes:**
