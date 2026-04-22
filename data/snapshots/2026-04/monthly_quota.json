@@ -939,8 +939,11 @@
     "_label_Applications": "-",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
-    "Funded Dollars Quota": null,
-    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars Quota": {
+      "amount": 734638,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$734,638.00",
     "Funded Dollars": null,
     "_label_Funded Dollars": "-",
     "Funded Dollars Difference": null,
