@@ -1320,14 +1320,14 @@
     "_label_Created Date/Time": "4/1/2026, 12:12 PM",
     "Subject": "00UTO00000YQiGN2A1",
     "_label_Subject": "Maps Check In",
-    "Company / Account": "00QTO000016pZqz2AE",
+    "Company / Account": "001TO00000jskrxYAA",
     "_label_Company / Account": "AT 1960 TRANSMISSIONS AND SERVICES LLC",
     "Assigned": "0058Y00000BjAtfQAF",
     "_label_Assigned": "Joseph Guerra",
     "Full Comments": "Speaking with Daniel and Rodolfo, they are getting the information together to enroll with us.",
     "_label_Full Comments": "Speaking with Daniel and Rodolfo, they are getting the information together to enroll with us.",
-    "Lead": "00QTO000016pZqz2AE",
-    "_label_Lead": "Rodolfo Serrato"
+    "Lead": null,
+    "_label_Lead": "-"
   },
   {
     "Created Date/Time": "2026-04-01T19:17:08Z",
