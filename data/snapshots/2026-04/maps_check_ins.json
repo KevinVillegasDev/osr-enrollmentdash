@@ -23150,8 +23150,8 @@
     "_label_Company / Account": "Varona Automotive",
     "Assigned": "0058Y00000BjAreQAF",
     "_label_Assigned": "Stephanie Whitlock",
-    "Full Comments": "Checked in via Maps Application",
-    "_label_Full Comments": "Checked in via Maps Application",
+    "Full Comments": "I came by to speak with Miguel to see if he was ready to enroll. He said that he wasn't because his business has been so slow that he is barely using Snap right now. I will come back in a few months and see if he is ready to enroll at that time.",
+    "_label_Full Comments": "I came by to speak with Miguel to see if he was ready to enroll. He said that he wasn't because his business has been so slow that he is barely using Snap right now. I will come back in a few months and see if he is ready to enroll at that time.",
     "Lead": null,
     "_label_Lead": "-"
   },
@@ -23280,20 +23280,6 @@
     "_label_Full Comments": "Checked in via Maps Application \nSpoke with Jackie. Enjoys using us but did bring up online banking as a reason for declines sometimes. Mentioned xriver coming soon as well.",
     "Lead": null,
     "_label_Lead": "-"
-  },
-  {
-    "Created Date/Time": "2026-04-15T16:25:06Z",
-    "_label_Created Date/Time": "4/15/2026, 9:25 AM",
-    "Subject": "00UTO00000YwYk62AF",
-    "_label_Subject": "Maps Check In",
-    "Company / Account": "00QTO00000xLZlZ2AW",
-    "_label_Company / Account": "Marvelous New and Used Tires",
-    "Assigned": "0058Y00000BjAreQAF",
-    "_label_Assigned": "Stephanie Whitlock",
-    "Full Comments": "Checked in via Maps Application",
-    "_label_Full Comments": "Checked in via Maps Application",
-    "Lead": "00QTO00000xLZlZ2AW",
-    "_label_Lead": "Marvelous New and Used Tires Unknown"
   },
   {
     "Created Date/Time": "2026-04-15T16:27:35Z",
@@ -27998,5 +27984,19 @@
     "_label_Full Comments": "Checked in via Maps Application \nThe Lab\n\nBranch ID: TBD\nContact: Carlos\nDecision Maker: Mike (not present)\nAddress: (add if needed)\n\n\u2e3b\n\nSummary:\n\nStopped by The Lab and spoke with Carlos. Good interaction. Carlos understands the EZPay program and sees the value. Mike (decision-maker) was not present during the visit. Business currently has financing in place, so timing and positioning will be key.\n\n\u2e3b\n\nNext Action Steps:\n\n* Follow up to connect with Mike (decision-maker)\n* Position EZPay as a complementary / second-look option\n* Work timing to align with business needs\n* Move toward enrollment when opportunity opens",
     "Lead": "00QTO000016dgEk2AI",
     "_label_Lead": "The Lab Unknown"
+  },
+  {
+    "Created Date/Time": "2026-04-17T17:22:29Z",
+    "_label_Created Date/Time": "4/17/2026, 10:22 AM",
+    "Subject": "00UTO00000Z2QS72AN",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "00Q8Y00001p5LLTUA2",
+    "_label_Company / Account": "Solid State Lube",
+    "Assigned": "005TO00000AbxucYAB",
+    "_label_Assigned": "Jeremy Moore",
+    "Full Comments": "Checked in via Maps Application \nBriefly spoke to Jose he pretty much shot me down right away, saying the owner was not interested in any sort of financing. This was a lead put in by the prior TSM. I\u2019m just going through them trying to figure out where potential is.",
+    "_label_Full Comments": "Checked in via Maps Application \nBriefly spoke to Jose he pretty much shot me down right away, saying the owner was not interested in any sort of financing. This was a lead put in by the prior TSM. I\u2019m just going through them trying to figure out where potential is.",
+    "Lead": "00Q8Y00001p5LLTUA2",
+    "_label_Lead": "Andrew Astrahan"
   }
 ]
