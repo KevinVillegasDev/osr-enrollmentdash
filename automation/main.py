@@ -136,6 +136,15 @@ def main():
                 logger.info("Maps split fetch returned %d rows (vs %d from single fetch). Using split data.",
                             len(maps_split), len(reports.get("maps_check_ins", [])))
                 reports["maps_check_ins"] = maps_split
+                # Re-save the snapshot so downstream tools (and past-month replays)
+                # read the merged data, not just the truncated first 2,000 rows.
+                snap_path = os.path.join(
+                    PROJECT_ROOT, "data", "snapshots",
+                    f"{current_year}-{current_month:02d}", "maps_check_ins.json"
+                )
+                with open(snap_path, "w", encoding="utf-8") as f:
+                    json.dump(maps_split, f, indent=2, default=str)
+                logger.info("Re-saved maps_check_ins snapshot with merged %d rows", len(maps_split))
             else:
                 logger.info("Maps single fetch (%d rows) was sufficient. Skipping split.",
                             len(reports.get("maps_check_ins", [])))
