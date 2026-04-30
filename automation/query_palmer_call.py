@@ -60,7 +60,7 @@ body = {
     "order": "asc",
     "orderBy": "conversationStart",
     "paging": {"pageSize": 100, "pageNumber": 1},
-    "conversationFilters": [
+    "segmentFilters": [
         {
             "type": "and",
             "predicates": [
