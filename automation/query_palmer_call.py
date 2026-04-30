@@ -101,28 +101,37 @@ def _digits(s: str) -> str:
 inbound = []
 outbound = []
 all_remote_numbers = {}  # digits -> count
+sample_palmer_session = None  # raw JSON for diagnostic
 
 # Phone fields that may contain remote numbers across Genesys versions
 PHONE_FIELDS = ("ani", "dnis", "remote", "addressFrom", "addressTo",
-                "addressOther", "remoteAddress")
+                "addressOther", "remoteAddress", "addressSelf")
 
 for conv in conversations:
     matched = False
     direction = None
 
-    for participant in conv.get("participants", []):
+    # Only look at participants where Palmer is the user (skip customer, IVR, queue legs)
+    palmer_participants = [
+        p for p in conv.get("participants", [])
+        if p.get("userId") == user_id
+    ]
+
+    for participant in palmer_participants:
         for session in participant.get("sessions", []):
+            # Capture the first one so we can see the real field structure
+            if sample_palmer_session is None:
+                sample_palmer_session = session
+
             sess_dir = session.get("direction") or participant.get("direction")
             for field in PHONE_FIELDS:
                 val = session.get(field, "")
                 if not val:
                     continue
                 digits = _digits(val)
-                if not digits:
+                if not digits or len(digits) < 7:
                     continue
-                # Track every remote number for diagnostic
-                if len(digits) >= 7:
-                    all_remote_numbers[digits] = all_remote_numbers.get(digits, 0) + 1
+                all_remote_numbers[digits] = all_remote_numbers.get(digits, 0) + 1
                 if TARGET_PHONE_DIGITS in digits:
                     matched = True
                     if sess_dir:
@@ -161,9 +170,17 @@ if inbound or outbound:
         d = r["direction"] or "unknown"
         print(f"  [{d:<8}] {r['start']} -> {r['end']}  ({r['conversationId']})")
 
+# Diagnostic: dump first Palmer session so we can see the actual field shape
+if sample_palmer_session:
+    print("\n--- Sample Palmer session (raw fields) ---")
+    print(json.dumps({
+        k: v for k, v in sample_palmer_session.items()
+        if k in PHONE_FIELDS or k in ("direction", "sessionId", "mediaType")
+    }, indent=2, default=str))
+
 # Diagnostic: show every unique remote number we saw + the closest matches
-print("\n--- Diagnostic: remote numbers observed ---")
-print(f"{len(all_remote_numbers)} unique remote numbers across all conversations")
+print("\n--- Diagnostic: remote numbers observed (Palmer participants only) ---")
+print(f"{len(all_remote_numbers)} unique numbers across {len(conversations)} conversations")
 
 # Show numbers ending in last 4 of target (e.g., '7745') — likely candidates
 last4 = TARGET_PHONE_DIGITS[-4:]
