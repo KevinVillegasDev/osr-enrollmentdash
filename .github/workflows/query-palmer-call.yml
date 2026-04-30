@@ -1,0 +1,32 @@
+name: One-off — Palmer call query
+
+# Manual-only. Runs automation/query_palmer_call.py against the Genesys
+# secrets and prints the result to the run log. Delete this workflow once
+# the question is answered.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  query:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Palmer call query
+        env:
+          GENESYS_CLIENT_ID: ${{ secrets.GENESYS_CLIENT_ID }}
+          GENESYS_CLIENT_SECRET: ${{ secrets.GENESYS_CLIENT_SECRET }}
+          GENESYS_REGION: ${{ secrets.GENESYS_REGION }}
+        run: python -m automation.query_palmer_call
