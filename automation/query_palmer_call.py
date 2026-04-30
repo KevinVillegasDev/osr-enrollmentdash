@@ -90,7 +90,7 @@ while True:
     if len(page_convs) < 100:
         break
     page += 1
-    if page > 20:  # safety cap — 2000 calls in a day is plenty
+    if page > 80:  # safety cap — 8000 calls is more than plenty
         break
 print(f"Pulled {len(conversations)} voice conversations for {TARGET_USER_NAME} on {TARGET_DATE}")
 
@@ -181,6 +181,15 @@ if sample_palmer_session:
 # Diagnostic: show every unique remote number we saw + the closest matches
 print("\n--- Diagnostic: remote numbers observed (Palmer participants only) ---")
 print(f"{len(all_remote_numbers)} unique numbers across {len(conversations)} conversations")
+
+# Sanity: any 313-area-code numbers (Detroit) at all?
+print(f"\nAny number with area code 313 (Detroit):")
+hits_313 = [(n, c) for n, c in all_remote_numbers.items()
+            if "1313" in n or n.startswith("313")]
+for n, c in sorted(hits_313, key=lambda x: -x[1]):
+    print(f"  {n}  ({c}x)")
+if not hits_313:
+    print("  (none)")
 
 # Show numbers ending in last 4 of target (e.g., '7745') — likely candidates
 last4 = TARGET_PHONE_DIGITS[-4:]
