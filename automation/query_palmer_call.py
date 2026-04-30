@@ -78,8 +78,20 @@ body = {
     ],
 }
 
-resp = client.post("/api/v2/analytics/conversations/details/query", body)
-conversations = resp.get("conversations", [])
+conversations = []
+page = 1
+while True:
+    body["paging"] = {"pageSize": 100, "pageNumber": page}
+    resp = client.post("/api/v2/analytics/conversations/details/query", body)
+    page_convs = resp.get("conversations", [])
+    if not page_convs:
+        break
+    conversations.extend(page_convs)
+    if len(page_convs) < 100:
+        break
+    page += 1
+    if page > 20:  # safety cap — 2000 calls in a day is plenty
+        break
 print(f"Pulled {len(conversations)} voice conversations for {TARGET_USER_NAME} on {TARGET_DATE}")
 
 # --- 3. Filter by phone + count by direction -----------------------------
@@ -88,25 +100,34 @@ def _digits(s: str) -> str:
 
 inbound = []
 outbound = []
+all_remote_numbers = {}  # digits -> count
+
+# Phone fields that may contain remote numbers across Genesys versions
+PHONE_FIELDS = ("ani", "dnis", "remote", "addressFrom", "addressTo",
+                "addressOther", "remoteAddress")
 
 for conv in conversations:
     matched = False
     direction = None
 
     for participant in conv.get("participants", []):
-        # Look at each session for this participant for ANI/DNIS + direction
         for session in participant.get("sessions", []):
-            ani = _digits(session.get("ani", ""))
-            dnis = _digits(session.get("dnis", ""))
-            remote = _digits(session.get("remote", ""))
             sess_dir = session.get("direction") or participant.get("direction")
-
-            if (TARGET_PHONE_DIGITS in ani
-                or TARGET_PHONE_DIGITS in dnis
-                or TARGET_PHONE_DIGITS in remote):
-                matched = True
-                if sess_dir:
-                    direction = sess_dir
+            for field in PHONE_FIELDS:
+                val = session.get(field, "")
+                if not val:
+                    continue
+                digits = _digits(val)
+                if not digits:
+                    continue
+                # Track every remote number for diagnostic
+                if len(digits) >= 7:
+                    all_remote_numbers[digits] = all_remote_numbers.get(digits, 0) + 1
+                if TARGET_PHONE_DIGITS in digits:
+                    matched = True
+                    if sess_dir:
+                        direction = sess_dir
+            if matched:
                 break
         if matched:
             break
@@ -125,8 +146,7 @@ for conv in conversations:
     elif direction == "outbound":
         outbound.append(record)
     else:
-        # Direction unknown — bucket as unclassified
-        outbound.append(record) if record else None
+        outbound.append(record)
 
 # --- 4. Print summary ----------------------------------------------------
 print()
@@ -138,4 +158,24 @@ print(f"Total:          {len(inbound) + len(outbound)}")
 if inbound or outbound:
     print("\nDetails:")
     for r in inbound + outbound:
-        print(f"  [{r['direction']:<8}] {r['start']} -> {r['end']}  ({r['conversationId']})")
+        d = r["direction"] or "unknown"
+        print(f"  [{d:<8}] {r['start']} -> {r['end']}  ({r['conversationId']})")
+
+# Diagnostic: show every unique remote number we saw + the closest matches
+print("\n--- Diagnostic: remote numbers observed ---")
+print(f"{len(all_remote_numbers)} unique remote numbers across all conversations")
+
+# Show numbers ending in last 4 of target (e.g., '7745') — likely candidates
+last4 = TARGET_PHONE_DIGITS[-4:]
+last7 = TARGET_PHONE_DIGITS[-7:]
+print(f"\nNumbers containing last 7 of target ({last7}):")
+hits7 = [(n, c) for n, c in all_remote_numbers.items() if last7 in n]
+for n, c in sorted(hits7, key=lambda x: -x[1])[:20]:
+    print(f"  {n}  ({c}x)")
+if not hits7:
+    print("  (none)")
+
+print(f"\nTop 20 most-frequent remote numbers seen on {TARGET_DATE}:")
+for n, c in sorted(all_remote_numbers.items(), key=lambda x: -x[1])[:20]:
+    marker = "  <-- last 4 match" if n.endswith(last4) else ""
+    print(f"  {n}  ({c}x){marker}")
