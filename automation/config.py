@@ -43,7 +43,9 @@ REPORT_IDS = {
     "isr_notes": os.environ.get("SF_REPORT_ISR_NOTES", "00O8Y0000098j62UAA"),
 }
 
-# ─── OSR Roster (as of March 2026) ───────────────────────────────────────────
+# ─── OSR Roster (as of May 2026) ─────────────────────────────────────────────
+# Jeremy Moore departed end of April 2026; Richard Herrera took over RIC-4 starting May 2026.
+# Jeremy retained in roster for historical cohort/scorecard continuity (Jan–Apr 2026 data).
 OSR_ROSTER = [
     "Cesar Flores",
     "Claudia Gerhardt",
@@ -55,6 +57,7 @@ OSR_ROSTER = [
     "Matthew MacDonald",
     "Omar Corona",
     "Phillip Mason",
+    "Richard Herrera",
     "Stephanie Whitlock",
     "Yemaira Hernandez",
     "Outside Sales Manager",
@@ -63,8 +66,8 @@ OSR_ROSTER = [
 # ─── Territory → OSR Mapping ────────────────────────────────────────────────
 # Maps territory codes from the sales budget to OSR names.
 # Unassigned territories (LTO-4, LTO-8, RIC-3, RIC-5) are excluded.
-# LTO-4 was Sara Porter (no longer on team); Jeremy Moore took RIC-4.
-# Cesar Flores assigned RIC-1.
+# LTO-4 was Sara Porter (no longer on team).
+# RIC-4: Jeremy Moore through April 2026; Richard Herrera from May 2026 forward.
 TERRITORY_MAP = {
     "LTO-1": "Yemaira Hernandez",
     "LTO-2": "Omar Corona",
@@ -73,7 +76,7 @@ TERRITORY_MAP = {
     "LTO-7": "Stephanie Whitlock",
     "RIC-1": "Cesar Flores",
     "RIC-2": "Claudia Gerhardt",
-    "RIC-4": "Jeremy Moore",
+    "RIC-4": "Richard Herrera",
     "RIC-6": "Phillip Mason",
     "RIC-7": "DeLon Phoenix",
     "RIC-8": "Eric Henderson",

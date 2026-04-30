@@ -7,6 +7,9 @@ on:
     - cron: '0 13-23 * * 1-5'
     # 12 AM – 2 AM UTC = Tue-Sat (still PST weekday evening)
     - cron: '0 0-2 * * 2-6'
+    # Month-end late-evening catch-up: 7–10 PM PST on days 28–31
+    # (03–06 UTC on UTC days 29, 30, 31, and 1 covers PST evenings of 28–31)
+    - cron: '0 3-6 29-31,1 * *'
   workflow_dispatch:
     # Manual trigger from GitHub Actions tab
 

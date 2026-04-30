@@ -341,9 +341,11 @@ For historical cohorts or Month 2 true-up data, Report 2 and 4 templates are cal
 - **Metrics**: `tTalkComplete` (talk seconds), `nConnected` (call count)
 - **Roster filtering**: Only ISR_ROSTER names are shown on the dashboard
 
-## OSR Roster (as of April 2026)
+## OSR Roster (as of May 2026)
 
-Cesar Flores, Claudia Gerhardt, DeLon Phoenix, Eric Henderson, Jared Midkiff, Jeremy Moore, Joseph Guerra, Matthew MacDonald, Omar Corona, Phillip Mason, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
+Cesar Flores, Claudia Gerhardt, DeLon Phoenix, Eric Henderson, Jared Midkiff, Joseph Guerra, Matthew MacDonald, Omar Corona, Phillip Mason, Richard Herrera, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
+
+*Jeremy Moore (departed end of April 2026) is retained in `OSR_ROSTER` for historical cohort continuity but no longer holds a territory.*
 
 ## ISR Roster (as of April 2026)
 
@@ -356,7 +358,7 @@ Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Michael Palmer, 
 | Javier Gonzalez | LTO-1 (Yemaira), LTO-5 (Jared) |
 | Noemy Carrion | LTO-2 (Omar), LTO-3 (Joseph) |
 | Connor Admirand | LTO-7 (Stephanie), RIC-8 (Eric) |
-| Katie Anguiano | RIC-1 (Cesar), RIC-2 (Claudia), RIC-4 (Jeremy) |
+| Katie Anguiano | RIC-1 (Cesar), RIC-2 (Claudia), RIC-4 (Richard) |
 | Laura Angulo | RIC-6 (Phillip) |
 | Michael Palmer | RIC-7 (DeLon), RIC-9 (Matthew) |
 
@@ -371,7 +373,7 @@ Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Michael Palmer, 
 | LTO-7 | Stephanie Whitlock | GA/NE FL/Panhandle |
 | RIC-1 | Cesar Flores | CA (LA Metro Core) |
 | RIC-2 | Claudia Gerhardt | CA (IE South/San Diego) |
-| RIC-4 | Jeremy Moore | CA (Orange County/SE LA) |
+| RIC-4 | Richard Herrera | CA (Orange County/SE LA) |
 | RIC-6 | Phillip Mason | CA (Sacramento/NorCal) |
 | RIC-7 | DeLon Phoenix | NV (Las Vegas/Reno) |
 | RIC-8 | Eric Henderson | PA (4 Metros) |
