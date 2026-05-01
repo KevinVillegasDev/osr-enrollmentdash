@@ -119,17 +119,28 @@ def process(all_enrollments: list[dict], credited_enrollments: list[dict],
     # Key by branch ID → {funded_dollars, funded_apps, total_apps}
     # Matrix reports have month-prefixed columns like "3/1/2026_Sum of Funded Dollars"
     # so we sum across all monthly columns for each metric.
+    #
+    # Dedupe by Branch ID across the two activity sources:
+    # - When processing the CURRENT month: Report 3 (current_month_activity)
+    #   covers THIS MONTH's enrollees and Report 4 (last_month_activity)
+    #   covers LAST MONTH's enrollees — disjoint cohorts, no dedupe effect.
+    # - When regenerating a PAST month: step 2b refreshes Report 4 with a
+    #   date override so it contains that past month's enrollees with the
+    #   latest multi-month funding totals. Report 3 is the frozen snapshot
+    #   from when that month was current. The same branch IDs appear in
+    #   both, and naive concatenation double-counts every merchant.
+    # Last-month-activity is always the more current/comprehensive source,
+    # so process it first and only fall back to current-month-activity for
+    # branches not seen there.
     merchant_activity = defaultdict(lambda: {"funded": 0.0, "funded_apps": 0, "total_apps": 0})
 
-    for row in current_month_activity + last_month_activity:
-        branch = _get(row, "branch_id", "")
-        if not branch:
-            # Also try "Account Name" as some matrix rows only have that
-            branch = row.get("Branch ID", "")
-            if not branch:
-                continue
+    def _row_branch(row):
+        b = _get(row, "branch_id", "")
+        if not b:
+            b = row.get("Branch ID", "")
+        return b
 
-        # Sum across all month-prefixed columns (matrix report format)
+    def _accumulate(row, branch):
         funded = 0.0
         funded_apps = 0
         total_apps = 0
@@ -156,6 +167,20 @@ def process(all_enrollments: list[dict], credited_enrollments: list[dict],
         merchant_activity[branch]["funded"] += funded
         merchant_activity[branch]["funded_apps"] += funded_apps
         merchant_activity[branch]["total_apps"] += total_apps
+
+    seen_branches = set()
+    for row in last_month_activity:
+        branch = _row_branch(row)
+        if not branch:
+            continue
+        seen_branches.add(branch)
+        _accumulate(row, branch)
+
+    for row in current_month_activity:
+        branch = _row_branch(row)
+        if not branch or branch in seen_branches:
+            continue
+        _accumulate(row, branch)
 
     # ── repMerchants: Per-OSR merchant detail with funding ───────────────
     rep_merchants = defaultdict(list)
