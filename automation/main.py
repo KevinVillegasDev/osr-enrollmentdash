@@ -705,6 +705,15 @@ def _create_month_from_template(target_path: str, month: int, year: int):
     new_meta = f"{new_name} {year}"
     html = html.replace(old_meta, new_meta)
 
+    # Also substitute abbreviated month+year (e.g. "Feb 2026" → "Mar 2026").
+    # Templates use both full ("February 2026") and abbreviated ("Feb 2026")
+    # forms in section subtitles. Without this the abbreviated form propagates
+    # forward unchanged and shows the wrong month label on every subsequent
+    # auto-created dashboard.
+    old_abbrev_meta = f"{MONTH_ABBREV[prev_month].title()} {prev_year}"
+    new_abbrev_meta = f"{MONTH_ABBREV[month].title()} {year}"
+    html = html.replace(old_abbrev_meta, new_abbrev_meta)
+
     with open(target_path, "w", encoding="utf-8") as f:
         f.write(html)
 
