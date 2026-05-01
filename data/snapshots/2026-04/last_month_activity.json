@@ -1,68 +1,5 @@
 [
   {
-    "Account Name": "USA Auto Repair Center G.O",
-    "Branch ID": "25614",
-    "4/1/2026_Sum of Funded Dollars": 2600.0,
-    "4/1/2026_Sum of Funded Average": 2600.0,
-    "4/1/2026_Sum of Applications": 2.0,
-    "4/1/2026_Sum of Funded Applications Total": 1.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Fulshear Tire & Automotive",
-    "Branch ID": "25582",
-    "4/1/2026_Sum of Funded Dollars": 1046.48,
-    "4/1/2026_Sum of Funded Average": 1046.48,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 1.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Sama Auto Express",
-    "Branch ID": "25572",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 5.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Locals 1820",
-    "Branch ID": "25568",
-    "4/1/2026_Sum of Funded Dollars": 2404.14,
-    "4/1/2026_Sum of Funded Average": 2404.14,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 1.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Distinct All Tunes Car Care",
-    "Branch ID": "25609",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Boost Mobile - Cleveland",
-    "Branch ID": "25626",
-    "4/1/2026_Sum of Funded Dollars": 2407.0,
-    "4/1/2026_Sum of Funded Average": 1203.5,
-    "4/1/2026_Sum of Applications": 15.0,
-    "4/1/2026_Sum of Funded Applications Total": 2.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Brothers Autocare Lubbock",
-    "Branch ID": "25665",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 11.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
     "Account Name": "Service Street Frisco",
     "Branch ID": "25583",
     "4/1/2026_Sum of Funded Dollars": 0.0,
@@ -72,74 +9,11 @@
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "Airway Automotive and Tire",
-    "Branch ID": "25602",
+    "Account Name": "EuroPlus",
+    "Branch ID": "25573",
     "4/1/2026_Sum of Funded Dollars": 0.0,
     "4/1/2026_Sum of Funded Average": 0.0,
     "4/1/2026_Sum of Applications": 3.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Jabes Auto Service",
-    "Branch ID": "25662",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "At Rudys Transmission & Auto Repair",
-    "Branch ID": "25586",
-    "4/1/2026_Sum of Funded Dollars": 461.0,
-    "4/1/2026_Sum of Funded Average": 461.0,
-    "4/1/2026_Sum of Applications": 4.0,
-    "4/1/2026_Sum of Funded Applications Total": 1.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Boost Mobile - Dayton",
-    "Branch ID": "25627",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "No Limit Autohaus",
-    "Branch ID": "25598",
-    "4/1/2026_Sum of Funded Dollars": 5625.0,
-    "4/1/2026_Sum of Funded Average": 2812.5,
-    "4/1/2026_Sum of Applications": 2.0,
-    "4/1/2026_Sum of Funded Applications Total": 2.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Midas Sacramento 1938",
-    "Branch ID": "25703",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 0.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Boost Mobile - Humble - 1st street",
-    "Branch ID": "25621",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 6.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "CM Wheels & Tires",
-    "Branch ID": "25557",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 6.0,
     "4/1/2026_Sum of Funded Applications Total": 0.0,
     "4/1/2026_Record Count": 1
   },
@@ -153,83 +27,11 @@
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "Meineke 4128",
-    "Branch ID": "25654",
-    "4/1/2026_Sum of Funded Dollars": 5179.12,
-    "4/1/2026_Sum of Funded Average": 2589.56,
-    "4/1/2026_Sum of Applications": 4.0,
-    "4/1/2026_Sum of Funded Applications Total": 2.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "E & E Automotive Services",
-    "Branch ID": "25588",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 0.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Beltran Tire",
-    "Branch ID": "25637",
+    "Account Name": "JMR Motorsports",
+    "Branch ID": "25684",
     "4/1/2026_Sum of Funded Dollars": 0.0,
     "4/1/2026_Sum of Funded Average": 0.0,
     "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Byrd Automotive 2",
-    "Branch ID": "25631",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Alirios Garage",
-    "Branch ID": "25685",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Sound Image",
-    "Branch ID": "25592",
-    "4/1/2026_Sum of Funded Dollars": 10982.0,
-    "4/1/2026_Sum of Funded Average": 2196.4,
-    "4/1/2026_Sum of Applications": 12.0,
-    "4/1/2026_Sum of Funded Applications Total": 5.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Espino's Auto Suspension 1",
-    "Branch ID": "25580",
-    "4/1/2026_Sum of Funded Dollars": 5500.0,
-    "4/1/2026_Sum of Funded Average": 1833.33,
-    "4/1/2026_Sum of Applications": 11.0,
-    "4/1/2026_Sum of Funded Applications Total": 3.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "In His Name Automotive",
-    "Branch ID": "25613",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Mancera Gallery",
-    "Branch ID": "25617",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 4.0,
     "4/1/2026_Sum of Funded Applications Total": 0.0,
     "4/1/2026_Record Count": 1
   },
@@ -243,8 +45,8 @@
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "Roven Motoring",
-    "Branch ID": "25678",
+    "Account Name": "Beltran Tire",
+    "Branch ID": "25637",
     "4/1/2026_Sum of Funded Dollars": 0.0,
     "4/1/2026_Sum of Funded Average": 0.0,
     "4/1/2026_Sum of Applications": 1.0,
@@ -252,111 +54,30 @@
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "Meineke 4135",
-    "Branch ID": "25653",
-    "4/1/2026_Sum of Funded Dollars": 477.74,
-    "4/1/2026_Sum of Funded Average": 477.74,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 1.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Elite Auto Repair - Port St Lucie",
-    "Branch ID": "25632",
-    "4/1/2026_Sum of Funded Dollars": 5301.32,
-    "4/1/2026_Sum of Funded Average": 2650.66,
-    "4/1/2026_Sum of Applications": 4.0,
-    "4/1/2026_Sum of Funded Applications Total": 2.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Ampd Up Motorsports",
-    "Branch ID": "25646",
-    "4/1/2026_Sum of Funded Dollars": 7430.65,
-    "4/1/2026_Sum of Funded Average": 1857.66,
-    "4/1/2026_Sum of Applications": 17.0,
-    "4/1/2026_Sum of Funded Applications Total": 4.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Home Style Furniture",
-    "Branch ID": "25677",
-    "4/1/2026_Sum of Funded Dollars": 1000.0,
-    "4/1/2026_Sum of Funded Average": 1000.0,
-    "4/1/2026_Sum of Applications": 2.0,
-    "4/1/2026_Sum of Funded Applications Total": 1.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Midas - 1599",
-    "Branch ID": "25639",
-    "4/1/2026_Sum of Funded Dollars": 1501.09,
-    "4/1/2026_Sum of Funded Average": 750.55,
-    "4/1/2026_Sum of Applications": 5.0,
-    "4/1/2026_Sum of Funded Applications Total": 2.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "On Fire Tires & Auto",
-    "Branch ID": "25636",
+    "Account Name": "Boost Mobile - Pasadena",
+    "Branch ID": "25620",
     "4/1/2026_Sum of Funded Dollars": 0.0,
     "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Boost Mobile - Humble - FM 1960",
-    "Branch ID": "25623",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 3.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "CC Furniture & Appliance",
-    "Branch ID": "25647",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 14.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Power Tire & Wheels - North Katy",
-    "Branch ID": "25663",
-    "4/1/2026_Sum of Funded Dollars": 600.0,
-    "4/1/2026_Sum of Funded Average": 600.0,
-    "4/1/2026_Sum of Applications": 2.0,
-    "4/1/2026_Sum of Funded Applications Total": 1.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "801 Motorsports",
-    "Branch ID": "25563",
-    "4/1/2026_Sum of Funded Dollars": 628.58,
-    "4/1/2026_Sum of Funded Average": 628.58,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 1.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "EuroPlus",
-    "Branch ID": "25573",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 3.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "TNT Transmissions",
-    "Branch ID": "25649",
-    "4/1/2026_Sum of Funded Dollars": 5000.0,
-    "4/1/2026_Sum of Funded Average": 5000.0,
     "4/1/2026_Sum of Applications": 0.0,
-    "4/1/2026_Sum of Funded Applications Total": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Sama Auto Express",
+    "Branch ID": "25572",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 5.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Adams Service Auto Repair",
+    "Branch ID": "25650",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
     "4/1/2026_Record Count": 1
   },
   {
@@ -369,8 +90,62 @@
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "California Tires Auto Care",
-    "Branch ID": "25603",
+    "Account Name": "Ampd Up Motorsports",
+    "Branch ID": "25646",
+    "4/1/2026_Sum of Funded Dollars": 7430.65,
+    "4/1/2026_Sum of Funded Average": 1857.66,
+    "4/1/2026_Sum of Applications": 18.0,
+    "4/1/2026_Sum of Funded Applications Total": 4.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Boost Mobile - Cleveland",
+    "Branch ID": "25626",
+    "4/1/2026_Sum of Funded Dollars": 2407.0,
+    "4/1/2026_Sum of Funded Average": 1203.5,
+    "4/1/2026_Sum of Applications": 15.0,
+    "4/1/2026_Sum of Funded Applications Total": 2.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Midas Sacramento 1938",
+    "Branch ID": "25703",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 0.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Meineke 4350",
+    "Branch ID": "25652",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Boost Mobile - Houston - Imperial Valley",
+    "Branch ID": "25625",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 5.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "CC Furniture & Appliance",
+    "Branch ID": "25647",
+    "4/1/2026_Sum of Funded Dollars": 1000.0,
+    "4/1/2026_Sum of Funded Average": 1000.0,
+    "4/1/2026_Sum of Applications": 14.0,
+    "4/1/2026_Sum of Funded Applications Total": 1.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Plaza Auto Care Center 2",
+    "Branch ID": "25643",
     "4/1/2026_Sum of Funded Dollars": 0.0,
     "4/1/2026_Sum of Funded Average": 0.0,
     "4/1/2026_Sum of Applications": 1.0,
@@ -387,57 +162,21 @@
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "Ron\u2019s Service & Tire Center",
-    "Branch ID": "25561",
+    "Account Name": "V-Tec Tire Import Export",
+    "Branch ID": "25577",
     "4/1/2026_Sum of Funded Dollars": 0.0,
     "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 2.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "D'S Tire and Auto Repair - St Louis",
-    "Branch ID": "25604",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 4.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Meineke 4234",
-    "Branch ID": "25656",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 2.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Poway Muffler and Brake",
-    "Branch ID": "25661",
-    "4/1/2026_Sum of Funded Dollars": 1704.41,
-    "4/1/2026_Sum of Funded Average": 1704.41,
     "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Durango Auto Repair",
+    "Branch ID": "25599",
+    "4/1/2026_Sum of Funded Dollars": 500.0,
+    "4/1/2026_Sum of Funded Average": 500.0,
+    "4/1/2026_Sum of Applications": 3.0,
     "4/1/2026_Sum of Funded Applications Total": 1.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "JMR Motorsports",
-    "Branch ID": "25684",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Sams Auto Repair and Sales LLC",
-    "Branch ID": "25664",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
     "4/1/2026_Record Count": 1
   },
   {
@@ -450,98 +189,17 @@
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "Boost Mobile - Liberty",
-    "Branch ID": "25622",
+    "Account Name": "Brothers Autocare Lubbock",
+    "Branch ID": "25665",
     "4/1/2026_Sum of Funded Dollars": 0.0,
     "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 2.0,
+    "4/1/2026_Sum of Applications": 12.0,
     "4/1/2026_Sum of Funded Applications Total": 0.0,
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "Peach State Auto Pro Mableton",
-    "Branch ID": "25660",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Meineke 4369",
-    "Branch ID": "25655",
-    "4/1/2026_Sum of Funded Dollars": 1500.0,
-    "4/1/2026_Sum of Funded Average": 750.0,
-    "4/1/2026_Sum of Applications": 6.0,
-    "4/1/2026_Sum of Funded Applications Total": 2.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Boost Mobile - Pasadena",
-    "Branch ID": "25620",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 0.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Express Tires Auto Shop",
-    "Branch ID": "25608",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "V-Tec Tire Import Export",
-    "Branch ID": "25577",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "GST Automotive",
-    "Branch ID": "25690",
-    "4/1/2026_Sum of Funded Dollars": 1471.5,
-    "4/1/2026_Sum of Funded Average": 1471.5,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 1.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Adams Service Auto Repair",
-    "Branch ID": "25650",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "TRS Wheels & Suspension",
-    "Branch ID": "25587",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 3.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Legacy TX Off-Road & Performance",
-    "Branch ID": "25567",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "DJ Custom Audio",
-    "Branch ID": "25681",
+    "Account Name": "Airway Automotive and Tire",
+    "Branch ID": "25602",
     "4/1/2026_Sum of Funded Dollars": 0.0,
     "4/1/2026_Sum of Funded Average": 0.0,
     "4/1/2026_Sum of Applications": 3.0,
@@ -558,8 +216,89 @@
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "Plaza Auto Care Center 2",
-    "Branch ID": "25643",
+    "Account Name": "Elite Auto Repair - Port St Lucie",
+    "Branch ID": "25632",
+    "4/1/2026_Sum of Funded Dollars": 5301.32,
+    "4/1/2026_Sum of Funded Average": 2650.66,
+    "4/1/2026_Sum of Applications": 5.0,
+    "4/1/2026_Sum of Funded Applications Total": 2.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "TRS Wheels & Suspension",
+    "Branch ID": "25587",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 3.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "GST Automotive",
+    "Branch ID": "25690",
+    "4/1/2026_Sum of Funded Dollars": 1471.5,
+    "4/1/2026_Sum of Funded Average": 1471.5,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 1.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Legacy TX Off-Road & Performance",
+    "Branch ID": "25567",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "D'S Tire and Auto Repair - St Louis",
+    "Branch ID": "25604",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 4.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Power Tire & Wheels - North Katy",
+    "Branch ID": "25663",
+    "4/1/2026_Sum of Funded Dollars": 600.0,
+    "4/1/2026_Sum of Funded Average": 600.0,
+    "4/1/2026_Sum of Applications": 2.0,
+    "4/1/2026_Sum of Funded Applications Total": 1.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Meineke 2128",
+    "Branch ID": "25651",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "E & E Automotive Services",
+    "Branch ID": "25588",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 0.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "USA Auto Repair Center G.O",
+    "Branch ID": "25614",
+    "4/1/2026_Sum of Funded Dollars": 2600.0,
+    "4/1/2026_Sum of Funded Average": 2600.0,
+    "4/1/2026_Sum of Applications": 2.0,
+    "4/1/2026_Sum of Funded Applications Total": 1.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Alirios Garage",
+    "Branch ID": "25685",
     "4/1/2026_Sum of Funded Dollars": 0.0,
     "4/1/2026_Sum of Funded Average": 0.0,
     "4/1/2026_Sum of Applications": 1.0,
@@ -576,24 +315,6 @@
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "Boost Mobile - Houston - Hollow Tree",
-    "Branch ID": "25624",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 7.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Scooter City Fort Lauderdale",
-    "Branch ID": "25591",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 5.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
     "Account Name": "Miller Auto 17",
     "Branch ID": "25589",
     "4/1/2026_Sum of Funded Dollars": 0.0,
@@ -603,17 +324,233 @@
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "Mk Trucks",
-    "Branch ID": "25612",
-    "4/1/2026_Sum of Funded Dollars": 57060.0,
-    "4/1/2026_Sum of Funded Average": 3566.25,
-    "4/1/2026_Sum of Applications": 23.0,
-    "4/1/2026_Sum of Funded Applications Total": 16.0,
+    "Account Name": "Boost Mobile - Humble - 1st street",
+    "Branch ID": "25621",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 6.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "Boost Mobile - Houston - Imperial Valley",
-    "Branch ID": "25625",
+    "Account Name": "California Tires Auto Care",
+    "Branch ID": "25603",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Peach State Auto Pros Snellville",
+    "Branch ID": "25659",
+    "4/1/2026_Sum of Funded Dollars": 1460.0,
+    "4/1/2026_Sum of Funded Average": 1460.0,
+    "4/1/2026_Sum of Applications": 3.0,
+    "4/1/2026_Sum of Funded Applications Total": 1.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "801 Motorsports",
+    "Branch ID": "25563",
+    "4/1/2026_Sum of Funded Dollars": 628.58,
+    "4/1/2026_Sum of Funded Average": 628.58,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 1.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "TNT Transmissions",
+    "Branch ID": "25649",
+    "4/1/2026_Sum of Funded Dollars": 5000.0,
+    "4/1/2026_Sum of Funded Average": 5000.0,
+    "4/1/2026_Sum of Applications": 0.0,
+    "4/1/2026_Sum of Funded Applications Total": 1.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Escobar Auto Repair & Body Shop",
+    "Branch ID": "25712",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 3.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Sams Auto Repair and Sales LLC",
+    "Branch ID": "25664",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Fulshear Tire & Automotive",
+    "Branch ID": "25582",
+    "4/1/2026_Sum of Funded Dollars": 1046.48,
+    "4/1/2026_Sum of Funded Average": 1046.48,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 1.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Byrd Automotive 2",
+    "Branch ID": "25631",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Locals 1820",
+    "Branch ID": "25568",
+    "4/1/2026_Sum of Funded Dollars": 2404.14,
+    "4/1/2026_Sum of Funded Average": 2404.14,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 1.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Poway Muffler and Brake",
+    "Branch ID": "25661",
+    "4/1/2026_Sum of Funded Dollars": 1704.41,
+    "4/1/2026_Sum of Funded Average": 1704.41,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 1.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "D'S Tire and Auto Repair - Kearney",
+    "Branch ID": "25605",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 3.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Meineke 4128",
+    "Branch ID": "25654",
+    "4/1/2026_Sum of Funded Dollars": 5179.12,
+    "4/1/2026_Sum of Funded Average": 2589.56,
+    "4/1/2026_Sum of Applications": 4.0,
+    "4/1/2026_Sum of Funded Applications Total": 2.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Peach State Auto Pro Mableton",
+    "Branch ID": "25660",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 2.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Jabes Auto Service",
+    "Branch ID": "25662",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Ron\u2019s Service & Tire Center",
+    "Branch ID": "25561",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 2.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Automatic Multiconcept",
+    "Branch ID": "25590",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 2.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Boost Mobile - Humble - FM 1960",
+    "Branch ID": "25623",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 3.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Mk Trucks",
+    "Branch ID": "25612",
+    "4/1/2026_Sum of Funded Dollars": 69932.0,
+    "4/1/2026_Sum of Funded Average": 3680.63,
+    "4/1/2026_Sum of Applications": 26.0,
+    "4/1/2026_Sum of Funded Applications Total": 19.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Meineke 4264",
+    "Branch ID": "25699",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Boost Mobile - Liberty",
+    "Branch ID": "25622",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 2.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Espino's Auto Suspension 1",
+    "Branch ID": "25580",
+    "4/1/2026_Sum of Funded Dollars": 5500.0,
+    "4/1/2026_Sum of Funded Average": 1833.33,
+    "4/1/2026_Sum of Applications": 11.0,
+    "4/1/2026_Sum of Funded Applications Total": 3.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Sound Image",
+    "Branch ID": "25592",
+    "4/1/2026_Sum of Funded Dollars": 10982.0,
+    "4/1/2026_Sum of Funded Average": 2196.4,
+    "4/1/2026_Sum of Applications": 12.0,
+    "4/1/2026_Sum of Funded Applications Total": 5.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Express Tires Auto Shop",
+    "Branch ID": "25608",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Acosta Customs",
+    "Branch ID": "25710",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 3.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Scooter City Fort Lauderdale",
+    "Branch ID": "25591",
     "4/1/2026_Sum of Funded Dollars": 0.0,
     "4/1/2026_Sum of Funded Average": 0.0,
     "4/1/2026_Sum of Applications": 5.0,
@@ -630,17 +567,125 @@
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "Meineke 4236",
-    "Branch ID": "25657",
-    "4/1/2026_Sum of Funded Dollars": 5500.86,
-    "4/1/2026_Sum of Funded Average": 1100.17,
-    "4/1/2026_Sum of Applications": 7.0,
-    "4/1/2026_Sum of Funded Applications Total": 5.0,
+    "Account Name": "Distinct All Tunes Car Care",
+    "Branch ID": "25609",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "D'S Tire and Auto Repair - Kearney",
-    "Branch ID": "25605",
+    "Account Name": "R&M Automotive",
+    "Branch ID": "25607",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 2.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "On Fire Tires & Auto",
+    "Branch ID": "25636",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Meineke 4234",
+    "Branch ID": "25656",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 2.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Boost Mobile - Dayton",
+    "Branch ID": "25627",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Roven Motoring",
+    "Branch ID": "25678",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Meineke 4369",
+    "Branch ID": "25655",
+    "4/1/2026_Sum of Funded Dollars": 1500.0,
+    "4/1/2026_Sum of Funded Average": 750.0,
+    "4/1/2026_Sum of Applications": 6.0,
+    "4/1/2026_Sum of Funded Applications Total": 2.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Midas - 1599",
+    "Branch ID": "25639",
+    "4/1/2026_Sum of Funded Dollars": 2825.5,
+    "4/1/2026_Sum of Funded Average": 941.83,
+    "4/1/2026_Sum of Applications": 7.0,
+    "4/1/2026_Sum of Funded Applications Total": 3.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Boost Mobile - Houston - Hollow Tree",
+    "Branch ID": "25624",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 9.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "In His Name Automotive",
+    "Branch ID": "25613",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Meineke 4135",
+    "Branch ID": "25653",
+    "4/1/2026_Sum of Funded Dollars": 477.74,
+    "4/1/2026_Sum of Funded Average": 477.74,
+    "4/1/2026_Sum of Applications": 2.0,
+    "4/1/2026_Sum of Funded Applications Total": 1.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "CM Wheels & Tires",
+    "Branch ID": "25557",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 7.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "Orlando Furniture Mart",
+    "Branch ID": "25562",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 1.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "DJ Custom Audio",
+    "Branch ID": "25681",
     "4/1/2026_Sum of Funded Dollars": 0.0,
     "4/1/2026_Sum of Funded Average": 0.0,
     "4/1/2026_Sum of Applications": 3.0,
@@ -657,55 +702,46 @@
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "Durango Auto Repair",
-    "Branch ID": "25599",
-    "4/1/2026_Sum of Funded Dollars": 500.0,
-    "4/1/2026_Sum of Funded Average": 500.0,
-    "4/1/2026_Sum of Applications": 2.0,
+    "Account Name": "Mancera Gallery",
+    "Branch ID": "25617",
+    "4/1/2026_Sum of Funded Dollars": 0.0,
+    "4/1/2026_Sum of Funded Average": 0.0,
+    "4/1/2026_Sum of Applications": 5.0,
+    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "At Rudys Transmission & Auto Repair",
+    "Branch ID": "25586",
+    "4/1/2026_Sum of Funded Dollars": 461.0,
+    "4/1/2026_Sum of Funded Average": 461.0,
+    "4/1/2026_Sum of Applications": 4.0,
     "4/1/2026_Sum of Funded Applications Total": 1.0,
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "R&M Automotive",
-    "Branch ID": "25607",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
+    "Account Name": "Meineke 4236",
+    "Branch ID": "25657",
+    "4/1/2026_Sum of Funded Dollars": 5500.86,
+    "4/1/2026_Sum of Funded Average": 1100.17,
+    "4/1/2026_Sum of Applications": 7.0,
+    "4/1/2026_Sum of Funded Applications Total": 5.0,
+    "4/1/2026_Record Count": 1
+  },
+  {
+    "Account Name": "No Limit Autohaus",
+    "Branch ID": "25598",
+    "4/1/2026_Sum of Funded Dollars": 5625.0,
+    "4/1/2026_Sum of Funded Average": 2812.5,
     "4/1/2026_Sum of Applications": 2.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
+    "4/1/2026_Sum of Funded Applications Total": 2.0,
     "4/1/2026_Record Count": 1
   },
   {
-    "Account Name": "Meineke 2128",
-    "Branch ID": "25651",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Automatic Multiconcept",
-    "Branch ID": "25590",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 2.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Meineke 4350",
-    "Branch ID": "25652",
-    "4/1/2026_Sum of Funded Dollars": 0.0,
-    "4/1/2026_Sum of Funded Average": 0.0,
-    "4/1/2026_Sum of Applications": 1.0,
-    "4/1/2026_Sum of Funded Applications Total": 0.0,
-    "4/1/2026_Record Count": 1
-  },
-  {
-    "Account Name": "Peach State Auto Pros Snellville",
-    "Branch ID": "25659",
-    "4/1/2026_Sum of Funded Dollars": 1460.0,
-    "4/1/2026_Sum of Funded Average": 1460.0,
+    "Account Name": "Home Style Furniture",
+    "Branch ID": "25677",
+    "4/1/2026_Sum of Funded Dollars": 1000.0,
+    "4/1/2026_Sum of Funded Average": 1000.0,
     "4/1/2026_Sum of Applications": 3.0,
     "4/1/2026_Sum of Funded Applications Total": 1.0,
     "4/1/2026_Record Count": 1
