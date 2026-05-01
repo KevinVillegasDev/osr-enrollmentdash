@@ -105,13 +105,17 @@ def main():
             prev_m = 12
             prev_y -= 1
 
-        # Refresh credited enrollments (catches credit reassignments)
+        # Refresh credited + new enrollments (catches credit reassignments
+        # and any late-backfilled enrollment records).
+        prev_enroll_refresh_ok = False
         try:
-            _refresh_past_month_snapshot(client, prev_m, prev_y, output_dir)
+            prev_enroll_refresh_ok = _refresh_past_month_snapshot(
+                client, prev_m, prev_y, output_dir)
         except Exception as e:
             logger.warning("Previous month enrollment refresh failed (non-fatal): %s", e)
 
         # Refresh activity/funding data (catches late-posting transactions)
+        prev_activity_refresh_ok = False
         try:
             prev_activity = fetch_cohort_activity(
                 client, prev_m, prev_y, current_month, current_year
@@ -125,8 +129,29 @@ def main():
                     json.dump(prev_activity, f, indent=2, default=str)
                 logger.info("Refreshed %s %d activity: %d rows",
                              MONTH_ABBREV[prev_m], prev_y, len(prev_activity))
+                prev_activity_refresh_ok = True
         except Exception as e:
             logger.warning("Previous month activity refresh failed (non-fatal): %s", e)
+
+        # Regenerate previous-month dashboard during the early-month window
+        # (days 1–5 of the new month) so headline numbers on {prev}-{year}.html
+        # stay aligned with the refreshed cohort/index data while late SF
+        # credit assignments and funding transactions land. After day 5 the
+        # past-month HTML freezes permanently. Only runs if BOTH refreshes
+        # succeeded that run, to avoid mixed-vintage data.
+        REGEN_WINDOW_DAYS = 5
+        if (today.day <= REGEN_WINDOW_DAYS
+                and prev_enroll_refresh_ok
+                and prev_activity_refresh_ok):
+            logger.info(
+                "Day %d of month — regenerating %s %d dashboard from refreshed snapshot",
+                today.day, MONTH_ABBREV[prev_m], prev_y)
+            _regenerate_past_month_dashboard(prev_m, prev_y, output_dir)
+        elif today.day <= REGEN_WINDOW_DAYS:
+            logger.info(
+                "Day %d ≤ regen window but refresh incomplete "
+                "(enroll=%s, activity=%s) — skipping past-month regen this run",
+                today.day, prev_enroll_refresh_ok, prev_activity_refresh_ok)
 
     # ── Step 2c: Re-fetch Maps check-ins with split to avoid 2000 row cap ──
     if client:
@@ -1022,38 +1047,132 @@ def _normalize_enrollment_rows(rows: list) -> list:
     return normalized
 
 
-def _refresh_past_month_snapshot(client, month: int, year: int, output_dir: str):
+def _refresh_past_month_snapshot(client, month: int, year: int, output_dir: str) -> bool:
     """
-    Re-fetch credited enrollments for a past month and update its snapshot,
-    monthly dashboard, and Q1 data. Used when SF credits are updated after
-    a month closes.
+    Re-fetch credited and new enrollments for a past month and update their
+    snapshots. Used when SF credits are updated after a month closes (and to
+    catch any late-backfilled enrollment records).
+
+    Returns:
+        True if BOTH new_enrollments and credited_enrollments were refreshed
+        successfully (so downstream code may safely regenerate the past-month
+        dashboard). False if either refresh failed or returned no rows.
     """
-    logger.info("--- Refreshing %s %d snapshot (one-time) ---", MONTH_ABBREV[month], year)
+    logger.info("--- Refreshing %s %d snapshot ---", MONTH_ABBREV[month], year)
+    snapshot_dir = os.path.join(PROJECT_ROOT, "data", "snapshots",
+                                f"{year}-{month:02d}")
+    os.makedirs(snapshot_dir, exist_ok=True)
+
+    credited_ok = False
+    new_ok = False
+
+    # Refresh credited enrollments (Report 2)
     try:
-        rows = _fetch_credited_for_month(client, month, year)
-        if not rows:
-            logger.warning("No rows returned for %s %d refresh", MONTH_ABBREV[month], year)
-            return
-
-        rows = _normalize_enrollment_rows(rows)
-        logger.info("Refreshed %d credited enrollments for %s %d",
-                     len(rows), MONTH_ABBREV[month], year)
-
-        # Save updated snapshot
-        snapshot_dir = os.path.join(PROJECT_ROOT, "data", "snapshots",
-                                    f"{year}-{month:02d}")
-        os.makedirs(snapshot_dir, exist_ok=True)
-        snapshot_path = os.path.join(snapshot_dir, "credited_enrollments.json")
-        with open(snapshot_path, "w", encoding="utf-8") as f:
-            json.dump(rows, f, indent=2, default=str)
-        logger.info("Saved refreshed snapshot: %s", snapshot_path)
-
-        # Note: Do NOT reprocess the monthly dashboard here — it would
-        # overwrite KPI totals using snapshot data that may be incomplete.
-        # The snapshot update is sufficient for cohort tracking.
-
+        credited_rows = _fetch_credited_for_month(client, month, year)
+        if credited_rows:
+            credited_rows = _normalize_enrollment_rows(credited_rows)
+            logger.info("Refreshed %d credited enrollments for %s %d",
+                         len(credited_rows), MONTH_ABBREV[month], year)
+            snap_path = os.path.join(snapshot_dir, "credited_enrollments.json")
+            with open(snap_path, "w", encoding="utf-8") as f:
+                json.dump(credited_rows, f, indent=2, default=str)
+            logger.info("Saved refreshed snapshot: %s", snap_path)
+            credited_ok = True
+        else:
+            logger.warning("No credited rows returned for %s %d refresh",
+                           MONTH_ABBREV[month], year)
     except Exception as e:
-        logger.warning("Past month refresh failed (non-fatal): %s", e)
+        logger.warning("Past month credited refresh failed (non-fatal): %s", e)
+
+    # Refresh new enrollments (Report 1) — keeps total enrollment KPI in sync
+    # with credited count when the past-month dashboard is regenerated.
+    try:
+        new_rows = _fetch_new_enrollments_for_month(client, month, year)
+        if new_rows:
+            new_rows = _normalize_enrollment_rows(new_rows)
+            logger.info("Refreshed %d total (new) enrollments for %s %d",
+                         len(new_rows), MONTH_ABBREV[month], year)
+            snap_path = os.path.join(snapshot_dir, "new_enrollments.json")
+            with open(snap_path, "w", encoding="utf-8") as f:
+                json.dump(new_rows, f, indent=2, default=str)
+            logger.info("Saved refreshed snapshot: %s", snap_path)
+            new_ok = True
+        else:
+            logger.warning("No new-enrollment rows returned for %s %d refresh",
+                           MONTH_ABBREV[month], year)
+    except Exception as e:
+        logger.warning("Past month new-enrollment refresh failed (non-fatal): %s", e)
+
+    return credited_ok and new_ok
+
+
+def _fetch_new_enrollments_for_month(client, month: int, year: int) -> list:
+    """
+    Fetch Report 1 (new enrollments — all company) for a specific past month
+    via API with date filter overrides. Mirrors _fetch_credited_for_month.
+    """
+    report_id = REPORT_IDS["new_enrollments"]
+    if report_id == "REPLACE_WITH_REPORT_ID":
+        return []
+
+    start_date = date(year, month, 1)
+    if month == 12:
+        end_date = date(year + 1, 1, 1) - timedelta(days=1)
+    else:
+        end_date = date(year, month + 1, 1) - timedelta(days=1)
+
+    filters = [
+        {"column": "RECORDTYPE", "operator": "equals", "value": "Branch"},
+        {"column": "Account.Enrollment_Date__c", "operator": "greaterOrEqual",
+         "value": start_date.isoformat()},
+        {"column": "Account.Enrollment_Date__c", "operator": "lessOrEqual",
+         "value": end_date.isoformat()},
+    ]
+
+    try:
+        raw = fetch_report(client, report_id, filters=filters)
+        rows = parse_report_rows(raw)
+        if rows:
+            logger.info("Fetched %d new enrollments for %s %d via API",
+                         len(rows), MONTH_ABBREV[month], year)
+            return rows
+    except Exception as e:
+        logger.warning("Failed to fetch new enrollments for %s %d: %s",
+                        MONTH_ABBREV[month], year, e)
+
+    return []
+
+
+def _regenerate_past_month_dashboard(month: int, year: int, output_dir: str) -> bool:
+    """
+    Regenerate the {month}-{year}.html dashboard from the (just-refreshed)
+    snapshot files. Intended to run only during the early-month "regen
+    window" (days 1–5 of the new month) so the previous-month headline
+    numbers stay aligned with the refreshed cohort/index data, then freeze.
+
+    Returns True on successful regeneration, False otherwise.
+    """
+    monthly_data = _load_month_snapshot_all(month, year)
+    if not monthly_data:
+        logger.warning(
+            "Skipping %s %d dashboard regeneration: snapshot incomplete",
+            MONTH_ABBREV[month], year)
+        return False
+
+    month_path = os.path.join(output_dir, month_filename(month, year))
+    if not os.path.exists(month_path):
+        logger.warning(
+            "Skipping %s %d dashboard regeneration: %s not found",
+            MONTH_ABBREV[month], year, month_path)
+        return False
+
+    try:
+        html_generator.update_monthly_dashboard(month_path, monthly_data)
+        logger.info("Regenerated past-month dashboard: %s", month_path)
+        return True
+    except Exception as e:
+        logger.warning("Past-month dashboard regeneration failed (non-fatal): %s", e)
+        return False
 
 
 def _fetch_credited_for_month(client, month: int, year: int) -> list:
