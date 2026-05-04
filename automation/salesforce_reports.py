@@ -561,3 +561,85 @@ def fetch_maps_check_ins_split(client, month: int, year: int) -> list[dict]:
     logger.info("Maps split total: %d rows (before dedup)", len(all_rows))
 
     return all_rows
+
+
+def fetch_monthly_quota_for_month(client, month: int, year: int) -> list[dict]:
+    """
+    Fetch Monthly Quota (Report 6) for a specific month using filter override.
+
+    The saved report's filter is "First Date of Month = THIS MONTH", which always
+    returns the calendar-current month. To capture late funded-dollar settlement
+    that lands AFTER a month closes (post-rollover SF updates), we need to
+    re-pull the prior month with a date-range override.
+
+    Auto-discovers the date column's API name from the saved report metadata so
+    we don't have to hardcode object/field naming. Falls back to the most likely
+    custom-field name if discovery fails.
+
+    Args:
+        client: Authenticated SalesforceClient
+        month: Target month (1-12)
+        year: Target year
+
+    Returns:
+        Parsed list of TABULAR row dicts, or empty list if the report is
+        unavailable / placeholder ID / SF call failed.
+    """
+    report_id = REPORT_IDS["monthly_quota"]
+    if report_id == "REPLACE_WITH_REPORT_ID":
+        logger.warning("monthly_quota report has placeholder ID. Skipping prior-month fetch.")
+        return []
+
+    # Step 1: Fetch saved report once to discover the date column's API name.
+    # POST replaces filters wholesale, so we also need to preserve any other
+    # saved filters (record-type, role, etc. — even if not currently documented).
+    try:
+        saved = fetch_report(client, report_id)
+    except Exception as e:
+        logger.warning("Could not fetch saved monthly_quota metadata: %s", e)
+        return []
+
+    saved_filters = list(saved.get("reportMetadata", {}).get("reportFilters", []))
+    date_column = None
+    preserved_filters = []
+    for f in saved_filters:
+        col = f.get("column", "")
+        # Match the "First Date of Month" filter regardless of object qualifier
+        # (e.g. "Monthly_Quota__c.First_Date_of_Month__c" or just
+        # "First_Date_of_Month__c"). Both forms appear in SF reports depending
+        # on how the field is referenced in the report builder.
+        if "first_date_of_month" in col.lower():
+            date_column = col
+            continue  # drop saved date filter; we replace with date range below
+        preserved_filters.append(f)
+
+    if not date_column:
+        # Fallback: most likely API name on the Monthly_Quota__c custom object.
+        date_column = "Monthly_Quota__c.First_Date_of_Month__c"
+        logger.warning(
+            "Could not auto-discover First Date of Month column on saved "
+            "monthly_quota filters; falling back to %s", date_column,
+        )
+
+    # Step 2: Build date-range override for the requested month.
+    start = date(year, month, 1)
+    if month == 12:
+        end = date(year + 1, 1, 1) - timedelta(days=1)
+    else:
+        end = date(year, month + 1, 1) - timedelta(days=1)
+
+    new_filters = preserved_filters + [
+        {"column": date_column, "operator": "greaterOrEqual", "value": start.isoformat()},
+        {"column": date_column, "operator": "lessOrEqual", "value": end.isoformat()},
+    ]
+
+    logger.info(
+        "Fetching monthly_quota for %s %d (column=%s, range=%s..%s)",
+        MONTH_ABBREV[month].title(), year, date_column,
+        start.isoformat(), end.isoformat(),
+    )
+
+    # Default boolean filter (AND across all) — we don't carry over the saved
+    # one because positions may have shifted after our filter swap.
+    raw = fetch_report(client, report_id, filters=new_filters)
+    return parse_report_rows(raw)

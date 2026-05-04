@@ -24,7 +24,7 @@ from .config import (
     TERRITORY_MAP,
 )
 from .salesforce_auth import SalesforceClient, SalesforceAuthError
-from .salesforce_reports import fetch_all_reports, fetch_cohort_activity, parse_report_rows, fetch_report, fetch_maps_check_ins_split
+from .salesforce_reports import fetch_all_reports, fetch_cohort_activity, parse_report_rows, fetch_report, fetch_maps_check_ins_split, fetch_monthly_quota_for_month
 from .processors import monthly_dashboard, cohort_tracking, q1_enrollment, field_activity, index_page, analytics, territory_review
 from . import html_generator
 
@@ -132,6 +132,29 @@ def main():
                 prev_activity_refresh_ok = True
         except Exception as e:
             logger.warning("Previous month activity refresh failed (non-fatal): %s", e)
+
+        # Refresh prior-month Monthly Quota (Report 6) so funded-dollar totals
+        # reflect post-rollover SF settlement. Without this, the prior-month
+        # monthly_quota.json freezes at whatever was current on rollover day,
+        # missing late-tail transactions that settle in early days of the new
+        # month. Downstream consumers (e.g. weekly-territory-cards' EoM archive)
+        # rely on this snapshot staying fresh for ~5–7 days post-rollover.
+        try:
+            prev_quota = fetch_monthly_quota_for_month(client, prev_m, prev_y)
+            if prev_quota:
+                snap_dir = os.path.join(PROJECT_ROOT, "data", "snapshots",
+                                        f"{prev_y}-{prev_m:02d}")
+                os.makedirs(snap_dir, exist_ok=True)
+                snap_path = os.path.join(snap_dir, "monthly_quota.json")
+                with open(snap_path, "w", encoding="utf-8") as f:
+                    json.dump(prev_quota, f, indent=2, default=str)
+                logger.info("Refreshed %s %d monthly_quota: %d rows",
+                             MONTH_ABBREV[prev_m], prev_y, len(prev_quota))
+            else:
+                logger.info("Prior-month monthly_quota refresh returned no rows; "
+                             "leaving existing snapshot in place")
+        except Exception as e:
+            logger.warning("Previous month quota refresh failed (non-fatal): %s", e)
 
         # Regenerate previous-month dashboard during the early-month window
         # (days 1–5 of the new month) so headline numbers on {prev}-{year}.html
