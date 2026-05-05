@@ -324,6 +324,40 @@ def main():
             current_cohort, current_month
         )
 
+    # 5. Refresh older cohorts still in the late-posting window.
+    #    Active (offset 1) and current (offset 0) are already processed above.
+    #    For older cohorts, the M2 true-up window is M0+2 months, and
+    #    late-posting funding can land for several weeks after a month closes.
+    #    Refreshing offsets 2 and 3 covers cohorts whose M2 ended in the last
+    #    ~30 days plus the cohort that's currently in its M2 window.
+    #    Cohorts older than offset 3 are considered settled and stay frozen.
+    OLDER_COHORT_OFFSETS = (2, 3)
+    if client:
+        for offset in OLDER_COHORT_OFFSETS:
+            em = current_month - offset
+            ey = current_year
+            while em < 1:
+                em += 12
+                ey -= 1
+            try:
+                older_credited, older_activity = _refresh_older_cohort(
+                    client, em, ey, current_month, current_year
+                )
+                if older_credited and older_activity:
+                    older_var_name = f"{MONTH_ABBREV[em]}Cohort"
+                    older_cohort = cohort_tracking.process_cohort(
+                        credited_enrollments=older_credited,
+                        monthly_activity=older_activity,
+                        enrollment_month=em,
+                        enrollment_year=ey,
+                    )
+                    cohorts[older_var_name] = older_cohort
+                    logger.info("Refreshed older cohort %s %d (%d entries)",
+                                MONTH_ABBREV[em], ey, len(older_cohort))
+            except Exception as e:
+                logger.warning("Older cohort refresh failed for %s %d (non-fatal): %s",
+                               MONTH_ABBREV[em], ey, e)
+
     # Build cohort configs for all tracked cohorts (including current month)
     cohort_configs = _build_cohort_configs(current_month, current_year)
 
@@ -1136,6 +1170,59 @@ def _refresh_past_month_snapshot(client, month: int, year: int, output_dir: str)
         logger.warning("Past month new-enrollment refresh failed (non-fatal): %s", e)
 
     return credited_ok and new_ok
+
+
+def _refresh_older_cohort(client, enroll_month: int, enroll_year: int,
+                          current_month: int, current_year: int) -> tuple:
+    """
+    Re-fetch credited enrollments + multi-month cohort activity for a past
+    cohort and persist the snapshots. Used to keep older cohort tabs on
+    cohort-tracking.html aligned with late-posting Salesforce funding.
+
+    Saves credited enrollments to ``data/snapshots/{Y-M}/credited_enrollments.json``
+    and the activity matrix to ``cohort_activity_refresh.json`` in the same dir.
+
+    Returns:
+        (credited_rows, normalized_activity_dict) on success
+        (None, None) if the credited fetch failed or returned no rows
+    """
+    snapshot_dir = os.path.join(PROJECT_ROOT, "data", "snapshots",
+                                f"{enroll_year}-{enroll_month:02d}")
+    os.makedirs(snapshot_dir, exist_ok=True)
+
+    # 1. Refresh credited enrollments (Report 2 with date override)
+    credited = _fetch_credited_for_month(client, enroll_month, enroll_year)
+    if not credited:
+        logger.warning(
+            "Older cohort %s %d: no credited rows returned",
+            MONTH_ABBREV[enroll_month], enroll_year)
+        return None, None
+
+    credited = _normalize_enrollment_rows(credited)
+    cred_path = os.path.join(snapshot_dir, "credited_enrollments.json")
+    with open(cred_path, "w", encoding="utf-8") as f:
+        json.dump(credited, f, indent=2, default=str)
+    logger.info("Refreshed older cohort credited: %s (%d rows)", cred_path, len(credited))
+
+    # 2. Refresh cohort activity (Report 4 matrix with date override)
+    activity_rows = fetch_cohort_activity(
+        client, enroll_month, enroll_year, current_month, current_year
+    )
+    if not activity_rows:
+        logger.warning(
+            "Older cohort %s %d: no activity rows returned",
+            MONTH_ABBREV[enroll_month], enroll_year)
+        return credited, {}
+
+    activity_path = os.path.join(snapshot_dir, "cohort_activity_refresh.json")
+    with open(activity_path, "w", encoding="utf-8") as f:
+        json.dump(activity_rows, f, indent=2, default=str)
+    logger.info("Refreshed older cohort activity: %s (%d rows)",
+                activity_path, len(activity_rows))
+
+    # 3. Normalize the matrix into a per-month dict for process_cohort
+    normalized = _normalize_matrix_to_monthly(activity_rows)
+    return credited, normalized
 
 
 def _fetch_new_enrollments_for_month(client, month: int, year: int) -> list:
