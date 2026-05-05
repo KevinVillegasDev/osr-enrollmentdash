@@ -221,8 +221,8 @@
     <!-- OVERVIEW -->
     <div class="tab-content active" id="overview">
       <div class="kpi-grid">
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">12</span><span class="kpi-sub">All sources, May 2026</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">1</span><span class="kpi-sub">8.3% of total</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">15</span><span class="kpi-sub">All sources, May 2026</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">1</span><span class="kpi-sub">6.7% of total</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#FBBF24,transparent)"></div><span class="kpi-label">Funded Volume</span><span class="kpi-value">$0</span><span class="kpi-sub">1 merchants tracked</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#A78BFA,transparent)"></div><span class="kpi-label">Funded Apps</span><span class="kpi-value">0</span><span class="kpi-sub">of 1 total apps</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#22D3EE,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">0.0%</span><span class="kpi-sub">Apps → Funded</span></div>
@@ -232,7 +232,7 @@
         <div class="section-sub">Credited enrollments by date — May 2026</div>
         <div style="height:240px"><canvas id="chartDaily"></canvas></div>
         <div class="callout">
-          <span><strong style="color:#FBBF24">Peak:</strong> May 5 (3 enrollments)</span>
+          <span><strong style="color:#FBBF24">Peak:</strong> May 5 (5 enrollments)</span>
           <span><strong style="color:#5B9BFF">Avg daily:</strong> ~0.5 enrollments/day</span>
         </div>
       </div>
@@ -240,7 +240,7 @@
         <div style="font-size:13px;color:#8494AB">Breakdown: <span id="ovScopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (1)</span></div>
         <div style="display:inline-flex;background:#293852;border-radius:8px;padding:3px;gap:2px">
           <button id="ovBtnOsr" onclick="setOverviewScope('osr')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (1)</button>
-          <button id="ovBtnAll" onclick="setOverviewScope('all')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (12)</button>
+          <button id="ovBtnAll" onclick="setOverviewScope('all')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (15)</button>
         </div>
       </div>
       <div class="grid-2-1">
@@ -291,7 +291,7 @@
         <div style="font-size:13px;color:#8494AB">Showing <span id="scopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (1)</span> enrollments</div>
         <div style="display:inline-flex;background:#293852;border-radius:8px;padding:3px;gap:2px">
           <button id="btnOsr" onclick="setMarketsScope('osr')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (1)</button>
-          <button id="btnAll" onclick="setMarketsScope('all')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (12)</button>
+          <button id="btnAll" onclick="setMarketsScope('all')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (15)</button>
         </div>
       </div>
       <div class="grid-2">
@@ -309,11 +309,11 @@
       </div>
       <div class="card">
         <div class="section-title">Total vs. Credited Enrollments</div>
-        <div class="section-sub">12 total new enrollments, 1 credited to outside sales team</div>
+        <div class="section-sub">15 total new enrollments, 1 credited to outside sales team</div>
         <div class="grid-3">
-          <div class="stat-box"><div class="stat-box-label">Total New</div><div class="stat-box-value" style="color:#5B9BFF">12</div><div class="stat-box-sub">8.3% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">Total New</div><div class="stat-box-value" style="color:#5B9BFF">15</div><div class="stat-box-sub">6.7% of total</div></div>
           <div class="stat-box"><div class="stat-box-label">OSR Credited</div><div class="stat-box-value" style="color:#2DD4A0">1</div><div class="stat-box-sub">77.2% of total</div></div>
-          <div class="stat-box"><div class="stat-box-label">Other Sources</div><div class="stat-box-value" style="color:#FBBF24">11</div><div class="stat-box-sub">91.7% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">Other Sources</div><div class="stat-box-value" style="color:#FBBF24">14</div><div class="stat-box-sub">93.3% of total</div></div>
         </div>
       </div>
     </div>
@@ -358,18 +358,18 @@
 
 <script>
 var repCredits=[{"n":"DeLon Phoenix","v":1}];
-var marketData=[{"n":"TX","v":2},{"n":"FL","v":1},{"n":"NV","v":1}];
-var industryData=[{"n":"Auto - Repair","v":2},{"n":"Auto - Wheels & Tires","v":1},{"n":"Auto - Other","v":1}];
-var marketDataFull=[{"n":"TX","v":5},{"n":"FL","v":4},{"n":"NV","v":1},{"n":"CA","v":1},{"n":"GA","v":1}];
-var industryDataFull=[{"n":"Auto - Repair","v":5},{"n":"Auto - Other","v":2},{"n":"MedSpa","v":1},{"n":"Scooters","v":1},{"n":"Furniture","v":1},{"n":"Other","v":1},{"n":"Auto - Wheels & Tires","v":1}];
+var marketData=[{"n":"TX","v":2},{"n":"PA","v":2},{"n":"FL","v":1},{"n":"NV","v":1}];
+var industryData=[{"n":"Auto - Repair","v":4},{"n":"Auto - Wheels & Tires","v":1},{"n":"Auto - Other","v":1}];
+var marketDataFull=[{"n":"TX","v":5},{"n":"FL","v":5},{"n":"PA","v":2},{"n":"NV","v":1},{"n":"CA","v":1},{"n":"GA","v":1}];
+var industryDataFull=[{"n":"Auto - Repair","v":7},{"n":"Auto - Other","v":2},{"n":"Furniture","v":2},{"n":"MedSpa","v":1},{"n":"Scooters","v":1},{"n":"Other","v":1},{"n":"Auto - Wheels & Tires","v":1}];
 var marketsScope='osr';
-var isrData=[{"n":"Noemy Carrion","v":2},{"n":"Javier Gonzalez","v":1},{"n":"Michael Palmer","v":1}];
-var dailyTrend=[{"d":"May 1","v":1},{"d":"May 5","v":3}];
+var isrData=[{"n":"Noemy Carrion","v":2},{"n":"Connor Admirand","v":2},{"n":"Javier Gonzalez","v":1},{"n":"Michael Palmer","v":1}];
+var dailyTrend=[{"d":"May 1","v":1},{"d":"May 5","v":5}];
 var topProducers=[{"n":"High Roller Customs","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":"DeLon Phoenix"}];
 var PC=["#3B82F6","#10B981","#F59E0B","#EF4444","#8B5CF6","#06B6D4","#EC4899","#F97316","#14B8A6","#A855F7","#6366F1","#84CC16"];
 
 var repMerchants={
-"-":[{"n":"At 1960 Transmissions and Services","b":25728,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Lonestar Offroad & Performance","b":25734,"l":"Pinehurst, TX","f":0,"fa":0,"ta":0},{"n":"Pam's Motor City","b":25733,"l":"Fort Myers, FL","f":0,"fa":0,"ta":0}],
+"-":[{"n":"At 1960 Transmissions and Services","b":25728,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Lonestar Offroad & Performance","b":25734,"l":"Pinehurst, TX","f":0,"fa":0,"ta":0},{"n":"E&S Auto Repair and Sales","b":25738,"l":"Harrisburg, PA","f":0,"fa":0,"ta":0},{"n":"Fco Auto Repair LLC Kelvin Taveras","b":25739,"l":"Harrisburg, PA","f":0,"fa":0,"ta":0},{"n":"Pam's Motor City","b":25733,"l":"Fort Myers, FL","f":0,"fa":0,"ta":0}],
 "DeLon Phoenix":[{"n":"High Roller Customs","b":25725,"l":"Las Vegas, NV","f":0.0,"fa":0,"ta":1}]
 };
 
@@ -475,7 +475,7 @@ function setMarketsScope(scope){
   document.getElementById('btnOsr').style.color=scope==='osr'?'#fff':'#8494AB';
   document.getElementById('btnAll').style.background=scope==='all'?'#5B9BFF':'transparent';
   document.getElementById('btnAll').style.color=scope==='all'?'#fff':'#8494AB';
-  document.getElementById('scopeLabel').textContent=scope==='all'?'All Enrollments (12)':'OSR Credited (1)';
+  document.getElementById('scopeLabel').textContent=scope==='all'?'All Enrollments (15)':'OSR Credited (1)';
   document.getElementById('stateSub').textContent=scope==='all'?'All new enrollments across all channels':'Credited sales team enrollments';
   // Rebuild state chart
   destroyChart('states');
@@ -498,7 +498,7 @@ function setOverviewScope(scope){
   document.getElementById('ovBtnOsr').style.color=scope==='osr'?'#fff':'#8494AB';
   document.getElementById('ovBtnAll').style.background=scope==='all'?'#5B9BFF':'transparent';
   document.getElementById('ovBtnAll').style.color=scope==='all'?'#fff':'#8494AB';
-  document.getElementById('ovScopeLabel').textContent=scope==='all'?'All Enrollments (12)':'OSR Credited (1)';
+  document.getElementById('ovScopeLabel').textContent=scope==='all'?'All Enrollments (15)':'OSR Credited (1)';
   // Top 5 Markets
   var sd=scope==='all'?marketDataFull:marketData;
   document.getElementById('ovMarketSub').textContent=scope==='all'?'States by total enrollment volume':'States by credited enrollment volume';
