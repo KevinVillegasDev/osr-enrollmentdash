@@ -139,22 +139,35 @@ def main():
         # missing late-tail transactions that settle in early days of the new
         # month. Downstream consumers (e.g. weekly-territory-cards' EoM archive)
         # rely on this snapshot staying fresh for ~5–7 days post-rollover.
-        try:
-            prev_quota = fetch_monthly_quota_for_month(client, prev_m, prev_y)
-            if prev_quota:
-                snap_dir = os.path.join(PROJECT_ROOT, "data", "snapshots",
-                                        f"{prev_y}-{prev_m:02d}")
-                os.makedirs(snap_dir, exist_ok=True)
-                snap_path = os.path.join(snap_dir, "monthly_quota.json")
-                with open(snap_path, "w", encoding="utf-8") as f:
-                    json.dump(prev_quota, f, indent=2, default=str)
-                logger.info("Refreshed %s %d monthly_quota: %d rows",
-                             MONTH_ABBREV[prev_m], prev_y, len(prev_quota))
-            else:
-                logger.info("Prior-month monthly_quota refresh returned no rows; "
-                             "leaving existing snapshot in place")
-        except Exception as e:
-            logger.warning("Previous month quota refresh failed (non-fatal): %s", e)
+        #
+        # Gated to days 1–7 of the new month to avoid adding two extra SF API
+        # calls on every hourly run for the rest of the month — by day 8, the
+        # prior month is reconciled by Sales Ops and our snapshot doesn't need
+        # to keep refreshing.
+        QUOTA_REFRESH_WINDOW_DAYS = 7
+        if today.day <= QUOTA_REFRESH_WINDOW_DAYS:
+            try:
+                prev_quota = fetch_monthly_quota_for_month(client, prev_m, prev_y)
+                if prev_quota:
+                    snap_dir = os.path.join(PROJECT_ROOT, "data", "snapshots",
+                                            f"{prev_y}-{prev_m:02d}")
+                    os.makedirs(snap_dir, exist_ok=True)
+                    snap_path = os.path.join(snap_dir, "monthly_quota.json")
+                    with open(snap_path, "w", encoding="utf-8") as f:
+                        json.dump(prev_quota, f, indent=2, default=str)
+                    logger.info("Refreshed %s %d monthly_quota: %d rows",
+                                 MONTH_ABBREV[prev_m], prev_y, len(prev_quota))
+                else:
+                    logger.info("Prior-month monthly_quota refresh returned no rows; "
+                                 "leaving existing snapshot in place")
+            except Exception as e:
+                logger.warning("Previous month quota refresh failed (non-fatal): %s", e)
+        else:
+            logger.info(
+                "Day %d > %d — skipping prior-month monthly_quota refresh "
+                "(snapshot considered final after first week of new month)",
+                today.day, QUOTA_REFRESH_WINDOW_DAYS,
+            )
 
         # Regenerate previous-month dashboard during the early-month window
         # (days 1–5 of the new month) so headline numbers on {prev}-{year}.html

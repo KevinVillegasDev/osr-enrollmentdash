@@ -590,16 +590,19 @@ def fetch_monthly_quota_for_month(client, month: int, year: int) -> list[dict]:
         logger.warning("monthly_quota report has placeholder ID. Skipping prior-month fetch.")
         return []
 
-    # Step 1: Fetch saved report once to discover the date column's API name.
-    # POST replaces filters wholesale, so we also need to preserve any other
-    # saved filters (record-type, role, etc. — even if not currently documented).
+    # Step 1: Use /describe to read the saved report's metadata (filters only,
+    # no row execution — much faster than running the full report). POST
+    # replaces filters wholesale, so we also need to preserve any other saved
+    # filters (record-type, role, etc.).
+    describe_path = _report_url(report_id) + "/describe"
+    saved_filters = []
     try:
-        saved = fetch_report(client, report_id)
+        describe = client.get(describe_path)
+        saved_filters = list(describe.get("reportMetadata", {}).get("reportFilters", []))
     except Exception as e:
-        logger.warning("Could not fetch saved monthly_quota metadata: %s", e)
+        logger.warning("Could not /describe monthly_quota report: %s", e)
         return []
 
-    saved_filters = list(saved.get("reportMetadata", {}).get("reportFilters", []))
     date_column = None
     preserved_filters = []
     for f in saved_filters:

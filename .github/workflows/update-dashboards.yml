@@ -16,10 +16,18 @@ on:
 permissions:
   contents: write
 
+# Serialize runs so a slow run doesn't get cancelled by the next cron firing.
+# `cancel-in-progress: false` waits for the running job instead of killing it.
+concurrency:
+  group: update-dashboards
+  cancel-in-progress: false
+
 jobs:
   update-dashboards:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # 15 min gives headroom for the early-month prior-snapshot refreshes
+    # (extra SF API calls in days 1–7) without falsely tripping a timeout.
+    timeout-minutes: 15
 
     steps:
       - name: Checkout repository
