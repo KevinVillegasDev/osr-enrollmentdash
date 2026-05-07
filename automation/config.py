@@ -136,6 +136,36 @@ COHORT_TARGET_M2 = 30000    # $30K by end of Month 2 (true-up)
 QUARTERLY_TARGET = 30       # 30 enrollments per quarter
 MONTHLY_FLOOR = 10          # No single month below 10
 
+# ─── Cohort Email Distribution ───────────────────────────────────────────────
+# OSR email addresses for the weekly cohort email. Keys must match OSR_ROSTER.
+# Leave a value as "" to skip sending to that rep (e.g., departed, manager).
+OSR_EMAILS = {
+    "Cesar Flores": "cesar.flores@easypayfinance.com",
+    "Claudia Gerhardt": "claudia.gerhardt@easypayfinance.com",
+    "DeLon Phoenix": "delon.phoenix@easypayfinance.com",
+    "Eric Henderson": "eric.henderson@easypayfinance.com",
+    "Jared Midkiff": "jared.midkiff@easypayfinance.com",
+    "Jeremy Moore": "",  # departed end of April 2026 — skip
+    "Joseph Guerra": "joseph.guerra@easypayfinance.com",
+    "Matthew MacDonald": "matthew.macdonald@easypayfinance.com",
+    "Omar Corona": "omar.corona@easypayfinance.com",
+    "Phillip Mason": "phillip.mason@easypayfinance.com",
+    "Richard Herrera": "richard.herrera@easypayfinance.com",
+    "Stephanie Whitlock": "stephanie.whitlock@easypayfinance.com",
+    "Yemaira Hernandez": "yemaira.hernandez@easypayfinance.com",
+    "Outside Sales Manager": "",  # manager/overflow account — skip
+}
+
+# Local OneDrive path where the email script drops JSON envelopes.
+# Power Automate watches this folder and sends the actual emails.
+COHORT_EMAIL_OUTBOX = os.environ.get(
+    "COHORT_EMAIL_OUTBOX",
+    r"C:\Users\kevin.villegas\OneDrive - Duvera\OSR Reports\Outbox",
+)
+
+# Kevin's address — used for --test sends and as a BCC on real sends if desired.
+COHORT_EMAIL_ADMIN = "kevin.v@easypayfinance.com"
+
 # ─── Salesforce Report Column Names ──────────────────────────────────────────
 # These are the API names of columns in the Salesforce reports.
 # If column names differ in your org, update them here.
