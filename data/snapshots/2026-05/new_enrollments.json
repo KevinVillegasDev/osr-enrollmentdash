@@ -646,5 +646,32 @@
     "_label_Industry": "Auto - Repair",
     "EPF Product": "Rental Payments (Lease-to-Own Option)",
     "_label_EPF Product": "Rental Payments (Lease-to-Own Option)"
+  },
+  {
+    "Enrollment Date": "5/7/2026",
+    "Branch ID": "25750",
+    "_label_Branch ID": "25750",
+    "Account Name": "001TO00000jvJKBYA2",
+    "_label_Account Name": "Quality Truck and Trailer Parts",
+    "Billing State/Province (text only)": "Florida",
+    "_label_Billing State/Province (text only)": "Florida",
+    "Status": "New",
+    "_label_Status": "New",
+    "Parent Account": "001TO00000jvVRmYAM",
+    "_label_Parent Account": "Quality Truck and Trailer Parts LLC",
+    "CID": "19997",
+    "_label_CID": "19997",
+    "Billing Street": "702 S Market Ave",
+    "_label_Billing Street": "702 S Market Ave",
+    "Billing State/Province": "FL",
+    "_label_Billing State/Province": "Florida",
+    "Billing Zip/Postal Code": "34982",
+    "_label_Billing Zip/Postal Code": "34982",
+    "Created Date": "2026-04-24",
+    "_label_Created Date": "4/24/2026",
+    "Industry": "Auto - Repair",
+    "_label_Industry": "Auto - Repair",
+    "EPF Product": "Rental Payments (Lease-to-Own Option)",
+    "_label_EPF Product": "Rental Payments (Lease-to-Own Option)"
   }
 ]
