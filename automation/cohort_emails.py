@@ -33,6 +33,7 @@ import json
 import logging
 import os
 import re
+import subprocess
 import sys
 from datetime import date, timedelta
 from html import escape
@@ -651,6 +652,33 @@ def write_envelope(envelope: dict, outbox_dir: str, today: date) -> str:
 
 # ─── Cohort data sources ─────────────────────────────────────────────────────
 
+def pull_latest():
+    """Pull latest dashboard data from GitHub into the local checkout.
+
+    The hourly pipeline runs in GitHub Actions and commits cohort-tracking.html
+    to GitHub — it does not auto-sync to this machine. Without a `git pull`
+    here, we'd read stale local data and send emails with old numbers.
+    Failures are logged but non-fatal; the script falls back to whatever's
+    already on disk.
+    """
+    try:
+        result = subprocess.run(
+            ["git", "pull", "--ff-only"],
+            cwd=PROJECT_ROOT,
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+        if result.returncode == 0:
+            msg = result.stdout.strip().splitlines()[-1] if result.stdout.strip() else "up to date"
+            logger.info("git pull: %s", msg)
+        else:
+            logger.warning("git pull failed (using local data): %s",
+                           result.stderr.strip() or result.stdout.strip())
+    except Exception as e:
+        logger.warning("git pull errored (using local data): %s", e)
+
+
 def load_cohorts_from_html(html_path: str) -> dict[str, list[dict]]:
     """
     Parse cohort variables out of cohort-tracking.html.
@@ -783,6 +811,8 @@ def main():
     if not args.from_html:
         logger.error("No data source specified. Use --test for sample data or --from-html for live data.")
         sys.exit(2)
+
+    pull_latest()
 
     html_path = os.path.join(PROJECT_ROOT, "cohort-tracking.html")
     cohorts = load_cohorts_from_html(html_path)
