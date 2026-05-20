@@ -169,6 +169,35 @@ def main():
                 today.day, QUOTA_REFRESH_WINDOW_DAYS,
             )
 
+        # ─── Idempotent backfill: Feb 2026 monthly_quota ──────────────────
+        # Report 6 collection started in March 2026, so 2026-02 has no
+        # monthly_quota.json snapshot. We need that file to evaluate the
+        # contract V3.4 Trigger A (3 consecutive months <95% Budget
+        # Attainment) starting from the Feb 1 contract effective date.
+        # The check below is idempotent — once the snapshot exists, it
+        # short-circuits without an API call. Safe to leave in place.
+        feb2026_quota_path = os.path.join(
+            PROJECT_ROOT, "data", "snapshots", "2026-02", "monthly_quota.json")
+        if not os.path.exists(feb2026_quota_path):
+            try:
+                logger.info("Backfilling missing Feb 2026 monthly_quota snapshot")
+                feb_quota = fetch_monthly_quota_for_month(client, 2, 2026)
+                if feb_quota:
+                    os.makedirs(os.path.dirname(feb2026_quota_path),
+                                exist_ok=True)
+                    with open(feb2026_quota_path, "w", encoding="utf-8") as f:
+                        json.dump(feb_quota, f, indent=2, default=str)
+                    logger.info(
+                        "Backfilled Feb 2026 monthly_quota: %d rows -> %s",
+                        len(feb_quota), feb2026_quota_path)
+                else:
+                    logger.warning(
+                        "Feb 2026 monthly_quota backfill returned no rows; "
+                        "snapshot left absent")
+            except Exception as e:
+                logger.warning(
+                    "Feb 2026 monthly_quota backfill failed (non-fatal): %s", e)
+
         # Regenerate previous-month dashboard during the early-month window
         # (days 1–5 of the new month) so headline numbers on {prev}-{year}.html
         # stay aligned with the refreshed cohort/index data while late SF
