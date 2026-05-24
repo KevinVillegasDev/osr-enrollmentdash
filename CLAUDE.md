@@ -345,7 +345,7 @@ For historical cohorts or Month 2 true-up data, Report 2 and 4 templates are cal
 
 Cesar Flores, Claudia Gerhardt, DeLon Phoenix, Eric Henderson, Francisco Gonzalez, Jared Midkiff, Joseph Guerra, Matthew MacDonald, Omar Corona, Phillip Mason, Richard Herrera, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
 
-*Jeremy Moore (departed end of April 2026) is retained in `OSR_ROSTER` for historical cohort continuity but no longer holds a territory.*
+*Jeremy Moore (departed end of April 2026) is no longer in `OSR_ROSTER`. Frozen Jan–Apr 2026 dashboards still show him historically.*
 
 ## ISR Roster (as of April 2026)
 

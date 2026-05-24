@@ -45,7 +45,7 @@ REPORT_IDS = {
 
 # ─── OSR Roster (as of May 2026) ─────────────────────────────────────────────
 # Jeremy Moore departed end of April 2026; Richard Herrera took over RIC-4 starting May 2026.
-# Jeremy retained in roster for historical cohort/scorecard continuity (Jan–Apr 2026 data).
+# Frozen Jan–Apr 2026 dashboards still show Jeremy historically — those HTMLs are never regenerated.
 OSR_ROSTER = [
     "Cesar Flores",
     "Claudia Gerhardt",
@@ -53,7 +53,6 @@ OSR_ROSTER = [
     "Eric Henderson",
     "Francisco Gonzalez",
     "Jared Midkiff",
-    "Jeremy Moore",
     "Joseph Guerra",
     "Matthew MacDonald",
     "Omar Corona",
@@ -149,7 +148,6 @@ OSR_EMAILS = {
     "Eric Henderson": "eric.henderson@easypayfinance.com",
     "Francisco Gonzalez": "francisco.gonzalez@easypayfinance.com",
     "Jared Midkiff": "jared.midkiff@easypayfinance.com",
-    "Jeremy Moore": "",  # departed end of April 2026 — skip
     "Joseph Guerra": "joseph.guerra@easypayfinance.com",
     "Matthew MacDonald": "matthew.macdonald@easypayfinance.com",
     "Omar Corona": "omar.corona@easypayfinance.com",
