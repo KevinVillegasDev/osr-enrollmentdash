@@ -343,7 +343,7 @@ For historical cohorts or Month 2 true-up data, Report 2 and 4 templates are cal
 
 ## OSR Roster (as of May 2026)
 
-Cesar Flores, Claudia Gerhardt, DeLon Phoenix, Eric Henderson, Jared Midkiff, Joseph Guerra, Matthew MacDonald, Omar Corona, Phillip Mason, Richard Herrera, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
+Cesar Flores, Claudia Gerhardt, DeLon Phoenix, Eric Henderson, Francisco Gonzalez, Jared Midkiff, Joseph Guerra, Matthew MacDonald, Omar Corona, Phillip Mason, Richard Herrera, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
 
 *Jeremy Moore (departed end of April 2026) is retained in `OSR_ROSTER` for historical cohort continuity but no longer holds a territory.*
 
@@ -356,7 +356,7 @@ Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Michael Palmer, 
 | ISR | Territories |
 |-----|-------------|
 | Javier Gonzalez | LTO-1 (Yemaira), LTO-5 (Jared) |
-| Noemy Carrion | LTO-2 (Omar), LTO-3 (Joseph) |
+| Noemy Carrion | LTO-2 (Omar), LTO-3 (Joseph), LTO-4 (Francisco) |
 | Connor Admirand | LTO-7 (Stephanie), RIC-8 (Eric) |
 | Katie Anguiano | RIC-1 (Cesar), RIC-2 (Claudia), RIC-4 (Richard) |
 | Laura Angulo | RIC-6 (Phillip) |
@@ -369,6 +369,7 @@ Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Michael Palmer, 
 | LTO-1 | Yemaira Hernandez | FL (Miami-Dade/Broward) |
 | LTO-2 | Omar Corona | TX (S. Houston/Valley/El Paso) |
 | LTO-3 | Joseph Guerra | TX (State Manager) |
+| LTO-4 | Francisco Gonzalez | — |
 | LTO-5 | Jared Midkiff | FL (State Manager) |
 | LTO-7 | Stephanie Whitlock | GA/NE FL/Panhandle |
 | RIC-1 | Cesar Flores | CA (LA Metro Core) |
@@ -379,7 +380,7 @@ Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Michael Palmer, 
 | RIC-8 | Eric Henderson | PA (4 Metros) |
 | RIC-9 | Matthew MacDonald | AZ (State Manager + NM/UT/ID) |
 
-**Unassigned territories:** LTO-4 (Sara Porter, departed), LTO-8, RIC-3, RIC-5 — hiring in progress.
+**Unassigned territories:** LTO-8, RIC-3, RIC-5 — hiring in progress.
 
 ## Key Terminology
 

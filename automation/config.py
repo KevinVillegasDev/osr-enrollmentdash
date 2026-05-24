@@ -51,6 +51,7 @@ OSR_ROSTER = [
     "Claudia Gerhardt",
     "DeLon Phoenix",
     "Eric Henderson",
+    "Francisco Gonzalez",
     "Jared Midkiff",
     "Jeremy Moore",
     "Joseph Guerra",
@@ -65,13 +66,14 @@ OSR_ROSTER = [
 
 # ─── Territory → OSR Mapping ────────────────────────────────────────────────
 # Maps territory codes from the sales budget to OSR names.
-# Unassigned territories (LTO-4, LTO-8, RIC-3, RIC-5) are excluded.
-# LTO-4 was Sara Porter (no longer on team).
+# Unassigned territories (LTO-8, RIC-3, RIC-5) are excluded.
+# LTO-4: Sara Porter through early 2026; Francisco Gonzalez from May 2026 forward.
 # RIC-4: Jeremy Moore through April 2026; Richard Herrera from May 2026 forward.
 TERRITORY_MAP = {
     "LTO-1": "Yemaira Hernandez",
     "LTO-2": "Omar Corona",
     "LTO-3": "Joseph Guerra",
+    "LTO-4": "Francisco Gonzalez",
     "LTO-5": "Jared Midkiff",
     "LTO-7": "Stephanie Whitlock",
     "RIC-1": "Cesar Flores",
@@ -89,6 +91,7 @@ ISR_TERRITORY_MAP = {
     "LTO-1": "Javier Gonzalez",
     "LTO-2": "Noemy Carrion",
     "LTO-3": "Noemy Carrion",
+    "LTO-4": "Noemy Carrion",
     "LTO-5": "Javier Gonzalez",
     "LTO-7": "Connor Admirand",
     "RIC-1": "Katie Anguiano",
@@ -144,6 +147,7 @@ OSR_EMAILS = {
     "Claudia Gerhardt": "claudia.gerhardt@easypayfinance.com",
     "DeLon Phoenix": "delon.phoenix@easypayfinance.com",
     "Eric Henderson": "eric.henderson@easypayfinance.com",
+    "Francisco Gonzalez": "francisco.gonzalez@easypayfinance.com",
     "Jared Midkiff": "jared.midkiff@easypayfinance.com",
     "Jeremy Moore": "",  # departed end of April 2026 — skip
     "Joseph Guerra": "joseph.guerra@easypayfinance.com",
