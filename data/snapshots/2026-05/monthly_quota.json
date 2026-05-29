@@ -8,8 +8,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 855,
-    "_label_Applications": "855",
+    "Applications": 896,
+    "_label_Applications": "896",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -18,28 +18,28 @@
     },
     "_label_Funded Dollars Quota": "$514,818.00",
     "Funded Dollars": {
-      "amount": 478163.67,
+      "amount": 495012.44,
       "currency": null
     },
-    "_label_Funded Dollars": "$478,163.67",
+    "_label_Funded Dollars": "$495,012.44",
     "Funded Dollars Difference": {
-      "amount": -36654.33,
+      "amount": -19805.56,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$36,654.33",
-    "Funded Applications Total": 286,
-    "_label_Funded Applications Total": "286",
+    "_label_Funded Dollars Difference": "-$19,805.56",
+    "Funded Applications Total": 299,
+    "_label_Funded Applications Total": "299",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 982,
-    "_label_Applications Projected": "982",
-    "Funding Progress": 99.8,
-    "_label_Funding Progress": "99.8%",
+    "Applications Projected": 992,
+    "_label_Applications Projected": "992",
+    "Funding Progress": 99.6,
+    "_label_Funding Progress": "99.6%",
     "Funding Projected": {
-      "amount": 513583.2,
+      "amount": 512691.46,
       "currency": null
     },
-    "_label_Funding Projected": "$513,583.20"
+    "_label_Funding Projected": "$512,691.46"
   },
   {
     "User": "005TO000006CQMfYAO",
@@ -50,8 +50,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 1063,
-    "_label_Applications": "1,063",
+    "Applications": 1104,
+    "_label_Applications": "1,104",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -60,28 +60,28 @@
     },
     "_label_Funded Dollars Quota": "$597,441.00",
     "Funded Dollars": {
-      "amount": 527986.75,
+      "amount": 566819.12,
       "currency": null
     },
-    "_label_Funded Dollars": "$527,986.75",
+    "_label_Funded Dollars": "$566,819.12",
     "Funded Dollars Difference": {
-      "amount": -69454.25,
+      "amount": -30621.88,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$69,454.25",
-    "Funded Applications Total": 336,
-    "_label_Funded Applications Total": "336",
+    "_label_Funded Dollars Difference": "-$30,621.88",
+    "Funded Applications Total": 355,
+    "_label_Funded Applications Total": "355",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 1220,
-    "_label_Applications Projected": "1,220",
-    "Funding Progress": 94.9,
-    "_label_Funding Progress": "94.9%",
+    "Applications Projected": 1222,
+    "_label_Applications Projected": "1,222",
+    "Funding Progress": 98.3,
+    "_label_Funding Progress": "98.3%",
     "Funding Projected": {
-      "amount": 567096.88,
+      "amount": 587062.66,
       "currency": null
     },
-    "_label_Funding Projected": "$567,096.88"
+    "_label_Funding Projected": "$587,062.66"
   },
   {
     "User": "005TO000007Eqp7YAC",
@@ -92,8 +92,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 1394,
-    "_label_Applications": "1,394",
+    "Applications": 1455,
+    "_label_Applications": "1,455",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -102,28 +102,28 @@
     },
     "_label_Funded Dollars Quota": "$570,972.00",
     "Funded Dollars": {
-      "amount": 696348,
+      "amount": 725901.11,
       "currency": null
     },
-    "_label_Funded Dollars": "$696,348.00",
+    "_label_Funded Dollars": "$725,901.11",
     "Funded Dollars Difference": {
-      "amount": 125376,
+      "amount": 154929.11,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "$125,376.00",
-    "Funded Applications Total": 410,
-    "_label_Funded Applications Total": "410",
+    "_label_Funded Dollars Difference": "$154,929.11",
+    "Funded Applications Total": 428,
+    "_label_Funded Applications Total": "428",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 1601,
-    "_label_Applications Projected": "1,601",
-    "Funding Progress": 131,
-    "_label_Funding Progress": "131.0%",
+    "Applications Projected": 1611,
+    "_label_Applications Projected": "1,611",
+    "Funding Progress": 131.7,
+    "_label_Funding Progress": "131.7%",
     "Funding Projected": {
-      "amount": 747929.33,
+      "amount": 751826.15,
       "currency": null
     },
-    "_label_Funding Projected": "$747,929.33"
+    "_label_Funding Projected": "$751,826.15"
   },
   {
     "User": "005TO000007KAf7YAG",
@@ -167,8 +167,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 904,
-    "_label_Applications": "904",
+    "Applications": 950,
+    "_label_Applications": "950",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -177,28 +177,28 @@
     },
     "_label_Funded Dollars Quota": "$727,092.00",
     "Funded Dollars": {
-      "amount": 499619.79,
+      "amount": 526901.47,
       "currency": null
     },
-    "_label_Funded Dollars": "$499,619.79",
+    "_label_Funded Dollars": "$526,901.47",
     "Funded Dollars Difference": {
-      "amount": -227472.21,
+      "amount": -200190.53,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$227,472.21",
-    "Funded Applications Total": 344,
-    "_label_Funded Applications Total": "344",
+    "_label_Funded Dollars Difference": "-$200,190.53",
+    "Funded Applications Total": 367,
+    "_label_Funded Applications Total": "367",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 1038,
-    "_label_Applications Projected": "1,038",
-    "Funding Progress": 73.8,
-    "_label_Funding Progress": "73.8%",
+    "Applications Projected": 1052,
+    "_label_Applications Projected": "1,052",
+    "Funding Progress": 75.1,
+    "_label_Funding Progress": "75.1%",
     "Funding Projected": {
-      "amount": 536628.66,
+      "amount": 545719.38,
       "currency": null
     },
-    "_label_Funding Projected": "$536,628.66"
+    "_label_Funding Projected": "$545,719.38"
   },
   {
     "User": "005TO0000099jojYAA",
@@ -209,8 +209,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 2067,
-    "_label_Applications": "2,067",
+    "Applications": 2168,
+    "_label_Applications": "2,168",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -219,28 +219,28 @@
     },
     "_label_Funded Dollars Quota": "$1,205,131.00",
     "Funded Dollars": {
-      "amount": 1041413.72,
+      "amount": 1076303.16,
       "currency": null
     },
-    "_label_Funded Dollars": "$1,041,413.72",
+    "_label_Funded Dollars": "$1,076,303.16",
     "Funded Dollars Difference": {
-      "amount": -163717.28,
+      "amount": -128827.84,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$163,717.28",
-    "Funded Applications Total": 661,
-    "_label_Funded Applications Total": "661",
+    "_label_Funded Dollars Difference": "-$128,827.84",
+    "Funded Applications Total": 685,
+    "_label_Funded Applications Total": "685",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 2373,
-    "_label_Applications Projected": "2,373",
-    "Funding Progress": 92.8,
-    "_label_Funding Progress": "92.8%",
+    "Applications Projected": 2400,
+    "_label_Applications Projected": "2,400",
+    "Funding Progress": 92.5,
+    "_label_Funding Progress": "92.5%",
     "Funding Projected": {
-      "amount": 1118555.48,
+      "amount": 1114742.56,
       "currency": null
     },
-    "_label_Funding Projected": "$1,118,555.48"
+    "_label_Funding Projected": "$1,114,742.56"
   },
   {
     "User": "005TO000009FYnOYAW",
@@ -251,8 +251,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 979,
-    "_label_Applications": "979",
+    "Applications": 1010,
+    "_label_Applications": "1,010",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -261,28 +261,28 @@
     },
     "_label_Funded Dollars Quota": "$703,049.00",
     "Funded Dollars": {
-      "amount": 541901.74,
+      "amount": 556524.16,
       "currency": null
     },
-    "_label_Funded Dollars": "$541,901.74",
+    "_label_Funded Dollars": "$556,524.16",
     "Funded Dollars Difference": {
-      "amount": -161147.26,
+      "amount": -146524.84,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$161,147.26",
-    "Funded Applications Total": 361,
-    "_label_Funded Applications Total": "361",
+    "_label_Funded Dollars Difference": "-$146,524.84",
+    "Funded Applications Total": 373,
+    "_label_Funded Applications Total": "373",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 1124,
-    "_label_Applications Projected": "1,124",
-    "Funding Progress": 82.8,
-    "_label_Funding Progress": "82.8%",
+    "Applications Projected": 1118,
+    "_label_Applications Projected": "1,118",
+    "Funding Progress": 82,
+    "_label_Funding Progress": "82.0%",
     "Funding Projected": {
-      "amount": 582042.61,
+      "amount": 576400.02,
       "currency": null
     },
-    "_label_Funding Projected": "$582,042.61"
+    "_label_Funding Projected": "$576,400.02"
   },
   {
     "User": "005TO000009FYyfYAG",
@@ -359,8 +359,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 1858,
-    "_label_Applications": "1,858",
+    "Applications": 1946,
+    "_label_Applications": "1,946",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -369,28 +369,28 @@
     },
     "_label_Funded Dollars Quota": "$1,456,707.00",
     "Funded Dollars": {
-      "amount": 1158232.65,
+      "amount": 1205690.47,
       "currency": null
     },
-    "_label_Funded Dollars": "$1,158,232.65",
+    "_label_Funded Dollars": "$1,205,690.47",
     "Funded Dollars Difference": {
-      "amount": -298474.35,
+      "amount": -251016.53,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$298,474.35",
-    "Funded Applications Total": 764,
-    "_label_Funded Applications Total": "764",
+    "_label_Funded Dollars Difference": "-$251,016.53",
+    "Funded Applications Total": 800,
+    "_label_Funded Applications Total": "800",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 2133,
-    "_label_Applications Projected": "2,133",
-    "Funding Progress": 85.4,
-    "_label_Funding Progress": "85.4%",
+    "Applications Projected": 2155,
+    "_label_Applications Projected": "2,155",
+    "Funding Progress": 85.7,
+    "_label_Funding Progress": "85.7%",
     "Funding Projected": {
-      "amount": 1244027.66,
+      "amount": 1248750.84,
       "currency": null
     },
-    "_label_Funding Projected": "$1,244,027.66"
+    "_label_Funding Projected": "$1,248,750.84"
   },
   {
     "User": "005TO000005jIxBYAU",
@@ -401,8 +401,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 2911,
-    "_label_Applications": "2,911",
+    "Applications": 3036,
+    "_label_Applications": "3,036",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -411,28 +411,28 @@
     },
     "_label_Funded Dollars Quota": "$2,129,497.00",
     "Funded Dollars": {
-      "amount": 1623348.11,
+      "amount": 1671015.17,
       "currency": null
     },
-    "_label_Funded Dollars": "$1,623,348.11",
+    "_label_Funded Dollars": "$1,671,015.17",
     "Funded Dollars Difference": {
-      "amount": -506148.89,
+      "amount": -458481.83,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$506,148.89",
-    "Funded Applications Total": 1076,
-    "_label_Funded Applications Total": "1,076",
+    "_label_Funded Dollars Difference": "-$458,481.83",
+    "Funded Applications Total": 1117,
+    "_label_Funded Applications Total": "1,117",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 3342,
-    "_label_Applications Projected": "3,342",
-    "Funding Progress": 81.9,
-    "_label_Funding Progress": "81.9%",
+    "Applications Projected": 3361,
+    "_label_Applications Projected": "3,361",
+    "Funding Progress": 81.3,
+    "_label_Funding Progress": "81.3%",
     "Funding Projected": {
-      "amount": 1743596.12,
+      "amount": 1730694.28,
       "currency": null
     },
-    "_label_Funding Projected": "$1,743,596.12"
+    "_label_Funding Projected": "$1,730,694.28"
   },
   {
     "User": "005TO000006F6MbYAK",
@@ -443,8 +443,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 3662,
-    "_label_Applications": "3,662",
+    "Applications": 3843,
+    "_label_Applications": "3,843",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -453,28 +453,28 @@
     },
     "_label_Funded Dollars Quota": "$1,665,307.00",
     "Funded Dollars": {
-      "amount": 1757551.13,
+      "amount": 1838554.25,
       "currency": null
     },
-    "_label_Funded Dollars": "$1,757,551.13",
+    "_label_Funded Dollars": "$1,838,554.25",
     "Funded Dollars Difference": {
-      "amount": 92244.13,
+      "amount": 173247.25,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "$92,244.13",
-    "Funded Applications Total": 1127,
-    "_label_Funded Applications Total": "1,127",
+    "_label_Funded Dollars Difference": "$173,247.25",
+    "Funded Applications Total": 1177,
+    "_label_Funded Applications Total": "1,177",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 4205,
-    "_label_Applications Projected": "4,205",
-    "Funding Progress": 113.4,
-    "_label_Funding Progress": "113.4%",
+    "Applications Projected": 4255,
+    "_label_Applications Projected": "4,255",
+    "Funding Progress": 114.3,
+    "_label_Funding Progress": "114.3%",
     "Funding Projected": {
-      "amount": 1887740.1,
+      "amount": 1904216.9,
       "currency": null
     },
-    "_label_Funding Projected": "$1,887,740.10"
+    "_label_Funding Projected": "$1,904,216.90"
   },
   {
     "User": "005TO0000083IdJYAU",
@@ -521,8 +521,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 2386,
-    "_label_Applications": "2,386",
+    "Applications": 2494,
+    "_label_Applications": "2,494",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -531,28 +531,28 @@
     },
     "_label_Funded Dollars Quota": "$1,415,703.00",
     "Funded Dollars": {
-      "amount": 1263569.87,
+      "amount": 1334780.2,
       "currency": null
     },
-    "_label_Funded Dollars": "$1,263,569.87",
+    "_label_Funded Dollars": "$1,334,780.20",
     "Funded Dollars Difference": {
-      "amount": -152133.13,
+      "amount": -80922.8,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$152,133.13",
-    "Funded Applications Total": 778,
-    "_label_Funded Applications Total": "778",
+    "_label_Funded Dollars Difference": "-$80,922.80",
+    "Funded Applications Total": 820,
+    "_label_Funded Applications Total": "820",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 2739,
-    "_label_Applications Projected": "2,739",
-    "Funding Progress": 95.9,
-    "_label_Funding Progress": "95.9%",
+    "Applications Projected": 2761,
+    "_label_Applications Projected": "2,761",
+    "Funding Progress": 97.7,
+    "_label_Funding Progress": "97.7%",
     "Funding Projected": {
-      "amount": 1357167.64,
+      "amount": 1382450.92,
       "currency": null
     },
-    "_label_Funding Projected": "$1,357,167.64"
+    "_label_Funding Projected": "$1,382,450.92"
   },
   {
     "User": "0058Y00000BjB02QAF",
@@ -563,32 +563,32 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 13611,
-    "_label_Applications": "13,611",
+    "Applications": 14220,
+    "_label_Applications": "14,220",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": null,
     "_label_Funded Dollars Quota": "-",
     "Funded Dollars": {
-      "amount": 7341185.62,
+      "amount": 7640901.99,
       "currency": null
     },
-    "_label_Funded Dollars": "$7,341,185.62",
+    "_label_Funded Dollars": "$7,640,901.99",
     "Funded Dollars Difference": null,
     "_label_Funded Dollars Difference": "-",
-    "Funded Applications Total": 4760,
-    "_label_Funded Applications Total": "4,760",
+    "Funded Applications Total": 4963,
+    "_label_Funded Applications Total": "4,963",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 15627,
-    "_label_Applications Projected": "15,627",
+    "Applications Projected": 15744,
+    "_label_Applications Projected": "15,744",
     "Funding Progress": 0,
     "_label_Funding Progress": "0.0%",
     "Funding Projected": {
-      "amount": 7884977.15,
+      "amount": 7913791.35,
       "currency": null
     },
-    "_label_Funding Projected": "$7,884,977.15"
+    "_label_Funding Projected": "$7,913,791.35"
   },
   {
     "User": "0058Y00000B79SKQAZ",
@@ -599,32 +599,32 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 13323,
-    "_label_Applications": "13,323",
+    "Applications": 13947,
+    "_label_Applications": "13,947",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": null,
     "_label_Funded Dollars Quota": "-",
     "Funded Dollars": {
-      "amount": 6850780.49,
+      "amount": 7138267.75,
       "currency": null
     },
-    "_label_Funded Dollars": "$6,850,780.49",
+    "_label_Funded Dollars": "$7,138,267.75",
     "Funded Dollars Difference": null,
     "_label_Funded Dollars Difference": "-",
-    "Funded Applications Total": 4431,
-    "_label_Funded Applications Total": "4,431",
+    "Funded Applications Total": 4624,
+    "_label_Funded Applications Total": "4,624",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 15297,
-    "_label_Applications Projected": "15,297",
+    "Applications Projected": 15441,
+    "_label_Applications Projected": "15,441",
     "Funding Progress": 0,
     "_label_Funding Progress": "0.0%",
     "Funding Projected": {
-      "amount": 7358245.71,
+      "amount": 7393205.88,
       "currency": null
     },
-    "_label_Funding Projected": "$7,358,245.71"
+    "_label_Funding Projected": "$7,393,205.88"
   },
   {
     "User": "0058Y00000B79SFQAZ",
@@ -635,8 +635,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 1913,
-    "_label_Applications": "1,913",
+    "Applications": 2013,
+    "_label_Applications": "2,013",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -645,28 +645,28 @@
     },
     "_label_Funded Dollars Quota": "$888,545.00",
     "Funded Dollars": {
-      "amount": 877687.37,
+      "amount": 921517.17,
       "currency": null
     },
-    "_label_Funded Dollars": "$877,687.37",
+    "_label_Funded Dollars": "$921,517.17",
     "Funded Dollars Difference": {
-      "amount": -10857.63,
+      "amount": 32972.17,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$10,857.63",
-    "Funded Applications Total": 603,
-    "_label_Funded Applications Total": "603",
+    "_label_Funded Dollars Difference": "$32,972.17",
+    "Funded Applications Total": 630,
+    "_label_Funded Applications Total": "630",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 2196,
-    "_label_Applications Projected": "2,196",
-    "Funding Progress": 106.1,
-    "_label_Funding Progress": "106.1%",
+    "Applications Projected": 2229,
+    "_label_Applications Projected": "2,229",
+    "Funding Progress": 107.4,
+    "_label_Funding Progress": "107.4%",
     "Funding Projected": {
-      "amount": 942701.25,
+      "amount": 954428.5,
       "currency": null
     },
-    "_label_Funding Projected": "$942,701.25"
+    "_label_Funding Projected": "$954,428.50"
   },
   {
     "User": "0058Y00000BjAreQAF",
@@ -677,8 +677,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 745,
-    "_label_Applications": "745",
+    "Applications": 796,
+    "_label_Applications": "796",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -687,28 +687,28 @@
     },
     "_label_Funded Dollars Quota": "$379,727.00",
     "Funded Dollars": {
-      "amount": 303346.54,
+      "amount": 319859.59,
       "currency": null
     },
-    "_label_Funded Dollars": "$303,346.54",
+    "_label_Funded Dollars": "$319,859.59",
     "Funded Dollars Difference": {
-      "amount": -76380.46,
+      "amount": -59867.41,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$76,380.46",
-    "Funded Applications Total": 207,
-    "_label_Funded Applications Total": "207",
+    "_label_Funded Dollars Difference": "-$59,867.41",
+    "Funded Applications Total": 219,
+    "_label_Funded Applications Total": "219",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 855,
-    "_label_Applications Projected": "855",
-    "Funding Progress": 85.8,
-    "_label_Funding Progress": "85.8%",
+    "Applications Projected": 881,
+    "_label_Applications Projected": "881",
+    "Funding Progress": 87.2,
+    "_label_Funding Progress": "87.2%",
     "Funding Projected": {
-      "amount": 325816.65,
+      "amount": 331283.15,
       "currency": null
     },
-    "_label_Funding Projected": "$325,816.65"
+    "_label_Funding Projected": "$331,283.15"
   },
   {
     "User": "0058Y00000BjAryQAF",
@@ -719,8 +719,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 1951,
-    "_label_Applications": "1,951",
+    "Applications": 2045,
+    "_label_Applications": "2,045",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -729,28 +729,28 @@
     },
     "_label_Funded Dollars Quota": "$1,426,448.00",
     "Funded Dollars": {
-      "amount": 1086205.54,
+      "amount": 1119250.18,
       "currency": null
     },
-    "_label_Funded Dollars": "$1,086,205.54",
+    "_label_Funded Dollars": "$1,119,250.18",
     "Funded Dollars Difference": {
-      "amount": -340242.46,
+      "amount": -307197.82,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$340,242.46",
-    "Funded Applications Total": 720,
-    "_label_Funded Applications Total": "720",
+    "_label_Funded Dollars Difference": "-$307,197.82",
+    "Funded Applications Total": 749,
+    "_label_Funded Applications Total": "749",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 2240,
-    "_label_Applications Projected": "2,240",
-    "Funding Progress": 81.8,
-    "_label_Funding Progress": "81.8%",
+    "Applications Projected": 2264,
+    "_label_Applications Projected": "2,264",
+    "Funding Progress": 81.3,
+    "_label_Funding Progress": "81.3%",
     "Funding Projected": {
-      "amount": 1166665.21,
+      "amount": 1159223.4,
       "currency": null
     },
-    "_label_Funding Projected": "$1,166,665.21"
+    "_label_Funding Projected": "$1,159,223.40"
   },
   {
     "User": "005TO000009aiVBYAY",
@@ -761,8 +761,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 705,
-    "_label_Applications": "705",
+    "Applications": 743,
+    "_label_Applications": "743",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -771,28 +771,28 @@
     },
     "_label_Funded Dollars Quota": "$546,511.00",
     "Funded Dollars": {
-      "amount": 369020.68,
+      "amount": 382324.53,
       "currency": null
     },
-    "_label_Funded Dollars": "$369,020.68",
+    "_label_Funded Dollars": "$382,324.53",
     "Funded Dollars Difference": {
-      "amount": -177490.32,
+      "amount": -164186.47,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$177,490.32",
-    "Funded Applications Total": 258,
-    "_label_Funded Applications Total": "258",
+    "_label_Funded Dollars Difference": "-$164,186.47",
+    "Funded Applications Total": 269,
+    "_label_Funded Applications Total": "269",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 809,
-    "_label_Applications Projected": "809",
+    "Applications Projected": 823,
+    "_label_Applications Projected": "823",
     "Funding Progress": 72.5,
     "_label_Funding Progress": "72.5%",
     "Funding Projected": {
-      "amount": 396355.55,
+      "amount": 395978.98,
       "currency": null
     },
-    "_label_Funding Projected": "$396,355.55"
+    "_label_Funding Projected": "$395,978.98"
   },
   {
     "User": "0058Y00000BjB0lQAF",
@@ -803,8 +803,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 2802,
-    "_label_Applications": "2,802",
+    "Applications": 2954,
+    "_label_Applications": "2,954",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -813,28 +813,28 @@
     },
     "_label_Funded Dollars Quota": "$1,584,859.00",
     "Funded Dollars": {
-      "amount": 1339460.26,
+      "amount": 1390862.75,
       "currency": null
     },
-    "_label_Funded Dollars": "$1,339,460.26",
+    "_label_Funded Dollars": "$1,390,862.75",
     "Funded Dollars Difference": {
-      "amount": -245398.74,
+      "amount": -193996.25,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$245,398.74",
-    "Funded Applications Total": 865,
-    "_label_Funded Applications Total": "865",
+    "_label_Funded Dollars Difference": "-$193,996.25",
+    "Funded Applications Total": 901,
+    "_label_Funded Applications Total": "901",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 3217,
-    "_label_Applications Projected": "3,217",
-    "Funding Progress": 90.8,
-    "_label_Funding Progress": "90.8%",
+    "Applications Projected": 3271,
+    "_label_Applications Projected": "3,271",
+    "Funding Progress": 90.9,
+    "_label_Funding Progress": "90.9%",
     "Funding Projected": {
-      "amount": 1438679.54,
+      "amount": 1440536.42,
       "currency": null
     },
-    "_label_Funding Projected": "$1,438,679.54"
+    "_label_Funding Projected": "$1,440,536.42"
   },
   {
     "User": "005TO00000AbxucYAB",
@@ -878,8 +878,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 466,
-    "_label_Applications": "466",
+    "Applications": 488,
+    "_label_Applications": "488",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -888,28 +888,28 @@
     },
     "_label_Funded Dollars Quota": "$268,777.00",
     "Funded Dollars": {
-      "amount": 293954.12,
+      "amount": 302837.18,
       "currency": null
     },
-    "_label_Funded Dollars": "$293,954.12",
+    "_label_Funded Dollars": "$302,837.18",
     "Funded Dollars Difference": {
-      "amount": 25177.12,
+      "amount": 34060.18,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "$25,177.12",
-    "Funded Applications Total": 178,
-    "_label_Funded Applications Total": "178",
+    "_label_Funded Dollars Difference": "$34,060.18",
+    "Funded Applications Total": 184,
+    "_label_Funded Applications Total": "184",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 535,
-    "_label_Applications Projected": "535",
-    "Funding Progress": 117.5,
-    "_label_Funding Progress": "117.5%",
+    "Applications Projected": 540,
+    "_label_Applications Projected": "540",
+    "Funding Progress": 116.7,
+    "_label_Funding Progress": "116.7%",
     "Funding Projected": {
-      "amount": 315728.5,
+      "amount": 313652.79,
       "currency": null
     },
-    "_label_Funding Projected": "$315,728.50"
+    "_label_Funding Projected": "$313,652.79"
   },
   {
     "User": "005TO00000B0J4LYAV",
@@ -920,8 +920,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 491,
-    "_label_Applications": "491",
+    "Applications": 511,
+    "_label_Applications": "511",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -930,28 +930,28 @@
     },
     "_label_Funded Dollars Quota": "$460,837.00",
     "Funded Dollars": {
-      "amount": 372328.57,
+      "amount": 383621.65,
       "currency": null
     },
-    "_label_Funded Dollars": "$372,328.57",
+    "_label_Funded Dollars": "$383,621.65",
     "Funded Dollars Difference": {
-      "amount": -88508.43,
+      "amount": -77215.35,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$88,508.43",
-    "Funded Applications Total": 246,
-    "_label_Funded Applications Total": "246",
+    "_label_Funded Dollars Difference": "-$77,215.35",
+    "Funded Applications Total": 253,
+    "_label_Funded Applications Total": "253",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 564,
-    "_label_Applications Projected": "564",
-    "Funding Progress": 86.8,
-    "_label_Funding Progress": "86.8%",
+    "Applications Projected": 566,
+    "_label_Applications Projected": "566",
+    "Funding Progress": 86.2,
+    "_label_Funding Progress": "86.2%",
     "Funding Projected": {
-      "amount": 399908.46,
+      "amount": 397322.42,
       "currency": null
     },
-    "_label_Funding Projected": "$399,908.46"
+    "_label_Funding Projected": "$397,322.42"
   },
   {
     "User": "005TO00000BDzP7YAL",
@@ -995,8 +995,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 2776,
-    "_label_Applications": "2,776",
+    "Applications": 2883,
+    "_label_Applications": "2,883",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -1005,28 +1005,28 @@
     },
     "_label_Funded Dollars Quota": "$1,960,338.00",
     "Funded Dollars": {
-      "amount": 1519577.56,
+      "amount": 1571955.6,
       "currency": null
     },
-    "_label_Funded Dollars": "$1,519,577.56",
+    "_label_Funded Dollars": "$1,571,955.60",
     "Funded Dollars Difference": {
-      "amount": -440760.44,
+      "amount": -388382.4,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$440,760.44",
-    "Funded Applications Total": 1004,
-    "_label_Funded Applications Total": "1,004",
+    "_label_Funded Dollars Difference": "-$388,382.40",
+    "Funded Applications Total": 1038,
+    "_label_Funded Applications Total": "1,038",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 3187,
-    "_label_Applications Projected": "3,187",
-    "Funding Progress": 83.3,
-    "_label_Funding Progress": "83.3%",
+    "Applications Projected": 3192,
+    "_label_Applications Projected": "3,192",
+    "Funding Progress": 83.1,
+    "_label_Funding Progress": "83.1%",
     "Funding Projected": {
-      "amount": 1632138.86,
+      "amount": 1628096.87,
       "currency": null
     },
-    "_label_Funding Projected": "$1,632,138.86"
+    "_label_Funding Projected": "$1,628,096.87"
   },
   {
     "User": "005TO00000BUpLJYA1",
@@ -1037,8 +1037,8 @@
     "_label_First Date of Month": "5/1/2026",
     "Applications Quota": null,
     "_label_Applications Quota": "-",
-    "Applications": 468,
-    "_label_Applications": "468",
+    "Applications": 494,
+    "_label_Applications": "494",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
     "Funded Dollars Quota": {
@@ -1047,28 +1047,28 @@
     },
     "_label_Funded Dollars Quota": "$303,444.00",
     "Funded Dollars": {
-      "amount": 257419.45,
+      "amount": 272948.64,
       "currency": null
     },
-    "_label_Funded Dollars": "$257,419.45",
+    "_label_Funded Dollars": "$272,948.64",
     "Funded Dollars Difference": {
-      "amount": -46024.55,
+      "amount": -30495.36,
       "currency": null
     },
-    "_label_Funded Dollars Difference": "-$46,024.55",
-    "Funded Applications Total": 156,
-    "_label_Funded Applications Total": "156",
+    "_label_Funded Dollars Difference": "-$30,495.36",
+    "Funded Applications Total": 166,
+    "_label_Funded Applications Total": "166",
     "Applications Progress": 0,
     "_label_Applications Progress": "0.0%",
-    "Applications Projected": 537,
-    "_label_Applications Projected": "537",
-    "Funding Progress": 91.1,
-    "_label_Funding Progress": "91.1%",
+    "Applications Projected": 547,
+    "_label_Applications Projected": "547",
+    "Funding Progress": 93.2,
+    "_label_Funding Progress": "93.2%",
     "Funding Projected": {
-      "amount": 276487.56,
+      "amount": 282696.81,
       "currency": null
     },
-    "_label_Funding Projected": "$276,487.56"
+    "_label_Funding Projected": "$282,696.81"
   },
   {
     "User": "005TO00000Be9B7YAJ",
