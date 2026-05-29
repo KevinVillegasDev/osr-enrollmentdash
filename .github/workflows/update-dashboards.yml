@@ -4,12 +4,15 @@ on:
   schedule:
     # Hourly 5 AM – 6 PM PST (1 PM – 2 AM UTC) weekdays
     # 1 PM – 11 PM UTC = Mon-Fri
-    - cron: '0 13-23 * * 1-5'
+    # NOTE: Minute offset = :17 instead of :00. GitHub Actions delays/drops
+    # scheduled runs hardest at the top of the hour due to global cron
+    # congestion. Running at :17 dramatically improves reliability.
+    - cron: '17 13-23 * * 1-5'
     # 12 AM – 2 AM UTC = Tue-Sat (still PST weekday evening)
-    - cron: '0 0-2 * * 2-6'
+    - cron: '17 0-2 * * 2-6'
     # Month-end late-evening catch-up: 7–10 PM PST on days 28–31
     # (03–06 UTC on UTC days 29, 30, 31, and 1 covers PST evenings of 28–31)
-    - cron: '0 3-6 29-31,1 * *'
+    - cron: '17 3-6 29-31,1 * *'
   workflow_dispatch:
     # Manual trigger from GitHub Actions tab
 
