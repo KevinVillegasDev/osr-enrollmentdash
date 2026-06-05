@@ -341,15 +341,16 @@ For historical cohorts or Month 2 true-up data, Report 2 and 4 templates are cal
 - **Metrics**: `tTalkComplete` (talk seconds), `nConnected` (call count)
 - **Roster filtering**: Only ISR_ROSTER names are shown on the dashboard
 
-## OSR Roster (as of May 2026)
+## OSR Roster (as of June 2026)
 
-Cesar Flores, Claudia Gerhardt, DeLon Phoenix, Eric Henderson, Francisco Gonzalez, Jared Midkiff, Joseph Guerra, Matthew MacDonald, Omar Corona, Phillip Mason, Richard Herrera, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
+Cesar Flores, Claudia Gerhardt, DeLon Phoenix, Eric Henderson, Francisco Gonzalez, Jared Midkiff, Joseph Guerra, Mariana Gross, Matthew MacDonald, Omar Corona, Phillip Mason, Richard Herrera, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
 
 *Jeremy Moore (departed end of April 2026) is no longer in `OSR_ROSTER`. Frozen Jan–Apr 2026 dashboards still show him historically.*
+*Mariana Gross added June 2026, assigned RIC-5 (Phoenix Metro, AZ; previously unassigned).*
 
-## ISR Roster (as of April 2026)
+## ISR Roster (as of June 2026)
 
-Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Michael Palmer, Noemy Carrion
+Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Lesly Arroyo, Michael Palmer, Noemy Carrion
 
 ## ISR → Territory Assignments
 
@@ -359,6 +360,7 @@ Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Michael Palmer, 
 | Noemy Carrion | LTO-2 (Omar), LTO-3 (Joseph), LTO-4 (Francisco) |
 | Connor Admirand | LTO-7 (Stephanie), RIC-8 (Eric) |
 | Katie Anguiano | RIC-1 (Cesar), RIC-2 (Claudia), RIC-4 (Richard) |
+| Lesly Arroyo | RIC-5 (Mariana) |
 | Laura Angulo | RIC-6 (Phillip) |
 | Michael Palmer | RIC-7 (DeLon), RIC-9 (Matthew) |
 
@@ -375,12 +377,13 @@ Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Michael Palmer, 
 | RIC-1 | Cesar Flores | CA (LA Metro Core) |
 | RIC-2 | Claudia Gerhardt | CA (IE South/San Diego) |
 | RIC-4 | Richard Herrera | CA (Orange County/SE LA) |
+| RIC-5 | Mariana Gross | AZ (Phoenix Metro) |
 | RIC-6 | Phillip Mason | CA (Sacramento/NorCal) |
 | RIC-7 | DeLon Phoenix | NV (Las Vegas/Reno) |
 | RIC-8 | Eric Henderson | PA (4 Metros) |
 | RIC-9 | Matthew MacDonald | AZ (State Manager + NM/UT/ID) |
 
-**Unassigned territories:** LTO-8, RIC-3, RIC-5 — hiring in progress.
+**Unassigned territories:** LTO-8, RIC-3 — hiring in progress.
 
 ## Key Terminology
 

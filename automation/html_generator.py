@@ -2159,6 +2159,7 @@ def update_territory_review(filepath: str, territory_data: dict) -> bool:
         '  "RIC-1": {osr:"Cesar Flores", area:"CA (LA Metro Core)"},\n'
         '  "RIC-2": {osr:"Claudia Gerhardt", area:"CA (IE South/San Diego)"},\n'
         '  "RIC-4": {osr:"Richard Herrera", area:"CA (Orange County/SE LA)"},\n'
+        '  "RIC-5": {osr:"Mariana Gross", area:"AZ (Phoenix Metro)"},\n'
         '  "RIC-6": {osr:"Phillip Mason", area:"CA (Sacramento/NorCal)"},\n'
         '  "RIC-7": {osr:"DeLon Phoenix", area:"NV (Las Vegas/Reno)"},\n'
         '  "RIC-8": {osr:"Eric Henderson", area:"PA (4 Metros)"},\n'

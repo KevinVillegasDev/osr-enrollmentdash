@@ -25,6 +25,7 @@ ISR_ROSTER = [
     "Javier Gonzalez",
     "Katie Anguiano",
     "Laura Angulo",
+    "Lesly Arroyo",
     "Michael Palmer",
     "Noemy Carrion",
 ]
@@ -43,9 +44,10 @@ REPORT_IDS = {
     "isr_notes": os.environ.get("SF_REPORT_ISR_NOTES", "00O8Y0000098j62UAA"),
 }
 
-# ─── OSR Roster (as of May 2026) ─────────────────────────────────────────────
+# ─── OSR Roster (as of June 2026) ────────────────────────────────────────────
 # Jeremy Moore departed end of April 2026; Richard Herrera took over RIC-4 starting May 2026.
 # Frozen Jan–Apr 2026 dashboards still show Jeremy historically — those HTMLs are never regenerated.
+# Mariana Gross added June 2026 (territory assignment pending — see TERRITORY_MAP note).
 OSR_ROSTER = [
     "Cesar Flores",
     "Claudia Gerhardt",
@@ -54,6 +56,7 @@ OSR_ROSTER = [
     "Francisco Gonzalez",
     "Jared Midkiff",
     "Joseph Guerra",
+    "Mariana Gross",
     "Matthew MacDonald",
     "Omar Corona",
     "Phillip Mason",
@@ -65,9 +68,10 @@ OSR_ROSTER = [
 
 # ─── Territory → OSR Mapping ────────────────────────────────────────────────
 # Maps territory codes from the sales budget to OSR names.
-# Unassigned territories (LTO-8, RIC-3, RIC-5) are excluded.
+# Unassigned territories (LTO-8, RIC-3) are excluded.
 # LTO-4: Sara Porter through early 2026; Francisco Gonzalez from May 2026 forward.
 # RIC-4: Jeremy Moore through April 2026; Richard Herrera from May 2026 forward.
+# RIC-5: Mariana Gross from June 2026 (Phoenix Metro, AZ; previously unassigned).
 TERRITORY_MAP = {
     "LTO-1": "Yemaira Hernandez",
     "LTO-2": "Omar Corona",
@@ -78,6 +82,7 @@ TERRITORY_MAP = {
     "RIC-1": "Cesar Flores",
     "RIC-2": "Claudia Gerhardt",
     "RIC-4": "Richard Herrera",
+    "RIC-5": "Mariana Gross",
     "RIC-6": "Phillip Mason",
     "RIC-7": "DeLon Phoenix",
     "RIC-8": "Eric Henderson",
@@ -96,6 +101,7 @@ ISR_TERRITORY_MAP = {
     "RIC-1": "Katie Anguiano",
     "RIC-2": "Katie Anguiano",
     "RIC-4": "Katie Anguiano",
+    "RIC-5": "Lesly Arroyo",
     "RIC-6": "Laura Angulo",
     "RIC-7": "Michael Palmer",
     "RIC-8": "Connor Admirand",
