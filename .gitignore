@@ -10,3 +10,11 @@ output/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Claude Code worktrees
+.claude/worktrees/
+
+# Generated training materials (regenerated on demand)
+Cohort_Email_Training_Guide.pdf
+build_cohort_training_guide.py
+_easypay_logo.png
