@@ -155,6 +155,7 @@ OSR_EMAILS = {
     "Francisco Gonzalez": "francisco.gonzalez@easypayfinance.com",
     "Jared Midkiff": "jared.midkiff@easypayfinance.com",
     "Joseph Guerra": "joseph.guerra@easypayfinance.com",
+    "Mariana Gross": "mariana.gross@easypayfinance.com",
     "Matthew MacDonald": "matthew.macdonald@easypayfinance.com",
     "Omar Corona": "omar.corona@easypayfinance.com",
     "Phillip Mason": "phillip.mason@easypayfinance.com",
