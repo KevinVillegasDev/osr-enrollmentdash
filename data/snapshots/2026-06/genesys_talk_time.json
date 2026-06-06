@@ -16,9 +16,9 @@
   {
     "user_id": "21ab0300-3df4-4b95-a620-da649b60ba1e",
     "name": "Eduardo Yanez",
-    "talk_seconds": 73985,
-    "talk_display": "20h 33m",
-    "calls": 843
+    "talk_seconds": 75096,
+    "talk_display": "20h 51m",
+    "calls": 848
   },
   {
     "user_id": "5dfa55b4-fa43-4aa7-8156-d0126a1ae950",
@@ -44,9 +44,9 @@
   {
     "user_id": "cd8f6d36-afbb-4f94-abad-2e57083d320a",
     "name": "Eduardo Gonzalez",
-    "talk_seconds": 64696,
-    "talk_display": "17h 58m",
-    "calls": 807
+    "talk_seconds": 64782,
+    "talk_display": "17h 59m",
+    "calls": 811
   },
   {
     "user_id": "4badaa53-13ea-49a2-a518-7a98aecbd0b5",
@@ -156,23 +156,23 @@
   {
     "user_id": "d92f85ef-d236-44e8-af25-34c7caa50a3f",
     "name": "Dan Flores",
-    "talk_seconds": 50411,
-    "talk_display": "14h 0m",
-    "calls": 688
+    "talk_seconds": 50643,
+    "talk_display": "14h 4m",
+    "calls": 705
   },
   {
     "user_id": "eb53ed35-8863-4021-bd44-909f19636923",
     "name": "Benjamin Munoz",
-    "talk_seconds": 49933,
-    "talk_display": "13h 52m",
-    "calls": 696
+    "talk_seconds": 50071,
+    "talk_display": "13h 54m",
+    "calls": 701
   },
   {
     "user_id": "d421063f-892f-44c6-a753-68c3b0dc2525",
     "name": "Elton Ramirez",
-    "talk_seconds": 49814,
-    "talk_display": "13h 50m",
-    "calls": 734
+    "talk_seconds": 49989,
+    "talk_display": "13h 53m",
+    "calls": 743
   },
   {
     "user_id": "14f259f6-102a-4700-a51a-b47ae04d24e7",
@@ -210,18 +210,18 @@
     "calls": 1377
   },
   {
+    "user_id": "5efed342-ef59-4c96-9849-1903a69647a4",
+    "name": "Melany Munguia",
+    "talk_seconds": 46286,
+    "talk_display": "12h 51m",
+    "calls": 672
+  },
+  {
     "user_id": "3379f0b9-cd06-400b-bddb-8164e11d41e8",
     "name": "Fatmata Barry",
     "talk_seconds": 46021,
     "talk_display": "12h 47m",
     "calls": 808
-  },
-  {
-    "user_id": "5efed342-ef59-4c96-9849-1903a69647a4",
-    "name": "Melany Munguia",
-    "talk_seconds": 45903,
-    "talk_display": "12h 45m",
-    "calls": 657
   },
   {
     "user_id": "bd4818d1-a4eb-4711-bdbb-736a2227bbd2",
