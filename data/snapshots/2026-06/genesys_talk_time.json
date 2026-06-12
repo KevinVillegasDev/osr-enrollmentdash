@@ -14,18 +14,18 @@
     "calls": 1276
   },
   {
+    "user_id": "21ab0300-3df4-4b95-a620-da649b60ba1e",
+    "name": "Eduardo Yanez",
+    "talk_seconds": 129070,
+    "talk_display": "35h 51m",
+    "calls": 1582
+  },
+  {
     "user_id": "4e3d344f-424b-40c1-aeae-95f1606327b7",
     "name": "Victor Martinez",
     "talk_seconds": 129043,
     "talk_display": "35h 50m",
     "calls": 1140
-  },
-  {
-    "user_id": "21ab0300-3df4-4b95-a620-da649b60ba1e",
-    "name": "Eduardo Yanez",
-    "talk_seconds": 127895,
-    "talk_display": "35h 31m",
-    "calls": 1580
   },
   {
     "user_id": "725dba32-5dad-4383-8352-79d7330dc8f6",
@@ -135,9 +135,9 @@
   {
     "user_id": "d92f85ef-d236-44e8-af25-34c7caa50a3f",
     "name": "Dan Flores",
-    "talk_seconds": 95205,
-    "talk_display": "26h 26m",
-    "calls": 1388
+    "talk_seconds": 95484,
+    "talk_display": "26h 31m",
+    "calls": 1396
   },
   {
     "user_id": "1332d5ba-280b-4f82-9b9f-ea0c03c92c89",
@@ -156,16 +156,16 @@
   {
     "user_id": "eb53ed35-8863-4021-bd44-909f19636923",
     "name": "Benjamin Munoz",
-    "talk_seconds": 92271,
-    "talk_display": "25h 37m",
-    "calls": 1377
+    "talk_seconds": 92365,
+    "talk_display": "25h 39m",
+    "calls": 1382
   },
   {
     "user_id": "d421063f-892f-44c6-a753-68c3b0dc2525",
     "name": "Elton Ramirez",
-    "talk_seconds": 90248,
-    "talk_display": "25h 4m",
-    "calls": 1325
+    "talk_seconds": 91201,
+    "talk_display": "25h 20m",
+    "calls": 1332
   },
   {
     "user_id": "dc6d4a2a-8231-4fb9-876e-94b3cb1ded5a",
@@ -219,9 +219,9 @@
   {
     "user_id": "5efed342-ef59-4c96-9849-1903a69647a4",
     "name": "Melany Munguia",
-    "talk_seconds": 78254,
-    "talk_display": "21h 44m",
-    "calls": 1193
+    "talk_seconds": 78555,
+    "talk_display": "21h 49m",
+    "calls": 1202
   },
   {
     "user_id": "51debfab-e7a1-47c4-9da2-757d9bb615d1",
@@ -462,6 +462,13 @@
     "calls": 17
   },
   {
+    "user_id": "c452ea49-5d1b-4c1f-ae71-bdce0153d27d",
+    "name": "Carlos Jimenez",
+    "talk_seconds": 497,
+    "talk_display": "8m",
+    "calls": 3
+  },
+  {
     "user_id": "c30af5b2-a82c-440e-9629-a37affc3f08d",
     "name": "Diego Arriaga",
     "talk_seconds": 219,
@@ -474,13 +481,6 @@
     "talk_seconds": 202,
     "talk_display": "3m",
     "calls": 4
-  },
-  {
-    "user_id": "c452ea49-5d1b-4c1f-ae71-bdce0153d27d",
-    "name": "Carlos Jimenez",
-    "talk_seconds": 181,
-    "talk_display": "3m",
-    "calls": 1
   },
   {
     "user_id": "0c3006b0-d6a8-4212-a234-6c5e0524cdb6",
