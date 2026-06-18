@@ -30980,5 +30980,47 @@
     "_label_Full Comments": "Checked in via Maps Application \nSalesforce Note: \nLead/potential Auto \nThis is a bad lead. Residential. Will delete",
     "Lead": null,
     "_label_Lead": "-"
+  },
+  {
+    "Created Date/Time": "2026-06-18T22:27:30Z",
+    "_label_Created Date/Time": "6/18/2026, 3:27 PM",
+    "Subject": "00UTO00000bUysy2AC",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "0018Y00002s0lAlQAI",
+    "_label_Company / Account": "Jim Dandy Transmission, Inc.",
+    "Assigned": "005TO000009aiVBYAY",
+    "_label_Assigned": "Phillip Mason",
+    "Full Comments": "Checked in via Maps Application \nMonthly check-in nothing new to report",
+    "_label_Full Comments": "Checked in via Maps Application \nMonthly check-in nothing new to report",
+    "Lead": null,
+    "_label_Lead": "-"
+  },
+  {
+    "Created Date/Time": "2026-06-18T22:52:24Z",
+    "_label_Created Date/Time": "6/18/2026, 3:52 PM",
+    "Subject": "00UTO00000bVD0W2AW",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "001TO00000mUbrMYAS",
+    "_label_Company / Account": "Mattress Magic",
+    "Assigned": "005TO00000Be9B7YAJ",
+    "_label_Assigned": "Mariana Gross",
+    "Full Comments": "Checked in via Maps Application",
+    "_label_Full Comments": "Checked in via Maps Application",
+    "Lead": null,
+    "_label_Lead": "-"
+  },
+  {
+    "Created Date/Time": "2026-06-18T22:53:24Z",
+    "_label_Created Date/Time": "6/18/2026, 3:53 PM",
+    "Subject": "00UTO00000bVG3D2AW",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "001TO00000mUbrMYAS",
+    "_label_Company / Account": "Mattress Magic",
+    "Assigned": "005TO00000Be9B7YAJ",
+    "_label_Assigned": "Mariana Gross",
+    "Full Comments": "Checked in via Maps Application",
+    "_label_Full Comments": "Checked in via Maps Application",
+    "Lead": null,
+    "_label_Lead": "-"
   }
 ]
