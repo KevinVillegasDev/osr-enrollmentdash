@@ -222,7 +222,7 @@
     <div class="tab-content active" id="overview">
       <div class="kpi-grid">
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">83</span><span class="kpi-sub">All sources, Jun 2026</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">48</span><span class="kpi-sub">57.8% of total</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">61</span><span class="kpi-sub">73.5% of total</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#FBBF24,transparent)"></div><span class="kpi-label">Funded Volume</span><span class="kpi-value">$30,118</span><span class="kpi-sub">24 merchants tracked</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#A78BFA,transparent)"></div><span class="kpi-label">Funded Apps</span><span class="kpi-value">16</span><span class="kpi-sub">of 151 total apps</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#22D3EE,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">10.6%</span><span class="kpi-sub">Apps → Funded</span></div>
@@ -232,14 +232,14 @@
         <div class="section-sub">Credited enrollments by date — June 2026</div>
         <div style="height:240px"><canvas id="chartDaily"></canvas></div>
         <div class="callout">
-          <span><strong style="color:#FBBF24">Peak:</strong> Jun 10 (8 enrollments)</span>
-          <span><strong style="color:#5B9BFF">Avg daily:</strong> ~3.7 enrollments/day</span>
+          <span><strong style="color:#FBBF24">Peak:</strong> Jun 17 (9 enrollments)</span>
+          <span><strong style="color:#5B9BFF">Avg daily:</strong> ~4.1 enrollments/day</span>
         </div>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px">
-        <div style="font-size:13px;color:#8494AB">Breakdown: <span id="ovScopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (48)</span></div>
+        <div style="font-size:13px;color:#8494AB">Breakdown: <span id="ovScopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (61)</span></div>
         <div style="display:inline-flex;background:#293852;border-radius:8px;padding:3px;gap:2px">
-          <button id="ovBtnOsr" onclick="setOverviewScope('osr')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (48)</button>
+          <button id="ovBtnOsr" onclick="setOverviewScope('osr')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (61)</button>
           <button id="ovBtnAll" onclick="setOverviewScope('all')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (83)</button>
         </div>
       </div>
@@ -288,9 +288,9 @@
     <!-- MARKETS -->
     <div class="tab-content" id="markets">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-        <div style="font-size:13px;color:#8494AB">Showing <span id="scopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (48)</span> enrollments</div>
+        <div style="font-size:13px;color:#8494AB">Showing <span id="scopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (61)</span> enrollments</div>
         <div style="display:inline-flex;background:#293852;border-radius:8px;padding:3px;gap:2px">
-          <button id="btnOsr" onclick="setMarketsScope('osr')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (48)</button>
+          <button id="btnOsr" onclick="setMarketsScope('osr')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (61)</button>
           <button id="btnAll" onclick="setMarketsScope('all')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (83)</button>
         </div>
       </div>
@@ -309,11 +309,11 @@
       </div>
       <div class="card">
         <div class="section-title">Total vs. Credited Enrollments</div>
-        <div class="section-sub">83 total new enrollments, 48 credited to outside sales team</div>
+        <div class="section-sub">83 total new enrollments, 61 credited to outside sales team</div>
         <div class="grid-3">
-          <div class="stat-box"><div class="stat-box-label">Total New</div><div class="stat-box-value" style="color:#5B9BFF">83</div><div class="stat-box-sub">57.8% of total</div></div>
-          <div class="stat-box"><div class="stat-box-label">OSR Credited</div><div class="stat-box-value" style="color:#2DD4A0">48</div><div class="stat-box-sub">77.2% of total</div></div>
-          <div class="stat-box"><div class="stat-box-label">Other Sources</div><div class="stat-box-value" style="color:#FBBF24">35</div><div class="stat-box-sub">42.2% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">Total New</div><div class="stat-box-value" style="color:#5B9BFF">83</div><div class="stat-box-sub">73.5% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">OSR Credited</div><div class="stat-box-value" style="color:#2DD4A0">61</div><div class="stat-box-sub">77.2% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">Other Sources</div><div class="stat-box-value" style="color:#FBBF24">22</div><div class="stat-box-sub">26.5% of total</div></div>
         </div>
       </div>
     </div>
@@ -357,31 +357,31 @@
 </div>
 
 <script>
-var repCredits=[{"n":"Mariana Gross","v":8},{"n":"Stephanie Whitlock","v":7},{"n":"Eric Henderson","v":7},{"n":"Joseph Guerra","v":7},{"n":"Phillip Mason","v":4},{"n":"Cesar Flores","v":3},{"n":"Francisco Gonzalez","v":3},{"n":"Yemaira Hernandez","v":2},{"n":"DeLon Phoenix","v":2},{"n":"Omar Corona","v":1},{"n":"Richard Herrera","v":1},{"n":"Claudia Gerhardt","v":1},{"n":"Jared Midkiff","v":1},{"n":"Matthew MacDonald","v":1}];
-var marketData=[{"n":"CA","v":11},{"n":"TX","v":11},{"n":"AZ","v":10},{"n":"PA","v":8},{"n":"FL","v":6},{"n":"GA","v":4},{"n":"NV","v":2},{"n":"KY","v":1}];
-var industryData=[{"n":"Auto - Repair","v":15},{"n":"Furniture","v":15},{"n":"Auto - Wheels & Tires","v":7},{"n":"Auto - Total Car Care","v":5},{"n":"Auto - Tires","v":4},{"n":"Scooters","v":4},{"n":"Auto - Transmission","v":1},{"n":"Power Vehicles","v":1},{"n":"Auto - Stereo","v":1}];
+var repCredits=[{"n":"Eric Henderson","v":9},{"n":"Joseph Guerra","v":9},{"n":"Stephanie Whitlock","v":8},{"n":"Mariana Gross","v":8},{"n":"Cesar Flores","v":5},{"n":"Phillip Mason","v":4},{"n":"Francisco Gonzalez","v":4},{"n":"Richard Herrera","v":3},{"n":"Yemaira Hernandez","v":3},{"n":"Jared Midkiff","v":3},{"n":"DeLon Phoenix","v":2},{"n":"Omar Corona","v":1},{"n":"Claudia Gerhardt","v":1},{"n":"Matthew MacDonald","v":1}];
+var marketData=[{"n":"CA","v":15},{"n":"TX","v":14},{"n":"AZ","v":10},{"n":"PA","v":10},{"n":"FL","v":9},{"n":"GA","v":5},{"n":"NV","v":2},{"n":"KY","v":1}];
+var industryData=[{"n":"Auto - Repair","v":21},{"n":"Furniture","v":17},{"n":"Auto - Wheels & Tires","v":7},{"n":"Auto - Total Car Care","v":6},{"n":"Scooters","v":5},{"n":"Auto - Tires","v":4},{"n":"Auto - Stereo","v":2},{"n":"Auto - Transmission","v":1},{"n":"Bicycle","v":1},{"n":"Power Vehicles","v":1},{"n":"Home-Appliance","v":1}];
 var marketDataFull=[{"n":"TX","v":20},{"n":"CA","v":17},{"n":"PA","v":12},{"n":"AZ","v":10},{"n":"FL","v":9},{"n":"GA","v":7},{"n":"NH","v":3},{"n":"NV","v":2},{"n":"SD","v":1},{"n":"KY","v":1},{"n":"KS","v":1}];
 var industryDataFull=[{"n":"Auto - Repair","v":30},{"n":"Furniture","v":18},{"n":"Auto - Total Car Care","v":9},{"n":"Auto - Wheels & Tires","v":7},{"n":"Scooters","v":5},{"n":"Auto - Tires","v":5},{"n":"Auto - Transmission","v":2},{"n":"Auto - Stereo","v":2},{"n":"Electronics","v":2},{"n":"Home-Appliance","v":1},{"n":"Power Vehicles","v":1},{"n":"Bicycle","v":1}];
 var marketsScope='osr';
-var isrData=[{"n":"Connor Admirand","v":14},{"n":"Noemy Carrion","v":11},{"n":"Lesly Arroyo","v":10},{"n":"Michael Palmer","v":8},{"n":"Katie Anguiano","v":5},{"n":"Laura Angulo","v":3}];
-var dailyTrend=[{"d":"Jun 1","v":2},{"d":"Jun 2","v":4},{"d":"Jun 4","v":6},{"d":"Jun 5","v":4},{"d":"Jun 6","v":6},{"d":"Jun 9","v":4},{"d":"Jun 10","v":8},{"d":"Jun 11","v":2},{"d":"Jun 12","v":7},{"d":"Jun 13","v":1},{"d":"Jun 16","v":5},{"d":"Jun 17","v":3},{"d":"Jun 19","v":1}];
-var topProducers=[{"n":"Northcutt Auto Repair","f":10275.0,"fa":4,"ta":26,"r":"15.4%","o":""},{"n":"Agencia Llantera","f":5875.0,"fa":3,"ta":14,"r":"21.4%","o":"-"},{"n":"J&M Transmissions and Full Service","f":4800.0,"fa":3,"ta":22,"r":"13.6%","o":""},{"n":"Transco Auto & Diesel Repair","f":3905.0,"fa":2,"ta":2,"r":"100.0%","o":""},{"n":"Chingon Auto Complete","f":1764.0,"fa":1,"ta":11,"r":"9.1%","o":""},{"n":"Big O Tires of Shepherdsville - 017015","f":1489.45,"fa":1,"ta":3,"r":"33.3%","o":"-"},{"n":"Ceres Transmission Shop","f":1400.0,"fa":1,"ta":5,"r":"20.0%","o":"-"},{"n":"Fast Tire Shop","f":610.0,"fa":1,"ta":3,"r":"33.3%","o":"Cesar Flores"},{"n":"RB Scooters","f":0.0,"fa":0,"ta":2,"r":"0.0%","o":"Yemaira Hernandez"},{"n":"CAS Car Audio Store - Carrollton","f":0.0,"fa":0,"ta":4,"r":"0.0%","o":""},{"n":"Legacy Furniture - Allegheny Ave","f":0.0,"fa":0,"ta":4,"r":"0.0%","o":"Eric Henderson"},{"n":"MM Furniture","f":0.0,"fa":0,"ta":9,"r":"0.0%","o":""},{"n":"Midas 3992","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":""},{"n":"Associated Automotive Services","f":0.0,"fa":0,"ta":2,"r":"0.0%","o":""},{"n":"Essi Discount Furniture","f":0.0,"fa":0,"ta":7,"r":"0.0%","o":"Francisco Gonzalez"}];
+var isrData=[{"n":"Connor Admirand","v":17},{"n":"Noemy Carrion","v":14},{"n":"Lesly Arroyo","v":10},{"n":"Katie Anguiano","v":9},{"n":"Michael Palmer","v":8},{"n":"Laura Angulo","v":6}];
+var dailyTrend=[{"d":"Jun 1","v":2},{"d":"Jun 2","v":4},{"d":"Jun 4","v":6},{"d":"Jun 5","v":5},{"d":"Jun 6","v":6},{"d":"Jun 9","v":4},{"d":"Jun 10","v":8},{"d":"Jun 11","v":2},{"d":"Jun 12","v":8},{"d":"Jun 13","v":2},{"d":"Jun 15","v":1},{"d":"Jun 16","v":6},{"d":"Jun 17","v":9},{"d":"Jun 18","v":1},{"d":"Jun 19","v":2}];
+var topProducers=[{"n":"Northcutt Auto Repair","f":10275.0,"fa":4,"ta":26,"r":"15.4%","o":""},{"n":"Agencia Llantera","f":5875.0,"fa":3,"ta":14,"r":"21.4%","o":"-"},{"n":"J&M Transmissions and Full Service","f":4800.0,"fa":3,"ta":22,"r":"13.6%","o":""},{"n":"Transco Auto & Diesel Repair","f":3905.0,"fa":2,"ta":2,"r":"100.0%","o":""},{"n":"Chingon Auto Complete","f":1764.0,"fa":1,"ta":11,"r":"9.1%","o":""},{"n":"Big O Tires of Shepherdsville - 017015","f":1489.45,"fa":1,"ta":3,"r":"33.3%","o":"-"},{"n":"Ceres Transmission Shop","f":1400.0,"fa":1,"ta":5,"r":"20.0%","o":"-"},{"n":"Fast Tire Shop","f":610.0,"fa":1,"ta":3,"r":"33.3%","o":"Cesar Flores"},{"n":"RB Scooters","f":0.0,"fa":0,"ta":2,"r":"0.0%","o":"Yemaira Hernandez"},{"n":"CAS Car Audio Store - Carrollton","f":0.0,"fa":0,"ta":4,"r":"0.0%","o":"Francisco Gonzalez"},{"n":"Legacy Furniture - Allegheny Ave","f":0.0,"fa":0,"ta":4,"r":"0.0%","o":"Eric Henderson"},{"n":"MM Furniture","f":0.0,"fa":0,"ta":9,"r":"0.0%","o":""},{"n":"Midas 3992","f":0.0,"fa":0,"ta":1,"r":"0.0%","o":"Jared Midkiff"},{"n":"Associated Automotive Services","f":0.0,"fa":0,"ta":2,"r":"0.0%","o":""},{"n":"Essi Discount Furniture","f":0.0,"fa":0,"ta":7,"r":"0.0%","o":"Francisco Gonzalez"}];
 var PC=["#3B82F6","#10B981","#F59E0B","#EF4444","#8B5CF6","#06B6D4","#EC4899","#F97316","#14B8A6","#A855F7","#6366F1","#84CC16"];
 
 var repMerchants={
 "-":[{"n":"Agencia Llantera","b":25886,"l":"Phoenix, AZ","f":5875.0,"fa":3,"ta":14},{"n":"Big O Tires of Shepherdsville - 017015","b":25895,"l":"Shepherdsville, KY","f":1489.45,"fa":1,"ta":3},{"n":"Ceres Transmission Shop","b":25884,"l":"Modesto, CA","f":1400.0,"fa":1,"ta":5},{"n":"High Speed Transmissions","b":25889,"l":"Stockton, CA","f":0,"fa":0,"ta":0},{"n":"Ipina Auto Repair","b":25947,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0}],
-"Cesar Flores":[{"n":"Fast Tire Shop","b":25888,"l":"Bell Gardens, CA","f":610.0,"fa":1,"ta":3},{"n":"Rodriguez Tire & Auto Care","b":25890,"l":"Bell, CA","f":0,"fa":0,"ta":0},{"n":"Capital Tires and Auto Repair","b":25927,"l":"Pico Rivera, CA","f":0,"fa":0,"ta":0}],
+"Cesar Flores":[{"n":"Fast Tire Shop","b":25888,"l":"Bell Gardens, CA","f":610.0,"fa":1,"ta":3},{"n":"Rodriguez Tire & Auto Care","b":25890,"l":"Bell, CA","f":0,"fa":0,"ta":0},{"n":"Capital Tires and Auto Repair","b":25927,"l":"Pico Rivera, CA","f":0,"fa":0,"ta":0},{"n":"DAG Riders 2.0","b":25939,"l":"Lawndale, CA","f":0,"fa":0,"ta":0},{"n":"Custom Muffler","b":25943,"l":"Hawthorne, CA","f":0,"fa":0,"ta":0}],
 "Omar Corona":[{"n":"Just Like New Automotive","b":25909,"l":"Canutillo, TX","f":0,"fa":0,"ta":0}],
 "Phillip Mason":[{"n":"Tire Geeks 2","b":25949,"l":"Sacramento, CA","f":0,"fa":0,"ta":0},{"n":"Tire Geeks 1","b":25950,"l":"Sacramento, CA","f":0,"fa":0,"ta":0},{"n":"Tire Busters Automotive Repair","b":25932,"l":"Sacramento, CA","f":0.0,"fa":0,"ta":4},{"n":"Prime Ride E Bikes","b":25946,"l":"Orangevale, CA","f":0,"fa":0,"ta":0}],
-"Richard Herrera":[{"n":"Subi Care","b":25938,"l":"Orange, CA","f":0,"fa":0,"ta":0}],
-"Stephanie Whitlock":[{"n":"Tiger Powersports","b":25941,"l":"Norcross, GA","f":0,"fa":0,"ta":0},{"n":"J Arthur Diesel","b":25897,"l":"Jacksonville, FL","f":0,"fa":0,"ta":0},{"n":"St Augustine Auto Repair","b":25905,"l":"St. Augustine, FL","f":0,"fa":0,"ta":0},{"n":"1000 Furniture","b":25906,"l":"Jacksonville, FL","f":0.0,"fa":0,"ta":15},{"n":"Wendy's Home Furniture","b":25910,"l":"Lawrenceville, GA","f":0.0,"fa":0,"ta":2},{"n":"Ruhls Automotive Service","b":25945,"l":"Columbus, GA","f":0,"fa":0,"ta":0},{"n":"B & L Tire and Automotive","b":25965,"l":"Newnan, GA","f":0,"fa":0,"ta":0}],
-"Yemaira Hernandez":[{"n":"RB Scooters","b":25885,"l":"Pompano Beach, FL","f":0.0,"fa":0,"ta":2},{"n":"Discount Sem","b":25922,"l":"Miami, FL","f":0.0,"fa":0,"ta":3}],
+"Richard Herrera":[{"n":"Xpress Automotive Garage","b":25962,"l":"Long Beach, CA","f":0,"fa":0,"ta":0},{"n":"Subi Care","b":25938,"l":"Orange, CA","f":0,"fa":0,"ta":0},{"n":"iHome Furniture","b":25954,"l":"Anaheim, CA","f":0,"fa":0,"ta":0}],
+"Stephanie Whitlock":[{"n":"Tiger Powersports","b":25941,"l":"Norcross, GA","f":0,"fa":0,"ta":0},{"n":"J Arthur Diesel","b":25897,"l":"Jacksonville, FL","f":0,"fa":0,"ta":0},{"n":"St Augustine Auto Repair","b":25905,"l":"St. Augustine, FL","f":0,"fa":0,"ta":0},{"n":"1000 Furniture","b":25906,"l":"Jacksonville, FL","f":0.0,"fa":0,"ta":15},{"n":"Wendy's Home Furniture","b":25910,"l":"Lawrenceville, GA","f":0.0,"fa":0,"ta":2},{"n":"Los Tocayos Automotives","b":25966,"l":"Snellville, GA","f":0,"fa":0,"ta":0},{"n":"Ruhls Automotive Service","b":25945,"l":"Columbus, GA","f":0,"fa":0,"ta":0},{"n":"B & L Tire and Automotive","b":25965,"l":"Newnan, GA","f":0,"fa":0,"ta":0}],
+"Yemaira Hernandez":[{"n":"RB Scooters","b":25885,"l":"Pompano Beach, FL","f":0.0,"fa":0,"ta":2},{"n":"Easy Home Appliances","b":25959,"l":"Dania Beach, FL","f":0,"fa":0,"ta":0},{"n":"Discount Sem","b":25922,"l":"Miami, FL","f":0.0,"fa":0,"ta":3}],
 "Claudia Gerhardt":[{"n":"Alternative Automotive","b":25891,"l":"Murrieta, CA","f":0,"fa":0,"ta":0}],
 "DeLon Phoenix":[{"n":"Grease Monkey 1532","b":25913,"l":"Las Vegas, NV","f":0,"fa":0,"ta":0},{"n":"Sonnie's Tire Shop","b":25928,"l":"Las Vegas, NV","f":0,"fa":0,"ta":0}],
-"Eric Henderson":[{"n":"Legacy Furniture - Allegheny Ave","b":25900,"l":"Philadelphia, PA","f":0.0,"fa":0,"ta":4},{"n":"Leo Furniture and More","b":25887,"l":"Allentown, PA","f":0,"fa":0,"ta":0},{"n":"Legacy Furniture 2 - Whitaker Ave","b":25901,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0},{"n":"K Furniture","b":25892,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0},{"n":"A1 Appliances","b":25893,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0},{"n":"Super Value Furniture","b":25894,"l":"Bensalem, PA","f":0,"fa":0,"ta":0},{"n":"Castillo Mattress and Furniture","b":25911,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0}],
-"Francisco Gonzalez":[{"n":"Essi Discount Furniture","b":25903,"l":"Mesquite, TX","f":0.0,"fa":0,"ta":7},{"n":"Unlimited Car Stereo and Window Tint","b":25904,"l":"Dallas, TX","f":0.0,"fa":0,"ta":4},{"n":"G2 Wheels Lifts & More","b":25929,"l":"Dallas, TX","f":0,"fa":0,"ta":0}],
-"Jared Midkiff":[{"n":"ZoomX Powersports","b":25908,"l":"Winter Haven, FL","f":0,"fa":0,"ta":0}],
-"Joseph Guerra":[{"n":"Power Wheels n Tires - Long Point Rd","b":25933,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Power Wheels n Tires - Antoine Dr","b":25934,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Power Wheels n Tires - N Fry Rd","b":25935,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"At Livingston Transmission & Auto Repair","b":25936,"l":"Livingston, TX","f":0,"fa":0,"ta":0},{"n":"King Tire & Wheel #1","b":25898,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Same Day Auto Repair - Hwy 6","b":25955,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Same Day Auto Repair - Hillcroft","b":25956,"l":"Houston, TX","f":0,"fa":0,"ta":0}],
+"Eric Henderson":[{"n":"Legacy Furniture - Allegheny Ave","b":25900,"l":"Philadelphia, PA","f":0.0,"fa":0,"ta":4},{"n":"Leo Furniture and More","b":25887,"l":"Allentown, PA","f":0,"fa":0,"ta":0},{"n":"Legacy Furniture 2 - Whitaker Ave","b":25901,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0},{"n":"K Furniture","b":25892,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0},{"n":"A1 Appliances","b":25893,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0},{"n":"Super Value Furniture","b":25894,"l":"Bensalem, PA","f":0,"fa":0,"ta":0},{"n":"Castillo Mattress and Furniture","b":25911,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0},{"n":"United Furniture Style","b":25957,"l":"Darby, PA","f":0,"fa":0,"ta":0},{"n":"Philly E-Bike Center","b":25960,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0}],
+"Francisco Gonzalez":[{"n":"CAS Car Audio Store - Carrollton","b":25952,"l":"Carrollton, TX","f":0.0,"fa":0,"ta":4},{"n":"Essi Discount Furniture","b":25903,"l":"Mesquite, TX","f":0.0,"fa":0,"ta":7},{"n":"Unlimited Car Stereo and Window Tint","b":25904,"l":"Dallas, TX","f":0.0,"fa":0,"ta":4},{"n":"G2 Wheels Lifts & More","b":25929,"l":"Dallas, TX","f":0,"fa":0,"ta":0}],
+"Jared Midkiff":[{"n":"ZoomX Powersports","b":25908,"l":"Winter Haven, FL","f":0,"fa":0,"ta":0},{"n":"Midas 3992","b":25896,"l":"Winter Haven, FL","f":0.0,"fa":0,"ta":1},{"n":"Jiffy Lube 4281","b":25944,"l":"West Palm Beach, FL","f":0,"fa":0,"ta":0}],
+"Joseph Guerra":[{"n":"Power Wheels n Tires - Long Point Rd","b":25933,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Power Wheels n Tires - Antoine Dr","b":25934,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Power Wheels n Tires - N Fry Rd","b":25935,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"At Livingston Transmission & Auto Repair","b":25936,"l":"Livingston, TX","f":0,"fa":0,"ta":0},{"n":"King Tire & Wheel #1","b":25898,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Integrity Automotive - Humble","b":25953,"l":"Humble, TX","f":0,"fa":0,"ta":0},{"n":"Same Day Auto Repair - Hwy 6","b":25955,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Katy Auto Experts - N Fry Rd","b":25958,"l":"Houston, TX","f":0,"fa":0,"ta":0},{"n":"Same Day Auto Repair - Hillcroft","b":25956,"l":"Houston, TX","f":0,"fa":0,"ta":0}],
 "Mariana Gross":[{"n":"Furniture Memoryzzz","b":25914,"l":"Mesa, AZ","f":0.0,"fa":0,"ta":2},{"n":"Maaco M2291 - W Deer Valley Rd","b":25921,"l":"Phoenix, AZ","f":0,"fa":0,"ta":0},{"n":"Maaco M2821 - E Van Buren St","b":25924,"l":"Phoenix, AZ","f":0.0,"fa":0,"ta":1},{"n":"Maaco M2022 - Prescott","b":25923,"l":"Prescott, AZ","f":0,"fa":0,"ta":0},{"n":"Maaco M2165 - E University Dr","b":25926,"l":"Tempe, AZ","f":0,"fa":0,"ta":0},{"n":"V Dub Furniture","b":25931,"l":"Mesa, AZ","f":0,"fa":0,"ta":0},{"n":"Pars Furniture","b":25942,"l":"Glendale, AZ","f":0.0,"fa":0,"ta":3},{"n":"Mattress Magic","b":25961,"l":"Tempe, AZ","f":0,"fa":0,"ta":0}],
 "Matthew MacDonald":[{"n":"Furniture & Mattress Discounters","b":25937,"l":"Chandler, AZ","f":0,"fa":0,"ta":0}]
 };
@@ -488,7 +488,7 @@ function setMarketsScope(scope){
   document.getElementById('btnOsr').style.color=scope==='osr'?'#fff':'#8494AB';
   document.getElementById('btnAll').style.background=scope==='all'?'#5B9BFF':'transparent';
   document.getElementById('btnAll').style.color=scope==='all'?'#fff':'#8494AB';
-  document.getElementById('scopeLabel').textContent=scope==='all'?'All Enrollments (83)':'OSR Credited (48)';
+  document.getElementById('scopeLabel').textContent=scope==='all'?'All Enrollments (83)':'OSR Credited (61)';
   document.getElementById('stateSub').textContent=scope==='all'?'All new enrollments across all channels':'Credited sales team enrollments';
   // Rebuild state chart
   destroyChart('states');
@@ -511,7 +511,7 @@ function setOverviewScope(scope){
   document.getElementById('ovBtnOsr').style.color=scope==='osr'?'#fff':'#8494AB';
   document.getElementById('ovBtnAll').style.background=scope==='all'?'#5B9BFF':'transparent';
   document.getElementById('ovBtnAll').style.color=scope==='all'?'#fff':'#8494AB';
-  document.getElementById('ovScopeLabel').textContent=scope==='all'?'All Enrollments (83)':'OSR Credited (48)';
+  document.getElementById('ovScopeLabel').textContent=scope==='all'?'All Enrollments (83)':'OSR Credited (61)';
   // Top 5 Markets
   var sd=scope==='all'?marketDataFull:marketData;
   document.getElementById('ovMarketSub').textContent=scope==='all'?'States by total enrollment volume':'States by credited enrollment volume';
@@ -533,8 +533,8 @@ function setOverviewScope(scope){
 }
 
 // Progress bars
-bars('marketsOverview',marketData.slice(0,5),11,PC.slice(0,5),100);
-bars('isrBars',isrData,14,'#22D3EE',130);
+bars('marketsOverview',marketData.slice(0,5),15,PC.slice(0,5),100);
+bars('isrBars',isrData,17,'#22D3EE',130);
 
 // Init
 Chart.defaults.color='#8494AB';
