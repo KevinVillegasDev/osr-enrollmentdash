@@ -4,16 +4,48 @@
     "Branch ID": "25910",
     "6/1/2026_Sum of Funded Dollars": 0.0,
     "6/1/2026_Sum of Funded Average": 0.0,
-    "6/1/2026_Sum of Applications": 2.0,
+    "6/1/2026_Sum of Applications": 3.0,
     "6/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
-    "Account Name": "Maaco M2821 - E Van Buren St",
-    "Branch ID": "25924",
+    "Account Name": "Ceres Transmission Shop",
+    "Branch ID": "25884",
+    "6/1/2026_Sum of Funded Dollars": 1400.0,
+    "6/1/2026_Sum of Funded Average": 1400.0,
+    "6/1/2026_Sum of Applications": 5.0,
+    "6/1/2026_Sum of Funded Applications Total": 1.0
+  },
+  {
+    "Account Name": "Northcutt Auto Repair",
+    "Branch ID": "25915",
+    "6/1/2026_Sum of Funded Dollars": 10275.0,
+    "6/1/2026_Sum of Funded Average": 2568.75,
+    "6/1/2026_Sum of Applications": 29.0,
+    "6/1/2026_Sum of Funded Applications Total": 4.0
+  },
+  {
+    "Account Name": "G2 Wheels Lifts & More",
+    "Branch ID": "25929",
     "6/1/2026_Sum of Funded Dollars": 0.0,
     "6/1/2026_Sum of Funded Average": 0.0,
     "6/1/2026_Sum of Applications": 1.0,
     "6/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "1000 Furniture",
+    "Branch ID": "25906",
+    "6/1/2026_Sum of Funded Dollars": 0.0,
+    "6/1/2026_Sum of Funded Average": 0.0,
+    "6/1/2026_Sum of Applications": 17.0,
+    "6/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Fast Tire Shop",
+    "Branch ID": "25888",
+    "6/1/2026_Sum of Funded Dollars": 610.0,
+    "6/1/2026_Sum of Funded Average": 610.0,
+    "6/1/2026_Sum of Applications": 3.0,
+    "6/1/2026_Sum of Funded Applications Total": 1.0
   },
   {
     "Account Name": "Chingon Auto Complete",
@@ -24,22 +56,6 @@
     "6/1/2026_Sum of Funded Applications Total": 1.0
   },
   {
-    "Account Name": "CAS Car Audio Store - Carrollton",
-    "Branch ID": "25952",
-    "6/1/2026_Sum of Funded Dollars": 0.0,
-    "6/1/2026_Sum of Funded Average": 0.0,
-    "6/1/2026_Sum of Applications": 4.0,
-    "6/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
-    "Account Name": "1000 Furniture",
-    "Branch ID": "25906",
-    "6/1/2026_Sum of Funded Dollars": 0.0,
-    "6/1/2026_Sum of Funded Average": 0.0,
-    "6/1/2026_Sum of Applications": 15.0,
-    "6/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
     "Account Name": "Transco Auto & Diesel Repair",
     "Branch ID": "25930",
     "6/1/2026_Sum of Funded Dollars": 3905.0,
@@ -48,27 +64,11 @@
     "6/1/2026_Sum of Funded Applications Total": 2.0
   },
   {
-    "Account Name": "Pars Furniture",
-    "Branch ID": "25942",
+    "Account Name": "Super Value Furniture",
+    "Branch ID": "25894",
     "6/1/2026_Sum of Funded Dollars": 0.0,
     "6/1/2026_Sum of Funded Average": 0.0,
-    "6/1/2026_Sum of Applications": 3.0,
-    "6/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
-    "Account Name": "Legacy Furniture - Allegheny Ave",
-    "Branch ID": "25900",
-    "6/1/2026_Sum of Funded Dollars": 0.0,
-    "6/1/2026_Sum of Funded Average": 0.0,
-    "6/1/2026_Sum of Applications": 4.0,
-    "6/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
-    "Account Name": "Furniture Memoryzzz",
-    "Branch ID": "25914",
-    "6/1/2026_Sum of Funded Dollars": 0.0,
-    "6/1/2026_Sum of Funded Average": 0.0,
-    "6/1/2026_Sum of Applications": 2.0,
+    "6/1/2026_Sum of Applications": 1.0,
     "6/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
@@ -76,8 +76,40 @@
     "Branch ID": "25899",
     "6/1/2026_Sum of Funded Dollars": 0.0,
     "6/1/2026_Sum of Funded Average": 0.0,
-    "6/1/2026_Sum of Applications": 9.0,
+    "6/1/2026_Sum of Applications": 12.0,
     "6/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Los Tocayos Automotives",
+    "Branch ID": "25966",
+    "6/1/2026_Sum of Funded Dollars": 0.0,
+    "6/1/2026_Sum of Funded Average": 0.0,
+    "6/1/2026_Sum of Applications": 1.0,
+    "6/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "RB Scooters",
+    "Branch ID": "25885",
+    "6/1/2026_Sum of Funded Dollars": 0.0,
+    "6/1/2026_Sum of Funded Average": 0.0,
+    "6/1/2026_Sum of Applications": 2.0,
+    "6/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Discount Sem",
+    "Branch ID": "25922",
+    "6/1/2026_Sum of Funded Dollars": 0.0,
+    "6/1/2026_Sum of Funded Average": 0.0,
+    "6/1/2026_Sum of Applications": 3.0,
+    "6/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "J&M Transmissions and Full Service",
+    "Branch ID": "25912",
+    "6/1/2026_Sum of Funded Dollars": 4800.0,
+    "6/1/2026_Sum of Funded Average": 1600.0,
+    "6/1/2026_Sum of Applications": 25.0,
+    "6/1/2026_Sum of Funded Applications Total": 3.0
   },
   {
     "Account Name": "Associated Automotive Services",
@@ -88,16 +120,8 @@
     "6/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
-    "Account Name": "Essi Discount Furniture",
-    "Branch ID": "25903",
-    "6/1/2026_Sum of Funded Dollars": 0.0,
-    "6/1/2026_Sum of Funded Average": 0.0,
-    "6/1/2026_Sum of Applications": 7.0,
-    "6/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
-    "Account Name": "Discount Sem",
-    "Branch ID": "25922",
+    "Account Name": "Hanover Lube and Brake Tire Pros",
+    "Branch ID": "25940",
     "6/1/2026_Sum of Funded Dollars": 0.0,
     "6/1/2026_Sum of Funded Average": 0.0,
     "6/1/2026_Sum of Applications": 3.0,
@@ -112,20 +136,28 @@
     "6/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
-    "Account Name": "Midas 3992",
-    "Branch ID": "25896",
+    "Account Name": "CAS Car Audio Store - Carrollton",
+    "Branch ID": "25952",
     "6/1/2026_Sum of Funded Dollars": 0.0,
     "6/1/2026_Sum of Funded Average": 0.0,
-    "6/1/2026_Sum of Applications": 1.0,
+    "6/1/2026_Sum of Applications": 7.0,
     "6/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
-    "Account Name": "Ceres Transmission Shop",
-    "Branch ID": "25884",
-    "6/1/2026_Sum of Funded Dollars": 1400.0,
-    "6/1/2026_Sum of Funded Average": 1400.0,
-    "6/1/2026_Sum of Applications": 5.0,
-    "6/1/2026_Sum of Funded Applications Total": 1.0
+    "Account Name": "Pars Furniture",
+    "Branch ID": "25942",
+    "6/1/2026_Sum of Funded Dollars": 0.0,
+    "6/1/2026_Sum of Funded Average": 0.0,
+    "6/1/2026_Sum of Applications": 3.0,
+    "6/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Furniture Memoryzzz",
+    "Branch ID": "25914",
+    "6/1/2026_Sum of Funded Dollars": 0.0,
+    "6/1/2026_Sum of Funded Average": 0.0,
+    "6/1/2026_Sum of Applications": 2.0,
+    "6/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
     "Account Name": "Tire Busters Automotive Repair",
@@ -136,59 +168,91 @@
     "6/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
-    "Account Name": "J&M Transmissions and Full Service",
-    "Branch ID": "25912",
-    "6/1/2026_Sum of Funded Dollars": 4800.0,
-    "6/1/2026_Sum of Funded Average": 1600.0,
-    "6/1/2026_Sum of Applications": 22.0,
-    "6/1/2026_Sum of Funded Applications Total": 3.0
-  },
-  {
-    "Account Name": "Hanover Lube and Brake Tire Pros",
-    "Branch ID": "25940",
-    "6/1/2026_Sum of Funded Dollars": 0.0,
-    "6/1/2026_Sum of Funded Average": 0.0,
-    "6/1/2026_Sum of Applications": 2.0,
-    "6/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
-    "Account Name": "RB Scooters",
-    "Branch ID": "25885",
-    "6/1/2026_Sum of Funded Dollars": 0.0,
-    "6/1/2026_Sum of Funded Average": 0.0,
-    "6/1/2026_Sum of Applications": 2.0,
-    "6/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
     "Account Name": "Agencia Llantera",
     "Branch ID": "25886",
     "6/1/2026_Sum of Funded Dollars": 5875.0,
     "6/1/2026_Sum of Funded Average": 1958.33,
-    "6/1/2026_Sum of Applications": 14.0,
+    "6/1/2026_Sum of Applications": 16.0,
     "6/1/2026_Sum of Funded Applications Total": 3.0
   },
   {
-    "Account Name": "Fast Tire Shop",
-    "Branch ID": "25888",
-    "6/1/2026_Sum of Funded Dollars": 610.0,
-    "6/1/2026_Sum of Funded Average": 610.0,
-    "6/1/2026_Sum of Applications": 3.0,
-    "6/1/2026_Sum of Funded Applications Total": 1.0
+    "Account Name": "Cherokee Muffler and Repair",
+    "Branch ID": "25925",
+    "6/1/2026_Sum of Funded Dollars": 0.0,
+    "6/1/2026_Sum of Funded Average": 0.0,
+    "6/1/2026_Sum of Applications": 1.0,
+    "6/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
-    "Account Name": "Northcutt Auto Repair",
-    "Branch ID": "25915",
-    "6/1/2026_Sum of Funded Dollars": 10275.0,
-    "6/1/2026_Sum of Funded Average": 2568.75,
-    "6/1/2026_Sum of Applications": 26.0,
-    "6/1/2026_Sum of Funded Applications Total": 4.0
+    "Account Name": "Midas 3992",
+    "Branch ID": "25896",
+    "6/1/2026_Sum of Funded Dollars": 0.0,
+    "6/1/2026_Sum of Funded Average": 0.0,
+    "6/1/2026_Sum of Applications": 1.0,
+    "6/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Alpha Cycles",
+    "Branch ID": "25967",
+    "6/1/2026_Sum of Funded Dollars": 0.0,
+    "6/1/2026_Sum of Funded Average": 0.0,
+    "6/1/2026_Sum of Applications": 15.0,
+    "6/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Maaco M2821 - E Van Buren St",
+    "Branch ID": "25924",
+    "6/1/2026_Sum of Funded Dollars": 0.0,
+    "6/1/2026_Sum of Funded Average": 0.0,
+    "6/1/2026_Sum of Applications": 1.0,
+    "6/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Tiger Powersports",
+    "Branch ID": "25941",
+    "6/1/2026_Sum of Funded Dollars": 0.0,
+    "6/1/2026_Sum of Funded Average": 0.0,
+    "6/1/2026_Sum of Applications": 5.0,
+    "6/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "City Side Auto",
+    "Branch ID": "25951",
+    "6/1/2026_Sum of Funded Dollars": 0.0,
+    "6/1/2026_Sum of Funded Average": 0.0,
+    "6/1/2026_Sum of Applications": 1.0,
+    "6/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
     "Account Name": "Big O Tires of Shepherdsville - 017015",
     "Branch ID": "25895",
     "6/1/2026_Sum of Funded Dollars": 1489.45,
     "6/1/2026_Sum of Funded Average": 1489.45,
-    "6/1/2026_Sum of Applications": 3.0,
+    "6/1/2026_Sum of Applications": 4.0,
     "6/1/2026_Sum of Funded Applications Total": 1.0
+  },
+  {
+    "Account Name": "Legacy Furniture - Allegheny Ave",
+    "Branch ID": "25900",
+    "6/1/2026_Sum of Funded Dollars": 0.0,
+    "6/1/2026_Sum of Funded Average": 0.0,
+    "6/1/2026_Sum of Applications": 4.0,
+    "6/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Subi Care",
+    "Branch ID": "25938",
+    "6/1/2026_Sum of Funded Dollars": 0.0,
+    "6/1/2026_Sum of Funded Average": 0.0,
+    "6/1/2026_Sum of Applications": 1.0,
+    "6/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Essi Discount Furniture",
+    "Branch ID": "25903",
+    "6/1/2026_Sum of Funded Dollars": 0.0,
+    "6/1/2026_Sum of Funded Average": 0.0,
+    "6/1/2026_Sum of Applications": 7.0,
+    "6/1/2026_Sum of Funded Applications Total": 0.0
   }
 ]
