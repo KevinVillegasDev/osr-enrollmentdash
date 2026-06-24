@@ -47,13 +47,13 @@ REPORT_IDS = {
 # ─── OSR Roster (as of June 2026) ────────────────────────────────────────────
 # Jeremy Moore departed end of April 2026; Richard Herrera took over RIC-4 starting May 2026.
 # Frozen Jan–Apr 2026 dashboards still show Jeremy historically — those HTMLs are never regenerated.
-# Mariana Gross added June 2026 (territory assignment pending — see TERRITORY_MAP note).
+# Mariana Gross added June 2026 (RIC-5 — Phoenix Metro).
+# Francisco Gonzalez (LTO-4) and DeLon Phoenix (RIC-7) removed June 2026; their
+# territories are now unassigned. Frozen past-month dashboards still show them historically.
 OSR_ROSTER = [
     "Cesar Flores",
     "Claudia Gerhardt",
-    "DeLon Phoenix",
     "Eric Henderson",
-    "Francisco Gonzalez",
     "Jared Midkiff",
     "Joseph Guerra",
     "Mariana Gross",
@@ -68,15 +68,15 @@ OSR_ROSTER = [
 
 # ─── Territory → OSR Mapping ────────────────────────────────────────────────
 # Maps territory codes from the sales budget to OSR names.
-# Unassigned territories (LTO-8, RIC-3) are excluded.
-# LTO-4: Sara Porter through early 2026; Francisco Gonzalez from May 2026 forward.
+# Unassigned territories (LTO-4, LTO-8, RIC-3, RIC-7) are excluded.
+# LTO-4: Sara Porter → Francisco Gonzalez (removed June 2026); now unassigned.
 # RIC-4: Jeremy Moore through April 2026; Richard Herrera from May 2026 forward.
 # RIC-5: Mariana Gross from June 2026 (Phoenix Metro, AZ; previously unassigned).
+# RIC-7: DeLon Phoenix (removed June 2026); now unassigned.
 TERRITORY_MAP = {
     "LTO-1": "Yemaira Hernandez",
     "LTO-2": "Omar Corona",
     "LTO-3": "Joseph Guerra",
-    "LTO-4": "Francisco Gonzalez",
     "LTO-5": "Jared Midkiff",
     "LTO-7": "Stephanie Whitlock",
     "RIC-1": "Cesar Flores",
@@ -84,7 +84,6 @@ TERRITORY_MAP = {
     "RIC-4": "Richard Herrera",
     "RIC-5": "Mariana Gross",
     "RIC-6": "Phillip Mason",
-    "RIC-7": "DeLon Phoenix",
     "RIC-8": "Eric Henderson",
     "RIC-9": "Matthew MacDonald",
 }
@@ -95,7 +94,6 @@ ISR_TERRITORY_MAP = {
     "LTO-1": "Javier Gonzalez",
     "LTO-2": "Noemy Carrion",
     "LTO-3": "Noemy Carrion",
-    "LTO-4": "Noemy Carrion",
     "LTO-5": "Javier Gonzalez",
     "LTO-7": "Connor Admirand",
     "RIC-1": "Katie Anguiano",
@@ -103,7 +101,6 @@ ISR_TERRITORY_MAP = {
     "RIC-4": "Katie Anguiano",
     "RIC-5": "Lesly Arroyo",
     "RIC-6": "Laura Angulo",
-    "RIC-7": "Michael Palmer",
     "RIC-8": "Connor Admirand",
     "RIC-9": "Michael Palmer",
 }
@@ -150,9 +147,7 @@ MONTHLY_FLOOR = 10          # No single month below 10
 OSR_EMAILS = {
     "Cesar Flores": "cesar.flores@easypayfinance.com",
     "Claudia Gerhardt": "claudia.gerhardt@easypayfinance.com",
-    "DeLon Phoenix": "delon.phoenix@easypayfinance.com",
     "Eric Henderson": "eric.henderson@easypayfinance.com",
-    "Francisco Gonzalez": "francisco.gonzalez@easypayfinance.com",
     "Jared Midkiff": "jared.midkiff@easypayfinance.com",
     "Joseph Guerra": "joseph.guerra@easypayfinance.com",
     "Mariana Gross": "mariana.gross@easypayfinance.com",

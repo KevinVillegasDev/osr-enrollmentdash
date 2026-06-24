@@ -2153,7 +2153,6 @@ def update_territory_review(filepath: str, territory_data: dict) -> bool:
         '  "LTO-1": {osr:"Yemaira Hernandez", area:"FL (Miami-Dade/Broward)"},\n'
         '  "LTO-2": {osr:"Omar Corona", area:"TX (S. Houston/Valley/El Paso)"},\n'
         '  "LTO-3": {osr:"Joseph Guerra", area:"TX (State Manager)"},\n'
-        '  "LTO-4": {osr:"Francisco Gonzalez", area:""},\n'
         '  "LTO-5": {osr:"Jared Midkiff", area:"FL (State Manager)"},\n'
         '  "LTO-7": {osr:"Stephanie Whitlock", area:"GA/NE FL/Panhandle"},\n'
         '  "RIC-1": {osr:"Cesar Flores", area:"CA (LA Metro Core)"},\n'
@@ -2161,7 +2160,6 @@ def update_territory_review(filepath: str, territory_data: dict) -> bool:
         '  "RIC-4": {osr:"Richard Herrera", area:"CA (Orange County/SE LA)"},\n'
         '  "RIC-5": {osr:"Mariana Gross", area:"AZ (Phoenix Metro)"},\n'
         '  "RIC-6": {osr:"Phillip Mason", area:"CA (Sacramento/NorCal)"},\n'
-        '  "RIC-7": {osr:"DeLon Phoenix", area:"NV (Las Vegas/Reno)"},\n'
         '  "RIC-8": {osr:"Eric Henderson", area:"PA (4 Metros)"},\n'
         '  "RIC-9": {osr:"Matthew MacDonald", area:"AZ (State Manager + NM/UT/ID)"}\n'
         '};')

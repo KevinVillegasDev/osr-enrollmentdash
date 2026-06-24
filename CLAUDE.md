@@ -343,7 +343,9 @@ For historical cohorts or Month 2 true-up data, Report 2 and 4 templates are cal
 
 ## OSR Roster (as of June 2026)
 
-Cesar Flores, Claudia Gerhardt, DeLon Phoenix, Eric Henderson, Francisco Gonzalez, Jared Midkiff, Joseph Guerra, Mariana Gross, Matthew MacDonald, Omar Corona, Phillip Mason, Richard Herrera, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
+Cesar Flores, Claudia Gerhardt, Eric Henderson, Jared Midkiff, Joseph Guerra, Mariana Gross, Matthew MacDonald, Omar Corona, Phillip Mason, Richard Herrera, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
+
+*Francisco Gonzalez (LTO-4) and DeLon Phoenix (RIC-7) removed June 2026; both territories now unassigned. Frozen past-month dashboards still show them historically.*
 
 *Jeremy Moore (departed end of April 2026) is no longer in `OSR_ROSTER`. Frozen Jan–Apr 2026 dashboards still show him historically.*
 *Mariana Gross added June 2026, assigned RIC-5 (Phoenix Metro, AZ; previously unassigned).*
@@ -357,12 +359,12 @@ Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Lesly Arroyo, Mi
 | ISR | Territories |
 |-----|-------------|
 | Javier Gonzalez | LTO-1 (Yemaira), LTO-5 (Jared) |
-| Noemy Carrion | LTO-2 (Omar), LTO-3 (Joseph), LTO-4 (Francisco) |
+| Noemy Carrion | LTO-2 (Omar), LTO-3 (Joseph) |
 | Connor Admirand | LTO-7 (Stephanie), RIC-8 (Eric) |
 | Katie Anguiano | RIC-1 (Cesar), RIC-2 (Claudia), RIC-4 (Richard) |
 | Lesly Arroyo | RIC-5 (Mariana) |
 | Laura Angulo | RIC-6 (Phillip) |
-| Michael Palmer | RIC-7 (DeLon), RIC-9 (Matthew) |
+| Michael Palmer | RIC-9 (Matthew) |
 
 ## Territory → OSR Mapping
 
@@ -371,7 +373,6 @@ Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Lesly Arroyo, Mi
 | LTO-1 | Yemaira Hernandez | FL (Miami-Dade/Broward) |
 | LTO-2 | Omar Corona | TX (S. Houston/Valley/El Paso) |
 | LTO-3 | Joseph Guerra | TX (State Manager) |
-| LTO-4 | Francisco Gonzalez | — |
 | LTO-5 | Jared Midkiff | FL (State Manager) |
 | LTO-7 | Stephanie Whitlock | GA/NE FL/Panhandle |
 | RIC-1 | Cesar Flores | CA (LA Metro Core) |
@@ -379,11 +380,10 @@ Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Lesly Arroyo, Mi
 | RIC-4 | Richard Herrera | CA (Orange County/SE LA) |
 | RIC-5 | Mariana Gross | AZ (Phoenix Metro) |
 | RIC-6 | Phillip Mason | CA (Sacramento/NorCal) |
-| RIC-7 | DeLon Phoenix | NV (Las Vegas/Reno) |
 | RIC-8 | Eric Henderson | PA (4 Metros) |
 | RIC-9 | Matthew MacDonald | AZ (State Manager + NM/UT/ID) |
 
-**Unassigned territories:** LTO-8, RIC-3 — hiring in progress.
+**Unassigned territories:** LTO-4, LTO-8, RIC-3, RIC-7 — hiring in progress.
 
 ## Key Terminology
 
