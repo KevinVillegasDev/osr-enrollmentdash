@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>June Enrollment & Production Dashboard — EasyPay Finance</title>
+  <title>July Enrollment & Production Dashboard — EasyPay Finance</title>
   <script src="auth.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -198,9 +198,9 @@
       <div>
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
           <span class="badge">LIVE</span>
-          <span class="header-meta">June 2026</span>
+          <span class="header-meta">July 2026</span>
         </div>
-        <h1>June Enrollment &amp; Production Dashboard</h1>
+        <h1>July Enrollment &amp; Production Dashboard</h1>
         <p class="header-sub">EasyPay Finance — Enrollment &amp; Production Tracking</p>
       </div>
       <div class="updated">
@@ -221,7 +221,7 @@
     <!-- OVERVIEW -->
     <div class="tab-content active" id="overview">
       <div class="kpi-grid">
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">118</span><span class="kpi-sub">All sources, Jun 2026</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">118</span><span class="kpi-sub">All sources, Jul 2026</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">79</span><span class="kpi-sub">66.9% of total</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#FBBF24,transparent)"></div><span class="kpi-label">Funded Volume</span><span class="kpi-value">$145,043</span><span class="kpi-sub">59 merchants tracked</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#A78BFA,transparent)"></div><span class="kpi-label">Funded Apps</span><span class="kpi-value">72</span><span class="kpi-sub">of 356 total apps</span></div>
@@ -229,11 +229,11 @@
       </div>
       <div class="card">
         <div class="section-title">Daily Enrollment Pace</div>
-        <div class="section-sub">Credited enrollments by date — June 2026</div>
+        <div class="section-sub">Credited enrollments by date — July 2026</div>
         <div style="height:240px"><canvas id="chartDaily"></canvas></div>
         <div class="callout">
-          <span><strong style="color:#FBBF24">Peak:</strong> Jun 25 (12 enrollments)</span>
-          <span><strong style="color:#5B9BFF">Avg daily:</strong> ~3.8 enrollments/day</span>
+          <span><strong style="color:#FBBF24">Peak:</strong> Jul 25 (10 enrollments)</span>
+          <span><strong style="color:#5B9BFF">Avg daily:</strong> ~4.0 enrollments/day</span>
         </div>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px">
@@ -277,7 +277,7 @@
     <div class="tab-content" id="reps">
       <div class="card">
         <div class="section-title">Credited Enrollments by Rep</div>
-        <div class="section-sub">Enrollments officially credited to each OSR — June 2026 · <span style="color:#7AB8FF">Click a bar to view merchant details</span></div>
+        <div class="section-sub">Enrollments officially credited to each OSR — July 2026 · <span style="color:#7AB8FF">Click a bar to view merchant details</span></div>
         <div style="height:480px"><canvas id="chartAllReps"></canvas></div>
       </div>
       <div class="section-title" style="margin-bottom:4px">Individual Rep Scorecards</div>
@@ -328,7 +328,7 @@
       </div>
       <div class="card">
         <div class="section-title">Top 15 Producing Merchants</div>
-        <div class="section-sub">Ranked by total funded dollars — June 2026 new enrollments</div>
+        <div class="section-sub">Ranked by total funded dollars — July 2026 new enrollments</div>
         <div style="overflow-x:auto"><table><thead><tr><th class="left">#</th><th class="left">Merchant</th><th class="left">OSR</th><th>Funded $</th><th>Funded Apps</th><th>Total Apps</th><th>Conv. Rate</th></tr></thead><tbody id="prodTable"></tbody></table></div>
       </div>
       <div class="grid-2">
@@ -339,7 +339,7 @@
         </div>
         <div class="card">
           <div class="section-title">Key Observations</div>
-          <div class="section-sub">Production insights for June</div>
+          <div class="section-sub">Production insights for July</div>
           <div id="observations"></div>
         </div>
       </div>
@@ -358,18 +358,18 @@
 
 <script>
 var repCredits=[{"n":"Eric Henderson","v":12},{"n":"Joseph Guerra","v":11},{"n":"Cesar Flores","v":10},{"n":"Mariana Gross","v":10},{"n":"Stephanie Whitlock","v":9},{"n":"Yemaira Hernandez","v":5},{"n":"Phillip Mason","v":4},{"n":"Francisco Gonzalez","v":4},{"n":"Omar Corona","v":3},{"n":"Richard Herrera","v":3},{"n":"Jared Midkiff","v":3},{"n":"DeLon Phoenix","v":2},{"n":"Matthew MacDonald","v":2},{"n":"Claudia Gerhardt","v":1}];
-var marketData=[{"n":"TX","v":27},{"n":"CA","v":26},{"n":"PA","v":18},{"n":"AZ","v":16},{"n":"FL","v":14},{"n":"GA","v":7},{"n":"NH","v":3},{"n":"KY","v":2},{"n":"SD","v":2},{"n":"NV","v":2},{"n":"KS","v":1}];
-var industryData=[{"n":"Auto - Repair","v":38},{"n":"Furniture","v":25},{"n":"Auto - Wheels & Tires","v":16},{"n":"Auto - Total Car Care","v":11},{"n":"Scooters","v":6},{"n":"Auto - Tires","v":6},{"n":"Electronics","v":5},{"n":"Auto - Stereo","v":4},{"n":"Auto - Transmission","v":3},{"n":"Bicycle","v":1},{"n":"Power Vehicles","v":1},{"n":"Home-Appliance","v":1},{"n":"Motorcycle","v":1}];
+var marketData=[{"n":"CA","v":20},{"n":"TX","v":19},{"n":"AZ","v":14},{"n":"FL","v":12},{"n":"PA","v":12},{"n":"GA","v":5},{"n":"KY","v":2},{"n":"NV","v":2}];
+var industryData=[{"n":"Auto - Repair","v":24},{"n":"Furniture","v":20},{"n":"Auto - Wheels & Tires","v":13},{"n":"Auto - Total Car Care","v":7},{"n":"Scooters","v":5},{"n":"Auto - Tires","v":4},{"n":"Auto - Stereo","v":4},{"n":"Electronics","v":3},{"n":"Auto - Transmission","v":2},{"n":"Bicycle","v":1},{"n":"Power Vehicles","v":1},{"n":"Home-Appliance","v":1},{"n":"Motorcycle","v":1}];
 var marketDataFull=[{"n":"TX","v":27},{"n":"CA","v":26},{"n":"PA","v":18},{"n":"AZ","v":16},{"n":"FL","v":14},{"n":"GA","v":7},{"n":"NH","v":3},{"n":"SD","v":2},{"n":"KY","v":2},{"n":"NV","v":2},{"n":"KS","v":1}];
 var industryDataFull=[{"n":"Auto - Repair","v":38},{"n":"Furniture","v":25},{"n":"Auto - Wheels & Tires","v":16},{"n":"Auto - Total Car Care","v":11},{"n":"Scooters","v":6},{"n":"Auto - Tires","v":6},{"n":"Electronics","v":5},{"n":"Auto - Stereo","v":4},{"n":"Auto - Transmission","v":3},{"n":"Home-Appliance","v":1},{"n":"Motorcycle","v":1},{"n":"Power Vehicles","v":1},{"n":"Bicycle","v":1}];
 var marketsScope='osr';
-var isrData=[{"n":"Connor Admirand","v":27},{"n":"Noemy Carrion","v":25},{"n":"Katie Anguiano","v":17},{"n":"Lesly Arroyo","v":14},{"n":"Laura Angulo","v":12},{"n":"Michael Palmer","v":12}];
-var dailyTrend=[{"d":"Jun 1","v":2},{"d":"Jun 2","v":4},{"d":"Jun 4","v":6},{"d":"Jun 5","v":7},{"d":"Jun 6","v":7},{"d":"Jun 9","v":11},{"d":"Jun 10","v":9},{"d":"Jun 11","v":3},{"d":"Jun 12","v":9},{"d":"Jun 13","v":2},{"d":"Jun 15","v":1},{"d":"Jun 16","v":8},{"d":"Jun 17","v":9},{"d":"Jun 18","v":3},{"d":"Jun 19","v":3},{"d":"Jun 20","v":1},{"d":"Jun 23","v":3},{"d":"Jun 24","v":6},{"d":"Jun 25","v":12},{"d":"Jun 26","v":7},{"d":"Jun 27","v":5}];
-var topProducers=[{"n":"Movil Express","f":28942.0,"fa":11,"ta":12,"r":"91.7%","o":"-"},{"n":"Estren Electronic","f":27672.0,"fa":10,"ta":16,"r":"62.5%","o":"-"},{"n":"Northcutt Auto Repair","f":13961.0,"fa":6,"ta":32,"r":"18.8%","o":"-"},{"n":"J&M Transmissions and Full Service","f":11300.0,"fa":5,"ta":30,"r":"16.7%","o":"-"},{"n":"Chingon Auto Complete","f":10664.0,"fa":4,"ta":17,"r":"23.5%","o":"-"},{"n":"Flashtronics","f":10333.77,"fa":7,"ta":18,"r":"38.9%","o":"Yemaira Hernandez"},{"n":"Agencia Llantera","f":8024.0,"fa":5,"ta":25,"r":"20.0%","o":"-"},{"n":"B & L Tire and Automotive","f":5700.79,"fa":2,"ta":2,"r":"100.0%","o":"Stephanie Whitlock"},{"n":"Philly Encanto Furniture","f":4450.0,"fa":1,"ta":3,"r":"33.3%","o":"-"},{"n":"Tire Busters Automotive Repair","f":4235.0,"fa":4,"ta":8,"r":"50.0%","o":"Phillip Mason"},{"n":"Transco Auto & Diesel Repair","f":3905.0,"fa":2,"ta":4,"r":"50.0%","o":"-"},{"n":"Alpha Cycles","f":2250.0,"fa":1,"ta":22,"r":"4.5%","o":"Yemaira Hernandez"},{"n":"Big O Tires of Shepherdsville - 017015","f":2034.51,"fa":2,"ta":6,"r":"33.3%","o":"-"},{"n":"Subi Care","f":1800.0,"fa":1,"ta":3,"r":"33.3%","o":"Richard Herrera"},{"n":"City Side Auto","f":1700.0,"fa":1,"ta":3,"r":"33.3%","o":"-"}];
+var isrData=[{"n":"Connor Admirand","v":20},{"n":"Noemy Carrion","v":19},{"n":"Katie Anguiano","v":14},{"n":"Lesly Arroyo","v":12},{"n":"Michael Palmer","v":10},{"n":"Laura Angulo","v":8}];
+var dailyTrend=[{"d":"Jul 1","v":2},{"d":"Jul 2","v":4},{"d":"Jul 4","v":6},{"d":"Jul 5","v":5},{"d":"Jul 6","v":6},{"d":"Jul 9","v":4},{"d":"Jul 10","v":8},{"d":"Jul 11","v":2},{"d":"Jul 12","v":8},{"d":"Jul 13","v":2},{"d":"Jul 15","v":1},{"d":"Jul 16","v":6},{"d":"Jul 17","v":9},{"d":"Jul 18","v":1},{"d":"Jul 19","v":3},{"d":"Jul 20","v":1},{"d":"Jul 23","v":2},{"d":"Jul 24","v":5},{"d":"Jul 25","v":10},{"d":"Jul 27","v":1}];
+var topProducers=[{"n":"Movil Express","f":28942.0,"fa":11,"ta":12,"r":"91.7%","o":""},{"n":"Estren Electronic","f":27672.0,"fa":10,"ta":16,"r":"62.5%","o":""},{"n":"Northcutt Auto Repair","f":13961.0,"fa":6,"ta":32,"r":"18.8%","o":""},{"n":"J&M Transmissions and Full Service","f":11300.0,"fa":5,"ta":30,"r":"16.7%","o":""},{"n":"Chingon Auto Complete","f":10664.0,"fa":4,"ta":17,"r":"23.5%","o":""},{"n":"Flashtronics","f":10333.77,"fa":7,"ta":18,"r":"38.9%","o":"Yemaira Hernandez"},{"n":"Agencia Llantera","f":8024.0,"fa":5,"ta":25,"r":"20.0%","o":"-"},{"n":"B & L Tire and Automotive","f":5700.79,"fa":2,"ta":2,"r":"100.0%","o":"Stephanie Whitlock"},{"n":"Philly Encanto Furniture","f":4450.0,"fa":1,"ta":3,"r":"33.3%","o":""},{"n":"Tire Busters Automotive Repair","f":4235.0,"fa":4,"ta":8,"r":"50.0%","o":"Phillip Mason"},{"n":"Transco Auto & Diesel Repair","f":3905.0,"fa":2,"ta":4,"r":"50.0%","o":""},{"n":"Alpha Cycles","f":2250.0,"fa":1,"ta":22,"r":"4.5%","o":"Yemaira Hernandez"},{"n":"Big O Tires of Shepherdsville - 017015","f":2034.51,"fa":2,"ta":6,"r":"33.3%","o":"-"},{"n":"Subi Care","f":1800.0,"fa":1,"ta":3,"r":"33.3%","o":"Richard Herrera"},{"n":"City Side Auto","f":1700.0,"fa":1,"ta":3,"r":"33.3%","o":""}];
 var PC=["#3B82F6","#10B981","#F59E0B","#EF4444","#8B5CF6","#06B6D4","#EC4899","#F97316","#14B8A6","#A855F7","#6366F1","#84CC16"];
 
 var repMerchants={
-"-":[{"n":"Movil Express","b":25964,"l":"Austin, TX","f":28942.0,"fa":11,"ta":12},{"n":"Estren Electronic","b":25948,"l":"Austin, TX","f":27672.0,"fa":10,"ta":16},{"n":"Northcutt Auto Repair","b":25915,"l":"Jesup, GA","f":13961.0,"fa":6,"ta":32},{"n":"J&M Transmissions and Full Service","b":25912,"l":"Tyler, TX","f":11300.0,"fa":5,"ta":30},{"n":"Chingon Auto Complete","b":25902,"l":"El Paso, TX","f":10664.0,"fa":4,"ta":17},{"n":"Agencia Llantera","b":25886,"l":"Phoenix, AZ","f":8024.0,"fa":5,"ta":25},{"n":"Philly Encanto Furniture","b":25971,"l":"Philadelphia, PA","f":4450.0,"fa":1,"ta":3},{"n":"Transco Auto & Diesel Repair","b":25930,"l":"Santa Rosa, CA","f":3905.0,"fa":2,"ta":4},{"n":"Big O Tires of Shepherdsville - 017015","b":25895,"l":"Shepherdsville, KY","f":2034.51,"fa":2,"ta":6},{"n":"City Side Auto","b":25951,"l":"Leesport, PA","f":1700.0,"fa":1,"ta":3},{"n":"Ceres Transmission Shop","b":25884,"l":"Modesto, CA","f":1400.0,"fa":1,"ta":6},{"n":"Associated Automotive Services","b":25907,"l":"Covina, CA","f":1296.7,"fa":1,"ta":4},{"n":"Rangel Car Audio","b":25973,"l":"Dallas, TX","f":1190.0,"fa":1,"ta":1},{"n":"Hanover Lube and Brake Tire Pros","b":25940,"l":"Hanover, PA","f":600.0,"fa":1,"ta":6},{"n":"Quick Fix Auto Repair","b":25990,"l":"Hanover, PA","f":0,"fa":0,"ta":0},{"n":"Scooters 4 U","b":25998,"l":"Hollywood, FL","f":0,"fa":0,"ta":0},{"n":"Redhawk Auto Service Canyon Lake","b":25991,"l":"Canyon Lake, CA","f":0,"fa":0,"ta":0},{"n":"High Speed Transmissions","b":25889,"l":"Stockton, CA","f":0,"fa":0,"ta":0},{"n":"Big O Tires - 16024","b":25916,"l":"Emporia, KS","f":0,"fa":0,"ta":0},{"n":"MM Furniture","b":25899,"l":"Pharr, TX","f":0.0,"fa":0,"ta":16},{"n":"Midas Auto Service","b":25917,"l":"Arlington, TX","f":0.0,"fa":0,"ta":2},{"n":"Cherokee Muffler and Repair","b":25925,"l":"Canton, GA","f":0.0,"fa":0,"ta":1},{"n":"Midas of Concord - 4699","b":25919,"l":"Concord, NH","f":0,"fa":0,"ta":0},{"n":"Midas of Manchester - 4321","b":25920,"l":"Manchester, NH","f":0,"fa":0,"ta":0},{"n":"Midas of Keene - 4916","b":25918,"l":"Keene, NH","f":0,"fa":0,"ta":0},{"n":"Bed DRS","b":25992,"l":"Scottsdale, AZ","f":0,"fa":0,"ta":0},{"n":"Z Furniture Nation","b":25975,"l":"Philadelphia, PA","f":0.0,"fa":0,"ta":2},{"n":"World Wide Automotive","b":25963,"l":"Sioux Falls, SD","f":0,"fa":0,"ta":0},{"n":"Northland Auto Center","b":25987,"l":"Webster, SD","f":0.0,"fa":0,"ta":2},{"n":"Christian Brothers Automotive South Scottsdale","b":25988,"l":"Scottsdale, AZ","f":0,"fa":0,"ta":0},{"n":"Gripnation","b":25981,"l":"Louisville, KY","f":0,"fa":0,"ta":0},{"n":"Auto Master Repair","b":25999,"l":"Winter Park, FL","f":0.0,"fa":0,"ta":1},{"n":"Big O Tires 43132","b":25980,"l":"Katy, TX","f":0,"fa":0,"ta":0},{"n":"Carey Auto Repair","b":25993,"l":"Wilkes-Barre, PA","f":0,"fa":0,"ta":0},{"n":"PS2 Custom Wheels - La Puente","b":25995,"l":"La Puente, CA","f":0,"fa":0,"ta":0},{"n":"PS2 Custom Wheels - Inglewood","b":25996,"l":"Inglewood, CA","f":0,"fa":0,"ta":0},{"n":"AJ's Auto Works","b":25994,"l":"Tempe, AZ","f":0,"fa":0,"ta":0},{"n":"JW Motorsports","b":25997,"l":"Bellflower, CA","f":0,"fa":0,"ta":0},{"n":"Better Sleep Mattresses","b":26000,"l":"Spring, TX","f":0,"fa":0,"ta":0}],
+"-":[{"n":"Agencia Llantera","b":25886,"l":"Phoenix, AZ","f":8024.0,"fa":5,"ta":25},{"n":"Big O Tires of Shepherdsville - 017015","b":25895,"l":"Shepherdsville, KY","f":2034.51,"fa":2,"ta":6},{"n":"Ceres Transmission Shop","b":25884,"l":"Modesto, CA","f":1400.0,"fa":1,"ta":6},{"n":"Rangel Car Audio","b":25973,"l":"Dallas, TX","f":1190.0,"fa":1,"ta":1},{"n":"High Speed Transmissions","b":25889,"l":"Stockton, CA","f":0,"fa":0,"ta":0},{"n":"Christian Brothers Automotive South Scottsdale","b":25988,"l":"Scottsdale, AZ","f":0,"fa":0,"ta":0},{"n":"Gripnation","b":25981,"l":"Louisville, KY","f":0,"fa":0,"ta":0}],
 "Cesar Flores":[{"n":"Fast Tire Shop","b":25888,"l":"Bell Gardens, CA","f":610.0,"fa":1,"ta":3},{"n":"J & J Tires & Wheels","b":25972,"l":"Los Angeles, CA","f":0,"fa":0,"ta":0},{"n":"Rodriguez Tire & Auto Care","b":25890,"l":"Bell, CA","f":0.0,"fa":0,"ta":1},{"n":"Capital Tires and Auto Repair","b":25927,"l":"Pico Rivera, CA","f":0.0,"fa":0,"ta":1},{"n":"DAG Riders 2.0","b":25939,"l":"Lawndale, CA","f":0,"fa":0,"ta":0},{"n":"Custom Muffler","b":25943,"l":"Hawthorne, CA","f":0,"fa":0,"ta":0},{"n":"Melendez Jr. Auto Shop","b":25968,"l":"La Habra, CA","f":0.0,"fa":0,"ta":2},{"n":"G Boyz Custom Wire Wheels","b":25969,"l":"Bell, CA","f":0.0,"fa":0,"ta":1},{"n":"Harbor Tires & Auto Services","b":25977,"l":"Torrance, CA","f":0,"fa":0,"ta":0},{"n":"Santa Clarita Auto Sound","b":25979,"l":"Santa Clarita, CA","f":0,"fa":0,"ta":0}],
 "Omar Corona":[{"n":"Just Like New Automotive","b":25909,"l":"Canutillo, TX","f":0,"fa":0,"ta":0},{"n":"Best Liquidations - 1","b":25983,"l":"Pasadena, TX","f":0,"fa":0,"ta":0},{"n":"Best Liquidations - 2","b":25984,"l":"South Houston, TX","f":0,"fa":0,"ta":0}],
 "Phillip Mason":[{"n":"Tire Busters Automotive Repair","b":25932,"l":"Sacramento, CA","f":4235.0,"fa":4,"ta":8},{"n":"Tire Geeks 2","b":25949,"l":"Sacramento, CA","f":0,"fa":0,"ta":0},{"n":"Tire Geeks 1","b":25950,"l":"Sacramento, CA","f":0.0,"fa":0,"ta":1},{"n":"Prime Ride E Bikes","b":25946,"l":"Orangevale, CA","f":0,"fa":0,"ta":0}],
@@ -471,7 +471,7 @@ var fh='';fi.forEach(function(s){fh+='<div class="funnel-item"><div class="funne
 document.getElementById('funnelArea').innerHTML=fh;
 
 // Observations
-var obs=[{"i":"🏆","t":"Movil Express leads all merchants at $28,942 funded (20.0% of total volume)"},{"i":"⚡","t":"Top 5 merchants account for $92,539 (63.8%) of all funded volume"},{"i":"🎯","t":"Movil Express has the highest conversion rate among top producers at 91.7% (11/12 apps funded)"},{"i":"📈","t":"Non-auto verticals driving $22,101 -- 15.2% of total production"}];
+var obs=[{"i":"🏆","t":"Movil Express leads all merchants at $28,942 funded (20.0% of total volume)"},{"i":"⚡","t":"Top 5 merchants account for $92,539 (63.8%) of all funded volume"},{"i":"🎯","t":"Movil Express has the highest conversion rate among top producers at 91.7% (11/12 apps funded)"},{"i":"📈","t":"Non-auto verticals driving $4,235 -- 2.9% of total production"}];
 var oh='';obs.forEach(function(o){oh+='<div class="obs-item"><span class="obs-icon">'+o.i+'</span><span class="obs-text">'+o.t+'</span></div>';});
 document.getElementById('observations').innerHTML=oh;
 
@@ -533,8 +533,8 @@ function setOverviewScope(scope){
 }
 
 // Progress bars
-bars('marketsOverview',marketData.slice(0,5),27,PC.slice(0,5),100);
-bars('isrBars',isrData,27,'#22D3EE',130);
+bars('marketsOverview',marketData.slice(0,5),20,PC.slice(0,5),100);
+bars('isrBars',isrData,20,'#22D3EE',130);
 
 // Init
 Chart.defaults.color='#8494AB';
