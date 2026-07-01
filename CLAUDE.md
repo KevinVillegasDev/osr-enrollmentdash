@@ -343,10 +343,11 @@ For historical cohorts or Month 2 true-up data, Report 2 and 4 templates are cal
 
 ## OSR Roster (as of June 2026)
 
-Cesar Flores, Claudia Gerhardt, Eric Henderson, Jared Midkiff, Jose Valencia, Joseph Guerra, Mariana Gross, Matthew MacDonald, Omar Corona, Phillip Mason, Richard Herrera, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
+Cesar Flores, Claudia Gerhardt, Eric Henderson, Jared Midkiff, Jose Valencia, Joseph Guerra, Marco Garmendia, Mariana Gross, Matthew MacDonald, Omar Corona, Phillip Mason, Richard Herrera, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
 
 *Francisco Gonzalez (LTO-4) and DeLon Phoenix (RIC-7) removed June 2026; both territories now unassigned. Frozen past-month dashboards still show them historically.*
 *Jose Valencia added for RIC-3, effective July 2026 (previously unassigned).*
+*Marco Garmendia added for RIC-10, effective July 2026 — new multi-state territory covering unmanaged areas across states; no dedicated ISR (absent from ISR → Territory table).*
 
 *Jeremy Moore (departed end of April 2026) is no longer in `OSR_ROSTER`. Frozen Jan–Apr 2026 dashboards still show him historically.*
 *Mariana Gross added June 2026, assigned RIC-5 (Phoenix Metro, AZ; previously unassigned).*
@@ -384,6 +385,7 @@ Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Lesly Arroyo, Mi
 | RIC-6 | Phillip Mason | CA (Sacramento/NorCal) |
 | RIC-8 | Eric Henderson | PA (4 Metros) |
 | RIC-9 | Matthew MacDonald | AZ (State Manager + NM/UT/ID) |
+| RIC-10 | Marco Garmendia | Multi-state (unmanaged areas) *(effective July 2026; no dedicated ISR)* |
 
 **Unassigned territories:** LTO-4, LTO-8, RIC-7 — hiring in progress.
 

@@ -51,6 +51,8 @@ REPORT_IDS = {
 # Francisco Gonzalez (LTO-4) and DeLon Phoenix (RIC-7) removed June 2026; their
 # territories are now unassigned. Frozen past-month dashboards still show them historically.
 # Jose Valencia added for RIC-3, effective July 2026 (previously unassigned).
+# Marco Garmendia added for RIC-10, effective July 2026 — NEW multi-state
+# territory covering unmanaged areas across states; no dedicated ISR.
 OSR_ROSTER = [
     "Cesar Flores",
     "Claudia Gerhardt",
@@ -58,6 +60,7 @@ OSR_ROSTER = [
     "Jared Midkiff",
     "Jose Valencia",
     "Joseph Guerra",
+    "Marco Garmendia",
     "Mariana Gross",
     "Matthew MacDonald",
     "Omar Corona",
@@ -76,6 +79,8 @@ OSR_ROSTER = [
 # RIC-4: Jeremy Moore through April 2026; Richard Herrera from May 2026 forward.
 # RIC-5: Mariana Gross from June 2026 (Phoenix Metro, AZ; previously unassigned).
 # RIC-7: DeLon Phoenix (removed June 2026); now unassigned.
+# RIC-10: Marco Garmendia, effective July 2026 (NEW territory — multi-state
+#         unmanaged areas; no dedicated ISR, so absent from ISR_TERRITORY_MAP).
 TERRITORY_MAP = {
     "LTO-1": "Yemaira Hernandez",
     "LTO-2": "Omar Corona",
@@ -90,6 +95,7 @@ TERRITORY_MAP = {
     "RIC-6": "Phillip Mason",
     "RIC-8": "Eric Henderson",
     "RIC-9": "Matthew MacDonald",
+    "RIC-10": "Marco Garmendia",
 }
 
 # ─── Territory → ISR Mapping ────────────────────────────────────────
@@ -156,6 +162,7 @@ OSR_EMAILS = {
     "Jared Midkiff": "jared.midkiff@easypayfinance.com",
     "Jose Valencia": "jose.valencia@easypayfinance.com",
     "Joseph Guerra": "joseph.guerra@easypayfinance.com",
+    "Marco Garmendia": "marco.garmendia@easypayfinance.com",
     "Mariana Gross": "mariana.gross@easypayfinance.com",
     "Matthew MacDonald": "matthew.macdonald@easypayfinance.com",
     "Omar Corona": "omar.corona@easypayfinance.com",

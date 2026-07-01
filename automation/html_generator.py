@@ -2162,7 +2162,8 @@ def update_territory_review(filepath: str, territory_data: dict) -> bool:
         '  "RIC-5": {osr:"Mariana Gross", area:"AZ (Phoenix Metro)"},\n'
         '  "RIC-6": {osr:"Phillip Mason", area:"CA (Sacramento/NorCal)"},\n'
         '  "RIC-8": {osr:"Eric Henderson", area:"PA (4 Metros)"},\n'
-        '  "RIC-9": {osr:"Matthew MacDonald", area:"AZ (State Manager + NM/UT/ID)"}\n'
+        '  "RIC-9": {osr:"Matthew MacDonald", area:"AZ (State Manager + NM/UT/ID)"},\n'
+        '  "RIC-10": {osr:"Marco Garmendia", area:"Multi-state (unmanaged areas)"}\n'
         '};')
 
     html = _replace_script_data(html, script_data)
