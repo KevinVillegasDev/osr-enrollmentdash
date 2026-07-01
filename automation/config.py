@@ -50,11 +50,13 @@ REPORT_IDS = {
 # Mariana Gross added June 2026 (RIC-5 — Phoenix Metro).
 # Francisco Gonzalez (LTO-4) and DeLon Phoenix (RIC-7) removed June 2026; their
 # territories are now unassigned. Frozen past-month dashboards still show them historically.
+# Jose Valencia added for RIC-3, effective July 2026 (previously unassigned).
 OSR_ROSTER = [
     "Cesar Flores",
     "Claudia Gerhardt",
     "Eric Henderson",
     "Jared Midkiff",
+    "Jose Valencia",
     "Joseph Guerra",
     "Mariana Gross",
     "Matthew MacDonald",
@@ -68,8 +70,9 @@ OSR_ROSTER = [
 
 # ─── Territory → OSR Mapping ────────────────────────────────────────────────
 # Maps territory codes from the sales budget to OSR names.
-# Unassigned territories (LTO-4, LTO-8, RIC-3, RIC-7) are excluded.
+# Unassigned territories (LTO-4, LTO-8, RIC-7) are excluded.
 # LTO-4: Sara Porter → Francisco Gonzalez (removed June 2026); now unassigned.
+# RIC-3: Jose Valencia, effective July 2026 (CA; previously unassigned).
 # RIC-4: Jeremy Moore through April 2026; Richard Herrera from May 2026 forward.
 # RIC-5: Mariana Gross from June 2026 (Phoenix Metro, AZ; previously unassigned).
 # RIC-7: DeLon Phoenix (removed June 2026); now unassigned.
@@ -81,6 +84,7 @@ TERRITORY_MAP = {
     "LTO-7": "Stephanie Whitlock",
     "RIC-1": "Cesar Flores",
     "RIC-2": "Claudia Gerhardt",
+    "RIC-3": "Jose Valencia",
     "RIC-4": "Richard Herrera",
     "RIC-5": "Mariana Gross",
     "RIC-6": "Phillip Mason",
@@ -98,6 +102,7 @@ ISR_TERRITORY_MAP = {
     "LTO-7": "Connor Admirand",
     "RIC-1": "Katie Anguiano",
     "RIC-2": "Katie Anguiano",
+    "RIC-3": "Lesly Arroyo",
     "RIC-4": "Katie Anguiano",
     "RIC-5": "Lesly Arroyo",
     "RIC-6": "Laura Angulo",
@@ -149,6 +154,7 @@ OSR_EMAILS = {
     "Claudia Gerhardt": "claudia.gerhardt@easypayfinance.com",
     "Eric Henderson": "eric.henderson@easypayfinance.com",
     "Jared Midkiff": "jared.midkiff@easypayfinance.com",
+    "Jose Valencia": "jose.valencia@easypayfinance.com",
     "Joseph Guerra": "joseph.guerra@easypayfinance.com",
     "Mariana Gross": "mariana.gross@easypayfinance.com",
     "Matthew MacDonald": "matthew.macdonald@easypayfinance.com",
