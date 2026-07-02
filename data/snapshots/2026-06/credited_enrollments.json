@@ -1756,8 +1756,8 @@
   },
   {
     "OSR Enrollment Credit": "-",
-    "OSR": null,
-    "_label_OSR": "-",
+    "OSR": "0058Y00000BjAqgQAF",
+    "_label_OSR": "Marco Garmendia",
     "Branch ID": "25987",
     "_label_Branch ID": "25987",
     "Account ID": "001TO00000mmjk3YAA",
@@ -1814,8 +1814,8 @@
     "_label_Merchant Risk Level": "-",
     "Tags": null,
     "_label_Tags": "-",
-    "OS Territory": null,
-    "_label_OS Territory": "-",
+    "OS Territory": "a1cTO0000045PGPYA2",
+    "_label_OS Territory": "RIC-10",
     "Converted from - Lead ID": null,
     "_label_Converted from - Lead ID": "-"
   },
