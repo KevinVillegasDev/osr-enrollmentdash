@@ -28,6 +28,13 @@
     "calls": 146
   },
   {
+    "user_id": "bd4818d1-a4eb-4711-bdbb-736a2227bbd2",
+    "name": "Alex Perez",
+    "talk_seconds": 19716,
+    "talk_display": "5h 28m",
+    "calls": 194
+  },
+  {
     "user_id": "c30af5b2-a82c-440e-9629-a37affc3f08d",
     "name": "Diego Arriaga",
     "talk_seconds": 19160,
@@ -35,11 +42,11 @@
     "calls": 215
   },
   {
-    "user_id": "bd4818d1-a4eb-4711-bdbb-736a2227bbd2",
-    "name": "Alex Perez",
-    "talk_seconds": 18470,
-    "talk_display": "5h 7m",
-    "calls": 178
+    "user_id": "21ab0300-3df4-4b95-a620-da649b60ba1e",
+    "name": "Eduardo Yanez",
+    "talk_seconds": 17836,
+    "talk_display": "4h 57m",
+    "calls": 229
   },
   {
     "user_id": "932bd276-022e-4614-9029-454afdeaa7df",
@@ -56,13 +63,6 @@
     "calls": 203
   },
   {
-    "user_id": "21ab0300-3df4-4b95-a620-da649b60ba1e",
-    "name": "Eduardo Yanez",
-    "talk_seconds": 16397,
-    "talk_display": "4h 33m",
-    "calls": 219
-  },
-  {
     "user_id": "3a8c4b87-ed65-4857-996e-cf8f195e1c4a",
     "name": "Maria Briceno Rocha",
     "talk_seconds": 15671,
@@ -77,18 +77,18 @@
     "calls": 181
   },
   {
+    "user_id": "8862fd25-c708-4e34-81ce-555776053328",
+    "name": "Fabiola Tapia",
+    "talk_seconds": 15162,
+    "talk_display": "4h 12m",
+    "calls": 198
+  },
+  {
     "user_id": "898912fa-39ca-479d-bf45-a6a0a69b5154",
     "name": "Ana Karen Morales",
     "talk_seconds": 14846,
     "talk_display": "4h 7m",
     "calls": 133
-  },
-  {
-    "user_id": "8862fd25-c708-4e34-81ce-555776053328",
-    "name": "Fabiola Tapia",
-    "talk_seconds": 14430,
-    "talk_display": "4h 0m",
-    "calls": 189
   },
   {
     "user_id": "e650f045-ae73-4b3d-be81-b95449f33f2f",
@@ -140,6 +140,13 @@
     "calls": 232
   },
   {
+    "user_id": "eb53ed35-8863-4021-bd44-909f19636923",
+    "name": "Benjamin Munoz",
+    "talk_seconds": 12363,
+    "talk_display": "3h 26m",
+    "calls": 127
+  },
+  {
     "user_id": "f6480c39-3494-44ac-a818-6a6982fb29ce",
     "name": "Edgar Chavez",
     "talk_seconds": 11864,
@@ -147,18 +154,11 @@
     "calls": 157
   },
   {
-    "user_id": "eb53ed35-8863-4021-bd44-909f19636923",
-    "name": "Benjamin Munoz",
-    "talk_seconds": 11832,
-    "talk_display": "3h 17m",
-    "calls": 124
-  },
-  {
     "user_id": "44b5a74e-dfd1-46dc-81a3-5582c9e57065",
     "name": "Carlos Bello",
-    "talk_seconds": 10691,
-    "talk_display": "2h 58m",
-    "calls": 159
+    "talk_seconds": 11028,
+    "talk_display": "3h 3m",
+    "calls": 172
   },
   {
     "user_id": "4c30a9fe-24ea-4d0d-8835-b545238c8b15",
@@ -217,6 +217,13 @@
     "calls": 169
   },
   {
+    "user_id": "03ef1d8c-7daa-4a57-9229-d028d76c465a",
+    "name": "Fatima Rodriguez",
+    "talk_seconds": 8961,
+    "talk_display": "2h 29m",
+    "calls": 215
+  },
+  {
     "user_id": "e353547e-676b-42b2-ac21-4ad9aff70e61",
     "name": "Juan Fabian",
     "talk_seconds": 8758,
@@ -231,6 +238,13 @@
     "calls": 196
   },
   {
+    "user_id": "24b58ccf-3042-4c4b-b52c-0bff88f282da",
+    "name": "Joseph Hernandez",
+    "talk_seconds": 8457,
+    "talk_display": "2h 20m",
+    "calls": 134
+  },
+  {
     "user_id": "b217b1f8-ac35-42a7-88b7-3b77714ae49e",
     "name": "Evelin Morales",
     "talk_seconds": 8355,
@@ -238,25 +252,11 @@
     "calls": 208
   },
   {
-    "user_id": "03ef1d8c-7daa-4a57-9229-d028d76c465a",
-    "name": "Fatima Rodriguez",
-    "talk_seconds": 8299,
-    "talk_display": "2h 18m",
-    "calls": 205
-  },
-  {
     "user_id": "d421063f-892f-44c6-a753-68c3b0dc2525",
     "name": "Elton Ramirez",
     "talk_seconds": 8149,
     "talk_display": "2h 15m",
     "calls": 171
-  },
-  {
-    "user_id": "24b58ccf-3042-4c4b-b52c-0bff88f282da",
-    "name": "Joseph Hernandez",
-    "talk_seconds": 7765,
-    "talk_display": "2h 9m",
-    "calls": 121
   },
   {
     "user_id": "51debfab-e7a1-47c4-9da2-757d9bb615d1",
@@ -397,6 +397,13 @@
     "talk_seconds": 87,
     "talk_display": "1m",
     "calls": 6
+  },
+  {
+    "user_id": "c452ea49-5d1b-4c1f-ae71-bdce0153d27d",
+    "name": "Carlos Jimenez",
+    "talk_seconds": 68,
+    "talk_display": "1m",
+    "calls": 1
   },
   {
     "user_id": "a659dca0-15a2-4136-a59b-d81e3c096577",
