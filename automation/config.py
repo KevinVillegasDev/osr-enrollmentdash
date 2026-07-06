@@ -20,9 +20,10 @@ GENESYS_CLIENT_SECRET = os.environ.get("GENESYS_CLIENT_SECRET", "")
 # Inside sales reps tracked via Genesys Cloud talk time.
 # Names must match exactly how they appear in Genesys Cloud.
 # Update this list when ISRs join or leave the team.
+# 6 ISRs per Territory_Overview_v1.9 (June 2026), reporting to Luz Vigil.
+# Javier Gonzalez departed (absent from v1.9 pairings; zero June Genesys data).
 ISR_ROSTER = [
     "Connor Admirand",
-    "Javier Gonzalez",
     "Katie Anguiano",
     "Laura Angulo",
     "Lesly Arroyo",
@@ -103,18 +104,29 @@ TERRITORY_MAP = {
 
 # ─── Territory → ISR Mapping ────────────────────────────────────────
 # Maps territory codes to assigned ISR names.
+# Source of truth: Territory_Overview_v1.9 (June 2026) "ISR Pairings — Phase 1".
+# Open territories (LTO-4, LTO-8, RIC-7) keep active ISR coverage per v1.9
+# even with no TSR assigned — entries below are inert for cohort math (which
+# keys off TERRITORY_MAP) but document real coverage.
+# Note: v1.9 labels Stephanie's book LTO-7; SF re-coded it LTO-6 (June 2026),
+# so the LTO-6 key below is deliberate.
+# Phase 2 plan (not yet active): ISR #7 hire takes LTO-4 from Noemy;
+# ISR #8 hire takes RIC-1 from Katie and RIC-3 from Lesly.
 ISR_TERRITORY_MAP = {
-    "LTO-1": "Javier Gonzalez",
+    "LTO-1": "Laura Angulo",
     "LTO-2": "Noemy Carrion",
     "LTO-3": "Noemy Carrion",
-    "LTO-5": "Javier Gonzalez",
+    "LTO-4": "Noemy Carrion",      # territory OPEN — ISR coverage continues
+    "LTO-5": "Laura Angulo",
     "LTO-6": "Connor Admirand",
+    "LTO-8": "Laura Angulo",       # territory OPEN — ISR coverage continues
     "RIC-1": "Katie Anguiano",
     "RIC-2": "Katie Anguiano",
     "RIC-3": "Lesly Arroyo",
     "RIC-4": "Katie Anguiano",
     "RIC-5": "Lesly Arroyo",
-    "RIC-6": "Laura Angulo",
+    "RIC-6": "Lesly Arroyo",
+    "RIC-7": "Michael Palmer",     # territory OPEN — ISR coverage continues
     "RIC-8": "Connor Admirand",
     "RIC-9": "Michael Palmer",
 }

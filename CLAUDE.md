@@ -352,21 +352,24 @@ Cesar Flores, Claudia Gerhardt, Eric Henderson, Jared Midkiff, Jose Valencia, Jo
 *Jeremy Moore (departed end of April 2026) is no longer in `OSR_ROSTER`. Frozen Jan–Apr 2026 dashboards still show him historically.*
 *Mariana Gross added June 2026, assigned RIC-5 (Phoenix Metro, AZ; previously unassigned).*
 
-## ISR Roster (as of June 2026)
+## ISR Roster (as of July 2026)
 
-Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Lesly Arroyo, Michael Palmer, Noemy Carrion
+Connor Admirand, Katie Anguiano, Laura Angulo, Lesly Arroyo, Michael Palmer, Noemy Carrion — all report to Luz Vigil (ISR Supervisor).
+
+*Javier Gonzalez departed (absent from Territory_Overview_v1.9 pairings; zero June Genesys data). His LTO-1/LTO-5 coverage moved to Laura Angulo.*
 
 ## ISR → Territory Assignments
 
+Per **Territory_Overview_v1.9** (June 2026), "ISR Pairings — Phase 1". Open territories keep ISR coverage until reassigned.
+
 | ISR | Territories |
 |-----|-------------|
-| Javier Gonzalez | LTO-1 (Yemaira), LTO-5 (Jared) |
-| Noemy Carrion | LTO-2 (Omar), LTO-3 (Joseph) |
+| Katie Anguiano | RIC-1 (Cesar), RIC-2 (Claudia), RIC-4 (Richard) — drops RIC-1 when ISR #8 hired |
+| Lesly Arroyo | RIC-3 (Jose), RIC-5 (Mariana), RIC-6 (Phillip) — drops RIC-3 when ISR #8 hired |
+| Laura Angulo | LTO-1 (Yemaira), LTO-5 (Jared), LTO-8 (open) — drops LTO-8 when TSR fills |
+| Noemy Carrion | LTO-2 (Omar), LTO-3 (Joseph), LTO-4 (open) — drops LTO-4 when ISR #7 hired |
 | Connor Admirand | LTO-6 (Stephanie), RIC-8 (Eric) |
-| Katie Anguiano | RIC-1 (Cesar), RIC-2 (Claudia), RIC-4 (Richard) |
-| Lesly Arroyo | RIC-3 (Jose), RIC-5 (Mariana) |
-| Laura Angulo | RIC-6 (Phillip) |
-| Michael Palmer | RIC-9 (Matthew) |
+| Michael Palmer | RIC-7 (open), RIC-9 (Matthew) |
 
 ## Territory → OSR Mapping
 
