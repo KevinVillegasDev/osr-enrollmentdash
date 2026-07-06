@@ -81,12 +81,15 @@ OSR_ROSTER = [
 # RIC-7: DeLon Phoenix (removed June 2026); now unassigned.
 # RIC-10: Marco Garmendia, effective July 2026 (NEW territory — multi-state
 #         unmanaged areas; no dedicated ISR, so absent from ISR_TERRITORY_MAP).
+# LTO-6: Stephanie Whitlock — SF re-coded her territory LTO-7 → LTO-6 in June
+#        2026 (confirmed by Sales Ops; same GA/NE FL/Panhandle book). Her
+#        Jan–Mar cohorts are frozen under the old LTO-7 code and stay intact.
 TERRITORY_MAP = {
     "LTO-1": "Yemaira Hernandez",
     "LTO-2": "Omar Corona",
     "LTO-3": "Joseph Guerra",
     "LTO-5": "Jared Midkiff",
-    "LTO-7": "Stephanie Whitlock",
+    "LTO-6": "Stephanie Whitlock",
     "RIC-1": "Cesar Flores",
     "RIC-2": "Claudia Gerhardt",
     "RIC-3": "Jose Valencia",
@@ -105,7 +108,7 @@ ISR_TERRITORY_MAP = {
     "LTO-2": "Noemy Carrion",
     "LTO-3": "Noemy Carrion",
     "LTO-5": "Javier Gonzalez",
-    "LTO-7": "Connor Admirand",
+    "LTO-6": "Connor Admirand",
     "RIC-1": "Katie Anguiano",
     "RIC-2": "Katie Anguiano",
     "RIC-3": "Lesly Arroyo",

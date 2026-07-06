@@ -362,7 +362,7 @@ Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Lesly Arroyo, Mi
 |-----|-------------|
 | Javier Gonzalez | LTO-1 (Yemaira), LTO-5 (Jared) |
 | Noemy Carrion | LTO-2 (Omar), LTO-3 (Joseph) |
-| Connor Admirand | LTO-7 (Stephanie), RIC-8 (Eric) |
+| Connor Admirand | LTO-6 (Stephanie), RIC-8 (Eric) |
 | Katie Anguiano | RIC-1 (Cesar), RIC-2 (Claudia), RIC-4 (Richard) |
 | Lesly Arroyo | RIC-3 (Jose), RIC-5 (Mariana) |
 | Laura Angulo | RIC-6 (Phillip) |
@@ -376,7 +376,7 @@ Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Lesly Arroyo, Mi
 | LTO-2 | Omar Corona | TX (S. Houston/Valley/El Paso) |
 | LTO-3 | Joseph Guerra | TX (State Manager) |
 | LTO-5 | Jared Midkiff | FL (State Manager) |
-| LTO-7 | Stephanie Whitlock | GA/NE FL/Panhandle |
+| LTO-6 | Stephanie Whitlock | GA/NE FL/Panhandle *(SF re-coded LTO-7 → LTO-6, June 2026)* |
 | RIC-1 | Cesar Flores | CA (LA Metro Core) |
 | RIC-2 | Claudia Gerhardt | CA (IE South/San Diego) |
 | RIC-3 | Jose Valencia | CA *(effective July 2026)* |
@@ -387,7 +387,7 @@ Connor Admirand, Javier Gonzalez, Katie Anguiano, Laura Angulo, Lesly Arroyo, Mi
 | RIC-9 | Matthew MacDonald | AZ (State Manager + NM/UT/ID) |
 | RIC-10 | Marco Garmendia | Multi-state (unmanaged areas) *(effective July 2026; no dedicated ISR)* |
 
-**Unassigned territories:** LTO-4, LTO-8, RIC-7 — hiring in progress.
+**Unassigned territories:** LTO-4, LTO-8, RIC-7 — hiring in progress. **Retired code:** LTO-7 (renamed to LTO-6 in SF, June 2026; Stephanie's Jan–Mar cohort history remains frozen under LTO-7).
 
 ## Key Terminology
 
