@@ -1,0 +1,48 @@
+name: Pull Merchant Services Inbound
+
+# Manual-only: pulls daily inbound call analytics (Jan 2025 -> today) for
+# queues matching the filter, and uploads the Excel/CSV output as an
+# artifact. Download from the run page after it finishes.
+on:
+  workflow_dispatch:
+    inputs:
+      queue_filter:
+        description: "Queue name filter (comma-separated terms, case-insensitive)"
+        required: false
+        default: "merchant"
+
+permissions:
+  contents: read
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests openpyxl
+
+      - name: Pull inbound analytics
+        env:
+          GENESYS_CLIENT_ID: ${{ secrets.GENESYS_CLIENT_ID }}
+          GENESYS_CLIENT_SECRET: ${{ secrets.GENESYS_CLIENT_SECRET }}
+          GENESYS_REGION: ${{ secrets.GENESYS_REGION }}
+          QUEUE_FILTER: ${{ inputs.queue_filter }}
+        run: python automation/pull_merchant_inbound.py
+
+      - name: Upload output
+        uses: actions/upload-artifact@v4
+        with:
+          name: merchant-services-inbound
+          path: output/
+          retention-days: 14
+          if-no-files-found: warn
