@@ -18,6 +18,7 @@ import csv
 import json
 import os
 import sys
+import time
 from datetime import date, datetime, timedelta
 
 import requests
@@ -96,6 +97,8 @@ def month_chunks(start, end):
         yield cur, min(nxt, end + timedelta(days=1))
         cur = nxt
 
+RETRYABLE = {429, 500, 502, 503, 504}
+
 def agg_query(interval, group_by, metrics, queue_ids):
     body = {
         "interval": interval, "granularity": "P1D", "timeZone": TZ,
@@ -108,10 +111,31 @@ def agg_query(interval, group_by, metrics, queue_ids):
                 {"dimension": "direction", "value": "inbound"}]},
         ]},
     }
-    resp = requests.post(f"{API}/api/v2/analytics/conversations/aggregates/query",
-                         headers=H, data=json.dumps(body), timeout=60)
-    resp.raise_for_status()
-    return resp.json().get("results", [])
+    delays = [2, 5, 10, 20, 40]
+    for attempt in range(len(delays) + 1):
+        try:
+            resp = requests.post(
+                f"{API}/api/v2/analytics/conversations/aggregates/query",
+                headers=H, data=json.dumps(body), timeout=60)
+        except requests.RequestException as e:
+            if attempt >= len(delays):
+                raise
+            print(f"    request error ({e.__class__.__name__}), "
+                  f"retrying in {delays[attempt]}s...")
+            time.sleep(delays[attempt]); continue
+        if resp.status_code in RETRYABLE:
+            if attempt >= len(delays):
+                resp.raise_for_status()
+            wait = delays[attempt]
+            ra = resp.headers.get("Retry-After")
+            if ra and ra.isdigit():
+                wait = max(wait, int(ra))
+            print(f"    HTTP {resp.status_code} from analytics API, "
+                  f"retrying in {wait}s (attempt {attempt + 1})...")
+            time.sleep(wait); continue
+        resp.raise_for_status()
+        return resp.json().get("results", [])
+    return []
 
 by_queue = {}   # (date, queue) -> {offered, answered, abandon_n, talk_s}
 by_agent = {}   # (date, agent) -> {answered, talk_s}
@@ -159,6 +183,7 @@ for cs, ce in month_chunks(START, today):
                     row["talk_s"] += float(st.get("sum", 0)) / 1000.0
     print(f"  chunk {cs} .. {ce - timedelta(days=1)}: "
           f"queue-days={len(by_queue)} agent-days={len(by_agent)}")
+    time.sleep(0.5)
 
 # ── Output ──────────────────────────────────────────────────────────────────
 os.makedirs("output", exist_ok=True)
