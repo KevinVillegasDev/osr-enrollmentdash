@@ -99,24 +99,12 @@ def month_chunks(start, end):
 
 RETRYABLE = {429, 500, 502, 503, 504}
 
-def agg_query(interval, group_by, metrics, queue_ids):
-    body = {
-        "interval": interval, "granularity": "P1D", "timeZone": TZ,
-        "groupBy": group_by, "metrics": metrics,
-        "filter": {"type": "and", "clauses": [
-            {"type": "or", "predicates": [
-                {"dimension": "queueId", "value": q} for q in queue_ids]},
-            {"type": "and", "predicates": [
-                {"dimension": "mediaType", "value": "voice"},
-                {"dimension": "direction", "value": "inbound"}]},
-        ]},
-    }
+def post_retry(url, body):
     delays = [2, 5, 10, 20, 40]
     for attempt in range(len(delays) + 1):
         try:
-            resp = requests.post(
-                f"{API}/api/v2/analytics/conversations/aggregates/query",
-                headers=H, data=json.dumps(body), timeout=60)
+            resp = requests.post(url, headers=H, data=json.dumps(body),
+                                 timeout=60)
         except requests.RequestException as e:
             if attempt >= len(delays):
                 raise
@@ -130,12 +118,44 @@ def agg_query(interval, group_by, metrics, queue_ids):
             ra = resp.headers.get("Retry-After")
             if ra and ra.isdigit():
                 wait = max(wait, int(ra))
-            print(f"    HTTP {resp.status_code} from analytics API, "
-                  f"retrying in {wait}s (attempt {attempt + 1})...")
+            print(f"    HTTP {resp.status_code}, retrying in {wait}s "
+                  f"(attempt {attempt + 1})...")
             time.sleep(wait); continue
         resp.raise_for_status()
-        return resp.json().get("results", [])
-    return []
+        return resp.json()
+    return {}
+
+def agg_query(interval, group_by, metrics, queue_ids):
+    body = {
+        "interval": interval, "granularity": "P1D", "timeZone": TZ,
+        "groupBy": group_by, "metrics": metrics,
+        "filter": {"type": "and", "clauses": [
+            {"type": "or", "predicates": [
+                {"dimension": "queueId", "value": q} for q in queue_ids]},
+            {"type": "and", "predicates": [
+                {"dimension": "mediaType", "value": "voice"},
+                {"dimension": "direction", "value": "inbound"}]},
+        ]},
+    }
+    return post_retry(
+        f"{API}/api/v2/analytics/conversations/aggregates/query",
+        body).get("results", [])
+
+def details_page(interval, page, queue_ids):
+    body = {
+        "interval": interval,
+        "order": "asc", "orderBy": "conversationStart",
+        "paging": {"pageSize": 100, "pageNumber": page},
+        "segmentFilters": [
+            {"type": "and", "predicates": [
+                {"dimension": "mediaType", "value": "voice"},
+                {"dimension": "direction", "value": "inbound"}]},
+            {"type": "or", "predicates": [
+                {"dimension": "queueId", "value": q} for q in queue_ids]},
+        ],
+    }
+    return post_retry(
+        f"{API}/api/v2/analytics/conversations/details/query", body)
 
 by_queue = {}   # (date, queue) -> {offered, answered, abandon_n, talk_s}
 by_agent = {}   # (date, agent) -> {answered, talk_s}
@@ -184,6 +204,82 @@ for cs, ce in month_chunks(START, today):
     print(f"  chunk {cs} .. {ce - timedelta(days=1)}: "
           f"queue-days={len(by_queue)} agent-days={len(by_agent)}")
     time.sleep(0.5)
+
+# ── Per-call log (conversation details — ANI phone numbers) ────────────────
+import re as _re
+from zoneinfo import ZoneInfo
+LA = ZoneInfo(TZ)
+
+def clean_number(raw):
+    if not raw:
+        return "unknown"
+    m = _re.search(r"\+?\d{7,15}", raw)
+    return m.group(0) if m else "restricted"
+
+def parse_ts(s):
+    try:
+        return datetime.fromisoformat(s.replace("Z", "+00:00")).astimezone(LA)
+    except Exception:
+        return None
+
+call_rows = []
+capped_chunks = []
+print("\nPulling per-call log (conversation details)...")
+for cs, ce in month_chunks(START, today):
+    interval = f"{cs.isoformat()}T00:00:00/{ce.isoformat()}T00:00:00"
+    page = 1
+    chunk_count = 0
+    while True:
+        body = details_page(interval, page, qids)
+        convs = body.get("conversations", [])
+        if not convs:
+            break
+        for c in convs:
+            start = parse_ts(c.get("conversationStart", ""))
+            end = parse_ts(c.get("conversationEnd", ""))
+            ani = dnis = None
+            agent_id = None
+            queue_name = ""
+            for p in c.get("participants", []):
+                purpose = p.get("purpose", "")
+                for s in p.get("sessions", []):
+                    if purpose in ("external", "customer") and not ani:
+                        ani = s.get("ani"); dnis = s.get("dnis")
+                    for seg in s.get("segments", []):
+                        qid = seg.get("queueId")
+                        if qid in matched and not queue_name:
+                            queue_name = matched[qid]
+                        if (purpose == "agent" and not agent_id
+                                and seg.get("segmentType") == "interact"):
+                            agent_id = p.get("userId")
+            agent = users.get(agent_id, {}).get("name", "") if agent_id else ""
+            dur_min = (round((end - start).total_seconds() / 60, 2)
+                       if (start and end) else None)
+            call_rows.append([
+                start.strftime("%Y-%m-%d") if start else "",
+                start.strftime("%H:%M:%S") if start else "",
+                clean_number(ani),
+                clean_number(dnis),
+                queue_name,
+                "Answered" if agent_id else "Abandoned/Unanswered",
+                agent,
+                dur_min,
+                c.get("conversationId", ""),
+            ])
+            chunk_count += 1
+        if len(convs) < 100:
+            break
+        page += 1
+        if page > 100:  # sync details API caps at 10,000 records per query
+            capped_chunks.append(cs.strftime("%Y-%m"))
+            print(f"    WARNING: {cs:%Y-%m} hit the 10K sync cap; "
+                  f"log truncated for this month")
+            break
+        time.sleep(0.2)
+    print(f"  calls {cs:%Y-%m}: {chunk_count}")
+    time.sleep(0.3)
+print(f"Total calls in log: {len(call_rows)}")
+call_rows.sort(key=lambda r: (r[0], r[1]))
 
 # ── Output ──────────────────────────────────────────────────────────────────
 os.makedirs("output", exist_ok=True)
@@ -239,13 +335,24 @@ sheet_with(ws,
      for (mo, a), v in sorted(monthly.items())],
     [10, 24, 16, 20])
 
+ws = wb.create_sheet("Call Log")
+sheet_with(ws,
+    ["Date", "Time", "Caller Number", "Line Dialed", "Queue",
+     "Outcome", "Agent", "Duration (min)", "Conversation ID"],
+    call_rows,
+    [12, 10, 16, 16, 26, 22, 22, 14, 38])
+
 ws = wb.create_sheet("Info")
+cap_note = (f" NOTE: these month(s) exceeded the 10,000-record sync cap and "
+            f"their Call Log is truncated: {', '.join(capped_chunks)}."
+            if capped_chunks else "")
 info = [
     ["Report", "Merchant Services inbound call analytics, daily"],
     ["Window", f"{START.isoformat()} through {today.isoformat()}"],
     ["Timezone", TZ],
     ["Queues included", "; ".join(sorted(matched.values()))],
     ["Queue filter term(s)", ", ".join(QUEUE_FILTER)],
+    ["Calls in log", str(len(call_rows))],
     ["Generated", datetime.now().isoformat(timespec="seconds")],
     ["Notes", "Inbound voice only, filtered to the queues above. "
               "Agent rows include past employees (inactive/deleted users). "
@@ -254,7 +361,10 @@ info = [
               "used a different/renamed queue earlier in the window, those "
               "months will be empty; re-run with a broader queue_filter. "
               "Direct-to-agent (DID) inbound calls that bypass the queue "
-              "are not included."],
+              "are not included. Call Log: one row per inbound call; "
+              "'Caller Number' is the ANI — callers with blocked/withheld "
+              "caller ID appear as 'restricted' or 'unknown'. Times are "
+              "local (America/Los_Angeles)." + cap_note],
 ]
 for r_i, (k, v) in enumerate(info, 1):
     a = ws.cell(row=r_i, column=1, value=k); a.font = Font(name="Arial", bold=True, size=10)
@@ -280,6 +390,13 @@ for name, data, headers in [
             else:
                 w.writerow([d, k2, v["email"], v["state"], v["answered"],
                             round(v["talk_s"]/3600, 2)])
+
+with open(f"output/call_log_{stamp}.csv", "w", newline="",
+          encoding="utf-8") as f:
+    w = csv.writer(f)
+    w.writerow(["Date", "Time", "Caller Number", "Line Dialed", "Queue",
+                "Outcome", "Agent", "Duration (min)", "Conversation ID"])
+    w.writerows(call_rows)
 
 print(f"\nWROTE {xlsx_path}")
 print(f"Agent-day rows: {len(by_agent)} | Queue-day rows: {len(by_queue)}")
