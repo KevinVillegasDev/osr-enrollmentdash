@@ -221,8 +221,8 @@
     <!-- OVERVIEW -->
     <div class="tab-content active" id="overview">
       <div class="kpi-grid">
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">23</span><span class="kpi-sub">All sources, Jul 2026</span></div>
-        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">4</span><span class="kpi-sub">17.4% of total</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#5B9BFF,transparent)"></div><span class="kpi-label">Total Enrollments</span><span class="kpi-value">25</span><span class="kpi-sub">All sources, Jul 2026</span></div>
+        <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#2DD4A0,transparent)"></div><span class="kpi-label">Credited to OSR</span><span class="kpi-value">4</span><span class="kpi-sub">16.0% of total</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#FBBF24,transparent)"></div><span class="kpi-label">Funded Volume</span><span class="kpi-value">$6,786</span><span class="kpi-sub">4 merchants tracked</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#A78BFA,transparent)"></div><span class="kpi-label">Funded Apps</span><span class="kpi-value">5</span><span class="kpi-sub">of 7 total apps</span></div>
         <div class="kpi"><div class="kpi-bar" style="background:linear-gradient(90deg,#22D3EE,transparent)"></div><span class="kpi-label">Conversion Rate</span><span class="kpi-value">71.4%</span><span class="kpi-sub">Apps → Funded</span></div>
@@ -233,14 +233,14 @@
         <div style="height:240px"><canvas id="chartDaily"></canvas></div>
         <div class="callout">
           <span><strong style="color:#FBBF24">Peak:</strong> Jul 7 (3 enrollments)</span>
-          <span><strong style="color:#5B9BFF">Avg daily:</strong> ~1.3 enrollments/day</span>
+          <span><strong style="color:#5B9BFF">Avg daily:</strong> ~1.0 enrollments/day</span>
         </div>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px">
         <div style="font-size:13px;color:#8494AB">Breakdown: <span id="ovScopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (4)</span></div>
         <div style="display:inline-flex;background:#293852;border-radius:8px;padding:3px;gap:2px">
           <button id="ovBtnOsr" onclick="setOverviewScope('osr')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (4)</button>
-          <button id="ovBtnAll" onclick="setOverviewScope('all')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (23)</button>
+          <button id="ovBtnAll" onclick="setOverviewScope('all')" style="padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (25)</button>
         </div>
       </div>
       <div class="grid-2-1">
@@ -291,7 +291,7 @@
         <div style="font-size:13px;color:#8494AB">Showing <span id="scopeLabel" style="color:#F1F5F9;font-weight:600">OSR Credited (4)</span> enrollments</div>
         <div style="display:inline-flex;background:#293852;border-radius:8px;padding:3px;gap:2px">
           <button id="btnOsr" onclick="setMarketsScope('osr')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:#5B9BFF;color:#fff;transition:all .2s">OSR Credited (4)</button>
-          <button id="btnAll" onclick="setMarketsScope('all')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (23)</button>
+          <button id="btnAll" onclick="setMarketsScope('all')" style="padding:6px 14px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:#8494AB;transition:all .2s">All Enrollments (25)</button>
         </div>
       </div>
       <div class="grid-2">
@@ -309,11 +309,11 @@
       </div>
       <div class="card">
         <div class="section-title">Total vs. Credited Enrollments</div>
-        <div class="section-sub">23 total new enrollments, 4 credited to outside sales team</div>
+        <div class="section-sub">25 total new enrollments, 4 credited to outside sales team</div>
         <div class="grid-3">
-          <div class="stat-box"><div class="stat-box-label">Total New</div><div class="stat-box-value" style="color:#5B9BFF">23</div><div class="stat-box-sub">17.4% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">Total New</div><div class="stat-box-value" style="color:#5B9BFF">25</div><div class="stat-box-sub">16.0% of total</div></div>
           <div class="stat-box"><div class="stat-box-label">OSR Credited</div><div class="stat-box-value" style="color:#2DD4A0">4</div><div class="stat-box-sub">77.2% of total</div></div>
-          <div class="stat-box"><div class="stat-box-label">Other Sources</div><div class="stat-box-value" style="color:#FBBF24">19</div><div class="stat-box-sub">82.6% of total</div></div>
+          <div class="stat-box"><div class="stat-box-label">Other Sources</div><div class="stat-box-value" style="color:#FBBF24">21</div><div class="stat-box-sub">84.0% of total</div></div>
         </div>
       </div>
     </div>
@@ -358,18 +358,18 @@
 
 <script>
 var repCredits=[{"n":"Eric Henderson","v":1},{"n":"Joseph Guerra","v":1},{"n":"Mariana Gross","v":1},{"n":"Omar Corona","v":1}];
-var marketData=[{"n":"FL","v":2},{"n":"TX","v":2},{"n":"GA","v":1},{"n":"PA","v":1},{"n":"AZ","v":1}];
-var industryData=[{"n":"Auto - Repair","v":4},{"n":"Auto - Wheels & Tires","v":2},{"n":"Auto - Collision","v":1}];
-var marketDataFull=[{"n":"FL","v":8},{"n":"TX","v":5},{"n":"AZ","v":3},{"n":"PA","v":2},{"n":"CA","v":2},{"n":"GA","v":2},{"n":"KY","v":1}];
-var industryDataFull=[{"n":"Auto - Repair","v":9},{"n":"Auto - Total Car Care","v":7},{"n":"Auto - Wheels & Tires","v":2},{"n":"Auto - Tires","v":2},{"n":"Scooters","v":1},{"n":"Cell Phones","v":1},{"n":"Auto - Collision","v":1}];
+var marketData=[{"n":"FL","v":2},{"n":"TX","v":2},{"n":"GA","v":1},{"n":"UT","v":1},{"n":"PA","v":1},{"n":"AZ","v":1}];
+var industryData=[{"n":"Auto - Repair","v":4},{"n":"Auto - Wheels & Tires","v":2},{"n":"Auto - Collision","v":1},{"n":"Auto - Total Car Care","v":1}];
+var marketDataFull=[{"n":"FL","v":8},{"n":"TX","v":5},{"n":"AZ","v":3},{"n":"PA","v":2},{"n":"CA","v":2},{"n":"GA","v":2},{"n":"KY","v":1},{"n":"MO","v":1},{"n":"UT","v":1}];
+var industryDataFull=[{"n":"Auto - Repair","v":9},{"n":"Auto - Total Car Care","v":8},{"n":"Auto - Wheels & Tires","v":2},{"n":"Auto - Tires","v":2},{"n":"Scooters","v":1},{"n":"Cell Phones","v":1},{"n":"Auto - Collision","v":1},{"n":"Pets","v":1}];
 var marketsScope='osr';
-var isrData=[{"n":"Connor Admirand","v":3},{"n":"Noemy Carrion","v":2},{"n":"Laura Angulo","v":1},{"n":"Lesly Arroyo","v":1}];
-var dailyTrend=[{"d":"Jul 1","v":2},{"d":"Jul 2","v":2},{"d":"Jul 7","v":3}];
+var isrData=[{"n":"Connor Admirand","v":3},{"n":"Noemy Carrion","v":2},{"n":"Laura Angulo","v":1},{"n":"Michael Palmer","v":1},{"n":"Lesly Arroyo","v":1}];
+var dailyTrend=[{"d":"Jul 1","v":2},{"d":"Jul 2","v":2},{"d":"Jul 7","v":3},{"d":"Jul 9","v":1}];
 var topProducers=[{"n":"Tires 4 Less","f":3900.0,"fa":2,"ta":2,"r":"100.0%","o":""},{"n":"Maaco - Riviera Beach","f":1412.35,"fa":1,"ta":1,"r":"100.0%","o":"-"},{"n":"Midas Valley Station 2360","f":1063.26,"fa":1,"ta":1,"r":"100.0%","o":""},{"n":"BYOP Auto Repair and Sales","f":410.0,"fa":1,"ta":3,"r":"33.3%","o":""}];
 var PC=["#3B82F6","#10B981","#F59E0B","#EF4444","#8B5CF6","#06B6D4","#EC4899","#F97316","#14B8A6","#A855F7","#6366F1","#84CC16"];
 
 var repMerchants={
-"-":[{"n":"Maaco - Riviera Beach","b":26018,"l":"Riviera Beach, FL","f":1412.35,"fa":1,"ta":1},{"n":"Allied Auto & Truck Repair","b":26024,"l":"Jacksonville, FL","f":0,"fa":0,"ta":0},{"n":"Fenski Automotive","b":26019,"l":"Sugar Hill, GA","f":0,"fa":0,"ta":0}],
+"-":[{"n":"Maaco - Riviera Beach","b":26018,"l":"Riviera Beach, FL","f":1412.35,"fa":1,"ta":1},{"n":"Allied Auto & Truck Repair","b":26024,"l":"Jacksonville, FL","f":0,"fa":0,"ta":0},{"n":"Fenski Automotive","b":26019,"l":"Sugar Hill, GA","f":0,"fa":0,"ta":0},{"n":"Dixie Automotive","b":26026,"l":"Washington, UT","f":0,"fa":0,"ta":0}],
 "Eric Henderson":[{"n":"Exotic Automotive","b":26009,"l":"Philadelphia, PA","f":0,"fa":0,"ta":0}],
 "Joseph Guerra":[{"n":"Auto Garage Katy","b":26002,"l":"Katy, TX","f":0,"fa":0,"ta":0}],
 "Mariana Gross":[{"n":"Fastire Tire Shop","b":26012,"l":"Phoenix, AZ","f":0,"fa":0,"ta":0}],
@@ -478,7 +478,7 @@ function setMarketsScope(scope){
   document.getElementById('btnOsr').style.color=scope==='osr'?'#fff':'#8494AB';
   document.getElementById('btnAll').style.background=scope==='all'?'#5B9BFF':'transparent';
   document.getElementById('btnAll').style.color=scope==='all'?'#fff':'#8494AB';
-  document.getElementById('scopeLabel').textContent=scope==='all'?'All Enrollments (23)':'OSR Credited (4)';
+  document.getElementById('scopeLabel').textContent=scope==='all'?'All Enrollments (25)':'OSR Credited (4)';
   document.getElementById('stateSub').textContent=scope==='all'?'All new enrollments across all channels':'Credited sales team enrollments';
   // Rebuild state chart
   destroyChart('states');
@@ -501,7 +501,7 @@ function setOverviewScope(scope){
   document.getElementById('ovBtnOsr').style.color=scope==='osr'?'#fff':'#8494AB';
   document.getElementById('ovBtnAll').style.background=scope==='all'?'#5B9BFF':'transparent';
   document.getElementById('ovBtnAll').style.color=scope==='all'?'#fff':'#8494AB';
-  document.getElementById('ovScopeLabel').textContent=scope==='all'?'All Enrollments (23)':'OSR Credited (4)';
+  document.getElementById('ovScopeLabel').textContent=scope==='all'?'All Enrollments (25)':'OSR Credited (4)';
   // Top 5 Markets
   var sd=scope==='all'?marketDataFull:marketData;
   document.getElementById('ovMarketSub').textContent=scope==='all'?'States by total enrollment volume':'States by credited enrollment volume';
