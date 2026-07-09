@@ -8,19 +8,27 @@
     "7/1/2026_Sum of Funded Applications Total": 2.0
   },
   {
-    "Account Name": "Midas Valley Station 2360",
-    "Branch ID": "26005",
-    "7/1/2026_Sum of Funded Dollars": 0.0,
-    "7/1/2026_Sum of Funded Average": 0.0,
-    "7/1/2026_Sum of Applications": 1.0,
-    "7/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
     "Account Name": "BYOP Auto Repair and Sales",
     "Branch ID": "26014",
     "7/1/2026_Sum of Funded Dollars": 410.0,
     "7/1/2026_Sum of Funded Average": 410.0,
     "7/1/2026_Sum of Applications": 3.0,
+    "7/1/2026_Sum of Funded Applications Total": 1.0
+  },
+  {
+    "Account Name": "Midas Valley Station 2360",
+    "Branch ID": "26005",
+    "7/1/2026_Sum of Funded Dollars": 1063.26,
+    "7/1/2026_Sum of Funded Average": 1063.26,
+    "7/1/2026_Sum of Applications": 1.0,
+    "7/1/2026_Sum of Funded Applications Total": 1.0
+  },
+  {
+    "Account Name": "Maaco - Riviera Beach",
+    "Branch ID": "26018",
+    "7/1/2026_Sum of Funded Dollars": 1412.35,
+    "7/1/2026_Sum of Funded Average": 1412.35,
+    "7/1/2026_Sum of Applications": 1.0,
     "7/1/2026_Sum of Funded Applications Total": 1.0
   }
 ]
