@@ -8,16 +8,32 @@
     "7/1/2026_Sum of Funded Applications Total": 2.0
   },
   {
-    "Account Name": "Petland Joplin",
-    "Branch ID": "26025",
+    "Account Name": "T & L Auto Repair",
+    "Branch ID": "26016",
     "7/1/2026_Sum of Funded Dollars": 0.0,
     "7/1/2026_Sum of Funded Average": 0.0,
-    "7/1/2026_Sum of Applications": 6.0,
+    "7/1/2026_Sum of Applications": 3.0,
     "7/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
-    "Account Name": "T & L Auto Repair",
-    "Branch ID": "26016",
+    "Account Name": "Exotic Automotive",
+    "Branch ID": "26009",
+    "7/1/2026_Sum of Funded Dollars": 0.0,
+    "7/1/2026_Sum of Funded Average": 0.0,
+    "7/1/2026_Sum of Applications": 2.0,
+    "7/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Fenski Automotive",
+    "Branch ID": "26019",
+    "7/1/2026_Sum of Funded Dollars": 0.0,
+    "7/1/2026_Sum of Funded Average": 0.0,
+    "7/1/2026_Sum of Applications": 1.0,
+    "7/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Puppy Dreams - Meridian",
+    "Branch ID": "26027",
     "7/1/2026_Sum of Funded Dollars": 0.0,
     "7/1/2026_Sum of Funded Average": 0.0,
     "7/1/2026_Sum of Applications": 3.0,
@@ -32,6 +48,22 @@
     "7/1/2026_Sum of Funded Applications Total": 1.0
   },
   {
+    "Account Name": "Quality Tune Up #50 - Northgate",
+    "Branch ID": "26017",
+    "7/1/2026_Sum of Funded Dollars": 3302.12,
+    "7/1/2026_Sum of Funded Average": 1651.06,
+    "7/1/2026_Sum of Applications": 2.0,
+    "7/1/2026_Sum of Funded Applications Total": 2.0
+  },
+  {
+    "Account Name": "Petland Joplin",
+    "Branch ID": "26025",
+    "7/1/2026_Sum of Funded Dollars": 0.0,
+    "7/1/2026_Sum of Funded Average": 0.0,
+    "7/1/2026_Sum of Applications": 6.0,
+    "7/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
     "Account Name": "Continental Tire",
     "Branch ID": "26036",
     "7/1/2026_Sum of Funded Dollars": 0.0,
@@ -40,20 +72,12 @@
     "7/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
-    "Account Name": "Exotic Automotive",
-    "Branch ID": "26009",
-    "7/1/2026_Sum of Funded Dollars": 0.0,
-    "7/1/2026_Sum of Funded Average": 0.0,
-    "7/1/2026_Sum of Applications": 1.0,
-    "7/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
     "Account Name": "Premier Tire & Auto",
     "Branch ID": "26028",
-    "7/1/2026_Sum of Funded Dollars": 0.0,
-    "7/1/2026_Sum of Funded Average": 0.0,
+    "7/1/2026_Sum of Funded Dollars": 5750.0,
+    "7/1/2026_Sum of Funded Average": 2875.0,
     "7/1/2026_Sum of Applications": 2.0,
-    "7/1/2026_Sum of Funded Applications Total": 0.0
+    "7/1/2026_Sum of Funded Applications Total": 2.0
   },
   {
     "Account Name": "Maaco - Riviera Beach",
@@ -64,27 +88,11 @@
     "7/1/2026_Sum of Funded Applications Total": 1.0
   },
   {
-    "Account Name": "Puppy Dreams - Meridian",
-    "Branch ID": "26027",
-    "7/1/2026_Sum of Funded Dollars": 0.0,
-    "7/1/2026_Sum of Funded Average": 0.0,
-    "7/1/2026_Sum of Applications": 3.0,
-    "7/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
     "Account Name": "Midas Valley Station 2360",
     "Branch ID": "26005",
     "7/1/2026_Sum of Funded Dollars": 1063.26,
     "7/1/2026_Sum of Funded Average": 1063.26,
-    "7/1/2026_Sum of Applications": 2.0,
+    "7/1/2026_Sum of Applications": 3.0,
     "7/1/2026_Sum of Funded Applications Total": 1.0
-  },
-  {
-    "Account Name": "Quality Tune Up #50 - Northgate",
-    "Branch ID": "26017",
-    "7/1/2026_Sum of Funded Dollars": 3302.12,
-    "7/1/2026_Sum of Funded Average": 1651.06,
-    "7/1/2026_Sum of Applications": 2.0,
-    "7/1/2026_Sum of Funded Applications Total": 2.0
   }
 ]
