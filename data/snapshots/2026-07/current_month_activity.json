@@ -4,7 +4,7 @@
     "Branch ID": "26013",
     "7/1/2026_Sum of Funded Dollars": 3900.0,
     "7/1/2026_Sum of Funded Average": 1950.0,
-    "7/1/2026_Sum of Applications": 2.0,
+    "7/1/2026_Sum of Applications": 4.0,
     "7/1/2026_Sum of Funded Applications Total": 2.0
   },
   {
@@ -16,6 +16,54 @@
     "7/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
+    "Account Name": "Midas Valley Station 2360",
+    "Branch ID": "26005",
+    "7/1/2026_Sum of Funded Dollars": 1063.26,
+    "7/1/2026_Sum of Funded Average": 1063.26,
+    "7/1/2026_Sum of Applications": 3.0,
+    "7/1/2026_Sum of Funded Applications Total": 1.0
+  },
+  {
+    "Account Name": "Palmers Auto Repair",
+    "Branch ID": "26020",
+    "7/1/2026_Sum of Funded Dollars": 0.0,
+    "7/1/2026_Sum of Funded Average": 0.0,
+    "7/1/2026_Sum of Applications": 1.0,
+    "7/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Quality Tune Up #50 - Northgate",
+    "Branch ID": "26017",
+    "7/1/2026_Sum of Funded Dollars": 3302.12,
+    "7/1/2026_Sum of Funded Average": 1651.06,
+    "7/1/2026_Sum of Applications": 4.0,
+    "7/1/2026_Sum of Funded Applications Total": 2.0
+  },
+  {
+    "Account Name": "Fenski Automotive",
+    "Branch ID": "26019",
+    "7/1/2026_Sum of Funded Dollars": 0.0,
+    "7/1/2026_Sum of Funded Average": 0.0,
+    "7/1/2026_Sum of Applications": 1.0,
+    "7/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Rogue Scooters",
+    "Branch ID": "26029",
+    "7/1/2026_Sum of Funded Dollars": 0.0,
+    "7/1/2026_Sum of Funded Average": 0.0,
+    "7/1/2026_Sum of Applications": 9.0,
+    "7/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Premier Tire & Auto",
+    "Branch ID": "26028",
+    "7/1/2026_Sum of Funded Dollars": 5750.0,
+    "7/1/2026_Sum of Funded Average": 2875.0,
+    "7/1/2026_Sum of Applications": 2.0,
+    "7/1/2026_Sum of Funded Applications Total": 2.0
+  },
+  {
     "Account Name": "Exotic Automotive",
     "Branch ID": "26009",
     "7/1/2026_Sum of Funded Dollars": 0.0,
@@ -24,8 +72,16 @@
     "7/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
-    "Account Name": "Fenski Automotive",
-    "Branch ID": "26019",
+    "Account Name": "Maaco - Riviera Beach",
+    "Branch ID": "26018",
+    "7/1/2026_Sum of Funded Dollars": 1412.35,
+    "7/1/2026_Sum of Funded Average": 1412.35,
+    "7/1/2026_Sum of Applications": 1.0,
+    "7/1/2026_Sum of Funded Applications Total": 1.0
+  },
+  {
+    "Account Name": "Continental Tire",
+    "Branch ID": "26036",
     "7/1/2026_Sum of Funded Dollars": 0.0,
     "7/1/2026_Sum of Funded Average": 0.0,
     "7/1/2026_Sum of Applications": 1.0,
@@ -40,6 +96,14 @@
     "7/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
+    "Account Name": "Petland Joplin",
+    "Branch ID": "26025",
+    "7/1/2026_Sum of Funded Dollars": 0.0,
+    "7/1/2026_Sum of Funded Average": 0.0,
+    "7/1/2026_Sum of Applications": 9.0,
+    "7/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
     "Account Name": "BYOP Auto Repair and Sales",
     "Branch ID": "26014",
     "7/1/2026_Sum of Funded Dollars": 410.0,
@@ -48,51 +112,19 @@
     "7/1/2026_Sum of Funded Applications Total": 1.0
   },
   {
-    "Account Name": "Quality Tune Up #50 - Northgate",
-    "Branch ID": "26017",
-    "7/1/2026_Sum of Funded Dollars": 3302.12,
-    "7/1/2026_Sum of Funded Average": 1651.06,
-    "7/1/2026_Sum of Applications": 2.0,
-    "7/1/2026_Sum of Funded Applications Total": 2.0
-  },
-  {
-    "Account Name": "Petland Joplin",
-    "Branch ID": "26025",
-    "7/1/2026_Sum of Funded Dollars": 0.0,
-    "7/1/2026_Sum of Funded Average": 0.0,
-    "7/1/2026_Sum of Applications": 6.0,
-    "7/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
-    "Account Name": "Continental Tire",
-    "Branch ID": "26036",
+    "Account Name": "5 Star Appliances and Furniture",
+    "Branch ID": "26048",
     "7/1/2026_Sum of Funded Dollars": 0.0,
     "7/1/2026_Sum of Funded Average": 0.0,
     "7/1/2026_Sum of Applications": 1.0,
     "7/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
-    "Account Name": "Premier Tire & Auto",
-    "Branch ID": "26028",
-    "7/1/2026_Sum of Funded Dollars": 5750.0,
-    "7/1/2026_Sum of Funded Average": 2875.0,
-    "7/1/2026_Sum of Applications": 2.0,
-    "7/1/2026_Sum of Funded Applications Total": 2.0
-  },
-  {
-    "Account Name": "Maaco - Riviera Beach",
-    "Branch ID": "26018",
-    "7/1/2026_Sum of Funded Dollars": 1412.35,
-    "7/1/2026_Sum of Funded Average": 1412.35,
+    "Account Name": "Petland Wichita West",
+    "Branch ID": "26044",
+    "7/1/2026_Sum of Funded Dollars": 0.0,
+    "7/1/2026_Sum of Funded Average": 0.0,
     "7/1/2026_Sum of Applications": 1.0,
-    "7/1/2026_Sum of Funded Applications Total": 1.0
-  },
-  {
-    "Account Name": "Midas Valley Station 2360",
-    "Branch ID": "26005",
-    "7/1/2026_Sum of Funded Dollars": 1063.26,
-    "7/1/2026_Sum of Funded Average": 1063.26,
-    "7/1/2026_Sum of Applications": 3.0,
-    "7/1/2026_Sum of Funded Applications Total": 1.0
+    "7/1/2026_Sum of Funded Applications Total": 0.0
   }
 ]
