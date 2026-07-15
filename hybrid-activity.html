@@ -50,6 +50,7 @@
     .entry-top { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
     .entry-merchant { font-size: 14px; font-weight: 700; }
     .entry-meta { font-size: 11px; color: #627289; }
+    .bid-chip { font-size: 12.5px; font-weight: 700; color: #FBBF24; background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.35); padding: 2px 9px; border-radius: 6px; letter-spacing: 0.03em; white-space: nowrap; }
     .entry-subject { font-size: 12.5px; font-weight: 600; color: #A8B8CC; margin-top: 2px; }
     .entry-comment { font-size: 13px; color: #8494AB; margin-top: 6px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
 
@@ -170,12 +171,12 @@ function renderFeed() {
       var badge = e.type === 'note'
         ? '<span class="badge badge-note">NOTE</span>'
         : '<span class="badge badge-stop">FIELD</span>';
-      var meta = [];
-      if (e.t) meta.push(esc(e.t));
-      if (e.bid) meta.push('BID ' + esc(e.bid));
+      var bits = [];
+      if (e.bid) bits.push('<span class="bid-chip">BID ' + esc(e.bid) + '</span>');
+      if (e.t) bits.push('<span class="entry-meta">' + esc(e.t) + '</span>');
       return '<div class="entry">' + badge + '<div class="entry-body">' +
         '<div class="entry-top"><span class="entry-merchant">' + esc(e.merchant) + '</span>' +
-        (meta.length ? '<span class="entry-meta">' + meta.join(' · ') + '</span>' : '') + '</div>' +
+        bits.join('') + '</div>' +
         (e.subject ? '<div class="entry-subject">' + esc(e.subject) + '</div>' : '') +
         (e.comment ? '<div class="entry-comment">' + esc(e.comment) + '</div>' : '') +
         '</div></div>';

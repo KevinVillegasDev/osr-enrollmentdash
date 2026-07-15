@@ -70,13 +70,22 @@ def process(rep_name: str, territory: str, isr_notes: list[dict],
         note_date = _parse_mdy(row.get(date_label, ""))
         if note_date is None or note_date.month != month or note_date.year != year:
             continue
+        comment = (row.get(comment_label) or "").strip()
+        if comment == "-":
+            comment = ""
+        # Skip open/unlogged tasks (call-back and follow-up reminders that
+        # haven't happened yet). Report 7 has no task-status column, but
+        # logged calls and completed notes always carry comment text while
+        # open tasks come through blank — only completed activity counts.
+        if not comment:
+            continue
         merchant = row.get(account_label) or row.get("_label_Company / Account") or ""
         notes.append({
             "date": note_date,
             "merchant": "" if merchant == "-" else merchant,
             "bid": str(row.get("_label_" + bid_label, row.get(bid_label, "")) or ""),
             "subject": row.get(subject_label, "") or "",
-            "comment": (row.get(comment_label) or "").strip(),
+            "comment": comment,
         })
 
     note_merchants = {n["bid"] if n["bid"] not in ("", "-") else n["merchant"]
