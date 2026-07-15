@@ -20,6 +20,7 @@ from collections import defaultdict
 from datetime import date
 
 from ..config import COLUMN_LABELS
+from .field_activity import _parse_time_to_24h
 
 logger = logging.getLogger(__name__)
 
@@ -142,6 +143,35 @@ def process(rep_name: str, territory: str, isr_notes: list[dict],
         for e in recent[:RECENT_LIMIT]
     ]
 
+    # ── Full entry list for the hybrid-activity.html drill-down page ─────
+    entries = []
+    for n in notes:
+        entries.append({
+            "d": f"{n['date'].month}/{n['date'].day}",
+            "dow": DOW_NAMES.get(n["date"].weekday(), ""),
+            "iso": n["date"].isoformat(),
+            "t": "",
+            "type": "note",
+            "merchant": n["merchant"] or "—",
+            "bid": "" if n["bid"] == "-" else n["bid"],
+            "subject": n["subject"],
+            "comment": n["comment"],
+        })
+    for s in stops:
+        entries.append({
+            "d": f"{s['date'].month}/{s['date'].day}",
+            "dow": DOW_NAMES.get(s["date"].weekday(), ""),
+            "iso": s["date"].isoformat(),
+            "t": s["time"],
+            "type": "stop",
+            "merchant": s["merchant"] or "—",
+            "bid": "",
+            "subject": "Existing merchant" if s["existing"] else "Prospect",
+            "comment": s["comment"],
+        })
+    entries.sort(key=lambda e: (e["iso"], _parse_time_to_24h(e["t"]) if e["t"] else "00:00"),
+                 reverse=True)
+
     logger.info(
         "Hybrid tracker %s: %d notes (%d merchants), %d check-ins, genesys=%s",
         rep_name, len(notes), len(note_merchants), len(stops),
@@ -162,6 +192,7 @@ def process(rep_name: str, territory: str, isr_notes: list[dict],
         "genesys": genesys,
         "daily": daily,
         "recent": recent,
+        "entries": entries,
     }
 
 

@@ -1784,14 +1784,62 @@ def _generate_hybrid_tracker_html(cards: list[dict], month_name: str, year: int)
             f'<div class="sc-header"><div class="sc-title">{name}'
             f' <span style="font-size:12px;font-weight:600;color:#8494AB;'
             f'background:rgba(98,114,137,0.12);padding:3px 10px;border-radius:6px">{territory}</span></div>'
+            f'<div style="display:flex;align-items:center;gap:14px">'
+            f'<a href="hybrid-activity.html" style="font-size:13px;font-weight:600;color:#5B9BFF;'
+            f'text-decoration:none">Full activity &rarr;</a>'
             f'<span class="month-tag" style="background:rgba(167,139,250,0.15);color:#A78BFA;'
-            f'border:1px solid rgba(167,139,250,0.3)">Hybrid</span></div>'
+            f'border:1px solid rgba(167,139,250,0.3)">Hybrid</span></div></div>'
             f'<div class="sc-subtitle">Inside + outside sales activity &middot; Salesforce notes, '
             f'Maps check-ins &amp; Genesys &middot; {_esc(month_name)} {year}</div>'
             f'{summary}{body}</div>'
         )
 
     return "\n".join(out)
+
+
+def update_hybrid_activity(filepath: str, cards: list[dict], month_label: str) -> bool:
+    """
+    Update hybrid-activity.html (the widget's drill-down page) with the full
+    note + check-in entry lists produced by the hybrid_tracker processor.
+    """
+    if not os.path.exists(filepath):
+        logger.error("Hybrid activity file not found: %s", filepath)
+        return False
+
+    html = _read_file(filepath)
+
+    reps = []
+    for c in cards:
+        genesys = c.get("genesys")
+        reps.append({
+            "name": c.get("name", ""),
+            "territory": c.get("territory", ""),
+            "monthLabel": month_label,
+            "genesys": ({"talk_display": genesys.get("talk_display", "0m"),
+                         "calls": genesys.get("calls", 0)} if genesys else None),
+            "notes_total": c.get("notes_total", 0),
+            "notes_merchants": c.get("notes_merchants", 0),
+            "stops_total": c.get("stops_total", 0),
+            "stops_prospect": c.get("stops_prospect", 0),
+            "active_days": c.get("active_days", 0),
+            "entries": c.get("entries", []),
+        })
+
+    lines = [
+        f"var hybridActivityData={_js_value(reps)};",
+        "var activeRep=0;",
+        "var typeFilter='all';",
+        "var searchQ='';",
+    ]
+    html = _replace_script_data(html, "\n".join(lines))
+
+    if _validate_html(html):
+        _write_file(filepath, html)
+        logger.info("Updated %s (%d reps)", filepath, len(reps))
+        return True
+    else:
+        logger.error("HTML validation failed for %s", filepath)
+        return False
 
 
 # ─── Production Forecast Generator ─────────────────────────────────────────────

@@ -696,6 +696,18 @@ def main():
         for rep_name, territory in HYBRID_REPS.items()
     ]
 
+    # Update the hybrid drill-down page (full notes + check-in feed)
+    hybrid_path = os.path.join(output_dir, "hybrid-activity.html")
+    if not os.path.exists(hybrid_path):
+        src = os.path.join(PROJECT_ROOT, "hybrid-activity.html")
+        if os.path.exists(src) and os.path.abspath(src) != os.path.abspath(hybrid_path):
+            import shutil
+            shutil.copy2(src, hybrid_path)
+    if os.path.exists(hybrid_path):
+        html_generator.update_hybrid_activity(
+            hybrid_path, index_data["hybrid_tracker"],
+            f"{MONTH_NAMES[current_month]} {current_year}")
+
     index_path = os.path.join(output_dir, "index.html")
     if os.path.exists(index_path):
         html_generator.update_index_page(index_path, index_data)

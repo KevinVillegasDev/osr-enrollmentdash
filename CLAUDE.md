@@ -20,6 +20,7 @@ cohort-tracking.html    - Cohort commission tracker (tabbed: active + baseline)
 q1-enrollment.html      - Q1 2026 enrollment compliance tracker (archived)
 q2-enrollment.html      - Q2 2026 enrollment compliance tracker (active)
 field-activity.html     - Monthly field check-in tracker (Maps data)
+hybrid-activity.html    - Hybrid Role Tracker drill-down (full notes + check-in feed)
 territory-review.html   - Territory cohort review page (admin-only, analytics-gated)
 genesys-test.html       - Genesys Cloud API test page (ISR talk time)
 automation/             - Salesforce + Genesys API automation pipeline (Python)
@@ -131,9 +132,11 @@ Per-rep monthly activity card for reps in a mixed inside/outside role. Configure
 - **Maps check-ins** — reuses the deduped per-rep stop list from `field_activity.process()` (`repStops`), so counts match the field-activity page exactly.
 - **Genesys** — matched by exact name in the Genesys agent data. Shows "Genesys: pending setup" until the rep's name appears (lights up automatically once they're set up in Genesys — no roster change needed since the widget matches by name, not ISR_ROSTER).
 
-**Card contents:** summary chips (notes logged, merchants touched, field check-ins, prospect stops, active days, talk time/calls), a daily notes-vs-check-ins table, and a recent-activity feed (last 8 entries, NOTE/FIELD badges). Renders an explanatory empty state when the rep has no activity yet.
+**Card contents:** summary chips (notes logged, merchants touched, field check-ins, prospect stops, active days, talk time/calls), a daily notes-vs-check-ins table, and a recent-activity feed (last 8 entries, NOTE/FIELD badges). Renders an explanatory empty state when the rep has no activity yet. A "Full activity →" link opens the drill-down page.
 
-**Pipeline:** `processors/hybrid_tracker.py` → `index_data["hybrid_tracker"]` (main.py Step 8) → `_generate_hybrid_tracker_html()` → injected between `<!-- Hybrid Tracker Data -->` markers on index.html.
+**Drill-down page (hybrid-activity.html):** every note and check-in for the month, grouped by day, with full comment text, All/Notes/Field filter pills, and text search. Data injected via the script-data-block pattern (`hybridActivityData` JS var) by `update_hybrid_activity()`.
+
+**Pipeline:** `processors/hybrid_tracker.py` → `index_data["hybrid_tracker"]` (main.py Step 8) → `_generate_hybrid_tracker_html()` → injected between `<!-- Hybrid Tracker Data -->` markers on index.html; same card data (incl. `entries`) also feeds `update_hybrid_activity()` for hybrid-activity.html.
 
 ## Analytics Page (analytics.html)
 
