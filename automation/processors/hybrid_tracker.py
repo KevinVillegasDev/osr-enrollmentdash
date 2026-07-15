@@ -47,6 +47,7 @@ def process(rep_name: str, territory: str, isr_notes: list[dict],
     """
     # ── Notes (Report 7, this month, attributed to the rep) ──────────────
     isr_label = COLUMN_LABELS.get("isr_note_rep", "_label_ISR")
+    author_label = COLUMN_LABELS.get("isr_note_author", "_label_Created By")
     subject_label = COLUMN_LABELS.get("isr_note_subject", "_label_Subject")
     account_label = COLUMN_LABELS.get("isr_note_account", "_label_Account Name")
     bid_label = COLUMN_LABELS.get("isr_note_branch_id", "Branch ID")
@@ -55,7 +56,15 @@ def process(rep_name: str, territory: str, isr_notes: list[dict],
 
     notes = []
     for row in isr_notes:
-        if row.get(isr_label) != rep_name:
+        # Match by note author (Created By) — the ISR column is the ACCOUNT's
+        # assigned ISR, not who wrote the note, so it can't attribute a hybrid
+        # rep's own notes (and would over-count once the rep is assigned as
+        # account ISR). Fall back to the ISR column only if the report ever
+        # loses the Created By column.
+        if author_label in row:
+            if row.get(author_label) != rep_name:
+                continue
+        elif row.get(isr_label) != rep_name:
             continue
         note_date = _parse_mdy(row.get(date_label, ""))
         if note_date is None or note_date.month != month or note_date.year != year:

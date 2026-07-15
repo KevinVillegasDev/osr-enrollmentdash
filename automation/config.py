@@ -248,6 +248,7 @@ COLUMN_LABELS = {
     "isr_note_subject": "_label_Subject",
     "isr_note_comments": "_label_Full Comments",
     "isr_note_date": "_label_Created Date",
+    "isr_note_author": "_label_Created By",  # note author (added July 2026 for hybrid tracker)
 }
 
 # ─── File Paths ──────────────────────────────────────────────────────────────

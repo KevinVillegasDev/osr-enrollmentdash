@@ -127,7 +127,7 @@ Auto-detects current quarter and updates Q label, targets, and link. When Q2+ is
 Per-rep monthly activity card for reps in a mixed inside/outside role. Configured via `HYBRID_REPS` in config.py (`{name: territory}` — currently `{"Marco Garmendia": "RIC-10"}`); one card renders per entry, so adding a hybrid rep is a one-line config change.
 
 **Data sources (per rep, current month):**
-- **Salesforce notes** — Report 7 (ISR Notes) rows where `_label_ISR` matches the rep. Note: Report 7's Salesforce filters must include the rep for their notes to appear (the report is ISR-oriented; if the rep's notes don't show up, check the SF report filter, not the pipeline).
+- **Salesforce notes** — Report 7 (ISR Notes) rows where `_label_Created By` (note author) matches the rep. The report's ISR column is the ACCOUNT's assigned ISR, not the note author, so it can't attribute a hybrid rep's own notes — the Created By column was added to Report 7 (July 2026) specifically for this. Falls back to `_label_ISR` matching only if the Created By column ever disappears from the report. (ISR leaderboard, OB2 counts, and territory reviews still use `_label_ISR`, unchanged.)
 - **Maps check-ins** — reuses the deduped per-rep stop list from `field_activity.process()` (`repStops`), so counts match the field-activity page exactly.
 - **Genesys** — matched by exact name in the Genesys agent data. Shows "Genesys: pending setup" until the rep's name appears (lights up automatically once they're set up in Genesys — no roster change needed since the widget matches by name, not ISR_ROSTER).
 
