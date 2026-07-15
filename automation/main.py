@@ -21,11 +21,11 @@ from .config import (
     GENESYS_REGION, GENESYS_CLIENT_ID, GENESYS_CLIENT_SECRET,
     REPORT_IDS, MONTH_ABBREV, MONTH_NAMES, PROJECT_ROOT,
     COLUMN_LABELS, month_filename, month_filepath,
-    TERRITORY_MAP,
+    TERRITORY_MAP, HYBRID_REPS,
 )
 from .salesforce_auth import SalesforceClient, SalesforceAuthError
 from .salesforce_reports import fetch_all_reports, fetch_cohort_activity, parse_report_rows, fetch_report, fetch_maps_check_ins_split, fetch_monthly_quota_for_month
-from .processors import monthly_dashboard, cohort_tracking, q1_enrollment, field_activity, index_page, analytics, territory_review
+from .processors import monthly_dashboard, cohort_tracking, q1_enrollment, field_activity, index_page, analytics, territory_review, hybrid_tracker
 from . import html_generator
 
 # ─── Logging ─────────────────────────────────────────────────────────────────
@@ -681,6 +681,20 @@ def main():
         quota_rows=quota_rows,
         isr_notes=isr_notes_rows,
     )
+
+    # Hybrid Role Tracker (Marco Garmendia — mixed inside/outside role)
+    index_data["hybrid_tracker"] = [
+        hybrid_tracker.process(
+            rep_name=rep_name,
+            territory=territory,
+            isr_notes=isr_notes_rows,
+            field_result=field_data,
+            genesys_data=genesys_data,
+            month=current_month,
+            year=current_year,
+        )
+        for rep_name, territory in HYBRID_REPS.items()
+    ]
 
     index_path = os.path.join(output_dir, "index.html")
     if os.path.exists(index_path):

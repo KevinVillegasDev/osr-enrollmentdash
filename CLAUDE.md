@@ -60,8 +60,9 @@ Two-tier client-side JS password gate using SHA-256 hashing via Web Crypto API:
 3. **Production Forecast** — territory budget attainment (% only, no dollar amounts visible to reps)
 4. Commission Tracking (cohort production card + quarterly enrollment compliance card)
 5. Field Activity (monthly check-ins card)
-6. Analytics & Insights (links to analytics.html and territory-review.html)
-7. Monthly Dashboards (cards per month, auto-collapses after 3 most recent)
+6. **Hybrid Role Tracker** — per-rep activity card for mixed inside/outside roles (currently Marco Garmendia, RIC-10)
+7. Analytics & Insights (links to analytics.html and territory-review.html)
+8. Monthly Dashboards (cards per month, auto-collapses after 3 most recent)
 
 **Force-update button:** "Refresh All Reports" calls Netlify Function → triggers GitHub Actions workflow. Shows last refresh timestamp (injected by pipeline).
 
@@ -120,6 +121,19 @@ The cohort card on index.html dynamically updates its labels each month:
 ### Quarterly Enrollment Compliance Card
 
 Auto-detects current quarter and updates Q label, targets, and link. When Q2+ is active, shows "Previous: Q1 2026 (Jan – Mar)" archive link below the card.
+
+### Hybrid Role Tracker
+
+Per-rep monthly activity card for reps in a mixed inside/outside role. Configured via `HYBRID_REPS` in config.py (`{name: territory}` — currently `{"Marco Garmendia": "RIC-10"}`); one card renders per entry, so adding a hybrid rep is a one-line config change.
+
+**Data sources (per rep, current month):**
+- **Salesforce notes** — Report 7 (ISR Notes) rows where `_label_ISR` matches the rep. Note: Report 7's Salesforce filters must include the rep for their notes to appear (the report is ISR-oriented; if the rep's notes don't show up, check the SF report filter, not the pipeline).
+- **Maps check-ins** — reuses the deduped per-rep stop list from `field_activity.process()` (`repStops`), so counts match the field-activity page exactly.
+- **Genesys** — matched by exact name in the Genesys agent data. Shows "Genesys: pending setup" until the rep's name appears (lights up automatically once they're set up in Genesys — no roster change needed since the widget matches by name, not ISR_ROSTER).
+
+**Card contents:** summary chips (notes logged, merchants touched, field check-ins, prospect stops, active days, talk time/calls), a daily notes-vs-check-ins table, and a recent-activity feed (last 8 entries, NOTE/FIELD badges). Renders an explanatory empty state when the rep has no activity yet.
+
+**Pipeline:** `processors/hybrid_tracker.py` → `index_data["hybrid_tracker"]` (main.py Step 8) → `_generate_hybrid_tracker_html()` → injected between `<!-- Hybrid Tracker Data -->` markers on index.html.
 
 ## Analytics Page (analytics.html)
 
@@ -233,6 +247,7 @@ automation/
     cohort_tracking.py       # Reports 2+4 (date overrides) → cohort arrays (territory-filtered)
     q1_enrollment.py         # Report 2 (per month) → q1Data array
     field_activity.py        # Report 5 → repActivity, repStops, days, dayLabels, avg_hours
+    hybrid_tracker.py        # Reports 5+7 + Genesys → Hybrid Role Tracker card (HYBRID_REPS)
     forecast.py              # Report 6 (or fallback) → territory budget forecast per OSR
     territory_review.py      # Reports 1-7 + Genesys → per-territory cohort review (7 sections)
     analytics.py             # Multi-month trends → analytics.html data
@@ -313,6 +328,7 @@ The pipeline uses two injection methods:
    - `<!-- Scorecard Data -->` — TSR leaderboard on index.html
    - `<!-- ISR Scorecard Data -->` — ISR leaderboard on index.html
    - `<!-- Forecast Data -->` — Production forecast on index.html
+   - `<!-- Hybrid Tracker Data -->` — Hybrid Role Tracker card(s) on index.html
    - `<!-- Analytics Forecast Data -->` — Full budget forecast on analytics.html
    - `<!-- Pipeline Timestamp -->` — Last refresh timestamp on index.html
 

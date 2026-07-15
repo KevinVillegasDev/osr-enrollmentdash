@@ -102,6 +102,16 @@ TERRITORY_MAP = {
     "RIC-10": "Marco Garmendia",
 }
 
+# ─── Hybrid-Role Reps ────────────────────────────────────────────────────────
+# Reps working a mixed inside/outside role, tracked on the index-page Hybrid
+# Role Tracker widget: Salesforce notes (Report 7, _label_ISR), Maps check-ins
+# (Report 5), and Genesys talk time (once the rep is set up in Genesys — the
+# widget shows "pending setup" until their name appears in the Genesys data).
+# Keys must match the name exactly as it appears in Salesforce and Genesys.
+HYBRID_REPS = {
+    "Marco Garmendia": "RIC-10",
+}
+
 # ─── Territory → ISR Mapping ────────────────────────────────────────
 # Maps territory codes to assigned ISR names.
 # Source of truth: Territory_Overview_v1.9 (June 2026) "ISR Pairings — Phase 1".
@@ -232,7 +242,7 @@ COLUMN_LABELS = {
     "stop_location": "",  # Not available in API response
     "lead_field": "Lead",  # null = Account (existing), non-null = Lead (prospect)
     # Report 7: ISR Notes / Touch Points
-    "isr_note_account": "_label_Company / Account",
+    "isr_note_account": "_label_Account Name",
     "isr_note_branch_id": "Branch ID",
     "isr_note_rep": "_label_ISR",
     "isr_note_subject": "_label_Subject",

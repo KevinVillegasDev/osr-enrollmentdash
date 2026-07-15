@@ -13,6 +13,7 @@ import logging
 import os
 import re
 from datetime import date, datetime, timezone, timedelta
+from html import escape as _esc
 
 from .config import PROJECT_ROOT, MONTH_NAMES, MONTH_ABBREV
 
@@ -1023,6 +1024,16 @@ def update_index_page(filepath: str, data: dict) -> bool:
         forecast_html = _generate_forecast_table(forecast)
         html = _replace_between_markers(html, "Forecast Data", forecast_html)
 
+    # ── Hybrid Role Tracker ──────────────────────────────────────────────
+    hybrid_cards = data.get("hybrid_tracker", [])
+    if hybrid_cards:
+        hybrid_html = _generate_hybrid_tracker_html(
+            hybrid_cards,
+            data.get("scorecard_month", ""),
+            data.get("scorecard_year", 2026),
+        )
+        html = _replace_between_markers(html, "Hybrid Tracker Data", hybrid_html)
+
     # ── Last Updated Timestamp ─────────────────────────────────────────
     pst = timezone(timedelta(hours=-7))
     now_pst = datetime.now(pst)
@@ -1656,6 +1667,131 @@ def _generate_isr_scorecard_table(isr_scorecard: list[dict]) -> str:
     )
 
     return table
+
+
+# ─── Hybrid Role Tracker Generator ──────────────────────────────────────────
+
+def _generate_hybrid_tracker_html(cards: list[dict], month_name: str, year: int) -> str:
+    """
+    Generate the Hybrid Role Tracker card(s) for index.html.
+
+    One card per hybrid rep (HYBRID_REPS in config.py). Returns the full
+    inner content between the <!-- Hybrid Tracker Data --> markers.
+    """
+    out = []
+    for card in cards:
+        name = _esc(card.get("name", ""))
+        territory = _esc(card.get("territory", ""))
+        notes_total = card.get("notes_total", 0)
+        notes_merchants = card.get("notes_merchants", 0)
+        stops_total = card.get("stops_total", 0)
+        stops_prospect = card.get("stops_prospect", 0)
+        active_days = card.get("active_days", 0)
+        genesys = card.get("genesys")
+
+        # Genesys summary chip — shows pending state until the rep is set up
+        if genesys:
+            genesys_chip = (
+                f'<span><b style="color:#2DD4A0">{_esc(genesys.get("talk_display", "0m"))}</b>'
+                f' talk &middot; <b style="color:#2DD4A0">{genesys.get("calls", 0):,}</b> calls</span>'
+            )
+        else:
+            genesys_chip = '<span style="color:#627289">Genesys: pending setup</span>'
+
+        summary = (
+            f'<div class="sc-summary" style="flex-wrap:wrap">'
+            f'<span><b style="color:#A78BFA">{notes_total}</b> notes logged</span>'
+            f'<span><b style="color:#5B9BFF">{notes_merchants}</b> merchants touched</span>'
+            f'<span><b style="color:#22D3EE">{stops_total}</b> field check-ins</span>'
+            f'<span><b style="color:#FBBF24">{stops_prospect}</b> prospect stops</span>'
+            f'<span><b style="color:#2DD4A0">{active_days}</b> active days</span>'
+            f'{genesys_chip}'
+            f'</div>'
+        )
+
+        # ── Daily breakdown table ────────────────────────────────────────
+        daily = card.get("daily", [])
+        if daily:
+            day_rows = []
+            for i, d in enumerate(daily):
+                stripe = ' class="sc-stripe"' if i % 2 == 1 else ""
+                notes_color = "#A78BFA" if d["notes"] else "#627289"
+                stops_color = "#22D3EE" if d["stops"] else "#627289"
+                day_rows.append(
+                    f'<tr{stripe}>'
+                    f'<td class="sc-name" style="padding:7px 12px">{_esc(d["d"])}'
+                    f' <span style="color:#627289;font-weight:400">{_esc(d["dow"])}</span></td>'
+                    f'<td class="sc-num" style="padding:7px 8px;color:{notes_color}">{d["notes"] or "—"}</td>'
+                    f'<td class="sc-num" style="padding:7px 8px;color:{stops_color}">{d["stops"] or "—"}</td>'
+                    f'</tr>'
+                )
+            daily_html = (
+                f'<div style="flex:1;min-width:220px;max-width:320px">'
+                f'<div style="font-size:0.88em;font-weight:700;color:#F1F5F9;margin-bottom:8px">Daily Activity</div>'
+                f'<div style="overflow-x:auto"><table class="sc-table">'
+                f'<thead><tr><th class="sc-th-name">Day</th>'
+                f'<th class="sc-th-num">Notes</th><th class="sc-th-num">Check-Ins</th></tr></thead>'
+                f'<tbody>' + "".join(day_rows) + '</tbody></table></div></div>'
+            )
+        else:
+            daily_html = ""
+
+        # ── Recent activity feed ─────────────────────────────────────────
+        recent = card.get("recent", [])
+        if recent:
+            feed_rows = []
+            for e in recent:
+                if e["type"] == "note":
+                    badge = ('<span style="display:inline-block;min-width:44px;text-align:center;'
+                             'font-size:10px;font-weight:700;letter-spacing:0.05em;padding:2px 6px;'
+                             'border-radius:5px;background:rgba(167,139,250,0.15);color:#A78BFA">NOTE</span>')
+                else:
+                    badge = ('<span style="display:inline-block;min-width:44px;text-align:center;'
+                             'font-size:10px;font-weight:700;letter-spacing:0.05em;padding:2px 6px;'
+                             'border-radius:5px;background:rgba(34,211,238,0.15);color:#22D3EE">FIELD</span>')
+                detail = e.get("detail", "")
+                if len(detail) > 110:
+                    detail = detail[:107].rstrip() + "…"
+                detail_html = f' <span style="color:#8494AB">— {_esc(detail)}</span>' if detail else ""
+                feed_rows.append(
+                    f'<div style="display:flex;gap:10px;align-items:baseline;padding:7px 0;'
+                    f'border-bottom:1px solid rgba(41,56,82,0.5);font-size:13px">'
+                    f'{badge}'
+                    f'<span style="color:#627289;min-width:34px">{_esc(e["d"])}</span>'
+                    f'<span style="line-height:1.4"><b style="color:#F1F5F9;font-weight:600">'
+                    f'{_esc(e["merchant"])}</b>{detail_html}</span>'
+                    f'</div>'
+                )
+            feed_html = (
+                f'<div style="flex:2;min-width:280px">'
+                f'<div style="font-size:0.88em;font-weight:700;color:#F1F5F9;margin-bottom:8px">Recent Activity</div>'
+                + "".join(feed_rows) + '</div>'
+            )
+        else:
+            feed_html = ""
+
+        if daily_html or feed_html:
+            body = f'<div style="display:flex;flex-wrap:wrap;gap:24px;margin-top:4px">{daily_html}{feed_html}</div>'
+        else:
+            body = (
+                '<div style="padding:20px 0;color:#627289;font-size:13px">'
+                'No notes or check-ins recorded yet this month — activity appears here '
+                'automatically as Salesforce notes and Maps check-ins are logged.</div>'
+            )
+
+        out.append(
+            f'<div class="sc-card" style="margin-bottom:20px">'
+            f'<div class="sc-header"><div class="sc-title">{name}'
+            f' <span style="font-size:12px;font-weight:600;color:#8494AB;'
+            f'background:rgba(98,114,137,0.12);padding:3px 10px;border-radius:6px">{territory}</span></div>'
+            f'<span class="month-tag" style="background:rgba(167,139,250,0.15);color:#A78BFA;'
+            f'border:1px solid rgba(167,139,250,0.3)">Hybrid</span></div>'
+            f'<div class="sc-subtitle">Inside + outside sales activity &middot; Salesforce notes, '
+            f'Maps check-ins &amp; Genesys &middot; {_esc(month_name)} {year}</div>'
+            f'{summary}{body}</div>'
+        )
+
+    return "\n".join(out)
 
 
 # ─── Production Forecast Generator ─────────────────────────────────────────────
