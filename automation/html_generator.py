@@ -1736,36 +1736,46 @@ def _generate_hybrid_tracker_html(cards: list[dict], month_name: str, year: int)
         else:
             daily_html = ""
 
-        # ── Recent activity feed ─────────────────────────────────────────
-        recent = card.get("recent", [])
-        if recent:
-            feed_rows = []
-            for e in recent:
-                if e["type"] == "note":
-                    badge = ('<span style="display:inline-block;min-width:44px;text-align:center;'
-                             'font-size:10px;font-weight:700;letter-spacing:0.05em;padding:2px 6px;'
-                             'border-radius:5px;background:rgba(167,139,250,0.15);color:#A78BFA">NOTE</span>')
-                else:
-                    badge = ('<span style="display:inline-block;min-width:44px;text-align:center;'
-                             'font-size:10px;font-weight:700;letter-spacing:0.05em;padding:2px 6px;'
-                             'border-radius:5px;background:rgba(34,211,238,0.15);color:#22D3EE">FIELD</span>')
-                detail = e.get("detail", "")
-                if len(detail) > 110:
-                    detail = detail[:107].rstrip() + "…"
-                detail_html = f' <span style="color:#8494AB">— {_esc(detail)}</span>' if detail else ""
-                feed_rows.append(
-                    f'<div style="display:flex;gap:10px;align-items:baseline;padding:7px 0;'
-                    f'border-bottom:1px solid rgba(41,56,82,0.5);font-size:13px">'
-                    f'{badge}'
-                    f'<span style="color:#627289;min-width:34px">{_esc(e["d"])}</span>'
-                    f'<span style="line-height:1.4"><b style="color:#F1F5F9;font-weight:600">'
-                    f'{_esc(e["merchant"])}</b>{detail_html}</span>'
-                    f'</div>'
+        # ── Top merchants table ──────────────────────────────────────────
+        top_merchants = card.get("top_merchants", [])
+        if top_merchants:
+            merch_rows = []
+            for i, m in enumerate(top_merchants):
+                stripe = ' class="sc-stripe"' if i % 2 == 1 else ""
+                bid_chip = (
+                    f'<span style="font-size:11px;font-weight:700;color:#FBBF24;'
+                    f'background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.35);'
+                    f'padding:1px 7px;border-radius:5px;white-space:nowrap">{_esc(m["bid"])}</span>'
+                ) if m.get("bid") else ""
+                notes_color = "#A78BFA" if m["notes"] else "#627289"
+                stops_color = "#22D3EE" if m["stops"] else "#627289"
+                merch_rows.append(
+                    f'<tr{stripe}>'
+                    f'<td class="sc-name" style="padding:7px 12px;white-space:normal">'
+                    f'<div style="display:flex;align-items:center;gap:8px">'
+                    f'<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'
+                    f'max-width:260px">{_esc(m["merchant"])}</span>{bid_chip}</div></td>'
+                    f'<td class="sc-num" style="padding:7px 8px;color:{notes_color}">{m["notes"] or "—"}</td>'
+                    f'<td class="sc-num" style="padding:7px 8px;color:{stops_color}">{m["stops"] or "—"}</td>'
+                    f'<td class="sc-num" style="padding:7px 8px;color:#8494AB;font-weight:400">{_esc(m["last"])}</td>'
+                    f'</tr>'
                 )
+            more = card.get("more_merchants", 0)
+            more_html = (
+                f'<div style="margin-top:8px;font-size:12px;color:#627289">'
+                f'+{more} more merchant{"s" if more != 1 else ""} &middot; '
+                f'<a href="hybrid-activity.html" style="color:#5B9BFF;text-decoration:none">'
+                f'Full activity &rarr;</a></div>'
+            ) if more else ""
             feed_html = (
                 f'<div style="flex:2;min-width:280px">'
-                f'<div style="font-size:0.88em;font-weight:700;color:#F1F5F9;margin-bottom:8px">Recent Activity</div>'
-                + "".join(feed_rows) + '</div>'
+                f'<div style="font-size:0.88em;font-weight:700;color:#F1F5F9;margin-bottom:8px">Top Merchants</div>'
+                f'<div style="overflow-x:auto"><table class="sc-table">'
+                f'<thead><tr><th class="sc-th-name">Merchant</th>'
+                f'<th class="sc-th-num">Notes</th><th class="sc-th-num">Check-Ins</th>'
+                f'<th class="sc-th-num">Last</th></tr></thead>'
+                f'<tbody>' + "".join(merch_rows) + '</tbody></table></div>'
+                f'{more_html}</div>'
             )
         else:
             feed_html = ""

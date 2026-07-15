@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 DOW_NAMES = {0: "Mon", 1: "Tue", 2: "Wed", 3: "Thu", 4: "Fri", 5: "Sat", 6: "Sun"}
 
-RECENT_LIMIT = 8  # entries shown in the Recent Activity feed
+TOP_MERCHANTS_LIMIT = 8  # merchants shown in the card's Top Merchants table
 
 
 def process(rep_name: str, territory: str, isr_notes: list[dict],
@@ -129,28 +129,33 @@ def process(rep_name: str, territory: str, isr_notes: list[dict],
         for d, counts in sorted(daily_map.items(), reverse=True)
     ]
 
-    # ── Recent activity feed (notes + stops interleaved, newest first) ───
-    recent = []
+    # ── Top merchants (notes + stops merged by merchant name) ────────────
+    merch_map = {}
     for n in notes:
-        recent.append({
-            "date": n["date"],
-            "type": "note",
-            "merchant": n["merchant"] or "—",
-            "detail": n["subject"] or n["comment"],
-        })
+        name = n["merchant"] or "—"
+        m = merch_map.setdefault(name.lower(), {
+            "merchant": name, "bid": "", "notes": 0, "stops": 0, "last": n["date"]})
+        m["notes"] += 1
+        if n["date"] > m["last"]:
+            m["last"] = n["date"]
+        if n["bid"] and n["bid"] != "-" and not m["bid"]:
+            m["bid"] = n["bid"]
     for s in stops:
-        recent.append({
-            "date": s["date"],
-            "type": "stop",
-            "merchant": s["merchant"] or "—",
-            "detail": s["comment"] or ("Existing merchant" if s["existing"] else "Prospect"),
-        })
-    recent.sort(key=lambda e: e["date"], reverse=True)
-    recent = [
-        {"d": f"{e['date'].month}/{e['date'].day}", "type": e["type"],
-         "merchant": e["merchant"], "detail": e["detail"]}
-        for e in recent[:RECENT_LIMIT]
+        name = s["merchant"] or "—"
+        m = merch_map.setdefault(name.lower(), {
+            "merchant": name, "bid": "", "notes": 0, "stops": 0, "last": s["date"]})
+        m["stops"] += 1
+        if s["date"] > m["last"]:
+            m["last"] = s["date"]
+
+    ranked = sorted(merch_map.values(),
+                    key=lambda m: (m["notes"] + m["stops"], m["last"]), reverse=True)
+    top_merchants = [
+        {"merchant": m["merchant"], "bid": m["bid"], "notes": m["notes"],
+         "stops": m["stops"], "last": f"{m['last'].month}/{m['last'].day}"}
+        for m in ranked[:TOP_MERCHANTS_LIMIT]
     ]
+    more_merchants = max(len(ranked) - TOP_MERCHANTS_LIMIT, 0)
 
     # ── Full entry list for the hybrid-activity.html drill-down page ─────
     entries = []
@@ -200,7 +205,8 @@ def process(rep_name: str, territory: str, isr_notes: list[dict],
         "active_days": len(note_days | stop_days),
         "genesys": genesys,
         "daily": daily,
-        "recent": recent,
+        "top_merchants": top_merchants,
+        "more_merchants": more_merchants,
         "entries": entries,
     }
 
