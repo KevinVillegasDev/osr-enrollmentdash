@@ -197,7 +197,7 @@ Monthly check-in data from Salesforce Maps (Report 5).
 ## Data Flow
 
 **Automated (active, hands-free):**
-1. GitHub Actions runs hourly (5 AM – 6 PM PST, weekdays) via `.github/workflows/update-dashboards.yml`
+1. GitHub Actions runs hourly on weekdays via `.github/workflows/update-dashboards.yml`. Cron fires at **:17 past the hour** (not :00 — top-of-hour runs get dropped/delayed by GitHub's shared-runner congestion). Coverage: ~6 AM–6 PM PT weekdays, plus a month-end late-evening catch-up on days 28–31 (`17 3-6 29-31,1 * *`) to capture late end-of-month funding. See "Pipeline timing & self-healing windows" below.
 2. Python script authenticates to Salesforce via Connected App (OAuth 2.0 Client Credentials)
 3. Pulls 7 Salesforce reports via Analytics REST API (v62.0)
 4. Authenticates to Genesys Cloud via OAuth 2.0 Client Credentials
@@ -224,7 +224,10 @@ automation/
   genesys_auth.py            # Genesys Cloud OAuth 2.0 → GenesysClient
   genesys_reports.py         # Fetch ISR talk time via Genesys Analytics API
   forecast_data.py           # Static fallback budget/actuals data (used if Report 6 unavailable)
+  cohort_emails.py           # Weekly per-rep cohort email — see "Cohort Email Subsystem" below
   test_genesys.py            # Standalone Genesys API test script
+  probe_genesys_access.py    # Diagnostic: what can the Genesys OAuth client query (run via workflow)
+  pull_merchant_inbound.py   # One-off: Merchant Services inbound call analytics (run via workflow)
   processors/
     monthly_dashboard.py     # Reports 1-4 → repCredits, marketData, topProducers, etc.
     cohort_tracking.py       # Reports 2+4 (date overrides) → cohort arrays (territory-filtered)
@@ -240,6 +243,20 @@ automation/
 
 **Run locally:** `py -m automation.main --dry-run` (outputs to `output/` dir)
 **Run in CI:** Triggered by cron schedule, manual `workflow_dispatch`, or Netlify Function
+
+### Cohort Email Subsystem (`cohort_emails.py`) — standalone, NOT in the main pipeline
+
+Weekly per-rep cohort-status email, separate from the dashboard pipeline (main.py does not import it). Flow:
+- Reads cohort data from `cohort-tracking.html` and writes **one JSON envelope per OSR** (`{to, subject, html_body}`) to the OneDrive **outbox** folder (`COHORT_EMAIL_OUTBOX` in config.py, default `…/OSR Reports/Outbox`).
+- **Power Automate** watches that outbox and sends each envelope as an Outlook email. Cadence target: Monday 9 AM PT via Windows Task Scheduler (local machine, not GitHub Actions).
+- Recipients come from **`OSR_EMAILS`** in config.py — **keys MUST stay in sync with `OSR_ROSTER`** (add/remove reps in both; set value to `""` to skip a rep, e.g. the Outside Sales Manager). This is why the roster-maintenance steps below also touch OSR_EMAILS.
+- Run modes: `py -m automation.cohort_emails --test` (one envelope to Kevin w/ sample data), `--from-html` (one per rostered rep), `--from-html --rep "Name"` (single-rep dry run), `--out ./output` (override outbox).
+
+### Diagnostic / one-off workflows (`.github/workflows/`)
+
+Manual (`workflow_dispatch`) only — not scheduled, safe to leave in place:
+- **`probe-genesys.yml`** → `probe_genesys_access.py`: reports what the Genesys OAuth client (role `API_Analytics`) can query. Confirmed OK: conversation aggregates + details, user aggregates, users directory, routing queues, queue observations, presence, quality; DENIED: wrap-up codes, WFM, OAuth admin.
+- **`pull-merchant-inbound.yml`** → `pull_merchant_inbound.py`: daily inbound call analytics + full per-call log (caller ANI) for queues matching a `queue_filter` input (default "merchant" → "Merchant Services Voice" + "Merchant Service Spanish"). Output uploaded as an artifact (xlsx + CSVs), not committed.
 
 ### Salesforce Report Formats
 
@@ -272,19 +289,21 @@ The cohort processor (`cohort_tracking.py`) filters merchants by the `OS Territo
 
 ### Historical Month Snapshot Handling
 
-The pipeline only processes the current month's data live. For past months on the index page (month cards, YTD summary), it uses:
+The pipeline processes the current month's data live. For past months on the index page (month cards, YTD summary), it uses:
 1. `_load_month_snapshot_all()` — requires BOTH `new_enrollments.json` AND `credited_enrollments.json` in the snapshot directory
 2. If incomplete → falls back to `_extract_monthly_from_html()` which reads KPIs from the existing dashboard HTML
-3. Past month dashboard HTML files are NEVER reprocessed by the pipeline — they stay frozen
 
-**Automatic previous-month snapshot refresh (Step 2b in main.py):**
-On every hourly pipeline run, the previous month's snapshots are auto-refreshed from Salesforce:
-1. `_refresh_past_month_snapshot()` — re-fetches credited enrollments (catches SF credit reassignments)
-2. `fetch_cohort_activity()` — re-fetches last month activity/funding data (catches late-posting transactions)
+### Pipeline timing & self-healing windows (Step 2b in main.py)
 
-This ensures cohort commission numbers stay current for the most recently-closed month without manual intervention. Only affects snapshot JSON — dashboard HTML is never regenerated for past months.
+Several time-gated refresh behaviors keep recently-closed data current without manual intervention. A new feature touching main.py should preserve these:
 
-For older months (2+ months back), snapshots are frozen unless manually refreshed with a one-time `_refresh_past_month_snapshot()` call in main.py.
+- **Prior-month snapshot refresh (every run):** re-fetches the previous month's credited enrollments (`_refresh_past_month_snapshot`, catches SF credit reassignments) and cohort activity (`fetch_cohort_activity`, catches late-posting funding). Snapshot JSON only.
+- **Prior-month monthly_quota refresh (days 1–7 of new month):** re-pulls Report 6 for the just-closed month so budget/attainment settles.
+- **Prior-month dashboard HTML regeneration (days 1–5 of new month, the "regen window"):** unlike older months, the *immediately* prior month's `{mon}-{year}.html` IS regenerated during days 1–5 so its headline numbers track late SF credits/funding — but only when both the enrollment and activity refreshes succeeded that run (avoids mixed-vintage data). After day 5 it freezes permanently. Months 2+ back are never regenerated.
+- **Older-cohort refresh (offsets 2–3):** each run also re-pulls and re-renders the cohort tracker entries for the cohorts 2 and 3 months back (their M1/M2 windows are still settling). Without this, cohort $ silently drifts from SF as late funding posts. This is why `cohort-tracking.html` shows movement on cohorts older than the active one.
+- **Idempotent Feb-2026 quota backfill:** Report 6 collection began in March 2026, so `2026-02/monthly_quota.json` was missing; a guarded block backfills it once (needed for PIP Trigger-A history) and no-ops thereafter. Pattern to copy if another month's snapshot ever needs a one-time backfill.
+
+**Correcting older past-month data manually:** add a one-time `_refresh_past_month_snapshot()` call in main.py, let it run once, then remove it (see Common Maintenance Tasks).
 
 ### HTML Injection Patterns
 
@@ -443,10 +462,13 @@ PPTX decks generated per territory for leadership reviews. Built with pptxgenjs 
 
 ## Common Maintenance Tasks
 
-**Roster changes:**
-1. Update `OSR_ROSTER` (or `ISR_ROSTER`) in `automation/config.py`
-2. If the rep has a territory, update `TERRITORY_MAP` (OSR) and/or `ISR_TERRITORY_MAP` (ISR) in `automation/config.py`
-3. Update the roster/territory sections in this file
+**Roster changes** (all in `automation/config.py` unless noted):
+1. Update `OSR_ROSTER` (or `ISR_ROSTER`)
+2. If the rep has a territory: update `TERRITORY_MAP` (OSR) and/or `ISR_TERRITORY_MAP` (ISR)
+3. **Update `OSR_EMAILS`** — keys must stay in sync with `OSR_ROSTER` (adding a rep without an email entry, or leaving a departed rep's entry, breaks/misfires the weekly cohort email)
+4. Update the embedded `TERRITORY_MAP` in `html_generator.py` (the territory-review page has its own copy with area labels)
+5. Update the roster/territory/ISR sections in this file
+6. Removals follow the "Jeremy Moore precedent": drop from roster + maps + emails, territory becomes unassigned; frozen past-month dashboards keep the departed rep historically. New hires with a future effective date can be added immediately — credit only flows once SF's `OSR Enrollment Credit` names them.
 
 **Report changes:**
 1. Update `REPORT_IDS` in `automation/config.py` with new 18-character Salesforce Report IDs
