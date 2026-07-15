@@ -18,3 +18,16 @@ Thumbs.db
 Cohort_Email_Training_Guide.pdf
 build_cohort_training_guide.py
 _easypay_logo.png
+
+# One-off analysis deliverables (outputs, regenerated on demand — kept on
+# disk but never committed). Dashboard source is *.html + automation/*.py.
+*.pdf
+*.docx
+*.xlsx
+# Scratch/build-intermediate scripts (underscore-prefixed convention)
+_*.py
+_*.json
+_*.txt
+# One-off report generators kept locally
+rep_performance_report.py
+pip_handoff.md
