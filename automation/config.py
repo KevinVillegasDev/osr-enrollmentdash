@@ -54,6 +54,8 @@ REPORT_IDS = {
 # Jose Valencia added for RIC-3, effective July 2026 (previously unassigned).
 # Marco Garmendia added for RIC-10, effective July 2026 — NEW multi-state
 # territory covering unmanaged areas across states; no dedicated ISR.
+# Phillip Mason (RIC-6) departed July 2026; RIC-6 now unassigned (ISR
+# coverage continues under Lesly Arroyo). Frozen past dashboards keep him.
 OSR_ROSTER = [
     "Cesar Flores",
     "Claudia Gerhardt",
@@ -65,7 +67,6 @@ OSR_ROSTER = [
     "Mariana Gross",
     "Matthew MacDonald",
     "Omar Corona",
-    "Phillip Mason",
     "Richard Herrera",
     "Stephanie Whitlock",
     "Yemaira Hernandez",
@@ -74,8 +75,10 @@ OSR_ROSTER = [
 
 # ─── Territory → OSR Mapping ────────────────────────────────────────────────
 # Maps territory codes from the sales budget to OSR names.
-# Unassigned territories (LTO-4, LTO-8, RIC-7) are excluded.
+# Unassigned territories (LTO-4, LTO-8, RIC-6, RIC-7) are excluded.
 # LTO-4: Sara Porter → Francisco Gonzalez (removed June 2026); now unassigned.
+# RIC-6: Phillip Mason (departed July 2026); now unassigned. ISR coverage
+#        continues under Lesly Arroyo (still in ISR_TERRITORY_MAP).
 # RIC-3: Jose Valencia, effective July 2026 (CA; previously unassigned).
 # RIC-4: Jeremy Moore through April 2026; Richard Herrera from May 2026 forward.
 # RIC-5: Mariana Gross from June 2026 (Phoenix Metro, AZ; previously unassigned).
@@ -96,7 +99,6 @@ TERRITORY_MAP = {
     "RIC-3": "Jose Valencia",
     "RIC-4": "Richard Herrera",
     "RIC-5": "Mariana Gross",
-    "RIC-6": "Phillip Mason",
     "RIC-8": "Eric Henderson",
     "RIC-9": "Matthew MacDonald",
     "RIC-10": "Marco Garmendia",
@@ -135,7 +137,7 @@ ISR_TERRITORY_MAP = {
     "RIC-3": "Lesly Arroyo",
     "RIC-4": "Katie Anguiano",
     "RIC-5": "Lesly Arroyo",
-    "RIC-6": "Lesly Arroyo",
+    "RIC-6": "Lesly Arroyo",       # territory OPEN (Phillip departed) — ISR coverage continues
     "RIC-7": "Michael Palmer",     # territory OPEN — ISR coverage continues
     "RIC-8": "Connor Admirand",
     "RIC-9": "Michael Palmer",
@@ -191,7 +193,6 @@ OSR_EMAILS = {
     "Mariana Gross": "mariana.gross@easypayfinance.com",
     "Matthew MacDonald": "matthew.macdonald@easypayfinance.com",
     "Omar Corona": "omar.corona@easypayfinance.com",
-    "Phillip Mason": "phillip.mason@easypayfinance.com",
     "Richard Herrera": "richard.herrera@easypayfinance.com",
     "Stephanie Whitlock": "stephanie.whitlock@easypayfinance.com",
     "Yemaira Hernandez": "yemaira.hernandez@easypayfinance.com",
