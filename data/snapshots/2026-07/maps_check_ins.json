@@ -32541,7 +32541,7 @@
     "Subject": "00UTO00000cyEwf2AE",
     "_label_Subject": "Maps Check In",
     "Company / Account": "001TO00000oroDBYAY",
-    "_label_Company / Account": "COLLISION LAB CENTRAL FLORIDA LLC",
+    "_label_Company / Account": "Collision Lab Central Florida LLC",
     "Assigned": "0058Y00000B79SFQAZ",
     "_label_Assigned": "Jared Midkiff",
     "Full Comments": "Spoke with Letty about enrolling with EasyPay while also reviewing benefits to the business/customer, answered some of her questions and ENROLLED!",
@@ -34403,7 +34403,7 @@
     "Subject": "00UTO00000czhGf2AI",
     "_label_Subject": "Maps Check In",
     "Company / Account": "001TO00000HFMcoYAH",
-    "_label_Company / Account": "Akbar Auto Service",
+    "_label_Company / Account": "Perry's Place",
     "Assigned": "005TO00000ByPGXYA3",
     "_label_Assigned": "Jose Valencia",
     "Full Comments": "Checked in via Maps Application \nATLAS \u2014 Merchant Visit Logged\n\nMerchant: Akbar Auto Repair \u2192 Perry\u2019s Auto Repair\nVisit Date: July 23, 2026\nStatus: \ud83d\udfe2 Active \u2014 Retain / Monitor\nAccount: Same corporation; business name changed from Akbar Auto Repair to Perry\u2019s Auto Repair.\n\nVisit Findings: Merchant is already using EasyPay, although at relatively low volume. The shop specializes more in higher-end/European vehicle repair, and its customer base generally has less need for financing. Realistic opportunity appears to be approximately 1\u20132 funded deals per month.\n\nAssessment: Keep the account active. This doesn\u2019t appear to be a dormant merchant caused by lack of training or engagement; financing simply isn\u2019t a major part of their customer mix. Even modest consistent production makes the relationship worth maintaining.\n\nNext Action: Revisit in approximately 30 days to review activity and determine whether there is an opportunity to increase EasyPay usage or put a specific incentive/productio...",
@@ -36326,6 +36326,20 @@
     "_label_Assigned": "Claudia Gerhardt",
     "Full Comments": "Checked in via Maps Application \nSalesforce Note: Famous Tire\nSpoke to Marcos discussed business levels mentioned business is slow right now hoping things pick up. Will let us know if they need anything.",
     "_label_Full Comments": "Checked in via Maps Application \nSalesforce Note: Famous Tire\nSpoke to Marcos discussed business levels mentioned business is slow right now hoping things pick up. Will let us know if they need anything.",
+    "Lead": null,
+    "_label_Lead": "-"
+  },
+  {
+    "Created Date/Time": "2026-07-24T22:59:00Z",
+    "_label_Created Date/Time": "7/24/2026, 3:59 PM",
+    "Subject": "00UTO00000d2QUb2AM",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "001TO00000Ho2haYAB",
+    "_label_Company / Account": "United Tint & Car Wraps 2",
+    "Assigned": "005TO000008qrzhYAA",
+    "_label_Assigned": "Claudia Gerhardt",
+    "Full Comments": "Checked in via Maps Application \nSalesforce Note: United Tint \nSpoke to Chris technician briefly this merchant is not yet on XRiver Mika is not in.",
+    "_label_Full Comments": "Checked in via Maps Application \nSalesforce Note: United Tint \nSpoke to Chris technician briefly this merchant is not yet on XRiver Mika is not in.",
     "Lead": null,
     "_label_Lead": "-"
   }
