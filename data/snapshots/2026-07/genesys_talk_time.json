@@ -9,9 +9,9 @@
   {
     "user_id": "5dfa55b4-fa43-4aa7-8156-d0126a1ae950",
     "name": "Sergio Rodriguez",
-    "talk_seconds": 343754,
-    "talk_display": "95h 29m",
-    "calls": 4040
+    "talk_seconds": 345240,
+    "talk_display": "95h 54m",
+    "calls": 4051
   },
   {
     "user_id": "43a30a6a-413a-47fb-b1ea-600091b4fcf4",
@@ -100,9 +100,9 @@
   {
     "user_id": "24b58ccf-3042-4c4b-b52c-0bff88f282da",
     "name": "Joseph Hernandez",
-    "talk_seconds": 219299,
-    "talk_display": "60h 54m",
-    "calls": 3778
+    "talk_seconds": 219835,
+    "talk_display": "61h 3m",
+    "calls": 3788
   },
   {
     "user_id": "a8b0fb23-2fb2-4b48-8c09-9916a343146f",
@@ -114,9 +114,9 @@
   {
     "user_id": "a27c2751-4e06-4a48-b962-4be00871c869",
     "name": "Christian Martinez",
-    "talk_seconds": 206830,
-    "talk_display": "57h 27m",
-    "calls": 2727
+    "talk_seconds": 209112,
+    "talk_display": "58h 5m",
+    "calls": 2735
   },
   {
     "user_id": "1332d5ba-280b-4f82-9b9f-ea0c03c92c89",
@@ -191,9 +191,16 @@
   {
     "user_id": "3379f0b9-cd06-400b-bddb-8164e11d41e8",
     "name": "Fatmata Barry",
-    "talk_seconds": 171662,
-    "talk_display": "47h 41m",
-    "calls": 3006
+    "talk_seconds": 171958,
+    "talk_display": "47h 45m",
+    "calls": 3015
+  },
+  {
+    "user_id": "b217b1f8-ac35-42a7-88b7-3b77714ae49e",
+    "name": "Evelin Morales",
+    "talk_seconds": 170795,
+    "talk_display": "47h 26m",
+    "calls": 2865
   },
   {
     "user_id": "14f259f6-102a-4700-a51a-b47ae04d24e7",
@@ -201,13 +208,6 @@
     "talk_seconds": 170578,
     "talk_display": "47h 22m",
     "calls": 3268
-  },
-  {
-    "user_id": "b217b1f8-ac35-42a7-88b7-3b77714ae49e",
-    "name": "Evelin Morales",
-    "talk_seconds": 169692,
-    "talk_display": "47h 8m",
-    "calls": 2851
   },
   {
     "user_id": "d2343d3e-9373-4bc2-9b38-907016f6998b",
@@ -219,9 +219,9 @@
   {
     "user_id": "a907a9b0-1d7d-4bca-bbef-e55967e19d27",
     "name": "Michelle Johnson",
-    "talk_seconds": 156341,
-    "talk_display": "43h 25m",
-    "calls": 3333
+    "talk_seconds": 157328,
+    "talk_display": "43h 42m",
+    "calls": 3356
   },
   {
     "user_id": "eb3ae4bc-db4e-4ad2-9f82-f02fd722b127",
@@ -247,9 +247,9 @@
   {
     "user_id": "51debfab-e7a1-47c4-9da2-757d9bb615d1",
     "name": "Francisco Lozano",
-    "talk_seconds": 140880,
-    "talk_display": "39h 8m",
-    "calls": 3283
+    "talk_seconds": 141810,
+    "talk_display": "39h 23m",
+    "calls": 3291
   },
   {
     "user_id": "b4bab66e-98f6-425c-b97e-bb6a7f0ddf39",
@@ -275,16 +275,16 @@
   {
     "user_id": "3b6ccb2a-ba08-4cf2-832d-8a4cd4f5fe7a",
     "name": "Christy Mcintosh",
-    "talk_seconds": 130332,
-    "talk_display": "36h 12m",
-    "calls": 878
+    "talk_seconds": 131064,
+    "talk_display": "36h 24m",
+    "calls": 885
   },
   {
     "user_id": "e353547e-676b-42b2-ac21-4ad9aff70e61",
     "name": "Juan Fabian",
-    "talk_seconds": 129293,
-    "talk_display": "35h 54m",
-    "calls": 1137
+    "talk_seconds": 129538,
+    "talk_display": "35h 58m",
+    "calls": 1141
   },
   {
     "user_id": "eb53ed35-8863-4021-bd44-909f19636923",
@@ -338,9 +338,9 @@
   {
     "user_id": "3afeaaa8-987f-46bd-8079-a9f5069b5ca9",
     "name": "Connor Admirand",
-    "talk_seconds": 91381,
-    "talk_display": "25h 23m",
-    "calls": 708
+    "talk_seconds": 91470,
+    "talk_display": "25h 24m",
+    "calls": 710
   },
   {
     "user_id": "cd8f6d36-afbb-4f94-abad-2e57083d320a",
@@ -366,9 +366,9 @@
   {
     "user_id": "32fa528b-c886-4359-ab9d-638a8d5e29ee",
     "name": "Laura Angulo",
-    "talk_seconds": 80999,
-    "talk_display": "22h 29m",
-    "calls": 687
+    "talk_seconds": 81082,
+    "talk_display": "22h 31m",
+    "calls": 688
   },
   {
     "user_id": "29c31553-1bd2-4881-9cba-149a3fab34f7",
@@ -401,9 +401,9 @@
   {
     "user_id": "97862fa2-10c0-4ece-8186-b05d5cf49f1d",
     "name": "Noemy Carrion",
-    "talk_seconds": 51603,
+    "talk_seconds": 51611,
     "talk_display": "14h 20m",
-    "calls": 525
+    "calls": 527
   },
   {
     "user_id": "55b19737-f2ab-410e-914a-b2c5206bbc82",
@@ -464,9 +464,9 @@
   {
     "user_id": "9b0240f3-1111-4b76-ab90-af825a32b010",
     "name": "Lidia Lomeli",
-    "talk_seconds": 5340,
-    "talk_display": "1h 29m",
-    "calls": 43
+    "talk_seconds": 5606,
+    "talk_display": "1h 33m",
+    "calls": 47
   },
   {
     "user_id": "aaa20da5-e478-42ab-9a42-b6ab8d704e25",
