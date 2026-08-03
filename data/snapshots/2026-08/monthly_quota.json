@@ -12,15 +12,21 @@
     "_label_Applications": "40",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
-    "Funded Dollars Quota": null,
-    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars Quota": {
+      "amount": 637430,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$637,430.00",
     "Funded Dollars": {
       "amount": 0,
       "currency": null
     },
     "_label_Funded Dollars": "$0.00",
-    "Funded Dollars Difference": null,
-    "_label_Funded Dollars Difference": "-",
+    "Funded Dollars Difference": {
+      "amount": -637430,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$637,430.00",
     "Funded Applications Total": 0,
     "_label_Funded Applications Total": "0",
     "Applications Progress": 0,
@@ -48,15 +54,21 @@
     "_label_Applications": "53",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
-    "Funded Dollars Quota": null,
-    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars Quota": {
+      "amount": 617812,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$617,812.00",
     "Funded Dollars": {
       "amount": 0,
       "currency": null
     },
     "_label_Funded Dollars": "$0.00",
-    "Funded Dollars Difference": null,
-    "_label_Funded Dollars Difference": "-",
+    "Funded Dollars Difference": {
+      "amount": -617812,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$617,812.00",
     "Funded Applications Total": 0,
     "_label_Funded Applications Total": "0",
     "Applications Progress": 0,
@@ -84,15 +96,21 @@
     "_label_Applications": "78",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
-    "Funded Dollars Quota": null,
-    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars Quota": {
+      "amount": 744225,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$744,225.00",
     "Funded Dollars": {
       "amount": 0,
       "currency": null
     },
     "_label_Funded Dollars": "$0.00",
-    "Funded Dollars Difference": null,
-    "_label_Funded Dollars Difference": "-",
+    "Funded Dollars Difference": {
+      "amount": -744225,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$744,225.00",
     "Funded Applications Total": 0,
     "_label_Funded Applications Total": "0",
     "Applications Progress": 0,
@@ -153,15 +171,21 @@
     "_label_Applications": "44",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
-    "Funded Dollars Quota": null,
-    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars Quota": {
+      "amount": 836558,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$836,558.00",
     "Funded Dollars": {
       "amount": 0,
       "currency": null
     },
     "_label_Funded Dollars": "$0.00",
-    "Funded Dollars Difference": null,
-    "_label_Funded Dollars Difference": "-",
+    "Funded Dollars Difference": {
+      "amount": -836558,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$836,558.00",
     "Funded Applications Total": 0,
     "_label_Funded Applications Total": "0",
     "Applications Progress": 0,
@@ -189,15 +213,21 @@
     "_label_Applications": "169",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
-    "Funded Dollars Quota": null,
-    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars Quota": {
+      "amount": 1521665,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$1,521,665.00",
     "Funded Dollars": {
       "amount": 0,
       "currency": null
     },
     "_label_Funded Dollars": "$0.00",
-    "Funded Dollars Difference": null,
-    "_label_Funded Dollars Difference": "-",
+    "Funded Dollars Difference": {
+      "amount": -1521665,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$1,521,665.00",
     "Funded Applications Total": 0,
     "_label_Funded Applications Total": "0",
     "Applications Progress": 0,
@@ -570,15 +600,21 @@
     "_label_Applications": "113",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
-    "Funded Dollars Quota": null,
-    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars Quota": {
+      "amount": 1086322,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$1,086,322.00",
     "Funded Dollars": {
       "amount": 0,
       "currency": null
     },
     "_label_Funded Dollars": "$0.00",
-    "Funded Dollars Difference": null,
-    "_label_Funded Dollars Difference": "-",
+    "Funded Dollars Difference": {
+      "amount": -1086322,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$1,086,322.00",
     "Funded Applications Total": 0,
     "_label_Funded Applications Total": "0",
     "Applications Progress": 0,
@@ -606,15 +642,21 @@
     "_label_Applications": "23",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
-    "Funded Dollars Quota": null,
-    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars Quota": {
+      "amount": 380840,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$380,840.00",
     "Funded Dollars": {
       "amount": 0,
       "currency": null
     },
     "_label_Funded Dollars": "$0.00",
-    "Funded Dollars Difference": null,
-    "_label_Funded Dollars Difference": "-",
+    "Funded Dollars Difference": {
+      "amount": -380840,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$380,840.00",
     "Funded Applications Total": 0,
     "_label_Funded Applications Total": "0",
     "Applications Progress": 0,
@@ -642,15 +684,21 @@
     "_label_Applications": "60",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
-    "Funded Dollars Quota": null,
-    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars Quota": {
+      "amount": 1250941,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$1,250,941.00",
     "Funded Dollars": {
       "amount": 0,
       "currency": null
     },
     "_label_Funded Dollars": "$0.00",
-    "Funded Dollars Difference": null,
-    "_label_Funded Dollars Difference": "-",
+    "Funded Dollars Difference": {
+      "amount": -1250941,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$1,250,941.00",
     "Funded Applications Total": 0,
     "_label_Funded Applications Total": "0",
     "Applications Progress": 0,
@@ -780,15 +828,21 @@
     "_label_Applications": "72",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
-    "Funded Dollars Quota": null,
-    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars Quota": {
+      "amount": 489565,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$489,565.00",
     "Funded Dollars": {
       "amount": 0,
       "currency": null
     },
     "_label_Funded Dollars": "$0.00",
-    "Funded Dollars Difference": null,
-    "_label_Funded Dollars Difference": "-",
+    "Funded Dollars Difference": {
+      "amount": -489565,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$489,565.00",
     "Funded Applications Total": 0,
     "_label_Funded Applications Total": "0",
     "Applications Progress": 0,
@@ -816,15 +870,21 @@
     "_label_Applications": "24",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
-    "Funded Dollars Quota": null,
-    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars Quota": {
+      "amount": 517711,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$517,711.00",
     "Funded Dollars": {
       "amount": 0,
       "currency": null
     },
     "_label_Funded Dollars": "$0.00",
-    "Funded Dollars Difference": null,
-    "_label_Funded Dollars Difference": "-",
+    "Funded Dollars Difference": {
+      "amount": -517711,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$517,711.00",
     "Funded Applications Total": 0,
     "_label_Funded Applications Total": "0",
     "Applications Progress": 0,
@@ -954,15 +1014,21 @@
     "_label_Applications": "95",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
-    "Funded Dollars Quota": null,
-    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars Quota": {
+      "amount": 1221361,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$1,221,361.00",
     "Funded Dollars": {
       "amount": 0,
       "currency": null
     },
     "_label_Funded Dollars": "$0.00",
-    "Funded Dollars Difference": null,
-    "_label_Funded Dollars Difference": "-",
+    "Funded Dollars Difference": {
+      "amount": -1221361,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$1,221,361.00",
     "Funded Applications Total": 0,
     "_label_Funded Applications Total": "0",
     "Applications Progress": 0,
@@ -1026,15 +1092,21 @@
     "_label_Applications": "153",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
-    "Funded Dollars Quota": null,
-    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars Quota": {
+      "amount": 2305903,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$2,305,903.00",
     "Funded Dollars": {
       "amount": 0,
       "currency": null
     },
     "_label_Funded Dollars": "$0.00",
-    "Funded Dollars Difference": null,
-    "_label_Funded Dollars Difference": "-",
+    "Funded Dollars Difference": {
+      "amount": -2305903,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$2,305,903.00",
     "Funded Applications Total": 0,
     "_label_Funded Applications Total": "0",
     "Applications Progress": 0,
@@ -1062,15 +1134,21 @@
     "_label_Applications": "31",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
-    "Funded Dollars Quota": null,
-    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars Quota": {
+      "amount": 701969,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$701,969.00",
     "Funded Dollars": {
       "amount": 0,
       "currency": null
     },
     "_label_Funded Dollars": "$0.00",
-    "Funded Dollars Difference": null,
-    "_label_Funded Dollars Difference": "-",
+    "Funded Dollars Difference": {
+      "amount": -701969,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$701,969.00",
     "Funded Applications Total": 0,
     "_label_Funded Applications Total": "0",
     "Applications Progress": 0,
@@ -1098,15 +1176,21 @@
     "_label_Applications": "23",
     "Applications Difference": null,
     "_label_Applications Difference": "-",
-    "Funded Dollars Quota": null,
-    "_label_Funded Dollars Quota": "-",
+    "Funded Dollars Quota": {
+      "amount": 282531,
+      "currency": null
+    },
+    "_label_Funded Dollars Quota": "$282,531.00",
     "Funded Dollars": {
       "amount": 0,
       "currency": null
     },
     "_label_Funded Dollars": "$0.00",
-    "Funded Dollars Difference": null,
-    "_label_Funded Dollars Difference": "-",
+    "Funded Dollars Difference": {
+      "amount": -282531,
+      "currency": null
+    },
+    "_label_Funded Dollars Difference": "-$282,531.00",
     "Funded Applications Total": 0,
     "_label_Funded Applications Total": "0",
     "Applications Progress": 0,
