@@ -24,6 +24,7 @@ from ..config import (
     TERRITORY_MAP,
     COHORT_TARGET_M1,
     COHORT_TARGET_M2,
+    today_pacific,
 )
 
 logger = logging.getLogger(__name__)
@@ -221,7 +222,7 @@ def _build_summary(osr_name, primary_isr, osr_cohorts, quarter_months, year,
 
 def _build_cohort_scorecard(osr_cohorts, quarter_months, year):
     """Build per-month cohort cards with maturity and pass/fail status."""
-    today = date.today()
+    today = today_pacific()
     scorecard = []
 
     for month_num in quarter_months:
@@ -525,7 +526,7 @@ def _build_gaps(bid_set, bid_enrollment_date, bid_merchant_name,
         })
 
     # ── Zero-funded enrolled > 30 days ───────────────────────────────────
-    today = date.today()
+    today = today_pacific()
     stale_zero = []
     for bid in bid_set:
         enroll_date = bid_enrollment_date.get(bid)
@@ -556,7 +557,7 @@ def _build_gaps(bid_set, bid_enrollment_date, bid_merchant_name,
 def _build_pipeline(bid_set, bid_merchant_name, bid_funding, ob_sequences,
                     bid_enrollment_date, bid_cohort_month, territory_notes):
     """Categorize BIDs into action pipeline: HIGH, RETAIN, GROW, ACT_NOW."""
-    today = date.today()
+    today = today_pacific()
     pipeline = []
 
     for bid in bid_set:

@@ -1,1 +1,4 @@
 requests>=2.31.0
+# Ships the IANA tz database so zoneinfo.ZoneInfo("America/Los_Angeles") works
+# on platforms without a system tz database (e.g. bare Windows Python).
+tzdata>=2024.1

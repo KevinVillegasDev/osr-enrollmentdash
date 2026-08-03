@@ -4,6 +4,8 @@ Report IDs, OSR roster, month mappings, color palette, and Salesforce field name
 """
 
 import os
+from datetime import date, datetime
+from zoneinfo import ZoneInfo
 
 # ─── Salesforce Connection ───────────────────────────────────────────────────
 SF_LOGIN_URL = os.environ.get("SF_LOGIN_URL", "https://login.salesforce.com")
@@ -251,6 +253,33 @@ COLUMN_LABELS = {
     "isr_note_date": "_label_Created Date",
     "isr_note_author": "_label_Created By",  # note author (added July 2026 for hybrid tracker)
 }
+
+# ─── Pipeline Timezone ───────────────────────────────────────────────────────
+# The pipeline MUST reason about dates in the Salesforce org's timezone
+# (Pacific), NOT the machine's. GitHub Actions runners are UTC, so a bare
+# date.today() reads as the next calendar day from 5 PM Pacific onward.
+#
+# This matters because the saved Salesforce reports use relative date filters
+# ("Enrollment Date = THIS MONTH", "Created Date = THIS MONTH") that Salesforce
+# evaluates in the ORG's timezone. If the pipeline thinks it's August while
+# Salesforce still thinks it's July, July's rows get written into August's
+# buckets — which is exactly how July enrollments landed in augCohort during
+# the Aug 1 03:47 UTC (Jul 31 8:47 PM PDT) month-end catch-up run.
+#
+# Always use today_pacific() / now_pacific() for month, quarter, and
+# business-day decisions instead of date.today() / datetime.now().
+PIPELINE_TZ = ZoneInfo("America/Los_Angeles")
+
+
+def now_pacific() -> datetime:
+    """Current timezone-aware datetime in the Salesforce org's timezone."""
+    return datetime.now(PIPELINE_TZ)
+
+
+def today_pacific() -> date:
+    """Today's date in the Salesforce org's timezone (Pacific)."""
+    return now_pacific().date()
+
 
 # ─── File Paths ──────────────────────────────────────────────────────────────
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

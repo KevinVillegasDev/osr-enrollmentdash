@@ -18,7 +18,7 @@ from datetime import date
 
 from ..config import (
     MONTH_NAMES, MONTH_ABBREV, PROJECT_ROOT,
-    month_filepath, QUARTERLY_TARGET,
+    month_filepath, QUARTERLY_TARGET, today_pacific,
 )
 
 logger = logging.getLogger(__name__)
@@ -41,7 +41,7 @@ def process(monthly_results: dict, q1_data: dict, cohorts: dict,
     Returns:
         Dict with all data variables for analytics.html
     """
-    today = date.today()
+    today = today_pacific()
     prev_month = current_month - 1 if current_month > 1 else 12
     prev_year = current_year if current_month > 1 else current_year - 1
 

@@ -15,7 +15,7 @@ import re
 from datetime import date, datetime, timezone, timedelta
 from html import escape as _esc
 
-from .config import PROJECT_ROOT, MONTH_NAMES, MONTH_ABBREV
+from .config import PROJECT_ROOT, MONTH_NAMES, MONTH_ABBREV, today_pacific
 
 logger = logging.getLogger(__name__)
 
@@ -477,8 +477,7 @@ def _replace_q1_kpis(html: str, data: dict) -> str:
     # Update KPI sub text for completed months
     completed_months = []
     for m in quarter_months:
-        from datetime import date as dt_date
-        today = dt_date.today()
+        today = today_pacific()
         if data.get("year", 2026) < today.year or \
            (data.get("year", 2026) == today.year and m < today.month):
             completed_months.append(MONTH_NAMES[m][:3])
@@ -1147,7 +1146,7 @@ def update_analytics_page(filepath: str, data: dict, forecast_data: dict = None)
         html = _replace_between_markers(html, "Analytics Forecast Data", forecast_html)
 
     # Update last-updated date
-    today = date.today()
+    today = today_pacific()
     try:
         import platform
         if platform.system() == "Windows":
@@ -2322,7 +2321,7 @@ def update_territory_review(filepath: str, territory_data: dict) -> bool:
     html = _read_file(filepath)
 
     # Stamp each territory's summary with an "updated" date
-    today = date.today()
+    today = today_pacific()
     try:
         import platform
         if platform.system() == "Windows":

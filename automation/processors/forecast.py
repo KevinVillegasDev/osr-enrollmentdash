@@ -15,7 +15,7 @@ Outputs: Dict with per-rep forecast data and team-level aggregates.
 import logging
 from datetime import datetime, date, timedelta
 
-from ..config import TERRITORY_MAP, MONTH_NAMES, OSR_ROSTER
+from ..config import TERRITORY_MAP, MONTH_NAMES, OSR_ROSTER, now_pacific
 
 logger = logging.getLogger(__name__)
 
@@ -65,7 +65,7 @@ def process_forecast(current_date=None, quota_rows=None) -> dict:
         and team-level aggregates.
     """
     if current_date is None:
-        current_date = datetime.now()
+        current_date = now_pacific()
     if isinstance(current_date, datetime):
         current_date = current_date.date()
 

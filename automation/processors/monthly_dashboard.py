@@ -12,7 +12,7 @@ import logging
 from collections import Counter, defaultdict
 from datetime import date
 
-from ..config import COLUMN_LABELS, MONTH_NAMES, CHART_PALETTE
+from ..config import COLUMN_LABELS, MONTH_NAMES, CHART_PALETTE, today_pacific
 
 logger = logging.getLogger(__name__)
 
@@ -365,7 +365,7 @@ def process(all_enrollments: list[dict], credited_enrollments: list[dict],
         "year": year,
         "month_name": month_name,
         "month_abbrev": month_abbrev,
-        "last_updated": _format_date(date.today()),
+        "last_updated": _format_date(today_pacific()),
     }
 
 

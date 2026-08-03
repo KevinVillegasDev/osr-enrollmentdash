@@ -49,6 +49,7 @@ from .config import (
     COHORT_EMAIL_OUTBOX,
     COHORT_EMAIL_ADMIN,
     PROJECT_ROOT,
+    today_pacific,
 )
 
 logging.basicConfig(
@@ -762,7 +763,7 @@ def main():
                         help="Override send date as YYYY-MM-DD (default: today).")
     args = parser.parse_args()
 
-    today = date.fromisoformat(args.date) if args.date else date.today()
+    today = date.fromisoformat(args.date) if args.date else today_pacific()
     outbox = args.out or COHORT_EMAIL_OUTBOX
 
     # Determine cohort months from today.

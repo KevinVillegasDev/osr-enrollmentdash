@@ -21,7 +21,7 @@ from .config import (
     GENESYS_REGION, GENESYS_CLIENT_ID, GENESYS_CLIENT_SECRET,
     REPORT_IDS, MONTH_ABBREV, MONTH_NAMES, PROJECT_ROOT,
     COLUMN_LABELS, month_filename, month_filepath,
-    TERRITORY_MAP, HYBRID_REPS,
+    TERRITORY_MAP, HYBRID_REPS, today_pacific,
 )
 from .salesforce_auth import SalesforceClient, SalesforceAuthError
 from .salesforce_reports import fetch_all_reports, fetch_cohort_activity, parse_report_rows, fetch_report, fetch_maps_check_ins_split, fetch_monthly_quota_for_month
@@ -45,10 +45,12 @@ def main():
                         help="Skip Salesforce fetch (use cached data from data/snapshots/)")
     args = parser.parse_args()
 
-    today = date.today()
+    # Pacific, not UTC — must match the timezone Salesforce uses to evaluate the
+    # reports' relative date filters ("THIS MONTH"). See config.PIPELINE_TZ.
+    today = today_pacific()
     current_month = today.month
     current_year = today.year
-    logger.info("=== OSR Dashboard Update - %s ===", today.isoformat())
+    logger.info("=== OSR Dashboard Update - %s (Pacific) ===", today.isoformat())
     logger.info("Current month: %s %d", MONTH_NAMES[current_month], current_year)
 
     # ── Output directory ─────────────────────────────────────────────────
@@ -742,7 +744,7 @@ def fetch_isr_notes_split(client, quarter_months: list[int], year: int) -> list[
 
     for month in quarter_months:
         # Don't fetch future months
-        today = date.today()
+        today = today_pacific()
         if year > today.year or (year == today.year and month > today.month):
             continue
 
@@ -1645,7 +1647,7 @@ def _build_cohort_configs(current_month: int, current_year: int) -> list:
     """
     import calendar
 
-    today = date.today()
+    today = today_pacific()
     configs = []
 
     # Cohort tracking starts from Jan 2026

@@ -20,6 +20,7 @@ import os
 import sys
 import time
 from datetime import date, datetime, timedelta
+from zoneinfo import ZoneInfo
 
 import requests
 from openpyxl import Workbook
@@ -159,7 +160,8 @@ def details_page(interval, page, queue_ids):
 
 by_queue = {}   # (date, queue) -> {offered, answered, abandon_n, talk_s}
 by_agent = {}   # (date, agent) -> {answered, talk_s}
-today = date.today()
+# Pacific, not UTC — matches TZ used for the Genesys interval queries below.
+today = datetime.now(ZoneInfo(TZ)).date()
 qids = list(matched)
 
 for cs, ce in month_chunks(START, today):
@@ -353,7 +355,7 @@ info = [
     ["Queues included", "; ".join(sorted(matched.values()))],
     ["Queue filter term(s)", ", ".join(QUEUE_FILTER)],
     ["Calls in log", str(len(call_rows))],
-    ["Generated", datetime.now().isoformat(timespec="seconds")],
+    ["Generated", datetime.now(ZoneInfo(TZ)).isoformat(timespec="seconds")],
     ["Notes", "Inbound voice only, filtered to the queues above. "
               "Agent rows include past employees (inactive/deleted users). "
               "Queue-level Offered/Abandoned cannot be attributed to agents. "

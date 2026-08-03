@@ -13,7 +13,7 @@ from collections import Counter
 from datetime import date
 import calendar
 
-from ..config import COLUMN_LABELS, MONTH_ABBREV, MONTHLY_FLOOR, QUARTERLY_TARGET
+from ..config import COLUMN_LABELS, MONTH_ABBREV, MONTHLY_FLOOR, QUARTERLY_TARGET, today_pacific
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +32,7 @@ def process(monthly_credited: dict[str, list[dict]], quarter_months: list[int],
     Returns:
         Dict with q1Data array and KPI values
     """
-    today = date.today()
+    today = today_pacific()
 
     # ── Count enrollments per OSR per month ──────────────────────────────
     osr_monthly = {}  # osr_name -> {month_abbrev: count}
