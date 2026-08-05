@@ -8520,6 +8520,14 @@
     "Last_Status_Change_Date__c": "2026-01-10"
   },
   {
+    "Branch_ID__c": "23436",
+    "Name": "Service with Aloha",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-05"
+  },
+  {
     "Branch_ID__c": "23434",
     "Name": "Kim's Automotive",
     "Entity_Status__c": "Closed/Sold",
@@ -9714,10 +9722,10 @@
   {
     "Branch_ID__c": "24283",
     "Name": "All Cylinder Auto",
-    "Entity_Status__c": "Warning List",
+    "Entity_Status__c": "Suspended",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-06-19"
+    "Last_Status_Change_Date__c": "2026-08-05"
   },
   {
     "Branch_ID__c": "24407",
