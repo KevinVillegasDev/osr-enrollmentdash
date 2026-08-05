@@ -276,6 +276,17 @@ Manual (`workflow_dispatch`) only — not scheduled, safe to leave in place:
 - **`probe-genesys.yml`** → `probe_genesys_access.py`: reports what the Genesys OAuth client (role `API_Analytics`) can query. Confirmed OK: conversation aggregates + details, user aggregates, users directory, routing queues, queue observations, presence, quality; DENIED: wrap-up codes, WFM, OAuth admin.
 - **`pull-merchant-inbound.yml`** → `pull_merchant_inbound.py`: daily inbound call analytics + full per-call log (caller ANI) for queues matching a `queue_filter` input (default "merchant" → "Merchant Services Voice" + "Merchant Service Spanish"). Output uploaded as an artifact (xlsx + CSVs), not committed.
 
+### Branch Lifecycle Status Snapshot (Step 2d)
+
+Every run pulls Branch accounts whose `Entity_Status__c` is anything other than Active/New
+(changed since 2025) via SOQL — `fetch_branch_statuses()` in salesforce_reports.py — and writes
+`data/snapshots/branch_statuses.json` (~1,500 rows: Closed/Sold, Terminated, Watchlist,
+Suspended, Inactive, Warning List; fields incl. Status_Reason__c + Termination_Date__c).
+Entity Status exists ONLY in Salesforce (not the warehouse or Tableau). **Consumed by the
+management + RIC-10 dashboards** (repo `management-dash`, which sparse-checkouts
+`data/snapshots/`) for terminated/closed badges on watchlists and location tables. Non-fatal:
+a failure logs a warning and the rest of the pipeline continues.
+
 ### Salesforce Report Formats
 
 - **SUMMARY** format (Reports 1, 2): Stores raw Salesforce IDs in main keys and display labels in `_label_` prefixed keys.
