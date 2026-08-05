@@ -646,3 +646,32 @@ def fetch_monthly_quota_for_month(client, month: int, year: int) -> list[dict]:
     # one because positions may have shifted after our filter swap.
     raw = fetch_report(client, report_id, filters=new_filters)
     return parse_report_rows(raw)
+
+
+def fetch_branch_statuses(client) -> list[dict]:
+    """Branch accounts whose lifecycle status is anything other than
+    Active/New, changed since 2025 (older changes can't appear on any live
+    dashboard). SOQL, not a report — Entity Status lives only on the Account
+    record. Paginated via nextRecordsUrl. Feeds the management/RIC-10
+    dashboards' terminated/closed badges via data/snapshots/branch_statuses.json.
+    """
+    soql = (
+        "SELECT Branch_ID__c, Name, Entity_Status__c, Status_Reason__c, "
+        "Termination_Date__c, Last_Status_Change_Date__c "
+        "FROM Account "
+        "WHERE RecordType.Name = 'Branch' "
+        "AND Entity_Status__c NOT IN ('Active', 'New') "
+        "AND Last_Status_Change_Date__c >= 2025-01-01"
+    )
+    path = f"/services/data/{client.api_version}/query"
+    resp = client.get(path, params={"q": soql})
+    rows = []
+    while True:
+        rows.extend(resp.get("records", []))
+        nxt = resp.get("nextRecordsUrl")
+        if not nxt:
+            break
+        resp = client.get(nxt)
+    for r in rows:
+        r.pop("attributes", None)
+    return rows

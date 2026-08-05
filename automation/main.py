@@ -24,7 +24,7 @@ from .config import (
     TERRITORY_MAP, HYBRID_REPS, today_pacific,
 )
 from .salesforce_auth import SalesforceClient, SalesforceAuthError
-from .salesforce_reports import fetch_all_reports, fetch_cohort_activity, parse_report_rows, fetch_report, fetch_maps_check_ins_split, fetch_monthly_quota_for_month
+from .salesforce_reports import fetch_all_reports, fetch_cohort_activity, parse_report_rows, fetch_report, fetch_maps_check_ins_split, fetch_monthly_quota_for_month, fetch_branch_statuses
 from .processors import monthly_dashboard, cohort_tracking, q1_enrollment, field_activity, index_page, analytics, territory_review, hybrid_tracker
 from . import html_generator
 
@@ -242,6 +242,21 @@ def main():
                             len(reports.get("maps_check_ins", [])))
         except Exception as e:
             logger.warning("Maps split fetch failed (non-fatal, keeping single fetch): %s", e)
+
+    # ── Step 2d: Branch lifecycle statuses (terminated/closed/suspended) ──
+    # Consumed by the management + RIC-10 dashboards (repo management-dash),
+    # which sparse-checkout data/snapshots/. Entity Status exists only in
+    # Salesforce — not in the warehouse or Tableau. Non-fatal on failure.
+    if client:
+        try:
+            statuses = fetch_branch_statuses(client)
+            status_path = os.path.join(PROJECT_ROOT, "data", "snapshots",
+                                       "branch_statuses.json")
+            with open(status_path, "w", encoding="utf-8") as f:
+                json.dump(statuses, f, indent=2, default=str)
+            logger.info("Saved branch statuses: %d non-active branches", len(statuses))
+        except Exception as e:
+            logger.warning("Branch status fetch failed (non-fatal): %s", e)
 
     # Normalize enrollment rows so all processors see display values
     # instead of raw Salesforce IDs (SUMMARY format stores IDs in main keys,
