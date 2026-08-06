@@ -7648,14 +7648,6 @@
     "Last_Status_Change_Date__c": "2025-03-11"
   },
   {
-    "Branch_ID__c": "22879",
-    "Name": "Speedys Towing and Auto",
-    "Entity_Status__c": "Suspended",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-05-26"
-  },
-  {
     "Branch_ID__c": "22880",
     "Name": "North Mountain Auto & Fleet Repair",
     "Entity_Status__c": "Watchlist",
