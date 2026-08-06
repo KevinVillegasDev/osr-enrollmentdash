@@ -16,6 +16,14 @@
     "Last_Status_Change_Date__c": "2026-03-05"
   },
   {
+    "Branch_ID__c": "3692",
+    "Name": "Payless 4 Plumbing Inc - Kendall",
+    "Entity_Status__c": "Inactive",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-06"
+  },
+  {
     "Branch_ID__c": "4162",
     "Name": "Hk Global Inc. DBA Aamco Transmissions And Total Car Care",
     "Entity_Status__c": "Closed/Sold",
@@ -958,6 +966,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-07-16"
+  },
+  {
+    "Branch_ID__c": "1354",
+    "Name": "South First Furniture, Inc. DBA Ricks Furniture",
+    "Entity_Status__c": "Inactive",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-06"
   },
   {
     "Branch_ID__c": "1365",
