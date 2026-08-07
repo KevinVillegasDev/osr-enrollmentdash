@@ -11728,6 +11728,14 @@
     "Last_Status_Change_Date__c": "2026-07-29"
   },
   {
+    "Branch_ID__c": "26172",
+    "Name": "R&R Mobility",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-07"
+  },
+  {
     "Branch_ID__c": "26190",
     "Name": "High Tech Motorsports 2",
     "Entity_Status__c": "Watchlist",
