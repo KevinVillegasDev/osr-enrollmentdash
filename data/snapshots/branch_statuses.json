@@ -7904,6 +7904,14 @@
     "Last_Status_Change_Date__c": "2026-06-05"
   },
   {
+    "Branch_ID__c": "23124",
+    "Name": "Aamco - 653",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-06"
+  },
+  {
     "Branch_ID__c": "23100",
     "Name": "Jewel Time Plus",
     "Entity_Status__c": "Terminated",
@@ -8680,6 +8688,14 @@
     "Last_Status_Change_Date__c": "2025-03-26"
   },
   {
+    "Branch_ID__c": "23489",
+    "Name": "Wilcox & Son Automotive",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-06"
+  },
+  {
     "Branch_ID__c": "23592",
     "Name": "Carput Multiservices",
     "Entity_Status__c": "Closed/Sold",
@@ -8750,6 +8766,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-01-29"
+  },
+  {
+    "Branch_ID__c": "23536",
+    "Name": "A Tech Transmission",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-06"
   },
   {
     "Branch_ID__c": "23550",
@@ -10272,6 +10296,14 @@
     "Last_Status_Change_Date__c": "2025-10-21"
   },
   {
+    "Branch_ID__c": "24836",
+    "Name": "Fast Fix Auto",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-06"
+  },
+  {
     "Branch_ID__c": "24856",
     "Name": "Alpha Electric Bikes",
     "Entity_Status__c": "Watchlist",
@@ -11458,10 +11490,10 @@
   {
     "Branch_ID__c": "25971",
     "Name": "Philly Encanto Furniture",
-    "Entity_Status__c": "Watchlist",
+    "Entity_Status__c": "Suspended",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-08-03"
+    "Last_Status_Change_Date__c": "2026-08-06"
   },
   {
     "Branch_ID__c": "26020",
@@ -11494,6 +11526,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-07-09"
+  },
+  {
+    "Branch_ID__c": "26183",
+    "Name": "Titan Audio",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-06"
   },
   {
     "Branch_ID__c": "26009",
