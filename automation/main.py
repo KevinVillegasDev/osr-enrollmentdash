@@ -24,7 +24,7 @@ from .config import (
     TERRITORY_MAP, HYBRID_REPS, today_pacific,
 )
 from .salesforce_auth import SalesforceClient, SalesforceAuthError
-from .salesforce_reports import fetch_all_reports, fetch_cohort_activity, parse_report_rows, fetch_report, fetch_maps_check_ins_split, fetch_monthly_quota_for_month, fetch_branch_statuses
+from .salesforce_reports import fetch_all_reports, fetch_cohort_activity, parse_report_rows, fetch_report, fetch_maps_check_ins_split, fetch_monthly_quota_for_month, fetch_branch_statuses, fetch_branch_parents
 from .processors import monthly_dashboard, cohort_tracking, q1_enrollment, field_activity, index_page, analytics, territory_review, hybrid_tracker
 from . import html_generator
 
@@ -257,6 +257,29 @@ def main():
             logger.info("Saved branch statuses: %d non-active branches", len(statuses))
         except Exception as e:
             logger.warning("Branch status fetch failed (non-fatal): %s", e)
+
+    # ── Step 2e: Branch -> parent (Legal Entity) map ─────────────────────
+    # Consumed by the merchant report builder (management-dash repo) for
+    # entity-level reporting. Only rewritten when content changes, so the
+    # hourly commit stays quiet. Non-fatal on failure.
+    if client:
+        try:
+            parents = fetch_branch_parents(client)
+            parents.sort(key=lambda r: r["b"])
+            ppath = os.path.join(PROJECT_ROOT, "data", "snapshots",
+                                 "branch_parents.json")
+            new_payload = json.dumps(parents, separators=(",", ":"))
+            old_payload = None
+            if os.path.exists(ppath):
+                with open(ppath, "r", encoding="utf-8") as f:
+                    old_payload = f.read()
+            if new_payload != old_payload:
+                with open(ppath, "w", encoding="utf-8") as f:
+                    f.write(new_payload)
+            logger.info("Branch parents: %d mappings%s", len(parents),
+                        "" if new_payload != old_payload else " (unchanged)")
+        except Exception as e:
+            logger.warning("Branch parent fetch failed (non-fatal): %s", e)
 
     # Normalize enrollment rows so all processors see display values
     # instead of raw Salesforce IDs (SUMMARY format stores IDs in main keys,

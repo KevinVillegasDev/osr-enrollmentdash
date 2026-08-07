@@ -675,3 +675,25 @@ def fetch_branch_statuses(client) -> list[dict]:
     for r in rows:
         r.pop("attributes", None)
     return rows
+
+
+def fetch_branch_parents(client) -> list[dict]:
+    """Branch ID -> parent (Legal Entity) account name for every branch that
+    has one. Compact {b, p} rows; feeds the merchant report builder's entity
+    picker (management-dash repo). Paginated via nextRecordsUrl."""
+    soql = ("SELECT Branch_ID__c, Parent.Name FROM Account "
+            "WHERE RecordType.Name = 'Branch' AND ParentId != null")
+    path = f"/services/data/{client.api_version}/query"
+    resp = client.get(path, params={"q": soql})
+    rows = []
+    while True:
+        for r in resp.get("records", []):
+            bid = (r.get("Branch_ID__c") or "").strip()
+            parent = ((r.get("Parent") or {}).get("Name") or "").strip()
+            if bid and parent:
+                rows.append({"b": bid, "p": parent})
+        nxt = resp.get("nextRecordsUrl")
+        if not nxt:
+            break
+        resp = client.get(nxt)
+    return rows
