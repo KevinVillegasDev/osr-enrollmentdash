@@ -6610,10 +6610,10 @@
   {
     "Branch_ID__c": "22132",
     "Name": "Orr Automotive",
-    "Entity_Status__c": "Suspended",
+    "Entity_Status__c": "Closed/Sold",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-07-14"
+    "Last_Status_Change_Date__c": "2026-08-08"
   },
   {
     "Branch_ID__c": "22151",
