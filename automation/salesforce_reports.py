@@ -681,7 +681,8 @@ def fetch_branch_parents(client) -> list[dict]:
     """Branch ID -> parent (Legal Entity) account name for every branch that
     has one. Compact {b, p} rows; feeds the merchant report builder's entity
     picker (management-dash repo). Paginated via nextRecordsUrl."""
-    soql = ("SELECT Branch_ID__c, Parent.Name FROM Account "
+    soql = ("SELECT Branch_ID__c, Parent.Name, Name, BillingStreet, "
+            "BillingCity, BillingState FROM Account "
             "WHERE RecordType.Name = 'Branch' AND ParentId != null")
     path = f"/services/data/{client.api_version}/query"
     resp = client.get(path, params={"q": soql})
@@ -691,7 +692,18 @@ def fetch_branch_parents(client) -> list[dict]:
             bid = (r.get("Branch_ID__c") or "").strip()
             parent = ((r.get("Parent") or {}).get("Name") or "").strip()
             if bid and parent:
-                rows.append({"b": bid, "p": parent})
+                row = {"b": bid, "p": parent}
+                ln = (r.get("Name") or "").strip()
+                if ln:
+                    row["ln"] = ln
+                street = " ".join((r.get("BillingStreet") or "").split())
+", ", ")
+                if street:
+                    row["ad"] = street
+                city = (r.get("BillingCity") or "").strip()
+                if city:
+                    row["c"] = city
+                rows.append(row)
         nxt = resp.get("nextRecordsUrl")
         if not nxt:
             break
