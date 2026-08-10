@@ -697,7 +697,6 @@ def fetch_branch_parents(client) -> list[dict]:
                 if ln:
                     row["ln"] = ln
                 street = " ".join((r.get("BillingStreet") or "").split())
-", ", ")
                 if street:
                     row["ad"] = street
                 city = (r.get("BillingCity") or "").strip()
