@@ -10024,6 +10024,14 @@
     "Last_Status_Change_Date__c": "2025-11-12"
   },
   {
+    "Branch_ID__c": "24734",
+    "Name": "Ceaser\u2019s Diesel Performance",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-10"
+  },
+  {
     "Branch_ID__c": "24524",
     "Name": "Arrington Speed Sport",
     "Entity_Status__c": "Suspended",
