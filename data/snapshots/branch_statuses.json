@@ -5696,6 +5696,14 @@
     "Last_Status_Change_Date__c": "2026-03-06"
   },
   {
+    "Branch_ID__c": "21212",
+    "Name": "AAMCO Transmissions - Lancaster",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-11"
+  },
+  {
     "Branch_ID__c": "21122",
     "Name": "All American Diesel & Fleet Services",
     "Entity_Status__c": "Suspended",
@@ -7822,6 +7830,14 @@
     "Status_Reason__c": "N/A",
     "Termination_Date__c": "2025-02-19",
     "Last_Status_Change_Date__c": "2025-02-19"
+  },
+  {
+    "Branch_ID__c": "23013",
+    "Name": "Inter Cars Miami",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-11"
   },
   {
     "Branch_ID__c": "23004",
