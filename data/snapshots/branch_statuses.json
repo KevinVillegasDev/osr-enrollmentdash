@@ -6152,6 +6152,14 @@
     "Last_Status_Change_Date__c": "2025-01-21"
   },
   {
+    "Branch_ID__c": "21640",
+    "Name": "Logos Automotive Repair",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-11"
+  },
+  {
     "Branch_ID__c": "21632",
     "Name": "Gilbert Tire Pros",
     "Entity_Status__c": "Closed/Sold",
