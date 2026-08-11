@@ -6600,6 +6600,14 @@
     "Last_Status_Change_Date__c": "2026-06-24"
   },
   {
+    "Branch_ID__c": "22641",
+    "Name": "JD Auto Repair",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-11"
+  },
+  {
     "Branch_ID__c": "22105",
     "Name": "Sterling Automotive",
     "Entity_Status__c": "Closed/Sold",
@@ -11198,6 +11206,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-04-02"
+  },
+  {
+    "Branch_ID__c": "25784",
+    "Name": "Barrons Tires and Wheels Custom Offsets",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-11"
   },
   {
     "Branch_ID__c": "25592",
