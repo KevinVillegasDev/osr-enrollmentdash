@@ -9528,6 +9528,14 @@
     "Last_Status_Change_Date__c": "2026-05-14"
   },
   {
+    "Branch_ID__c": "24972",
+    "Name": "Famous Cool Air 1",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-11"
+  },
+  {
     "Branch_ID__c": "24089",
     "Name": "Perfect Phone",
     "Entity_Status__c": "Watchlist",
