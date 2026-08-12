@@ -5016,6 +5016,14 @@
     "Last_Status_Change_Date__c": "2026-06-04"
   },
   {
+    "Branch_ID__c": "20279",
+    "Name": "Brake Masters",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-12"
+  },
+  {
     "Branch_ID__c": "20849",
     "Name": "Brother's Mobile Service",
     "Entity_Status__c": "Closed/Sold",
@@ -11210,10 +11218,10 @@
   {
     "Branch_ID__c": "25784",
     "Name": "Barrons Tires and Wheels Custom Offsets",
-    "Entity_Status__c": "Suspended",
+    "Entity_Status__c": "Watchlist",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-08-11"
+    "Last_Status_Change_Date__c": "2026-08-12"
   },
   {
     "Branch_ID__c": "25592",
