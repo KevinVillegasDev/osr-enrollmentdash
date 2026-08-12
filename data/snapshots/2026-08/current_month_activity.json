@@ -1,11 +1,43 @@
 [
   {
+    "Account Name": "RTP Rearend & Transmission Parts",
+    "Branch ID": "26173",
+    "8/1/2026_Sum of Funded Dollars": 0.0,
+    "8/1/2026_Sum of Funded Average": 0.0,
+    "8/1/2026_Sum of Applications": 2.0,
+    "8/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Affordable Furniture",
+    "Branch ID": "26171",
+    "8/1/2026_Sum of Funded Dollars": 0.0,
+    "8/1/2026_Sum of Funded Average": 0.0,
+    "8/1/2026_Sum of Applications": 1.0,
+    "8/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
     "Account Name": "R&R Mobility",
     "Branch ID": "26172",
-    "8/1/2026_Sum of Funded Dollars": 3469.0,
-    "8/1/2026_Sum of Funded Average": 1734.5,
-    "8/1/2026_Sum of Applications": 10.0,
-    "8/1/2026_Sum of Funded Applications Total": 2.0
+    "8/1/2026_Sum of Funded Dollars": 5089.0,
+    "8/1/2026_Sum of Funded Average": 1696.33,
+    "8/1/2026_Sum of Applications": 13.0,
+    "8/1/2026_Sum of Funded Applications Total": 3.0
+  },
+  {
+    "Account Name": "ATech-Transmissions",
+    "Branch ID": "26187",
+    "8/1/2026_Sum of Funded Dollars": 0.0,
+    "8/1/2026_Sum of Funded Average": 0.0,
+    "8/1/2026_Sum of Applications": 1.0,
+    "8/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "First Class Auto Service",
+    "Branch ID": "26178",
+    "8/1/2026_Sum of Funded Dollars": 1208.09,
+    "8/1/2026_Sum of Funded Average": 1208.09,
+    "8/1/2026_Sum of Applications": 1.0,
+    "8/1/2026_Sum of Funded Applications Total": 1.0
   },
   {
     "Account Name": "Aamco Transmissions and Total Car Care - Brookhurst St - Anaheim",
@@ -20,31 +52,7 @@
     "Branch ID": "26185",
     "8/1/2026_Sum of Funded Dollars": 3255.34,
     "8/1/2026_Sum of Funded Average": 3255.34,
-    "8/1/2026_Sum of Applications": 1.0,
+    "8/1/2026_Sum of Applications": 2.0,
     "8/1/2026_Sum of Funded Applications Total": 1.0
-  },
-  {
-    "Account Name": "Affordable Furniture",
-    "Branch ID": "26171",
-    "8/1/2026_Sum of Funded Dollars": 0.0,
-    "8/1/2026_Sum of Funded Average": 0.0,
-    "8/1/2026_Sum of Applications": 1.0,
-    "8/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
-    "Account Name": "ATech-Transmissions",
-    "Branch ID": "26187",
-    "8/1/2026_Sum of Funded Dollars": 0.0,
-    "8/1/2026_Sum of Funded Average": 0.0,
-    "8/1/2026_Sum of Applications": 1.0,
-    "8/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
-    "Account Name": "First Class Auto Service",
-    "Branch ID": "26178",
-    "8/1/2026_Sum of Funded Dollars": 0.0,
-    "8/1/2026_Sum of Funded Average": 0.0,
-    "8/1/2026_Sum of Applications": 1.0,
-    "8/1/2026_Sum of Funded Applications Total": 0.0
   }
 ]
