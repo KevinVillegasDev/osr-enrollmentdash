@@ -7480,6 +7480,14 @@
     "Last_Status_Change_Date__c": "2025-12-12"
   },
   {
+    "Branch_ID__c": "22685",
+    "Name": "Alpha Tires & Wheels",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-13"
+  },
+  {
     "Branch_ID__c": "22687",
     "Name": "RCI Jeep & 4x4",
     "Entity_Status__c": "Suspended",
@@ -9448,6 +9456,14 @@
     "Last_Status_Change_Date__c": "2025-10-11"
   },
   {
+    "Branch_ID__c": "23993",
+    "Name": "Alpha Appliances & More",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-13"
+  },
+  {
     "Branch_ID__c": "23987",
     "Name": "Plaza Home Center Furniture",
     "Entity_Status__c": "Terminated",
@@ -10078,6 +10094,14 @@
     "Status_Reason__c": "Performance",
     "Termination_Date__c": "2025-11-12",
     "Last_Status_Change_Date__c": "2025-11-12"
+  },
+  {
+    "Branch_ID__c": "24434",
+    "Name": "California Sound",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-13"
   },
   {
     "Branch_ID__c": "24734",
