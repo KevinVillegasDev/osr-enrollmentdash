@@ -14187,7 +14187,7 @@
     "Subject": "00UTO00000dizvl2AA",
     "_label_Subject": "Maps Check In",
     "Company / Account": "001TO00000ptwXSYAY",
-    "_label_Company / Account": "PDE TRUCK PARTS LLC",
+    "_label_Company / Account": "PDE Truck Parts LLC",
     "Assigned": "0058Y00000B79SFQAZ",
     "_label_Assigned": "Jared Midkiff",
     "Full Comments": "Spoke with Amira about enrolling with EasyPay while also reviewing benefits to the business/customer, got location to enroll!",
@@ -15790,5 +15790,47 @@
     "_label_Full Comments": "-",
     "Lead": "00QTO00001BGBQT2A5",
     "_label_Lead": "Jorge Valencia"
+  },
+  {
+    "Created Date/Time": "2026-08-12T23:06:07Z",
+    "_label_Created Date/Time": "8/12/2026, 4:06 PM",
+    "Subject": "00UTO00000dk4S22AI",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "0018Y00002s0kCqQAI",
+    "_label_Company / Account": "Full Throttle Automotive LLC",
+    "Assigned": "005TO000008qrzhYAA",
+    "_label_Assigned": "Claudia Gerhardt",
+    "Full Comments": "Checked in via Maps Application \nSalesforce Note: Full Throttle \nSpoke with Scott briefly while he was outside working on a vehicle. Everyone else had already left for the day, and there was no one in the front lobby. Not much activity at the time of the visit. Scott mentioned that business has been slow; however, if any customers need financing, they always refer them to EasyPay. Will stay close and follow up with this merchant.",
+    "_label_Full Comments": "Checked in via Maps Application \nSalesforce Note: Full Throttle \nSpoke with Scott briefly while he was outside working on a vehicle. Everyone else had already left for the day, and there was no one in the front lobby. Not much activity at the time of the visit. Scott mentioned that business has been slow; however, if any customers need financing, they always refer them to EasyPay. Will stay close and follow up with this merchant.",
+    "Lead": null,
+    "_label_Lead": "-"
+  },
+  {
+    "Created Date/Time": "2026-08-12T23:08:15Z",
+    "_label_Created Date/Time": "8/12/2026, 4:08 PM",
+    "Subject": "00UTO00000dkTrm2AE",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "00QTO00001BGChV2AX",
+    "_label_Company / Account": "2504 Durfee Ave",
+    "Assigned": "005TO00000ByPGXYA3",
+    "_label_Assigned": "Jose Valencia",
+    "Full Comments": null,
+    "_label_Full Comments": "-",
+    "Lead": "00QTO00001BGChV2AX",
+    "_label_Lead": "Daniel Unknown"
+  },
+  {
+    "Created Date/Time": "2026-08-12T23:19:56Z",
+    "_label_Created Date/Time": "8/12/2026, 4:19 PM",
+    "Subject": "00UTO00000dkScM2AU",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "0018Y00002s0mPXQAY",
+    "_label_Company / Account": "Jaime Echevarria DBA J&A Auto Repair & Smog",
+    "Assigned": "005TO00000ByPGXYA3",
+    "_label_Assigned": "Jose Valencia",
+    "Full Comments": "Checked in via Maps Application \nStopped by J&A Auto and Electric Repair. I spoke with a gentleman next door who rebuilds engines and has been at the location for approximately 25 years. He told me that Mr. Jaime had been at this location for about 30 years but has since relocated to Fontana.\n\nBased on that information, I\u2019m going to begin the process of shutting down this account. I may eventually visit Mr. Jaime at his new location in Fontana to see if there is an opportunity to do business with him there.\n\nHowever, I also noticed that the account has been signed up with EasyPay since 2018 and has never submitted a single application. Given the lack of activity over that period of time, I don\u2019t believe it makes sense to continue carrying this account in the portfolio.",
+    "_label_Full Comments": "Checked in via Maps Application \nStopped by J&A Auto and Electric Repair. I spoke with a gentleman next door who rebuilds engines and has been at the location for approximately 25 years. He told me that Mr. Jaime had been at this location for about 30 years but has since relocated to Fontana.\n\nBased on that information, I\u2019m going to begin the process of shutting down this account. I may eventually visit Mr. Jaime at his new location in Fontana to see if there is an opportunity to do business with him there.\n\nHowever, I also noticed that the account has been signed up with EasyPay since 2018 and has never submitted a single application. Given the lack of activity over that period of time, I don\u2019t believe it makes sense to continue carrying this account in the portfolio.",
+    "Lead": null,
+    "_label_Lead": "-"
   }
 ]
