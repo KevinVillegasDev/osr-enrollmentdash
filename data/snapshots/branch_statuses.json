@@ -9720,6 +9720,14 @@
     "Last_Status_Change_Date__c": "2026-03-17"
   },
   {
+    "Branch_ID__c": "24197",
+    "Name": "Rambo Tires",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-13"
+  },
+  {
     "Branch_ID__c": "24214",
     "Name": "Sara Jewelers",
     "Entity_Status__c": "Terminated",
