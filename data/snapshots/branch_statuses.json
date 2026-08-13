@@ -4952,6 +4952,14 @@
     "Last_Status_Change_Date__c": "2025-01-31"
   },
   {
+    "Branch_ID__c": "5397",
+    "Name": "Jtl International, Inc. DBA Jubilee Furniture",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-13"
+  },
+  {
     "Branch_ID__c": "10792",
     "Name": "Mid-Atlantic Auto Specialist Inc DBA Mid- Atlantic Auto Specialist",
     "Entity_Status__c": "Closed/Sold",
