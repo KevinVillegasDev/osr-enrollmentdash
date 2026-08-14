@@ -15968,8 +15968,8 @@
     "_label_Company / Account": "Eddy's Timing Solution",
     "Assigned": "0058Y00000BjAreQAF",
     "_label_Assigned": "Stephanie Whitlock",
-    "Full Comments": "Checked in via Maps Application",
-    "_label_Full Comments": "Checked in via Maps Application",
+    "Full Comments": "I spoke with Eddy, the owner. I had spoken to him about the program a couple months ago, so I stopped by today to see if he was ready to enroll. He asked me several questions but ultimately said he was not ready to enroll today. I reminded him that it\u2019s a pre-service so even if he enrolled today, he did not need to use this right away, but he still didn\u2019t feel comfortable enrolling. I will come back in a few months.",
+    "_label_Full Comments": "I spoke with Eddy, the owner. I had spoken to him about the program a couple months ago, so I stopped by today to see if he was ready to enroll. He asked me several questions but ultimately said he was not ready to enroll today. I reminded him that it\u2019s a pre-service so even if he enrolled today, he did not need to use this right away, but he still didn\u2019t feel comfortable enrolling. I will come back in a few months.",
     "Lead": "00QTO000017lfuR2AQ",
     "_label_Lead": "Eddy's Timing Solution Unknown"
   },
@@ -16248,8 +16248,8 @@
     "_label_Company / Account": "Vic's Auto",
     "Assigned": "0058Y00000BjAreQAF",
     "_label_Assigned": "Stephanie Whitlock",
-    "Full Comments": "Checked in via Maps Application",
-    "_label_Full Comments": "Checked in via Maps Application",
+    "Full Comments": "I spoke with Justin and Chris. I stopped by because we recently had to turn off their spiff after their corporate office informed us that the CEO did not want to incentivize associates to use financing. During the visit, I learned that our competition was not asked to discontinue their spiff. Acima lowered their spiff from $40 to $20, which understandably left the associates frustrated.\r\n\r\nI wanted to meet with them in person to explain the situation and make it clear that turning off the spiff was not our decision. I told them that while I can\u2019t provide a spiff for every application, I would still look for other ways to encourage them to use EasyPay, such as sending lunch for the team or potentially providing one larger Amazon gift card at the end of the month as a thank-you.\r\n\r\nAfter I explained the situation, they were much less upset with us. They also said they will likely continue using EasyPay because they have experienced issues with Acima when trying to finance anything other...",
+    "_label_Full Comments": "I spoke with Justin and Chris. I stopped by because we recently had to turn off their spiff after their corporate office informed us that the CEO did not want to incentivize associates to use financing. During the visit, I learned that our competition was not asked to discontinue their spiff. Acima lowered their spiff from $40 to $20, which understandably left the associates frustrated.\r\n\r\nI wanted to meet with them in person to explain the situation and make it clear that turning off the spiff was not our decision. I told them that while I can\u2019t provide a spiff for every application, I would still look for other ways to encourage them to use EasyPay, such as sending lunch for the team or potentially providing one larger Amazon gift card at the end of the month as a thank-you.\r\n\r\nAfter I explained the situation, they were much less upset with us. They also said they will likely continue using EasyPay because they have experienced issues with Acima when trying to finance anything other...",
     "Lead": null,
     "_label_Lead": "-"
   },
@@ -18296,5 +18296,47 @@
     "_label_Full Comments": "-",
     "Lead": "00QTO00001BIAOh2AP",
     "_label_Lead": "Miguel Unknown"
+  },
+  {
+    "Created Date/Time": "2026-08-13T23:28:11Z",
+    "_label_Created Date/Time": "8/13/2026, 4:28 PM",
+    "Subject": "00UTO00000dn5Eh2AI",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "001TO00000ClPIeYAN",
+    "_label_Company / Account": "JBE Electronics & Appliances",
+    "Assigned": "005TO000008qrzhYAA",
+    "_label_Assigned": "Claudia Gerhardt",
+    "Full Comments": "Checked in via Maps Application \nSalesforce Note: JBE \nBrought in some rack cards and display.",
+    "_label_Full Comments": "Checked in via Maps Application \nSalesforce Note: JBE \nBrought in some rack cards and display.",
+    "Lead": null,
+    "_label_Lead": "-"
+  },
+  {
+    "Created Date/Time": "2026-08-13T23:30:00Z",
+    "_label_Created Date/Time": "8/13/2026, 4:30 PM",
+    "Subject": "00UTO00000dnEQ02AM",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "00QTO00001BIMPp2AP",
+    "_label_Company / Account": "Pulido's Auto Repair Inc.",
+    "Assigned": "005TO000008qrzhYAA",
+    "_label_Assigned": "Claudia Gerhardt",
+    "Full Comments": "See sales notes",
+    "_label_Full Comments": "See sales notes",
+    "Lead": "00QTO00001BIMPp2AP",
+    "_label_Lead": "Juan Unknown"
+  },
+  {
+    "Created Date/Time": "2026-08-13T23:57:57Z",
+    "_label_Created Date/Time": "8/13/2026, 4:57 PM",
+    "Subject": "00UTO00000dnMPA2A2",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "00QTO00001BIOEj2AP",
+    "_label_Company / Account": "Inda Tires",
+    "Assigned": "005TO000008qrzhYAA",
+    "_label_Assigned": "Claudia Gerhardt",
+    "Full Comments": "See sales notes",
+    "_label_Full Comments": "See sales notes",
+    "Lead": "00QTO00001BIOEj2AP",
+    "_label_Lead": "Eduardo Unknown"
   }
 ]
