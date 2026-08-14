@@ -1112,6 +1112,14 @@
     "Last_Status_Change_Date__c": "2025-12-12"
   },
   {
+    "Branch_ID__c": "1656",
+    "Name": "Fairport Auto & Tire Service",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-14"
+  },
+  {
     "Branch_ID__c": "1664",
     "Name": "Peters Auto Works",
     "Entity_Status__c": "Closed/Sold",
