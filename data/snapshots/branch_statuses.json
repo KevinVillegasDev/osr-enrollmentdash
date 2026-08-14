@@ -7040,6 +7040,14 @@
     "Last_Status_Change_Date__c": "2025-12-12"
   },
   {
+    "Branch_ID__c": "22380",
+    "Name": "World Auto and Transmissions",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-14"
+  },
+  {
     "Branch_ID__c": "22768",
     "Name": "Fayraz Jewelry",
     "Entity_Status__c": "Terminated",
