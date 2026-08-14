@@ -11320,6 +11320,14 @@
     "Last_Status_Change_Date__c": "2026-04-20"
   },
   {
+    "Branch_ID__c": "25708",
+    "Name": "Euro Motorsports",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-14"
+  },
+  {
     "Branch_ID__c": "25675",
     "Name": "Timeless Classics",
     "Entity_Status__c": "Watchlist",
