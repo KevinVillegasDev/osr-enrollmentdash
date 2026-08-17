@@ -4656,6 +4656,14 @@
     "Last_Status_Change_Date__c": "2025-07-16"
   },
   {
+    "Branch_ID__c": "19808",
+    "Name": "Marco Espinosa DBA Eagle Ranch Automotive",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-17"
+  },
+  {
     "Branch_ID__c": "19904",
     "Name": "Ricky Auto Repair",
     "Entity_Status__c": "Warning List",
@@ -10246,6 +10254,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2025-12-20"
+  },
+  {
+    "Branch_ID__c": "24669",
+    "Name": "Cali Current",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-17"
   },
   {
     "Branch_ID__c": "24581",
