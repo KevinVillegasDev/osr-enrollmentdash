@@ -58,6 +58,8 @@ REPORT_IDS = {
 # territory covering unmanaged areas across states; no dedicated ISR.
 # Phillip Mason (RIC-6) departed July 2026; RIC-6 now unassigned (ISR
 # coverage continues under Lesly Arroyo). Frozen past dashboards keep him.
+# Monroe Simon added August 2026 for LTO-4 (TX — DFW; open since Francisco
+# Gonzalez departed in June).
 OSR_ROSTER = [
     "Cesar Flores",
     "Claudia Gerhardt",
@@ -68,6 +70,7 @@ OSR_ROSTER = [
     "Marco Garmendia",
     "Mariana Gross",
     "Matthew MacDonald",
+    "Monroe Simon",
     "Omar Corona",
     "Richard Herrera",
     "Stephanie Whitlock",
@@ -77,8 +80,9 @@ OSR_ROSTER = [
 
 # ─── Territory → OSR Mapping ────────────────────────────────────────────────
 # Maps territory codes from the sales budget to OSR names.
-# Unassigned territories (LTO-4, LTO-8, RIC-6, RIC-7) are excluded.
-# LTO-4: Sara Porter → Francisco Gonzalez (removed June 2026); now unassigned.
+# Unassigned territories (LTO-8, RIC-6, RIC-7) are excluded.
+# LTO-4: Sara Porter → Francisco Gonzalez (removed June 2026) → Monroe Simon
+#        from August 2026 (TX — DFW).
 # RIC-6: Phillip Mason (departed July 2026); now unassigned. ISR coverage
 #        continues under Lesly Arroyo (still in ISR_TERRITORY_MAP).
 # RIC-3: Jose Valencia, effective July 2026 (CA; previously unassigned).
@@ -94,6 +98,7 @@ TERRITORY_MAP = {
     "LTO-1": "Yemaira Hernandez",
     "LTO-2": "Omar Corona",
     "LTO-3": "Joseph Guerra",
+    "LTO-4": "Monroe Simon",
     "LTO-5": "Jared Midkiff",
     "LTO-6": "Stephanie Whitlock",
     "RIC-1": "Cesar Flores",
@@ -130,7 +135,7 @@ ISR_TERRITORY_MAP = {
     "LTO-1": "Laura Angulo",
     "LTO-2": "Noemy Carrion",
     "LTO-3": "Noemy Carrion",
-    "LTO-4": "Noemy Carrion",      # territory OPEN — ISR coverage continues
+    "LTO-4": "Noemy Carrion",      # Monroe Simon's territory (Aug 2026); drops to ISR #7 when hired
     "LTO-5": "Laura Angulo",
     "LTO-6": "Connor Admirand",
     "LTO-8": "Laura Angulo",       # territory OPEN — ISR coverage continues
@@ -194,6 +199,7 @@ OSR_EMAILS = {
     "Marco Garmendia": "marco.garmendia@easypayfinance.com",
     "Mariana Gross": "mariana.gross@easypayfinance.com",
     "Matthew MacDonald": "matthew.macdonald@easypayfinance.com",
+    "Monroe Simon": "monroe.simon@easypayfinance.com",
     "Omar Corona": "omar.corona@easypayfinance.com",
     "Richard Herrera": "richard.herrera@easypayfinance.com",
     "Stephanie Whitlock": "stephanie.whitlock@easypayfinance.com",
