@@ -3320,6 +3320,14 @@
     "Last_Status_Change_Date__c": "2025-08-26"
   },
   {
+    "Branch_ID__c": "12034",
+    "Name": "Jaime Echevarria DBA J&A Auto Repair & Smog",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-17"
+  },
+  {
     "Branch_ID__c": "12089",
     "Name": "Alejandra Perez DBA Koritas Tires",
     "Entity_Status__c": "Closed/Sold",
