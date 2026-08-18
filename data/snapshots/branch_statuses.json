@@ -10096,6 +10096,14 @@
     "Last_Status_Change_Date__c": "2025-08-14"
   },
   {
+    "Branch_ID__c": "24400",
+    "Name": "F. Rodelman Body Shop",
+    "Entity_Status__c": "Warning List",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-17"
+  },
+  {
     "Branch_ID__c": "24409",
     "Name": "Done Right Auto Body",
     "Entity_Status__c": "Watchlist",
@@ -10574,6 +10582,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2025-11-14"
+  },
+  {
+    "Branch_ID__c": "24852",
+    "Name": "Whittier Tint Shop",
+    "Entity_Status__c": "Warning List",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-17"
   },
   {
     "Branch_ID__c": "24889",
