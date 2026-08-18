@@ -616,6 +616,14 @@
     "Last_Status_Change_Date__c": "2026-07-17"
   },
   {
+    "Branch_ID__c": "151",
+    "Name": "Az Beds LLC DBA Arizona Beds",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-18"
+  },
+  {
     "Branch_ID__c": "193",
     "Name": "Aire Serv of Salt Lake City",
     "Entity_Status__c": "Closed/Sold",
@@ -4736,6 +4744,14 @@
     "Last_Status_Change_Date__c": "2026-02-06"
   },
   {
+    "Branch_ID__c": "19547",
+    "Name": "Meineke Car Care - 2938",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": "2024-04-30",
+    "Last_Status_Change_Date__c": "2025-05-14"
+  },
+  {
     "Branch_ID__c": "19585",
     "Name": "Global Tires Snellville LLC DBA Global Tires",
     "Entity_Status__c": "Suspended",
@@ -4838,6 +4854,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-06-09"
+  },
+  {
+    "Branch_ID__c": "19696",
+    "Name": "Meineke Car Care - 2939",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-05-14"
   },
   {
     "Branch_ID__c": "19709",
@@ -5542,6 +5566,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-03-17"
+  },
+  {
+    "Branch_ID__c": "20695",
+    "Name": "Meineke Car Care - 2479",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-05-14"
   },
   {
     "Branch_ID__c": "20713",
