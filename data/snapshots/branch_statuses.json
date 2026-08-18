@@ -2608,6 +2608,14 @@
     "Last_Status_Change_Date__c": "2026-04-28"
   },
   {
+    "Branch_ID__c": "6394",
+    "Name": "Wheels Deals Sepulveda Inc.",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-18"
+  },
+  {
     "Branch_ID__c": "6400",
     "Name": "Affordable Tire & Brake III , Inc DBA Affordable Tire Factory",
     "Entity_Status__c": "Closed/Sold",
@@ -10130,10 +10138,10 @@
   {
     "Branch_ID__c": "24400",
     "Name": "F. Rodelman Body Shop",
-    "Entity_Status__c": "Warning List",
+    "Entity_Status__c": "Suspended",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-08-17"
+    "Last_Status_Change_Date__c": "2026-08-18"
   },
   {
     "Branch_ID__c": "24409",
@@ -10618,10 +10626,10 @@
   {
     "Branch_ID__c": "24852",
     "Name": "Whittier Tint Shop",
-    "Entity_Status__c": "Warning List",
+    "Entity_Status__c": "Suspended",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-08-17"
+    "Last_Status_Change_Date__c": "2026-08-18"
   },
   {
     "Branch_ID__c": "24889",
