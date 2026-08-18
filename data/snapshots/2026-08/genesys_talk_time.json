@@ -9,16 +9,16 @@
   {
     "user_id": "a9680b0b-833e-422c-9ae7-c2b280afd964",
     "name": "Maria Espindola",
-    "talk_seconds": 221009,
-    "talk_display": "61h 23m",
-    "calls": 2134
+    "talk_seconds": 221513,
+    "talk_display": "61h 31m",
+    "calls": 2141
   },
   {
     "user_id": "c30af5b2-a82c-440e-9629-a37affc3f08d",
     "name": "Diego Arriaga",
-    "talk_seconds": 209051,
-    "talk_display": "58h 4m",
-    "calls": 1945
+    "talk_seconds": 209554,
+    "talk_display": "58h 12m",
+    "calls": 1950
   },
   {
     "user_id": "dc6d4a2a-8231-4fb9-876e-94b3cb1ded5a",
@@ -114,9 +114,9 @@
   {
     "user_id": "d421063f-892f-44c6-a753-68c3b0dc2525",
     "name": "Elton Ramirez",
-    "talk_seconds": 115096,
-    "talk_display": "31h 58m",
-    "calls": 1855
+    "talk_seconds": 115229,
+    "talk_display": "32h 0m",
+    "calls": 1860
   },
   {
     "user_id": "1332d5ba-280b-4f82-9b9f-ea0c03c92c89",
@@ -142,9 +142,9 @@
   {
     "user_id": "eb53ed35-8863-4021-bd44-909f19636923",
     "name": "Benjamin Munoz",
-    "talk_seconds": 109132,
-    "talk_display": "30h 18m",
-    "calls": 1567
+    "talk_seconds": 109461,
+    "talk_display": "30h 24m",
+    "calls": 1571
   },
   {
     "user_id": "03ef1d8c-7daa-4a57-9229-d028d76c465a",
@@ -177,9 +177,9 @@
   {
     "user_id": "d92f85ef-d236-44e8-af25-34c7caa50a3f",
     "name": "Dan Flores",
-    "talk_seconds": 98663,
-    "talk_display": "27h 24m",
-    "calls": 1599
+    "talk_seconds": 98912,
+    "talk_display": "27h 28m",
+    "calls": 1603
   },
   {
     "user_id": "d2343d3e-9373-4bc2-9b38-907016f6998b",
@@ -203,18 +203,18 @@
     "calls": 979
   },
   {
+    "user_id": "8862fd25-c708-4e34-81ce-555776053328",
+    "name": "Fabiola Tapia",
+    "talk_seconds": 91804,
+    "talk_display": "25h 30m",
+    "calls": 987
+  },
+  {
     "user_id": "a907a9b0-1d7d-4bca-bbef-e55967e19d27",
     "name": "Michelle Johnson",
     "talk_seconds": 91632,
     "talk_display": "25h 27m",
     "calls": 2147
-  },
-  {
-    "user_id": "8862fd25-c708-4e34-81ce-555776053328",
-    "name": "Fabiola Tapia",
-    "talk_seconds": 91396,
-    "talk_display": "25h 23m",
-    "calls": 984
   },
   {
     "user_id": "3a8c4b87-ed65-4857-996e-cf8f195e1c4a",
