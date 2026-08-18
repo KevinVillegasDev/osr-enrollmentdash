@@ -1416,6 +1416,14 @@
     "Last_Status_Change_Date__c": "2026-08-18"
   },
   {
+    "Branch_ID__c": "2558",
+    "Name": "Christian Kaleta DBA Predators Reptile Center",
+    "Entity_Status__c": "Inactive",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-18"
+  },
+  {
     "Branch_ID__c": "2570",
     "Name": "James Bondi Furniture Company Inc. DBA Bondi Furniture",
     "Entity_Status__c": "Closed/Sold",
