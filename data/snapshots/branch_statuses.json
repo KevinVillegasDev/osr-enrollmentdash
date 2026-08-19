@@ -1888,6 +1888,14 @@
     "Last_Status_Change_Date__c": "2025-12-05"
   },
   {
+    "Branch_ID__c": "4141",
+    "Name": "Maria Medina DBA Lupitas Furniture",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-19"
+  },
+  {
     "Branch_ID__c": "4152",
     "Name": "Trebuchet Automotive, LLC DBA Meineke Car Care Center - 2110",
     "Entity_Status__c": "Closed/Sold",
@@ -5478,6 +5486,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-07-30"
+  },
+  {
+    "Branch_ID__c": "20659",
+    "Name": "Texas Tires Discounters",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-19"
   },
   {
     "Branch_ID__c": "20770",

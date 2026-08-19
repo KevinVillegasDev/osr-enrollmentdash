@@ -1,82 +1,34 @@
 [
   {
-    "Account Name": "Viera Truck Repairs",
-    "Branch ID": "26219",
-    "8/1/2026_Sum of Funded Dollars": 600.0,
-    "8/1/2026_Sum of Funded Average": 600.0,
-    "8/1/2026_Sum of Applications": 1.0,
-    "8/1/2026_Sum of Funded Applications Total": 1.0
-  },
-  {
-    "Account Name": "Titan Audio",
-    "Branch ID": "26183",
-    "8/1/2026_Sum of Funded Dollars": 31154.0,
-    "8/1/2026_Sum of Funded Average": 3894.25,
-    "8/1/2026_Sum of Applications": 11.0,
-    "8/1/2026_Sum of Funded Applications Total": 8.0
-  },
-  {
-    "Account Name": "First Class Auto Service",
-    "Branch ID": "26178",
-    "8/1/2026_Sum of Funded Dollars": 1208.09,
-    "8/1/2026_Sum of Funded Average": 1208.09,
-    "8/1/2026_Sum of Applications": 3.0,
-    "8/1/2026_Sum of Funded Applications Total": 1.0
-  },
-  {
-    "Account Name": "Joes Tires",
-    "Branch ID": "26201",
-    "8/1/2026_Sum of Funded Dollars": 1046.72,
-    "8/1/2026_Sum of Funded Average": 1046.72,
-    "8/1/2026_Sum of Applications": 1.0,
-    "8/1/2026_Sum of Funded Applications Total": 1.0
-  },
-  {
-    "Account Name": "RTP Rearend & Transmission Parts",
-    "Branch ID": "26173",
+    "Account Name": "YeaWeFixThat - Deltona",
+    "Branch ID": "26228",
     "8/1/2026_Sum of Funded Dollars": 0.0,
     "8/1/2026_Sum of Funded Average": 0.0,
-    "8/1/2026_Sum of Applications": 3.0,
+    "8/1/2026_Sum of Applications": 2.0,
     "8/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
-    "Account Name": "Cornerstone (Integrity 1st Auto - Culebra)",
-    "Branch ID": "26212",
-    "8/1/2026_Sum of Funded Dollars": 0.0,
-    "8/1/2026_Sum of Funded Average": 0.0,
-    "8/1/2026_Sum of Applications": 1.0,
-    "8/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
-    "Account Name": "Thorr Auto Inc",
-    "Branch ID": "26195",
-    "8/1/2026_Sum of Funded Dollars": 0.0,
-    "8/1/2026_Sum of Funded Average": 0.0,
-    "8/1/2026_Sum of Applications": 1.0,
-    "8/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
-    "Account Name": "OSY Semi Trailer Repair & Truck Parts",
-    "Branch ID": "26185",
-    "8/1/2026_Sum of Funded Dollars": 6130.34,
-    "8/1/2026_Sum of Funded Average": 3065.17,
-    "8/1/2026_Sum of Applications": 7.0,
-    "8/1/2026_Sum of Funded Applications Total": 2.0
   },
   {
     "Account Name": "ATech-Transmissions",
     "Branch ID": "26187",
+    "8/1/2026_Sum of Funded Dollars": 3000.0,
+    "8/1/2026_Sum of Funded Average": 3000.0,
+    "8/1/2026_Sum of Applications": 2.0,
+    "8/1/2026_Sum of Funded Applications Total": 1.0
+  },
+  {
+    "Account Name": "Viera Truck Repairs",
+    "Branch ID": "26219",
+    "8/1/2026_Sum of Funded Dollars": 1600.0,
+    "8/1/2026_Sum of Funded Average": 800.0,
+    "8/1/2026_Sum of Applications": 5.0,
+    "8/1/2026_Sum of Funded Applications Total": 2.0
+  },
+  {
+    "Account Name": "NS Auto Sales",
+    "Branch ID": "26175",
     "8/1/2026_Sum of Funded Dollars": 0.0,
     "8/1/2026_Sum of Funded Average": 0.0,
     "8/1/2026_Sum of Applications": 1.0,
-    "8/1/2026_Sum of Funded Applications Total": 0.0
-  },
-  {
-    "Account Name": "EZ Famous Wheels & Tires",
-    "Branch ID": "26216",
-    "8/1/2026_Sum of Funded Dollars": 0.0,
-    "8/1/2026_Sum of Funded Average": 0.0,
-    "8/1/2026_Sum of Applications": 2.0,
     "8/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
@@ -88,20 +40,12 @@
     "8/1/2026_Sum of Funded Applications Total": 8.0
   },
   {
-    "Account Name": "R&R Mobility",
-    "Branch ID": "26172",
-    "8/1/2026_Sum of Funded Dollars": 9899.0,
-    "8/1/2026_Sum of Funded Average": 1649.83,
-    "8/1/2026_Sum of Applications": 23.0,
-    "8/1/2026_Sum of Funded Applications Total": 6.0
-  },
-  {
-    "Account Name": "Meineke 367",
-    "Branch ID": "26213",
-    "8/1/2026_Sum of Funded Dollars": 0.0,
-    "8/1/2026_Sum of Funded Average": 0.0,
-    "8/1/2026_Sum of Applications": 2.0,
-    "8/1/2026_Sum of Funded Applications Total": 0.0
+    "Account Name": "OSY Semi Trailer Repair & Truck Parts",
+    "Branch ID": "26185",
+    "8/1/2026_Sum of Funded Dollars": 6130.34,
+    "8/1/2026_Sum of Funded Average": 3065.17,
+    "8/1/2026_Sum of Applications": 8.0,
+    "8/1/2026_Sum of Funded Applications Total": 2.0
   },
   {
     "Account Name": "Affordable Furniture",
@@ -120,8 +64,104 @@
     "8/1/2026_Sum of Funded Applications Total": 1.0
   },
   {
-    "Account Name": "NS Auto Sales",
-    "Branch ID": "26175",
+    "Account Name": "Titan Audio",
+    "Branch ID": "26183",
+    "8/1/2026_Sum of Funded Dollars": 41337.0,
+    "8/1/2026_Sum of Funded Average": 3757.91,
+    "8/1/2026_Sum of Applications": 14.0,
+    "8/1/2026_Sum of Funded Applications Total": 11.0
+  },
+  {
+    "Account Name": "Joes Tires",
+    "Branch ID": "26201",
+    "8/1/2026_Sum of Funded Dollars": 1046.72,
+    "8/1/2026_Sum of Funded Average": 1046.72,
+    "8/1/2026_Sum of Applications": 1.0,
+    "8/1/2026_Sum of Funded Applications Total": 1.0
+  },
+  {
+    "Account Name": "Tx Furniture & Vanity",
+    "Branch ID": "26232",
+    "8/1/2026_Sum of Funded Dollars": 0.0,
+    "8/1/2026_Sum of Funded Average": 0.0,
+    "8/1/2026_Sum of Applications": 3.0,
+    "8/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Team One Auto Group",
+    "Branch ID": "26197",
+    "8/1/2026_Sum of Funded Dollars": 0.0,
+    "8/1/2026_Sum of Funded Average": 0.0,
+    "8/1/2026_Sum of Applications": 1.0,
+    "8/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "First Class Auto Service",
+    "Branch ID": "26178",
+    "8/1/2026_Sum of Funded Dollars": 2026.62,
+    "8/1/2026_Sum of Funded Average": 1013.31,
+    "8/1/2026_Sum of Applications": 4.0,
+    "8/1/2026_Sum of Funded Applications Total": 2.0
+  },
+  {
+    "Account Name": "Meineke 367",
+    "Branch ID": "26213",
+    "8/1/2026_Sum of Funded Dollars": 0.0,
+    "8/1/2026_Sum of Funded Average": 0.0,
+    "8/1/2026_Sum of Applications": 2.0,
+    "8/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "EZ Famous Wheels & Tires",
+    "Branch ID": "26216",
+    "8/1/2026_Sum of Funded Dollars": 0.0,
+    "8/1/2026_Sum of Funded Average": 0.0,
+    "8/1/2026_Sum of Applications": 2.0,
+    "8/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Thorr Auto Inc",
+    "Branch ID": "26195",
+    "8/1/2026_Sum of Funded Dollars": 0.0,
+    "8/1/2026_Sum of Funded Average": 0.0,
+    "8/1/2026_Sum of Applications": 1.0,
+    "8/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "R&R Mobility",
+    "Branch ID": "26172",
+    "8/1/2026_Sum of Funded Dollars": 9899.0,
+    "8/1/2026_Sum of Funded Average": 1649.83,
+    "8/1/2026_Sum of Applications": 24.0,
+    "8/1/2026_Sum of Funded Applications Total": 6.0
+  },
+  {
+    "Account Name": "Cornerstone (Integrity 1st Auto - Culebra)",
+    "Branch ID": "26212",
+    "8/1/2026_Sum of Funded Dollars": 0.0,
+    "8/1/2026_Sum of Funded Average": 0.0,
+    "8/1/2026_Sum of Applications": 1.0,
+    "8/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Best Now Furniture, Appliances and Electronics",
+    "Branch ID": "26238",
+    "8/1/2026_Sum of Funded Dollars": 0.0,
+    "8/1/2026_Sum of Funded Average": 0.0,
+    "8/1/2026_Sum of Applications": 2.0,
+    "8/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "RTP Rearend & Transmission Parts",
+    "Branch ID": "26173",
+    "8/1/2026_Sum of Funded Dollars": 0.0,
+    "8/1/2026_Sum of Funded Average": 0.0,
+    "8/1/2026_Sum of Applications": 3.0,
+    "8/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Aamco Transmission & Total Car Care",
+    "Branch ID": "26231",
     "8/1/2026_Sum of Funded Dollars": 0.0,
     "8/1/2026_Sum of Funded Average": 0.0,
     "8/1/2026_Sum of Applications": 1.0,
