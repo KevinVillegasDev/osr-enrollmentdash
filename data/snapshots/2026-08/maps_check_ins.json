@@ -19297,7 +19297,7 @@
     "Subject": "00UTO00000doxPr2AI",
     "_label_Subject": "Maps Check In",
     "Company / Account": "001TO00000q1glgYAA",
-    "_label_Company / Account": "Starbright Auto Glass Inc",
+    "_label_Company / Account": "Starbright LLC",
     "Assigned": "005TO0000099jojYAA",
     "_label_Assigned": "Eric Henderson",
     "Full Comments": "Interested in enrolling. Next door has us.",
@@ -23035,7 +23035,7 @@
     "Subject": "00UTO00000dw6pl2AA",
     "_label_Subject": "Maps Check In",
     "Company / Account": "001TO00000qCFi5YAG",
-    "_label_Company / Account": "ORLANDO AUTO REPAIR LLC",
+    "_label_Company / Account": "Orlando Auto Repair LLC",
     "Assigned": "0058Y00000B79SFQAZ",
     "_label_Assigned": "Jared Midkiff",
     "Full Comments": "Spoke with this location about enrolling with EasyPay while also reviewing benefits to the business/customer, answered questions and got them ENROLLED!",
@@ -27522,5 +27522,33 @@
     "_label_Full Comments": "See sales notes",
     "Lead": "00QTO00001BT4J72AL",
     "_label_Lead": "Donnie Unknown"
+  },
+  {
+    "Created Date/Time": "2026-08-19T22:48:10Z",
+    "_label_Created Date/Time": "8/19/2026, 3:48 PM",
+    "Subject": "00UTO00000dzQyS2AU",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "00QTO00001BT5By2AL",
+    "_label_Company / Account": "Tint Monsters Lake Elsinore",
+    "Assigned": "005TO000008qrzhYAA",
+    "_label_Assigned": "Claudia Gerhardt",
+    "Full Comments": "See sales notes",
+    "_label_Full Comments": "See sales notes",
+    "Lead": "00QTO00001BT5By2AL",
+    "_label_Lead": "Arnie Unknown"
+  },
+  {
+    "Created Date/Time": "2026-08-19T23:01:50Z",
+    "_label_Created Date/Time": "8/19/2026, 4:01 PM",
+    "Subject": "00UTO00000dzT6g2AE",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "00QTO00001BT7k12AD",
+    "_label_Company / Account": "Diamond Star Auto Glass and Tint - Lake Elsinore",
+    "Assigned": "005TO000008qrzhYAA",
+    "_label_Assigned": "Claudia Gerhardt",
+    "Full Comments": "See sales notes",
+    "_label_Full Comments": "See sales notes",
+    "Lead": "00QTO00001BT7k12AD",
+    "_label_Lead": "Eddie Unknown"
   }
 ]
