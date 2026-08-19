@@ -8082,10 +8082,10 @@
   {
     "Branch_ID__c": "23229",
     "Name": "Custom Quick Cars Ink",
-    "Entity_Status__c": "Suspended",
+    "Entity_Status__c": "Warning List",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-06-05"
+    "Last_Status_Change_Date__c": "2026-08-19"
   },
   {
     "Branch_ID__c": "23124",
