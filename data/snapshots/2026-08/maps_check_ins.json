@@ -29474,14 +29474,14 @@
     "_label_Created Date/Time": "8/20/2026, 12:44 PM",
     "Subject": "00UTO00000e1HFu2AM",
     "_label_Subject": "Maps Check In",
-    "Company / Account": "00QTO00001BUq5Z2AT",
+    "Company / Account": "001TO00000qKQy7YAG",
     "_label_Company / Account": "My Wheel Doctor",
     "Assigned": "005TO000006CQMfYAO",
     "_label_Assigned": "Omar Corona",
     "Full Comments": "sending enrolment",
     "_label_Full Comments": "sending enrolment",
-    "Lead": "00QTO00001BUq5Z2AT",
-    "_label_Lead": "Cory C"
+    "Lead": null,
+    "_label_Lead": "-"
   },
   {
     "Created Date/Time": "2026-08-20T19:45:32Z",
@@ -29832,5 +29832,19 @@
     "_label_Full Comments": "See sales notes",
     "Lead": "00QTO00001BV7Xq2AL",
     "_label_Lead": "Manny Unknown"
+  },
+  {
+    "Created Date/Time": "2026-08-20T23:34:26Z",
+    "_label_Created Date/Time": "8/20/2026, 4:34 PM",
+    "Subject": "00UTO00000e1md42AA",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "001TO00000IUntnYAD",
+    "_label_Company / Account": "Premier Auto Service",
+    "Assigned": "005TO000008qrzhYAA",
+    "_label_Assigned": "Claudia Gerhardt",
+    "Full Comments": "Checked in via Maps Application \nSalesforce Note: Premier Auto\nSpoke to Edward went over EasyPay program and discussed payment options trying to get some applications to be sent. On our way. This merchant is pretty dormant and not much activity. Owner was not in at the moment. We\u2019ll stay close and work on securing some apps.",
+    "_label_Full Comments": "Checked in via Maps Application \nSalesforce Note: Premier Auto\nSpoke to Edward went over EasyPay program and discussed payment options trying to get some applications to be sent. On our way. This merchant is pretty dormant and not much activity. Owner was not in at the moment. We\u2019ll stay close and work on securing some apps.",
+    "Lead": null,
+    "_label_Lead": "-"
   }
 ]
