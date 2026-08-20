@@ -28182,20 +28182,6 @@
     "_label_Lead": "-"
   },
   {
-    "Created Date/Time": "2026-08-20T16:05:39Z",
-    "_label_Created Date/Time": "8/20/2026, 9:05 AM",
-    "Subject": "00UTO00000e0ioP2AQ",
-    "_label_Subject": "Maps Check In",
-    "Company / Account": "00QTO00000PPjTE2A1",
-    "_label_Company / Account": "Mullinax Auto and Marine Repair",
-    "Assigned": "0058Y00000BjAreQAF",
-    "_label_Assigned": "Stephanie Whitlock",
-    "Full Comments": "Checked in via Maps Application",
-    "_label_Full Comments": "Checked in via Maps Application",
-    "Lead": "00QTO00000PPjTE2A1",
-    "_label_Lead": "Mullinax Unknown"
-  },
-  {
     "Created Date/Time": "2026-08-20T16:06:15Z",
     "_label_Created Date/Time": "8/20/2026, 9:06 AM",
     "Subject": "00UTO00000e0aPU2AY",
@@ -28484,8 +28470,8 @@
     "_label_Company / Account": "MTI Racing",
     "Assigned": "0058Y00000BjAreQAF",
     "_label_Assigned": "Stephanie Whitlock",
-    "Full Comments": "Checked in via Maps Application",
-    "_label_Full Comments": "Checked in via Maps Application",
+    "Full Comments": "I spoke with Reese, the owner. I told him about the program and in the middle of my explanation he stopped me and said that he prepares are well over $5000 because he works on specialty cars and said that he has no need for our business.",
+    "_label_Full Comments": "I spoke with Reese, the owner. I told him about the program and in the middle of my explanation he stopped me and said that he prepares are well over $5000 because he works on specialty cars and said that he has no need for our business.",
     "Lead": "00QTO00000PPjjx2AD",
     "_label_Lead": "MTI Unknown"
   },
@@ -28876,8 +28862,8 @@
     "_label_Company / Account": "Tower Auto Repair",
     "Assigned": "0058Y00000BjAreQAF",
     "_label_Assigned": "Stephanie Whitlock",
-    "Full Comments": "Checked in via Maps Application",
-    "_label_Full Comments": "Checked in via Maps Application",
+    "Full Comments": "I spoke with Josh, the service advisor. He told me that they don\u2019t have a finance option. I told him about the program and left a flyer and my card for the owner. I\u2019ll come back if I don\u2019t hear back from the owner",
+    "_label_Full Comments": "I spoke with Josh, the service advisor. He told me that they don\u2019t have a finance option. I told him about the program and left a flyer and my card for the owner. I\u2019ll come back if I don\u2019t hear back from the owner",
     "Lead": "00QTO00000PPk412AD",
     "_label_Lead": "Tower Unknown"
   },
@@ -29720,5 +29706,75 @@
     "_label_Full Comments": "Checked in via Maps Application \nSalesforce Note: Bravo Collection\nSpoke to Jesse went over EP trying to get them to enroll in our program. Heavy Snap users here not much interest in enrolling at the moment.",
     "Lead": null,
     "_label_Lead": "-"
+  },
+  {
+    "Created Date/Time": "2026-08-20T20:55:34Z",
+    "_label_Created Date/Time": "8/20/2026, 1:55 PM",
+    "Subject": "00UTO00000e1CbC2AU",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "0018Y00002s0liDQAQ",
+    "_label_Company / Account": "Rfc Industries LLC DBA Subiworks",
+    "Assigned": "005TO000008qrzhYAA",
+    "_label_Assigned": "Claudia Gerhardt",
+    "Full Comments": "Checked in via Maps Application \nSalesforce Note: Subiworks \nNo one available to meet .",
+    "_label_Full Comments": "Checked in via Maps Application \nSalesforce Note: Subiworks \nNo one available to meet .",
+    "Lead": null,
+    "_label_Lead": "-"
+  },
+  {
+    "Created Date/Time": "2026-08-20T20:56:32Z",
+    "_label_Created Date/Time": "8/20/2026, 1:56 PM",
+    "Subject": "00UTO00000e1a8r2AA",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "00QTO00001BUkQ42AL",
+    "_label_Company / Account": "1201 S Alma School Rd, Mesa,",
+    "Assigned": "005TO00000Be9B7YAJ",
+    "_label_Assigned": "Mariana Gross",
+    "Full Comments": "Checked in via Maps Application \nGirl lobby was subbing",
+    "_label_Full Comments": "Checked in via Maps Application \nGirl lobby was subbing",
+    "Lead": "00QTO00001BUkQ42AL",
+    "_label_Lead": "1201 S Alma School Rd, Mesa, Unknown"
+  },
+  {
+    "Created Date/Time": "2026-08-20T21:03:33Z",
+    "_label_Created Date/Time": "8/20/2026, 2:03 PM",
+    "Subject": "00UTO00000e1bT72AI",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "001TO00000fXCdvYAG",
+    "_label_Company / Account": "DTX Furniture",
+    "Assigned": "005TO00000Cc63tYAB",
+    "_label_Assigned": "Monroe Simon",
+    "Full Comments": "Checked in via Maps Application \nTalked with Pepe and owner edger by phone he is using snap and acima first he said he will use us first I will come back in two weeks to check performance",
+    "_label_Full Comments": "Checked in via Maps Application \nTalked with Pepe and owner edger by phone he is using snap and acima first he said he will use us first I will come back in two weeks to check performance",
+    "Lead": null,
+    "_label_Lead": "-"
+  },
+  {
+    "Created Date/Time": "2026-08-20T21:27:28Z",
+    "_label_Created Date/Time": "8/20/2026, 2:27 PM",
+    "Subject": "00UTO00000e1eKX2AY",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "001TO00000qKVpkYAG",
+    "_label_Company / Account": "All in Home",
+    "Assigned": "005TO000006CQMfYAO",
+    "_label_Assigned": "Omar Corona",
+    "Full Comments": "sending enrollment email",
+    "_label_Full Comments": "sending enrollment email",
+    "Lead": null,
+    "_label_Lead": "-"
+  },
+  {
+    "Created Date/Time": "2026-08-20T21:42:02Z",
+    "_label_Created Date/Time": "8/20/2026, 2:42 PM",
+    "Subject": "00UTO00000e1fdB2AQ",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "00QTO000018LEkd2AG",
+    "_label_Company / Account": "Town Furniture",
+    "Assigned": "005TO00000B0J4LYAV",
+    "_label_Assigned": "Richard Herrera",
+    "Full Comments": "Checked in via Maps Application \nLow-rent shop with questionable staff. No third-party financing options are advertised, though they appear to offer some type of in-house layaway program. Based on the overall condition of the shop and the staff, I don\u2019t see a viable opportunity for EasyPay, and I would not recommend having EasyPay marketed or advertised at this location.",
+    "_label_Full Comments": "Checked in via Maps Application \nLow-rent shop with questionable staff. No third-party financing options are advertised, though they appear to offer some type of in-house layaway program. Based on the overall condition of the shop and the staff, I don\u2019t see a viable opportunity for EasyPay, and I would not recommend having EasyPay marketed or advertised at this location.",
+    "Lead": "00QTO000018LEkd2AG",
+    "_label_Lead": "Town Furniture Unknown"
   }
 ]
