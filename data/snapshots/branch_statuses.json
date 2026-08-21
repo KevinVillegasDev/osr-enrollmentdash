@@ -12022,5 +12022,29 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-08-17"
+  },
+  {
+    "Branch_ID__c": "26254",
+    "Name": "Oxnard Tires and Wheels #2 - 905 Oxnard",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-21"
+  },
+  {
+    "Branch_ID__c": "26255",
+    "Name": "Oxnard Car Repair - 429 Oxnard",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-21"
+  },
+  {
+    "Branch_ID__c": "26256",
+    "Name": "Oxnard Tires and Wheels - 2870 Vineyard",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-21"
   }
 ]
