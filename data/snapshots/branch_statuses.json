@@ -11682,10 +11682,10 @@
   {
     "Branch_ID__c": "25948",
     "Name": "Estren Electronic",
-    "Entity_Status__c": "Suspended",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-06-26"
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-08-21",
+    "Last_Status_Change_Date__c": "2026-08-21"
   },
   {
     "Branch_ID__c": "25947",
@@ -11738,10 +11738,10 @@
   {
     "Branch_ID__c": "25964",
     "Name": "Movil Express",
-    "Entity_Status__c": "Suspended",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-06-29"
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-08-21",
+    "Last_Status_Change_Date__c": "2026-08-21"
   },
   {
     "Branch_ID__c": "25954",

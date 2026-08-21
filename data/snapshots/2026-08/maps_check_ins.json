@@ -27137,7 +27137,7 @@
     "Subject": "00UTO00000dzDhq2AE",
     "_label_Subject": "Maps Check In",
     "Company / Account": "001TO00000qGz3BYAS",
-    "_label_Company / Account": "Monart Motors llc",
+    "_label_Company / Account": "Monart Motors LLC",
     "Assigned": "005TO00000Cc63tYAB",
     "_label_Assigned": "Monroe Simon",
     "Full Comments": "Enrolling now",
@@ -30910,5 +30910,33 @@
     "_label_Full Comments": "Checked in via Maps Application \nSalesforce Note: \nSpoke to Mike thanked him for the applications and funding this month busy merchant already has almost 6000 in funding hoping we can get them to 10,000 by the end of the month he will push EasyPay and try to get us to the 10,000 mark.",
     "Lead": null,
     "_label_Lead": "-"
+  },
+  {
+    "Created Date/Time": "2026-08-21T22:53:05Z",
+    "_label_Created Date/Time": "8/21/2026, 3:53 PM",
+    "Subject": "00UTO00000e3cmW2AQ",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "001TO00000Hhl8MYAR",
+    "_label_Company / Account": "Fix Auto Cathedral City",
+    "Assigned": "005TO000008qrzhYAA",
+    "_label_Assigned": "Claudia Gerhardt",
+    "Full Comments": "Checked in via Maps Application \nSalesforce Note: Fix Auto\nSpoke to Patrick went over EasyPay program and discuss 90 day. Option shop is slow right now mentioned they would be sending some applications our way monitor this merchant as they are heavy snap users.",
+    "_label_Full Comments": "Checked in via Maps Application \nSalesforce Note: Fix Auto\nSpoke to Patrick went over EasyPay program and discuss 90 day. Option shop is slow right now mentioned they would be sending some applications our way monitor this merchant as they are heavy snap users.",
+    "Lead": null,
+    "_label_Lead": "-"
+  },
+  {
+    "Created Date/Time": "2026-08-21T22:56:02Z",
+    "_label_Created Date/Time": "8/21/2026, 3:56 PM",
+    "Subject": "00UTO00000e3mHC2AY",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "00QTO00001BXB5t2AH",
+    "_label_Company / Account": "OG'S Auto Accessories",
+    "Assigned": "005TO000008qrzhYAA",
+    "_label_Assigned": "Claudia Gerhardt",
+    "Full Comments": "See sales notes",
+    "_label_Full Comments": "See sales notes",
+    "Lead": "00QTO00001BXB5t2AH",
+    "_label_Lead": "Omar Unknown"
   }
 ]
