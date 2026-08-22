@@ -9,9 +9,9 @@
   {
     "user_id": "a9680b0b-833e-422c-9ae7-c2b280afd964",
     "name": "Maria Espindola",
-    "talk_seconds": 280956,
-    "talk_display": "78h 2m",
-    "calls": 2837
+    "talk_seconds": 281421,
+    "talk_display": "78h 10m",
+    "calls": 2842
   },
   {
     "user_id": "4b6a0976-42ea-413b-8cea-5d3cbb55fc13",
@@ -65,9 +65,9 @@
   {
     "user_id": "21ab0300-3df4-4b95-a620-da649b60ba1e",
     "name": "Eduardo Yanez",
-    "talk_seconds": 200382,
-    "talk_display": "55h 39m",
-    "calls": 2702
+    "talk_seconds": 200991,
+    "talk_display": "55h 49m",
+    "calls": 2705
   },
   {
     "user_id": "898912fa-39ca-479d-bf45-a6a0a69b5154",
@@ -107,9 +107,9 @@
   {
     "user_id": "03ef1d8c-7daa-4a57-9229-d028d76c465a",
     "name": "Fatima Rodriguez",
-    "talk_seconds": 158692,
-    "talk_display": "44h 4m",
-    "calls": 2432
+    "talk_seconds": 158808,
+    "talk_display": "44h 6m",
+    "calls": 2438
   },
   {
     "user_id": "4998f0bc-96ce-45c9-b404-1682d84d609a",
@@ -133,18 +133,18 @@
     "calls": 1010
   },
   {
+    "user_id": "d92f85ef-d236-44e8-af25-34c7caa50a3f",
+    "name": "Dan Flores",
+    "talk_seconds": 148338,
+    "talk_display": "41h 12m",
+    "calls": 2294
+  },
+  {
     "user_id": "eb53ed35-8863-4021-bd44-909f19636923",
     "name": "Benjamin Munoz",
     "talk_seconds": 147808,
     "talk_display": "41h 3m",
     "calls": 2136
-  },
-  {
-    "user_id": "d92f85ef-d236-44e8-af25-34c7caa50a3f",
-    "name": "Dan Flores",
-    "talk_seconds": 147802,
-    "talk_display": "41h 3m",
-    "calls": 2289
   },
   {
     "user_id": "1368ae54-e473-44df-b701-df524f9d5d18",
@@ -184,9 +184,9 @@
   {
     "user_id": "24b58ccf-3042-4c4b-b52c-0bff88f282da",
     "name": "Joseph Hernandez",
-    "talk_seconds": 126728,
-    "talk_display": "35h 12m",
-    "calls": 2070
+    "talk_seconds": 126841,
+    "talk_display": "35h 14m",
+    "calls": 2074
   },
   {
     "user_id": "a8b0fb23-2fb2-4b48-8c09-9916a343146f",
@@ -268,9 +268,9 @@
   {
     "user_id": "bd4818d1-a4eb-4711-bdbb-736a2227bbd2",
     "name": "Alex Perez",
-    "talk_seconds": 102797,
-    "talk_display": "28h 33m",
-    "calls": 1122
+    "talk_seconds": 103608,
+    "talk_display": "28h 46m",
+    "calls": 1129
   },
   {
     "user_id": "44b5a74e-dfd1-46dc-81a3-5582c9e57065",
