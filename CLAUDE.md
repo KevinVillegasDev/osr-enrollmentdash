@@ -392,10 +392,11 @@ For historical cohorts or Month 2 true-up data, Report 2 and 4 templates are cal
 
 ## OSR Roster (as of June 2026)
 
-Cesar Flores, Claudia Gerhardt, Eric Henderson, Jared Midkiff, Jose Valencia, Joseph Guerra, Marco Garmendia, Mariana Gross, Matthew MacDonald, Monroe Simon, Omar Corona, Richard Herrera, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
+Cesar Flores, Claudia Gerhardt, Daviyon McDaniel, Eric Henderson, Jared Midkiff, Jose Valencia, Joseph Guerra, Marco Garmendia, Mariana Gross, Matthew MacDonald, Monroe Simon, Omar Corona, Richard Herrera, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
 
 *Phillip Mason (RIC-6) departed July 2026; RIC-6 now unassigned (ISR coverage continues under Lesly Arroyo). Frozen past-month dashboards still show him historically.*
 *Monroe Simon added August 2026 for LTO-4 (TX — DFW; open since Francisco Gonzalez departed in June).*
+*Daviyon McDaniel added August 2026 for RIC-7 (NV — Las Vegas/Reno; open since DeLon Phoenix was removed in June).*
 
 *Francisco Gonzalez (LTO-4) and DeLon Phoenix (RIC-7) removed June 2026; both territories now unassigned. Frozen past-month dashboards still show them historically.*
 *Jose Valencia added for RIC-3, effective July 2026 (previously unassigned).*
@@ -421,7 +422,7 @@ Per **Territory_Overview_v1.9** (June 2026), "ISR Pairings — Phase 1". Open te
 | Laura Angulo | LTO-1 (Yemaira), LTO-5 (Jared), LTO-8 (open) — drops LTO-8 when TSR fills |
 | Noemy Carrion | LTO-2 (Omar), LTO-3 (Joseph), LTO-4 (Monroe) — drops LTO-4 when ISR #7 hired |
 | Connor Admirand | LTO-6 (Stephanie), RIC-8 (Eric) |
-| Michael Palmer | RIC-7 (open), RIC-9 (Matthew) |
+| Michael Palmer | RIC-7 (Daviyon), RIC-9 (Matthew) |
 
 ## Territory → OSR Mapping
 
@@ -438,11 +439,12 @@ Per **Territory_Overview_v1.9** (June 2026), "ISR Pairings — Phase 1". Open te
 | RIC-3 | Jose Valencia | CA *(effective July 2026)* |
 | RIC-4 | Richard Herrera | CA (Orange County/SE LA) |
 | RIC-5 | Mariana Gross | AZ (Phoenix Metro) |
+| RIC-7 | Daviyon McDaniel | NV (Las Vegas/Reno) *(effective August 2026)* |
 | RIC-8 | Eric Henderson | PA (4 Metros) |
 | RIC-9 | Matthew MacDonald | AZ (State Manager + NM/UT/ID) |
 | RIC-10 | Marco Garmendia | Multi-state (unmanaged areas) *(effective July 2026; no dedicated ISR)* |
 
-**Unassigned territories:** LTO-8, RIC-6, RIC-7 — hiring in progress. **Retired code:** LTO-7 (renamed to LTO-6 in SF, June 2026; Stephanie's Jan–Mar cohort history remains frozen under LTO-7).
+**Unassigned territories:** LTO-8, RIC-6 — hiring in progress. **Retired code:** LTO-7 (renamed to LTO-6 in SF, June 2026; Stephanie's Jan–Mar cohort history remains frozen under LTO-7).
 
 ## Key Terminology
 

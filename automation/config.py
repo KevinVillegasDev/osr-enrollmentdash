@@ -60,9 +60,12 @@ REPORT_IDS = {
 # coverage continues under Lesly Arroyo). Frozen past dashboards keep him.
 # Monroe Simon added August 2026 for LTO-4 (TX — DFW; open since Francisco
 # Gonzalez departed in June).
+# Daviyon McDaniel added August 2026 for RIC-7 (NV — Las Vegas/Reno; open
+# since DeLon Phoenix was removed in June).
 OSR_ROSTER = [
     "Cesar Flores",
     "Claudia Gerhardt",
+    "Daviyon McDaniel",
     "Eric Henderson",
     "Jared Midkiff",
     "Jose Valencia",
@@ -80,7 +83,7 @@ OSR_ROSTER = [
 
 # ─── Territory → OSR Mapping ────────────────────────────────────────────────
 # Maps territory codes from the sales budget to OSR names.
-# Unassigned territories (LTO-8, RIC-6, RIC-7) are excluded.
+# Unassigned territories (LTO-8, RIC-6) are excluded.
 # LTO-4: Sara Porter → Francisco Gonzalez (removed June 2026) → Monroe Simon
 #        from August 2026 (TX — DFW).
 # RIC-6: Phillip Mason (departed July 2026); now unassigned. ISR coverage
@@ -88,7 +91,8 @@ OSR_ROSTER = [
 # RIC-3: Jose Valencia, effective July 2026 (CA; previously unassigned).
 # RIC-4: Jeremy Moore through April 2026; Richard Herrera from May 2026 forward.
 # RIC-5: Mariana Gross from June 2026 (Phoenix Metro, AZ; previously unassigned).
-# RIC-7: DeLon Phoenix (removed June 2026); now unassigned.
+# RIC-7: DeLon Phoenix (removed June 2026) → Daviyon McDaniel from
+#        August 2026 (NV — Las Vegas/Reno).
 # RIC-10: Marco Garmendia, effective July 2026 (NEW territory — multi-state
 #         unmanaged areas; no dedicated ISR, so absent from ISR_TERRITORY_MAP).
 # LTO-6: Stephanie Whitlock — SF re-coded her territory LTO-7 → LTO-6 in June
@@ -106,6 +110,7 @@ TERRITORY_MAP = {
     "RIC-3": "Jose Valencia",
     "RIC-4": "Richard Herrera",
     "RIC-5": "Mariana Gross",
+    "RIC-7": "Daviyon McDaniel",
     "RIC-8": "Eric Henderson",
     "RIC-9": "Matthew MacDonald",
     "RIC-10": "Marco Garmendia",
@@ -145,7 +150,7 @@ ISR_TERRITORY_MAP = {
     "RIC-4": "Katie Anguiano",
     "RIC-5": "Lesly Arroyo",
     "RIC-6": "Lesly Arroyo",       # territory OPEN (Phillip departed) — ISR coverage continues
-    "RIC-7": "Michael Palmer",     # territory OPEN — ISR coverage continues
+    "RIC-7": "Michael Palmer",     # Daviyon McDaniel's territory (Aug 2026)
     "RIC-8": "Connor Admirand",
     "RIC-9": "Michael Palmer",
 }
@@ -192,6 +197,7 @@ MONTHLY_FLOOR = 10          # No single month below 10
 OSR_EMAILS = {
     "Cesar Flores": "cesar.flores@easypayfinance.com",
     "Claudia Gerhardt": "claudia.gerhardt@easypayfinance.com",
+    "Daviyon McDaniel": "daviyon.mcdaniel@easypayfinance.com",
     "Eric Henderson": "eric.henderson@easypayfinance.com",
     "Jared Midkiff": "jared.midkiff@easypayfinance.com",
     "Jose Valencia": "jose.valencia@easypayfinance.com",
