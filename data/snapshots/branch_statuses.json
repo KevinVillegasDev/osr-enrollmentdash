@@ -2688,6 +2688,14 @@
     "Last_Status_Change_Date__c": "2026-07-30"
   },
   {
+    "Branch_ID__c": "6489",
+    "Name": "Shelton Collision Repair Inc.",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-24"
+  },
+  {
     "Branch_ID__c": "6490",
     "Name": "Express Tire & Auto LLC.",
     "Entity_Status__c": "Closed/Sold",
