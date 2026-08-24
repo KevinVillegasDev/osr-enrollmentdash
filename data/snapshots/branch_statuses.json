@@ -1152,6 +1152,14 @@
     "Last_Status_Change_Date__c": "2025-12-12"
   },
   {
+    "Branch_ID__c": "1774",
+    "Name": "Shalabi General Trading Inc. DBA Jerusalem Furniture",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-22"
+  },
+  {
     "Branch_ID__c": "1783",
     "Name": "Daniel Bojorquez DBA Stone Transmission",
     "Entity_Status__c": "Closed/Sold",
@@ -2358,6 +2366,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-05-14"
+  },
+  {
+    "Branch_ID__c": "5511",
+    "Name": "Oscar Munoz DBA Oscars Garage",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-22"
   },
   {
     "Branch_ID__c": "5572",
@@ -6478,6 +6494,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2025-07-03"
+  },
+  {
+    "Branch_ID__c": "21815",
+    "Name": "Kwik Kar Oil Change and Auto Care - Mesquite",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-22"
   },
   {
     "Branch_ID__c": "21854",
@@ -11560,6 +11584,14 @@
     "Last_Status_Change_Date__c": "2026-07-08"
   },
   {
+    "Branch_ID__c": "26258",
+    "Name": "Casa Forma Interiors Home and Deco",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-22"
+  },
+  {
     "Branch_ID__c": "25817",
     "Name": "Royal Furniture Philly",
     "Entity_Status__c": "Watchlist",
@@ -11982,6 +12014,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-08-05"
+  },
+  {
+    "Branch_ID__c": "26259",
+    "Name": "Emme Ride",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-22"
   },
   {
     "Branch_ID__c": "26136",

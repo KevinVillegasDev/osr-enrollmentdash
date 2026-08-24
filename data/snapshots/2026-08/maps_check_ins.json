@@ -30315,7 +30315,7 @@
     "Subject": "00UTO00000e3AGj2AM",
     "_label_Subject": "Maps Check In",
     "Company / Account": "001TO00000qNRb3YAG",
-    "_label_Company / Account": "J&S Auto Body 2 INC",
+    "_label_Company / Account": "J&S Autobody II Inc",
     "Assigned": "005TO0000099jojYAA",
     "_label_Assigned": "Eric Henderson",
     "Full Comments": "Has snap. Interested in enrolling.",
@@ -30938,5 +30938,47 @@
     "_label_Full Comments": "See sales notes",
     "Lead": "00QTO00001BXB5t2AH",
     "_label_Lead": "Omar Unknown"
+  },
+  {
+    "Created Date/Time": "2026-08-24T12:53:39Z",
+    "_label_Created Date/Time": "8/24/2026, 5:53 AM",
+    "Subject": "00UTO00000e6Ojl2AE",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "0018Y00002s0n0rQAA",
+    "_label_Company / Account": "Vmc Corp DBA Midas - 2324",
+    "Assigned": "005TO000007Eqp7YAC",
+    "_label_Assigned": "Yemaira Hernandez",
+    "Full Comments": "Checked in via Maps Application \nsw midas girls let them know i will most likely not be able to provide them with their gc next month coming up. they were very understanding and let me know that they will try pushing us regardless because we do provide better service in comparison to our competitors",
+    "_label_Full Comments": "Checked in via Maps Application \nsw midas girls let them know i will most likely not be able to provide them with their gc next month coming up. they were very understanding and let me know that they will try pushing us regardless because we do provide better service in comparison to our competitors",
+    "Lead": null,
+    "_label_Lead": "-"
+  },
+  {
+    "Created Date/Time": "2026-08-24T13:58:28Z",
+    "_label_Created Date/Time": "8/24/2026, 6:58 AM",
+    "Subject": "00UTO00000e6Kme2AE",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "00QTO00001BaVWH2A3",
+    "_label_Company / Account": "MR. Furniture",
+    "Assigned": "005TO000007Eqp7YAC",
+    "_label_Assigned": "Yemaira Hernandez",
+    "Full Comments": "owner is not at the store, dropped off my bc will circle back when i am in the area",
+    "_label_Full Comments": "owner is not at the store, dropped off my bc will circle back when i am in the area",
+    "Lead": "00QTO00001BaVWH2A3",
+    "_label_Lead": "employee employee"
+  },
+  {
+    "Created Date/Time": "2026-08-24T14:01:23Z",
+    "_label_Created Date/Time": "8/24/2026, 7:01 AM",
+    "Subject": "00UTO00000e6bKQ2AY",
+    "_label_Subject": "Maps Check In",
+    "Company / Account": "00QTO00001BaW2X2AV",
+    "_label_Company / Account": "Ely's Tires",
+    "Assigned": "005TO000007Eqp7YAC",
+    "_label_Assigned": "Yemaira Hernandez",
+    "Full Comments": "owner is really hard to get in touch with, he is barely at the shop. mostly here on wednesdays. dropped off bc",
+    "_label_Full Comments": "owner is really hard to get in touch with, he is barely at the shop. mostly here on wednesdays. dropped off bc",
+    "Lead": "00QTO00001BaW2X2AV",
+    "_label_Lead": "ricky employee"
   }
 ]
