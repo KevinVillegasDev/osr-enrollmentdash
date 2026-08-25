@@ -3144,6 +3144,14 @@
     "Last_Status_Change_Date__c": "2025-08-06"
   },
   {
+    "Branch_ID__c": "10508",
+    "Name": "Bahes Automotive Inc.",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-25"
+  },
+  {
     "Branch_ID__c": "10535",
     "Name": "Edgar Tarin DBA Team Car Care",
     "Entity_Status__c": "Suspended",
