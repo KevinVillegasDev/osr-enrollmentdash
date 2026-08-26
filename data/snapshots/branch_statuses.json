@@ -840,6 +840,14 @@
     "Last_Status_Change_Date__c": "2025-12-12"
   },
   {
+    "Branch_ID__c": "959",
+    "Name": "Five Star Upholstery and Auto Glass",
+    "Entity_Status__c": "Inactive",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-26"
+  },
+  {
     "Branch_ID__c": "982",
     "Name": "Bond Jewelers, Inc. DBA Unclaimed Diamonds",
     "Entity_Status__c": "Terminated",
@@ -6510,6 +6518,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2025-07-03"
+  },
+  {
+    "Branch_ID__c": "21848",
+    "Name": "No Fear Tires and Mobile",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-26"
   },
   {
     "Branch_ID__c": "21815",
