@@ -64,6 +64,14 @@
     "Last_Status_Change_Date__c": "2026-06-17"
   },
   {
+    "Branch_ID__c": "6019",
+    "Name": "Cal Deals - Santa Maria",
+    "Entity_Status__c": "Inactive",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-27"
+  },
+  {
     "Branch_ID__c": "6204",
     "Name": "S&S Auto Pro Inc DBA Randys Automotive & Transmission",
     "Entity_Status__c": "Closed/Sold",
@@ -2758,6 +2766,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2025-12-17"
+  },
+  {
+    "Branch_ID__c": "6631",
+    "Name": "Pacific C. Tires, Inc. DBA Pacific Coast Tires",
+    "Entity_Status__c": "Inactive",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-27"
   },
   {
     "Branch_ID__c": "6634",
