@@ -7976,6 +7976,14 @@
     "Last_Status_Change_Date__c": "2025-08-15"
   },
   {
+    "Branch_ID__c": "22954",
+    "Name": "Gencorp Auto Body Shop",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-28"
+  },
+  {
     "Branch_ID__c": "22956",
     "Name": "Joel Wheels and Tires",
     "Entity_Status__c": "Terminated",
@@ -12110,5 +12118,13 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-08-17"
+  },
+  {
+    "Branch_ID__c": "26297",
+    "Name": "PCH Custom Audio - Murrieta",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-28"
   }
 ]
