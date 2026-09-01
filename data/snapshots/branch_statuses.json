@@ -2688,6 +2688,14 @@
     "Last_Status_Change_Date__c": "2025-12-12"
   },
   {
+    "Branch_ID__c": "6433",
+    "Name": "Abel Del Cid DBA Able Auto Electric",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-01"
+  },
+  {
     "Branch_ID__c": "6452",
     "Name": "Furniture & Mattress",
     "Entity_Status__c": "Closed/Sold",
@@ -10610,10 +10618,10 @@
   {
     "Branch_ID__c": "24738",
     "Name": "Azusa Auto Repair & Collision",
-    "Entity_Status__c": "Watchlist",
+    "Entity_Status__c": "Closed/Sold",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2025-10-21"
+    "Last_Status_Change_Date__c": "2026-09-01"
   },
   {
     "Branch_ID__c": "24836",
@@ -10710,6 +10718,14 @@
     "Status_Reason__c": "Performance",
     "Termination_Date__c": "2026-06-11",
     "Last_Status_Change_Date__c": "2026-06-11"
+  },
+  {
+    "Branch_ID__c": "25103",
+    "Name": "JR Tomball Car Care",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-01"
   },
   {
     "Branch_ID__c": "24807",
@@ -11482,10 +11498,10 @@
   {
     "Branch_ID__c": "25784",
     "Name": "Barrons Tires and Wheels Custom Offsets",
-    "Entity_Status__c": "Suspended",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-08-13"
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Fraud;Performance",
+    "Termination_Date__c": "2026-09-01",
+    "Last_Status_Change_Date__c": "2026-09-01"
   },
   {
     "Branch_ID__c": "25592",
