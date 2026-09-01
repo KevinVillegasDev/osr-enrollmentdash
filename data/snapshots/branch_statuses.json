@@ -12144,6 +12144,14 @@
     "Last_Status_Change_Date__c": "2026-08-17"
   },
   {
+    "Branch_ID__c": "26298",
+    "Name": "Prime Ride",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-01"
+  },
+  {
     "Branch_ID__c": "26301",
     "Name": "Cordero Automotive",
     "Entity_Status__c": "Watchlist",
