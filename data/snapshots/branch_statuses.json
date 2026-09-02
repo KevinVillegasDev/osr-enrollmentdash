@@ -3496,12 +3496,28 @@
     "Last_Status_Change_Date__c": "2025-11-25"
   },
   {
+    "Branch_ID__c": "12421",
+    "Name": "P & G Holdings Ltd DBA Midas Auto Service Conroe",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
     "Branch_ID__c": "12427",
     "Name": "Grease Monkey Of Hampton Roads, Inc DBA Grease Monkey - 333",
     "Entity_Status__c": "Closed/Sold",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2025-01-03"
+  },
+  {
+    "Branch_ID__c": "12443",
+    "Name": "Hm Westheimer, Inc DBA Midas Auto Service",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "12480",
@@ -8968,14 +8984,6 @@
     "Last_Status_Change_Date__c": "2026-01-10"
   },
   {
-    "Branch_ID__c": "23436",
-    "Name": "Service with Aloha",
-    "Entity_Status__c": "Suspended",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-08-05"
-  },
-  {
     "Branch_ID__c": "23434",
     "Name": "Kim's Automotive",
     "Entity_Status__c": "Closed/Sold",
@@ -11760,12 +11768,76 @@
     "Last_Status_Change_Date__c": "2026-04-07"
   },
   {
+    "Branch_ID__c": "25620",
+    "Name": "Boost Mobile - Pasadena",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
+    "Branch_ID__c": "25621",
+    "Name": "Boost Mobile - Humble - 1st street",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
+    "Branch_ID__c": "25622",
+    "Name": "Boost Mobile - Liberty",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
+    "Branch_ID__c": "25623",
+    "Name": "Boost Mobile - Humble - FM 1960",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
     "Branch_ID__c": "25596",
     "Name": "Noriega's Auto Repair",
     "Entity_Status__c": "Watchlist",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-04-09"
+  },
+  {
+    "Branch_ID__c": "25624",
+    "Name": "Boost Mobile - Houston - Hollow Tree",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
+    "Branch_ID__c": "25625",
+    "Name": "Boost Mobile - Houston - Imperial Valley",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
+    "Branch_ID__c": "25626",
+    "Name": "Boost Mobile - Cleveland",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
+    "Branch_ID__c": "25627",
+    "Name": "Boost Mobile - Dayton",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "25710",
