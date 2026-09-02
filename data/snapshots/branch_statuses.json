@@ -608,6 +608,14 @@
     "Last_Status_Change_Date__c": "2025-03-20"
   },
   {
+    "Branch_ID__c": "19368",
+    "Name": "Ljd Performance Transmissions Inc DBA Aamco St Pete #22144",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
     "Branch_ID__c": "19404",
     "Name": "Aamco Phoenix Central",
     "Entity_Status__c": "Closed/Sold",
@@ -1574,6 +1582,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2025-11-12"
+  },
+  {
+    "Branch_ID__c": "2951",
+    "Name": "RPM Mobile 1 Car Care Center",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "2955",
@@ -3240,6 +3256,14 @@
     "Last_Status_Change_Date__c": "2026-02-26"
   },
   {
+    "Branch_ID__c": "10743",
+    "Name": "My Transmission Experts Inc DBA My Transmission Experts",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
     "Branch_ID__c": "10745",
     "Name": "My Transmission Experts",
     "Entity_Status__c": "Closed/Sold",
@@ -3550,6 +3574,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-05-28"
+  },
+  {
+    "Branch_ID__c": "12825",
+    "Name": "2920 Automotive LLC DBA My Transmission Experts 06",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "12840",
@@ -4680,6 +4712,14 @@
     "Last_Status_Change_Date__c": "2025-02-19"
   },
   {
+    "Branch_ID__c": "19369",
+    "Name": "Sunshine Group Of Sw Fl, Inc DBA Kb Auto Repair",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
     "Branch_ID__c": "19389",
     "Name": "Northeast Scottsdale Auto Group, Inc. DBA Greulichs Automotive Services - Store 37",
     "Entity_Status__c": "Closed/Sold",
@@ -5184,6 +5224,14 @@
     "Last_Status_Change_Date__c": "2026-04-24"
   },
   {
+    "Branch_ID__c": "20186",
+    "Name": "Bakersfield Midas",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-07"
+  },
+  {
     "Branch_ID__c": "20565",
     "Name": "559 Car Stereo & Alarm",
     "Entity_Status__c": "Terminated",
@@ -5302,6 +5350,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-05-14"
+  },
+  {
+    "Branch_ID__c": "20240",
+    "Name": "Wycliffe Automotive",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "20064",
@@ -6192,6 +6248,14 @@
     "Last_Status_Change_Date__c": "2025-05-21"
   },
   {
+    "Branch_ID__c": "21330",
+    "Name": "Elite Auto Experts",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
     "Branch_ID__c": "21334",
     "Name": "Master Tech Automotive & Cycle Repair",
     "Entity_Status__c": "Closed/Sold",
@@ -6854,6 +6918,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-06-24"
+  },
+  {
+    "Branch_ID__c": "22641",
+    "Name": "JD Auto Repair",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-01"
   },
   {
     "Branch_ID__c": "22105",
@@ -8816,6 +8888,14 @@
     "Last_Status_Change_Date__c": "2025-12-12"
   },
   {
+    "Branch_ID__c": "23414",
+    "Name": "Affordable Car Care and Transmissions",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
     "Branch_ID__c": "23412",
     "Name": "Mega Deals Liquidation",
     "Entity_Status__c": "Closed/Sold",
@@ -10032,6 +10112,14 @@
     "Last_Status_Change_Date__c": "2026-03-17"
   },
   {
+    "Branch_ID__c": "24199",
+    "Name": "JR Tires & Diesel Truck Repair",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
     "Branch_ID__c": "24197",
     "Name": "Rambo Tires",
     "Entity_Status__c": "Suspended",
@@ -10326,6 +10414,14 @@
     "Status_Reason__c": "EasyPay Industry Exit",
     "Termination_Date__c": "2025-12-12",
     "Last_Status_Change_Date__c": "2025-12-12"
+  },
+  {
+    "Branch_ID__c": "24383",
+    "Name": "Hernandez Auto Body Shop",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "24396",
@@ -10718,6 +10814,22 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-07-03"
+  },
+  {
+    "Branch_ID__c": "24711",
+    "Name": "Motorvation Service Center",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
+    "Branch_ID__c": "24712",
+    "Name": "Motorvation Service Center - Marietta",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "24732",
