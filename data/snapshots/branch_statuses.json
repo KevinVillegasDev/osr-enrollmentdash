@@ -3272,6 +3272,14 @@
     "Last_Status_Change_Date__c": "2026-03-17"
   },
   {
+    "Branch_ID__c": "10840",
+    "Name": "Dynopro Auto Services, Inc DBA 407 Dynopro",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
     "Branch_ID__c": "10851",
     "Name": "Manuel Delgado DBA Eurozone Motorwerkz",
     "Entity_Status__c": "Terminated",
@@ -4320,6 +4328,22 @@
     "Last_Status_Change_Date__c": "2025-11-11"
   },
   {
+    "Branch_ID__c": "18343",
+    "Name": "Autotrust Repairs LLC DBA Autotrust Repairs - Montgomery",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
+    "Branch_ID__c": "18344",
+    "Name": "Autotrust Repairs LLC DBA Autotrust Repairs - Navasota",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
     "Branch_ID__c": "18351",
     "Name": "Aa Paint And Body Inc DBA Auto Art Collision Specialists",
     "Entity_Status__c": "Closed/Sold",
@@ -4354,10 +4378,10 @@
   {
     "Branch_ID__c": "18478",
     "Name": "Scooter Ave",
-    "Entity_Status__c": "Watchlist",
-    "Status_Reason__c": null,
-    "Termination_Date__c": "2024-05-24",
-    "Last_Status_Change_Date__c": "2026-04-21"
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "18496",
@@ -5578,10 +5602,10 @@
   {
     "Branch_ID__c": "20801",
     "Name": "B's Auto Professional Services",
-    "Entity_Status__c": "Suspended",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-01-14"
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "20795",
@@ -6176,6 +6200,14 @@
     "Last_Status_Change_Date__c": "2025-01-24"
   },
   {
+    "Branch_ID__c": "21340",
+    "Name": "Martinez Auto Repair",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
     "Branch_ID__c": "21350",
     "Name": "Hercules Auto Repair",
     "Entity_Status__c": "Closed/Sold",
@@ -6190,6 +6222,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2025-01-03"
+  },
+  {
+    "Branch_ID__c": "21469",
+    "Name": "FR Tire King",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "21352",
@@ -6734,6 +6774,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-07-06"
+  },
+  {
+    "Branch_ID__c": "21999",
+    "Name": "Cars and Trucks Engines 4Less",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "21996",
@@ -7672,6 +7720,22 @@
     "Last_Status_Change_Date__c": "2026-06-10"
   },
   {
+    "Branch_ID__c": "22633",
+    "Name": "Autotrust Repairs- College Station",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
+    "Branch_ID__c": "22678",
+    "Name": "Always Good Auto Repair & Tires",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
     "Branch_ID__c": "22675",
     "Name": "Rigid Repair",
     "Entity_Status__c": "Closed/Sold",
@@ -8504,6 +8568,14 @@
     "Last_Status_Change_Date__c": "2026-01-13"
   },
   {
+    "Branch_ID__c": "23290",
+    "Name": "Angelino & Son Auto Truck Center",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
     "Branch_ID__c": "23265",
     "Name": "VIP Wheels and Audio",
     "Entity_Status__c": "Terminated",
@@ -8990,6 +9062,14 @@
     "Status_Reason__c": "Failed Repurchase;Merchant Unresponsive",
     "Termination_Date__c": "2025-04-23",
     "Last_Status_Change_Date__c": "2025-04-23"
+  },
+  {
+    "Branch_ID__c": "23487",
+    "Name": "Auto Tech of Orlando",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "23485",
@@ -9722,10 +9802,10 @@
   {
     "Branch_ID__c": "24054",
     "Name": "All Pro Transmission Auto Care",
-    "Entity_Status__c": "Warning List",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-01-29"
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "24027",
@@ -9850,10 +9930,10 @@
   {
     "Branch_ID__c": "24141",
     "Name": "Crown Auto Repair and Collision",
-    "Entity_Status__c": "Watchlist",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2025-12-16"
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "24140",
@@ -10032,6 +10112,14 @@
     "Last_Status_Change_Date__c": "2025-12-12"
   },
   {
+    "Branch_ID__c": "24258",
+    "Name": "Pronto Auto Care",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
     "Branch_ID__c": "24266",
     "Name": "Empire Wheels and Tires",
     "Entity_Status__c": "Terminated",
@@ -10078,6 +10166,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-03-16"
+  },
+  {
+    "Branch_ID__c": "24328",
+    "Name": "G&G GA Transport",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "24312",
@@ -10158,6 +10254,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2025-11-26"
+  },
+  {
+    "Branch_ID__c": "24336",
+    "Name": "Rapid 3T Customs",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "24352",
@@ -10402,10 +10506,10 @@
   {
     "Branch_ID__c": "24539",
     "Name": "Gladys Tires",
-    "Entity_Status__c": "Watchlist",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-06-08"
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "24532",
@@ -10454,6 +10558,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-08-17"
+  },
+  {
+    "Branch_ID__c": "24600",
+    "Name": "Exclusive Ceramic Window Tint",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "24581",
@@ -10562,10 +10674,10 @@
   {
     "Branch_ID__c": "24676",
     "Name": "Fushion Tires & Wheels",
-    "Entity_Status__c": "Watchlist",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2025-10-07"
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "25952",
@@ -10706,10 +10818,10 @@
   {
     "Branch_ID__c": "24772",
     "Name": "Champs Tire & Wheel",
-    "Entity_Status__c": "Warning List",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-02-27"
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "24777",
@@ -10842,10 +10954,10 @@
   {
     "Branch_ID__c": "24920",
     "Name": "Radical Builds",
-    "Entity_Status__c": "Closed/Sold",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-04-08"
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "24897",
@@ -11210,10 +11322,10 @@
   {
     "Branch_ID__c": "25266",
     "Name": "Motors Market",
-    "Entity_Status__c": "Watchlist",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-06-08"
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "25300",
@@ -11374,6 +11486,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-07-30"
+  },
+  {
+    "Branch_ID__c": "25387",
+    "Name": "Espinos Tires San Antonio",
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "25368",
@@ -11602,10 +11722,10 @@
   {
     "Branch_ID__c": "25753",
     "Name": "Miami Custom Performance",
-    "Entity_Status__c": "Suspended",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-08-25"
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Performance",
+    "Termination_Date__c": "2026-09-02",
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "25706",

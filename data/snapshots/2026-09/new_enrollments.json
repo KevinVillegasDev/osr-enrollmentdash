@@ -349,5 +349,32 @@
     "_label_Industry": "Auto - Wheels & Tires",
     "EPF Product": "Rental Payments (Lease-to-Own Option)",
     "_label_EPF Product": "Rental Payments (Lease-to-Own Option)"
+  },
+  {
+    "Enrollment Date": "9/2/2026",
+    "Branch ID": "26314",
+    "_label_Branch ID": "26314",
+    "Account Name": "001TO00000qm2HjYAI",
+    "_label_Account Name": "Bay Area Chrysler Dodge Jeep Ram",
+    "Billing State/Province (text only)": "Oregon",
+    "_label_Billing State/Province (text only)": "Oregon",
+    "Status": "New",
+    "_label_Status": "New",
+    "Parent Account": "001TO00000qm4JVYAY",
+    "_label_Parent Account": "Bay Area Automotive LLC",
+    "CID": "20506",
+    "_label_CID": "20506",
+    "Billing Street": "1400 Ocean Blvd NW",
+    "_label_Billing Street": "1400 Ocean Blvd NW",
+    "Billing State/Province": "OR",
+    "_label_Billing State/Province": "Oregon",
+    "Billing Zip/Postal Code": "97420",
+    "_label_Billing Zip/Postal Code": "97420",
+    "Created Date": "2026-08-29",
+    "_label_Created Date": "8/29/2026",
+    "Industry": "Auto - Dealership",
+    "_label_Industry": "Auto - Dealership",
+    "EPF Product": "Purchase Installments (Retail Contract)",
+    "_label_EPF Product": "Purchase Installments (Retail Contract)"
   }
 ]
