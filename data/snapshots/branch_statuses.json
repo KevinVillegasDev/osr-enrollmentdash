@@ -2488,6 +2488,14 @@
     "Last_Status_Change_Date__c": "2025-12-12"
   },
   {
+    "Branch_ID__c": "5720",
+    "Name": "Mario Ramirez DBA Ok Stereo",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-03"
+  },
+  {
     "Branch_ID__c": "5739",
     "Name": "Enrique Trujillo DBA Trujillo Maintenance Service",
     "Entity_Status__c": "Closed/Sold",
