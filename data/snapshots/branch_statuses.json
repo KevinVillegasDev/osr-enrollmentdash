@@ -5864,6 +5864,22 @@
     "Last_Status_Change_Date__c": "2025-08-12"
   },
   {
+    "Branch_ID__c": "20923",
+    "Name": "Midas 1584",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-08-07"
+  },
+  {
+    "Branch_ID__c": "20924",
+    "Name": "Midas 1240",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-02"
+  },
+  {
     "Branch_ID__c": "20911",
     "Name": "Elegant Furniture",
     "Entity_Status__c": "Terminated",
@@ -7558,6 +7574,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2025-10-03"
+  },
+  {
+    "Branch_ID__c": "22466",
+    "Name": "Midas 1903",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "22505",
