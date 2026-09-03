@@ -12232,6 +12232,14 @@
     "Last_Status_Change_Date__c": "2026-07-27"
   },
   {
+    "Branch_ID__c": "26323",
+    "Name": "Pitt Stop Tire Shop",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-03"
+  },
+  {
     "Branch_ID__c": "26043",
     "Name": "Regal Furniture #7 North Richland Hills",
     "Entity_Status__c": "Watchlist",
