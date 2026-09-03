@@ -608,14 +608,6 @@
     "Last_Status_Change_Date__c": "2025-03-20"
   },
   {
-    "Branch_ID__c": "19368",
-    "Name": "Ljd Performance Transmissions Inc DBA Aamco St Pete #22144",
-    "Entity_Status__c": "Terminated",
-    "Status_Reason__c": "Performance",
-    "Termination_Date__c": "2026-09-02",
-    "Last_Status_Change_Date__c": "2026-09-02"
-  },
-  {
     "Branch_ID__c": "19404",
     "Name": "Aamco Phoenix Central",
     "Entity_Status__c": "Closed/Sold",
@@ -5368,14 +5360,6 @@
     "Last_Status_Change_Date__c": "2026-05-14"
   },
   {
-    "Branch_ID__c": "20240",
-    "Name": "Wycliffe Automotive",
-    "Entity_Status__c": "Terminated",
-    "Status_Reason__c": "Performance",
-    "Termination_Date__c": "2026-09-02",
-    "Last_Status_Change_Date__c": "2026-09-02"
-  },
-  {
     "Branch_ID__c": "20064",
     "Name": "Arden Audio",
     "Entity_Status__c": "Warning List",
@@ -6278,14 +6262,6 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2025-05-21"
-  },
-  {
-    "Branch_ID__c": "21330",
-    "Name": "Elite Auto Experts",
-    "Entity_Status__c": "Terminated",
-    "Status_Reason__c": "Performance",
-    "Termination_Date__c": "2026-09-02",
-    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "21334",
@@ -9248,6 +9224,14 @@
     "Last_Status_Change_Date__c": "2026-08-06"
   },
   {
+    "Branch_ID__c": "23591",
+    "Name": "Jim Sabos Truck and Fleet Service",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-03"
+  },
+  {
     "Branch_ID__c": "23550",
     "Name": "H O Auto Repair and Tires",
     "Entity_Status__c": "Watchlist",
@@ -10846,22 +10830,6 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-07-03"
-  },
-  {
-    "Branch_ID__c": "24711",
-    "Name": "Motorvation Service Center",
-    "Entity_Status__c": "Terminated",
-    "Status_Reason__c": "Performance",
-    "Termination_Date__c": "2026-09-02",
-    "Last_Status_Change_Date__c": "2026-09-02"
-  },
-  {
-    "Branch_ID__c": "24712",
-    "Name": "Motorvation Service Center - Marietta",
-    "Entity_Status__c": "Terminated",
-    "Status_Reason__c": "Performance",
-    "Termination_Date__c": "2026-09-02",
-    "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
     "Branch_ID__c": "24732",
