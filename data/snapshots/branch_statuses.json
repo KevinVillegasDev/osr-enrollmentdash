@@ -2248,6 +2248,14 @@
     "Last_Status_Change_Date__c": "2026-07-14"
   },
   {
+    "Branch_ID__c": "5038",
+    "Name": "Joey Cervantes DBA Mattress Kings",
+    "Entity_Status__c": "Inactive",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-04"
+  },
+  {
     "Branch_ID__c": "5048",
     "Name": "Lisa Furniture Inc DBA Cohens Furniture Express",
     "Entity_Status__c": "Closed/Sold",
