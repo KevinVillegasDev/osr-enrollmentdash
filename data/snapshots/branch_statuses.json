@@ -11968,6 +11968,14 @@
     "Last_Status_Change_Date__c": "2026-08-19"
   },
   {
+    "Branch_ID__c": "25797",
+    "Name": "Addis Tire Outlet",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-03"
+  },
+  {
     "Branch_ID__c": "25807",
     "Name": "Hot Drive & Sound",
     "Entity_Status__c": "Watchlist",
