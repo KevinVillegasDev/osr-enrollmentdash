@@ -9784,6 +9784,14 @@
     "Last_Status_Change_Date__c": "2026-02-23"
   },
   {
+    "Branch_ID__c": "23921",
+    "Name": "Sam's Automotive Service & Repair",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-04"
+  },
+  {
     "Branch_ID__c": "23937",
     "Name": "The Car Clinic of Houston",
     "Entity_Status__c": "Suspended",
