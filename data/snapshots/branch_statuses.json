@@ -11936,6 +11936,14 @@
     "Last_Status_Change_Date__c": "2026-05-05"
   },
   {
+    "Branch_ID__c": "25902",
+    "Name": "Chingon Auto Complete",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-03"
+  },
+  {
     "Branch_ID__c": "25737",
     "Name": "Guzzies RIV",
     "Entity_Status__c": "Terminated",
