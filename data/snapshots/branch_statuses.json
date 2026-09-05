@@ -5688,6 +5688,14 @@
     "Last_Status_Change_Date__c": "2026-07-13"
   },
   {
+    "Branch_ID__c": "20779",
+    "Name": "Rolin Automotive",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-04"
+  },
+  {
     "Branch_ID__c": "20760",
     "Name": "Service Street Auto Repair 1740",
     "Entity_Status__c": "Closed/Sold",

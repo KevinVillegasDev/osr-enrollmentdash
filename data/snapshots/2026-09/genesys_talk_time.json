@@ -42,6 +42,13 @@
     "calls": 577
   },
   {
+    "user_id": "4e3d344f-424b-40c1-aeae-95f1606327b7",
+    "name": "Victor Martinez",
+    "talk_seconds": 67175,
+    "talk_display": "18h 39m",
+    "calls": 490
+  },
+  {
     "user_id": "ae2ebad4-ad15-4b50-b5be-6bb7c67a1379",
     "name": "Alejandro Aguilar",
     "talk_seconds": 67148,
@@ -49,18 +56,11 @@
     "calls": 576
   },
   {
-    "user_id": "4e3d344f-424b-40c1-aeae-95f1606327b7",
-    "name": "Victor Martinez",
-    "talk_seconds": 65295,
-    "talk_display": "18h 8m",
-    "calls": 473
-  },
-  {
     "user_id": "21ab0300-3df4-4b95-a620-da649b60ba1e",
     "name": "Eduardo Yanez",
-    "talk_seconds": 59274,
-    "talk_display": "16h 27m",
-    "calls": 593
+    "talk_seconds": 61302,
+    "talk_display": "17h 1m",
+    "calls": 606
   },
   {
     "user_id": "4badaa53-13ea-49a2-a518-7a98aecbd0b5",
@@ -86,16 +86,16 @@
   {
     "user_id": "d92f85ef-d236-44e8-af25-34c7caa50a3f",
     "name": "Dan Flores",
-    "talk_seconds": 51845,
-    "talk_display": "14h 24m",
-    "calls": 675
+    "talk_seconds": 52507,
+    "talk_display": "14h 35m",
+    "calls": 696
   },
   {
     "user_id": "03ef1d8c-7daa-4a57-9229-d028d76c465a",
     "name": "Fatima Rodriguez",
-    "talk_seconds": 48625,
-    "talk_display": "13h 30m",
-    "calls": 606
+    "talk_seconds": 48761,
+    "talk_display": "13h 32m",
+    "calls": 612
   },
   {
     "user_id": "e650f045-ae73-4b3d-be81-b95449f33f2f",
@@ -112,6 +112,13 @@
     "calls": 645
   },
   {
+    "user_id": "8862fd25-c708-4e34-81ce-555776053328",
+    "name": "Fabiola Tapia",
+    "talk_seconds": 45435,
+    "talk_display": "12h 37m",
+    "calls": 471
+  },
+  {
     "user_id": "898912fa-39ca-479d-bf45-a6a0a69b5154",
     "name": "Ana Karen Morales",
     "talk_seconds": 45080,
@@ -126,11 +133,18 @@
     "calls": 310
   },
   {
-    "user_id": "8862fd25-c708-4e34-81ce-555776053328",
-    "name": "Fabiola Tapia",
-    "talk_seconds": 44267,
-    "talk_display": "12h 17m",
-    "calls": 448
+    "user_id": "d421063f-892f-44c6-a753-68c3b0dc2525",
+    "name": "Elton Ramirez",
+    "talk_seconds": 43478,
+    "talk_display": "12h 4m",
+    "calls": 609
+  },
+  {
+    "user_id": "6b908f34-1163-49f5-8561-d6fa2fa4364c",
+    "name": "Myeshia Williams",
+    "talk_seconds": 43116,
+    "talk_display": "11h 58m",
+    "calls": 213
   },
   {
     "user_id": "a27c2751-4e06-4a48-b962-4be00871c869",
@@ -138,20 +152,6 @@
     "talk_seconds": 43082,
     "talk_display": "11h 58m",
     "calls": 431
-  },
-  {
-    "user_id": "d421063f-892f-44c6-a753-68c3b0dc2525",
-    "name": "Elton Ramirez",
-    "talk_seconds": 43007,
-    "talk_display": "11h 56m",
-    "calls": 592
-  },
-  {
-    "user_id": "6b908f34-1163-49f5-8561-d6fa2fa4364c",
-    "name": "Myeshia Williams",
-    "talk_seconds": 42603,
-    "talk_display": "11h 50m",
-    "calls": 209
   },
   {
     "user_id": "dc6d4a2a-8231-4fb9-876e-94b3cb1ded5a",
@@ -219,9 +219,9 @@
   {
     "user_id": "ad921406-58f6-464c-9496-a038e21a3e69",
     "name": "Mercedez Leggett",
-    "talk_seconds": 31033,
-    "talk_display": "8h 37m",
-    "calls": 172
+    "talk_seconds": 31332,
+    "talk_display": "8h 42m",
+    "calls": 173
   },
   {
     "user_id": "e353547e-676b-42b2-ac21-4ad9aff70e61",
@@ -273,6 +273,13 @@
     "calls": 126
   },
   {
+    "user_id": "eb53ed35-8863-4021-bd44-909f19636923",
+    "name": "Benjamin Munoz",
+    "talk_seconds": 24370,
+    "talk_display": "6h 46m",
+    "calls": 366
+  },
+  {
     "user_id": "e3e7fe27-1781-4f59-a5b7-3a7d89753df3",
     "name": "Amy Negrete",
     "talk_seconds": 24258,
@@ -287,11 +294,11 @@
     "calls": 235
   },
   {
-    "user_id": "eb53ed35-8863-4021-bd44-909f19636923",
-    "name": "Benjamin Munoz",
-    "talk_seconds": 23192,
-    "talk_display": "6h 26m",
-    "calls": 362
+    "user_id": "bd4818d1-a4eb-4711-bdbb-736a2227bbd2",
+    "name": "Alex Perez",
+    "talk_seconds": 20009,
+    "talk_display": "5h 33m",
+    "calls": 120
   },
   {
     "user_id": "d2343d3e-9373-4bc2-9b38-907016f6998b",
@@ -334,13 +341,6 @@
     "talk_seconds": 17693,
     "talk_display": "4h 54m",
     "calls": 305
-  },
-  {
-    "user_id": "bd4818d1-a4eb-4711-bdbb-736a2227bbd2",
-    "name": "Alex Perez",
-    "talk_seconds": 17623,
-    "talk_display": "4h 53m",
-    "calls": 115
   },
   {
     "user_id": "32fa528b-c886-4359-ab9d-638a8d5e29ee",
