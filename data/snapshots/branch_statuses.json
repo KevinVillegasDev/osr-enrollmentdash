@@ -1589,7 +1589,7 @@
     "Entity_Status__c": "Suspended",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-09-02"
+    "Last_Status_Change_Date__c": "2026-09-08"
   },
   {
     "Branch_ID__c": "2955",
@@ -8417,7 +8417,7 @@
   },
   {
     "Branch_ID__c": "23137",
-    "Name": "Limitless Fleet Services",
+    "Name": "Limitless Automotive",
     "Entity_Status__c": "Watchlist",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
@@ -11216,6 +11216,14 @@
     "Last_Status_Change_Date__c": "2025-12-26"
   },
   {
+    "Branch_ID__c": "24964",
+    "Name": "Camelia Wheels And Tires",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-08"
+  },
+  {
     "Branch_ID__c": "25003",
     "Name": "Patriot Auto & Truck Repair",
     "Entity_Status__c": "Closed/Sold",
@@ -12266,10 +12274,10 @@
   {
     "Branch_ID__c": "26183",
     "Name": "Titan Audio",
-    "Entity_Status__c": "Suspended",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-08-19"
+    "Entity_Status__c": "Terminated",
+    "Status_Reason__c": "Fraud",
+    "Termination_Date__c": "2026-09-08",
+    "Last_Status_Change_Date__c": "2026-09-08"
   },
   {
     "Branch_ID__c": "26009",
