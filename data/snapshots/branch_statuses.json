@@ -6712,6 +6712,14 @@
     "Last_Status_Change_Date__c": "2025-01-30"
   },
   {
+    "Branch_ID__c": "21840",
+    "Name": "Cowboys Auto 2",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-09"
+  },
+  {
     "Branch_ID__c": "21817",
     "Name": "Nuvision Auto Glass - Florida",
     "Entity_Status__c": "Watchlist",
