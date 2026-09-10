@@ -970,5 +970,32 @@
     "_label_Industry": "Auto - Repair",
     "EPF Product": "Rental Payments (Lease-to-Own Option)",
     "_label_EPF Product": "Rental Payments (Lease-to-Own Option)"
+  },
+  {
+    "Enrollment Date": "9/10/2026",
+    "Branch ID": "26337",
+    "_label_Branch ID": "26337",
+    "Account Name": "001TO00000r3qDHYAY",
+    "_label_Account Name": "Auto Service Depot",
+    "Billing State/Province (text only)": "Georgia",
+    "_label_Billing State/Province (text only)": "Georgia",
+    "Status": "New",
+    "_label_Status": "New",
+    "Parent Account": "001TO00000r43vFYAQ",
+    "_label_Parent Account": "Auto Repair Specialists LLC",
+    "CID": "20527",
+    "_label_CID": "20527",
+    "Billing Street": "2191 Idlewood Rd",
+    "_label_Billing Street": "2191 Idlewood Rd",
+    "Billing State/Province": "GA",
+    "_label_Billing State/Province": "Georgia",
+    "Billing Zip/Postal Code": "30084",
+    "_label_Billing Zip/Postal Code": "30084",
+    "Created Date": "2026-09-03",
+    "_label_Created Date": "9/3/2026",
+    "Industry": "Auto - Repair",
+    "_label_Industry": "Auto - Repair",
+    "EPF Product": "Rental Payments (Lease-to-Own Option)",
+    "_label_EPF Product": "Rental Payments (Lease-to-Own Option)"
   }
 ]
