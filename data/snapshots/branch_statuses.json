@@ -12128,6 +12128,14 @@
     "Last_Status_Change_Date__c": "2026-06-05"
   },
   {
+    "Branch_ID__c": "25959",
+    "Name": "Easy Home Appliances",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-10"
+  },
+  {
     "Branch_ID__c": "26040",
     "Name": "Regal Furniture #4 Jim Miller",
     "Entity_Status__c": "Watchlist",
