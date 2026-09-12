@@ -63,6 +63,13 @@
     "calls": 1102
   },
   {
+    "user_id": "dc6d4a2a-8231-4fb9-876e-94b3cb1ded5a",
+    "name": "Rebeca Zaragoza",
+    "talk_seconds": 134129,
+    "talk_display": "37h 15m",
+    "calls": 1387
+  },
+  {
     "user_id": "a8b0fb23-2fb2-4b48-8c09-9916a343146f",
     "name": "Diego Castro",
     "talk_seconds": 132851,
@@ -70,18 +77,18 @@
     "calls": 1062
   },
   {
-    "user_id": "dc6d4a2a-8231-4fb9-876e-94b3cb1ded5a",
-    "name": "Rebeca Zaragoza",
-    "talk_seconds": 132662,
-    "talk_display": "36h 51m",
-    "calls": 1368
-  },
-  {
     "user_id": "21ab0300-3df4-4b95-a620-da649b60ba1e",
     "name": "Eduardo Yanez",
     "talk_seconds": 116718,
     "talk_display": "32h 25m",
     "calls": 1262
+  },
+  {
+    "user_id": "c30af5b2-a82c-440e-9629-a37affc3f08d",
+    "name": "Diego Arriaga",
+    "talk_seconds": 113654,
+    "talk_display": "31h 34m",
+    "calls": 871
   },
   {
     "user_id": "ae2ebad4-ad15-4b50-b5be-6bb7c67a1379",
@@ -93,16 +100,9 @@
   {
     "user_id": "03ef1d8c-7daa-4a57-9229-d028d76c465a",
     "name": "Fatima Rodriguez",
-    "talk_seconds": 112472,
-    "talk_display": "31h 14m",
-    "calls": 1432
-  },
-  {
-    "user_id": "c30af5b2-a82c-440e-9629-a37affc3f08d",
-    "name": "Diego Arriaga",
-    "talk_seconds": 112212,
-    "talk_display": "31h 10m",
-    "calls": 858
+    "talk_seconds": 112553,
+    "talk_display": "31h 15m",
+    "calls": 1434
   },
   {
     "user_id": "e650f045-ae73-4b3d-be81-b95449f33f2f",
@@ -121,23 +121,23 @@
   {
     "user_id": "d421063f-892f-44c6-a753-68c3b0dc2525",
     "name": "Elton Ramirez",
-    "talk_seconds": 105604,
-    "talk_display": "29h 20m",
-    "calls": 1362
+    "talk_seconds": 105991,
+    "talk_display": "29h 26m",
+    "calls": 1376
   },
   {
     "user_id": "8862fd25-c708-4e34-81ce-555776053328",
     "name": "Fabiola Tapia",
-    "talk_seconds": 103989,
-    "talk_display": "28h 53m",
-    "calls": 992
+    "talk_seconds": 105320,
+    "talk_display": "29h 15m",
+    "calls": 1013
   },
   {
     "user_id": "d92f85ef-d236-44e8-af25-34c7caa50a3f",
     "name": "Dan Flores",
-    "talk_seconds": 101132,
-    "talk_display": "28h 5m",
-    "calls": 1487
+    "talk_seconds": 101541,
+    "talk_display": "28h 12m",
+    "calls": 1504
   },
   {
     "user_id": "898912fa-39ca-479d-bf45-a6a0a69b5154",
@@ -226,9 +226,9 @@
   {
     "user_id": "71ce61e3-6815-4f4f-9d0c-6abfec938473",
     "name": "Adali Barrueta",
-    "talk_seconds": 72970,
-    "talk_display": "20h 16m",
-    "calls": 1136
+    "talk_seconds": 73226,
+    "talk_display": "20h 20m",
+    "calls": 1141
   },
   {
     "user_id": "b217b1f8-ac35-42a7-88b7-3b77714ae49e",
