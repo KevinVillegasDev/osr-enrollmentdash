@@ -12400,6 +12400,14 @@
     "Last_Status_Change_Date__c": "2026-08-04"
   },
   {
+    "Branch_ID__c": "26049",
+    "Name": "YeaWeFixThat",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-14"
+  },
+  {
     "Branch_ID__c": "26098",
     "Name": "ElectroPro Usa",
     "Entity_Status__c": "Watchlist",
@@ -12544,12 +12552,28 @@
     "Last_Status_Change_Date__c": "2026-08-07"
   },
   {
+    "Branch_ID__c": "26354",
+    "Name": "The Cell Phone Guy",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-14"
+  },
+  {
     "Branch_ID__c": "26227",
     "Name": "Valencia Mobile Transmission",
     "Entity_Status__c": "Watchlist",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-08-17"
+  },
+  {
+    "Branch_ID__c": "26228",
+    "Name": "YeaWeFixThat - Deltona",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-14"
   },
   {
     "Branch_ID__c": "26343",
