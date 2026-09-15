@@ -1944,6 +1944,22 @@
     "Last_Status_Change_Date__c": "2025-03-18"
   },
   {
+    "Branch_ID__c": "4154",
+    "Name": "Juan Tapia DBA Tap Tires And Radiators - Montclair",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-15"
+  },
+  {
+    "Branch_ID__c": "4155",
+    "Name": "Juan Tapia DBA Tap Tires And Radiators - Ontario",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-15"
+  },
+  {
     "Branch_ID__c": "4157",
     "Name": "Joyeria Lupita, Inc - Fontana",
     "Entity_Status__c": "Terminated",
