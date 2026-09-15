@@ -3200,6 +3200,14 @@
     "Last_Status_Change_Date__c": "2025-01-21"
   },
   {
+    "Branch_ID__c": "10260",
+    "Name": "Robert Beachum Inc DBA The Auto Place 1",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-15"
+  },
+  {
     "Branch_ID__c": "10273",
     "Name": "Dwaynes Auto & Truck Service",
     "Entity_Status__c": "Warning List",
@@ -3742,6 +3750,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-04-14"
+  },
+  {
+    "Branch_ID__c": "13484",
+    "Name": "Keith Smith DBA Keiths Garage",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-15"
   },
   {
     "Branch_ID__c": "13525",
