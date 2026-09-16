@@ -16,16 +16,16 @@
   {
     "user_id": "4b6a0976-42ea-413b-8cea-5d3cbb55fc13",
     "name": "Julio Cervantes",
-    "talk_seconds": 211069,
-    "talk_display": "58h 37m",
-    "calls": 1951
+    "talk_seconds": 212284,
+    "talk_display": "58h 58m",
+    "calls": 1955
   },
   {
     "user_id": "4e3d344f-424b-40c1-aeae-95f1606327b7",
     "name": "Victor Martinez",
-    "talk_seconds": 198528,
-    "talk_display": "55h 8m",
-    "calls": 1628
+    "talk_seconds": 201001,
+    "talk_display": "55h 50m",
+    "calls": 1655
   },
   {
     "user_id": "d584f8e7-6af9-4c7f-bb2b-912869d89b0b",
@@ -79,30 +79,30 @@
   {
     "user_id": "8862fd25-c708-4e34-81ce-555776053328",
     "name": "Fabiola Tapia",
-    "talk_seconds": 147278,
-    "talk_display": "40h 54m",
-    "calls": 1413
+    "talk_seconds": 149276,
+    "talk_display": "41h 27m",
+    "calls": 1451
   },
   {
     "user_id": "ae2ebad4-ad15-4b50-b5be-6bb7c67a1379",
     "name": "Alejandro Aguilar",
-    "talk_seconds": 146180,
-    "talk_display": "40h 36m",
-    "calls": 1292
+    "talk_seconds": 148164,
+    "talk_display": "41h 9m",
+    "calls": 1310
   },
   {
     "user_id": "21ab0300-3df4-4b95-a620-da649b60ba1e",
     "name": "Eduardo Yanez",
-    "talk_seconds": 143970,
-    "talk_display": "39h 59m",
-    "calls": 1501
+    "talk_seconds": 146184,
+    "talk_display": "40h 36m",
+    "calls": 1527
   },
   {
     "user_id": "03ef1d8c-7daa-4a57-9229-d028d76c465a",
     "name": "Fatima Rodriguez",
-    "talk_seconds": 141614,
-    "talk_display": "39h 20m",
-    "calls": 1813
+    "talk_seconds": 142395,
+    "talk_display": "39h 33m",
+    "calls": 1834
   },
   {
     "user_id": "43a30a6a-413a-47fb-b1ea-600091b4fcf4",
@@ -114,9 +114,16 @@
   {
     "user_id": "d421063f-892f-44c6-a753-68c3b0dc2525",
     "name": "Elton Ramirez",
-    "talk_seconds": 128355,
-    "talk_display": "35h 39m",
-    "calls": 1724
+    "talk_seconds": 129930,
+    "talk_display": "36h 5m",
+    "calls": 1750
+  },
+  {
+    "user_id": "e650f045-ae73-4b3d-be81-b95449f33f2f",
+    "name": "Maria Rosales",
+    "talk_seconds": 128004,
+    "talk_display": "35h 33m",
+    "calls": 1711
   },
   {
     "user_id": "898912fa-39ca-479d-bf45-a6a0a69b5154",
@@ -124,13 +131,6 @@
     "talk_seconds": 127874,
     "talk_display": "35h 31m",
     "calls": 1135
-  },
-  {
-    "user_id": "e650f045-ae73-4b3d-be81-b95449f33f2f",
-    "name": "Maria Rosales",
-    "talk_seconds": 127733,
-    "talk_display": "35h 28m",
-    "calls": 1703
   },
   {
     "user_id": "1368ae54-e473-44df-b701-df524f9d5d18",
@@ -142,9 +142,9 @@
   {
     "user_id": "d92f85ef-d236-44e8-af25-34c7caa50a3f",
     "name": "Dan Flores",
-    "talk_seconds": 121439,
-    "talk_display": "33h 43m",
-    "calls": 1831
+    "talk_seconds": 121867,
+    "talk_display": "33h 51m",
+    "calls": 1844
   },
   {
     "user_id": "1332d5ba-280b-4f82-9b9f-ea0c03c92c89",
@@ -177,9 +177,9 @@
   {
     "user_id": "bd4818d1-a4eb-4711-bdbb-736a2227bbd2",
     "name": "Alex Perez",
-    "talk_seconds": 107399,
-    "talk_display": "29h 49m",
-    "calls": 900
+    "talk_seconds": 111295,
+    "talk_display": "30h 54m",
+    "calls": 934
   },
   {
     "user_id": "b1cd33b6-85d5-4da1-bfba-71a0346104e7",
@@ -189,18 +189,18 @@
     "calls": 1486
   },
   {
+    "user_id": "6b908f34-1163-49f5-8561-d6fa2fa4364c",
+    "name": "Myeshia Williams",
+    "talk_seconds": 100308,
+    "talk_display": "27h 51m",
+    "calls": 532
+  },
+  {
     "user_id": "3b6ccb2a-ba08-4cf2-832d-8a4cd4f5fe7a",
     "name": "Christy Mcintosh",
     "talk_seconds": 100306,
     "talk_display": "27h 51m",
     "calls": 755
-  },
-  {
-    "user_id": "6b908f34-1163-49f5-8561-d6fa2fa4364c",
-    "name": "Myeshia Williams",
-    "talk_seconds": 99828,
-    "talk_display": "27h 43m",
-    "calls": 527
   },
   {
     "user_id": "a27c2751-4e06-4a48-b962-4be00871c869",
@@ -231,6 +231,13 @@
     "calls": 1213
   },
   {
+    "user_id": "e353547e-676b-42b2-ac21-4ad9aff70e61",
+    "name": "Juan Fabian",
+    "talk_seconds": 85811,
+    "talk_display": "23h 50m",
+    "calls": 793
+  },
+  {
     "user_id": "dbad3bfb-f8b3-4632-8920-25fbb6e58730",
     "name": "Sergio Picazo",
     "talk_seconds": 85771,
@@ -243,13 +250,6 @@
     "talk_seconds": 85766,
     "talk_display": "23h 49m",
     "calls": 1570
-  },
-  {
-    "user_id": "e353547e-676b-42b2-ac21-4ad9aff70e61",
-    "name": "Juan Fabian",
-    "talk_seconds": 85316,
-    "talk_display": "23h 41m",
-    "calls": 790
   },
   {
     "user_id": "b217b1f8-ac35-42a7-88b7-3b77714ae49e",
@@ -268,16 +268,16 @@
   {
     "user_id": "ad921406-58f6-464c-9496-a038e21a3e69",
     "name": "Mercedez Leggett",
-    "talk_seconds": 78474,
-    "talk_display": "21h 47m",
-    "calls": 462
+    "talk_seconds": 79423,
+    "talk_display": "22h 3m",
+    "calls": 465
   },
   {
     "user_id": "eb53ed35-8863-4021-bd44-909f19636923",
     "name": "Benjamin Munoz",
-    "talk_seconds": 75868,
-    "talk_display": "21h 4m",
-    "calls": 1058
+    "talk_seconds": 76737,
+    "talk_display": "21h 18m",
+    "calls": 1081
   },
   {
     "user_id": "4c30a9fe-24ea-4d0d-8835-b545238c8b15",
@@ -373,9 +373,9 @@
   {
     "user_id": "14f259f6-102a-4700-a51a-b47ae04d24e7",
     "name": "Jeniffer Griffith",
-    "talk_seconds": 32030,
-    "talk_display": "8h 53m",
-    "calls": 571
+    "talk_seconds": 32729,
+    "talk_display": "9h 5m",
+    "calls": 586
   },
   {
     "user_id": "aaa20da5-e478-42ab-9a42-b6ab8d704e25",
@@ -450,9 +450,9 @@
   {
     "user_id": "c452ea49-5d1b-4c1f-ae71-bdce0153d27d",
     "name": "Carlos Jimenez",
-    "talk_seconds": 748,
-    "talk_display": "12m",
-    "calls": 2
+    "talk_seconds": 978,
+    "talk_display": "16m",
+    "calls": 3
   },
   {
     "user_id": "a659dca0-15a2-4136-a59b-d81e3c096577",
