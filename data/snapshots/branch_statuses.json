@@ -11960,6 +11960,14 @@
     "Last_Status_Change_Date__c": "2026-04-20"
   },
   {
+    "Branch_ID__c": "25819",
+    "Name": "Airbase Automotive Repair",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-16"
+  },
+  {
     "Branch_ID__c": "25708",
     "Name": "Euro Motorsports",
     "Entity_Status__c": "Suspended",
@@ -12066,10 +12074,10 @@
   {
     "Branch_ID__c": "25797",
     "Name": "Addis Tire Outlet",
-    "Entity_Status__c": "Suspended",
+    "Entity_Status__c": "Watchlist",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-09-09"
+    "Last_Status_Change_Date__c": "2026-09-16"
   },
   {
     "Branch_ID__c": "25807",
