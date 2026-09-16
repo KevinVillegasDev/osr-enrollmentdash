@@ -12384,6 +12384,14 @@
     "Last_Status_Change_Date__c": "2026-09-03"
   },
   {
+    "Branch_ID__c": "26028",
+    "Name": "Premier Tire & Auto",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-16"
+  },
+  {
     "Branch_ID__c": "26043",
     "Name": "Regal Furniture #7 North Richland Hills",
     "Entity_Status__c": "Watchlist",
@@ -12432,6 +12440,14 @@
     "Last_Status_Change_Date__c": "2026-07-11"
   },
   {
+    "Branch_ID__c": "26032",
+    "Name": "Amigo Auto Care",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-16"
+  },
+  {
     "Branch_ID__c": "26177",
     "Name": "Dazart",
     "Entity_Status__c": "Watchlist",
@@ -12462,6 +12478,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-07-14"
+  },
+  {
+    "Branch_ID__c": "26156",
+    "Name": "5th Trading",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-16"
   },
   {
     "Branch_ID__c": "26103",
@@ -12614,6 +12638,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-09-14"
+  },
+  {
+    "Branch_ID__c": "26257",
+    "Name": "DDB Electronics",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-16"
   },
   {
     "Branch_ID__c": "26343",
