@@ -2928,6 +2928,14 @@
     "Last_Status_Change_Date__c": "2025-10-03"
   },
   {
+    "Branch_ID__c": "7974",
+    "Name": "Sun City Heating And Cooling Inc DBA Sun City Heating And Cooling Inc",
+    "Entity_Status__c": "Inactive",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-15"
+  },
+  {
     "Branch_ID__c": "9094",
     "Name": "Primitivo Sandoval DBA Primos Transmssion 888",
     "Entity_Status__c": "Closed/Sold",
