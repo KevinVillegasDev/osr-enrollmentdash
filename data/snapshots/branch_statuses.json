@@ -7792,6 +7792,14 @@
     "Last_Status_Change_Date__c": "2025-09-05"
   },
   {
+    "Branch_ID__c": "22548",
+    "Name": "Diesel Performance",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-18"
+  },
+  {
     "Branch_ID__c": "22553",
     "Name": "Top Tier Mattress and Bedding",
     "Entity_Status__c": "Closed/Sold",
@@ -11710,6 +11718,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-05-04"
+  },
+  {
+    "Branch_ID__c": "25313",
+    "Name": "Luis Lugo Mechanic Mobile",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-18"
   },
   {
     "Branch_ID__c": "25310",
