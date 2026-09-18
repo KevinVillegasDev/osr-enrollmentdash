@@ -2824,6 +2824,14 @@
     "Last_Status_Change_Date__c": "2026-04-22"
   },
   {
+    "Branch_ID__c": "6517",
+    "Name": "Rfc Industries LLC DBA Subiworks",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-17"
+  },
+  {
     "Branch_ID__c": "6523",
     "Name": "Superstition Rv",
     "Entity_Status__c": "Closed/Sold",
