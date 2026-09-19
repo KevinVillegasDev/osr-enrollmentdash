@@ -4,14 +4,14 @@
     "Branch ID": "26320",
     "9/1/2026_Sum of Funded Dollars": 2250.0,
     "9/1/2026_Sum of Funded Average": 2250.0,
-    "9/1/2026_Sum of Applications": 4.0,
+    "9/1/2026_Sum of Applications": 6.0,
     "9/1/2026_Sum of Funded Applications Total": 1.0
   },
   {
-    "Account Name": "Albert Appliances",
-    "Branch ID": "26345",
-    "9/1/2026_Sum of Funded Dollars": 600.0,
-    "9/1/2026_Sum of Funded Average": 600.0,
+    "Account Name": "Easy Boat Management",
+    "Branch ID": "26312",
+    "9/1/2026_Sum of Funded Dollars": 2750.0,
+    "9/1/2026_Sum of Funded Average": 2750.0,
     "9/1/2026_Sum of Applications": 1.0,
     "9/1/2026_Sum of Funded Applications Total": 1.0
   },
@@ -32,6 +32,14 @@
     "9/1/2026_Sum of Funded Applications Total": 1.0
   },
   {
+    "Account Name": "Brody's Car Care Center",
+    "Branch ID": "26366",
+    "9/1/2026_Sum of Funded Dollars": 0.0,
+    "9/1/2026_Sum of Funded Average": 0.0,
+    "9/1/2026_Sum of Applications": 3.0,
+    "9/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
     "Account Name": "Mikes Auto Mechanic Service",
     "Branch ID": "26306",
     "9/1/2026_Sum of Funded Dollars": 536.57,
@@ -40,12 +48,28 @@
     "9/1/2026_Sum of Funded Applications Total": 1.0
   },
   {
+    "Account Name": "Auto Service Depot",
+    "Branch ID": "26337",
+    "9/1/2026_Sum of Funded Dollars": 0.0,
+    "9/1/2026_Sum of Funded Average": 0.0,
+    "9/1/2026_Sum of Applications": 4.0,
+    "9/1/2026_Sum of Funded Applications Total": 0.0
+  },
+  {
+    "Account Name": "Albert Appliances",
+    "Branch ID": "26345",
+    "9/1/2026_Sum of Funded Dollars": 600.0,
+    "9/1/2026_Sum of Funded Average": 600.0,
+    "9/1/2026_Sum of Applications": 1.0,
+    "9/1/2026_Sum of Funded Applications Total": 1.0
+  },
+  {
     "Account Name": "The Cell Phone Guy",
     "Branch ID": "26354",
-    "9/1/2026_Sum of Funded Dollars": 5322.67,
-    "9/1/2026_Sum of Funded Average": 1064.53,
-    "9/1/2026_Sum of Applications": 16.0,
-    "9/1/2026_Sum of Funded Applications Total": 5.0
+    "9/1/2026_Sum of Funded Dollars": 5822.67,
+    "9/1/2026_Sum of Funded Average": 970.45,
+    "9/1/2026_Sum of Applications": 17.0,
+    "9/1/2026_Sum of Funded Applications Total": 6.0
   },
   {
     "Account Name": "Legion UTV",
@@ -74,10 +98,10 @@
   {
     "Account Name": "Joels Tire Shop and Auto Repair",
     "Branch ID": "26343",
-    "9/1/2026_Sum of Funded Dollars": 20095.99,
-    "9/1/2026_Sum of Funded Average": 4019.2,
-    "9/1/2026_Sum of Applications": 9.0,
-    "9/1/2026_Sum of Funded Applications Total": 5.0
+    "9/1/2026_Sum of Funded Dollars": 22965.99,
+    "9/1/2026_Sum of Funded Average": 3827.67,
+    "9/1/2026_Sum of Applications": 13.0,
+    "9/1/2026_Sum of Funded Applications Total": 6.0
   },
   {
     "Account Name": "MC Furniture",
@@ -88,12 +112,12 @@
     "9/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
-    "Account Name": "GC Rims and Tires",
-    "Branch ID": "26317",
-    "9/1/2026_Sum of Funded Dollars": 14211.0,
-    "9/1/2026_Sum of Funded Average": 1291.91,
-    "9/1/2026_Sum of Applications": 85.0,
-    "9/1/2026_Sum of Funded Applications Total": 11.0
+    "Account Name": "Gonzalo Transmission & Clutch",
+    "Branch ID": "26360",
+    "9/1/2026_Sum of Funded Dollars": 0.0,
+    "9/1/2026_Sum of Funded Average": 0.0,
+    "9/1/2026_Sum of Applications": 2.0,
+    "9/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
     "Account Name": "Pro Service Automotive",
@@ -112,27 +136,27 @@
     "9/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
-    "Account Name": "Easy Boat Management",
-    "Branch ID": "26312",
-    "9/1/2026_Sum of Funded Dollars": 2750.0,
-    "9/1/2026_Sum of Funded Average": 2750.0,
-    "9/1/2026_Sum of Applications": 1.0,
-    "9/1/2026_Sum of Funded Applications Total": 1.0
+    "Account Name": "GC Rims and Tires",
+    "Branch ID": "26317",
+    "9/1/2026_Sum of Funded Dollars": 14211.0,
+    "9/1/2026_Sum of Funded Average": 1291.91,
+    "9/1/2026_Sum of Applications": 91.0,
+    "9/1/2026_Sum of Funded Applications Total": 11.0
   },
   {
-    "Account Name": "Auto Service Depot",
-    "Branch ID": "26337",
+    "Account Name": "Fixfy",
+    "Branch ID": "26355",
     "9/1/2026_Sum of Funded Dollars": 0.0,
     "9/1/2026_Sum of Funded Average": 0.0,
-    "9/1/2026_Sum of Applications": 4.0,
+    "9/1/2026_Sum of Applications": 2.0,
     "9/1/2026_Sum of Funded Applications Total": 0.0
   },
   {
     "Account Name": "Northeast Philly E-Bikes",
     "Branch ID": "26321",
-    "9/1/2026_Sum of Funded Dollars": 6300.4,
-    "9/1/2026_Sum of Funded Average": 1575.1,
-    "9/1/2026_Sum of Applications": 34.0,
-    "9/1/2026_Sum of Funded Applications Total": 4.0
+    "9/1/2026_Sum of Funded Dollars": 7920.31,
+    "9/1/2026_Sum of Funded Average": 1584.06,
+    "9/1/2026_Sum of Applications": 75.0,
+    "9/1/2026_Sum of Funded Applications Total": 5.0
   }
 ]
