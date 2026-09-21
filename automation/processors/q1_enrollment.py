@@ -13,7 +13,7 @@ from collections import Counter
 from datetime import date
 import calendar
 
-from ..config import COLUMN_LABELS, MONTH_ABBREV, MONTHLY_FLOOR, QUARTERLY_TARGET, today_pacific
+from ..config import COLUMN_LABELS, MONTH_ABBREV, MONTHLY_FLOOR, OSR_ROSTER, QUARTERLY_TARGET, today_pacific
 
 logger = logging.getLogger(__name__)
 
@@ -35,6 +35,9 @@ def process(monthly_credited: dict[str, list[dict]], quarter_months: list[int],
     today = today_pacific()
 
     # ── Count enrollments per OSR per month ──────────────────────────────
+    # Only rostered OSRs appear on the tracker (same rule as the scorecard and
+    # cohort tracker): departed reps and stray credit names drop off.
+    roster_set = set(OSR_ROSTER)
     osr_monthly = {}  # osr_name -> {month_abbrev: count}
 
     for month_num in quarter_months:
@@ -44,7 +47,7 @@ def process(monthly_credited: dict[str, list[dict]], quarter_months: list[int],
         osr_counts = Counter()
         for row in rows:
             osr = _get(row, "osr_credit", "")
-            if osr and osr != "-":
+            if osr and osr != "-" and osr in roster_set:
                 osr_counts[osr] += 1
 
         for osr, count in osr_counts.items():

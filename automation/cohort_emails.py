@@ -21,7 +21,7 @@ Usage:
         Reads cohort data from cohort-tracking.html and writes
         one envelope per rep on the roster.
 
-    py -m automation.cohort_emails --from-html --rep "Cesar Flores"
+    py -m automation.cohort_emails --from-html --rep "Claudia Gerhardt"
         Single rep dry-run.
 
     py -m automation.cohort_emails --from-html --out ./output
@@ -88,7 +88,7 @@ def first_name(full_name: str) -> str:
 # ─── Cohort selection ────────────────────────────────────────────────────────
 
 def strip_territory(display_name: str) -> str:
-    """'Cesar Flores (RIC-1)' → 'Cesar Flores'"""
+    """'Claudia Gerhardt (RIC-2)' → 'Claudia Gerhardt'"""
     return re.sub(r"\s*\([^)]+\)\s*$", "", display_name).strip()
 
 
@@ -718,7 +718,7 @@ def sample_cohorts() -> tuple[list[dict], list[dict]]:
     """Two-rep sample to exercise the full layout: one behind, one with no current cohort."""
     apr = [
         {
-            "n": "Cesar Flores (RIC-1)",
+            "n": "Claudia Gerhardt (RIC-2)",
             "m": 5, "p": 3,
             "f": 12400.0, "f2": 14200.0,
             "apr": 4200.0, "may": 8200.0, "jun": 1800.0,
@@ -733,7 +733,7 @@ def sample_cohorts() -> tuple[list[dict], list[dict]]:
     ]
     may = [
         {
-            "n": "Cesar Flores (RIC-1)",
+            "n": "Claudia Gerhardt (RIC-2)",
             "m": 3, "p": 1,
             "f": 1800.0, "f2": 1800.0,
             "may": 1800.0, "jun": 0.0, "jul": 0.0,
@@ -780,7 +780,7 @@ def main():
         logger.info("TEST MODE — using sample data, sending to %s", COHORT_EMAIL_ADMIN)
         active_list, current_list = sample_cohorts()
         envelope = build_envelope(
-            rep_name="Cesar Flores",
+            rep_name="Claudia Gerhardt",
             rep_email=COHORT_EMAIL_ADMIN,
             active_cohort_list=active_list,
             current_cohort_list=current_list,

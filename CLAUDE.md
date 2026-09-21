@@ -121,7 +121,7 @@ The cohort card on index.html dynamically updates its labels each month:
 
 ### Quarterly Enrollment Compliance Card
 
-Auto-detects current quarter and updates Q label, targets, and link. When Q2+ is active, shows "Previous: Q1 2026 (Jan – Mar)" archive link below the card.
+Auto-detects current quarter and updates Q label, targets, and link. The quarterly tracker only lists `OSR_ROSTER` reps (a departed rep's quarter-to-date enrollments drop off the page and its KPIs). When Q2+ is active, shows "Previous: Q1 2026 (Jan – Mar)" archive link below the card.
 
 ### Hybrid Role Tracker
 
@@ -205,7 +205,7 @@ Tracks OSR compliance with Paul Funchess's commission structure:
 
 ## Field Activity Tracker (field-activity.html)
 
-Monthly check-in data from Salesforce Maps (Report 5).
+Monthly check-in data from Salesforce Maps (Report 5). Only `OSR_ROSTER` reps are shown — a departed rep's check-ins drop off on the next run.
 
 **Multi-month toggle:** Page shows pills at the top (e.g., "Mar 2026" / "Apr 2026") to switch between current and previous month's check-in data. Implemented via `monthlyFieldData` JS object injected by the pipeline. Click a month pill to swap `repActivity`, `repStops`, `days`, `dayLabels`, KPIs, and calendar without reloading.
 
@@ -390,10 +390,11 @@ For historical cohorts or Month 2 true-up data, Report 2 and 4 templates are cal
 - **Metrics**: `tTalkComplete` (talk seconds), `nConnected` (call count)
 - **Roster filtering**: Only ISR_ROSTER names are shown on the dashboard
 
-## OSR Roster (as of June 2026)
+## OSR Roster (as of September 2026)
 
-Cesar Flores, Claudia Gerhardt, Daviyon McDaniel, Eric Henderson, Jared Midkiff, Jose Valencia, Joseph Guerra, Marco Garmendia, Mariana Gross, Matthew MacDonald, Monroe Simon, Omar Corona, Richard Herrera, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
+Claudia Gerhardt, Daviyon McDaniel, Eric Henderson, Jared Midkiff, Jose Valencia, Joseph Guerra, Marco Garmendia, Mariana Gross, Matthew MacDonald, Monroe Simon, Omar Corona, Richard Herrera, Stephanie Whitlock, Yemaira Hernandez, Outside Sales Manager (overflow/unassigned)
 
+*Cesar Flores (RIC-1) departed September 2026; RIC-1 now unassigned (ISR coverage continues under Katie Anguiano). Frozen past-month dashboards still show him historically.*
 *Phillip Mason (RIC-6) departed July 2026; RIC-6 now unassigned (ISR coverage continues under Lesly Arroyo). Frozen past-month dashboards still show him historically.*
 *Monroe Simon added August 2026 for LTO-4 (TX — DFW; open since Francisco Gonzalez departed in June).*
 *Daviyon McDaniel added August 2026 for RIC-7 (NV — Las Vegas/Reno; open since DeLon Phoenix was removed in June).*
@@ -417,7 +418,7 @@ Per **Territory_Overview_v1.9** (June 2026), "ISR Pairings — Phase 1". Open te
 
 | ISR | Territories |
 |-----|-------------|
-| Katie Anguiano | RIC-1 (Cesar), RIC-2 (Claudia), RIC-4 (Richard) — drops RIC-1 when ISR #8 hired |
+| Katie Anguiano | RIC-1 (open), RIC-2 (Claudia), RIC-4 (Richard) — drops RIC-1 when ISR #8 hired |
 | Lesly Arroyo | RIC-3 (Jose), RIC-5 (Mariana), RIC-6 (open) — drops RIC-3 when ISR #8 hired |
 | Laura Angulo | LTO-1 (Yemaira), LTO-5 (Jared), LTO-8 (open) — drops LTO-8 when TSR fills |
 | Noemy Carrion | LTO-2 (Omar), LTO-3 (Joseph), LTO-4 (Monroe) — drops LTO-4 when ISR #7 hired |
@@ -434,7 +435,6 @@ Per **Territory_Overview_v1.9** (June 2026), "ISR Pairings — Phase 1". Open te
 | LTO-4 | Monroe Simon | TX (DFW) *(effective August 2026)* |
 | LTO-5 | Jared Midkiff | FL (State Manager) |
 | LTO-6 | Stephanie Whitlock | GA/NE FL/Panhandle *(SF re-coded LTO-7 → LTO-6, June 2026)* |
-| RIC-1 | Cesar Flores | CA (LA Metro Core) |
 | RIC-2 | Claudia Gerhardt | CA (IE South/San Diego) |
 | RIC-3 | Jose Valencia | CA *(effective July 2026)* |
 | RIC-4 | Richard Herrera | CA (Orange County/SE LA) |
@@ -444,7 +444,7 @@ Per **Territory_Overview_v1.9** (June 2026), "ISR Pairings — Phase 1". Open te
 | RIC-9 | Matthew MacDonald | AZ (State Manager + NM/UT/ID) |
 | RIC-10 | Marco Garmendia | Multi-state (unmanaged areas) *(effective July 2026; no dedicated ISR)* |
 
-**Unassigned territories:** LTO-8, RIC-6 — hiring in progress. **Retired code:** LTO-7 (renamed to LTO-6 in SF, June 2026; Stephanie's Jan–Mar cohort history remains frozen under LTO-7).
+**Unassigned territories:** LTO-8, RIC-1, RIC-6 — hiring in progress. **Retired code:** LTO-7 (renamed to LTO-6 in SF, June 2026; Stephanie's Jan–Mar cohort history remains frozen under LTO-7).
 
 ## Key Terminology
 
@@ -503,7 +503,7 @@ PPTX decks generated per territory for leadership reviews. Built with pptxgenjs 
 3. **Update `OSR_EMAILS`** — keys must stay in sync with `OSR_ROSTER` (adding a rep without an email entry, or leaving a departed rep's entry, breaks/misfires the weekly cohort email)
 4. Update the embedded `TERRITORY_MAP` in `html_generator.py` (the territory-review page has its own copy with area labels)
 5. Update the roster/territory/ISR sections in this file
-6. Removals follow the "Jeremy Moore precedent": drop from roster + maps + emails, territory becomes unassigned; frozen past-month dashboards keep the departed rep historically. New hires with a future effective date can be added immediately — credit only flows once SF's `OSR Enrollment Credit` names them.
+6. Removals follow the "Jeremy Moore precedent": drop from roster + maps + emails, territory becomes unassigned; frozen past-month dashboards keep the departed rep historically. Everything regenerated by the pipeline is roster-filtered (scorecard, forecast, cohort tracker, quarterly tracker, field activity, territory review), so the rep disappears from live pages on the next run — including any in-flight cohort or quarter-to-date numbers. New hires with a future effective date can be added immediately — credit only flows once SF's `OSR Enrollment Credit` names them.
 
 **Report changes:**
 1. Update `REPORT_IDS` in `automation/config.py` with new 18-character Salesforce Report IDs

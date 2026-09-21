@@ -2349,7 +2349,6 @@ def update_territory_review(filepath: str, territory_data: dict) -> bool:
         '  "LTO-4": {osr:"Monroe Simon", area:"TX (DFW)"},\n'
         '  "LTO-5": {osr:"Jared Midkiff", area:"FL (State Manager)"},\n'
         '  "LTO-6": {osr:"Stephanie Whitlock", area:"GA/NE FL/Panhandle"},\n'
-        '  "RIC-1": {osr:"Cesar Flores", area:"CA (LA Metro Core)"},\n'
         '  "RIC-2": {osr:"Claudia Gerhardt", area:"CA (IE South/San Diego)"},\n'
         '  "RIC-3": {osr:"Jose Valencia", area:"CA"},\n'
         '  "RIC-4": {osr:"Richard Herrera", area:"CA (Orange County/SE LA)"},\n'

@@ -35,9 +35,14 @@ def process(check_in_rows: list[dict]) -> dict:
     # ── Parse and deduplicate stops ──────────────────────────────────────
     # Group by (rep, stop_name, date) → keep entry with longest comment
     dedup_key = {}  # (rep, stop_name, date_str) → stop dict
+    # Only rostered reps are tracked (departed reps drop off; the "reps active"
+    # KPI denominator is already len(OSR_ROSTER)).
+    roster_set = set(OSR_ROSTER)
 
     for row in check_in_rows:
         rep = _get(row, "check_in_rep", "Unknown")
+        if rep not in roster_set:
+            continue
         stop_name = _get(row, "stop_name", "Unknown")
         check_date = _get(row, "check_in_date", "")
         comment = _get(row, "stop_comment", "")

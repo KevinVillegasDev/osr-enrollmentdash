@@ -892,7 +892,13 @@ def _load_latest_snapshot() -> dict:
         logger.warning("No snapshots directory found.")
         return {}
 
-    dirs = sorted(os.listdir(snapshot_base), reverse=True)
+    # Only month directories (YYYY-MM); the base dir also holds loose JSON
+    # files like branch_statuses.json / branch_parents.json.
+    dirs = sorted(
+        (d for d in os.listdir(snapshot_base)
+         if os.path.isdir(os.path.join(snapshot_base, d))),
+        reverse=True,
+    )
     if not dirs:
         logger.warning("No snapshot directories found.")
         return {}

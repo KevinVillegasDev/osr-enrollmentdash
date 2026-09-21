@@ -62,8 +62,9 @@ REPORT_IDS = {
 # Gonzalez departed in June).
 # Daviyon McDaniel added August 2026 for RIC-7 (NV — Las Vegas/Reno; open
 # since DeLon Phoenix was removed in June).
+# Cesar Flores (RIC-1) departed September 2026; RIC-1 now unassigned (ISR
+# coverage continues under Katie Anguiano). Frozen past dashboards keep him.
 OSR_ROSTER = [
-    "Cesar Flores",
     "Claudia Gerhardt",
     "Daviyon McDaniel",
     "Eric Henderson",
@@ -83,7 +84,9 @@ OSR_ROSTER = [
 
 # ─── Territory → OSR Mapping ────────────────────────────────────────────────
 # Maps territory codes from the sales budget to OSR names.
-# Unassigned territories (LTO-8, RIC-6) are excluded.
+# Unassigned territories (LTO-8, RIC-1, RIC-6) are excluded.
+# RIC-1: Cesar Flores (departed September 2026); now unassigned. ISR coverage
+#        continues under Katie Anguiano (still in ISR_TERRITORY_MAP).
 # LTO-4: Sara Porter → Francisco Gonzalez (removed June 2026) → Monroe Simon
 #        from August 2026 (TX — DFW).
 # RIC-6: Phillip Mason (departed July 2026); now unassigned. ISR coverage
@@ -105,7 +108,6 @@ TERRITORY_MAP = {
     "LTO-4": "Monroe Simon",
     "LTO-5": "Jared Midkiff",
     "LTO-6": "Stephanie Whitlock",
-    "RIC-1": "Cesar Flores",
     "RIC-2": "Claudia Gerhardt",
     "RIC-3": "Jose Valencia",
     "RIC-4": "Richard Herrera",
@@ -129,7 +131,7 @@ HYBRID_REPS = {
 # ─── Territory → ISR Mapping ────────────────────────────────────────
 # Maps territory codes to assigned ISR names.
 # Source of truth: Territory_Overview_v1.9 (June 2026) "ISR Pairings — Phase 1".
-# Open territories (LTO-4, LTO-8, RIC-7) keep active ISR coverage per v1.9
+# Open territories (LTO-8, RIC-1, RIC-6) keep active ISR coverage per v1.9
 # even with no TSR assigned — entries below are inert for cohort math (which
 # keys off TERRITORY_MAP) but document real coverage.
 # Note: v1.9 labels Stephanie's book LTO-7; SF re-coded it LTO-6 (June 2026),
@@ -144,7 +146,7 @@ ISR_TERRITORY_MAP = {
     "LTO-5": "Laura Angulo",
     "LTO-6": "Connor Admirand",
     "LTO-8": "Laura Angulo",       # territory OPEN — ISR coverage continues
-    "RIC-1": "Katie Anguiano",
+    "RIC-1": "Katie Anguiano",     # territory OPEN (Cesar departed) — ISR coverage continues
     "RIC-2": "Katie Anguiano",
     "RIC-3": "Lesly Arroyo",
     "RIC-4": "Katie Anguiano",
@@ -195,7 +197,6 @@ MONTHLY_FLOOR = 10          # No single month below 10
 # OSR email addresses for the weekly cohort email. Keys must match OSR_ROSTER.
 # Leave a value as "" to skip sending to that rep (e.g., departed, manager).
 OSR_EMAILS = {
-    "Cesar Flores": "cesar.flores@easypayfinance.com",
     "Claudia Gerhardt": "claudia.gerhardt@easypayfinance.com",
     "Daviyon McDaniel": "daviyon.mcdaniel@easypayfinance.com",
     "Eric Henderson": "eric.henderson@easypayfinance.com",
