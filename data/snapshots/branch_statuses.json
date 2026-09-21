@@ -11770,10 +11770,10 @@
   {
     "Branch_ID__c": "25382",
     "Name": "Castillo Tires & Auto Repair",
-    "Entity_Status__c": "Suspended",
+    "Entity_Status__c": "Closed/Sold",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-07-30"
+    "Last_Status_Change_Date__c": "2026-09-21"
   },
   {
     "Branch_ID__c": "25387",
@@ -12650,10 +12650,10 @@
   {
     "Branch_ID__c": "26259",
     "Name": "Emme Ride",
-    "Entity_Status__c": "Watchlist",
+    "Entity_Status__c": "Suspended",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-08-22"
+    "Last_Status_Change_Date__c": "2026-09-21"
   },
   {
     "Branch_ID__c": "26136",
@@ -12742,6 +12742,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-09-01"
+  },
+  {
+    "Branch_ID__c": "26321",
+    "Name": "Northeast Philly E-Bikes",
+    "Entity_Status__c": "Warning List",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-21"
   },
   {
     "Branch_ID__c": "26301",
