@@ -9952,6 +9952,14 @@
     "Last_Status_Change_Date__c": "2026-03-17"
   },
   {
+    "Branch_ID__c": "24011",
+    "Name": "Solid Motors",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-02-17"
+  },
+  {
     "Branch_ID__c": "23964",
     "Name": "Meineke 4264",
     "Entity_Status__c": "Closed/Sold",
