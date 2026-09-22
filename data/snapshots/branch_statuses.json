@@ -12040,6 +12040,14 @@
     "Last_Status_Change_Date__c": "2026-09-02"
   },
   {
+    "Branch_ID__c": "25600",
+    "Name": "Home Style Furniture",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-22"
+  },
+  {
     "Branch_ID__c": "25710",
     "Name": "Acosta Customs",
     "Entity_Status__c": "Watchlist",
@@ -12334,6 +12342,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-06-09"
+  },
+  {
+    "Branch_ID__c": "26386",
+    "Name": "Your Tire Shop",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-22"
   },
   {
     "Branch_ID__c": "25948",
