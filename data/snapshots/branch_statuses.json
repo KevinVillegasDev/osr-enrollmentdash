@@ -12402,10 +12402,10 @@
   {
     "Branch_ID__c": "25985",
     "Name": "Flashtronics",
-    "Entity_Status__c": "Watchlist",
+    "Entity_Status__c": "Suspended",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-08-03"
+    "Last_Status_Change_Date__c": "2026-09-21"
   },
   {
     "Branch_ID__c": "25970",
@@ -12614,6 +12614,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-07-25"
+  },
+  {
+    "Branch_ID__c": "26106",
+    "Name": "USA Tires and Wheels",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-21"
   },
   {
     "Branch_ID__c": "26126",
