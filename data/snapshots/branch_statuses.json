@@ -1610,7 +1610,7 @@
   {
     "Branch_ID__c": "2951",
     "Name": "RPM Mobile 1 Car Care Center",
-    "Entity_Status__c": "Suspended",
+    "Entity_Status__c": "Closed/Sold",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-09-08"
@@ -5320,6 +5320,14 @@
     "Last_Status_Change_Date__c": "2025-03-05"
   },
   {
+    "Branch_ID__c": "20020",
+    "Name": "Marwan Salem dba All Valley Collision",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-22"
+  },
+  {
     "Branch_ID__c": "20021",
     "Name": "Extreme Auto LLC",
     "Entity_Status__c": "Closed/Sold",
@@ -5902,6 +5910,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2025-05-22"
+  },
+  {
+    "Branch_ID__c": "20753",
+    "Name": "7 Days Tire Center",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-03-17"
   },
   {
     "Branch_ID__c": "20765",
@@ -11222,6 +11238,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-06-18"
+  },
+  {
+    "Branch_ID__c": "25307",
+    "Name": "RevUp Enterprises",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-22"
   },
   {
     "Branch_ID__c": "25990",
