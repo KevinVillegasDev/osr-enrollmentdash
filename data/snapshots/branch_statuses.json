@@ -12778,10 +12778,10 @@
   {
     "Branch_ID__c": "26343",
     "Name": "Joels Tire Shop and Auto Repair",
-    "Entity_Status__c": "Watchlist",
+    "Entity_Status__c": "Suspended",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-09-10"
+    "Last_Status_Change_Date__c": "2026-09-22"
   },
   {
     "Branch_ID__c": "26317",
