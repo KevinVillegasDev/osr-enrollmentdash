@@ -7496,14 +7496,6 @@
     "Last_Status_Change_Date__c": "2025-12-12"
   },
   {
-    "Branch_ID__c": "22380",
-    "Name": "World Auto and Transmissions",
-    "Entity_Status__c": "Closed/Sold",
-    "Status_Reason__c": null,
-    "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-08-14"
-  },
-  {
     "Branch_ID__c": "22768",
     "Name": "Fayraz Jewelry",
     "Entity_Status__c": "Terminated",
@@ -9984,6 +9976,22 @@
     "Last_Status_Change_Date__c": "2026-02-17"
   },
   {
+    "Branch_ID__c": "23949",
+    "Name": "Meineke 4089",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-23"
+  },
+  {
+    "Branch_ID__c": "23953",
+    "Name": "Meineke 2907",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-23"
+  },
+  {
     "Branch_ID__c": "23951",
     "Name": "Meineke 2937",
     "Entity_Status__c": "Closed/Sold",
@@ -9998,6 +10006,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-04-15"
+  },
+  {
+    "Branch_ID__c": "23954",
+    "Name": "Meineke 4378",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-23"
   },
   {
     "Branch_ID__c": "23955",
