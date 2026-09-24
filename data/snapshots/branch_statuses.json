@@ -2072,6 +2072,14 @@
     "Last_Status_Change_Date__c": "2025-09-04"
   },
   {
+    "Branch_ID__c": "4392",
+    "Name": "Az Scooter",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-23"
+  },
+  {
     "Branch_ID__c": "4416",
     "Name": "Manuel Blevins DBA Tonys Services",
     "Entity_Status__c": "Closed/Sold",
@@ -11450,10 +11458,10 @@
   {
     "Branch_ID__c": "24998",
     "Name": "Auto Integrity 1",
-    "Entity_Status__c": "Watchlist",
+    "Entity_Status__c": "Suspended",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2025-12-05"
+    "Last_Status_Change_Date__c": "2026-09-23"
   },
   {
     "Branch_ID__c": "25010",
@@ -11606,6 +11614,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-01-16"
+  },
+  {
+    "Branch_ID__c": "25113",
+    "Name": "Canino Motorworks",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-23"
   },
   {
     "Branch_ID__c": "25120",
