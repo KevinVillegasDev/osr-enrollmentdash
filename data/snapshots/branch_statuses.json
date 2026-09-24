@@ -6904,6 +6904,14 @@
     "Last_Status_Change_Date__c": "2025-05-15"
   },
   {
+    "Branch_ID__c": "21940",
+    "Name": "Tire and Wheel Zone",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-23"
+  },
+  {
     "Branch_ID__c": "21927",
     "Name": "Puppy Barn Las Vegas",
     "Entity_Status__c": "Closed/Sold",
