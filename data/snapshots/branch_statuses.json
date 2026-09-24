@@ -5240,6 +5240,14 @@
     "Last_Status_Change_Date__c": "2025-10-20"
   },
   {
+    "Branch_ID__c": "18576",
+    "Name": "Kansas Furniture Mart Inc",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-24"
+  },
+  {
     "Branch_ID__c": "2256",
     "Name": "A And K Pets Inc. DBA Petland Pittsburgh Mills",
     "Entity_Status__c": "Closed/Sold",
@@ -11813,7 +11821,7 @@
     "Entity_Status__c": "Suspended",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-09-18"
+    "Last_Status_Change_Date__c": "2026-09-24"
   },
   {
     "Branch_ID__c": "25310",
