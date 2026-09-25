@@ -3408,6 +3408,14 @@
     "Last_Status_Change_Date__c": "2026-03-17"
   },
   {
+    "Branch_ID__c": "10840",
+    "Name": "Dynopro Auto Services, Inc DBA 407 Dynopro",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-25"
+  },
+  {
     "Branch_ID__c": "10851",
     "Name": "Manuel Delgado DBA Eurozone Motorwerkz",
     "Entity_Status__c": "Terminated",
@@ -4806,6 +4814,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-07-27"
+  },
+  {
+    "Branch_ID__c": "19090",
+    "Name": "Grease Queen LLC DBA Grease Monkey - 1396",
+    "Entity_Status__c": "Closed/Sold",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-25"
   },
   {
     "Branch_ID__c": "19279",
@@ -11320,6 +11336,14 @@
     "Last_Status_Change_Date__c": "2026-06-26"
   },
   {
+    "Branch_ID__c": "24913",
+    "Name": "Posh Puppyco Arizona",
+    "Entity_Status__c": "Suspended",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-25"
+  },
+  {
     "Branch_ID__c": "24920",
     "Name": "Radical Builds",
     "Entity_Status__c": "Terminated",
@@ -12874,10 +12898,10 @@
   {
     "Branch_ID__c": "26321",
     "Name": "Northeast Philly E-Bikes",
-    "Entity_Status__c": "Warning List",
+    "Entity_Status__c": "Suspended",
     "Status_Reason__c": null,
     "Termination_Date__c": null,
-    "Last_Status_Change_Date__c": "2026-09-21"
+    "Last_Status_Change_Date__c": "2026-09-25"
   },
   {
     "Branch_ID__c": "26301",
@@ -12902,6 +12926,14 @@
     "Status_Reason__c": null,
     "Termination_Date__c": null,
     "Last_Status_Change_Date__c": "2026-08-28"
+  },
+  {
+    "Branch_ID__c": "26409",
+    "Name": "Stewarts Powersports",
+    "Entity_Status__c": "Watchlist",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-25"
   },
   {
     "Branch_ID__c": "26378",
