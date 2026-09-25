@@ -2016,6 +2016,14 @@
     "Last_Status_Change_Date__c": "2026-06-25"
   },
   {
+    "Branch_ID__c": "4258",
+    "Name": "Alicia Huerta DBA The Princess Mattress",
+    "Entity_Status__c": "Inactive",
+    "Status_Reason__c": null,
+    "Termination_Date__c": null,
+    "Last_Status_Change_Date__c": "2026-09-25"
+  },
+  {
     "Branch_ID__c": "4261",
     "Name": "Eric Carlos DBA Air Dreams Mattress",
     "Entity_Status__c": "Closed/Sold",
